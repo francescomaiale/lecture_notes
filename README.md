@@ -10,6 +10,14 @@ A collection of LaTeX lecture notes on computational fluid dynamics, numerical m
 | [Advanced Analysis](./aa/) | Advanced analysis, Fourier transform, etc. | [PDF](./aa/pdf/main.pdf) |
 | [Analysis of Sublaplacian operators](./analysis_sublaplacian/) | Sublaplacian on Lie groups | [PDF](./analysis_sublaplacian/pdf/main.pdf) |
 | [Calculus of variations](./calculus_variations/) | Calculus of variations, direct and indirect methods | [PDF](./calculus_variations/pdf/main.pdf) |
+| [Geometric Measure Theory](./gmt/) | Geometric measure theory, De Giorgi theorem | [PDF](./gmt/pdf/main.pdf) |
+| [Algebraic Geometry](./algebraic_geo/) | Algebraic Geometry | [PDF](./algebraic_geo/pdf/main.pdf) |
+| [Elliptic Equations](./elliptic_equations/) | Elliptic Equations | [PDF](./elliptic_equations/pdf/main.pdf) |
+| [Functional Analysis](./func_analysis/) | Functional Analysis, Sobolev spaces | [PDF](./func_analysis/pdf/main.pdf) |
+| [Topological Methods in Global Analysis](./topological_methods/) | Topological methods, linking theorems, etc. | [PDF](./topological_methods/pdf/main.pdf) |
+| [Variational Methods](./variational_methods/) | Variational methods | [PDF](./variational_methods/pdf/main.pdf) |
+| [Teaching Notes](./teaching_notes/) | Teaching notes | [PDF](./teaching_notes/provelibere/ProveLibere.pdf) |
+
 
 <!-- Add more courses as needed -->
 
