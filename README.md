@@ -6,7 +6,7 @@ A collection of LaTeX lecture notes on computational fluid dynamics, numerical m
 
 | Course | Topics | PDF |
 |--------|--------|-----|
-| [Numerical Methods](./numerical-methods/) | Finite differences, shooting method, iterative solvers | [PDF](./numerical-methods/main.pdf) |
+| [Group Theory](./group_theory/) | Group theory in Physics | [PDF](./group-theory/main.pdf) |
 | [Computational Fluid Dynamics](./cfd/) | Immersed boundary methods, SDF computations | [PDF](./cfd/main.pdf) |
 
 <!-- Add more courses as needed -->
@@ -15,9 +15,6 @@ A collection of LaTeX lecture notes on computational fluid dynamics, numerical m
 
 ```
 lecture-notes/
-├── common/                 # Shared resources
-│   ├── preamble.tex        # Common packages and macros
-│   └── bibliography.bib    # Shared references
 ├── course-name/
 │   ├── main.tex            # Main document
 │   ├── chapters/           # Chapter files
@@ -61,7 +58,7 @@ You are free to share and adapt this material, provided you give appropriate cre
 
 ## Author
 
-Francesco — [your.email@example.com](mailto:your.email@example.com)
+Francesco Paolo Maiale — [francescopaolo.maiale@gssi.it](mailto:francescopaolo.maiale@gssi.it)
 
 ## Acknowledgments
 
