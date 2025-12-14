@@ -1,0 +1,276 @@
+\chapter{Topics in Differential Geometry} \thispagestyle{empty}
+
+The goal of this chapter is to recollect some useful and well-known facts in differential geometry which are needed throughout the course. The reader who is totally unfamiliar with the topics discussed here may refer to \cite{manifolds}. 
+
+\section{Introduction}
+
+Recall that a {\em smooth manifold}\index{smooth manifold} is a topological manifold which is equipped with an equivalence class of atlases whose transition maps are all smooth. Namely, a manifold is a couple
+\[
+\left(M, \, \{ \varphi_i : U_i \to V_i \subset \R^q \}_{i \in I} \right),
+\]
+where $U_i$ and $V_i$ are open sets and the transition maps
+\[
+\varphi_{i, j} : \varphi_i(U_i \cap U_j) \to \varphi_j(U_i \cap U_j),
+\]
+defined by setting $\varphi_{i, j} = \varphi_j^{-1} \circ \varphi_i$, are smooth.
+
+\bd
+We say that a map between smooth manifolds $f : M \to N$ is smooth if it is so along some charts, that is,
+\[
+\psi_j \circ f \circ \varphi_i^{-1} : V_i \subset \R^q \to Z_i \subset \R^p \in C^\infty.
+\]
+\ed
+
+The tangent space at $p$ to a smooth manifold $M$ is easy to define when $M$ is embedded in $\R^q$, but it requires an abstract definition if $M$ is not a submanifold of the Euclidean space.
+
+\bd
+Let $M$ be a smooth manifold and fix $p \in M$. A {\em derivation}\index{derivation} $v$ at $p$ is an operator that assigns a number $v(f)$ to any smooth real-valued function $f$ defined in a neighbourhood of $p$, that satisfies the following assumptions: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If there exists $U \ni p$ such that $f \, \big|_U \equiv g \, \big|_U$, then $v(f) = v(g)$.
+\item The operator $v$ is linear.
+\item The operator $v$ satisfies the Leibniz rule, that is,
+\[
+v(fg) = f(p) v(g) + g(p) v(f).
+\]
+\end{enumerate}
+The set of all derivations at $p$ is called {\em tangent space at $p$ to $M$} and it will always be denoted with the symbol $\Tan_p M$.
+\ed
+
+\brmk
+The tangent space $\Tan_p M$ is a vector space.
+\ermk
+
+\subsubsection*{Immersion, embeddings and submanifolds}
+
+Let $f : M \to N$ be a smooth map between two smooth manifolds. We say that $f$ is a {\em immersion}\index{immersion} at $p \in M$ if the differential
+\[
+\mathrm{d}f_p : \Tan_p M \longrightarrow \Tan_{f(p)} N
+\]
+is injective as a linear map between vector spaces. It is worth remarking that an immersion is locally injective, but it might fail to be so globally: for example, the $8$-knot in $\R^2$ has a self-intersection at the origin, but it is an immersion. The natural "upgrade" of this notion is that of {\em embedding}\index{embedding}.
+
+\bd We say that a smooth map $f : M \to N$ is an embedding if it is an immersion and a homeomorphism onto its image. \ed
+
+The homeomorphism condition implies that an embedding is globally injective, but the vice versa is not always\footnote{A proper injective immersion is an embedding, so if $M$ is compact globally injective together with immersion is enough to get an embedding. } true although the counterexample is a little bit more subtle than the previous one. In any case, for us embeddings will take on a fundamental role thanks to the following property:
+
+\bl
+If $f : M \to N$ is an embedding, then $f(M)$ is a smooth submanifold of $N$.
+\el
+
+\section{Bundles}
+
+{\color{red}Work in progress...}
+
+\section{Vector fields and flows}
+\label{sec:vff}
+
+In this section, we introduce the notion of a {\em smooth vector field} and we investigate the properties of the associated flow.
+
+\bl
+Let $\Omega$ be an open connected subset of $\R^n$ and let $X : C^\infty(\Omega) \to C^\infty(\Omega)$ be a linear operator. Then the following assertions are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The operator $X$ is a smooth vector field satisfying
+\begin{equation*} Xf(x) = \sum_{j = 1}^n a_j(x) \partial_j, \end{equation*}
+where $a_j \in C^\infty(\Omega)$ and $\partial_j := \partial_{x_j}$.
+\item The operator $X$ satisfies the Leibniz rule.
+\end{enumerate}
+\el
+
+\begin{proof}
+Suppose that $X$ satisfies the Leibniz rule and let $f \in C^\infty(\Omega)$. For a fixed point $\bar{x} \in \Omega$ we can exploit the smoothness of $f$ to write
+\[ \begin{aligned}
+f(x) & = f(\bar{x}) + \frac{\mathrm{d}}{\mathrm{d}t} \int_0^1 f(tx + (1-t)\bar{x}) \, \mathrm{d}t =
+\\[1em] & = f(\bar{x}) + \sum_{j = 1}^n (x_j - \bar{x}_j) \int_0^1 \partial_j f(tx + (1-t)\bar{x}) \, \mathrm{d}t. 
+\end{aligned} \]
+Observe\footnote{Use the Leibniz rule with $f = g$ constant.} that $X$ vanishes on constant functions, i.e. $X(c) = 0$ for any $c \in \R$ and thus
+\[
+X(f)(x) = \underbracket{X(f(\bar{x}))}_{= 0 } + \sum_{j = 1}^n X \left( (x_j - \bar{x}_j) h_j(x) \right).
+\]
+We evaluate the expression at $x = \bar{x}$ and conclude that
+\[
+X(f)(\bar{x}) =\sum_{j = 1}^n X (x_j)(\bar{x}) h_j(\bar{x}).
+\]
+Set $a_j(\bar{x}) := X(x_j)(\bar{x})$ and observe that $h_j(\bar{x})$ is nothing but the partial derivative $\partial_j$. This concludes the proof of the lemma.
+\end{proof}
+
+To define the flow, we first need the notion of {\em integral curve}\index{integral curves} of a vector field $X$. The idea is to look for solutions $\gamma : (-\delta, \, \delta) \to \Omega$ of the following Cauchy problem:
+\[ \begin{cases}
+\gamma^\prime(t) = X(\gamma(t)),
+\\[.8em] \gamma(0) = x_0.
+\end{cases}\]
+The local existence theorem tells us that we can find a unique maximal solution, say $\gamma_{x_0}$, that is defined in the (maximal) interval $I_{x_0}$. We say that $\gamma_{x_0}$ is the integral curve of $X$ originating at $x_0$.
+
+\brmk
+If $K \subset \Omega$ is compact, then there exists $\epsilon_K > 0$ such that
+\[
+\text{$(- \epsilon_K, \, \epsilon_K) \subset I_x$ for all $x \in K$}.
+\]
+In particular, integral curves are always defined up to a time $\delta > 0$ which is uniform with respect to the choice of the originating point.
+\ermk
+
+The {\em flow}\index{vector field flow} of a vector field $X$ is defined by setting
+\[
+\Phi_X(x, \, t) := \gamma_x(t) \quad \text{(or $\varphi_{X, \, t}(x)$)},
+\]
+where $\gamma_x$ is the maximal solution of the Cauchy problem above. It is easy to verify that $\Phi_X$ is smooth ($C^\infty$) with respect to the couple $(x, \, t)$.
+
+\brmk
+If $\{X_y\}_{y \in \Theta}$ is a family of smooth vector fields, then the map
+\begin{equation*}(x, \, y, \, t) \longmapsto \Phi_{X_y}(x, \, t) \end{equation*}
+is smooth with respect to the triplet $(x, \, y,\, t)$.
+\ermk
+
+Now, let us denote by $D_X$ the domain of $\Phi_X$ (which happens to be vertically connected) and define $\varphi_{X, \, t}(\cdot)$ as the flow at a fixed time $t$, that is,
+\[
+\varphi_{X, \, t}(x) := \gamma_x(t).
+\]
+It is easy to verify that $\varphi_{X, \, 0}$ is the identity map and also that
+\[
+\varphi_{X, \, t} \circ \varphi_{X, \, s} = \varphi_{X, \, s + t}
+\]
+by the local uniqueness of the solution of the Cauchy problem. This immediately translates to the analogous property for the flow:
+\begin{equation} \label{eq.f.1}
+\Phi_X(x, \, t+s) = \Phi(\Phi(x, \, t), \, s).
+\end{equation}
+
+\bpr
+Let $A \subseteq \Omega \times \R$ be an open neighbourhood of $\Omega \times \{0\}$ that is vertically connected. Let $\Phi \in C^\infty(A,\, \Omega)$ satisfy \eqref{eq.f.1} and $\Phi(x, \, 0) = x$. Then for any $f \in C^\infty(\Omega)$ it turns out that
+\begin{equation*}Xf(x) = \frac{\mathrm{d}}{\mathrm{d}t} \, \Big|_{t = 0} f(\Phi(x, \, t)) \end{equation*}
+is a vector field and $\Phi = \Phi_X \, \Big|_A$.
+\epr
+
+\section{Exponential map}
+
+Fix a positive time $t$. We can consider\footnote{Whenever it makes sense, of course, but in this section we will purposely ignore this issue.} the operator
+\begin{equation*} f \longmapsto f \circ \varphi_{X, \, t}, \end{equation*}
+which sends $C^\infty(\Omega)$ into $C^\infty(\Omega_t)$, where $\Omega_t$ is the set of all $x$ such that the flow survives until (at least) time $t$. We denote it by
+\begin{equation*} \mathrm{exp}(tX)f  := f \circ \varphi_{X, \, t}, \end{equation*}
+and we call it exponential\index{exponential map}. It can easily be proved via the Cauchy problem above that
+\begin{equation*} f \circ \varphi_{X, \, t} = f \circ \varphi_{tX, \, 1} \end{equation*}
+since, roughly speaking, we can interpret $X$ as the speed at which we are running across the curve.
+
+\begin{lemma}[Properties of the exponential] \mbox{}
+\begin{enumerate}[label={\color{magenta}(\arabic*)}]
+\item The exponential $\mathrm{exp}(0 X)$ coincides with the identity map.
+\item The composition is given by $\mathrm{exp}((s+t)X) = \mathrm{exp}(sX)\mathrm{exp}(tX)$.
+\item The inverse is given by $\mathrm{exp}(-tX) = \left[ \mathrm{exp}(tX) \right]^{-1}$.
+\item The derivative is given by
+\begin{equation*} \frac{\mathrm{d}}{\mathrm{d}t} \mathrm{exp}(tX) = X \mathrm{exp}(tX) =  \mathrm{exp}(tX)X, \end{equation*}
+and therefore for all $k \in \N$ and $f \in C^\infty$ we have the following Taylor formula:
+\begin{equation}\label{taylor.e}  \mathrm{exp}(tX) f(x) = \sum_{j = 0}^k \frac{t^j}{j!} X^j f(x) + \mathcal{O}(t^{k+1}). \end{equation}
+If $x \in K$, then this identity makes sense for all time in $(-\epsilon_K, \, \epsilon_K)$ and the big-$\mathcal{O}$ is uniform.
+\item If $u : \Omega \to \Omega^\prime$ is a diffeomorphism, then
+\begin{equation*} u \circ \Phi_X(\cdot, \, t) = \Psi(\cdot, \, t) \end{equation*}
+is the flow of the pushforward vector field $X^\prime = u_\ast X$.
+\end{enumerate}
+\end{lemma}
+
+We are now interested in composition of exponential maps generated by different vector fields that may also not commute. In particular, we will compare the following three terms:
+\begin{equation*} \mathrm{e}^{tX} \mathrm{e}^{sY}, \quad \mathrm{e}^{sY}\mathrm{e}^{tX} \quad \text{and} \quad \mathrm{e}^{tX + sY} . \end{equation*}
+
+\begin{example}In $\R^2$ consider the vector fields $X = \partial_x$ and $Y = \partial_y$. Then
+\begin{equation*}\varphi_{X, \, t}(x, \, y) = (x+t, \, y)  \quad \text{and} \quad \varphi_{Y, \, s}(x, \, y) = (x, \, y + s), \end{equation*}
+so it is immediate to verify that these two flows commute, that is,
+\begin{equation*} \varphi_{X, \, t} \circ \varphi_{Y, \, s} \equiv  \varphi_{Y, \, s} \circ \varphi_{X, \, t}. \end{equation*}
+Still in $\R^2$, we can consider $X$ as above and $Y = x \partial_y$. In \hyperref[fig.g.1]{Figure \ref{fig.g.1}} we show that
+\begin{equation*} \varphi_{X, \, t} \circ \varphi_{Y, \, s}(x, \, y) \neq  \varphi_{Y, \, s} \circ \varphi_{X, \, t} (x, \, y) \end{equation*}
+for all points $(x, \, y) \in \R^2$, which means that the flows do not commute and something bad happens (as we will see later on). 
+\end{example}
+
+%%FIG. IPAD
+
+Now apply the Taylor expansion (up to the order two) to both $\mathrm{e}^{tX}$ and $\mathrm{e}^{sY}$. Assuming that $s$ and $t$ are admissible, we can write them as
+\begin{equation*} \begin{aligned} & \mathrm{e}^{tX} f(x) = f(x) + t X f(x) + \frac{t^2}{2} X^2 f(x) + \mathcal{O}(t^3),
+\\[1em] & \mathrm{e}^{sY} g(x) = g(x) + sY g(x) + \frac{s^2}{2} Y^2 g(x) + \mathcal{O}(s^3). \end{aligned} \end{equation*}
+We can now use these formulas to compute a second-order approximation of $ \mathrm{e}^{tX} \mathrm{e}^{sY}$ and $\mathrm{e}^{sY}\mathrm{e}^{tX}$ to better understand how the difference behaves. Namely, we have
+\begin{equation*}\mathrm{e}^{sY}\mathrm{e}^{tX} f(x) = f(x) + \left[ t X + s Y \right] f(x) + \left[ \frac{t^2}{2} X^2 + st YX + \frac{s^2}{2} Y^2 \right] f(x) + \dots, \end{equation*}
+and, by symmetry, also
+\begin{equation*}\mathrm{e}^{tX} \mathrm{e}^{sY}f(x) = f(x) + \left[ t X + s Y \right] f(x) + \left[ \frac{t^2}{2} X^2 + st XY + \frac{s^2}{2} Y^2 \right] f(x) + \dots. \end{equation*}
+It turns out that the difference at the second order is given by
+\begin{equation*}\left[ \mathrm{e}^{sY}, \, \mathrm{e}^{tX} \right] f(x) = st [Y, \, X] f(x), \end{equation*}
+which means that $[Y, \, X] = 0$ and having the flows commute are strictly related problems. As a matter of fact, even the exponential $\mathrm{e}^{tX + sY}$ differs from the previous ones (at the second-order approximation) by something multiplied by $[Y, \, X]$.
+
+\begin{theorem} Let $X$ and $Y$ be smooth vector fields on $\Omega$. The following assertions are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item There exists $\delta > 0$ such that for all $s, \, t$ admissible with $\max\{|t|, \, |s|\} < \delta$ we have
+\begin{equation*}\mathrm{e}^{tX} \mathrm{e}^{sY} = \mathrm{e}^{sY}\mathrm{e}^{tX}. \end{equation*}
+\item There exists $\delta > 0$ such that for all $t$ admissible with $|t| < \delta$ we have
+\begin{equation*}\mathrm{e}^{tX}Y = Y \mathrm{e}^{tX}. \end{equation*}
+\item There exists $\delta > 0$ such that for all $s$ admissible with $|s| < \delta$ we have
+\begin{equation*}\mathrm{e}^{sY}X = X\mathrm{e}^{sY}. \end{equation*}
+\item The vector fields $X$ and $Y$ commute, that is, $[X, \, Y] = 0$.
+\item There exists $\delta > 0$ such that for all $s, \, t$ admissible with $\max\{|t|, \, |s|\} < \delta$ we have
+\begin{equation*}\mathrm{e}^{tX} \mathrm{e}^{sY} = \mathrm{e}^{tX + sY}. \end{equation*}
+\end{enumerate}
+Furthermore, if one of these assertions hold, we can extend $\delta$ in such a way that $t$ and $s$ can be chosen among all the admissible ones.
+\end{theorem}
+
+\begin{proof}Suppose that $\mathbf{(1)}$ holds and notice that we can write
+\begin{equation*} \mathrm{e}^{tX}\mathrm{e}^{sY}\mathrm{e}^{-tX} f = f \circ \varphi_{X, \, -t} \circ \varphi_{Y, \, s} \circ \varphi_{X, \, t}. \end{equation*}
+Denote by $\Phi_t(x, \, s)$ the composition on the right-hand side except for $f$ and notice that it has the property of a flow, which means that there exists $X_t$ smooth vector field on $\Omega$ such that its flow coincide, that is,
+\begin{equation*} \Phi_t(x, \, s) = \varphi_{X_t, \, s}(x). \end{equation*}
+It is now easy to verify that
+\begin{equation*} \mathrm{e}^{tX}\mathrm{e}^{sY}\mathrm{e}^{-tX} f(x) = \mathrm{e}^{s X_t} f(x),\end{equation*}
+and therefore we can compute $X_t f(x)$ by differentiating the formula above at $s = 0$ with respect to $s$. More precisely, we have that
+\begin{equation*} X_t = \frac{\mathrm{d}}{\mathrm{d}s} \, \big|_{s = 0} \mathrm{e}^{s X_t} = \mathrm{e}^{tX} Y \mathrm{e}^{-tX}.\end{equation*}
+Since $\mathbf{(1)}$ holds, we also have that $X_t$ is identically (w.r.t. $t$) equal to $Y$. The formula above now tells us that $\mathbf{(2)}$ (and, equivalently, $\mathbf{(3)}$) holds. Now notice that
+\begin{equation*} \frac{\mathrm{d}}{\mathrm{d}t} \, \big|_{t = 0}  X_t = \mathrm{e}^{tX} [Y, \, X] \mathrm{e}^{-sX}, \end{equation*}
+and therefore if we assume that $\mathbf{(2)}$ (and $\mathbf{(3)}$) holds, we find that
+\begin{equation*} \frac{\mathrm{d}}{\mathrm{d}t} \, \big|_{t = 0}  X_t = [Y, \, X].  \end{equation*}
+But $Y_t$ is identically $Y$ so the derivative must be equal to zero and hence the commutator $[Y, \, X]$ must be zero well. This proves that $\mathbf{(2)}$ implies $\mathbf{(4)}$, but the reverse argument proves the reverse implication (although we will not need it.) Now introduce the function
+\begin{equation*}T(s, \, t) := \mathrm{e}^{-tX}\mathrm{e}^{tX + sY}\mathrm{e}^{-sY}. \end{equation*}
+If we can prove that $T$ is constant (in both variables) and equal to the identity, then we would be able to conclude that $\mathbf{(5)}$ holds. For this, let
+\begin{equation*}T_\alpha(s) := \mathrm{e}^{- \alpha s X}\mathrm{e}^{\alpha s X + sY}\mathrm{e}^{-sY},\end{equation*}
+where $\alpha$ is an arbitrary parameter which allows us to reduce the derivative problem to a single-variable function. Assume that $\mathbf{(4)}$ holds and notice that
+\begin{equation*} [\alpha X + Y, \, Y] = 0. \end{equation*}
+An easy computation, together with this commutator relation, shows that $T_\alpha^\prime(s)$ is identically equal to zero, and therefore we can infer $\mathbf{(5)}$. Finally $\mathbf{(5)}$ trivially implies $\mathbf{(1)}$, so the chain of implications is complete.\end{proof}
+
+\section{Foliations and distributions}
+\label{sec:foldist}
+
+In this section, we introduce some higher-dimensional analogues of vector fields and integral curves, replacing vectors with $k$-dimensional subspaces and integral curves with $k$-dimensional submanifolds.
+
+\bd\index{submanifold!immersed}
+Let $M$ be a smooth manifold. An {\em immersed submanifold} in $M$ is the image of an immersion $S \hookrightarrow M$.
+\ed
+
+\bd[Foliation] \index{foliation} Let $M$ be a smooth manifold. A {\em $k$-dimensional foliation} is a partition of $M$,
+\[
+M = \bigcup_{F \in \F} F,
+\]
+where each $F$ is an injectively immersed connected submanifold, such that the following holds: for every $p\in M$ there is a chart
+\[
+\Phi : U \longrightarrow \R^n,
+\]
+with $p \in U$, that sends the intersection of every $F \in \F$ with $U$ into a collection of countably many parallel affine $k$-planes of the type
+\[
+\{x_{k+1} = c_{k+1}, \, \dots, \, x_n = c_n\}.
+\]
+\ed
+
+The immersed submanifolds in the definition are usually referred to as {\em leaves}\index{foliation!leaves} of the foliation $\F$. Moreover, any chart $\varphi$ that satisfies the property above is said to be {\em compatible} with the foliation.
+
+\brmk
+Any foliation is made up of uncountably many leaves. Indeed, the countable union of immersed manifolds of dimension strictly smaller than $M$ has measure zero.
+\ermk
+
+There is an equivalent definition of foliation which translates everything to local conditions on the transition maps. More precisely, we have:
+
+\bd[Foliation] \index{foliation} Let $M$ be a smooth manifold. A {\em $k$-dimensional foliation} is an atlas $\{ \varphi_i : U_i \to \R^n\}$, compatible with the smooth structure of $M$, which transition maps are locally given by
+\[
+\varphi_{i, j}(x, \, y) = (\varphi_{i, j}^1(x, \, y), \, \varphi_{i, j}^2(y)),
+\]
+where $(x, \, y) \in \R^{k} \times \R^{\m - k}$.
+\ed
+
+
+\begin{definition}[Distribution] \index{distribution} Let $M$ be a smooth manifold. We say that $D$ is a $k$-distribution in $M$ if $D$ is a rank-$k$ subbundle $D$ of the tangent bundle $TM$, where
+\[ TM = \bigcup_{p \in M} T_p M. \]\end{definition}
+
+In other words, a distribution is a collection of $k$-subspaces $D_p \subset T_p M$ that varies smoothly (in a smooth manifold!) with $p \in M$.
+
+\begin{definition}[Integrable] \index{distribution!integrable} We say that a distribution $D$ on $M$ is {\em integrable} if it is tangent to some foliation $\mathscr{F}$. Namely, for each $p \in M$ there is $F \in \mathscr{F}$ such that
+\[ D_p = T_p F. \]\end{definition}
+
+We say that a distribution $D$ is {\em involutive} if whenever $X$ and $Y$ are tangent vector fields to $D$ (i.e., $X(p),\, Y(p) \in D_p$), then also $[X, \, Y]$ is a tangent vector field.
+
+\begin{theorem}[Frobenius] \index{Frobenius theorem}A distribution $D$ is integrable if and only if it is involutive. \end{theorem}

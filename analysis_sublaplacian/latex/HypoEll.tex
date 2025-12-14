@@ -1,0 +1,1237 @@
+\chapter{Hypoelliptic Operators and H\"{o}rmander Theorem}
+
+In this chapter, we introduce a notion that generalises the one of elliptic operators. Namely, we say that a linear differential operator $L$ with smooth coefficients in $\Omega$ is {\bf hypoelliptic}\index{hypoelliptic operator} if
+\[
+Lu \in C^\infty(\Omega^\prime) \implies u \in C^\infty(\Omega^\prime)
+\]
+for all $\Omega^\prime \subset \Omega$. The main goal of this chapter is to state and prove the well-known H\"{o}rmander theorem which gives a sufficient condition for an operator of the form
+\[
+L = \sum_{j =1}^k X_j^2
+\]
+to be hypoelliptic, where the $X_j$ are vector fields.
+
+\begin{customthm}{A} Assume that, at each $x \in \Omega$, the vector fields
+\[
+\{X_j\}_{j = 1, \, \dots, \, k}, \, \{ [X_j, \, X_i] \}_{1 \leq i < j \leq k}, \, \{ [X_j, \, [X_i, \, X_\ell]]\}_{i, \,j, \, \ell}, \, \dots
+\]
+span $\R^n$. Then the operator $L = \sum_{j = 1}^k X_j^2$ is hypoelliptic. \end{customthm}
+
+\section{Local solvability for constant coefficients operators}
+
+We can characterise hypoelliptic operators via the {\em singular support}, which is well-defined for all distributions in $\D^\prime(\R^n)$.
+
+\bd \index{distribution!singular support}
+The {\em singular support} of a distribution $\phi \in \D^\prime(\Omega)$ is defined as the complement of
+\[
+\left\{ \Omega^\prime \subset \Omega \: : \: \text{$\Omega$ open and $\phi \in C^\infty(\Omega^\prime)$} \right\},
+\]
+and it will be denoted by $\mathrm{spt}_{\mathrm{sing}}(\phi)$. \end{definition}
+
+\bpr
+A linear differential operator $L$ is hypoelliptic if and only if for all $u \in \D^\prime(\Omega)$ the following inclusion holds:
+\[
+\mathrm{spt}_{\mathrm{sing}}(u) \subseteq \mathrm{spt}_{\mathrm{sing}}(Lu).
+\]
+\epr
+
+The next result describes the local behaviour of hypoelliptic operators and allows one to estimate the $C^k$-norm of compactly supported functions. Recall that
+\[
+\|f\|_k := \sum_{|\alpha| \leq k} \| \partial^\alpha f \|_\infty.
+\]
+
+\bthm \label{thm.d.1}
+Let $L$ be a hypoelliptic operator and fix $x \in \Omega$ and $k \in \N$. There exist a compact neighbourhood $U_k$ of $x$ and $k^\prime = k^\prime(k) \in \N$ such that
+\begin{equation} \label{eq.d.1}
+\|f\|_{k} \lesssim_k \| Lf \|_{k^\prime} \quad \text{for all $f \in \D_{U_k}$.}
+\end{equation}
+\ethm
+
+We first need to introduce some notations and state a couple of technical results. For a compact subset $K$ of $\Omega$ and $\nu \in \N$ define
+\[
+V^\nu(K) := \{ f \in C^\nu(K) \: : \: Lf \in \D_K \},
+\]
+equipped with the family of norms
+\[
+\|f\|_{V^\nu, \, k} := \|f\|_\nu + \|Lf \|_k.
+\]
+
+\bl
+The couple $(V^\nu(K), \, \|\cdot\|_{V^\nu, \, k})$ is a Fréchet space. If in addition $L$ is hypoelliptic, then it coincides with $\D_K$.
+\el
+
+\begin{proof}
+The first assertion is left to the reader as an exercise. If $L$ is hypoelliptic, then
+\[
+Lf \in \D_K \implies f \in \D_U \quad \text{for all $U \subset K$ open}.
+\]
+By compactness, we can find $U_1, \, \dots, \, U_n \subset K$ such that $K = \cup_{i = 1}^n U_i$ and, applying the implication above, yields
+\[
+Lf \in \D_K \implies f \in \D_K \implies V^\nu(K) = \D_K.
+\]
+\end{proof}
+
+\bl
+Let $f \in C^\infty(\Omega)$ with $\mathrm{spt}(f) \subset B(r)$. Then
+\begin{equation} \label{eq.1.11.1}
+\|f\|_k \leq 2r \|f\|_{k+1} \quad \text{for all $k \in \N$}.
+\end{equation}
+\el
+
+\begin{proof}
+To simplify the notations, we can use the equivalent norm
+\[
+\|f\|_k := \|f\|_\infty + \max_{|\alpha| = k} \| \partial^\alpha f \|_\infty.
+\]
+We can assume that the support of $f$ is contained in the cube $Q := [-r, \, r]^n$. For any multi-index $\alpha$ of length less than or equal to $k$, let $\alpha^\prime = \alpha + (1, \, 0, \, \dots, \, 0)$. If $x \in Q$,
+\[\begin{aligned}
+|\partial^\alpha f(x)| & = \left| \int_{-r}^{x_1} \partial^{\alpha^\prime} f(t, \, x_2, \, \dots, \, x_n) \, \mathrm{d}t \right| \leq
+\\[1em] & \leq 2r \| \partial^{\alpha^\prime} f\|_\infty,
+\end{aligned}\]
+so that passing to the supremum yields \eqref{eq.1.11.1}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm.d.1}]
+Let $K$ be a compact neighbourhood of $x$ and fix $k \in \N$. The identity map
+\[
+\iota : \D_K \longrightarrow V^{k-1}(K) 
+\]
+is continuous and, as a consequence of what we have proved above, also surjective. By the {\bf open mapping theorem} $\iota$ is a homeomorphism. Therefore, the inclusion
+\[
+j : V^{k-1}(K) \hookrightarrow C^k(K)
+\]
+is continuous. Consequently, we can find $k^\prime \in \N$ and $C_k > 0$ such that
+\[
+\|f\|_k \lesssim_k  \|f\|_{k-1} + \|Lf\|_{k^\prime} \quad \text{for every $f \in \D_K$}.
+\]
+Finally, let $U_k$ be a ball centered at $x$ of radius $\frac{1}{4 C_k}$; it follows from the estimate \eqref{eq.1.11.1} that
+\[
+\|f\|_k \lesssim_k \|Lf\|_{k^\prime},
+\]
+and this concludes the proof.
+\end{proof}
+
+\bcor
+If $L$ is hypoelliptic, then $L$ is injective on $\mathcal{D}(U_k)$.
+\ecor
+
+\bd[Locally solvable] \index{locally solvable}
+Let $L$ be a linear differential operator with smooth coefficients on $\Omega$. We say that $L$ is \textit{locally solvable} at $x \in \Omega$ if
+\[
+\forall k \in \N, \, \exists V_k \in \mathcal{N}(x) \: : \: \forall \psi \in \mathcal{D}_k^\prime(\Omega), \, \exists u \in \mathcal{D}^\prime(V_k) \: : \: \text{$Lu = \psi$ on $V_k$}.
+\]
+In other words, for each $k \in \N$ we can find a neighbourhood of $x$, $V_k$, such that for each compactly supported distribution $\psi$ of order $k$ the equation
+\[
+Lu = \psi
+\]
+admits a solution $u \in \D^\prime(V_k)$.
+\ed
+
+\bthm
+Let $L$ be a hypoelliptic operator. Then $\transp{L}$ is locally solvable. 
+\ethm
+
+\begin{proof}
+Given $x \in \Omega$, let $U_0$ be a compact neighbourhood of $x$. Since $\psi \in \D^\prime(\Omega)$ is continuous, we know that there are $k \in \N$ and $C >0$ such that
+\[
+| \langle \psi, \, f \rangle | \leq C \|f\|_{(k)} \quad \text{for all $f \in \mathcal{D}(U_0)$.}
+\]
+Let $U := U_k$ be given as in \autoref{thm.d.1} and assume that $U \subset U_0$. Let
+\[
+\X := \{ Lg \: : \: g \in \D_U \} \subseteq \D_U,
+\]
+and define the linear functional $\lambda : \X \to \C$ by setting
+\[
+\lambda(Lg) := \langle \psi, \, g \rangle.
+\]
+This is well-defined because $L$ is injective and, using \autoref{thm.d.1}, we can find $k^\prime \in \N$ which provides a bound to the functional $\lambda$:
+\[
+\left| \lambda(Lg) \right| \leq C \|g\|_{(k)} \lesssim_k \|Lg\|_{(k^\prime)}. 
+\]
+Applying Hahn-Banach we can extend $\lambda$ to a continuous linear functional on $\D_{k^\prime, \, U}$. For $g \in \D_U$ there is a distribution $u$ on $V$ of order $k^\prime$ such that
+\[
+\langle u, \, Lg \rangle = \lambda(Lg) = \langle \psi, \, g \rangle, 
+\]
+which means that $\transp{L}u = \psi$ on $V := U$.
+\end{proof}
+
+Let $L$ be a constant coefficient differential operator with symbol $\sigma$. The following characterisation of hypoelliptic operators on $\R^n$ is due to Hörmander in \cite{hormhyp}.
+
+\bthm
+A linear differential operator $L$ with smooth coefficients is hypoelliptic on $\R^n$ if and only if, for some $\delta > 0$, the polynomial $p$ satisfies the inequality
+\[
+\left| \frac{ \partial^\alpha p(\xi) }{p(\xi)} \right| \leq C |\xi|^{- \delta |\alpha|} \quad \text{for $|\xi|$ sufficiently big,}
+\]
+for all $\alpha \in \N^n$ with length less than or equal to the degree of $p$ as a polynomial.
+\ethm
+
+This condition is satisfied by two fundamental classes of operators which also contains the Laplace operator (first one) and the heat operator (second one): \mbox{}
+\begin{enumerate}[label={\color{cyan}(\roman*)}, leftmargin=2.5\parindent]
+\item Elliptic operators whose principal polynomial $p_0$ only vanishes at the origin, e.g., the Laplace operator with
+\[
+p_0(\xi) = \xi_1^2 + \dots + \xi_n^2.
+\]
+\item Operators with polynomial only vanishes at the origin and is homogeneous with respect to some non-isotropic
+dilations, that is,
+\[
+p(\xi) = \sum_{\alpha} c_\alpha \xi^\alpha,
+\]
+where the sum is restricted to multi-indices $\alpha$ satisfying the affine relation $b \cdot \alpha = m$.
+\end{enumerate}
+
+\section{H\"{o}rmander theorem}
+
+The primary goal of this section is to characterise hypoelliptic operators of the form $X_j X_j$, where $X_1, \, \dots, \, X_k$ are smooth real vector fields defined on $\Omega$.
+
+\caution{The reader who is not familiar with the notions of vector field, commutator, flow, etc. is encouraged to read \autoref{sec:vff} before going any further.}
+
+\paragraph{Commutators.} Let $X$ denote the vector field on $\R^n$ defined by
+\[
+X = \sum_{j = 1}^n a_j(x) \partial_{x_j},
+\]
+where $a_j \in C^\infty(\Omega)$ for all $j$. Let $Y$ be another vector field, given by
+\[
+Y = \sum_{j = 1}^n b_j(x) \partial_{x_j},
+\]
+with $b_j \in C^\infty(\Omega)$. We can now compute $XY$ and $YX$ explicitly:
+\[ \begin{aligned}
+& XYf = \sum_{j, \, k = 1}^n a_j(x) b_k(x) \partial_{x_j} \partial_{x_k} f(x) + \sum_{j, \, k = 1}^n a_j(x) \partial_{x_j} b_k(x) \partial_{x_k} f(x),
+\\[1em] & YX f = \sum_{j, \, k = 1}^n a_j(x) b_k(x) \partial_{x_j} \partial_{x_k} f(x) + \sum_{j, \, k = 1}^n b_j(x) \partial_{x_j} a_k(x) \partial_{x_k} f(x).
+\end{aligned} \]
+This shows that $XY \neq YX$ or, in other words, $X$ and $Y$ do not commute. On the other hand, the commutator between $X$ and $Y$ is given by
+\[
+[X, \, Y] f(x) = \sum_{k=1}^n \left( \sum_{j=1}^n (a_j(x) \partial_{x_j} b_k(x) - b_j(x) \partial_{x_j} a_k(x)) \right)\partial_{x_k} f(x),
+\]
+and it is easy to see that it only depends on the value of $a_j$, $b_j$ and $f$ at the point $x$. If $L = \sum_{j = 1}^k X_j^2$, then $L$ is an {\em elliptic} operator on $\Omega$ if and only if
+\[
+\{ X_j(x) \}_{j = 1, \, \dots, \, k}
+\]
+spans all of $\R^n$ at all points $x \in \Omega$. In particular, $k$ must be greater than or equal to $n$.
+
+\bthm[H\"{o}rmander] \index{H\"{o}rmander theorem} \label{thm.hormander1}
+Assume that, at each $x \in \Omega$, the vector fields
+\[
+\{X_j\}_{j = 1, \, \dots, \, k}, \, \{ [X_j, \, X_i] \}_{1 \leq i < j \leq k}, \, \{ [X_j, \, [X_i, \, X_\ell]]\}_{i, \,j, \, \ell}, \, \dots
+\]
+span $\R^n$. Then the operator $L = \sum_{j = 1}^k X_j^2$ is hypoelliptic.
+\ethm
+
+\brmk
+Under the same assumptions, the operator $\sum_{j = 1}^{k-1} X_j^2 + X_k$ is also hypoelliptic.
+\ermk
+
+\bex[Grushin plane] \index{Grushin plane}
+Let $X = \partial_x$ and $Y = x \partial_y$ defined on $\R^2$. The operator
+\[
+L = \partial_x^2 + x^2 \partial_y^2
+\]
+is {\em elliptic} away from $\{(x,\,y) \in \R^2 \: : \: x = 0\}$. However, the commutator is given by
+\[
+[X, \, Y] \, \big|_{x = 0} = \partial_y,
+\]
+and hence $L$ is hypoelliptic on the whole plane $\R^2$, as a consequence of \autoref{thm.hormander1}.
+\eex
+
+\bex[Heisenberg space] \index{Heisenberg group}
+The operator defined in $\R^3$ by
+\[
+L = \underbrace{(\partial_x - 2y \partial_z)^2}_{:=X^2} +  \underbrace{(\partial_y + 2x \partial_z)^2}_{:=Y^2}
+\]
+is hypoelliptic and it is usually referred to as sublaplacian\index{sublaplacian}. Notice that $X$ and $Y$ are always linear independent and
+\[
+[X, \, Y] = 4 \partial_z \implies \text{$\{ X(x), \, Y(x), \, [X, \, Y](x) \}$ basis of $\R^3$}.
+\]
+\eex
+
+\section{Besov potential spaces}
+
+In this section, we introduce a few technical tools that are needed to prove the H\"{o}rmander hypoellipticity theorem. To be more precise, given $X$ vector field on $\Omega$, we would like to exploit the flow to define a normed space with
+\[
+\|f \|_{X, \, \alpha, \, \delta},
+\]
+which supposedly generalises the usual Lipschitz spaces, and investigate them.
+
+\subsection{Besov spaces of functions}
+
+\bd[Lipschitz] \index{Lipschitz function}
+Let $f$ be a function defined on $\R^n$. We say that $f$ is $\alpha$-Lipschitz\footnote{{\bf N.B.} In the literature, functions satisfying this property with $\alpha \in (0,\, 1)$ are called $\alpha$-H\"{o}lder while the terminology Lipschitz is reserved to the special case $\alpha = 1$.}, where $\alpha \in (0, \, 1]$, if
+\begin{equation} \label{eq.g.3}
+|f(x+h) - f(x)| \lesssim |h|^\alpha \quad \text{for all $x, \, h \in \R^n$.}
+\end{equation}
+Moreover, we say that $f$ is {\em locally} $\alpha$-Lipschitz if
+\[
+|f(x+h) - f(x)| \lesssim |h|^\alpha
+\]
+holds for all $x \in \R^n$ and for all $h$ in a ball which radius depends on $x$, i.e. $B(x, \, r(x))$.
+\ed
+
+\brmk
+A function which is $\alpha$-Lipschitz with $\alpha > 1$ is constant; this is why we require $\alpha$ to be in $(0, \, 1]$.
+\ermk
+
+\brmk
+We can also consider functions satisfying the inequality
+\begin{equation} \label{eq.g.4}
+|f(x+2h) - 2f(x + h) + f(x)| \lesssim |h|^\alpha.
+\end{equation}
+In this case, $\alpha\in (0, \, 2]$ does not lead to a trivial definition and, for all $\alpha \in (0, \, 1)$ - note that $\alpha = 1$ is excluded! - it is equivalent to \eqref{eq.g.4}. It is easy to verify that
+\[
+\alpha > 2 \implies \text{$f$ is affine,}
+\]
+which makes sense if we think about $f(x+2h) - 2f(x + h) + f(x)$ as a {\em good} approximation of the second derivative of $f$.
+\ermk
+
+In any case, it is not hard to verify that the condition \eqref{eq.g.3} can be also rewritten using translations as follows:
+\[
+\sup_{h \in \R^n \setminus \{0\}} |h|^{-\alpha} \| \tau_h f - f \|_\infty < \infty
+\]
+Starting from this observation, we can define the {\em $\alpha$-Besov space}\index{Besov space} as follows:
+\[
+\Lambda_\alpha^\infty = \{ f \in L^\infty(\R^n) \: : \: \sup_{h \in \R^n \setminus \{0\}} |h|^{-\alpha} \| \tau_h f - f \|_\infty < \infty \},
+\]
+endowed with the norm
+\[
+\|f\|_{\Lambda_\alpha^\infty} := \|f\|_{\infty} +  \sup_{h \in \R^n \setminus \{0\}} |h|^{-\alpha} \| \tau_h f - f \|_\infty.
+\]
+
+\bpr
+Let $\alpha \in (0, \, 1]$. A function $f$ belongs to $\Lambda_\alpha^\infty$ if and only if $f$ is continuous, bounded and $\alpha$-Lipschitz.
+\epr
+
+\begin{proof}
+Let $(\varphi_\epsilon)_{\epsilon > 0}$ be an approximate identity with $\mathrm{spt}(\varphi) \subset B_1$. Then
+\[
+\varphi_\epsilon \ast f(x) - f(x) = \int_{\R^n} [f(x-y) - f(x)] \varphi_\epsilon(y) \, \mathrm{d}y.
+\]
+Taking the $\| \cdot \|_\infty$ norm immediately leads to the following chain of inequalities:
+\begin{equation*} \begin{aligned} \| \varphi_\epsilon \ast f(x) - f(x) \|_\infty & \leq \int_{\R^n} \| \tau_y f - f \|_\infty \varphi_\epsilon(y) \, \mathrm{d}y \leq
+\\[1em] & \leq \|f\|_{\Lambda_\alpha^\infty} \int_{B_\epsilon} |y|^\alpha \varphi_\epsilon(y) \, \mathrm{d}y = \epsilon^\alpha \|f\|_{\Lambda_\alpha^\infty}. \end{aligned} \end{equation*}
+\end{proof}
+
+We can now introduce a slightly more refined version of Besov spaces, where $L^\infty$ is replaced by $L^p$ and the supremum norm by the $\| \cdot \|_p$ one.
+
+\bd \index{Besov space!$p$-power}
+For $1 \leq p \leq \infty$ we define the {\em $p$-Besov space} as
+\[
+\Lambda_\alpha^p = \{ f \in L^p(\R^n) \: : \: \sup_{h \in \R^n \setminus \{0\}} |h|^{-\alpha} \| \tau_h f - f \|_{L^p(\R^n)} < \infty \},
+\]
+endowed with the norm
+\[
+\|f\|_{\Lambda_\alpha^p} := \|f\|_{L^p(\R^n)} +  \sup_{h \in \R^n \setminus \{0\}} |h|^{-\alpha} \| \tau_h f - f \|_{L^p(\R^n)}.
+\]
+\ed
+
+\brmk
+We proved earlier that $f \in L^p(\R^n)$ is enough to conclude that
+\[
+\| \tau_h f - f \|_{L^p(\R^n)} \xrightarrow{|h| \to 0} 0,
+\]
+but here we are asking for something more: that the convergence happens with "$|h|^\alpha$-speed".
+\ermk
+
+\brmk
+The $p$-Besov space is nonempty since we always have that
+\[
+f_s(x) := |x|^{-s} \chi_{B(0, \, 1)}(x)
+\]
+is an element of $\Lambda_{\frac{n}{p} - s}^p$ for $s < \frac{n}{p}$.
+\ermk
+
+\bd \index{Besov space!$(p, \, q)$-power}
+For $1 \leq p \leq \infty$ and $1 \leq q < \infty$ we define the {\em $(p, \, q)$-Besov space} as
+\[
+\Lambda_\alpha^{p, \, q} = \left\{ f \in L^p(\R^n) \: : \:  \left[ \int_{\R^n} \left( |h|^{-\alpha} \| \tau_h f - f \|_{L^p(\R^n)} \right)^q \, \frac{\mathrm{d}h}{|h|^n} \right]^{\frac{1}{q}} < \infty \right\}, 
+\]
+endowed with the norm
+\[
+\|f\|_{\Lambda_\alpha^{p, \, q}} := \|f\|_{L^p(\R^n)} + \left[ \int_{\R^n} \left( |h|^{-\alpha} \| \tau_h f - f \|_{L^p(\R^n)} \right)^q \, \frac{\mathrm{d}h}{|h|^n} \right]^{\frac{1}{q}}.
+\]
+The $(p, \, \infty)$-Besov space $\Lambda_\alpha^{p, \, \infty}$ is defined in such a way that it corresponds with the $\Lambda_\alpha^p$ defined above.
+\ed
+
+\bl
+Let $1 \leq p < \infty$. For all $h \in \R^n$ there results
+\begin{equation} \label{eq.h.1}
+\lim_{|h| \to \infty} \| \tau_h f - f \|_{L^p(\R^n)} =2^{\frac{1}{p}} \|f\|_{L^p(\R^n)}.
+\end{equation}
+\el
+
+\begin{proof}
+First, assume that $f$ is compactly supported in a ball of radius $r$. Then, if $|h| > 2r$, we have
+\[
+\mathrm{spt}(f) \cap \mathrm{spt} (\tau_h f) = \varnothing.
+\]
+The $L^p$-norm is now easy to estimate since
+\[
+\| \tau_h f - f \|_{L^p(\R^n)}^p = \int_{B_r} |f|^p \, \mathrm{d}x + \int_{B_r + h} |\tau_h f|^p \, \mathrm{d}x = 2 \|f\|_{L^p(\R^n)}^p, 
+\]
+and this concludes the proof since we can always approximate $f \in L^p(\R^n)$ by a sequence of compactly supported functions.
+\end{proof}
+
+Now let $a > 0$ be fixed and suppose that $p < \infty$. We would like to estimate the seminorm associated to $\| \cdot \|_{\Lambda_\alpha^{p, \, q}}$ in the range $|h| > a$. From \eqref{eq.h.1} it follows that
+\[ \begin{aligned}
+\left[ \int_{|h|>a} \left( |h|^{-\alpha} \| \tau_h f - f \|_{L^p(\R^n)} \right)^q \, \frac{\mathrm{d}h}{|h|^n} \right]^{\frac{1}{q}} & \leq \left(2 \|f\|_{L^p(\R^n)} \right)^q \int_{|h| > a} \frac{\mathrm{d}h}{|h|^{n + \alpha q}} \leq
+\\[1em] & \leq C_{q, \, \alpha} \|f\|_{L^p(\R^n)}^q.
+\end{aligned} \]
+
+\bd[Sobolev space] \index{fractional Sobolev space}
+Let $s > 0$. We define the {\em $s$-fractional Sobolev space} as
+\[
+H^s(\R^n) := \left\{ f \in L^2(\R^n) \: : \: (1 + |\cdot|^2)^s \F(f)(\cdot) \in L^2(\R^n) \right\}.
+\]
+\ed
+
+We shall now study the connection between the fractional space $H^s(\R^n)$ and the Besov potential space $\Lambda_s^{2, \, 2}$, when $0 <  s = \alpha < 1$. First, recall that
+\begin{equation} \label{eq.plan}
+\| \F(g) \|_{L^2(\R^n)} = \|g\|_{L^2(\R^n)}
+\end{equation}
+as a consequence of Plancherel's theorem. It follows that
+\[
+\| \tau_h f - f \|_{L^2(\R^n)} = \| \F(\tau_h f - f) \|_{L^2(\R^n)},
+\]
+and we can easily compute the first term via a simple change of variables:
+\[
+\F(\tau_h f)(\xi) = \mathrm{e}^{- \imath h \cdot \xi} \F f(\xi). 
+\]
+Now let $f \in \Lambda_\alpha^{2, \, 2}$. It follows from the properties above that
+\[ \begin{aligned}
+\|f\|_{\Lambda_\alpha^{2, \, 2}} & = \| \F f \|_{L^2(\R^n)} +  \left[ |h|^{- 2\alpha}  \int_{\R^n} \| \mathrm{e}^{-\imath h \cdot \xi} \F f - \F f \|_{L^2(\R^n)}^2 \, \frac{\mathrm{d}h}{|h|^n} \right]^{\frac{1}{2}} =
+\\[1em] & = \|\F f \|_{L^2(\R^n)} + \left[ \int_{\R^n} |\F f(\xi)|^2 \, \mathrm{d}\xi \int_{\R^n} | \mathrm{e}^{- \imath h \cdot \xi} - 1|^2 \, \frac{\mathrm{d}h}{|h|^{n+2\alpha}} \right]^{\frac{1}{2}} \stackrel{\star}{=}
+\\[1em] & \stackrel{\star}{=} \| \F f \|_{L^2(\R^n)} + \left[ 2 \int_{\R^n} \frac{1 - \cos(h^\prime)}{|h^\prime|^{n + 2 \alpha}} \, \mathrm{d}h^\prime \int_{\R^n} |\xi|^{2 \alpha} |\F f(\xi)|^2 \, \mathrm{d}\xi\right]^{\frac{1}{2}}.
+\end{aligned} \]
+The identity $\star$ follow from the change of variables $h^\prime := |\xi| h$ which Jacobian is $|\xi|^n$. It is easy to verify that
+\[
+2 \int_{\R^n} \frac{1 - \cos(h^\prime)}{|h^\prime|^{n + 2 \alpha}} \, \mathrm{d}h^\prime \leq C(n, \, \alpha)
+\]
+since the integrand is asymptotically equivalent respectively to $|h^\prime|^{2 - n - 2\alpha}$ for $|h^\prime|\to 0$ and to $|h^\prime|^{-n-2 \alpha}$ for $|h^\prime| \to \infty$. It turns out that
+\[
+\|f\|_{\Lambda_\alpha^{2, \, 2}} \leq \| \F f \|_2 + C(n, \, \alpha) \| |\cdot|^\alpha \F f(\cdot) \|_{L^2(\R^n)} \leq \| f \|_{\Lambda_\alpha^{2, \, 2}}, 
+\]
+so we can finally conclude that
+\begin{equation*} \Lambda_\alpha^{2, \, 2} = H^\alpha(\R^n). \end{equation*}
+
+\bpr \label{prop2oqwdqwple}
+Let $0 < \beta < \alpha < 1$. Then the following inclusions hold:
+\[
+\Lambda_\alpha^{2, \, 2} \subset \Lambda_\alpha^{2, \, \infty} \subset \Lambda_\beta^{2, \, 2}. 
+\]
+\epr
+
+\begin{proof}
+The second inclusion is left as an exercise for the reader. As for the first one, let $f \in \Lambda_\alpha^{2, \, 2}$ be an arbitrary function. We claim that for each $h \in \R^n$ we have
+\[
+|h|^{-2 \alpha} \| \tau_h f - f \|_{L^2(\R^n)}^2 \leq C |h|^{2 - 2 \alpha} \|f\|_{\Lambda_\alpha^{2, \, 2}}.
+\]
+However, this follows immediately from the following inequalities:
+\[ \begin{aligned}
+\| \tau_h f - f \|_{L^2(\R^n)}^2 & \leq c \int_{\R^n} |\F f(\xi)|^2 | \mathrm{e}^{- \imath \xi \cdot h} - 1|^2 \, \mathrm{d}\xi \leq
+\\[1em] & \leq c^\prime |h|^2 \int_{\R^n} |\F f(\xi)|^2 |\xi|^2 \, \mathrm{d}\xi,
+\end{aligned}\]
+where the last one is obtained as before using this time the real part of $\mathrm{e}^{- \imath \xi \cdot h} - 1$. By assumption, the quantity $2 - 2 \alpha$ is always strictly positive so, taking into account that
+\[ \begin{aligned}
+& \| \tau_h f - f \|_{L^2(\R^n)}^2 \simeq \|f\|_{L^2(\R^n)}^2 \quad \text{as $|h| \to \infty$},
+\\[0.8em] &|h|^{-2\alpha}\| \tau_h f - f \|_{L^2(\R^n)}^2 \xrightarrow{|h| \to \infty} 0,
+\end{aligned} \]
+we readily infer that
+\[
+\sup_{h \neq 0} |h|^{-2 \alpha} \| \tau_h f - f \|_{L^2(\R^n)}^2 \leq \widetilde{C} \|f\|_{\Lambda_\alpha^{2, \, 2}}.
+\]
+\end{proof}
+
+\subsection{Besov spaces of vector fields}
+
+Let $\Omega \subset \R^n$ be an open set, $X$ a smooth vector field on $\Omega$ and denote by $\Phi(x, \, t)$ the {\em flow} generated by $X$. For $\alpha \in (0, \, 1]$ and $\delta > 0$ we define
+\[
+\|f\|_{X,\, \alpha, \, \delta} := \|f\|_{L^2(\Omega)} +  \sup_{|t|\leq \delta} |t|^{-\alpha} \| \exp(tX) f - f \|_{L^2(\Omega)}. 
+\]
+Notice that $\e^{tX} f(x) = f \circ \Phi_t(x)$, so the quantity above is well-defined provided that $\delta > 0$ is small enough for the flow to be defined {\bf at all $x \in \Omega$}. Since it might happen that
+\[
+\inf_{x \in \Omega} \left\{ t \in \R \: : \: (x, \, t) \in \mathrm{dom}(\Phi) \right\} = 0,
+\]
+we usually restrict ourselves to compact subsets of $\Omega$, as the following remark illustrates.
+
+\brmk
+If $K \subset \Omega$ is a compact set, then the flow is defined at all $x \in K$ up to a uniform time $\delta_K > 0$. Thus, the quantity
+\[
+\|f\|_{X,\, \alpha} = \|f\|_{L^2(\Omega)} +  \sup_{|t| \leq \delta_K} |t|^{-\alpha} \| \exp (tX) f - f \|_{L^2(\Omega)} 
+\]
+is well-defined for all functions $f \in L^2(\Omega)$ with compact support in $K$.
+\ermk
+
+\bl
+Let $K \subset \Omega$ and let $0 < \delta^\prime < \delta_K$. Then
+\[
+\|f\|_{X,\, \alpha, \, \delta^\prime} \leq  \|f\|_{X,\, \alpha, \, \delta_K} \quad \text{for all $f \in L^2(\Omega)$ with $\mathrm{spt}(f) \subset K$}.
+\]
+\el
+
+\begin{proof}
+This is obvious since on the right-hand side we are simply taking the supremum over a larger value of possible $t$'s.
+\end{proof}
+
+\bpr \label{prop.i.1}
+Let $K \subset \Omega$ be a compact subset and let
+\[
+\varphi : \Omega \times [0, \, \delta) \longrightarrow \Omega
+\]
+be a function satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{\color{magenta}(\alph*)}, leftmargin=2.5\parindent]
+\item For all $t \in [0, \, \delta)$ the function $\varphi_t$ is $C^\infty(\Omega)$ with respect to the variable $x$.
+\item All partial derivatives of any order with respect to $x$ are continuous in $t$.
+\item There exists $\mu > 0$ such that $\varphi(x, \, t) = x + \mathcal{O}(|t|^\mu)$ when $t \to 0^+$.
+\end{enumerate}
+Then there exists a constant $C = C(K,\, \varphi)$ such that for all $\alpha \in (0, \, 1]$ and $|t|$ small enough we have
+\begin{equation} \label{eq.i.1}
+\| f \circ \varphi_t - f \|_{L^2(\Omega)} \leq C|t|^{\mu \alpha} \|f\|_{\Lambda_\alpha^{2, \, \infty}} \quad \text{for all $f \in L^2(\Omega)$ with $\mathrm{spt}(f) \subset K$}.
+\end{equation}
+\epr
+
+\begin{proof}
+Start by considering all $h$ such that $|h| < |t|^\mu$ and apply the triangular inequality to the left-hand side of \eqref{eq.i.1}. Then
+\[
+\| f \circ \varphi_t - f \|_{L^2(\Omega)} \leq \| f \circ \varphi_t - \tau_h f\|_{L^2(\Omega)} + \| \tau_h f - f \|_{L^2(\Omega)},
+\]
+where the second addendum is already known to be estimates by $|h|^\alpha \|f\|_{\Lambda_\alpha^{2,\, \infty}}$. As for the first addendum, take the average with respect to $|t|^\mu$,
+\[
+\frac{1}{|t|^{n \mu}} \int_{|h| < |t|^\mu} \| f \circ \varphi_t - \tau_h f \|_{L^2(\Omega)}^2 \, \mathrm{d}h = \frac{1}{|t|^{n \mu}} \int_{|h| < |t|^\mu}  \int_\Omega | f(\varphi_t(x)) - f(x - h)|^2 \, \mathrm{d}x \mathrm{d}h,
+\]
+and apply the following change of variables:
+\[
+(y, \, u) = \Psi_t(x, \, h) := (x-h, \, \varphi_t(x) - (x-h)).
+\]
+Notice that $\Psi_0(x, \, h) = (x-h, \, h)$ is a {\bf diffeomorphism} and $\Psi_t$, for $|t|$ small enough, is a perturbation, small in the $C^1$-norm, of $\Psi_0$, and thus a diffeomorphism. Thus
+\[
+| f(\varphi_t(x)) - f(x - h)|^2= |f(u+y) - f(y)|^2,
+\]
+and this concludes the proof using the estimate above and the fact that $|h|$ and $|u|$ are not so different.
+\end{proof}
+
+\bpr
+Let $K \subset \Omega$ be a compact subset and let $X$ be a vector field on $\Omega$. There exists a constant $C = C(K,\, X) > 0$ such that, for all $\alpha \in (0, \, 1]$ and $|t|$ small enough,
+\begin{equation} \label{eq.i.2}
+\| f \|_{X, \, \alpha} \leq C \|f\|_{\Lambda_\alpha^{2, \, \infty}} \quad \text{for all $f \in L^2(\Omega)$ with $\mathrm{spt}(f) \subset K$}.
+\end{equation}
+\epr
+
+\begin{exercise}
+Prove \eqref{eq.i.2} exploiting the same methods proposed for the proof of \eqref{eq.i.1}.
+\end{exercise}
+
+Recall that, if $X$ is a vector field and $f$ a function, then there is a notion of product $fX$ which is also a vector field. In particular, there is a map
+\[
+C_c^\infty(\Omega) \ni \eta \longmapsto X_\eta := \eta X \in \mathfrak{X}(\Omega),
+\]
+which sends a smooth compactly supported function to a smooth vector field that is defined by setting
+\[
+X_\eta(p) := \eta(p) X(p).
+\]
+Our next goal is to understand the connection between $\| \cdot \|_{X, \, \alpha, \, \delta}$ and $\| \cdot \|_{X_\eta, \, \alpha, \, \delta}$. First, it is useful to see how integral curves are related to each other. Let $\gamma_x^\eta(t)$ and $\gamma_x(t)$ be the respective integral curves originating from the same point $x \in \Omega$, and notice that
+\begin{equation} \label{eq.i.3}
+\gamma_x^\eta(t) = \gamma_x(\tau(t, \, x)),
+\end{equation}
+where $\tau(t, \, x)$ is a function describing the time-discrepancy between the two curves. We differentiate \eqref{eq.i.3} with respect to $t$ and obtain
+\[
+X_\eta(\gamma_x^\eta(t)) = \partial_t \tau(t, \, x) X(\gamma_x^\eta(t)),
+\]
+which easily leads to
+\[
+\partial_t \tau(x, \, t) = \eta( \gamma_x^\eta(t)) = \eta( \gamma_x( \tau(x, \, t))).
+\]
+We thus obtain, for each $x \in \Omega$, a ODE problem with fixed initial value
+\[ \begin{cases}
+\partial_t \tau_x(t) = \eta(\gamma_x(\tau_x(t))), \\[0.8em] \tau_x(0) = 0,
+\end{cases} \]
+which gives local existence and also a uniform lower bound on the time of existence if we restrict $x$ to $K$.
+
+\bpr
+Let $K \subset \Omega$ be compact. There exists a constant $C = C(K,\, \eta)$ such that for all $\alpha \in (0, \, 1]$ we have
+\begin{equation} \label{eq.i.4}
+\| f \|_{X_\eta, \, \alpha} \leq C \|f\|_{X, \, \alpha} \quad \text{for all $f \in L^2(\Omega)$ with $\mathrm{spt}(f) \subset K$}.
+\end{equation}
+\epr
+
+\begin{proof}Let $\Phi$ and $\Phi^\eta$ be the flows of, respectively, $X$ and $X_\eta$. As before, we first apply the triangular inequality to the left-hand side of \eqref{eq.i.4} to obtain
+\[
+\| \exp(t X_\eta)f - f \|_{L^2(\Omega)} \leq \| \exp(t X_\eta) f  - \exp(sX)f\|_{L^2(\Omega)} + \| \exp(sX) f - f\|_{L^2(\Omega)}.
+\]
+By definition, we can estimate the second addendum $\| \exp(sX) f - f\|_{L^2(\Omega)}$ with $|s|^\alpha \|f\|_{X, \, \alpha}$, so we choose $s$ with $|s| \leq |t|$. As before, take the average over $t$,
+\[\begin{aligned}
+\frac{1}{2t} \int_{-|t|}^{|t|} \| \e^{t X_\eta}f  - \e^{s X}f\|_{L^2(\Omega)}^2 \, \mathrm{d}s & = \frac{1}{2t} \int_{-|t|}^{|t|} \int_\Omega | f \circ \Phi^\eta(x, \, t) - f \circ \Phi(x, \, s) |^2 \, \mathrm{d}x \mathrm{d}s =
+\\[1em] & = \frac{1}{2t} \int_{-|t|}^{|t|} \int_\Omega | f \circ\Phi(x, \, \tau(x, \, t)) - f \circ \Phi(x, \, s) |^2 \, \mathrm{d}x \mathrm{d}s.
+\end{aligned}\]
+Now apply the change of variables
+\[
+(y, \, u) = \Psi_t(x, \, s) := (\Phi(x, \, s), \, \tau(x, \, t) - s),
+\]
+and notice that $\Psi_0(x, \, s) = (\Phi(x, \, s), \, - s)$ is a diffeomorphism since its Jacobian has determinant equal to
+\[
+- \nabla_x \Phi(x, \, s).
+\]
+Therefore, since we can choose $|t|$ to be as small as we want, we can apply the same argument given in \eqref{eq.i.3} to conclude that $\Psi_t$ is a diffeomorphism and
+\[ 
+\| \e^{t X_\eta }f  - \e^{s X}f\|_2 \leq C |u|^{\alpha} \|f\|_{X, \, \alpha}.
+\]
+Finally, from the definition of $u$ and the fact that $|t|$ is small we find that
+\[
+|u| \leq |s| + |\tau(x,\, t)| \leq |t| + |\tau(x, \, t)| \stackrel{|t| \ll 1}{\leq} C^\prime |t|,
+\]
+and this concludes the proof. \end{proof}
+
+\subsection{Besov spaces of combinations of vector fields}
+
+The goal of this section is to investigate the relation between $\| \cdot \|_{X+Y, \, \alpha}$ and $\| \cdot \|_{X, \, \alpha} + \| \cdot \|_{Y, \, \alpha}$, where $X$ and $Y$ are two smooth vector fields. If $[X, \, Y] = 0$, then
+\[
+\| f \|_{X + Y, \, \alpha, \, \delta} = \|f\|_{L^2(\Omega)} + \sup_{|t| < \delta}\left\{ |t|^{-\alpha} \| \e^{tX + tY} f - f \|_{L^2(\Omega)} \right\}
+\]
+may be estimated using the triangular inequality with either $\e^{tX}$ or $\e^{tY}$:
+\[ \begin{aligned}
+\| \e^{tX + tY} f - f \|_{L^2(\Omega)} & \leq \| \e^{tX}(\e^{tY} f - f) \|_{L^2(\Omega)} + \| \e^{tX} f - f \|_{L^2(\Omega)} =
+\\[1em] & = \| (\e^{tY} f - f) \circ \varphi_{X, \, t} \|_{L^2(\Omega)} + \underbrace{ \| \e^{tX} f - f \|_{L^2(\Omega)} }_{\leq |t|^\alpha \|f\|_{X, \, \alpha}} {\color{blue}{}\leq}
+\\[1em] & {\color{blue}\leq{}} C|t|^\alpha \left( \|f\|_{Y, \, \alpha} + \|f\|_{X, \, \alpha} \right).
+\end{aligned} \]
+The {\color{blue}blue} inequality follows from the fact that, if $|t|$ is small enough, the flow $\varphi_{X,\, t}$ is a diffeomorphism and hence preserves the $L^2$-norm:
+\[
+\| (\e^{tY} f - f) \circ \varphi_{X, \, t} \|_{L^2(\Omega)} = \| \e^{tY} f - f \|_{L^2(\Omega)}.
+\]
+
+\bpr
+Let $K \subset \Omega$ be compact and let $X$ and $Y$ be smooth vector fields on $\Omega$ such that
+\[
+[X, \, Y] = 0.
+\]
+Then there exists a constant $C = C(K,\, X, \, Y) > 0$ such that for all $\alpha \in (0, \, 1]$ we have
+\begin{equation} \label{eq.i.5}
+\| f \|_{X+Y, \, \alpha} \leq C (\|f\|_{X, \, \alpha} + \|f\|_{Y, \, \alpha}) \quad \text{for all $f \in L^2(\Omega)$ with $\mathrm{spt}(f) \subset K$}.
+\end{equation}
+\epr
+
+If $[X, \, Y] \neq 0$, then things do not work out in the same way. We now state a lemma which strengthens the conclusions reached in \hyperref[prop.diff.2.1]{Proposition \ref{prop.diff.2.1}}.
+
+\bl
+Let $X_1, \, \dots, \, X_p$ be smooth vector fields on $\Omega$. \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item For all $m \geq 1$ there exists $N(m) = N$ such that
+\begin{equation} \label{eq.i.6}
+\exp \left( t(X_1 + \dots + X_p)\right) f(x) = \e^{\pm t X_{i_1}} \dots  \mathrm{e}^{\pm t X_{i_N}}f(x) + \mathcal{O}(|t|^m),
+\end{equation}
+where $i_k \in \{1, \, \dots, \, p\}$ for all $k = 1, \, \dots, \, N$ and $\mathcal{O}(|t|^m)$ is uniform once we fix a compact subset $K \subset \Omega$.
+\item Let $C_q$ be a elementary iterated commutator of multidegree $q$. Then for all $m \geq 1$ we can find $N(m) = N$ such that
+\begin{equation} \label{eq.i.7}
+\exp \left( t C_q\right) f(x) = \e^{\pm t^{\frac{1}{q}} X_{i_1}} \cdots  \e^{\pm t^{\frac{1}{q}} X_{i_N}}f(x) + \mathcal{O}(|t|^m),
+\end{equation}
+where $i_k \in \{1, \, \dots, \, p\}$ for all $k = 1, \, \dots, \, N$ and $\mathcal{O}(|t|^m)$ is uniform once we fix a compact subset $K \subset \Omega$.
+\end{enumerate} 
+\el
+
+\brmk
+Multiplying by the inverses of the exponentials in the right-hand side in \eqref{eq.i.6} yields
+\begin{equation} \label{eq.i.8}
+\e^{\mp t X_{i_N}} \cdots  \e^{\mp t X_{i_1}} \e^{ t(X_1 + \dots + X_p} f(x) - f(x) = \mathcal{O}(|t|^m),
+\end{equation}
+which means that the flow $\Psi$ associated to this composition of these exponentials satisfies
+\[
+f \circ \Psi(x, \, t) = f(x) + \mathcal{O}(|t|^m).
+\]
+If we choose $f$ to be the coordinate function $e_j$, $j = 1, \, \dots, \, n$, we get
+\[
+\Psi(x, \, t) =x + \mathcal{O}(|t|^m), 
+\]
+and hence $\Psi$ {\bf satisfies} the assumptions of \hyperref[prop.i.1]{Proposition \ref{prop.i.1}}.
+\ermk
+
+\bthm
+Let $X_1, \, \dots, \, X_p$ be smooth vector fields on $\Omega$, $K \subset \Omega$ compact and $\sigma \in (0, \, 1)$. Then for all $\alpha \geq 1$ and all $f \in L^2(\Omega)$ with support contained in $K$ we have: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item There exists $C(X,\, p, \, \sigma) = C$ such that
+\begin{equation} \label{eq.i.9}
+\|f\|_{X_1 + \dots + X_p, \, \alpha} \leq C \sum_{i = 1}^p \|f\|_{X_i, \, \alpha} + C^\prime \|f\|_{\Lambda_\sigma^{2, \, \infty}}.
+\end{equation}
+\item Let $q \in \N$. There exists $C(p, \, q) = C$ such that
+\begin{equation} \label{eq.i.10}
+\|f\|_{C_q, \, \frac{\alpha}{q}} \leq C \sum_{i = 1}^p \|f\|_{X_i, \, \alpha} + C^\prime \| f \|_{\Lambda_\sigma^{2, \, \infty}}.
+\end{equation}
+\end{enumerate}
+\ethm
+
+\begin{proof}
+We only prove $\mathbf{(ii)}$. Use \eqref{eq.i.7} to rewrite the left-hand side as
+\[
+ \| \e^{tC_q} f - f \|_{L^2(\Omega)} = \| \e^{\pm t^{\frac{1}{q}} X_{i_1}} \cdots \e^{\pm t^{\frac{1}{q}} X_{i_N}} (f \circ \Psi_t) - f \|_{L^2(\Omega)}.
+\]
+This implies the following chain of inequalities
+\[ \begin{aligned}
+ \mathbf{(LHS)} & \leq \| \e^{\pm t^{\frac{1}{q}} X_{i_1}} \cdots  \e^{\pm t^{\frac{1}{q}} X_{i_N}} (f \circ \Psi_t - f)  \|_{L^2(\Omega)} + \| \e^{\pm t^{\frac{1}{q}} X_{i_1}} \cdots  \e^{\pm t^{\frac{1}{q}} X_{i_N}} f - f  \|_{L^2(\Omega)} {{}\color{orange}\leq}
+\\[1em] & {\color{orange}\leq{}} C \| f \circ \Psi_t - f \|_{L^2(\Omega)} + \| \e^{\pm t^{\frac{1}{q}} X_{i_1}} \dots  \e^{\pm t^{\frac{1}{q}} X_{i_N}} f - f  \|_{L^2(\Omega)}  {{}\color{blue}\leq}
+\\[1em] & {\color{blue}\leq{}} C \| f \circ \Psi_t - f \|_{L^2(\Omega)} + C^\prime \sum_{i = 1}^p \| \e^{t^{\frac{1}{q}} X_i} f - f  \|_{L^2(\Omega)} \leq
+\\[1em] & \leq C |t|^{m\sigma} \|f\|_{\Lambda_\sigma^{2, \, \infty}} + C^\prime \sum_{i = 1}^p |t|^{\frac{\alpha}{q}} \|f\|_{X_j, \, \alpha},
+\end{aligned}\]
+and we conclude by choosing $m \sigma \geq \frac{\alpha}{q}$.
+
+The {\color{orange}orange} inequality follows from the fact that each $\varphi_{X_j, \, t}$ is a diffeomorphism for $|t|$ small enough, while the {\color{blue}blue} one follows from the fact that the second term can be rewritten as a telescopic sum (removing one exponential at a time.)
+\end{proof}
+
+\bl \label{lemma.j.1}
+Let $0 < \beta < \alpha \leq 1$ and let $\epsilon > 0$. Then there exists a positive constant $C_\epsilon$ such that
+\begin{equation} \label{eq.j.1}
+\|f\|_{\Lambda_\beta^{2, \, \infty}} \leq C_\epsilon \|f\|_{L^2(\Omega)} + \epsilon \|f\|_{\Lambda_\alpha^{2, \, \infty}} \quad \text{for all $f \in L^2(\R^n)$}.
+\end{equation}
+\el
+
+Notice that the constant $C_\epsilon$ does not depend on $\epsilon$ only, but on the length of the interval over which the supremum is taken. Indeed, recall that the Besov norm is
+\[
+\|f\|_{\Lambda_\alpha^2} = \|f\|_{L^2(\Omega)} + \sup_{0 < |t| < a} |h|^{-\alpha} \| \tau_h f - f \|_2,
+\]
+so it depends on the choice of $a$ - although taking $a \neq a^\prime$ only leads to equivalent norms.
+
+\begin{proof}
+Fix $a > 0$ and take $0 < \delta < a$. Then
+\[ \begin{aligned} 
+\|f\|_{\Lambda_\beta^{2, \, \infty}} & \leq \|f\|_{L^2(\Omega)} + \sup_{0 < |h| \leq \delta} |h|^{-\beta} \| \tau_h f - f \|_{L^2(\Omega)} + \sup_{ \delta \leq |h| < a} |h|^{-\beta} \| \tau_h f - f \|_{L^2(\Omega)} \leq
+\\[1em] & \leq \|f\|_{L^2(\Omega)} + \delta^{\alpha - \beta} \sup_{0 < |h| \leq \delta} |h|^{-\alpha} \| \tau_h f - f \|_{L^2(\Omega)} + 2 \delta^{-\beta} \|f\|_{L^2(\Omega)} =
+\\[1em] & \leq (1 + 2 \delta^{-\beta}) \|f\|_{L^2(\Omega)} + \delta^{\alpha - \beta} \sup_{0 < |h| < a} |h|^{-\alpha} \| \tau_h f - f \|_{L^2(\Omega)}.
+\end{aligned}\]
+Now choose $\delta$ in such a way that $\delta^{\alpha - \beta} = \epsilon$ and notice that \eqref{eq.j.1} holds with $C_\epsilon$ given by
+\[
+C_\epsilon = (1 + 2\delta^{-\beta} - \delta^{\alpha - \beta}).
+\]
+\end{proof}
+
+\bthm
+Let $X_1, \, \dots, \, X_k$ be smooth vector fields on $\Omega$ satisfying the condition
+\[
+\mathrm{Span} \left\langle X_1(x), \, \dots, \, X_k(x), \, \dots, \, \text{commutators up to order $m$ at $x$} \right\rangle = \R^n
+\]
+at all $x \in K \subset \Omega$, $K$ compact subset. Then for all $\alpha \in (0, \, 1]$ we have
+\begin{equation} \label{eq.j.2}
+\|f\|_{\Lambda_{\frac{\alpha}{m}}^{2, \, \infty}} \leq C_{\alpha, \, m, \, K} \sum_{j = 1}^k \|f\|_{X_j, \, \alpha} \quad \text{for all $f \in L^2(\Omega)$ with $\mathrm{spt}(f) \subset K$}.
+\end{equation}
+\ethm
+
+
+\begin{proof}
+First, notice that
+\[
+\| f \|_{\Lambda_\beta^{2, \, \infty}} \simeq \sum_{j = 1}^n \|f \|_{\partial_{x_j}, \, \beta},
+\]
+where $\partial_{x_j}$ denote the coordinate vector fields. Fix $x \in K$ and let
+\[
+\{ Y_1, \, \dots, \, Y_n\} \subset \{ X_1, \, \dots, \, X_k, \, \dots, \, \text{commutators up to order $m$} \}
+\]
+be the basis of $\R^n$ at $x$ which exists by assumption. Then there exists a small neighbourhood $U_x$ of $x$ such that
+\[
+\mathrm{Span} \langle Y_1(y), \, \dots, \, Y_n(y) \rangle = \R^n \quad \text{for all $y \in U_x$}.
+ \]
+Using the coordinate vector fields, we can write in a unique way
+\[
+Y_j(y) = \sum_{i = 1}^n \lambda_{i, \, j}(y) \partial_{x_i}
+\]
+for some smooth functions $\lambda_{i, \, j}$ defined on $U_x$. Invert the metric to find smooth functions $\eta_{i, \, j}$ such that the following holds:
+\[
+\partial_{x_j} = \sum_{i = 1}^n \eta_{i, \, j}(y) Y_i(y).
+\]
+The collection of open sets $\{ U_x \: : \: x \in K\}$ covers $K$ so, by compactness, we can select a finite family of point $x_1, \, \dots, \, x_N$ such that
+\[
+K \subseteq \bigcup_{i = 1}^N U_{x_i}.
+\]
+Let us consider a partition of unity\index{partition of unity} relative to $\cU$,
+\[
+\{ \varphi_i : U_{x_i} \longrightarrow \R \}_{1 \leq i \leq N},
+\]
+and glue together the vector fields $\partial_{x_j}$ to find a global representation that holds at all points of $K$; namely, we have
+\[ 
+\partial_{x_j} = \sum_{\ell = 1}^N \varphi_\ell(x) \sum_{i = 1}^n \eta_{i, \, j}^\ell(x) Y_i^\ell(x) \quad \text{for all $x \in K$}.
+\]
+We added the superscript $\ell$ to $\eta$ and $Y$ because they depend also on the choice of the point $x_i$. Using \eqref{eq.i.9}, followed by \eqref{eq.i.4}, we can easily infer that
+\[ \begin{aligned}
+\|f\|_{\partial_{x_j}, \, \frac{\alpha}{m}} & \leq C_\sigma \sum_{\ell=1}^N \sum_{i = 1}^n \|f\|_{\varphi_\ell \eta_{i, \, j} Y_i, \, \frac{\alpha}{m}} \leq
+\\[1em] & \leq C_\sigma^\prime \sum_{i = 1}^n \|f\|_{Y_i, \, \frac{\alpha}{m}} + C^\prime \|f\|_{\Lambda_\sigma^{2, \, \infty}}.\end{aligned} \]
+Now apply \eqref{eq.i.10} with $q = m$ - since $Y_k$ is at most a commutator of order $m$ - and notice that
+\[ 
+\|f\|_{\partial_{x_j}, \, \frac{\alpha}{m}} \leq C_{m, \, \sigma}^{\prime\prime} \sum_{i = 1}^k \|f\|_{X_i, \, \alpha} + C^\prime \|f\|_{\Lambda_\sigma^{2, \, \infty}}.
+\]
+It turns out that
+\[
+\| f \|_{\Lambda_\beta^{2,\, \infty}} \simeq \sum_{j = 1}^n \|f \|_{\partial_{x_j}, \, \beta} \leq \widetilde{C}_{m, \, n, \, \sigma} \sum_{i = 1}^k \|f\|_{X_i, \, \alpha} + C_n^{\prime\prime} \|f\|_{\Lambda_\sigma^{2, \, \infty}}.
+\]
+To estimate the second term in the right-hand side, take $\sigma$ smaller than $\frac{\alpha}{m}$ and notice that by \eqref{eq.j.1} we can find a constant $C_\epsilon > 0$ such that
+\[
+\|f\|_{\Lambda_\sigma^{2, \, \infty}} \leq \epsilon \|f\|_{\Lambda_{\frac{\alpha}{m}}^{2, \, \infty}} + C_\epsilon \|f\|_{L^2(\Omega)}. \]
+The conclusion follows immediately if we choose $\epsilon$ in such a way that
+\[
+C_n^{\prime\prime} \epsilon < \frac{1}{2}.
+\]
+\end{proof}
+
+\bcor
+Let $f \in C_c^\infty(\Omega)$ with support contained in some compact set $K \subset \Omega$. Then there exists a constant $C = C(K)>0$ such that
+\begin{equation} \label{eq.j.3}
+\|f\|_{\Lambda_{\frac{1}{m}}^{2, \, \infty}} \leq C \left( \sum_{j = 1}^2 \|X_j f\|_{L^2(\Omega)} + \|f\|_{L^2(\Omega)} \right).
+\end{equation}
+\ecor
+
+\begin{proof}
+It suffices to estimate $\| f\|_{X_j, \, \alpha}$ when $\alpha = 1$. We have
+\[ \begin{aligned}
+\left|  \int_\Omega \e^{t X} \, \mathrm{d}x \right|^2 & = \left| \int_\Omega \int_0^t \frac{\mathrm{d}}{\mathrm{d}s} \left( \e^{sX} \right)f(x) \, \mathrm{d}s \mathrm{d}x \right|^2 \leq
+\\[1em] & \leq a \int_\Omega \int_0^t |\e^{sX}X f(x)|^2 \, \mathrm{d}s \mathrm{d}x =
+\\[1em] & = a \int_0^t \| \e^{sX}X f \|{L^2(\Omega)}^2 \, \mathrm{d}s = a^2 \|Xf\|{L^2(\Omega)}^2,
+\end{aligned} \] 
+where $a$ is the parameter determining the Besov norm. This shows that
+\[
+\|f\|_{X_j, \, 1} \simeq \|X_j f \|_{L^2(\Omega)} + \|f\|_{L^2(\Omega)},
+\]
+and thus the conclusion follows from a straightforward application of \eqref{eq.j.2}.
+\end{proof}
+
+\bcor
+For every $s < \frac{1}{m}$ there results
+\begin{equation} \label{eq.j.4}
+\|f\|_{H^s(\Omega)} \leq C \left( \sum_{j = 1}^2 \|X_j f\|_{L^2(\Omega)} + \|f\|_{L^2(\Omega)} \right).
+\end{equation}
+\ecor
+
+\begin{proof}
+This is a simple consequence of the inclusions
+\[ \Lambda_\beta^{2, \, \infty} \subset \Lambda_\alpha^{2, \, 2} = H^\alpha (\Omega) \subset \Lambda_\alpha^{2, \, \infty}, \]
+which holds true as soon as $\beta > \alpha$ - see \hyperref[prop2oqwdqwple]{Proposition \ref{prop2oqwdqwple}}.
+\end{proof}
+
+\section{A step in H\"{o}rmander's theorem}
+
+In this section, we will show how to apply all these estimates proved so far to obtain a small step towards H\"{o}rmander's theorem.
+
+\bthm[H\"{o}rmander] 
+Assume that, at each $x \in \Omega$, the vector fields
+\[
+\{X_j\}_{j = 1, \, \dots, \, k}, \, \{ [X_j, \, X_i] \}_{1 \leq i < j \leq k}, \, \{ [X_j, \, [X_i, \, X_\ell]]\}_{i, \,j, \, \ell}, \, \dots
+\]
+span $\R^n$. Then the operator $L = \sum_{j = 1}^k X_j^2$ is hypoelliptic.
+\ethm
+
+\bl[A priori estimate]
+Let $f \in C_c^\infty(\Omega)$ with support contained in a compact set $K \subset \Omega$. Then there exists a constant $C_s(K) = C_s > 0$ such that
+\[
+\|f\|_{H^s(\Omega)} \leq C_s\left( \|f\|_{L^2(\Omega)} + \|Lf\|_{\X}^\prime \right)
+\]
+for every $s < \frac{1}{m}$, where $m$ is the order of commutators that are necessary to generate $\R^n$.
+\el
+
+\begin{proof}
+Let $K \subset \Omega^\prime \Subset \Omega$. Define the norm
+\[
+\|f\|_\X := \left[ \|f\|_{L^2(\Omega)}^2 + \sum_{j = 1}^k \|X_j f \|_{L^2(\Omega)}^2\right]^{\frac{1}{2}}
+\]
+and, for $u \in \D^\prime(\Omega^\prime)$, introduce the dual norm
+\[
+\|u\|_\X^\prime = \sup_{\substack{f \in \D(\Omega^\prime) \\[.2em] \|f\|_\X \leq 1}} | \langle u, \, f \rangle |.
+\]
+If $f \in \D(\Omega^\prime)$, then it is easy to check that
+\[
+\|f\|_\X^\prime \leq \|f \|_{L^2(\Omega)} \leq \|f\|_\X.
+\]
+The scalar product $\langle Lf, \, f \rangle$, in terms of the vector fields $X_j$, is given by
+\[
+\langle Lf, \, f \rangle = - \left\langle \sum_{j = 1}^k X_j^2 f, \, f \right\rangle = - \sum_{j =1 }^k \left\langle X_j f, \, X_j^\ast f \right\rangle,
+\]
+so we first need to understand how the duals $X_j^\ast$ behave. A simple computation shows that
+\[ \begin{aligned}
+\left\langle X^\ast f, \, g \right\rangle & := \left\langle f, \, X g \right\rangle = \int_\Omega f(x) \left[ \sum_{i = 1}^n a_i(x) \partial_{x_i} f(x) \right] \, \mathrm{d}x =
+\\[1em] & = - \int_\Omega  \sum_{i = 1}^n \partial_{x_i}(a_i f)(x) g(x) \, \mathrm{d}x =
+\\[1em] & = - \int_\Omega g(x) \sum_{i = 1}^n a_i(x) \partial_{x_i} f(x) \, \mathrm{d}x - \int_\Omega g(x) f(x) \underbrace{\sum_{i = 1}^n \partial_{x_i} a_i(x)}_{:= b(x)} \, \mathrm{d}x
+\end{aligned} \]
+so that
+\[
+Xf(x) = \sum_{i=1}^n a_i(x) \partial_{x_i} f(x) \implies X^\ast f(x) = - \sum_{i = 1}^n a_i(x) \partial_{x_i} f(x) - b(x)f(x).
+\]
+It follows that
+\[
+\left\langle Lf, \, f \right\rangle = \sum_{j = 1}^k \left\langle X_j f, \, (X_j + b_j)f \right\rangle = \sum_{j = 1}^k \|X_j f\|_{L^2(\Omega)}^2 + \sum_{j = 1}^k \left\langle X_j f, \, b_j f \right\rangle, \]
+and the second term in the right-hand side can easily be dealt with using once more the formula for the dual $X_j^\ast$:
+\[ \begin{aligned}
+\sum_{j = 1}^k \left\langle X_j f, \, b_j f \right\rangle & = - \sum_{j = 1}^k \left\langle f, \, (X_j + b_j) b_j f \right\rangle =
+\\[1em] & = - \sum_{j = 1}^k \left\langle f, \, X_j(b_j f) \right\rangle - \left\langle f, \, b_j^2 f \right\rangle =
+\\[1em] & = - \sum_{j = 1}^k\left[ \left\langle f, \, X_j(b_j) f \right\rangle - \left\langle f, \, b_j X_j(f) \right\rangle - \left\langle f, \, b_j^2 f \right\rangle \right].
+\end{aligned} \]
+Since $\sum_j \langle f, \, b_j X_j(f) \rangle$ is equal to the quantity on the left-hand side, we find that
+\[
+\sum_{j = 1}^k \left\langle X_j f, \, b_j f \right\rangle  = - \frac{1}{2} \sum_{j =1}^k \left[ \left\langle f, \, X_j(b_j) f \right\rangle + \left\langle f, \, b_j^2 f \right\rangle\right].
+\]
+Therefore, the scalar product between $Lf$ and $f$ is equal to
+\[
+\left\langle Lf, \, f \right\rangle = \sum_{j = 1}^k \|X_j f\|_{L^2(\Omega)}^2 - \frac{1}{2} \sum_{j =1}^k \left[ \left\langle f, \, X_j(b_j) f \right\rangle + \left\langle f, \, b_j^2 f \right\rangle\right], \]
+from which we immediately deduce that
+\[ \begin{aligned}
+\|f\|_\X & = \|f\|_{L^2(\Omega)} +\langle Lf, \, f \rangle + \frac{1}{2} \sum_{j =1}^k \left[ \left\langle f, \, X_j(b_j) f \right\rangle + \left\langle f, \, b_j^2 f \right\rangle\right] =
+\\[1em] & = \langle Lf, \, f \rangle + \frac{1}{2}  \sum_{j = 1}^k \left\langle f, \, (X_j b_j + b_j^2 + 2) f \right\rangle.
+\end{aligned} \]
+Now $(X_j b_j + b_j^2 + 2)$ is bounded on $\Omega^\prime$ so there exists a positive constant $C^\prime$ such that
+\[
+\frac{1}{2}  \sum_{j = 1}^k \left\langle f, \, (X_j b_j + b_j^2 + 2) f \right\rangle \leq C^\prime \|f\|_{L^2(\Omega)}^2.
+\]
+Consequently,
+\[ \begin{aligned}
+\|f\|_\X & \leq \| Lf \|_\X^\prime \|f\|_\X + C^\prime \|f\|_{L^2(\Omega)}^2 \leq
+\\[1em] & \leq \| Lf \|_\X^\prime \|f\|_\X + C^\prime \|f\|_{L^2(\Omega)} \|f\|_\X,
+\end{aligned} \]
+which implies that
+\[
+\|f\|_\X \leq \widetilde{C}(\|f\|_{L^2(\Omega)}^2 + \|Lf\|_\X^\prime).
+\]
+Using \eqref{eq.j.4} we conclude the proof of this lemma.
+\end{proof}
+
+\section{A few consequences of H\"{o}rmander's theorem}
+
+In this conclusive section, we show a few consequences of H\"{o}rmander's theorem such as the behaviour of integral curves of commutators and {\em nonisotropic lengths}. For example,
+
+\begin{customthm}{A}
+Let $\Omega$ be a connected subset of $\R^n$ and let $X_1, \, \dots, \, X_k$ be a H\"{o}rmander system on $\Omega$. Then any two points in $\Omega$ can be joined by a {\em horizontal curve}.
+\end{customthm}
+
+\subsection{Integral curves of commutators}
+
+Let $X_1, \, \dots, \, X_k$ be smooth vector fields on $\Omega$ satisfying the H\"{o}rmander condition with order $p$; in other words, for all $x \in \Omega$ we have
+\[
+\R^n = \mathrm{Span} \left\langle X_1(x), \, \dots, \, X_k(x), \, \text{commutators of order $\leq p$ at $x$} \right\rangle.
+\]
+Fix $x \in \Omega$ and denote by
+\[
+\cY_x := \{ Y_1, \, \dots, \, Y_n \}
+\]
+the collection of vector fields that gives a basis of $\R^n$ at $x$ among the ones above. By continuity of the determinant map, the set
+\[
+\{Y_1(y), \, \dots, \, Y_n(y) \}
+\]
+is still a basis of $\R^n$ at all $y$ in an neighbourhood $U_x$ of $x$ small enough. Now consider the map
+\[
+\Phi_{x}(t_1, \, \dots, \, t_n) := \gamma_{x}^{\sum_{j = 1}^n t_j Y_j}(1) = \varphi_{ \sum_{j=1}^n t_j Y_j,\, 1}(x),
+\]
+where $\gamma_{x}^{\sum_{j = 1}^n t_j Y_j}(1)$ is the integral curve relative to the vector field
+\[
+t_1 Y_1 + \cdots + t_n Y_n
+\]
+starting from the point $x \in \Omega$ and evaluated at time $\tau = 1$. This map is well-defined provided that we take $|t_i|$ sufficiently small for each $i = 1,\, \dots, \, n$. The Jacobian at the origin is given by
+\[
+J_{\Phi_{x}}(0, \, \dots, \, 0) = (Y_1(x), \, \dots, \, Y_n(x))
+\]
+since
+\[
+\frac{\partial}{\partial t_j} \, \Big|_{\vec{t} = 0} \Phi_{x}= \frac{\rmd}{\rmd s} \, \Big|_{s = 0} \Phi_{x}(0, \, \dots, \, s, \, \dots, \, 0) = Y_j(x)
+\]
+follows immediately by exploiting the equation defining the integral curve, that is,
+\[
+\gamma_x^\prime(\tau) = Y_j(\gamma_x(\tau)).
+\]
+The vector fields $Y_i$ are linearly independent at $x$ so the determinant of the Jacobian is nonzero, namely
+\[
+\mathrm{det}\left(J_{\Phi_{x}}(0, \, \dots, \, 0) \right)\neq 0,
+\]
+and hence $\Phi_{x}$, restricted to a small ball of $\R^n$ centred at the origin, is a diffeomorphism onto a neighbourhood of $x$. In a similar fashion, the map
+\[
+\Psi_{x}(t_1, \, \dots, \, t_n) :=  \varphi_{Y_1, \, t_1} \circ \dots \circ \varphi_{Y_n, \, t_n}(x)
+\]
+is the map that follows the integral curve of $Y_1$ starting from $x \in \Omega$ for a time $t_1$ and then iteratively following the integral curve of $Y_{j+1}$ starting from $Y_j(t_j)$ for a time $t_{j+1}$. But
+\[
+J_{\Psi_{x}}(0, \, \dots, \, 0) = (Y_1(x), \, \dots, \, Y_n(x))
+\]
+so $\Psi_{x}$ is also a diffeomorphism restricted to a small ball of $\R^n$ centred at the origin (and its differential coincides with the one given by the map $\Phi_{x}$.)
+
+\brmk
+Let $Y_1, \, \dots, \, Y_N$ denote the vector fields $X_1, \, \dots, \, X_k$ and their elementary commutators up to order $p$. The corresponding map
+\[
+\Phi_x(t_1, \, \dots, \, t_N) := \varphi_{Y_1, \, t_1} \circ \dots \circ \varphi_{Y_N, \, t_n}(x)
+\]
+has Jacobian with maximal rank, and hence it maps a small ball of $\R^n$ centred at the origin onto a neighbourhood of $x$. It is worth remarking that the choice of the vector fields does not depend on $x \in \Omega$ since the H\"{o}rmander condition holds.
+\ermk
+
+\bd[Horizontal Curve] \index{horizontal curve}
+We say that a piecewise $C^1$ function $\gamma :[a, \,b] \to \Omega$ is a {\em horizontal curve} if
+\[
+\gamma^\prime(t) \in \mathrm{Span} \langle X_1(\gamma(t)), \, \dots, \, X_k(\gamma(t)) \rangle \quad \text{for almost every $t \in [a, \, b]$}.
+\]
+\ed
+
+\begin{problem}
+Can we join any two points of $\Omega$ via a horizontal curve? If $\Omega$ is connected, it is enough to show that each $x \in \Omega$ has a neighbourhood $U_x$ such that
+\[
+y \in U_x \implies \text{$\exists \, \gamma :[a, \, b] \to \Omega$ horizontal with $\gamma(0) = x$, $\gamma(1) = y$}.
+\]
+\end{problem}
+
+If $\Psi$ is the map defined above, we might try to move along integral curves to connect points. However, there is no guarantee that
+\[ Y_j \in \{ X_1, \, \dots, \, X_k \} \quad \text{for all $j = 1, \, \dots, \, n$}, \]
+and this is, in fact, impossible when $k < n$. Therefore, our goal is to exploit the theory developed in the previous sections to "approximate" the flow when $Y_j$ is a commutator of order $\geq 1$. We start with the simplest case possible:
+
+\bl
+\label{lemma:fsd} Suppose that $Y = [X_1, \, X_2]$. Then the map
+\[
+\widetilde{\varphi}_{Y, \, t} (x) := \begin{cases}
+\varphi_{X_2, \, \sqrt{t}} \circ \varphi_{X_1, \, \sqrt{t}} \circ \varphi_{X_1, \, -\sqrt{t}} \circ \varphi_{X_2, \,-\sqrt{t}}(x), & \text{for $t \geq 0$},
+\\[.8em] \varphi_{X_2, \, \sqrt{|t|}} \circ \varphi_{X_1, \, \sqrt{|t|}} \circ \varphi_{X_1, \, -\sqrt{|t|}} \circ \varphi_{X_2, \, -\sqrt{|t|}}(x) & \text{for $t < 0$} \end{cases} \]
+is $C^1$ with respect to $t$ and satisfies the identity
+\[
+\frac{\rmd }{\rmd t} \, \Big|_{t = 0} \widetilde{\varphi}_{Y, \, t} (x) = Y(x).
+\]
+\el
+
+\begin{proof}
+Denote by $\widetilde{\exp}$ the exponential map related to the modified flow $\widetilde{\varphi}_{Y, \, t}$ so that
+\[
+\widetilde{\exp}(t Y)f(x) =\exp(\sqrt{t} X_2)\exp(\sqrt{t} X_1)\exp(-\sqrt{t} X_1)\exp(-\sqrt{t} X_2)f(x).
+\]
+We can easily compute the derivative for $t > 0$ as follows:
+\[ \begin{aligned}
+\frac{\rmd}{\rmd t} \widetilde{\varphi}_{Y, \, t} (x) & = \frac{1}{2 \sqrt{t}} \left( \e^{\sqrt{t} X_2} \left[ (X_1 + X_2), \,  \e^{\sqrt{t} X_1} \e^{-\sqrt{t} X_1} \right] \e^{-\sqrt{t} X_2} \right) f(x) = 
+\\[1em] & = \frac{1}{2 \sqrt{t}} \left( \e^{\sqrt{t} X_2} \left[ (X_1 + X_2), \,  \mathrm{Id} + \sqrt{t}(X_2 - X_1) + \mathcal{O}(t) \right] \e^{-\sqrt{t} X_2} \right) f(x) =
+\\[1em] & = ([X_1, \, X_2] + \mathcal{O}(t))f(x).
+\end{aligned} \]
+We can do a similar computation for $t < 0$, and this gives the continuity of the $t$-derivative at $0$ which concludes the proof since at any other point it is trivial.
+\end{proof}
+
+We can now find a way to replace higher-order commutators iteratively. More precisely, suppose that $Y = [X_1, \, [X_2, \, X_3]] =: [X_1, \, X^\prime]$ and write for $t > 0$
+\[
+\widetilde{\varphi}_{Y, \, t}(x) := \varphi_{X^\prime,\, t^{\frac{2}{3}}} \circ \varphi_{X_1, \, t^{\frac{1}{3}}}\circ \varphi_{X_1, \, -t^{\frac{1}{3}}} \circ  \varphi_{X^\prime, \, - t^{\frac{2}{3}}} (x).
+\]
+Now apply the formula given in \hyperref[lemma:fsd]{Lemma \ref{lemma:fsd}} to $X^\prime$ to rewrite the right-hand side as the composition of $\varphi_{X_j, \, t^{\frac{1}{3}}}$, $j = 1,\, 2, \, 3$, and iterate it to elementary commutators of any order.
+
+\bthm \label{thm:1231231}
+Suppose that $\Omega$ is connected and let $X_1, \, \dots, \, X_k$ be a H\"{o}rmander system on $\Omega$. Then any two points in $\Omega$ can be joined by a horizontal curve.
+\ethm
+
+\subsection{Nonisotropic lengths}
+\index{nonisotropic lengths}\label{nonisolength}
+
+Let $\gamma$ be a horizontal curve associated to the H\"{o}rmander system $\X := \{X_1, \, \dots, \, X_k\}$. By definition
+\[
+\gamma^\prime(t) \in \mathrm{Span}\langle X_1(\gamma(t)), \, \dots, \, X_k(\gamma(t)) \rangle,
+\]
+so we can find coefficients $a_1,\, \dots, \, a_k$ such that
+\[
+\gamma^\prime(t) = \sum_{j = 1}^k a_j X_j(\gamma(t)),
+\]
+but the representation is not unique (because, in general, $\X$ is not made up of linearly independent vectors). Therefore, to define the velocity of $\gamma$ at $t$, we consider all possible representation and write it as the smallest possible, namely\index{horizontal curve!velocity}
+\[
+|\gamma^\prime(t)|_\X := \inf\left\{ \sum_{j = 1}^k |a_j| \: : \: \gamma^\prime(t) = \sum_{j = 1}^k a_j X_j(\gamma(t)) \right\}.
+\]
+The {\em length}\index{horizontal curve!length} of $\gamma$ is defined through the velocity as usual,
+\[
+L_\X(\gamma) := \int_a^b |\gamma^\prime(t)|_\X \, \rmd t,
+\]
+and since it is not restrictive to assume $\Omega$ connected, we can apply \autoref{thm:1231231} and infer that the function defined by setting
+\[
+d_\X(x, \, y) := \inf \left\{ L_\X(\gamma)\: : \: \text{$\gamma$ horizontal curve joining $x$ and $y$} \right\}
+\]
+is a well-defined distance between the points of $\Omega$. This is usually referred to in the literature as {\em control distance}\index{control distance} associated to the vector fields $X_j$.
+
+Now let $\gamma : [a, \, b] \to \Omega$ be a piecewise $C^1$ curve and $\Y := \{Y_1, \, \dots, \, Y_N\}$ the collection of all the $X_j$'s and commutators up to order $p$ given by the H\"{o}rmander condition. Then
+\[
+\gamma^\prime(t) = \sum_{j = 1}^N a_j Y_j(\gamma(t)),
+\]
+but this representation is also non-unique since $\{Y_1, \, \dots, \, Y_N\}$ is in general not a minimal set of generators. If $d_j$ is the degree of $Y_j$, we define
+\[
+|\gamma^\prime(t)|_\Y := \inf\left\{ \sum_{j = 1}^k |a_j|^{\frac{1}{d_j}} \: : \: \gamma^\prime(t) = \sum_{j = 1}^N a_j Y_j(\gamma(t)) \right\}
+\]
+and, as above, the corresponding length
+\[ L_\Y(\gamma) := \int_a^b |\gamma^\prime(t)|_\Y \, \mathrm{d}t, \]
+and the distance
+\[
+d_\Y(x, \, y) := \inf \left\{ L_\Y(\gamma)\: : \: \text{$\gamma$ piecewise $C^1$ curve joining $x$ and $y$} \right\}.
+\]
+We will now make a similar construction, which is highly local but gives accurate information about the magnitude of the distance in a small neighbourhood. Fix $x \in \Omega$ and pick a basis of $\R^n$ following these "rules": \mbox{}
+\begin{enumerate}[label={\color{orange}\textbf{(\alph*)}}]
+\item Up to a relabeling, pick $X_1, \, \dots X_{\ell_1}$ in such a way that $X_1(y), \, \dots, \, X_{\ell_1}(y)$ are linearly independent for all $y \in U_x$.
+\item Pick $[X_{i_1},\, X_{j_1}], \, \dots [X_{i_{\ell_2}},\, X_{j_{\ell_2}}]$ in such a way that $[X_{i_1},\, X_{j_1}](y), \, \dots [X_{i_{\ell_2}},\, X_{j_{\ell_2}}](y)$ are linearly independent for all $y \in U_x$.
+\item Similar process up to commutators of order $p$. We get a basis, which we denote by
+\[ \{ Y_1, \, \dots, \, Y_{\ell_1}, \, Y_{\ell_1 + 1}, \, \dots, \, Y_{\ell_2}, \, \dots, \, Y_{\ell_{p+1}} \} \]
+satisfying the following dimensional relation
+\[
+\sum_{j = 1}^{p+1} \ell_j = n, \quad \ell_j \geq 0.
+\]
+\end{enumerate}
+We proved that this basis induces a diffeomorphism $\Psi \, \big|_{B(0, \, \epsilon)}$ onto a neighbourhood $U_x$ of $x$ for some $\epsilon > 0$. If $y \in U_x$ and $\gamma$ joins $y$ with $x$, then there exists a unique way to write
+\[
+\gamma^\prime(t) = \sum_{j = 1}^n a_j Y_j(\gamma(t)),
+\]
+and, consequently,
+\[
+|\gamma^\prime(t)|_\Y := \sum_{j = 1}^n |a_j|^{\frac{1}{d_j}}
+\]
+is well-defined and leads to a distance, which is obviously {\color{red}local}. Furthermore, if we write the $n$-uple $(t_1, \, \dots, \, t_n)$ as
+\[
+(\vec{t}_0, \, \dots, \, \vec{t}_p), \quad \text{where $\vec{t}_j = (t_{\ell_j + 1},\\, \dots, \, t_{\ell_{j+1}})$},
+\]
+then we can easily prove that
+\[ \begin{aligned}
+& y = \Psi(\vec{t}_0, \, 0, \, \dots, \, 0) \implies d(x, \, y) \simeq \epsilon,
+\\[1em] & y = \Psi(\vec{t}_0, \, \vec{t}_1, \, 0,\, \dots, \, 0) \implies \epsilon \leq d(x, \, y) \leq \epsilon^{\frac{1}{2}},
+\\[1em] & y = \Psi(\vec{t}_0, \, \vec{t}_1, \, \vec{t}_2, \, 0,\, \dots, \, 0) \implies \epsilon^{\frac{1}{2}} \leq d(x, \, y) \leq \epsilon^{\frac{1}{3}},
+\end{aligned} \]
+and, more in general, the distance between $x$ and $y \in U_x$ is always $\leq \epsilon^{\frac{1}{p}}$. It follows that the corresponding ball $B_d(x, \, r)$ satisfies the following:
+\[ 
+\text{$y \in B_d(x, \, r)$ in the direction generated by commutators of order $m$} \implies d(x, \, y) \leq r^m.
+\]
+
+\subsection{Applications to distributions} %% QUI
+
+Before going through this section, the reader is encouraged to refresh some concepts in differential geometry such as distributions, foliations, etc. In \hyperref[sec:foldist]{Section \ref{sec:foldist}}, the bare minimum necessary to understand this section is presented without any proof.
+
+\paragraph{Framework.} Let $M \subset \C^n$ be a hypersurface and let $\varphi : \C^n \to \R$ be the function with nonzero gradient $\nabla \varphi \neq 0$ such that
+\[
+M = \{ z \in \C^n \: : \: \varphi(z) = 0 \} = \varphi^{-1}(0),
+\]
+and, for $z \in M$, consider the real tangent space\index{tangent space!real}
+\[
+T_z M = ( \nabla \varphi(z) )^\perp.
+\]
+The symbol $\perp$ denotes the orthogonal with respect to the real scalar product $\langle \cdot, \, - \rangle$ and it is easy to verify that $T_z M$ is a $(2n-1)$-dimensional real vector space. We can also define the complex tangent\index{tangent space!complex} space
+\[
+T_z^\C M := ( \nabla \varphi(z) )^\perp,
+\]
+where the orthogonal is now taken with respect to the Hermitian inner product, which we will always denote by $\langle \cdot, \,  - \rangle_\C$. Observe that
+\[
+T_z^\C M = ( T_z M) \cap (\imath T_z M),
+\]
+so the complex one is, in general, different from the real one and actually its dimension is lower than $2n - 1$. For each $a \in \R$ we can analogously define a hypersurface by setting
+\[
+M_a := \{ z \in \C^n \: : \: \varphi(z) = a \} = \varphi^{-1}(a).
+\]
+Then the corresponding family of {\em real tangent spaces}
+\[
+\left\{ T_z M_{\varphi(z)} \: : \: z \in \C^n \right\}
+\]
+is an integrable distribution since it is tangent to the foliation of $\C^n$ made up of the hypersurfaces $\{M_a\}_{a\in \R}$. On the other hand, it is easy to see that
+\[
+\left\{ T_z^\C M_{\varphi(z)} \: : \: z \in \C^n \right\}
+\]
+might fail to be integrable.
+
+\bex
+If $\varphi(z) := \mathfrak{Im}(z_n)$, then
+\[
+T_z^\C M_a = \xi + \{ (z^\prime, \, 0) \: : \: z^\prime \in \C^{n-1} \},
+\]
+where $\xi \in \C^n$ is such that $\mathfrak{Im}(\xi) = a$. Then the distribution of complex tangent spaces defined by $\varphi$ is integrable.
+\eex
+
+\bex
+If we consider the sphere of radius one in $\C^n$, it is easy to see that the real tangent space cannot coincide with the complex one because
+\[
+\eta \perp T_p \mathbb{S}^{2n - 1} \implies \imath \eta \parallel T_p \mathbb{S}^{2n - 1}.
+\]
+\eex
+
+\brmk
+Let $\mathbb{S}^{n-1} \subset \R^n$ be the real unit sphere. Then a vector field $X$ is tangent to the sphere at $p$ if and only if
+\[
+X(x_1^2 + \dots + x_n^2) = 0.
+\]
+For example, the angular derivative $\Omega_{i,\,j} := x_i \partial_j - x_j \partial_i$ is always tangent to the sphere (in any dimension and for all $i \neq j$).
+\ermk
+
+\bex
+In $\C^2$, consider the vector fields
+\[ \begin{aligned}
+& X = \bar{z}_2 \partial_{z_1} -  \bar{z}_1 \partial_{z_2},
+\\[1em] & Y = z_2 \partial_{\bar{z}_1} -  z_1 \partial_{\bar{z}_2}.
+\end{aligned} \]
+It is rather easy to prove that $X$ and $Y$ are tangent to the complex tangent space of the complex sphere $S_\C^1$. However, the commutator is equal to
+\[
+[X,\,Y] = z_1 \partial_{z_1} + z_2 \partial_{z_2} - \bar{z}_1 \partial_{\bar{z}_1} - \bar{z}_2 \partial_{\bar{z}_2},
+\]
+and this is not tangent to the complex tangent space; in particular, the distribution
+\[
+\left\{ T_p^\C S_\C^1 \: : \: p \in \C^2 \right\}
+\]
+is not integrable.
+\eex
+
+\bex[Grushin plane] \index{Grushin plane}
+Consider on $\R^2$ the vector fields $X = \partial_x$ and $Y = x \partial_y$. It is easy to verify that $X$ and $Y$ span $\R^2$ everywhere except for the line $\{ x = 0\}$. However,
+\[ 
+[X, \, Y] = \partial_y,
+\]
+so they satisfy the H\"{o}rmander condition at order one. We now want to estimate the distance between points on $\R^2$, which we have defined in the previous section as
+\[
+d_\X(x, \, y) := \inf \left\{ L_\X(\gamma)\: : \: \text{$\gamma$ horizontal curve joining $x$ and $y$} \right\}.
+\]
+We recall that $\gamma$ is a horizontal curve if and only if $\gamma^\prime(t)$ belongs to the vector space spanned by $X(\gamma(t))$ and $Y(\gamma(t))$. Observe that
+\[
+p \in \R^2 \: : \: p_x \neq 0 \implies d_\X(p, \, q) \propto d(p, \, q)
+\]
+since outside of $\{x = 0\}$, the vector field $Y$ in a small neighbourhood of each point behaves similarly to $\partial_y$ multiplied by some constant.
+
+On the other hand, if both $p$ and $q$ belong to the $y$-axis, then we cannot move vertically so a horizontal curve joining them must be as in \autoref{figure:t.1}. Moreover,
+\[
+L_\X(\gamma) =\inf_{\delta > 0} \left\{ 2 \delta + \frac{h}{\delta}  \right\},
+\]
+which is achieved when $\delta = \frac{1}{\sqrt{2}} \sqrt{h}$. It follows that
+\[
+d_\X(p, \, q) = 2 \sqrt{2} \sqrt{h} \simeq \sqrt{h},
+\]
+so it is not comparable with the Euclidean distance but, at the same time, is coherent with the abstract theory developed in the previous sections.
+\eex
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 12cm, height = 8cm]{images/AA3.pdf}
+\caption{A picture of the curve joining two point on the $y$-axis in the Grushin plane.}
+\label{figure:t.1}
+\end{figure}
+
+\bex[Heisenberg space] \index{Heisenberg group}
+Consider on $\R^3$ the vector fields
+\[
+X = \partial_x - \frac{y}{2} \partial_z \quad \text{and} \quad Y = \partial_y + \frac{x}{2} \partial_z.
+\]
+As before, an easy computation shows that the commutator $[X, \, Y]$ equal to $\partial_z$ and thus the system $\X$ satisfies the H\"{o}rmander condition at order one. However, describing horizontal curves is not as easy as in the Grushin plane, and it can be done via a kind of constructive process which is briefly explained in \autoref{figure:t.2}.
+\eex
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 14cm, height = 7cm]{images/AA4.pdf}
+\caption{How to construct a horizontal curve in the Heisenberg group.}
+\label{figure:t.2}
+\end{figure}
+
+\brmk
+We can estimate the distance $d_\X$ in these two cases because they both enjoy a very special property. Namely, it is easy to verify that
+\[
+[X, \, [X, \, Y]] = [Y, \, [Y, \, X]] = 0
+\]
+so the Baker-Campbell-Hausdorff formula (see \autoref{thm.bchthm}) only consists of three terms:
+\[
+x \times y = x + y + \frac{1}{2}[x, \, y].
+\]
+Notice that even a minor modification of the first example, namely $X = \partial_x$ and $Y = e^x \partial_y$, leads to a Lie algebra which is infinite-dimensional since
+\[
+[X, \, X, \, \dots, \, [X, \, Y] \dots ] = Y
+\]
+for any number of the element $X$.
+\ermk
+
+In the general case, it makes sense to put some restrictions on $\X := \{X_1, \, \dots, \, X_k\}$ which are strictly related to the above examples. \mbox{}
+\begin{enumerate}[label={\color{orange}\textbf{(\alph*)}}]
+\item There is $N \in \N$ such that commutators of order $\geq N$ are zero. In particular,
+\[
+\mathrm{Span} \langle X_1, \, \dots, \, X_k, \, \dots \rangle
+\]
+is a finite-dimensional vector space.
+\item The dimension of the span is exactly equal to $n$, i.e., nonzero commutators form a H\"{o}rmander system.
+\end{enumerate}
+
+The first assumption is easily justified. Indeed, let $\{X_1, \, \dots, \, X_n\}$ generate $\R^n$ at each point $p \in \R^n$ and consider the elliptic operator
+\[
+L = \sum_{j = 1}^n X_j^2 = \sum_{j = 1}^n a_j(x) \partial_{x_j}\left( \sum_{i =1}^n a_i(x) \partial_{x_i} \right).
+\]
+Solving the equation $Lu = 0$ is not trivial, but one could try to build an approximate solution by freezing the coefficients at some $x_0 \in \R^n$ so that $L$ becomes an elliptic operator with constant coefficient. However, freezing
+\[
+L = \partial_x^2 + x^2 \partial_y^2
+\]
+at any point on the $y$-axis leads to the equation
+\[
+\partial_x^2 u(x, \, y) = 0,
+\]
+so there is a loss of information which results in a loss of regularity with respect to the actual solution.
+
+One idea that allows performing a better solution analysis is to modify the vector fields $X$ and $Y$ slightly in such a way that they satisfy condition {\color{orange}\textbf{(1)}}.
+
+In any case, these two properties are equivalent to the fact that $\R^n$ can be equipped with a multiplication law $\cdot$ which is strictly related to the vector fields. We will come back to this in the next chapter, after a short introduction on Lie groups.

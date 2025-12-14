@@ -1,0 +1,130 @@
+\indexentry{convolution!functions|hyperpage}{7}
+\indexentry{convolution!measures|hyperpage}{8}
+\indexentry{total variation|hyperpage}{8}
+\indexentry{bounded operator|hyperpage}{10}
+\indexentry{bounded operator!weakly|hyperpage}{10}
+\indexentry{Riesz-Thorin theorem|hyperpage}{11}
+\indexentry{finitely simple function|hyperpage}{11}
+\indexentry{Young inequality|hyperpage}{11}
+\indexentry{distribution|hyperpage}{12}
+\indexentry{distribution!order|hyperpage}{12}
+\indexentry{Dirac delta|hyperpage}{12}
+\indexentry{distribution!product|hyperpage}{13}
+\indexentry{distribution!derivative|hyperpage}{13}
+\indexentry{Heaviside function|hyperpage}{14}
+\indexentry{distribution!support|hyperpage}{14}
+\indexentry{symmetric|hyperpage}{14}
+\indexentry{distribution!associative convolution|hyperpage}{15}
+\indexentry{distribution!convolution|hyperpage}{15}
+\indexentry{Fourier transform|hyperpage}{16}
+\indexentry{exponential notation|hyperpage}{16}
+\indexentry{scaling function|hyperpage}{16}
+\indexentry{Fourier transform!convolution|hyperpage}{16}
+\indexentry{Plancherel theorem|hyperpage}{17}
+\indexentry{Hausdorff-Young inequality|hyperpage}{18}
+\indexentry{Schwartz class|hyperpage}{18}
+\indexentry{$F$-space|hyperpage}{19}
+\indexentry{Fr\IeC {\'e}chet space|hyperpage}{19}
+\indexentry{locally convex topology|hyperpage}{20}
+\indexentry{Fourier transform!inverse|hyperpage}{23}
+\indexentry{inversion formula|hyperpage}{23}
+\indexentry{Fourier transform!inversion theorem|hyperpage}{23}
+\indexentry{tempered distribution|hyperpage}{23}
+\indexentry{Bourbaki theorem|hyperpage}{24}
+\indexentry{moderate growth function|hyperpage}{24}
+\indexentry{mollifier|hyperpage}{27}
+\indexentry{mollifier!Schwartz|hyperpage}{30}
+\indexentry{holomorphic function|hyperpage}{30}
+\indexentry{entire function|hyperpage}{30}
+\indexentry{Moreira theorem|hyperpage}{31}
+\indexentry{Cauchy theorem|hyperpage}{31}
+\indexentry{Paley-Wiener theorem|hyperpage}{32}
+\indexentry{Paley-Wiener Theorem|hyperpage}{34}
+\indexentry{distributional kernel|hyperpage}{38}
+\indexentry{operator!translation-invariant|hyperpage}{40}
+\indexentry{distribution!translation|hyperpage}{40}
+\indexentry{operator!convolution|hyperpage}{41}
+\indexentry{differential operators|hyperpage}{49}
+\indexentry{differential operator|hyperpage}{49}
+\indexentry{fundamental solution|hyperpage}{49}
+\indexentry{Laplace operator|hyperpage}{51}
+\indexentry{heat operator|hyperpage}{51}
+\indexentry{wave operator|hyperpage}{51}
+\indexentry{Malgrange\IeC {\textendash }Ehrenpreis theorem|hyperpage}{52}
+\indexentry{Lojasiewicz-Hormander theorem|hyperpage}{54}
+\indexentry{hypoelliptic operator|hyperpage}{57}
+\indexentry{distribution!singular support|hyperpage}{57}
+\indexentry{locally solvable|hyperpage}{59}
+\indexentry{H\"{o}rmander theorem|hyperpage}{61}
+\indexentry{Grushin plane|hyperpage}{62}
+\indexentry{Heisenberg group|hyperpage}{62}
+\indexentry{sublaplacian|hyperpage}{62}
+\indexentry{Lipschitz function|hyperpage}{62}
+\indexentry{Besov space|hyperpage}{63}
+\indexentry{Besov space!$p$-power|hyperpage}{64}
+\indexentry{Besov space!$(p, \, q)$-power|hyperpage}{64}
+\indexentry{fractional Sobolev space|hyperpage}{65}
+\indexentry{partition of unity|hyperpage}{73}
+\indexentry{horizontal curve|hyperpage}{78}
+\indexentry{nonisotropic lengths|hyperpage}{79}
+\indexentry{horizontal curve!velocity|hyperpage}{80}
+\indexentry{horizontal curve!length|hyperpage}{80}
+\indexentry{control distance|hyperpage}{80}
+\indexentry{tangent space!real|hyperpage}{82}
+\indexentry{tangent space!complex|hyperpage}{82}
+\indexentry{Grushin plane|hyperpage}{83}
+\indexentry{Heisenberg group|hyperpage}{84}
+\indexentry{Lie group|hyperpage}{88}
+\indexentry{Lie group!left-translation|hyperpage}{88}
+\indexentry{Lie group!right-translation|hyperpage}{88}
+\indexentry{Leibniz rule!derivation|hyperpage}{89}
+\indexentry{vector field|hyperpage}{89}
+\indexentry{vector field!left-invariant|hyperpage}{90}
+\indexentry{Lie algebra|hyperpage}{91}
+\indexentry{one-parameter group|hyperpage}{92}
+\indexentry{Lie group!exponential map|hyperpage}{93}
+\indexentry{Lie algebra|hyperpage}{94}
+\indexentry{Jacobi identity|hyperpage}{94}
+\indexentry{Jacobi identity|hyperpage}{94}
+\indexentry{Lie algebra!homomorphism|hyperpage}{95}
+\indexentry{Lie algebra!commutative|hyperpage}{95}
+\indexentry{Lie algebra!subalgebra|hyperpage}{95}
+\indexentry{Lie algebra!ideal|hyperpage}{95}
+\indexentry{Lie algebra!centre|hyperpage}{95}
+\indexentry{Lie algebra!derived algebra|hyperpage}{95}
+\indexentry{descending central series|hyperpage}{96}
+\indexentry{Lie algebra!nilpotent|hyperpage}{96}
+\indexentry{Ado's theorem|hyperpage}{96}
+\indexentry{Engel's theorem|hyperpage}{96}
+\indexentry{Lie's theorem|hyperpage}{97}
+\indexentry{Lie group!homomorphism|hyperpage}{101}
+\indexentry{dilation|hyperpage}{102}
+\indexentry{Lie algebra!graded|hyperpage}{104}
+\indexentry{Lie algebra!stratified|hyperpage}{104}
+\indexentry{sublaplacian|hyperpage}{104}
+\indexentry{homogeneous norm|hyperpage}{104}
+\indexentry{quasi-triangular inequality|hyperpage}{105}
+\indexentry{quasi-distance|hyperpage}{105}
+\indexentry{measure!push-forward|hyperpage}{107}
+\indexentry{measure!invariant|hyperpage}{107}
+\indexentry{Haar measure|hyperpage}{107}
+\indexentry{unimodular group|hyperpage}{109}
+\indexentry{smooth manifold|hyperpage}{111}
+\indexentry{derivation|hyperpage}{111}
+\indexentry{immersion|hyperpage}{112}
+\indexentry{embedding|hyperpage}{112}
+\indexentry{integral curves|hyperpage}{113}
+\indexentry{vector field flow|hyperpage}{114}
+\indexentry{exponential map|hyperpage}{115}
+\indexentry{submanifold!immersed|hyperpage}{118}
+\indexentry{foliation|hyperpage}{118}
+\indexentry{foliation!leaves|hyperpage}{118}
+\indexentry{foliation|hyperpage}{119}
+\indexentry{distribution|hyperpage}{119}
+\indexentry{distribution!integrable|hyperpage}{119}
+\indexentry{Frobenius theorem|hyperpage}{119}
+\indexentry{free algebra|hyperpage}{120}
+\indexentry{Jacobi identity|hyperpage}{121}
+\indexentry{bracket operator|hyperpage}{121}
+\indexentry{elementary iterated commutator|hyperpage}{122}
+\indexentry{Baker\IeC {\textendash }Campbell\IeC {\textendash }Hausdorff formula|hyperpage}{122}

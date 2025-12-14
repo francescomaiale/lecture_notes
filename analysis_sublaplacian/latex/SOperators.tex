@@ -1,0 +1,846 @@
+\chapter{Linear Differential Operators} \thispagestyle{empty}
+
+In the first half of this chapter, we will focus on linear operators defined on $\Sc$ and taking values in the space of tempered distributions. More precisely, given
+\[
+T : \Sc \longrightarrow \Scp,
+\]
+we will show that the following characterisation holds:
+
+\begin{customthm}{A}
+Suppose that $T$ is a continuous and translation-invariant. Then there exists a unique $\Psi \in \Scp$ such that
+\[
+Tf = \Psi \ast f \quad \text{for all $f \in \Sc$}.
+\]
+\end{customthm}
+
+Next, we consider translation-invariant operators between $L^p$ spaces, show that they identify a particular class $C_{p, \, q}$, which can be connected with known spaces for specific values of $p$ and $q$. For example, we shall prove the following result:
+
+\begin{customthm}{B}
+The space $C_{2, \, 2} $ is isometrically isomorphic to $\F (L^\infty)$.
+\end{customthm}
+
+In the last part of the chapter, we discuss a completely different topic: linear differential operators and fundamental solutions. Recall that
+\[
+Lf = \sum_{|\alpha| \leq m} c_\alpha \partial^\alpha f,
+\] 
+where $c_\alpha$ are functions, eventually constant, is a linear differential operator. Our goal is to prove a result of the utmost importance, which is due to Malgrange and Ehrenpreis.
+
+\begin{customthm}{C}
+Let $L$ be a linear differential operator with constant coefficients. Then there exists $\psi \in \D^\prime(\R^n)$ such that
+\[
+L \psi = \delta_0.
+\] \end{customthm}
+
+\section{Distributional kernels}
+
+Recall that an operator $T : \Sc \to \Scp$ is continuous if the duality coupling
+\begin{equation} \label{extra.3.1}
+f \longmapsto \langle Tf, g \rangle
+\end{equation}
+is a continuous linear functional for all $g \in \Sc$. We already mentioned that \eqref{extra.3.1} can be identified to the following bilinear form
+\[
+(f, g) \longmapsto \langle Tf, g \rangle,
+\]
+which is separately continuous, provided that $T$ is continuous. By {\bf Banach-Alaoglu}, it is also jointly continuous and thus we can find $N \in \N$ and $C > 0$ such that
+\[
+\left| \langle Tf, g \rangle \right| \leq C \|f\|_{(N)} \|g\|_{(N)}.
+\]
+
+\bex
+Let us consider an integral operator with kernel $k$, namely
+\begin{equation} \label{extra.3.2}
+Tf(x) := \int_{\R^n} k(x, \, y) f(y) \, \mathrm{d}y,
+\end{equation}
+and assume that $k$ is continuous and supported on a compact set $K$. The associated linear functional \eqref{extra.3.1} is given by
+\[
+\langle Tf, g \rangle = \int_{\R^n} g(x) \int_{\R^n} k(x, y) f(y) \, \mathrm{d}y \mathrm{d}x.
+\]
+Now introduce the symbol $g \otimes f(x, y)$ to indicate the product $f(y) g(x)$. Then we can rewrite the linear functional as follows:
+\[
+\langle Tf, \, g \rangle = \iint_{\R^n \times \R^n} k(x, \, y) (g \otimes f)(x, \, y) \, \mathrm{d}y \mathrm{d}x.
+\]
+If $f$ and $g$ are Schwartz functions we easily infer that $T$ is a continuous operator since
+\[
+\left| \langle Tf, \, g \rangle \right| \leq \|k \|_{L^1(\Omega)} \|f\|_{(0)} \|g\|_{(0)},
+\]
+and $\|k \|_{L^1(\Omega)}$ is finite because we assumed $k$ to be (more than) summable.
+\eex
+
+Now let $\Phi \in \mathcal{S}^\prime(\R_x^m \times \R_y^n)$ be a tempered distribution, $f \in \mathcal{S}(\R^m)$ and $g \in \mathcal{S}(\R^n)$ in such a way that $g \otimes f \in \mathcal{S}(\R_x^m \times \R_y^n)$. We can define the equivalent of \eqref{extra.3.2}, a \textit{distributional kernel}\index{distributional kernel}, by setting
+\[
+\langle T_\Phi f, \, g \rangle := \langle \Phi, \, g \otimes f \rangle.
+\]
+Since $\Phi$ is continuous, we can find $N \in \N$ and $C > 0$ such that
+\[
+\left| \langle T_\Phi f, \, g \rangle \right| \lesssim \|g \otimes f \|_{(N)} \lesssim \|f\|_{(N)} \|g\|_{(N)}.
+\]
+This shows that the operator $T_\Phi$ is continuous from $\mathcal{S}(\R^m)$ to $\mathcal{S}^\prime(\R^n)$.
+
+\bthm \label{thm.2.1.1}
+Let $T : \Sc \to \cS^\prime(\R^m)$ be a linear continuous operator. Then there exists a unique $\Phi \in \cS^\prime(\R^m \times \R^n)$ such that
+\[
+T = T_\Phi.\]
+\ethm
+
+We will not give full proof of this result, but instead, we wish to discuss the main ideas behind it. The first step is to find a tensorial decomposition for Schwartz functions.
+
+\bl \label{lemma.2.1.1}
+For every $n \in \N$ there exists $m \in \N$ such that for every function $h \in \cS(\R^m \times \R^n)$ we can decompose $h$ as follows:
+\[
+h = \sum_{j = 0}^\infty g_j \otimes f_j,
+\]
+where $f_j$ and $g_j$ are functions satisfying the estimate
+\[
+\sum_{j = 0}^\infty \|g_j\|_{(N)} \|f_j\|_{(N)} \lesssim \|h\|_{(M)}.
+\]
+\el
+
+Now suppose that there exists $\Phi$ such that $T = T_\Phi$. By definition, given an arbitrary function $h$, we can write
+\[
+\langle \Phi, \, h \rangle = \sum_{j = 0}^\infty \langle \Phi, \, g_j \otimes f_j \rangle = \sum_{j = 0}^\infty \langle T f_j, \, g_j \rangle
+\]
+as a consequence of the previous technical lemma. The idea is to start from this identity and construct a $\Phi$ that satisfies it for every function $h \in \mathcal{S}(\R_x^m \times \R_y^n)$.
+
+\bex
+Consider the non-linear differential operator
+\[
+L f(x) := \sum_{|\alpha| \leq d} c_\alpha(x) \partial^\alpha f(x), 
+\]
+where $c_\alpha$ are smooth and bounded functions. It is easy to verify that
+\[
+L(\Sc) \subseteq \Sc \subset \Scp,
+\]
+so we can try to write explicitly the associated distributional kernel. If $\Phi$ exists, it must satisfy
+\[
+\langle \Phi, \, g \otimes f \rangle = \langle L f, \, g \rangle = \int_{\R^n} \left( \sum_{|\alpha| \leq d} c_\alpha(x) \partial^\alpha f(x) \right) g(x) \, \mathrm{d}x.
+\]
+The reader might prove, as an exercise, that
+\[
+\langle \Phi, \, h \rangle = \int_{\R^n} c_\alpha(x) ( \partial_2^\alpha h)(x, \, x) \, \mathrm{d}x,
+\]
+where $\partial_2^\alpha$ indicates the derivative with respect to the second variable. Finally, notice that this formula defines a distribution since it is linear and there results:
+\[
+\left| \langle \Phi, \, h \rangle \right| \leq \sum_{|\alpha| \leq d} \| c_\alpha \|_\infty \int_{\R^n} \frac{c \|h\|_{(N+d)}}{(1 + |x|)^N} \, \mathrm{d}x,
+\]
+which for $N$ big enough (so that the integral converges) leads to
+\[
+\left| \langle \Phi, \, h \rangle \right| \lesssim_{\alpha} \|h\|_{(N + d)}. 
+\]
+\eex
+
+\section{Translation-invariant operators}
+
+The goal of this section is to characterise linear operators $T : \Sc \to \Scp$ that are continuous and {\em translation-invariant}.
+
+\bd \index{operator!translation-invariant}\index{distribution!translation}
+We say that the operator $T : \Sc \to \Scp$ is {\em translation-invariant} if
+\[
+\langle \tau_h (Tf), \, g \rangle = \langle T(\tau_h f), \, g \rangle
+\]
+holds for all $h \in \R^n$ and all $g \in \Sc$. The translation of a distribution is given by
+\[
+\langle \tau_h \Phi, \, f \rangle := \langle \Phi, \, \tau_{-h} f \rangle.
+\]
+\ed
+
+Let $\Phi$ be the distributional kernel given by \hyperref[thm.2.1.1]{Theorem \ref{thm.2.1.1}}. The operator $T = T_\Phi$ is translation-invariant if and only if
+\[
+ \langle \Phi, \, g \otimes (\tau_h f) \rangle = \langle \Phi, \, (\tau_{-h} g) \otimes f \rangle,
+\]
+and, if we replace $g$ with $\tau_h g$, it is also equivalent to
+\begin{equation} \label{extra.4.1}
+\langle \Phi, \, (\tau_h g) \otimes (\tau_h f) \rangle = \langle \Phi, \, g \otimes f \rangle.
+\end{equation}
+Note that, if $\varphi \in \mathcal{S}(\R^m \times \R^n)$ is not given by the elementary product $g \otimes f$, we can exploit the decomposition given by \hyperref[lemma.2.1.1]{Lemma \ref{lemma.2.1.1}}. Then \eqref{extra.4.1} implies that
+\[ \begin{aligned}
+\langle \Phi, \, \varphi \rangle & = \sum_{j=0}^\infty \langle \Phi, \, g_j \otimes f_j \rangle =
+\\[1em] & = \sum_{j = 0}^\infty \langle \Phi, \, (\tau_h g_j) \otimes (\tau_h f_j) \rangle =
+\\[1em] & = \langle \Phi, \, \tau_h \varphi \rangle,
+\end{aligned} \]
+which means that \eqref{extra.4.1} completely characterise the property of being translation-invariant for the operator $T_\Phi$.
+
+\bex
+Let $\Psi \in \Scp$. The {\em convolution operator} associated to $\Psi$ is defined by setting\index{operator!convolution}
+\[ 
+\Sc \ni f \longmapsto Tf := \Psi \ast f.
+\]
+A straightforward computation, which follows from the definitions, shows that
+\[ \begin{aligned}
+\langle \Psi \ast (\tau_h f), \, g \rangle & = \langle \Psi, \, \widecheck{\tau_h f} \ast g \rangle =
+\\[1em] & = \langle \Psi, \, \check{f} \ast (\tau_{-h} g) \rangle =
+\\[1em] & = \langle \Psi \ast f, \, \tau_{-h} g \rangle =
+\\[1em] & = \langle \tau_h(\Psi \ast f), \, g \rangle.
+\end{aligned} \]
+From this chain of equalities we easily deduce that
+\[
+T(\tau_h f) = \Psi \ast (\tau_h f) = \tau_h(\Psi \ast f) = \tau_h(Tf), 
+\]
+which means that $T$ is translation-invariant as claimed.
+\eex
+
+The following result asserts that all linear continuous translation-invariant operators are necessarily equal to a {\em convolution operator}.
+
+\bthm \label{thm.2.1.2}
+Let $T : \Sc \to \Scp$ be a linear continuous translation-invariant operator. Then there exists a unique $\Psi \in \Scp$ such that
+\[ Tf = \Psi \ast f. \]
+\ethm
+
+We can now investigate the relation between $\Psi$ and the kernel $\Phi$ associated to $T$. More precisely, we will show that in a special case the following formula holds:
+\[
+\Psi(x-y) := \Phi(x-y, \, 0),
+\]
+and then we will try to generalise it via an approximation argument.
+
+\bex
+Let $T$ be a linear continuous operator and let $\Phi$ be its kernel, that is,
+\[
+\langle Tf, \, g \rangle = \langle \Phi, \, g \otimes f \rangle.
+\]
+Suppose that $\Phi$ is a continuous {\bf bounded function}. We can rewrite the above expression via integrals as follows:
+\[ 
+\langle Tf, \, g \rangle = \iint \Phi(x, \, y) g(x) f(y) \, \mathrm{d}x \mathrm{d}y.
+\]
+If $T$ is also translation-invariant, then
+\[
+\iint \Phi(x, \, y) g(x) f(y-h) \, \mathrm{d}x \mathrm{d}y =  \iint \Phi(x, \, y) g(x+h) f(y) \, \mathrm{d}x \mathrm{d}y,
+\]
+which is equivalent, via two change of variables, to the condition
+\[
+\iint \Phi(x, \, y + h) g(x) f(y) \, \mathrm{d}x \mathrm{d}y =  \iint \Phi(x-h, \, y) g(x) f(y) \, \mathrm{d}x \mathrm{d}y.
+\]
+Since $\Phi$ is a continuous function, it is easy to see that it must satisfy
+\[
+\Phi(x + h, \, y) = \Phi(x, \, y-h),
+\]
+for all $x, \, y, \, h \in \R^n$. We can evaluate it at the point $y = y^\prime + h$ and find that
+\[
+\Phi(x + h, \, y+h) = \Phi(x, \, y).
+\]
+In particular, the function $\Phi(x, \, y) = \Phi(x - y, \, 0)$ depends on a single variable, the difference between $x$ and $y$, and therefore the following function is well-defined:
+\[
+\Psi(x-y) := \Phi(x-y, \, 0).
+\]
+It is now easy to check that
+\[
+Tf = \Psi \ast f,
+\]
+and this concludes the proof in the special case.
+\eex
+
+In the general case, the computation above is not valid. Nevertheless, we can approximate $\Phi$ via a family of mollifiers $\{\eta_\epsilon \otimes \eta_\epsilon \}_{\epsilon > 0}$ and use the fact that
+\[
+(\eta_\epsilon \otimes \eta_\epsilon) \ast \Phi
+\]
+is a smooth function that converges to $\Phi$ when $\epsilon$ tends to zero.
+
+\bcor
+If $T$ is a linear continuous translation-invariant operator, then
+\[
+T(f \ast g) = (Tf) \ast g \quad \text{for all $f, \, g \in \Sc$.}
+\]
+\ecor
+
+\begin{proof}
+By \autoref{thm.2.1.2}, we know that there exists a unique tempered distribution $\Psi$ such that $Tf = \Psi \ast f$, so it suffices to show that convolution is associative, that is,
+\[
+\Psi \ast (f \ast g) \stackrel{?}{=} (\Psi \ast f) \ast g.
+\]
+Let $h \in \Sc$ be a test function. Then
+\[ \begin{aligned}
+\langle \Phi \ast(f \ast g), \, h \rangle & = \langle \Phi, \, \widecheck{(f \ast g)} \ast h \rangle =
+\\[1em] & = \langle \Phi, \, \check{f} \ast \check{g} \ast h \rangle =
+\\[1em] & = \langle \Phi \ast f, \, \check{g} \ast h \rangle = \langle (\Phi \ast f) \ast g, \, h \rangle,
+\end{aligned} \]
+and this concludes the proof since $h$ is arbitrary.
+\end{proof}
+
+\section{Translation-invariant operators in $L^p$}
+
+Let $1 \leq p < q \leq \infty$. If we can show that a tempered distribution $\Phi \in \Scp$ satisfies an inequality of the type
+\begin{equation} \label{eq.13.1}
+\| \Phi \ast f \|_{L^q(\R^n)}  \lesssim_{p, \, q} \|f\|_{L^p(\R^n)}
+\end{equation}
+for all $f \in \Sc$, then the associated linear operator
+\[
+T_\Phi : \Sc \subset L^p(\R^n) \longrightarrow L^q(\R^n) \subset \Scp
+\]
+is continuous. In particular, it extends uniquely to the closure of the domain,
+\[
+\widetilde{T_\Phi} : \overline{\Sc}^{\| \cdot \|_p} \longrightarrow L^q(\R^n).
+\]
+
+\brmk
+The closure of $\Sc$ with respect to $\| \cdot \|_{L^p(\R^n)}$ coincides with $L^p(\R^n)$ if $p \geq 1$ is finite and is given by
+\[ C_0(\R^n) := \{ f \in C(\R^n) \: : \: \lim_{|x| \to \infty} f(x) = 0 \}
+\]
+if $p = \infty$.
+\ermk
+
+Consequently, it makes sense to wonder whether or not a linear continuous translation-invariant operator $T$ from $L^p(\R^n)$ to $L^q(\R^n)$, $p < \infty$, is necessarily a convolution operator,
+\[
+T(f) = \Phi \ast f,
+\]
+where $\Phi$ belongs to an appropriate subspace of $\D^\prime(\R^n)$. Notice that
+\[
+T \, \big|_{\Sc} : \Sc \longrightarrow \Scp \supset L^q(\R^n),
+\]
+so by \autoref{thm.2.1.2} we can always find a tempered distribution $\Phi$ such that
+\[
+T(f) = \Phi \ast f \quad \text{for all $f \in \Sc$}.
+\]
+Set $p = 1$ and let $\{ \varphi_n \}_{n \in \N} \subset \Sc$ be an approximation identity (see \autoref{sec:appid}) such that whenever $f \in \Sc$
+\[
+\| \varphi_n \ast f - f \|_{L^1(\R^n)} \xrightarrow{n \to + \infty} 0.
+\]
+The operator $T$ is continuous, which means that $Tf$ is the limit (w.r.t the $L^q$ strong topology) of $T(\varphi_n \ast f)$; in other words, we have
+\[
+\| Tf - (T \varphi_n) \ast f \|_{L^q(\R^n)} \xrightarrow{n \to +\ infty} 0.
+\]
+Moreover, it is not hard to see that the family $\{ T \varphi_n \}_{n \in \N}$ is bounded in $L^q(\R^n)$. In fact, there exists a uniform constant $C(q) := C > 0$ such that
+\[
+\| T \varphi_n \|_{L^q(\R^n)} \leq C < \infty \quad \text{for all $n \in \N$}.
+\]
+By Banach-Alaoglu, we can find a subsequence $(n_k)_{k \in \N}$ for which $T \varphi_{n_k}$ converges to $\Phi \in L^q(\R^n)$ with respect to the {\bf weak topology}. It follows that, given $g \in \Sc$, we have
+\[ \begin{aligned}
+\langle Tf, \, g \rangle & = \langle T, \, \check{f} \ast g \rangle =
+\\[1em] & = \langle T, \, \widecheck{(f \ast \varphi_n)} \ast g \rangle =
+\\[1em] & = \langle T \varphi_n, \, \check{f} \ast g \rangle =
+\\[1em] & = \langle T \varphi_n \ast f, \, g \rangle,
+\end{aligned} \]
+which means that, up to subsequences, we have
+\[
+\langle Tf, \, g \rangle = \lim_{n \to + \infty} \langle T \varphi_n \ast f, \, g \rangle = \langle \Phi \ast f, \, g\rangle,
+\]
+and this concludes the proof that $T$ is a convolution operator in the case $p = 1$.
+
+\brmk
+The computation above requires the additional assumption $q \neq 1, \, \infty$ since otherwise we end up with $L^\infty(\R^n)$ and $L^1(\R^n)$, which are not reflexive and hence Banach-Alaoglu theorem does not apply. 
+\ermk
+
+We now summarise what we have obtained above in the next proposition, which asserts that translation-invariant operators from $L^1$ to $L^q$ are convolution operators.
+
+\bpr \label{proposition:exatra213}
+Let $T : L^1(\R^n) \to L^q(\R^n)$, $1 < q < \infty$, be a linear continuous translation-invariant operator. Then there exists $\Psi \in L^q(\R^n)$ such that
+\[
+Tf = \Psi \ast f  \quad \text{for all $f \in L^1(\R^n)$.}
+\]
+Moreover, for all translations $h\in \R^n$ there results
+\[
+\Psi \ast (\tau_h f) = \tau_h (\Psi \ast f).
+\]
+\epr
+
+
+\bd[$C_{p, \, q}$-spaces]
+The $(p, \, q)$-convolution space is defined as
+\[
+C_{p, \, q} := \left\{ T : L^p(\R^n) \to L^q(\R^n) \: : \: \text{$T$ linear, continuous and translation-invariant} \right\}
+\]
+if $p$ is finite, and
+\[
+C_{\infty, \, q} := \left\{ T : C_0(\R^n) \to L^q(\R^n) \: : \: \text{$T$ linear, continuous and translation-invariant} \right\}
+\]
+otherwise.
+\ed
+
+\brmk
+We proved earlier that we can associate to each element $T$ of $C_{p, \, q}$ a unique tempered distribution $\Psi_T$ in such a way that
+\[
+Tf = \Psi_T \ast f.
+\]
+This induces an isomorphism between $C_{p, \, q}$ and a subset of $\Scp$; more precisely,
+\[
+C_{p, \, q} = \left\{ \Phi \in \Scp \: : \: \text{$\|\Phi \ast f \|_{L^q(\R^n)} \lesssim_{p, \, q} \|f\|_{L^p(\R^n)}$ for all $f \in \Sc$} \right\}. 
+\]
+\ermk
+
+Notice that \hyperref[proposition:exatra213]{Proposition \ref{proposition:exatra213}} can be reformulated by saying that the convolution space $C_{1, \, q}$ is isomorphic to $L^q(\R^n)$ for all $1 < q < \infty$. Indeed, by Young's inequality
+\[
+\| \Psi \ast f \|_{L^q(\R^n)} \leq \|f\|_{L^1(\R^n)} \|\Psi\|_{L^q(\R^n)},
+\]
+which, in turn, implies that the operator $\Psi \ast f$ is continuous from $L^1(\R^n)$ to $L^q(\R^n)$ as long as $\Psi$ belongs to $L^q(\R^n)$.
+
+Unfortunately, {\bf Banach-Alaoglu's theorem} does not apply when $q = 1$, but it seems plausible to expect that measures will take the place of $L^q(\R^n)$.
+
+\bpr \label{extra.propositoasdjsakde}
+Let $\cM(\R^n)$ be the set of finite complex-valued Borel measures. Then
+\[
+C_{1, \, 1} \cong \cM(\R^n).
+\]
+\epr
+
+\begin{exercise}
+Prove \hyperref[extra.propositoasdjsakde]{Proposition \ref{extra.propositoasdjsakde}}.
+\end{exercise}
+
+\begin{proof}[Hint]
+First, show that $L^1(\R^n)$ is isometrically contained in $\cM(\R^n)$, which is the dual space of $C_0(\R^n)$. Next, use it to find a subsequence converging to some $\mu \in \cM(\R^n)$ such that
+\[
+\|\mu\|_1 \leq \|T\|.
+\]
+Finally, the same argument used above shows that $C_{1, \, 1} \cong \cM(\R^n)$.
+\end{proof}
+
+To investigate further properties of the $C_{p, \, q}$-spaces we need a technical lemma, which asserts that $L^p$-functions behave in a "nice" way with respect to infinite translations.
+
+\bl
+Let $f \in L^p(\R^n)$, $1 \leq p < \infty$. Then
+\begin{equation} \label{eq.2.2.1}
+\lim_{|h| \to + \infty} \| \tau_h f - f \|_{L^p(\R^n)} = 2^{\frac{1}{p}} \|f\|_{L^p(\R^n)}. \end{equation}
+Similarly, if $f \in C_0(\R^n)$, then
+\begin{equation} \label{eq.2.2.2}
+\lim_{|h| \to + \infty} \| \tau_h f - f \|_\infty =  \|f\|_\infty.
+\end{equation}
+\el
+
+\begin{proof}
+First, assume that $f \in C_c(\R^n)$. If $|h|$ is large enough, the support of $f$ and $\tau_h f$ are necessarily disjoint, and thus
+\[
+\|\tau_h f - f \|_{L^p(\R^n)}^p = \int_{\mathrm{spt}(f)} |f(x)|^p \, \mathrm{d}x + \int_{\mathrm{spt}(f) + h} |f(x-h)|^p \, \mathrm{d}x = 2 \|f\|_{L^p(\R^n)}^p. 
+\]
+Taking the $p$th square root, we obtain \eqref{eq.2.2.1}. For a generic $f \in L^p(\R^n)$, we consider the restrictions $f_r := f \chi_{B_r}$ and, given $\epsilon > 0$, we choose $r$ in such a way that
+\[
+\|f_r - f \|_{L^p(\R^n)} \leq \epsilon. 
+\]
+Finally, if $|h|$ is big enough (e.g., $|h| > 2r$ is enough), we infer that
+\[ \begin{aligned}
+\left| \|\tau_h f - f \|_{L^p(\R^n)} - 2^{\frac{1}{p}} \|f\|_{L^p(\R^n)} \right| & \leq \left| \| \tau_h f - f \|_{L^p(\R^n)}- \|\tau_h f_r - f_r\|_{L^p(\R^n)} \right| + \dots
+\\[1em] & \dots + 2^{\frac{1}{p}} \left| \|f_r\|_{L^p(\R^n)} - \|f\|_{L^p(\R^n)} \right| \leq
+\\[1em] & \leq \| \tau_h(f - f_r) - (f - f_r) \|_{L^p(\R^n)} + 2^{\frac{1}{p}} \|f - f_r\|_{L^p(\R^n)} \leq
+\\[1em] & \leq (2 + 2^{\frac{1}{p}}) \|f_r\|_{L^p(\R^n)} \leq 4 \epsilon.
+\end{aligned} \]
+\end{proof}
+
+\bthm \label{thm.cpqvuoti}
+For all $q < p$ there results $C_{p, \, q} = \{0\}$.
+\ethm
+
+\begin{proof}
+Suppose that there exists $T \in C_{p, \, q}$ such that $T \neq 0$. Then
+\[
+\| Tf \|_{L^q(\R^n)} \leq \|T\| \|f\|_{L^p(\R^n)}
+\]
+for all $f \in L^p(\R^n)$. Take $g := \tau_h f - f$ and exploit the linearity of $T$ to obtain the estimate
+\[
+\| T (\tau_h f) - Tf \|_{L^q(\R^n)} \leq \|T\| \|\tau_h f - f \|_{L^p(\R^n)}.
+\]
+Since $T$ is translation-invariant, the left-hand side can be rewritten as
+\[
+\| \tau_h (Tf) - Tf \|_{L^q(\R^n)}.
+\]
+Now let $|h|$ go to $\infty$ and apply \eqref{eq.2.2.1}. It turns out that
+\begin{equation} \label{extraoekoakd,}
+2^{\frac{1}{q}} \|Tf\|_{L^q(\R^n)} \leq 2^{\frac{1}{p}} \|T\| \|f\|_{L^p(\R^n)}.
+\end{equation}
+The operator norm $\| T \|$ is defined as the supremum of $\| T f \|_{L^q(\R^n)}$ as $f$ ranges in the closed ball of radius one in $L^p(\R^n)$. Thus taking the supremum in \eqref{extraoekoakd,} leads to
+\[
+ \|T\| \leq 2^{\frac{1}{p} - \frac{1}{q}} \|T\|, 
+ \]
+and this is absurd because $2^{\frac{1}{p} - \frac{1}{q}}$ is strictly less than one.
+\end{proof}
+
+\bthm
+The space $C_{p, \, q} $ is isometrically isomorphic to $C_{q^\prime, \, p^\prime}$, where
+\[
+\frac{1}{p} + \frac{1}{p^\prime} = \frac{1}{q} + \frac{1}{q^\prime} = 1.
+\]
+\ethm
+
+\begin{proof}
+Let $T \in C_{p, \, q}$ and denote its dual operator by
+\[
+T^\prime : L^{q^\prime}(\R^n) \longrightarrow L^{p^\prime}(\R^n).
+\]
+At this point, it is not clear whether or not $T \, \big|_{\Sc}$ coincides with $T^\prime \, \big|_{\Scp}$. Consider the bilinear form $B_p : L^p(\R^n) \times L^{p^\prime}(\R^n) \to \C$ given by
+\[
+B_p(f, \, g) := \int_{\R^n} f(x) g(-x) \, \mathrm{d}x.
+\]
+This characterise, for all $1 \leq p \leq \infty$, the $L^p$-norm of $f$ via duality as follows:
+\[
+\|f\|_{L^p(\R^n)} = \sup_{\|g\|_{p^\prime} \leq 1} B_p(f, \, g).
+\]
+In particular, the dual operator $T^\prime$ can be defined via this bilinear form in such a way that $T^\prime g$ is the unique element satisfying
+\[
+B_p(f, \, T^\prime g) = B_q(Tf, \, g) \quad \text{for all $f \in L^p(\R^n)$}.
+\]
+Thanks to \autoref{thm.cpqvuoti}, we can assume $p \leq q$, $q > 1$ and $p < \infty$. Then
+\[ \begin{aligned}
+\|T^\prime\| & = \sup_{\substack{g \in \Sc\\[.3em] \|g\|_{L^{q^\prime}(\R^n)} \leq 1}} \|T^\prime g \|_{L^{p^\prime}(\R^n)} =
+\\[1em] & =  \sup_{\substack{f, \, g \in \Sc \\[.3em] \|f\|_{L^p(\R^n)}, \|g\|_{L^{q^\prime}(\R^n)} \leq 1}} |B_p(f, \, T^\prime g)| =
+\\[1em] & = \sup_{\substack{f, \, g \in \Sc \\[.3em] \|f\|_{L^p(\R^n)}, \|g\|_{L^{q^\prime}(\R^n)} \leq 1}} |B_q(Tf, \, g)| = \|T\|.
+\end{aligned} \]
+Now, if $Tf = K \ast f$, for $f, \, g \in \Sc$ we have
+\[ \begin{aligned}
+B_p(f, \, T^\prime g) & = B_q(Tf, \, g) =
+\\[1em] & = \int_{\R^n} (K \ast f)(x) g(-x) \, \mathrm{d}x =
+\\[1em] & = \langle K \ast f, \, \check{g} \rangle =
+\\[1em] & = \langle f, \, \check{K} \ast \check{g} \rangle = B_p(f, \, Tg).
+\end{aligned}
+\]
+This shows that $T = T^\prime$ and concludes the proof. The case $p = q = \infty$ and $p = q = 1$ are left to the reader as an exercise.
+\end{proof}
+
+\bthm
+The space $C_{2, \, 2} $ is isometrically isomorphic to $\F(L^\infty(\R^n))$.
+\ethm
+
+\begin{proof}
+Let $T \in C_{2, \, 2}$. Then there exists $\Phi \in \Scp$ such that $T$ is the convolution operator associated to $\Phi$. In particular,
+\[
+Tf = \Phi \ast f,
+\]
+which, taking the Fourier transform, leads to
+\[ 
+\F(Tf) = \F(\Phi) \F(f).
+\]
+Denote $\F(\Phi)$ by $M$ (which stands for {\em multiplicative operator}) and apply \autoref{planchh} to infer that $M$ is bounded on $L^2(\R^n)$ with
+\[
+\| M \| = \|T \|.
+\]
+Therefore, given $f \in \Sc$ it is easy to verify that $M f \in L^2(\R^n)$ and
+\[
+\| M f \|_{L^2(\Omega)} \leq \|T\| \|f\|_{L^2(\Omega)}.
+\]
+Let $\psi$ be a cutoff function with compact support, $\chi_{B_1} \leq \psi \leq \chi_{B_{\frac{3}{2}}}$, and call $\psi_j(\xi)$ the rescaling $\psi(2^{-j} \xi)$. The functions $m_j := M \psi_j$ belong to $L^2(\R^n)$ and
+\[
+m_j m_{j+1} = m_j 
+\]
+holds for all $j \in \N$. We can easily construct $m \in L_{\mathrm{loc}}^2(\R^n)$ which coincides with each $m_j$ on $B_{2^j}$ so $Mf = mf$ for all $f \in C_c^\infty(\R^n)$. We now claim that
+\[
+m \in L^\infty(\R^n) \quad \text{and} \quad \|m\|_\infty \leq \|M\|.
+\]
+We argue by contradiction. Suppose that there is $\delta > 0$ such that $|m| > \|M\|+\delta$ on a set $E$ of positive measure (which we may assume to be bounded). If we take
+\[
+f_j \in C_c^\infty \: : \: \| f_j - \chi_E \|_{L^2(\R^n)} \xrightarrow{j \to \infty} 0, \]
+then
+\[
+M \chi_E = \lim_{j \to + \infty} M f_j = m \chi_E.
+\]
+It follows that $\|m \chi_E\|_{L^2(\R^n)} > (\|M\| + \delta) \|\chi_E\|_{L^2(\R^n)}$, which is absurd. Conversely, given $m \in L^\infty(\R^n)$, the associated operator is given by
+\[
+Tf = (\F^{-1} m) \ast f,
+\]
+and it is bounded on $L^2(\R^n)$ by Plancherel's identity, with $\|T\| \leq \|m\|_\infty$.
+\end{proof}
+
+\bcor \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $1 < p < q < 2$, then $C_{1, \, 1} \subset C_{p, \, p} \subset C_{q, \, q} \subset C_{2, \, 2}$.
+\item If $\frac{1}{p} - \frac{1}{q} = \frac{1}{r^\prime}$, then $L^(\Omega) \subset C_{p, \, q}$.
+\end{enumerate}
+\ecor
+
+\section{Differential operators and fundamental solutions}
+
+In this section, we focus on a special class of operators, which are usually known as {\em differential operators}\index{differential operators}. The main goal is to study existence of solutions to the equation
+\[
+Lu = f
+\]
+passing via {\em fundamental solutions}, which is a natural notion arising from the fact that we can study the same problem in the phases space via Fourier transform,
+\[
+\F(Lu) = \F(f).
+\]
+Thus, if we can find a solution of the transformed equation, we can obtain a solution of the initial problem via the inverse Fourier transform (when it is invertible).
+
+ 
+\bd[Differential operator] \index{differential operator}
+Let $\alpha \in \N^n$ be a multi-index. The $\alpha$-derivative of a function $f$ is defined by setting
+\[
+\partial^\alpha f(x) = \partial_{x_1}^{\alpha_1} \dots \partial_{x_n}^{\alpha_n} f(x).
+\]
+A {\em linear differential operator} $L$ is a linear combination of derivatives, that is,
+\[
+(Lf)(x) = \sum_{|\alpha| \leq m} c_\alpha(x) \partial^\alpha f(x),
+\]
+where $c_\alpha : \R^n \to \R$ are real-valued functions. If all $c_\alpha$ are constant, we can associate a {\em polynomial} to $L$ which is given by
+\[
+P(\xi) := \sum_{|\alpha| \leq m} c_\alpha (\imath \xi)^\alpha,
+\]
+and the corresponding principal part
+\[
+P_m(\xi) := \sum_{|\alpha| = m} c_\alpha (\imath \xi)^\alpha.
+\]
+\ed
+
+Notice that $L$ is translation-invariant and, if the $c_\alpha$ are all constant, it sends $\Sc$ into $\Sc$. Therefore, there exists a tempered distribution $\Phi$ such that
+\begin{equation} \label{eq.a.1}
+Lf = f \ast \Phi.
+\end{equation}
+A simple computation shows that $\Phi$ must be a linear combination of derivatives of the Dirac delta centred at the origin; more precisely, we have
+\[
+\Phi = \sum_{|\alpha| \leq m} c_\alpha \partial^\alpha \delta_0.
+\]
+
+\bd[Fundamental solution] \index{fundamental solution}
+Let $L$ be a linear differential operator. We say that a distribution $\Psi \in \D^\prime(\R^n)$ is a {\em fundamental solution} for $L$ if
+\begin{equation} \label{eq.a.2} L\psi = \delta_0. \end{equation}
+\ed
+
+The existence of a fundamental solution is one of the critical features in the theory of differential operators. In the next proposition, we explain why this is the case.
+
+\bpr Let $L$ be a linear differential operator and let $\Psi$ be a fundamental solution. Then for any given $f \in C_c^\infty(\R^n)$ it turns out that
+\[
+L ( \Psi \ast f) = f \implies \text{$u = \Psi \ast f$ is a solution}.
+\]
+\epr
+
+\begin{proof}
+It is clearly sufficient to show that
+\begin{equation} \label{eq.a.3}
+L(\Psi \ast f) = (L\Psi) \ast f.
+\end{equation}
+For a test function $g \in \D(\R^n)$ it turns out that
+\[
+\begin{aligned} \langle L(\Psi \ast f), \, g \rangle & = \langle \Psi \ast f, \, \transp{L} g \rangle =
+\\[1em] & = \langle \Psi, \, \transp{L}(\check{f} \ast g) \rangle =
+\\[1em]& = \langle L \Psi, \, \check{f} \ast g \rangle = \langle (L \Psi) \ast f, \, g \rangle,
+\end{aligned}\]
+where $\transp{L}$ denotes the transpose operator. This shows that \eqref{eq.a.3} holds and concludes the proof.
+\end{proof}
+
+However, finding a fundamental solution for an arbitrary operator $L$ is no easy task. Let us consider a linear differential operator of the form
+\[
+(Lf)(x) = \sum_{|\alpha| \leq m} c_\alpha \partial^\alpha f(x),
+\]
+and suppose that we have a fundamental solution $\Psi \in \Scp$. Since its Fourier transform is well-defined, it makes sense to compute
+\[
+\langle \F(L\Psi), \, f \rangle =  \langle L \Psi \, \F f \rangle =  \langle\Psi, \, \transp{L}\F f \rangle.
+\]
+One can check that the transpose operator $\transp{L}$ is given by
+\[ \transp{L}f(x) = \sum_{|\alpha| \leq m} (-1)^{|\alpha|}c_\alpha \partial^\alpha f(x).
+\]
+We can apply $\transp{L}$ to the Fourier transform of $f$ and find the following chain of equalities:
+\[ \begin{aligned}
+\transp{L} \F f(x) & = \sum_{|\alpha| \leq m} (-1)^{|\alpha|}c_\alpha \partial_x^\alpha \int_{\R^n} f(\xi) \e^{-\imath \xi \cdot x} \, \mathrm{d}\xi =
+\\[1em] & = \sum_{|\alpha| \leq m} (-1)^{|\alpha|}c_\alpha \int_{\R^n} f(\xi) (-\imath \xi)^\alpha \e^{-\imath \xi \cdot x} \, \mathrm{d}\xi =
+\\[1em]& = \int_{\R^n} f(\xi) P(\xi) \e^{\imath \xi \cdot x} \, \mathrm{d}\xi = \F (fP)(x),
+\end{aligned} \]
+where $P$ is the polynomial associated to the operator $L$, that is,
+\[
+P(\xi) := P_L(\xi) =\sum_{|\alpha| \leq m} c_\alpha( \imath \xi)^\alpha.
+\]
+It follows that
+\[
+\langle \F(L\Psi), \, f \rangle = \langle \Psi, \, \F(fP) \rangle = \langle P \F \Psi, \, f \rangle,
+\]
+which (using the fact that $\Psi$ is a fundamental solution) immediately leads to
+\begin{equation} \label{eq.a.5}
+P \F (\Psi) = 1.
+\end{equation}
+The naïve approach would suggest to simply take $\F \Psi$ as $\frac{1}{P}$ but, as we will see in the next examples, this is not always possible (because $P$ might fail to be entire - see \autoref{pwtheroem}).
+
+\bex[Laplace operator] \index{Laplace operator}
+Let $L := \Delta$ be the Laplace operator on $\R^n$, i.e.,
+\[
+Lf(x) = \left( \partial_{x_1}^2 + \dots + \partial_{x_n}^2 \right) f(x).
+\]
+The associated polynomial is $P(\xi) = - |\xi|^2$ and, clearly, we cannot define $\F \Psi$ as above because
+\[
+\left\langle - \frac{1}{|\cdot|^2}, \, f \right\rangle = - \int_{\R^n} \frac{f(x)}{|x|^2} \, \mathrm{d}x
+\]
+is not always a well-defined distribution. Indeed, if $n \geq 3$ then everything works fine, but for $n = 2$ the functional is not continuous.
+\eex
+
+\bex[Heat operator] \index{heat operator}
+Let $L := \partial_t - \Delta_{\R^n}$ be the {\em heat operator} in $\R_t \times \R_x^n$. Then the associated polynomial is
+\[
+P(\xi) = \imath \xi_0^2 + |\xi|^2 = \imath \xi_0^2 + \sum_{j = 1}^n \xi_j^2.
+\]
+In this case, the reciprocal of $P$ is well-defined and it allows us to define $\F \Psi$ as above, obtaining a distribution that is a fundamental solution for $L$.
+\eex
+
+\bex[Wave operator] \index{wave operator}
+Let $L := \partial_t^2 - \Delta_{\R^2}$ be the {\em wave operator} in $\R_t \times \R_x^2$. Then the associated polynomial is
+\[
+P(\xi) = -\xi_0^2 + \xi_1^2 + \xi_2^2.
+\]
+This polynomial vanishes on the whole cone
+\[
+\{ \xi \in \R^3 \: : \: \xi_0^2 = \xi_1^2 + \xi_2^2 \},
+\]
+and hence we cannot expect, in general, that the reciprocal defines the Fourier transform of a distribution.
+\end{example}
+
+That said, it is possible to show the existence of a fundamental solution for a special class of linear operators; more precisely, the ones with constant coefficients.
+
+\bthm[Malgrange–Ehrenpreis] \index{Malgrange–Ehrenpreis theorem}
+Let $L$ be a linear differential operator with constant coefficients. Then there exists $\Phi \in \D^\prime(\R^n)$ satisfying \eqref{eq.a.2}.
+\ethm
+
+%Suppose that $\Psi \in \Scp$ and $P \neq 0$ so that $\hat{\Psi} = \frac{1}{P}$ makes sense. Then
+%\begin{equation*}\langle \Psi, \, f \rangle = \Psi \ast \check{f}(0) = \frac{1}{(2\pi)^n} \int_{\R^n} \widehat{\Psi \ast \check{f}}(\xi) \, \mathrm{d}\xi =\frac{1}{(2\pi)^n} \int_{\R^n}\frac{\hat{f}(-\xi)}{P(\xi)} \, \mathrm{d}\xi \end{equation*}
+%and, if we take$f \in \mathcal{D}(\R^n)$, then we can use \hyperref[pwtheroem]{Theorem \ref{pwtheroem}} to infer that $f$ is entire on the complex extension $\C^n \supset \R^n$.
+
+\begin{proof}[Sketch of the proof]
+Let $P$ be the polynomial associated to the linear differential operator $L$. Then we can rewrite it as
+\[ P(\xi) = \sum_{|\alpha| \leq m} a_\alpha \xi^\alpha,
+\]
+where $a_\alpha = \imath^\alpha c_\alpha$. In a similar fashion, we can define
+\[ 
+P_m(\xi) = \sum_{|\alpha| = m} a_\alpha \xi^\alpha,
+\]
+to be the principal part of $P$.
+
+\paragraph{Step 1.} In particular, there must be a point $\bar{\xi} \in \R^n$ such that $P_m(\bar{\xi}) \neq 0$ and, up to a change of variables, we can always assume that
+\[
+\text{$\bar{\xi} = (1, \, \mathbf{0})$ and $P_m(\bar{\xi}) = 1$}.
+\]
+It follows that
+\[
+P_m(\xi) = \xi_1^m + \sum_{j=1}^{m-1} \xi_1^j q_{m - j}(\xi^\prime),
+\]
+where $\xi^\prime = (\xi_2, \, \dots, \, \xi_n) \in \R^{n-1}$ and $q_{m-j}$ is a $(m-j)$-homogeneous multinomial.
+
+\paragraph{Step 2.} Now fix $\xi^\prime$ and denote by $z_1(\xi^\prime), \, \dots, \, z_p(\xi^\prime)$ the distinct roots, with multiplicities $m_j(\xi^\prime)$, of the equation
+\[
+\xi_1^m + \sum_{j=1}^{m-1} \xi_1^j q_{m - j}(\xi^\prime) = 0.
+\]
+A further change of variables, namely $\Gamma(\xi) := (\xi_1, \, \xi^\prime) + (\imath \varphi(\xi^\prime), \, 0)$, is necessary to avoid points where $P_m$ vanishes. The naïve idea would be to choose $\varphi$ in such a way that
+\[
+|\varphi(\xi^\prime) - z_j(\xi^\prime)| > 1 \quad \text{for all $j \in \{1, \, \dots, \, n\}$}.
+\]
+Let $B_j(\xi^\prime)$ be the ball centred at $z_j(\xi^\prime)$ with radius $\epsilon_j > 0$ in such a way that
+\[
+B_j(\xi^\prime) \cap B_\ell(\xi^\prime) = \varnothing \quad \text{for all $j \neq \ell$}.
+\]
+Applying {\bf Rouché's theorem}, we conclude that for a given $\xi^{\prime \prime}$, close enough to $\xi^\prime$, the roots of $P_m(\cdot, \, \xi^{\prime \prime})$ remain confined inside the collection of balls $\{ B_j \}$. Now define
+\[
+\text{$\varphi$ constant function satisfying $\varphi(\xi^\prime) := a \in [1, \, m+1]$},
+\]
+so that the estimate
+\[
+|a - \mathfrak{Im}(z_j(\xi^{\prime \prime}))| > 1
+\]
+holds for all $\xi^{\prime \prime} \in V$, where $V$ is the small neighbourhood of $\xi^\prime$ mentioned before. Now $\Gamma$ allows us to avoid all the zeros of the polynomial, and thus we can write
+\begin{equation} \label{eq.c.1}
+\langle \Phi, \, g \rangle = \int_{\R^n} \frac{ \F g(- \xi_1 - \imath \varphi(\xi^\prime), \, - \xi^\prime)}{P(\xi_1 + \imath \varphi(\xi^\prime), \, \xi^\prime)} \, \mathrm{d}\xi
+\end{equation}
+for any compactly supported function $g \in \D(\R^n)$. But now
+\[
+ \left| P(\xi_1 + \imath \varphi(\xi^\prime), \, \xi^\prime) \right| = \prod_{j = 1}^m \left| \xi_1 + \imath \varphi(\xi^\prime) - z_j(\xi^\prime)\right| \geq \prod_{j = 1}^m \left| \varphi(\xi^\prime) - \mathfrak{Im}(z_j(\xi^\prime)) \right| > 1,
+ \]
+so the denominator on the right-hand side of \eqref{eq.c.1} is smaller than the constant $1$. In a similar fashion, we can estimate the numerator as follows:
+\[ \begin{aligned}
+\left| \F g(- \xi_1 - \imath \varphi(\xi^\prime), \, - \xi^\prime) \right| & = \left| \int_{\R^n} g(x_1, \, x^\prime) \e^{\imath (x_1 (\xi_1 + \imath \varphi(\xi^\prime)) + x^\prime \xi^\prime} \, \mathrm{d}x \right| \leq
+\\[1em] & \leq \int_{\R^n} |g(x_1, \, x^\prime)| \e^{x_1 \varphi(\xi^\prime)} \, \mathrm{d}x_1 \mathrm{d}x^\prime \leq
+\\[1em] & \leq \|g\|_\infty r^n \e^{r |\varphi(\xi^\prime)|}.
+\end{aligned} \]
+Notice that the last inequality follows from \autoref{pwtheroem} because $g$ belongs to $\D(\R^n)$ and thus we can find $r > 0$ such that $\mathrm{spt}(g) \subset B_r$. More in general, there results
+\[
+|z^\alpha \F g (z)| \lesssim_\alpha \| \partial^\alpha g \|_\infty r^n \e^{r |\mathfrak{Im}(z)|}.
+\]
+Combining this with the estimate above leads to
+\[
+\left| \F g (- \xi_1 - \imath \varphi(\xi^\prime), \, - \xi^\prime) \right| \leq \|g\|_{(N)} (1+|\xi|)^{-N} r^n \e^{r |\varphi(\xi^\prime)|}
+\]
+and, if we choose $N \in \N$ big enough, we readily find that the right-hand side of \eqref{eq.c.1} is an absolutely convergent integral. More precisely, we have
+\[
+|\langle \Phi, \, g \rangle| \lesssim_r \|g\|_{(N)},
+\]
+which means that $\Phi$ is continuous (hence belongs to $\D^\prime(\R^n)$), and this concludes the proof.
+\end{proof}
+
+To conclude this section, we state a stronger result concerning the existence of fundamental solutions which is due to Łojasiewicz-H\"{o}rmander.
+
+\bthm
+[Łojasiewicz-H\"{o}rmander] \index{Lojasiewicz-Hormander theorem} 
+Let $L$ be a linear differential operator with constant coefficients. Then there exists $\Phi \in \Scp$ satisfying \eqref{eq.a.2}.
+\ethm
+
+The proof of this result is rather involved. The reader may refer to \cite{krpa}, where a simple proof is presented, and the reference therein of the original works by Łojasiewicz and H\"{o}rmander.
+
+\subsection{Applications of Malgrange–Ehrenpreis theorem}
+
+Let $L$ be a linear differential operator with constant coefficients and $\Omega \subset \R^n$ an open set. We are interested in finding a solution of the problem
+\begin{equation} \label{eq.c.2}
+Lu = f
+\end{equation}
+when $f$ belongs to $\D^\prime(\Omega)$. However, all we can do is to find a solution in any bounded subsets $\Omega^\prime$ which is relatively compact in $\Omega$. To do it, consider a cutoff function
+\[
+\varphi \in \D(\Omega) \: : \:  \varphi \, \big|_{\Omega^\prime} \equiv 1
+\]
+and let $f_0 := \varphi f$. Clearly, $f_0$ is still a distribution that coincides with $f$ on $\Omega^\prime$, but it has a big advantage; namely, its support is compact. Thus
+\[
+L(\Phi \ast f_0) = f_0 \implies \text{$u = \Phi \ast f_0$ is a solution of \eqref{eq.c.2} in $\Omega^\prime$}.
+\]
+
+\bcor
+Linear differential operators with constant coefficients are locally solvable\footnote{In this set of notes, locally solvable means that we can find a solution in any relative compact subset. However, this notation is not standard and the reader may find a completely different notion of locally solvable in most books.}.
+\ecor
+
+We will now show that if we drop the assumption on the coefficients, even first-order operators with complex coefficients may not be locally solvable.
+
+\bthm
+[Lewy] Let $f \in C^1(\R, \, \R)$ and consider the problem
+\begin{equation}\label{lewy}
+A u(z, \, t) = f^\prime(t),
+\end{equation}
+where $A$ is the first-order linear differential operator defined by
+\[
+A = 2 \partial_{\bar{z}} - 2 \imath z \partial_t.
+\]
+Suppose that \eqref{lewy} has a solution of class $C^1$ defined in a neighbourhood of the form
+\[
+D(0, \, \delta) \times (-\epsilon, \, \epsilon).
+\]
+Then $f$ must be analytic in the interval $(- \epsilon, \, \epsilon)$. 
+\ethm
+
+\brmk
+There are no solutions even in the distributional sense for some initial data $\psi$. In particular, the operator $A$ is not locally solvable in a neighbourhood of the origin. 
+\ermk
+
+\begin{proof}
+We will try to follow the original argument given in \cite{hanlevi}, although the complex variable $z$ will usually be replaced by $(x, \, y)$. Using polar coordinates, we have
+\[
+x + \imath y = r^{\frac{1}{2}} \e^{\imath \theta},
+\]
+so that we can rewrite $f$ as
+\[
+f(x, \, y) = f(r^{\frac{1}{2}}\cos\theta, \, r^{\frac{1}{2}} \sin \theta) =: g_f(r,\, \theta).
+\]
+A simple computation shows that the partial derivatives in this new coordinate system are given by
+\[ \begin{aligned}
+& \partial_r g_f(r, \, \theta) = \frac{1}{2} r^{-\frac{1}{2}} \left(\cos\theta \partial_x f + \sin \theta \partial_y f \right),
+\\[1em] & \partial_\theta g_f(r, \, \theta) = r^{\frac{1}{2}} \left(-\sin\theta \partial_x f + \cos \theta \partial_y f \right),
+\end{aligned}\]
+and this readily leads to the Jacobian matrix of the change of variables:
+\[ \begin{aligned}
+& r^{\frac{1}{2}} \partial_x f = (2r \cos \theta \partial_r - \sin \theta \partial_\theta) g_f,
+\\[1em] & r^{\frac{1}{2}} \partial_y f = (2r \sin \theta \partial_r + \cos\theta \partial_\theta) g_f.
+\end{aligned}\]
+The complex derivative $\partial_{\bar{z}}$ is thus given by
+\[
+2\partial_{\bar{z}} = \partial_x +\imath \partial_y = 2 r^{\frac{1}{2}} \e^{\imath \theta} \partial_r + \imath r^{-\frac{1}{2}} \e^{\imath \theta} \partial_\theta,
+\]
+except at the point $(0, \, 0)$ where this is not well-defined since $r^{-\frac{1}{2}}$ is singular. We now exploit the polar coordinates to infer that
+\[ \begin{aligned}
+\int_0^{2\pi} \left[(\partial_x + \imath \partial_y)f\right](r^{\frac{1}{2}} \e^{\imath \theta}) \, \mathrm{d}\theta & = \int_0^{2\pi} \left[  r^{\frac{1}{2}} \e^{\imath \theta} \partial_r + \imath r^{-\frac{1}{2}} \e^{\imath \theta} \partial_\theta \right] g(r, \, \theta) \, \mathrm{d}\theta \, {\color{orange}=}
+\\[1em] & \, {\color{orange}=} \int_0^{2 \pi} [ r^{\frac{1}{2}} \e^{\imath \theta} \partial_r g ](r, \, \theta) \, \mathrm{d}\theta + r^{-\frac{1}{2}} \int_0^{2 \pi} g(r, \, \theta) \e^{\imath \theta} \, \mathrm{d}\theta =
+\\[1em] & = \int_0^{2\pi} \e^{\imath \theta} \left[ 2 r^{\frac{1}{2}} \partial_r +  r^{-\frac{1}{2}} \right] g(r, \,\theta) \, \mathrm{d}\theta =
+\\[1em] & = 2 \int_0^{2\pi} \e^{\imath \theta} \partial_r(  r^{\frac{1}{2}} g )(r, \, \theta) \, \mathrm{d}\theta =
+\\[1em] & 2 \partial_r \int_0^{2\pi} r^{\frac{1}{2}} g(r, \, \theta) \e^{\imath \theta} \, \mathrm{d}\theta
+\end{aligned} \]
+where the {\color{orange}orange} identity follows from integration by parts of $\e^{\imath \theta} \partial_\theta g$. Now set
+\[
+U(t, \, r) := \int_0^{2\pi} r^{\frac{1}{2}} \e^{\imath \theta} u(r^{\frac{1}{2}} \e^{\imath \theta}, \, t) \, \mathrm{d}\theta,
+\]
+and notice that
+\[ \begin{aligned}
+\partial_t U + \imath \partial_r U & = \int_0^{2\pi} r^{\frac{1}{2}} \e^{\imath \theta} \partial_t u(r^{\frac{1}{2}} \e^{\imath \theta}, \, t) \, \mathrm{d}\theta + \frac{1}{2} \imath \int_0^{2\pi} \left[(\partial_x + \imath \partial_y)f\right](r^{\frac{1}{2}} \e^{\imath \theta}) \, \mathrm{d}\theta =
+\\[1em] & = \imath \int_0^{2 \pi} \left( \partial_{\bar{z}} - \imath z \partial_t \right) u ( r^{\frac{1}{2}} \e^{\imath \theta}, \, t) \, \mathrm{d}\theta.
+\end{aligned} \]
+Let $F$ be a primitive of $f$. Then the function defined by setting
+\[
+\tilde{U}(t + \imath r) := U(t, \, r) - 2 \pi \imath F(t)
+\]
+is holomorphic (since $\partial_{\bar{z}} \tilde{U} = 0$) in $(- \epsilon, \, \epsilon) \times (0, \, \delta^2)$, which means that it extends holomorphically to $z=0$ by setting
+\[
+\tilde{U}(t) := - 2 \pi \imath F(t).
+\]
+It follows that $F$ is a real analytic function, and by definition so is its derivative $f$. This concludes the proof of the theorem.
+\end{proof}
+
+\brmk
+A linear differential operator with constant real-valued coefficient of order one is necessarily locally solvable so we must go to order at least $2$ to find a counterexample.
+\ermk

@@ -1,0 +1,881 @@
+ \chapter{Fourier Transform on $\R^n$} \thispagestyle{empty}
+
+The \textbf{convolution} $\ast$ is a fundamental operation in Mathematics and, while it is usually defined between two functions, it can be applied in a much more general setting. In fact, we can give a meaning to the expression
+\[ \Phi \ast \Psi \]
+even when both $\Phi$ and $\Psi$ are distributions, although we have to introduce mild assumptions on one of the supports. The connection between convolution and \textbf{Fourier transform} is well-known and it says that
+\[ \F(f) \F(g) = c_n\F (f \ast g), \]
+where $f$ and $g$ range in an appropriate class. In particular, we will investigate properties of the Fourier transform on Schwartz spaces,
+\[ \cS(\Omega) := \left\{ f \in C^\infty(\Omega) \: : \: \text{$|\partial^\alpha f(x)| \leq C_{\alpha,\, N} (1+ |x|)^{-N}$ $\forall (\alpha, \, N) \in \N^n\times \N$} \right\} \]
+such as being an invertible map (allowing us to define the so-called \textit{inverse Fourier transform}), even when the domain is the dual $\cS^\prime(\Omega)$.
+
+\section{Introduction}
+
+In this brief section, we recollect some useful definitions and properties related to the convolution of two functions in order to set the ground for the generalisation to distributions.
+
+\begin{definition}[Convolution] \index{convolution!functions} Let $f$ and $g$ be two functions. The \textit{convolution} between them is defined by setting
+\begin{equation} \label{eq.1.1} f \ast g(x) := \int_{\R^n} f(x-y) g(y) \, \rmd y. \end{equation}
+\end{definition}
+
+We did not use the term function to refer to \eqref{eq.1.1} because it actually depends on the regularity of $f$ and $g$. Indeed, it may happen that the integral
+\[  \int_{\R^n} f(x-y) g(y) \, \rmd y \]
+is not well-defined as a function, although it might still belong to some larger class.
+
+\brmk If $f, \,g  \in L^1(\R^n)$, then \eqref{eq.1.1} converges (absolutely) for almost every $x \in \R^n$ and using Fubini's theorem leads to the formula
+\[ \int_{\R^n} \int_{\R^n} f(x-y) g(y) \, \rmd y \rmd x = \int_{\R^n} g(y) \int_{\R^n} f(x-y) \, \rmd x \rmd y. \]
+A simple computation shows that
+\begin{equation} \label{eq.1.2} \| f \ast g \|_{L^1(\R^n)} \leq \|f\|_{L^1(\R^n)} \|g\|_{L^1(\R^n)}. \end{equation} \ermk
+
+\begin{remark}The convolution operation is commutative. Indeed, given $f, \, g \in L^1(\R^n)$ we can use the change of variables formula to obtain the following identity
+\[ f \ast g(x) = \int_{\R^n} f(x-y) g(y) \, \rmd y \stackrel{v= x-y}{=} \int_{\R^n} f(v) g(x - v) \, \rmd v = g \ast f(x). \]
+\end{remark}
+
+\begin{remark}Let $f, \, g \in L^1(\R^n)$. Then
+\begin{equation} \label{eq.1.1.2} \int_{\R^n}f \ast g(x) h(x) \,  \rmd x = \int_{\R^n} \int_{\R^n} f(u) g(v) h(u+v) \, \rmd u \rmd v\end{equation}
+holds, for example, for all $h \in L^1(\R^n)$. \end{remark}
+
+The idea is that we can use $h$ as a test function to generalise the definition of convolution to a slightly more general setting, namely to finite Borel measures.
+
+\begin{definition}[Convolution] \index{convolution!measures} Let $\mu, \, \nu \in \cM(\R^n)$ be two finite Borel measures. We define their convolution, denoted by $\mu \ast \nu$, by setting
+\begin{equation} \label{eq.1.3} \int_{\R^n} h(x) \rmd (\mu \ast \nu)(x) := \int_{\R^n} \int_{\R^n} h(x + y) \, \rmd \mu(x) \rmd \nu(y) \quad \text{for all $h \in C_0(\R^n)$}. \end{equation}
+\end{definition}
+
+\begin{remark} Notice that \eqref{eq.1.3} uniquely identifies the measure $\mu \ast \nu$. Indeed, it follows from Riesz (representation) theorem that $\cM (\R^n)$ is the dual space of $C_0(\R^n)$ and
+\[ \|\mu\|_{C_0(\R^n)^\prime} = |\mu|(\R^n) =: \| \mu \|_1, \]
+where the right-hand side denotes the \textbf{total variation}\index{total variation} of $\mu$. This is defined for any complex-valued measure $\nu$ as follows:
+\[ |\nu|(E) = \sup_{\pi} \sum_{A \in \pi} | \nu(A) |, \]
+where $\pi$ ranges among all countable partition in measurable subsets of $E$.\end{remark}
+
+\begin{proposition}Let $\mu, \, \nu \in \cM(\R^n)$ be two finite Borel measures. Then $\mu \ast \nu$ is also a finite Borel measure and the analogous of \eqref{eq.1.2} holds:
+\begin{equation} \label{eq.1.4} \| \mu \ast \nu \|_{1} \leq \| \mu \|_{1} \| \nu \|_{1}. \end{equation}\end{proposition}
+
+\begin{proof}Let $h$ be a $C_0(\R^n)$ function. By definition $\mu \ast \nu$ acts on $h$ as follows:
+\[ \int_{\R^n} h(x) \rmd(\mu \ast \nu)(x) = \int_{\R^n} \int_{\R^n} h(x + y) \, \rmd \mu(x) \rmd\nu(y). \]
+Now take the absolute value of both sides and notice that
+\[\left| \int_{\R^n} h(x) \rmd (\mu \ast \nu)(x) \right| \leq \int_{\R^n} \int_{\R^n} |h(x + y)| \, \rmd |\mu|(x) \rmd |\nu|(y). \]
+Since $h \in C_0(\R^n) \subset L^\infty(\R^n)$, we know that $\|h \|_{\infty}$ is equal to a finite constant, and therefore we can write the following estimate:
+\[ \left| \int_{\R^n} h(x) \rmd(\mu \ast \nu)(x) \right| \leq \|h\|_{\infty} \int_{\R^n} \int_{\R^n}\rmd|\mu|(x) \rmd|\nu|(y) = \|h\|_{\infty} \|\mu\|_1 \|\nu\|_1. \]
+Finally take the supremum on both sides with respect to $h \in C_0(\R^n)$ with $\| h \|_\infty \leq 1$ to achieve the desired inequality. \end{proof}
+
+\begin{proposition}Let $\mu, \, \nu \in \cM(\R^n)$ be two finite Borel measures and assume that $\nu$ is absolutely continuous with respect to the Lebesgue measure $\cL^n$ with density $f$. Then
+\[ \mu \ast \nu \ll \cL^n, \]
+and its density is given by
+\[ \varphi(x) = \int_{\R^n} f(x-y) \, \mathrm{d}\mu(y) =: f \ast \mu(x). \]
+\end{proposition}
+
+Assume now that $f \in L^1(\R^n)$ and $g \in L^\infty(\R^n)$. Then \eqref{eq.1.1} converges (absolutely) for \textit{every} $x \in \R^n$ and using Fubini's theorem we find that
+\begin{equation} \label{eq.1.5} \| f \ast g \|_{\infty} \leq \|f\|_{L^1(\R^n)} \|g\|_{\infty}. \end{equation}
+In particular, the convolution $f \ast g$ belongs to $L^\infty(\R^n)$ and, with little effort, it can be proved that it is actually a bounded function (i.e., an element of $C_b(\R^n)$.)
+
+\begin{lemma}Let $g \in L^p(\R^n)$, $1 < p < \infty$. Then
+\[ g(x) = g_1(x) + g_2(x) \in L^1(\R^n) + L^\infty(\R^n). \]
+\end{lemma}
+
+\begin{proof}The set $\Omega$ is bounded, so we have the inclusion
+\begin{equation*}L^p(\Omega) \subseteq L^1(\Omega) \end{equation*}
+for all $1 \leq p \leq \infty$. We can thus choose $g_1$ and $g_2$ as follows:
+\begin{equation*} g_1(x) = \begin{cases} g(x) & \text{if $|x| \leq 1$},
+\\ 0 & \text{otherwise,} \end{cases} \quad \text{and} \quad g_2(x) = \begin{cases} g(x) & \text{if $|x| > 1$},
+\\ 0 & \text{otherwise.} \end{cases} \end{equation*}
+\end{proof}
+
+This decomposition allows us to define the convolution between a function $f \in L^1(\R^n)$ and another function $g \in L^p(\R^n)$, $1 < p < \infty$. Indeed,
+\begin{equation*} f \ast g(x) = f \ast g_1(x) + f \ast g_2(x) \in L^1(\R^n) + L^\infty(\R^n), \end{equation*}
+but it can be proved (see \hyperref[Riesz-Thorin]{Theorem \ref{Riesz-Thorin}}) that it actually belongs to $L^p(\R^n)$.
+
+\begin{definition}[Bounded Operator]\index{bounded operator} Let $(\X, \, \mu)$ and $(\Y, \, \nu)$ be two measures space. We say that the operator
+\[ T : L^p(\X, \, \mu) \longrightarrow L^q(\Y, \, \nu) \]
+is \textit{bounded} if
+\begin{equation} \label{sbo} \| T(f) \|_{L^q(\Y, \, \nu)} \lesssim_{p, \, q} \|f\|_{L^p(\X, \, \mu)} \quad \text{for all $f \in L^p(\X, \, \mu)$}.\end{equation}
+\end{definition}
+
+We can introduce a slightly weaker notion of boundedness, which is useful when we deal with the so-called generalized Lebesgue spaces (or Lorentz spaces).
+
+\begin{definition}[Weakly Bounded Operator] \index{bounded operator!weakly} Let $(\X, \, \mu)$ and $(\Y, \, \nu)$ be two measures space. We say that the operator
+\[ T : L^p(\X, \, \mu) \longrightarrow L^{q, \, \infty}(\Y, \, \nu) \]
+is \textit{weakly bounded} (or of \textit{weak-type $(p, \, q)$}) if
+\begin{equation} \label{wbo} \nu  \left( \{ y \in \Y \: : \: |T(f)(y)| > \lambda \} \right) \lesssim_{p, \, q}\left( \frac{ \|f\|_{L^p(\X, \, \mu)} }{\lambda} \right)^q\end{equation}
+for all $f \in L^p(\X, \, \mu)$ and all $\lambda > 0$.\end{definition}
+
+We are now ready to state one of the most significant interpolations result in analysis. The idea is that a strongly bounded operator at the extremal of a segment, say
+\[ (p_0, \, q_0) \quad \text{and} \quad (p_1, \, q_1),\]
+is also weakly bounded in the interior of the segment, that is,
+\begin{equation*} (p, \, q) \in \left\{t(p_0, \, q_0) + (1-t)(p_1, \, q_1) \: : \: t \in [0, \, 1] \right\}. \end{equation*}
+
+\begin{definition}Let $(\X, \, \mu)$ be a measure space. We say that $\X$ is a $\sigma$-finite measure space if we can find a countable family $(X_n)_{n \in \N}$ such that
+\[ \X = \bigcup_{n \in \N} X_n \quad \text{and} \quad \text{$\mu(A_n) < \infty$ for all $n \in \N$}. \] \end{definition}
+
+\begin{theorem}[Riesz-Thorin] \index{Riesz-Thorin theorem} \label{Riesz-Thorin} Let $(\X, \, \mu)$ and $(\Y, \, \nu)$ be two $\sigma$-finite measure spaces. Consider a linear operator
+\[ T : \mathcal{S}(\X, \, \mu) \longrightarrow \mathcal{M}(\Y, \, \nu), \]
+where $\mathcal{S}(\X, \, \mu)$ here denotes the set of finitely simple functions\footnote{A simple function is finitely simple if and only if it is supported in a set of finite measure. Also, recall that these are dense in $L^p(\X, \, \mu)$ for all $0 < p < \infty$.}\index{finitely simple function}. Let $1 \leq p_0, \, p_1, \, q_0, \, q_1 \leq \infty$ and assume that
+\[ \begin{aligned} & \|T(f)\|_{L^{q_0}(\Y, \, \nu)} \leq M_0 \|f\|_{L^{p_0}(\X, \, \mu)},
+\\[1em] &  \|T(f)\|_{L^{q_1}(\Y, \, \nu)} \leq M_1 \|f\|_{L^{p_1}(\X, \, \mu)} \end{aligned} \]
+for all $f \in \mathcal{S}(\X, \, \mu)$. Then for all $\theta \in (0, \, 1)$ we have
+\begin{equation}\label{eq.rt.1} \|T(f) \|_{L^q(\Y, \, \nu)} \leq M_0^{1 - \theta} M_1^\theta \|f\|_{L^p(\X, \, \mu)} \end{equation}
+for all $f \in \mathcal{S}(\X, \, \mu)$, where
+\begin{equation*} \frac{1}{p} = \frac{1 - \theta}{p_0} + \frac{\theta}{p_1} \quad \text{and} \quad \frac{1}{q} = \frac{1 - \theta}{q_0} + \frac{\theta}{q_1}.  \end{equation*} \end{theorem}
+
+\begin{proof}The reader may consult the original paper \cite{thorin}, due to Thorin, which extends the result of Riesz via complex methods. \end{proof}
+
+We are now ready to apply this result to the convolution. Let $f \in L^p(\R^n)$ for some $p \in (1, \, \infty)$, and consider the operator
+\begin{equation*}T_f(g) := f \ast g. \end{equation*}
+We know already that $T$ is linear and satisfies the following inequalities:
+\begin{equation*}\begin{aligned} & \| T_f(g) \|_{L^p(\R^n)} \leq \|f\|_{L^p(\R^n)} \|g\|_{L^1(\R^n)},
+\\[1em] & \|T_f(g) \|_{L^\infty(\R^n)} \leq \|f\|_{L^p(\R^n)} \|g\|_{L^{p^\prime}(\R^n)}, \end{aligned} \end{equation*}
+where the second is an obvious consequence of Hölder's inequality. Applying \eqref{eq.rt.1} with $M_0 = M_1 = \|f\|_{L^p(\R^n)}$ we find the inequality
+\begin{equation} \label{young} \| f \ast g \|_{L^r(\R^n)} \leq \|f\|_{L^p(\R^n)} \|g\|_{L^q(\R^n)}, \end{equation}
+for all triples $(p, \, q, \, r)$ that satisfy the condition
+\begin{equation*} \frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}. \end{equation*}
+This result is usually known as \textbf{Young inequality}\index{Young inequality} and it arises in countless situations in harmonic analysis as well as in other areas of analysis.
+
+\section{Convolution of distributions}
+
+Let $\Omega \subset \R^n$ be an open set. We denote by $\cD(\Omega)$ the family of $C^\infty$-functions with compact support contained in $\Omega$. Recall that the family of seminorms
+\[ p_{K, \, \alpha}(f) := \sup_{x \in K} |\partial^\alpha f(x)|, \]
+where $K$ ranges among all compact subsets of $\Omega$ and $\alpha \in \N^n$, generates a locally convex topology on $\cD(\Omega)$. It is easy to verify that we can equivalently consider the enlarged family
+\[ \widetilde{\cP} := \{ \| \cdot \|_{(N)} \}_{N \in \N}, \]
+defined by setting
+\begin{equation}\label{eq:normma} \| f \|_{(N)} := \max_{|\alpha| \leq N} \max_{x \in \Omega} \left| D^\alpha  \varphi(x) \right|, \end{equation}
+generates the same locally convex topology. The space of \textit{distributions}\index{distribution} is the dual space of $\cD(\Omega)$, that is, the space of all linear and continuous maps
+\[ \Phi : \mathcal{D}(\Omega) \longrightarrow \C. \]
+Given a distribution $\Phi \in \cD^\prime(\Omega)$ and a function $f \in \cD(\Omega)$, we can introduce the following notation for the evaluation
+\[ \Phi(f) := \langle \Phi, \, f \rangle, \]
+which will be useful later on to compare properties of distributions versus integrals.
+
+\begin{definition}[Order] Let $\Phi \in \cD^\prime(\Omega)$. The \textit{order}\index{distribution!order} of $\Phi$ is defined as the smallest positive integer $N$ such that for all $K \subset \Omega$ there exists $C(K) > 0$ with
+\[ |\Phi(f)| \leq C(K) \|f\|_{(N)} \quad \text{for all $f \in \cD_K$}.\]
+If such a $N$ does not exist, then we say that $\Phi$ has order infinity. \end{definition}
+
+\begin{example}[Dirac] \index{Dirac delta} Let $p \in \R^n$. The \textit{Dirac delta} at the point $p$ is defined by
+\[ \delta_p: \mathcal{D}(\R^n) \ni f \longmapsto f(p) \in \C. \]
+This map defines a distribution since it is both linear and continuous. Moreover, it is easy to verify that $\delta_p$ has order zero since for each given compact set $K \subset \Omega$ we have
+\[ \left| \delta_p(f) \right| \leq \| f \|_{(0)} \]
+for all $f \in \cD_K$. Note that $\delta_p$ belongs to a class we know already: it is a measure.\end{example}
+
+\begin{example} Let $p \in \R^n$ and set
+\begin{equation*} \Phi_p(f) := f^\prime(p). \end{equation*}
+It is easy to check that $\Phi_p$ is a distribution of order one, but the reader might find it interesting to show that $\Phi_p$ is \textbf{not} a measure in any sense so
+\[ \cM(\R^n) \subset \cD^\prime(\R^n) \]
+is an actual strict inclusion. \end{example}
+
+\begin{example}[Locally Summable] Given $f \in L_{\mathrm{loc}}^1(\Omega)$, define
+\[ \Lambda_f(g) := \int_{\Omega} f(x) g(x) \, \mathrm{d}x. \]
+The linearity is obvious (the integral itself is linear), while the continuity is an easy consequence of the following estimate:
+\[ \left| \Lambda_f(g) \right| \leq \|f\|_{L^1(\mathrm{spt}(g))} \| g \|_{(0)}. \]\end{example}
+
+\begin{example}Given $\mu$ Borel measure (or locally finite positive measure), define
+\[ \Lambda_\mu(f) := \int_{\Omega}f(x) \, \mathrm{d} \mu(x). \]
+The linearity is obvious, while the continuity is an easy consequence of the following estimate:
+\[ \left| \Lambda_\mu(g) \right| \leq \|\mu\|_{1}  \| g \|_{(0)}, \]
+where $\| \mu \|_1$ denotes the total variation norm of $\mu$. \end{example}
+
+We now wonder whether or not it makes sense to multiply a Borel measure $\mu$ for a function $f$. We expect that $f \mu$ is a measure satisfying the following identity:
+\[ \int_{\R^n} g(x) \, \rmd(f\mu)(x) = \int_{\R^n} g(x) f(x) \, \rmd \mu(x). \]
+However, the right-hand side is well-defined if and only if $fg \in C_0(\R^n)$ for all $g \in C_0(\R^n)$. Equivalently, we might require $f \in C_b(\R^n)$. Therefore, the object
+\[ (f, \, \mu) \longmapsto f \mu  \]
+can be defined at least for all $f \in C_b(\R^n)$.
+
+\begin{definition}[Product] \index{distribution!product} Let $\Phi \in \cD^\prime(\Omega)$ and $f \in \cD(\Omega)$. The product $f \Phi$ is the distribution defined by
+\begin{equation} \label{distr:mult}\langle f \Phi, \, g \rangle := \langle \Phi, \, fg \rangle. \end{equation} \end{definition}
+
+\begin{exercise}Prove that \eqref{distr:mult} defines a distribution. Namely, show that for all $K \subset \Omega$ compact there exist $N = N(K) \in \N$ and $C(K) = C > 0$ such that
+\[ \left| f \Phi(g) \right| \leq C \|g\|_{(N)} \] \end{exercise}
+
+\begin{definition}[Derivative] \index{distribution!derivative} Let $\Phi \in \cD^\prime(\Omega)$ be a distribution. The \textit{derivative} with respect to the direction $x_k$ of $\Phi$ is given by
+\begin{equation} \label{distr:deriv} \langle \partial_{x_k} \Phi, \, g \rangle := - \langle \Phi, \, \partial_{x_k} g \rangle. \end{equation} \end{definition}
+
+Note that the definition \eqref{distr:deriv} is given in such a way that when $\langle f, \, g \rangle = \int f(x) g(x) \, \mathrm{d}x$, it is nothing but the integration by parts formula.
+
+\begin{exercise}Prove that \eqref{distr:deriv} defines a distribution. \end{exercise}
+
+\begin{example}[Heaviside] \index{Heaviside function} Let $H : \R \longrightarrow \R$ be the function defined by
+\[ H(x) = \begin{cases} 1 & \text{if $x \geq 0$,} \\[.8em] 0 & \text{if $x < 0$}. \end{cases} \]
+This function is not differentiable, but it admits a distributional derivative. The functional associated to $H$ is given by $\Lambda_H$, and its derivative is
+\[ \partial_{x_k} \Lambda_{H}(f) = - \int_\R H(x) f^\prime(x) \, \mathrm{d}x = f(0) \]
+for all $f \in \cD(\R)$. It follows that the distributional derivative of the Heaviside function is the Dirac delta $\delta$ at $p = 0$.\end{example}
+
+\begin{definition}[Support]\index{distribution!support} Let $\Phi \in \cD^\prime(\R^n)$. The \textit{support} of $\Phi$ is defined by
+\begin{equation} \label{spt} \mathrm{spt} (\Phi) := \R^n \setminus \bigcup \left\{ \omega \subset \R^n \: \left| \: \text{$\omega$ is an open subset such that $\Phi \equiv 0$ on $\cD^\prime(\omega)$} \right. \right\}. \end{equation} \end{definition}
+
+\brmk The notion is well-defined since $\Phi$ is actually zero as an element of
+\[ \cD^\prime \left( \Omega \setminus \mathrm{spt} (\Phi) \right). \] \ermk
+
+\begin{theorem} \label{theorem:support}Let $\Phi \in \cD^\prime(\R^n)$, and let $S := \mathrm{spt}(\Phi)$. Then the following properties hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}, leftmargin = 2.5\parindent]
+\item If $f \in \cD(\R^n)$ has support disjoint from $S$, then $\langle \Phi, \, f \rangle = 0$.
+\item If $S = \varnothing$, then $\Phi = 0$.
+\item If $g \in C^\infty(\Omega)$ is a smooth function such that $g \equiv 1$ on some open subset $U \supset S$, then $g \Phi = \Phi$ as distributions.
+\end{enumerate}
+\end{theorem}
+
+The goal of this section is to find a well-defined notion of convolution between a distribution $\Phi \in \cD^\prime$ and a function $f \in \cD$. Set
+\begin{equation} \label{distr.convoluzione} \langle \Phi \ast f , \, g \rangle := \langle \Phi, \, \widecheck{f} \ast g \rangle. \end{equation}
+Here we use the symbol $\widecheck{f}(y)$ to denote the function $f$ evaluated at the symmetric point of $y$, that is, we set\index{symmetric}
+\[ \widecheck{f}(y) := f(-y). \]
+Introduce also the following notation:
+\[ \langle \tau_x \Phi, \, f \rangle := \langle \Phi, \, \tau_{-x} f \rangle \quad \text{and} \quad \langle\widecheck{\Phi}, \, f \rangle := \langle \Phi, \, \widecheck{f} \rangle. \]
+We now claim that \eqref{distr.convoluzione} is well-defined and $\Phi \ast f$ is a function, not a distribution as one would normally expect. In fact, if $\Phi$ is a Borel measure $\mu$, we know that
+\[ f \ast \mu(x) = \int_{\R^n} f(x-y) \, \mathrm{d}\mu(y) = \langle \mu, \, \tau_x \widecheck{f} \, \rangle, \]
+so it makes sense to define the smooth function
+\[ u(x) := \langle \Phi, \, \tau_x \widecheck{f} \, \rangle. \]
+Then \eqref{distr.convoluzione} can also be rewritten as
+\[ \langle \Phi \ast f , \, g \rangle = \langle u, \,g \rangle_{L^2(\R^n)}, \]
+which means that $\Phi \ast f$ applied to $g$ is nothing but the distribution associated to the function $u$ applied to $g$. In particular, we can define the convolution as
+\begin{equation} \label{distr.convoluzione.true} \Phi \ast f(x) := \langle \Phi, \, \tau_x \widecheck{f} \, \rangle. \end{equation}
+
+\begin{proposition}[Associativity] \index{distribution!associative convolution} \label{associative1}Let $\Phi \in \cD^\prime$, and let $f, \, g \in \cD$. The convolution is associative, that is,
+\[ (\Phi \ast f) \ast g = \Phi \ast (f \ast g). \] \end{proposition}
+
+To conclude this section, we want to give the main ideas that are needed to properly define the convolution between two (or more) distributions - which is not always possible!
+
+\begin{proposition}\label{def:op} Let $\Phi \in \cD^\prime$ be a distribution. The operator defined by
+\[ \Phi_\ast : \cD \ni f \longmapsto \Phi \ast f \in \cE \]
+is linear, continuous and translation-invariant. Furthermore, if $L \in \mathcal{L}(\cD, \, \cE)$ is a linear continuous operator commuting with translations, then
+\[ \text{there exists a unique $\Phi \in \cD^\prime$ such that $L = \Phi_\ast$.}\]
+\end{proposition}
+
+\begin{definition}[Convolution]\index{distribution!convolution} Let $\Phi \in \cE^\prime$ be a compactly supported distribution and let $\Psi \in \cD^\prime$ be a generic distribution. The convolution is uniquely determined by the identity
+\begin{equation} \label{eq..s.sd} \langle \Phi \ast \Psi, \, f \rangle := \langle \Phi, \, \widecheck{\Psi} \ast f \rangle. \end{equation} \end{definition}
+
+\begin{lemma}\label{lemma:spt2} Let $\Phi \in \cE^\prime$ and $\Psi \in \cD^\prime$. Then the support of the convolution is contained in the sum of the supports, that is,
+\[ \mathrm{spt} (\Phi \ast \Psi) \subseteq \mathrm{spt}(\Phi) +  \mathrm{spt} (\Psi). \]
+\end{lemma}
+
+\begin{exercise}Prove that \eqref{eq..s.sd} is well-defined using the previous result. \end{exercise}
+
+\section{Fourier transform in $L^1(\R^n)$}
+
+Let $f \in L^1(\R^n)$. The \textit{Fourier transform}\index{Fourier transform} of $f$ is the function defined by
+\begin{equation} \label{eq.2.2} \hat{f}(\xi) := \int_{\R^n} f(x) \mathrm{e}^{- \imath x \cdot \xi} \, \mathrm{d}x, \end{equation}
+where $\cdot$ denotes the standard Euclidean scalar product on $\R^n$.
+
+\caution{We will also use the symbol $\F(f)$ for the Fourier transform.}
+
+\begin{notation} We denote by $e_x$ the exponential function\index{exponential notation}
+\[  e_x : \C \ni \xi \longmapsto \mathrm{e}^{\imath x \cdot \xi} \in \C, \]
+and, for any $\lambda \neq 0$, we denote by $h_\lambda$ the scaling\index{scaling function}
+\[ h_{\lambda} : L^1(\R^n) \ni \varphi \longmapsto \varphi_\lambda \in L^1(\R^n), \]
+where
+\[ \varphi_\lambda(x) := \varphi \left( \frac{x}{\lambda} \right). \]
+\end{notation}
+
+We now recollect a few basic properties of the Fourier transform operator which are simple consequences of the definition \eqref{eq.2.2}.
+
+\begin{proposition}\label{proofpssd}Let $f, \, g \in L^1(\R^n)$. Then the following properties hold: \mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item For all $x \in \R^n$ we have
+\[  \F( \tau_x (f)) = e_{-x}  \F(f). \]
+\item For all $x \in \R^n$ we have
+\[  \F(e_x ( f)) = \tau_x \F(f). \]
+\item The Fourier transform of the convolution\index{Fourier transform!convolution} equals of the product of the Fourier transforms, that is,
+\begin{equation} \label{eq.2.1000}\F(f \ast g) = \F(f) \F(g). \end{equation}
+\item Let $\lambda > 0$. The Fourier transform equals the inverse scaling of the Fourier transform, that is,
+\[ \F\left( h_\lambda (f )\right) = \lambda^n h_{\frac{1}{\lambda}} (\F(f) ). \]
+\item The Fourier transform of the overturning is given by
+\[ \F( \check{f} ) = (-1)^{n} \check{\F}(\varphi). \]
+\end{enumerate}\end{proposition}
+
+A fundamental property\footnote{See the Lebesgue-Riemann lemma.} is that $\F$ maps $L^1(\R^n)$ in $C_0(\R^n)$, the space of continuous functions vanishing at infinity. Therefore
+\[  \F : L^1(\R^n) \longrightarrow C_0(\R^n) \subset L^\infty(\R^n) \]
+is a bounded operator with costant one; namely,
+\begin{equation} \label{eq.2.3} \| \hat{f} \|_\infty \leq \| f \|_{L^1(\R^n)}. \end{equation}
+The inclusion in $L^\infty(\R^n)$ is easy to verify since one can estimate $\F(f)$ as follows:
+\[ |\F(f)(\xi)| \leq \int_{\R^n} |f(x)| \underbrace{| \mathrm{e}^{\imath x \cdot \xi} |}_{= 1} \, \mathrm{d}x = \|f\|_{L^1(\R^n)}.\]
+
+\subsection{Extension of the Fourier transform to $L^p(\R^n)$, $1 \leq p \leq 2$}
+
+We now want to show that the Fourier transform $\F$ can be extended to $L^2(\R^n)$-functions, in such a way that $\F(f)$ coincides with \eqref{eq.2.2} whenever $f \in L^1(\R^n)\cap L^2(\R^n)$.
+
+\begin{remark}If $f \in L^1(\R^n)\cap L^2(\R^n)$, then its Fourier transform $\F(f)$ belongs to $L^2(\R^n)$ as a consequence of the Plancherel's identity \index{Plancherel theorem}
+\begin{equation} \label{eq.2.4} \| \F(f) \|_{L^2(\R^n)}^2 = 2 \pi \|f\|_{L^2(\R^n)}^2.\end{equation}\end{remark}
+
+\begin{theorem}[Plancherel] \label{planchh} The Fourier transform $\F : L^1(\R^n) \to L^1(\R^n)$ can be uniquely extended to an operator $\tilde{\F} : L^2(\R^n) \to L^2(\R^n)$ such that
+\[ \tilde{\F}(f) = \F(f) \quad \text{for all $f \in L^1(\R^n)\cap L^2(\R^n)$} \]
+and \eqref{eq.2.4} holds for all $f \in L^2(\R^n)$ with $\tilde{\F}(f)$ in place of $\F(f)$.
+\end{theorem}
+
+\begin{proof} We first notice that for all $f, \, g \in L^1(\R^n) \cap L^2(\R^n)$ we have
+\[ 2 \pi \left\langle f, \, g \right\rangle_{2} = \left\langle \F(f), \, \F(f) \right\rangle_{2} \]
+as a consequence of the polarisation formula applied to \eqref{eq.2.4}, where
+\[ \langle f, \, g \rangle_2 = \int_{\R^n} f(x) \overline{g(x)} \, \mathrm{d}x. \]
+The space $L^1 \cap L^2$ is dense in $L^2$ with respect to $\| \cdot \|_{L^2(\R^n)}$, and hence
+\[ \F : L^1(\R^n) \cap L^2(\R^n) \longrightarrow L^2(\R^n) \]
+can be continuously extended in a unique way to an operator $\tilde{\F} : L^2(\R^n) \to L^2(\R^n)$ that satisfies \eqref{eq.2.4}. It remains to verify that $\tilde{\F}$ is well-defined. Let $f \in L^2(\R^n)$ and set
+\[ f_n(x) := f(x) \chi_{B(0, \, n)}. \]
+Then $f_n \in L^1(\R^n) \cap L^2(\R^n)$ and $f_n$ converges to $f$ with respect to the $L^2$-topology. Therefore, using the Plancherel's identity and the linearity of $\F$ we obtain
+\[  \| \F(f_n) - \F(f_m) \|_{L^2(\R^n)}^2 = 2 \pi \|f_n - f_m\|_{L^2(\R^n)}^2, \]
+which means that $\{ \F(f_n)\}_{n \in \N}$ is a Cauchy sequence (because $\{f_n\}_{n \in \N}$ is). By completeness, we can find $g \in L^2(\R^n)$ such that
+\[ \F(f_n) \xrightarrow{L^2(\R^n)} g \implies \tilde{\F}(f) := g \]
+is well-defined. \end{proof}
+
+\begin{corollary}The Fourier transform $\F : L^2(\R^n) \to L^2(\R^n)$ is a continuous bounded operator with constant $2 \pi$.\end{corollary}
+
+As a consequence of this fact, we can apply Riesz-Thorin interpolation inequality \eqref{eq.rt.1} to infer that for all $p \in [1, \, 2]$ the Fourier transform
+\[ \F : L^p(\R^n) \longrightarrow L^{p^\prime}(\R^n) \]
+is a continuous bounded operator. Moreover, the \textbf{Hausdorff-Young} inequality\index{Hausdorff-Young inequality}
+\begin{equation} \label{eq.2.5} \|\F(f) \|_{L^{p^\prime}(\R^n)} \leq (2\pi)^{\frac{1}{p^\prime}} \|f\|_{L^p(\R^n)} \end{equation}
+holds, where $(p, \, p^\prime)$ is a H\"{o}lder-conjugate couple, which means that
+\[ \frac{1}{p} + \frac{1}{p^\prime} = 1. \]
+
+\section{Schwartz spaces $\Sc$}
+
+The goal of this section is to introduce a class of smooth functions on which the Fourier transform operator has particularly unusual properties such as invertibility.
+
+\begin{definition}[Schwartz] \index{Schwartz class} Let $f \in C^\infty(\R^n)$ be a smooth function. We say that $f$ belongs to the {\em Schwartz space} $\Sc$ if, for all $\alpha \in \N^n$ and $N\in \N$, it turns out that
+\begin{equation} \label{eq.2.6} |\partial^\alpha f(x)| \leq c(\alpha, \, N) (1+ |x|)^{-N}. \end{equation} \end{definition}
+
+In the literature, functions in $\Sc$ are also referred to as {\em rapidly decreasing} as a consequence of the fact that any derivative goes to zero faster than any polynomial.
+
+We will now briefly discuss the topological properties of $\Sc$ and show that it is a Fréchet space endowed with a special family of seminorms.
+
+\begin{definition}[$F$-Space]\index{$F$-space} We say that a topological vector space $(X, \, \tau)$ is a \textit{$F$-space} if the following properties are satisfied:\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The topology $\tau$ is induced by a translation-invariant metric $d$.
+\item The metric space $(X, \, d)$ is complete.
+\end{enumerate} \end{definition}
+
+\begin{definition}[Fréchet Space] \index{Fréchet space} We say that a topological vector space $(X, \, \tau)$ is a \textit{Fréchet space} if $(X, \, \tau)$ is a locally convex $F$-space. \end{definition}
+
+A locally convex topology is usually characterised\footnote{The interested reader can find the theory of topological vector spaces in these \href{https://poisson.phc.dm.unipi.it/~fpmaiale/notes/AS.pdf}{lecture notes}.} via a family of seminorms satisfying certain properties. In the case of $\Sc$, we consider
+\[ p_{\alpha, \, N}(f) := \sup_{x \in \R^n} \left| (1+|x|)^N \partial^\alpha f(x) \right|, \]
+where $\alpha \in \N^n$ and $N \in \N$. The collection of seminorms $\cP := \left\{ p_{\alpha, \, N} \right\}_{\alpha \in \N^n, \, N \in \N}$ defines the Schwartz space as expected:
+\[ \Sc := \left\{ f \in C^\infty(\R^n) \: \left| \: \text{$p_{\alpha, \, N}(f) < \infty$ for all $\alpha \in \N^n$ and all $N \in \N$} \right. \right\}. \]
+We will not prove it (see {\em Theorem 2.33} \href{https://poisson.phc.dm.unipi.it/~fpmaiale/notes/AS.pdf}{here}) but $\cP$ induces on $\Sc$ a structure of topological vector space $\left(\Sc, \, \tau \right)$, where $\tau$ is a locally convex topology.
+
+\begin{lemma}The inclusions
+\[ \left(\D(\R^n), \, \tau_\D \right) \inj \left(\Sc, \, \tau \right) \inj \left( L^1(\R^n), \, \|\cdot\|_{1} \right)\]
+are continuous.\end{lemma}
+
+\begin{proof} We divide the proof into two steps.
+
+\paragraph{Step 1.} Let $f$ be a smooth compactly supported function. Then
+\[ p_{\alpha, \, N}(f) = \sup_{x \in \mathrm{spt} (f)} \left|(1+|x|)^N \partial^\alpha f(x) \right| \lesssim \|f\|_{(|\alpha|)}\]
+for all $\alpha \in \N^n$ and $N \in \N$, which means that the inclusion $\D(\R^n) \hookrightarrow \Sc$ is continuous.
+
+\paragraph{Step 2.} Let $f \in \Sc$ be a rapidly decreasing function. Recall that
+\[ H(x) := \left(\frac{1}{1 + |x|^2} \right)^n \]
+belongs to $L^1(\R^n)$. To obtain a bound for the $L^1$-norm of $f$, we multiply and divide it by $H(x)$ as follows:
+\begin{equation*} \| f \|_{L^1(\R^n)} = \int_{\R^n} \left| f(x) \right| \, \mathrm{d}x = \int_{\R^n} \frac{(1 + |x|^2)^n \, |f(x)|}{(1 + |x|^2)^n} \, \mathrm{d}x. \end{equation*}
+The numerator is uniformly bounded and the denominator is integrable. Thus, if we expand the binomial $n$-th power, then we find that
+\begin{equation*} \| f \|_{L^1(\R^n)} \lesssim  \left\| \frac{1}{(1 + |x|^2)^n} \right\|_{L^1(\R^n)} \sum_{|\alpha| \leq 2 n} p_{\alpha, \, 0}(f) < \infty, \end{equation*}
+which gives us the desired result.\end{proof}
+
+\begin{remark}The inclusion $\D(\R^n) \subset \Sc$ is proper. Indeed, it is easy to see that the Gaussian function $\mathrm{e}^{-|x|^2}$ is smooth and rapidly decreasing while its support is not compact. \end{remark}
+
+\begin{theorem}The Schwartz space $\Sc$ is a Fréchet space. \end{theorem}
+
+\begin{proof}See {\bf Theorem 5.3} in the \href{https://poisson.phc.dm.unipi.it/~fpmaiale/notes/AS.pdf}{lecture notes} of the course {\em Advanced Analysis}. \end{proof}
+
+Notice that the collection of seminorms $\cP$ introduced above can be replaced by a simpler one that depends on a unique parameter.
+
+\begin{exercise} Show that the collection of seminorms
+\[ \| f \|_{(N)} := \sup_{x \in \R^n} \sup_{|\alpha| \leq N} \left| (1+|x|)^N \partial^\alpha f(x) \right| \]
+indexed by $N \in \N$ generates the same topology $\tau$ given by $\cP$.\end{exercise}
+
+This characterization of the topology is useful because it allows us to give a notion of continuity that is easy to check each time. Indeed, a linear functional\index{locally convex topology}
+\[ \lambda : \Sc \longrightarrow \C \]
+is continuous if and only if there are $N \in \N$ and $C > 0$ such that
+\[ |\lambda|(f) \leq C \|f\|_{(N)} \quad \text{for all $f \in \Sc$}. \]
+Similarly, a linear operator $T : \Sc \to B$, where $(B, \, \| \cdot \|_B)$ is a normed space, is continuous if and only if there are $N \in \N$ and $C > 0$ such that
+\[ \|Tf\|_B \leq C \|f\|_{(N)} \quad \text{for all $f \in \Sc$}. \]
+This result is particularly important when $B$ is $\Sc$ itself since it gives an easy criterion to check whether or not a linear operator is continuous.
+
+\begin{proposition}A linear operator $T : \Sc \to \Sc$ is continuous if and only if for all $M \in \N$ we can find $N(M) \in \N$ and $C(M)> 0$ such that
+\[ \|Tf\|_{(M)} \leq C(M) \|f\|_{(N)}\quad \text{for all $f \in \Sc$}. \]
+\end{proposition}
+
+To conclude this section, we collect a couple of properties of the Fourier transform on Schwartz spaces. Notice that $\Sc \subset L^1(\R^n)$, so $\F \, \big|_{\Sc}$ is well-defined.
+
+\begin{proposition}Let $f \in \Sc$ and $\alpha \in \N^n$. Then
+\[ \F \left( \partial^\alpha f \right)(\xi) = \imath^{|\alpha|} \xi^\alpha\hat{f}(\xi) \quad \text{and} \quad \F \left( x^\alpha f \right)(\xi) = (-\imath)^{|\alpha|} \partial^\alpha \hat{f}(\xi). \]
+\end{proposition}
+
+\begin{theorem}\label{sidskd} The inclusion $\F(\Sc) \subseteq \Sc$ is continuous. \end{theorem}
+
+\begin{proof} Let $f \in \Sc$ and fix $M \in \N$. Then
+\[\begin{aligned}
+\| \F(f) \|_{(M)} & = \sup_{\xi \in \R^n} \sup_{|\alpha| \leq M} \left| (1+|\xi|)^M \partial^\alpha \F(f)(\xi) \right|  =
+\\[1em] & = \sup_{\xi \in \R^n} \sup_{|\alpha| \leq M} \left| (1+|\xi|)^M \F(x^\alpha f)(\xi) \right| =
+\\[1em] & = \sum_{|\beta| \leq M} c_\beta \sup_{\xi \in \R^n} \sup_{|\alpha| \leq M} \left| \F(\partial^\beta x^\alpha f)(\xi) \right| \leq
+\\[1em] & \leq \sum_{|\beta| \leq M} c_\beta \sup_{x \in \R^n} \left| \partial^\beta (1 +|x|)^M f(x) \right| \leq
+\\[1em] & \leq c(M) \|f\|_{(N)},
+\end{aligned} \]
+and this is enough to conclude that the inclusion is continuous.
+\end{proof}
+
+\section{Inverse Fourier transform}
+
+The numerous properties of the Fourier operator may be exploited, for example, to find solutions to certain PDEs. However, even if we were able to find $u$ such that
+\[ \F( P(D) u ) = \F(f), \]
+where $P(D)$ is a linear differential operator, at this point nothing guarantees us that we can recover $u$ from $\F(u)$. The goal of this section is to show that
+\[ \F^{-1} : \cS(\R^n) \longrightarrow \cS(\R^n) \]
+is well-defined and can be represented by an integral formula. We will also show that this phenomenon also happens in a more general framework, that of {\em tempered distributions.}
+
+\subsection{Inverse operator on Schwartz spaces}
+
+Recall that $\F : L^2(\R^n) \to L^2(\R^n)$ is well-defined. We know already that the operator is an isometry (up to the $2 \pi$ constant) so it suffices to show that $\F$ is onto to conclude that
+\[ \F^{-1} : L^2(\R^n)\longrightarrow L^2(\R^n) \]
+is well-defined and continuous. For this, first recall that
+\[ 2 \pi\left\langle f, \, g \right\rangle_{2} = \left\langle \F(f), \, \F(g) \right\rangle_{2}\]
+as a consequence of the polarisation formula applied to Plancherel identity \eqref{eq.2.4}. Taking the adjoint operator on the right-hand side leads to
+\[ 2 \pi \left\langle f, \, g \right\rangle_{2} =  \left\langle\F^\ast \F f, \, g \right\rangle_{2},\]
+which is equivalent to the operator identity
+\[ \frac{1}{2 \pi} \F^\ast \F = \mathrm{Id}_{L^2(\R^n)}. \]
+This shows that the Fourier transform on $L^2(\R^n)$ is invertible and there results
+\[ \F^{-1} = \frac{1}{2\pi} \F^\ast.\]
+Since $\Sc \subset L^2(\R^n)$ we know that the Fourier transform is invertible on the Schwartz space, but we do not know yet whether or not
+\[ \F^{-1}(\Sc) \subseteq \Sc. \]
+
+\begin{remark}Suppose that we have an integral operator $T$ with kernel $K$, namely
+\[ Tf(\xi) = \int_{\R^n} f(x)K(x, \, \xi) \, \mathrm{d}x. \]
+Then a standard result in harmonic analysis asserts that the adjoint of $T$ is given by
+\[ T^\ast f(x) = \int_{\R^n} f(\xi) \overline{K(\xi, \, x)} \, \mathrm{d}\xi. \]
+\end{remark}
+
+We can apply this general result to our case ($T = \F$), with kernel which is given by the complex exponential
+\[ K(x, \, \xi) = \mathrm{e}^{-\imath x \cdot \xi}. \]
+This quantity is invariant under the transformation $(x, \, \xi) \mapsto (\xi, \, x)$, and hence
+\begin{equation} \label{eq.2.7} \F^{-1}f(x) = \frac{1}{2\pi} \int_{\R^n} f(\xi) \mathrm{e}^{\imath x \cdot \xi} \, \mathrm{d}\xi\end{equation}
+is the {\em inverse Fourier transform}\index{Fourier transform!inverse}. A straightforward consequence is the {\em inversion formula}\index{inversion formula} which asserts that
+\begin{equation} \label{eq.2.8} f(x) = \frac{1}{2\pi} \int_{\R^n} \hat{f}(\xi) \mathrm{e}^{\imath x \cdot \xi} \, \mathrm{d}\xi. \end{equation}
+It is easy to verify that
+\[ f \in \cS(\R^n) \implies \F^{-1} f \in \cS(\R^n) \]
+using \eqref{eq.2.7}; therefore
+\[ \F : \Sc \longrightarrow \Sc \]
+is an isomorphism of Fréchet spaces. We summarize the results obtained so far for the inverse operator in the following theorem:
+
+\begin{theorem}[Inversion Theorem]\index{Fourier transform!inversion theorem} Let $f \in \Sc$ be a Schwartz function. Then
+\[ \F \circ \F (f)(x) = \check{f}(x),\]
+where $\check{f}(x) := f(-x)$.
+\end{theorem}
+
+\begin{remark}The inclusion $\D(\R^n) \hookrightarrow \Sc$ implies that $\F(\D(\R^n)) \subset \Sc$. However, it is \textbf{not} true that
+\[ \F(\D(\R^n)) \subseteq \D(\R^n).\]
+Indeed, the Fourier transform of a compactly supported smooth function has compact support if and only if it is {\em identically zero}. \end{remark}
+
+%\begin{theorem} Let $\varphi, \, \psi \in \Sc$ be two Schwartz functions. Then the convolution $\varphi \ast \psi$ belongs to $\Sc$ and the Fourier transform of the product is, up to a constant, the convolution of the Fourier products, that is,
+%\begin{equation*} \F \left( \varphi \cdot \psi \right) =\frac{1}{\left( 2 \pi \right)^{n/2}} \, \F(\varphi) \ast \F(\psi). \end{equation*} \end{theorem}
+
+%\begin{proof} We have already proved (see \hyperref[proofpssd]{Proposition \ref{proofpssd}}) that
+%\begin{equation*} \F \left( \varphi \ast \psi \right) =\left( 2 \pi \right)^{n/2} \, \F(\varphi) \cdot \F(\psi), \end{equation*}
+%therefore we can also apply this formula to $\F(\varphi)$ and $\F(\psi)$, since the Fourier transform operator sends $\Sc$ to $\Sc$. It follows that
+%\begin{equation*} \begin{aligned} \F \left( \F(\varphi) \ast \F(\psi) \right) & = \left( 2 \pi \right)^{n/2} \, \F^2(\varphi) \cdot \F^2(\psi) = \\[1em] & = \left( 2 \pi \right)^{n/2} \, \check{\varphi} \cdot \check{\psi}, \end{aligned} \end{equation*}
+%and, if we apply the Fourier transform again, it turns out to be the sought identity:
+%\begin{equation*} \F \left( \varphi \cdot \psi \right) = \frac{1}{\left(2 \pi \right)^{n/2}} \, \F(\varphi) \ast \F(\psi). \end{equation*}
+%\end{proof}
+
+\section{Tempered Distributions}
+
+In this section, our goal is to introduce a suitable notion of {\em Fourier transform} which makes sense for a special class of distributions and is also compatible with the one introduced already for functions. The naive idea would be to set
+\begin{equation} \label{ftd}  \langle \F \Phi, \, f \rangle := \langle \Phi, \, \F f \rangle, \end{equation}
+but it is easy to verify that for $\Phi \in \D^\prime(\R^n)$ it might not make any sense. To avoid this issue we restrict ourselves to a special class of distributions, called \textit{tempered distributions}.\index{tempered distribution}
+
+\begin{definition}A {\em tempered distribution} $\Phi$ is a linear continuous functional defined on the Schwartz space, that is,
+\[ \Phi : \Sc \longrightarrow \C, \]
+in which case we write $\Phi \in \Scp$. \end{definition}
+
+\begin{remark} Notice that\footnote{The inclusion $\D(\R^n) \subset \Sc$ is dense. We only proved that it is continuous, but the reader is encouraged to do it using a cutoff function and rescalings.}, if $\Phi$ is a tempered distribution, then the composition
+\[ \D(\R^n) \hookrightarrow \Sc \xrightarrow{\Phi} \C \]
+identifies $\Phi$ with an element of $\D^\prime(\R^n)$. This shows that $\Scp \subset \D^\prime(\R^n)$.\end{remark}
+
+Unless otherwise stated, we shall always endow $\Scp$ with the weak topology in such a way that a linear map $T : \Sc \to \Scp$ is continuous if and only if
+\[ \Sc \ni f \longmapsto \langle Tf, \, g \rangle \in \C \]
+is continuous for all $g \in \Sc$. Consequently, the bilinear mapping
+\[ B(f, \, g) :=  \langle Tf, \, g \rangle \]
+is separately continuous on both variables, and thus it is jointly continuous. In other words, there are $N, \, M \in \N$ and $C > 0$ such that
+\[ |B(f, \, g)| \leq C \|f\|_{(N)}\|g\|_{(M)} \quad \text{for all $f, \, g \in \Sc$}. \]
+
+\begin{theorem}[Bourbaki]\index{Bourbaki theorem} Let $X$ be a complete metric space, and let $Y$ and $Z$ be topological vector spaces. If a bilinear mapping
+\[ B : X \times Y \longrightarrow Z \]
+is separately sequentially continuous, then $B$ is also jointly sequentially continuous. \end{theorem}
+
+\begin{example}[of tempered distributions]\label{ex:1323}\mbox{}
+\begin{enumerate}[label=\textbf{{\color{orange}(\arabic*)}}]
+\item Let $\mu$ be a measure defined on $\R^n$. If there exists $N \in \N$ such that
+\begin{equation}\label{cons232} \int_{\R^n} \frac{1}{\left(1 + |x|^2\right)^N} \, \mathrm{d}\mu(x) \leq C < \infty, \end{equation}
+then $\Lambda_\mu \in \Scp$ is a tempered distribution.
+\item Let $f \in L^p(\R^n)$ for some $1 \leq p \leq \infty$. Then $\Lambda_f \in \Scp$.
+\item Let $\varphi(x) = x^\alpha$ be a monomial. Then $\Lambda_\varphi \in \Scp$ for all $\alpha \in \N^n$.
+\end{enumerate} \end{example}
+
+We now want to generalise the multiplication rule \eqref{distr:mult} to hold for a generic tempered distribution $\Phi \in \Scp$. The naive approach does not work since the implication
+\[ \Phi \in \Scp, \, f \in C^\infty(\R^n) \implies f \Phi \in \Scp \]
+is false, unless $f$ satisfies some extra assumptions.
+
+\begin{definition} Let $f \in C^\infty(\R^n)$. We say that $f$ is of \textit{moderate growth}\index{moderate growth function} if for all $\alpha \in \N^n$ there exists $m_\alpha \in \N$ such that
+\begin{equation} \label{eq.2.10} |\partial^\alpha f(x)| \lesssim_\alpha (1 + |x|)^{m_\alpha}. \end{equation} \end{definition}
+
+\begin{proposition} Let $\Phi \in \Scp$ and let $f$ be a function of moderate growth and define the product with a distribution as
+\[ \langle f \Phi, \, g \rangle := \langle \Phi, \, fg \rangle. \]
+Then
+\[ f \Phi \in \Scp \quad \text{and} \quad \partial^\alpha \Phi \in \Scp \]
+for all $\alpha \in \N^n$. \end{proposition}
+
+\begin{definition}[Convolution] Let $\Phi \in \Scp$ be a tempered distribution and let $f \in \Sc$. The convolution is the tempered distribution defined by setting
+\begin{equation} \label{eq.2.11} \langle f \ast \Phi, \, g \rangle := \langle \Phi, \, \check{f} \ast g \rangle. \end{equation} \end{definition}
+
+This definition is coherent with the one we have already given in the case $\Phi \in \D^\prime(\R^n)$, but we still need to check that
+\[ f, \, g \in \Sc \implies \check{f} \ast g \in \Sc. \]
+
+\begin{lemma}The convolution of two Schwartz functions is also a Schwartz function. \end{lemma}
+
+\begin{proof}See \cite{forwqe1}. \end{proof}
+
+To conclude this section, notice that the expression in \eqref{eq.2.11} does not really define a tempered distribution but rather a function. Namely,
+\begin{equation} \label{eq.2.12}f \ast \Phi(x) = \langle \Phi, \, \tau_x f \rangle \end{equation}
+and, as the reader might check by herself, it has moderate growth. This observation comes into play when we define the convolution between tempered distributions. Indeed,
+\[ \langle \Phi \ast \Psi, \, f \rangle := \langle \Phi, \, \check{\Psi} \ast f \rangle\]
+is well-defined and belongs to $\Scp$ if, for example, one of them has compact support.
+
+\subsection{Fourier transform on tempered distributions}
+
+Let $\Phi$ be the distribution associated to a summable function $h \in L^1(\R^n)$. Namely,
+\[ \langle \Phi, \, f \rangle = \Lambda_h(f) := \langle h, \, f \rangle_2. \]
+If we take the Fourier transform of $h$ we obtain
+\[ \langle \F \Phi, \, f \rangle = \langle \F h \, f \rangle_2 = \langle h, \, \F f \rangle_2 = \langle \Phi, \, \F f \rangle,\]
+so it makes sense to generalise the Fourier transform to tempered distributions $\Phi \in \Scp$ by setting
+\begin{equation} \label{eq.2.13} \langle \F \Phi, \, f \rangle := \langle \Phi, \, \F f \rangle.\end{equation}
+The functional $\F \Phi$ is obviously linear and continuous since it can be written as the composition of two continuous maps. More precisely, we have
+\[ \F \Phi = \Phi \circ \F.\]
+Furthermore, it is possible to find an extension of the property \eqref{eq.2.1000} to \eqref{eq.2.13}. The idea is that using the bracket notation we obtain the identity
+\[ \left\langle \F(f \ast \Phi), \, g \right\rangle = \left\langle \Phi, \, \check{f} \ast \F g \right\rangle.  \]
+The function on the right-hand side can be rewritten as the Fourier transform of a product using Fubini-Tonelli's theorem:
+\[ \begin{aligned} \check{f} \ast \F g (x) &= \int_{\R^n} f(y-x) \int_{\R^n} g(\xi) \mathrm{e}^{-\imath y \cdot \xi} \, \mathrm{d}\xi \mathrm{d}y =
+\\[1em] & = \int_{\R^n} g(\xi) \mathrm{e}^{-\imath x \cdot \xi} \int_{\R^n} f(y-x) \mathrm{e}^{-\imath(y-x)\cdot\xi} \, \mathrm{d}y =
+\\[1em] & = \F[ g \F (f) ].\end{aligned} \]
+It follows that
+\[ \F(f \ast \Phi) = \F f \F \Phi, \]
+which is the equivalent of \eqref{eq.2.1000} for $\Scp$ and $\Sc$.
+
+\begin{remark}The inclusion $\D^\prime(\R^n) \supset \Scp$ is proper. For example, consider
+\[ \Phi_0 := \sum_{n = 0}^{+ \infty} \delta_n^{(n)} \]
+and notice that $\Phi_0$ is a distribution (that is, $\Phi$ belongs to $\D^\prime(\R^n)$). On the other hand, it is easy to see that
+\[ \Phi_0 (f) = \sum_{n = 0}^{+ \infty} (-1)^n f^{(n)}(n) \]
+makes sense when $f$ has compact support, but it might not even when $f \in \Scp$.\end{remark}
+
+The reason behind all this is that all $\Psi \in \Scp$ have \textbf{finite order} while $\Phi_0$ has infinite order (as many other distributions in $\D^\prime(\R^n)$).
+
+\section{Approximate identity}
+\label{sec:appid}
+
+A natural question arising from the theory developed above is whether or not it is possible to find a function - or a distribution - $u$ on $\R^n$ that is the identity element for the convolution, that is,
+\[ u \ast f = f \quad \text{for all $f \in C_c^\infty(\R^n)$}. \]
+Recall that the space of all distributions $\D^\prime(\R^n)$ is closed under convolution. Thus, taking the Dirac delta at the origin as $u$, we find that that
+\[  \langle \Phi \ast \delta_0 , \, f \rangle = \langle \Phi, \, \delta_0 \ast f \rangle = \langle \Phi, \, f \rangle \implies \Phi \ast \delta_0 = \Phi \]
+holds for all $\Phi \in \D^\prime(\R^n)$. In particular,
+\[ ( \D^\prime(\R^n), \, \ast) \]
+is a unitary algebra. On the other hand, it is not possible to find $u \in L^1(\R^n)$ such that
+\[ u \ast f = f \quad \text{for all $f \in L^1(\R^n)$}. \]
+Therefore, we can formulate a slightly weaker version of the question above. Namely, if there exist a sequence $\{ \varphi_n \}_{n \in \N}$ (or a collection $\{ \varphi_t \}_{t > 0}$) of summable functions such that
+\[ \varphi_n \ast f \xrightarrow{n \to + \infty} f \]
+with respect to an adequate notion of convergence.
+
+\begin{definition}[Mollifier] \index{mollifier}Let $\varphi \in L^1(\R^n)$ be a nonnegative function with
+\[ \| \varphi \|_1 = \int_{\R^n} \varphi(x) \, \mathrm{d}x = 1. \]
+For $t > 0$ define the rescaling
+\[ \varphi_t(x) := t^{-n} \varphi \left( \frac{x}{t} \right). \]
+Then $\{ \varphi_t \}_{t > 0}$ is called a family of \textit{mollifiers}. \end{definition}
+
+\begin{remark} If $\{ \varphi_t \}_{t > 0}$ is a collection of mollifiers, it is not hard to see that
+\[ \| \varphi_t \|_1 = 1 \quad \text{for all $t > 0$}.\] \end{remark}
+
+\begin{lemma}\label{lemma:spt} Let $\Phi \in \D^\prime(\R^n)$ and let $f \in \D(\R^n)$. The support of the convolution is contained in the sum of the supports, that is,
+\[ \mathrm{spt}(\Phi \ast f) \subseteq  \mathrm{spt} (\Phi) +  \mathrm{spt} (f). \]
+\end{lemma}
+
+\begin{theorem}\label{thm.3.1} Let $\{ \varphi_t \}_{t > 0}$ be a family of mollifiers. Then for all $f \in L^1(\R^n)$ we have
+\[ \| \varphi_t \ast f - f \|_{L^1(\R^n)} \xrightarrow{t \to 0^+} 0. \]
+\end{theorem}
+
+The proof of this result is moderately straightforward, but we first need to state and prove a technical lemma which asserts that the map
+\[ \R^n \ni h \longmapsto \tau_h f \in L^1(\R^n),\]
+is continuous for all $f \in L^1(\R^n)$ fixed, where $\tau_h f(x) = f(x-h)$.
+
+\begin{lemma} Let $f \in L^1(\R^n)$. Then
+\[ \| f - \tau_h f\|_{L^1 (\R^n)} \xrightarrow{h \to 0} 0.\]
+\end{lemma}
+
+\begin{proof}First, assume that $f \in C_c^\infty(\R^n)$. Then $f$ is uniformly continuous, which means that for every $\epsilon > 0$ we can find a uniform $\delta > 0$ such that
+\[ |x - x^\prime| < \delta \implies |f(x) - f(x^\prime)| < \epsilon. \]
+Let $K$ be the support of $f$. Then $K+h$ is the support of $\tau_h f$, and thus
+\[ \| f - \tau_h f\|_{L^1(\R^n)} = \int_{K \cup (K + h)} |f(x - h) - f(x)| \, \mathrm{d}x. \]
+By uniform continuity of $f$, provided that $|h|$ is small enough, we readily obtain the estimate
+\[ \| f - \tau_h f\|_{L^1(\R^n)} \leq 2 \epsilon |K| \lesssim \epsilon. \]
+Now suppose that $f \in L^1(\R^n)$. By density we can find $g_\epsilon \in C_c^\infty(\R^n)$ such that
+\[ \| g_\epsilon - f \|_{L^1(\R^n)} \leq \frac{\epsilon}{3}. \]
+Finally, the triangular inequality implies that
+\[ \| f - \tau_h f\|_{L^1(\R^n)} \leq \| f - g_\epsilon \|_{L^1(\R^n)} + \| g_\epsilon - \tau_h g_\epsilon \|_{L^1(\R^n)} + \| \tau_h(g_\epsilon - f) \|_{L^1(\R^n)} \leq \epsilon, \]
+and this concludes the proof.
+\end{proof}
+
+\begin{proof}[Proof of \autoref{thm.3.1}] First, we evaluate the absolute value of the difference:
+\[ \begin{aligned} | \varphi_t \ast f(x) - f(x)| & = \left| \int_{\R^n} \varphi_t(y) f(x-y) \, \mathrm{d}y - f(x) \right| =
+\\[1em] & = \left| \int_{\R^n} \varphi_t(y) f(x-y) \, \mathrm{d}y - \int_{\R^n} f(x) \varphi_t(y) \, \mathrm{d}y \right| \leq
+\\[1em] & \leq \int_{\R^n} | \tau_y f(x) - f(x) | |\varphi_t(y)| \, \mathrm{d}y. \end{aligned} \]
+Next, we take the $L^1$-norm of the left-hand side. It turns out that
+\[ \begin{aligned} \| \varphi_t \ast f(x) - f(x) \|_{L^1(\R^n)} & \leq \int_{\R^n} \mathrm{d}x \int_{\R^n} \mathrm{d}y \left| \tau_y f(x) - f(x) \right| |\varphi_t(y)| =
+\\[1em] & \, {\color{red}=} \, \int_{\R^n} \mathrm{d}x \int_{\R^n} \mathrm{d}y^\prime \left| \tau_{ty^\prime} f(x) - f(x) \right| |\varphi(y^\prime)| =
+\\[1em] & \, {\color{orange}=} \, \int_{\R^n} \mathrm{d}y^\prime |\varphi(y^\prime)| \int_{\R^n} \mathrm{d}x \left| \tau_{ty^\prime} f(x) - f(x) \right| =
+\\[1em] & = \int_{\R^n} \| \tau_{ty^\prime} f - f \|_{L^1(\R^n)} |\varphi(y^\prime)| \, \mathrm{d}y^\prime.\end{aligned} \]
+For $t \to 0$ we can apply the continuity lemma (proved above) and the Lebesgue's dominated convergence theorem to infer that the right-hand side goes to zero.
+\end{proof}
+
+\begin{remark}The {\color{red}red} equality follows from the change of variables $y \mapsto ty^\prime$, while the {\color{orange}orange} one from the {\em Fubini-Tonelli's theorem}. \end{remark}
+
+This approximation via mollifiers is not a peculiarity of $L^1(\R^n)$ but, as we can see from the proof, it is true for all Banach spaces $\X$ satisfying specific properties.
+
+\begin{theorem}\label{thm.3.2} Let $\{ \varphi_t \}_{t > 0}$ be a family of mollifiers and let $\X$ be a Banach space of measurable real-valued functions such that the following properties hold: \mbox{}
+\begin{enumerate}[label=\textbf{($\star$)}, leftmargin=2\parindent]
+\item If $f \in \X$, then $\tau_h f \in \X$ and $\| f \|_\X = \| \tau_h f \|_\X$ for all $h \in \R^n$.
+\item The mapping $h \longmapsto \tau_h f$ is continuous for all $f \in \X$.
+\end{enumerate}
+Then
+\[ \| \varphi_t \ast f - f \|_{\X} \xrightarrow{t \to 0^+} 0.\]
+\end{theorem}
+
+\begin{remark}We can apply this theorem with $\X = L^p(\R^n)$ for all $p < \infty$. However, in the case with $p = \infty$ it is easy to verify that the mapping
+\begin{equation*}h \longmapsto \tau_h f \end{equation*}
+is not continuous for all $f \in L^\infty(\R^n)$. It works, though, if we replace $L^\infty$ with the space of vanishing functions $C_0(\R^n)$, which is equal to the closure of $C_c^\infty(\R^n)$ with respect to $\| \cdot \|_\infty$. \end{remark}
+
+Nevertheless, we can recover the result in $L^\infty(\R^n)$ if we require $\varphi_t \ast f$ to converge to $f$ with respect to the weak-$\ast$ topology induced by
+\[ L^\infty(\R^n) = \left[ L^1(\R^n) \right]^\prime. \]
+
+\begin{theorem}\label{thm.3.3} Let $\{ \varphi_t \}_{t > 0}$ be a family of mollifiers. Then for all $f \in L^\infty(\R^n)$ we have
+\[ \varphi_t \ast f \xrightarrow{ \text{weak-$\ast$ topology} } f. \]
+\end{theorem}
+
+\begin{theorem}\label{thm.3.4} Let $\{ \varphi_t \}_{t > 0}$ be a family of mollifiers. Then for all $\mu \in \cM(\R^n)$ we have
+\[ \varphi_t \ast \mu \xrightarrow{ \text{weak-$\ast$ topology} } \mu. \]
+Here $\cM(\R^n)$ denotes the set of all $\R^n$-valued finite Borel measures. \end{theorem}
+
+The next step would be to extend this approximation result to $\Sc$. Unfortunately, it is rather easy to verify that
+\[ f \in \Sc \quad \text{and} \quad \varphi \in C_c^\infty(\R^n)\implies \varphi \ast f \in C^\infty(\R^n), \]
+but, a priori, there is no guarantee that it also belongs to $\Sc$ and, in general, it will not be. Nonetheless, we can prove the following result with little effort:
+
+\begin{theorem}\label{thm.3.5} Let $\varphi \in \Sc$ and let $\{ \varphi_t \}_{t > 0}$ be the associated mollifiers\index{mollifier!Schwartz}. Then for all $f \in \Sc$ it turns out that
+\[ \varphi_t \ast f \xrightarrow{ \Sc } f.\]
+In other words, for all $N \in \N$ it turns out that
+\[ \| \varphi_t \ast f - f \|_{(N)} \xrightarrow{t \to 0^+} 0. \]
+\end{theorem}
+
+\begin{corollary} Let $\Phi \in \Scp$ and let $\{ \varphi_t \}_{t > 0}$ be a Schwartz mollifiers collection. Then
+\[ \varphi_t \ast \Phi \longrightarrow \Phi \]
+with respect to the weak topology of $\Scp$. \end{corollary}
+
+\section{Paley-Wiener theorem}
+
+The primary goal of this section is to show that the Fourier transform is the restriction on the real line $\R^n$ of a complex-valued operator which, under mild assumptions, sends compactly supported distributions to entire functions on the whole $\C^n$.
+
+\subsection{Introduction to complex analysis}
+
+We first recollect some basic definitions in complex analysis. Since we are mainly interested in the notion of {\bf entire} function, we will focus on being holomorphic and on the identity principle.
+
+\begin{definition}\index{holomorphic function}\index{entire function} Let $\Omega \subseteq \C^n$ be an open subset of the complex $n$-plane. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item A function $f_i : \Omega_i \subset \C \to \C$ is {\em holomorphic} on $\Omega_i$ if it is {\em complex differentiable} at all $z_0 \in \Omega_i$. In other words,
+\[ \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z -z_0} \]
+exists at all $z_0 \in \Omega_i$.
+\item A function $f : \Omega \to \C$ is {\em holomorphic} if it is continuous at every point of $\Omega$, and the coordinate functions
+\[ \Omega_i \ni z_i \longmapsto f(z_1, \, \dots, \, z_i, \, \dots, \, z_n) \]
+are holomorphic in the sense of $\mathbf{(1)}$ for all $i = 1, \, \dots, \, n$.
+\item A function $f : \C^n \to \C$ is {\em entire} if it is holomorphic at every point $z \in \C^n$.
+\end{enumerate}\end{definition}
+
+\begin{lemma}[Identity Principle] \label{lemma:ip} Let $f : \C^n \to \C$ be an entire function which is identically zero on the real line, that is,
+\[ f(z) = 0 \quad \text{for all $z = x + \imath y$ with $y = 0$}. \]
+Then $f$ is the function identically zero on $\C^n$.\end{lemma}
+
+\begin{proof} Consider the $k$th predicate
+\[
+P_k : \text{$f(z) = 0$ for every $z = (z_1, \, \dots, \, z_n) \in \C^n$ such that $z_1, \, \dots, \, z_k \in \R$}.
+\]
+By assumption $P_n$ is true. Therefore, it is enough to prove that
+\[
+P_{k} \implies P_{k-1}
+\]
+to conclude since $n$ is finite. But this is trivially true because
+\[
+\C \ni z_k \longmapsto f(z_1, \, \dots, \, z_k, \, \dots, \, z_n) \in \C
+\]
+is a complex function of a single variable, and we can hence apply the identity theorem\footnote{\textbf{Identity Theorem.} Let $g, \, h : D \to \C$ be complex functions defined on a connected open set $D \subseteq \C$. If $f(x) = g(x)$ for every $x \in S$, where $S$ is a nonempty open subset of $D$, then $f(x) = g(x)$ for every $x \in D$.}. \end{proof}
+
+\begin{theorem}[Moreira]\label{morth} \index{Moreira theorem}
+Let $f: \Omega \subseteq \C \to \C$ be a continuous function defined on a open subset of the complex plane satisfying
+\[
+\oint_\gamma f(z) \, \mathrm{d}z = 0\]
+for every closed piecewise $C^1$-curve $\gamma$ in $\Omega$. Then $f$ is holomorphic on $\Omega$.  \end{theorem}
+
+\begin{theorem}[Cauchy] \label{chsdt} \index{Cauchy theorem}
+Let $\Omega$ be an open subset of $\C$ which is simply connected. Let $f : \Omega \to \C$ be a holomorphic function, and let $\gamma$ be a rectifiable closed path in $\Omega$. Then
+\[
+\oint_\gamma f(z) \, \mathrm{d}z = 0.
+\]
+\end{theorem}
+
+\subsection{Paley-Wiener theorem}
+
+We are now ready to state and prove the main result of this section, starting from the case in which $f$ is a compactly supported function.
+
+\begin{theorem}[Paley-Wiener] \index{Paley-Wiener theorem}\label{pwtheroem}
+Let $f \in \D(\R^n)$ be a function with $\mathrm{spt}(f) \subseteq \bar{B}_r$. Then
+\begin{equation} \label{pw:eq}
+F(\zeta) := \int_{\R^n} f(\xi) \mathrm{e}^{- \imath \xi \cdot \zeta } \, \mathrm{d}\xi
+\end{equation}
+is an entire function which satisfies the estimate
+\begin{equation} \label{pw:es}
+\left| \partial^\alpha F(\zeta) \right| \lesssim_{\alpha, \, N} (1 + |\zeta|)^{-N} \mathrm{e}^{ r |\mathfrak{Im}(\zeta)|} 
+\end{equation}
+for all $\zeta \in \C^n$, $\alpha \in \N^n$ and $N \in \N$.
+
+Vice versa, if $F$ is an entire function on $\C^n$ satisfying the estimate \eqref{pw:es}, then we can find a smooth function $f \in \D(\R^n)$ such that 
+\[
+\mathrm{spt}(f) \subseteq \bar{B}_r.
+\]
+Furthermore, $F$ is exactly given by the formula \eqref{pw:eq}.
+\end{theorem}
+
+\begin{proof} The argument is moderately involved. Hence we break down the proof into several small steps, to ease the notation for the reader.
+
+\paragraph{Step 1.} The function given by \eqref{pw:eq} is well-defined and continuous, as a consequence of the dominated convergence theorem. Moreover, the coordinate function
+\[
+F_k : \C \ni \zeta_k \longmapsto F(\zeta_1, \, \dots, \, \zeta_k, \, \dots, \, \zeta_n) \in \C
+\]
+is holomorphic for any $k = 1, \, \dots, \, n$ as a simple application of \hyperref[morth]{Moreira's theorem}. Indeed, given a piecewise differentiable closed curve $\gamma$, it is easy to verify that
+\[
+\oint_{\gamma} \left[\zeta_k \mapsto  \int_{\R^n} f(\xi) \mathrm{e}^{- \imath \xi \cdot \zeta} \, \mathrm{d}\xi \right] \, \mathrm{d}\zeta_k = \int_{\R^n} \left[ \oint_{\gamma} \left(\zeta_k \mapsto \mathrm{e}^{- \imath \xi \cdot \zeta}  \right) \, \mathrm{d}\zeta_k \right] \, \mathrm{d}\xi,
+\]
+where the latter is equal to $0$, using Fubini-Tonelli's theorem together with the fact that the complex exponential is a holomorphic function.
+
+\paragraph{Step 2.} We now want to show that the estimate \eqref{pw:es} holds. Fix two indexes $\alpha,\, \beta \in \N^n$ and notice that
+\[ \begin{aligned}
+\left| \zeta^\beta \partial_\zeta^\alpha F(\zeta) \right| & =\left| \zeta^\beta \int_{\R^n} x^\alpha f(x) \e^{- \imath x \cdot \zeta} \, \mathrm{d}x \right| =
+\\[1em] & = \left|  \int_{\R^n} x^\alpha f(x) \partial_x^\beta( \e^{- \imath x \cdot \zeta}) \, \mathrm{d}x \right|=
+\\[1em] & = \left| \int_{\R^n} \partial_x^\beta(x^\alpha f(x)) \mathrm{e}^{- \imath x \cdot \zeta} \, \mathrm{d}x \right|.
+\end{aligned} \]
+Identify $\C^n$ with $\R^n \times \R^n$, write $\zeta = \xi + \imath \eta$ and notice that
+\[
+\left| \mathrm{e}^{- \imath  x \cdot \zeta} \right| = \mathrm{e}^{ x \cdot \eta }. 
+\]
+It follows that
+\[ \begin{aligned}
+\left| \zeta^\beta \partial_\zeta^\alpha F(\zeta) \right| & \leq \int_{\R^n} |\partial_x^\beta(x^\alpha f(x))| |\e^{- \imath x \cdot \zeta}| \, \mathrm{d}x \leq
+\\[1em] & \leq \| \partial_x^\beta (x^\alpha f(x)) \|_{L^\infty(\R^n)} \e^{r |\mathfrak{Im}(\zeta)|}.
+\end{aligned} \]
+It remains to estimate the $L^\infty$-norm of $\partial_x^\beta (x^\alpha f(x))$, but this is an immediate consequence of the following (up to constant) identity 
+\[
+(1 + |\zeta|)^N | \partial_\zeta^\alpha F(\zeta) | \simeq \sum_{|\beta| \leq N} \left| |\zeta|^\beta \partial^\alpha F(\zeta) \right|, \]
+which allows us to obtain \eqref{pw:eq} with a precise value for the constant:
+\[
+\left| (1 + |\zeta|)^N \partial_\zeta^\alpha F(\zeta) \right| \lesssim \sum_{|\beta| \leq N} \left[ \| \partial_x^\beta (x^\alpha f(x)) \|_\infty \right] \e^{r |\mathfrak{Im}(\zeta)|}.
+\]
+
+\paragraph{Step 3.} Vice versa, let $F$ be the entire function defined on $\C^n$ satisfying \eqref{pw:es} and denote by $\hat{f}$ the restriction of $F$ to the real line, that is,
+\[
+\hat{f} : \R^n \ni x \longmapsto F(x + \imath 0) \in \C.
+\]
+Suppose for the sake of simplicity that $n = 1$. The estimate \eqref{pw:es}, applied to the function $\hat{f}$, shows immediately that $\hat{f}$ belongs to $\Sc$. It follows that
+\[
+f(x) = \frac{1}{2 \pi} \int_{\R} \hat{f}(\xi) \mathrm{e}^{\imath \xi \cdot x} \, \mathrm{d}\xi
+\]
+is the unique possible choice for the function $f$ since the Fourier transform is an invertible operator restricted to the Schwartz space.
+
+\paragraph{Step 4.} We now claim that we can equivalently evaluate $f$ at $x$ by integrating $F$ on any line parallel to the $x$-axis. In other words, we have
+\begin{equation} \label{varphiclaim} f(x) = \frac{1}{2 \pi} \int_{\R} F(\xi + \imath \eta) \mathrm{e}^{\imath x \dot (\xi + \imath \eta) } \, \mathrm{d}\xi \end{equation}
+for all $\eta \in \R$. This will allow us to extend the function $f$ to the whole $\C$ since it only depends on the values attained on the real line. 
+
+\begin{proof} Let $\gamma_R$ be the curve defined as in \hyperref[fig:curva]{Figure \ref{fig:curva}}. The integrand is holomorphic and $\gamma_R$ is rectifiable and closed so, using \hyperref[chsdt]{Cauchy's theorem}, we find that
+\[ \begin{aligned}
+0 & = \int_{-R}^{R} F(\xi) \mathrm{e}^{\imath x \cdot \xi} \, \mathrm{d}\xi - \int_{-R}^{R} F(\xi + \imath \eta) \mathrm{e}^{\imath x \cdot (\xi + \imath \eta)} \, \mathrm{d}\xi + \dots
+\\[1em] & \dots + \int_{0}^{\eta} f(R + \imath \sigma) \mathrm{e}^{\imath x \cdot (R+\imath \sigma)} \, \mathrm{d}\sigma - \int_{0}^{\eta} F(-R + \imath \sigma) \mathrm{e}^{\imath x \cdot (-R+\imath \sigma)} \, \mathrm{d}\sigma.
+\end{aligned} \]
+The vertical terms go to zero as $R \to + \infty$ as a consequence of the estimate \eqref{pw:es}. Therefore
+\[
+\int_{-\infty}^{\infty} F(\xi) \mathrm{e}^{\imath x \cdot \xi} \, \mathrm{d}\xi - \int_{-\infty}^{\infty} F(\xi + \imath \eta) \mathrm{e}^{\imath x \cdot (\xi + \imath \eta)} \, \mathrm{d}\xi = 0,
+\]
+and this proves the claim.\end{proof}
+
+\paragraph{Step 5.} To conclude, we need to show that the support of $f$ is contained in $\bar{B}_r$. Let $x$ be a real number such that $|x| > r$, and notice that
+\[ \begin{aligned}
+\left| f(x) \right| & \leq \frac{1}{2 \pi} \int_{\R} \left|F(\xi + \imath \eta) \right|  \left| \mathrm{e}^{\imath x \cdot (\xi + \imath \eta)} \right| \, \mathrm{d}\xi \lesssim_n
+\\[1em] & \lesssim_n \mathrm{e}^{- x \cdot \eta } \int_{\R} \left| F(\xi + \imath \eta) \right| \, \mathrm{d}\xi \lesssim_{\alpha, \, n}
+\\[1em] & \lesssim_{\alpha, \, n} \mathrm{e}^{r|\eta| - x \cdot \eta}.
+\end{aligned} \]
+If we choose $\eta := \lambda \frac{x}{|x|}$, then
+\[
+\lambda (r - |x|) < 0 \implies \lim_{\lambda \to + \infty} \mathrm{e}^{r|\eta| - x \cdot \eta} = - \infty,
+\]
+which means that $f(x) = 0$ for all $|x| > r$.
+
+\paragraph{Step 6.} The final assertion, that the estimate \eqref{pw:eq} holds true for any $z \in \C$, follows trivially from \hyperref[lemma:ip]{Lemma \ref{lemma:ip}} and the fact that it holds already at all points $x \in \R$.
+\end{proof}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 10cm, height = 6cm]{images/AA1.pdf}
+\caption{A picture of the integral path $\gamma_R$.}
+\label{fig:curva}
+\end{figure}
+
+
+\begin{theorem}[Paley-Wiener, II] \index{Paley-Wiener Theorem}\label{pw:gen1}
+Let $\Phi \in \D^\prime(\R^n)$ be a distribution with compact support contained in the ball $\bar{B}_r$. Then the function
+\begin{equation} \label{pw2:eq}
+F(\zeta) := \Phi \left( \mathrm{e_{- \imath \zeta}} \right),
+\end{equation}
+is entire on $\C^n$ and satisfies the estimate
+\begin{equation} \label{pw2:es}
+\left| F(\zeta) \right| \lesssim \left(1 + |\zeta| \right)^N \e^{ r |\mathfrak{Im}(\zeta)|},
+\end{equation}
+for all $\zeta \in \C^n$ and $\alpha \in \N^n$, where $N$ is the order of the distribution $\Phi$.
+
+Vice versa, if $F$ is an entire function that satisfies the estimate \eqref{pw2:es}, then there exists a compactly supported distribution $\Phi \in \D^\prime(\R^n)$ with
+\[ \mathrm{spt}(\Phi) \subset \bar{B}_r. \]
+Moreover, the function $F$ is given by the formula \eqref{pw2:eq}.
+\end{theorem}
+
+\begin{remark}The estimate \eqref{pw:es}, for the vice versa, can be weakened to only require
+\begin{equation} \label{pw:esweak}
+\left|  F(\zeta) \right| \lesssim_N (1 + |\zeta|)^{-N} \mathrm{e}^{ r |\mathfrak{Im}(\zeta)|}
+\end{equation}
+for all $\zeta \in \C^n$. The reason is that the $\alpha$-derivative of $F$ at any point is given by Cauchy's formula as follows:
+\[
+\partial^\alpha F(0) = \frac{\alpha!}{(2 \pi \imath)^n} \oint_{\gamma_\rho^1} \dots \oint_{\gamma_\rho^n} \frac{F(\zeta_1, \, \dots, \, \zeta_n)}{\zeta_1^{\alpha_1+1} \dots \zeta_n^{\alpha_n+1}} \, \mathrm{d}\zeta, 
+\]
+where $\gamma_\rho^j$ is a curve parameterising the circumference of radius $\rho$ in the $j$th $\C$. We can hence estimate the absolute value of $\partial^\alpha F(0)$:
+\[ \begin{aligned}
+|\partial^\alpha F(0)| & \leq c_\alpha \rho^n \max_{ |\zeta_1| = \dots = |\zeta_n|=\rho} |F(\zeta_1, \, \dots, \, \zeta_n)| \rho^{- |\alpha| - n} \leq
+\\[1em] & \leq c_\alpha \rho^{-|\alpha|} (1 + \rho)^N.
+\end{aligned} \]
+Since $\rho$ is arbitrary, we may send it to $+ \infty$ and find that $\partial^\alpha F(0) = 0$ for all multi-indexes $\alpha$ of length strictly greater than $N$. This means that
+\[
+F(\zeta) = \sum_{|\alpha| \leq N} \frac{1}{\alpha!} \partial^\alpha F(0) \zeta^\alpha,
+\]
+and thus $F$ is given by a finite sum of derivatives. In particular, the estimate \eqref{pw:esweak} is equivalent to the apparently stronger one \eqref{pw:es}. \end{remark}
+
+\begin{corollary} Let $\Phi \in \Scp$.Then
+\[
+\mathrm{spt}(\Phi) \subseteq \{0\} \iff \text{$\F \Phi$ is a polynomial}.
+\]
+\end{corollary}
+
+\begin{proof}
+First, notice that if $\Phi$ is the Dirac delta $\delta_0$ centred at the origin, then
+\[
+\langle \F \delta_0, \, f \rangle = \F f(0) = \int_{\R^n} f(x) \, \mathrm{d}x = \langle 1, \, f \rangle_2.
+\]
+It follows that $\F \delta_0$ is equal, in a distributional sense, to the constant polynomial $1$. Moreover, the $\alpha$-derivative of the Dirac delta satisfies the identity
+\[
+\langle\partial^\alpha \delta_0, \, f \rangle = (-1)^{|\alpha|} \langle \delta_0, \, \partial^\alpha f \rangle = (-1)^{|\alpha|} \partial f(0),
+\]
+and thus any linear combination of derivatives of Dirac deltas $\partial^\alpha \delta_0$ has support contained in $\{0\}$. On the other hand, we have
+\[
+\langle \F(\partial^\alpha \delta_0), \, f \rangle = (-1)^{|\alpha|} \partial_\xi^\alpha \F(f)(0),
+\]
+so, if $\F \Phi$ is a polynomial, then $\Phi$ is a combination of $\partial^\alpha \delta_0$ since
+\[
+\F(\partial^\alpha \delta_0)(\xi) = (\imath \xi)^\alpha = \imath^{|\alpha|} \xi_1^{\alpha_1}\dots \xi_n^{\alpha_n}.
+\]
+Vice versa, if $\Phi \in \Scp$ has support contained in the singlet $\{0\}$, then \hyperref[pw:gen1]{Paley-Wiener theorem} shows that $\F \Phi$ must be a polynomial, and therefore
+\[
+\Phi = \sum_{|\alpha| \leq N} c_\alpha \partial^\alpha \delta_0.
+\]
+\end{proof}

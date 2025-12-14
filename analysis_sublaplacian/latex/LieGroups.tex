@@ -1,0 +1,883 @@
+\chapter{Lie Groups and Lie Algebras} \thispagestyle{empty}
+\label{chapter:Liegroups}
+
+In this chapter, we introduce the notion of {\em Lie group} and set the ground for Fourier analysis on this class of spaces generalizing what we did on $\R^n$.
+
+\section{Introduction to Lie groups}
+
+\bd[Lie group] \index{Lie group}
+A {\em Lie group} $\G$ is an abstract group and a smooth manifold in which the two structures are compatible. In other words, the map
+\[
+\G \times \G \ni (x, \, y) \longmapsto y^{-1} \cdot x \in \G
+\]
+is smooth.
+\ed
+
+\brmk
+Notice that the compatibility between the two structures is also equivalent to requiring that
+\[
+\G \times \G \ni (x, \, y) \longmapsto x \cdot y \in \G \quad \text{and} \quad \ni \G y \longmapsto y^{-1} \in \G
+\]
+are both smooth maps.
+\ermk
+
+\brmk
+In some books, a Lie group is defined as an analytic manifold rather than a smooth one. However, it can be proved that in this context smooth implies analytic - see, for example, \cite{serre1}.
+\ermk
+
+From now on, the symbol $\G$ will always indicate a Lie group equipped with a multiplication law $\cdot$ compatible with the smooth manifold structure.
+
+\bd\index{Lie group!left-translation}\index{Lie group!right-translation}
+Fix $a \in \G$. The {\em left-translation} operator $\ell_a : \G \to \G$ is defined by setting
+\[
+\ell_a(x) := a \cdot x
+\]
+and, similarly, the {\em right-translation} operator $r_a : \G \to \G$ is defined by
+\[
+r_a(x) := x \cdot a^{-1}.
+\]
+Notice that we use $a$ for $\ell_a$ and $a^{-1}$ for $r_a$ in order to make the composition laws coherent with each other, that is,
+\[
+\ell_a \ell_b = \ell_{a \cdot b} \qquad \text{and} \qquad r_a r_b = r_{a \cdot b}.
+\]
+\ed
+
+\brmk
+It is easy to verify that both $\ell_a$ and $r_a$ are diffeomorphisms of $\G$ with inverses $\ell_{a^{-1}}$ and $r_{a^{-1}}$ respectively.
+\ermk
+
+\begin{notation}
+Let $f \in C^\infty(\G)$. We denote by $\check{f}$ the function
+\[
+\check{f}(x) := f(x^{-1}) \in C^\infty(\G).
+\]
+In a similar fashion, we introduce the translation operators $L_a, \, R_a : C^\infty(\G) \to C^\infty(\G)$, for $a \in \G$, as follows:
+\[ \begin{aligned}
+& L_a f(x) := f(a^{-1} \cdot x) = f \circ \ell_a^{-1} (x),
+\\[1em] & R_a f(x) := f(x \cdot a) = f \circ r_a^{-1} (x).
+\end{aligned}\]
+\end{notation}
+
+Recall that Lie group $\G$ is a smooth manifold and therefore the notion of tangent space at some $p \in \G$ is well-defined, for example, through derivations. Recall that
+\[
+v : C^\infty(\G) \longrightarrow \R
+\]
+is a {\em derivation} at $p \in \G$ if the following properties hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $f \equiv g$ in a neighbourhood of $p$, then $v(f) = v(g)$.
+\item The {\bf Leibniz rule} holds, that is,\index{Leibniz rule!derivation}
+\[
+v(fg) = f(p) v(g) + g(p) v(f).
+\]
+\end{enumerate}
+
+\bpr
+Let $\varphi : A \subseteq \R^{q} \to \G$ be a coordinate system around $p_0 \in \G$ and assume that $\varphi(0) = p_0$. Then $v \in T_{p_0}\G$ if and only if there exists $(a_1, \, \dots, \, a_q) \in \R^q$ such that
+\[
+v(f) = \sum_{j = 1}^q a_j \partial_{x_j}(f \circ \varphi)(0).
+\]
+In other words, a derivation belongs to the tangent space if and only if it is a directional derivative.
+\epr
+
+\bd[Vector field] \index{vector field}
+A {\em vector field} $X$ defined on a Lie group $\G$ is a linear operator
+\[
+X : C^\infty(\G) \longrightarrow C^\infty(\G)
+\]
+that satisfies the Leibniz rule, that is,
+\[
+X(fg) = X(g) f + X(f) g.
+\]
+\ed
+
+We denote by $\X(\G)$ the space of all vector fields defined on $\G$ which is easily seen to be infinite-dimensional. Furthermore, for $p \in \G$ we have
+\[
+f \longmapsto Xf(p) \in T_p \G,
+\]
+which means that a vector field $X$ can be used to associate functions to tangent vectors.
+
+\bd \index{vector field!left-invariant}
+The vector field $X \in \X(\G)$ is {\em left-invariant} if
+\[
+X(L_a f) = L_a (X f) \quad \text{for all $f \in C^\infty(\G)$ and all $p \in \G$}.
+\]
+\ed
+
+\bex
+In $\R^n$, the vector field defined by setting
+\[
+X= \sum_{j = 1}^n a_j(x) \frac{\partial}{\partial x_j}
+\]
+is left-invariant if and only if $a_j(x) \equiv a_j$ is a constant function for all $j \in \{1, \, \dots, \, n\}$.
+\eex
+
+\bpr
+Let $X \in \X(\G)$ be a left-invariant vector field and let "$v = X(e)$" be the derivation defined by setting
+\[
+v(f) = Xf(e).
+\]
+Then, for all $x \in \G$ and for all $f \in C^\infty(\G)$, the vector field satisfies
+\[
+X f(x) = v( L_x^{-1} f).
+\]
+Conversely, given $v \in T_e \G$, the vector field defined by setting
+\[
+X_v f(x) := v(L_{x}^{-1} f)
+\]
+is left-invariant.
+\epr
+
+\begin{proof}
+The first identity is trivial since
+\[
+X f(x) = L_{x^{-1}} (Xf)(e) = X (L_{x^{-1}}f)(e) = v(L_x^{-1} f).
+\]
+To prove that $X_v$ is a vector field, we need to check\footnote{It is clearly sufficient to prove that $g$ is smooth in a neighbourhood of $x$.} that $g := X_v f \in C^\infty(\G)$. A straightforward computation shows that
+\[
+X_v f(x) = v(L_{x}^{-1} f) = \sum_{j = 1}^n a_j \partial_{x_j}( L_x^{-1} f \circ \varphi) (0) = \sum_{j = 1}^n a_j \partial_{x_j} f(x \cdot \varphi(t)),
+\]
+which means that $g$ is smooth since we can write it as the composition of smooth functions. We now show that $X_v$ is left-invariant. Let $a \in \G$ and notice that
+\[ \begin{aligned}
+X_v(L_a f)(x) & = v( L_x^{-1} L_a f) =
+\\[1em] & = v(L_{x \cdot a^{-1}} f) =
+\\[1em] & = X_v f(a^{-1} \cdot x) =
+\\[1em] & = L_a X_v(f)(x).
+\end{aligned} \]
+\end{proof}
+
+It follows from the proposition that $v \mapsto X_v$ is a bijection between $T_e \G$ and the subset of $\X(\G)$ that consists of left-invariant vector fields.
+
+\bd[Lie Algebra] \index{Lie algebra}
+The {\em Lie algebra} $\cg$ associated to a Lie group $\G$ is the algebra generated by left-invariant vector fields,
+\[
+\cg := \{ X \in \X(\G) \: : \: \text{$X$ left-invariant}, \},
+\]
+and it is a vector space of dimension $q$.
+\ed
+
+\brmk
+If $X, \, Y \in \cg$, then $[X, \, Y] \in \cg$.
+\ermk
+
+The algebra isomorphism between $\cg$ and $T_e \G$ is given by the map $v \mapsto X_v$, where $X_v$ can also be defined via the push-forward
+\[
+X_v(x) = \ell(x)_\ast v.
+\]
+
+\section{Exponential map and one-parameter groups}
+
+Let $X \in \cg$ be a left-invariant vector field and let $\gamma_x$ be the integral curve originating at some point $x \in \G$, namely the solution of the problem
+\[\begin{cases}
+\gamma_x'(t) = X(\gamma_x(t)),
+\\[.6em] \gamma_x(0) = x.
+\end{cases}\]
+We now claim that for all $x\in \G$ the following identity holds:
+\begin{equation} \label{eq.z.1}
+\gamma_x(t) = x \cdot \gamma_e(t).
+\end{equation}
+One way to see this is to use the exponential map. Recall that by definition
+\[
+\exp(tX) f(e) = f(\gamma_e(t)),
+\]
+so for any $x \in \G$ it turns out that
+\[ \begin{aligned}
+\exp(tX) L_{x^{-1}} f(e) & = L_{x^{-1}} \exp(tX) f(e)
+\\[1em] & =  L_{x^{-1}} \left[ f(\gamma_e(t)) \right]
+\\[1em] & = f(x \cdot \gamma_e(t)).
+\end{aligned} \]
+The left-hand side is equal to $[L_{x^{-1}} f](\gamma_e(t))$, and thus \eqref{eq.z.1} holds if we can prove that
+\[
+[L_{x^{-1}} f](\gamma_e(t)) = f(\gamma_x(t)).
+\]
+This is left as an exercise to the reader to get acquainted with the notions introduced so far.
+
+\brmk
+Another way to prove \eqref{eq.z.1} is to show that $x \cdot \gamma_e$ is the integral curve of $X$ starting from $x$. This is an immediate consequence of $X$ left-invariant vector field:
+\[ \begin{aligned}
+\frac{\mathrm{d}}{\mathrm{d}t} f(x \cdot \gamma_e(t)) & = \frac{\mathrm{d}}{\mathrm{d}t} L_{x^{-1}} f(\gamma_e(t))
+\\[1em] & =X(L_{x^{-1}} f)(\gamma_e(t))
+\\[1em] & = (Xf)(x \cdot \gamma_e(t)).
+\end{aligned} \]
+\ermk
+
+The identity \eqref{eq.z.1} is extremely important and carries several consequences, one of which is the existence of one-parameter groups. First, notice that
+\[
+\text{$\gamma_e(\cdot)$ defined for $t \in (- \epsilon, \, \epsilon) \implies \gamma_x(\cdot)$ defined for $t \in (- \epsilon, \, \epsilon)$}.
+\]
+In particular, we have $\gamma_{\gamma_e(s)}(t) = \gamma_e(s) \cdot \gamma_e(t)$ and, since we know already (via the composition of the corresponding flows) that
+\[
+\gamma_{\gamma_e(s)}(t)= \gamma(t + s),
+\]
+we can infer that $\gamma_e(t + s) = \gamma_e(t) \cdot \gamma_e(s)$. This means that we can extend the domain of $\gamma_e$ to coincide with the real line, and hence
+\[
+\gamma_e \in C^\infty(\R, \, \G)
+\]
+is a {\em smooth groups homomorphism} from $\R$ to $\G$. In this case we say that $\gamma_e$\index{one-parameter group} is a {\em one-parameter group} and we can easily define a one-to-one correspondence
+\[
+\cg \longleftrightarrow \{ \text{one-parameter groups} \}
+\]
+where $\gamma$, a one-parameter group, gives a left-invariant vector field by setting
+\[
+Xf(x) = \frac{\mathrm{d}}{\mathrm{d}t} f(x \cdot \gamma(t)).
+\]
+
+\bex
+The one-parameter groups of $(\R^n, \, +)$ are all of the form
+\[
+\gamma_v(t) := tv,
+\]
+where $v \in \R^n$. Notice that from a topological point of view $\gamma$ might not be a {\bf closed} subgroup (e.g., the irrational line in $\mathbb{T}$ which is dense)
+\eex
+
+Let $\G$ be a Lie group and identify its Lie algebra $\cg$ with the tangent space. 
+
+\bd\index{Lie group!exponential map}
+Fix $v \in T_e \G$ and let $\gamma_v$ be the one-parameter group satisfying the initial condition $\gamma_v^\prime(0) = v$. We call {\em exponential of $\G$} the mapping
+\[
+\exp_\G(v) := \gamma_v(1).
+\]
+\ed
+
+\bthm
+The exponential map $\exp_\G$ is a local diffeomorphism from a neighbourhood $U$ of $0 \in T_e \G$ to a neighbourhood $V$ of the identity element $e\in \G$.
+\ethm
+
+\begin{proof}
+Simply notice that $\exp_\G$ is smooth (since it is the restriction of $(t, \, v) \mapsto \gamma_v(t)$ which is smooth) and
+\[
+\mathrm{d}(\exp_\G)_0 : T_e \G \longrightarrow T_e \G
+\]
+is the identity map since $\gamma_v^\prime(0)=v$ by definition.
+\end{proof}
+
+One might wonder whether or not $\exp_\G$ is a {\bf global} diffeomorphism. However, it is easy to verify that any compact Lie group gives a counterexample since
+\[
+T_e \G \cong \R^q
+\]
+is only locally compact so it cannot be diffeomorphic to a compact manifold such as $\G$. For example,
+\[
+\mathrm{SU}(2, \, \C) \cong S^3 \subset \C^2
+\]
+is a compact Lie group and $\exp_\G$ is not a global diffeomorphism as one can easily see from the picture below.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 12.5cm, height = 2.5cm]{images/AA2.pdf}
+\caption{Counterexamples to $\exp_\G$ global diffeomorphism.}
+\label{fig:z1}
+\end{figure}
+
+Furthermore, notice that for $v$ and $w$ in a small neighbourhood of $0 \in T_e\G$ we find that there exists $u$ in the same neighbourhood such that
+\[
+(\exp_\G v)\cdot(\exp_\G w) = \exp_\G u,
+\]
+and $u$ is given by the \textsc{BCH} formula. In particular, the series
+\[
+v + w + \sum_{k_1 + k_2 \geq 1} c_{k_1, \, k_2}, \quad  c_{k_1, \, k_2}\in \mathcal{F}^{k_1, \, k_2}
+\]
+is convergent in a small neighbourhood of the origin and this is what (more or less) leads to the definition of Lie groups with "analytic" in place of "smooth".
+
+\bex
+Let $\G = \R$ and let $\G^\prime = \mathbb{T}$. Then it is easy to verify that
+\[
+\cg \cong \cg^\prime,
+\]
+and both are isomorphic to $\R$.
+\eex
+
+\brmk
+This shows that two Lie groups with the same (up to isomorphism) Lie algebra are not necessarily isomorphic themselves; however, they are locally isomorphic.
+\ermk
+
+\bthm
+Two Lie groups are locally isomorphic if and only if their Lie algebras are isomorphic.
+\ethm
+
+\brmk
+What we did until now only cares about the connected component of $\G$ and ignores all the others as if they did not exist. Therefore, assuming that $\G$ is connected is not restrictive in any sense.
+\ermk
+
+\section{Lie algebras and connection with Lie groups}
+
+We now introduce the notion of Lie algebra and show how is it related with the notion of Lie groups via left-invariant vector fields.
+
+\bd \index{Lie algebra}
+A Lie algebra $\cg$ is a vector space endowed with a bilinear operator $[ \cdot, \, - ] : \cg \times \cg \to \cg$ which is antisymmetric and satisfies the Jacobi identity\index{Jacobi identity}
+\begin{equation} \index{Jacobi identity}
+[x, \, [y,\,z]] + [z, \, [x,\,y]] + [y, \, [z,\,x]] = 0 \quad \text{for all $x, \, y, \, z \in \cg$}.
+\end{equation}
+\ed
+
+\bex
+The vector space of $n \times n$ real-valued matrices endowed with the bracket operator $[A,\, B] := AB - BA$ is a Lie algebra which is usually denoted by $\mathfrak{gl}(n, \, \R)$. Similarly,
+\[
+\mathfrak{sl}(n, \, \R) = \left\{ A \in \mathfrak{gl}(n, \, \R) \: : \: \mathrm{Tr}(A) = 0 \right\}
+\]
+and
+\[
+\mathfrak{so}(n, \, \R) = \left\{ A \in \mathfrak{gl}(n, \, \R) \: : \: \text{$A$ is skew-symmetric} \right\}
+\]
+are also Lie algebras with the same bracket operator. Notice that, in this case, the space of symmetric matrices in $\mathfrak{gl}(n, \, \R)$ is {\bf not} a Lie algebra.
+\eex
+
+\bex
+The Euclidean space $\R^3$ with the multiplication law given by the wedge product $\wedge$ is a Lie algebra which is isomorphic to $\mathfrak{so}(3, \, \R)$ via
+\[
+\R^3 \ni (v_1, \, v_2, \, v_3) \longmapsto \begin{pmatrix} 0 & v_3 & v_2 \\ - v_3 & 0 & - v_1 \\ - v_2 & v_1 & 0 \end{pmatrix} \in \mathfrak{so}(3, \, \R).
+\]
+\eex
+
+\bd[Homomorphism] \index{Lie algebra!homomorphism}
+A Lie algebras homomorphism $\varphi$ is a linear mapping that preserves the bracket, that is,
+\[
+[x,\,y] = [\varphi(x), \, \varphi(y)].
+\]
+\ed
+
+\bd\index{Lie algebra!commutative}
+We say that $\cg$ is a {\em commutative} Lie algebra if $[x, \, y] = 0$ for all $x, \, y \in \cg$.
+\ed
+
+We now introduce an useful notation for the commutator of linear spaces. More precisely, let $\mathfrak{h}$ be a linear subspace of a Lie algebra $\cg$. Then
+\[
+[\cg, \, \mathfrak{h}] := \mathrm{Span} \langle [x, \, y] \: : \: x \in \cg, \, y \in \mathfrak{h} \rangle.
+\]
+
+\bd\index{Lie algebra!subalgebra}
+Let $\cg$ be a Lie algebra. A linear subspace $\mathfrak{h}$ is a {\em Lie subalgebra} if it is closed under the bracket, that is,
+\[
+[\mathfrak{h}, \, \mathfrak{h}] \subseteq \mathfrak{h}.
+\]
+Moreover, we say that a Lie subalgebra $\mathfrak{h}$ is an {\em ideal}\index{Lie algebra!ideal} if
+\[
+[\mathfrak{h}, \, \cg] \subseteq \mathfrak{h}.
+\]
+\ed
+
+\brmk
+If $\mathfrak{h}$ is an ideal of $\cg$, then the quotient can be given a Lie algebra structure by setting
+\[
+[x + \mathfrak{h}, \, y + \mathfrak{h}] := [x, \, y] + \mathfrak{h}.
+\]
+Notice that this is not well-defined (i.e., it depends on the choice of the representatives) if $\mathfrak{h}$ is a subalgebra which is not an ideal.
+\ermk
+
+\bd \index{Lie algebra!centre}
+Let $\cg$ be a Lie algebra. The {\em centre} of $\cg$ is defined as
+\[
+Z_\cg := \{ x \in \cg \: : \: [x, \, \cg] = 0 \}.
+\]
+\ed
+
+\brmk
+The linear subspace $Z_\cg$ is an ideal of $\cg$.
+\ermk
+
+\bd \index{Lie algebra!derived algebra}
+Let $\cg$ be a Lie algebra. The {\em derived algebra} of $\cg$ is defined as
+\[
+\cg' := [\cg, \, \cg].
+\]
+\ed
+
+The derived algebra of $\cg$ does not always coincide with $\cg$ itself. For example, if $\cg = \mathfrak{gl}(n, \, \R)$ it is easy to verify that
+\[
+[\cg, \, \cg] \subseteq \mathfrak{sl}(n, \, \R),
+\]
+and thus it is a proper ideal of $\cg$.
+
+\bex
+Let $\mathfrak{t}(n,\,\R)$ be the space of $n\times n$ real-valued upper-triangular matrices. Then $\mathfrak{t}(n,\,\R)$ is a Lie algebra because $AB, \, BA \in \mathfrak{t}(n,\,\R)$, but
+\[
+[\mathfrak{t}(n,\,\R), \, \mathfrak{t}(n,\,\R)] \subset \mathfrak{t}(n,\,\R)
+\]
+is a proper ideal because all its elements have the super-diagonal identically equal to zero.
+\eex
+
+The previous example suggests that we can iterate this construction a finite number of times. We obtain a sequence of derived algebras which are proper ideals of one another until
+\[
+[ \mathfrak{t}(n,\,\R), \, [\mathfrak{t}(n,\,\R), \, [\mathfrak{t}(n,\,\R), \, \dots, \, [\mathfrak{t}(n,\,\R), \, \mathfrak{t}(n,\,\R)]]\dots] = 0.
+\]
+This construction is what is usually called {\em descending central series} and can be done with any other Lie algebra, although there is no guarantee that it will eventually be zero.\index{descending central series}
+
+\bd[Nilpotent] \index{Lie algebra!nilpotent}
+Let $\cg$ be a finite-dimensional Lie algebra. If the descending central series stabilises at $0$, then we say that $\cg$ is {\em nilpotent}.
+\ed
+
+\bex
+Let $\cg$ be the Heisenberg Lie algebra, namely the one generated as
+\[
+\cg = \mathrm{Span} \langle \partial_x - \frac{y}{2} \partial_z, \, \partial_y + \frac{x}{2} \partial_z, \, \partial_z \rangle.
+\]
+Then the derived algebra is $\cg' = \mathrm{Span} \langle \partial_z \rangle = \R$ and it is easy to verify that the $\cg$ is nilpotent of step two.
+\eex
+
+\bthm[Ado] \index{Ado's theorem}
+Every finite-dimensional Lie algebra over $\R$ (or $\C$) is isomorphic to a matrices Lie algebra.
+\ethm
+
+The original proof of this result due to Ado can be found in \cite{ados}. There are several others with new methods, but they are all reasonably complicated so we will just skip it.
+
+\bthm[Engel] \index{Engel's theorem}
+Every finite-dimensional nilpotent Lie algebra over $\R$ (or $\C$) is isomorphic to a upper-triangular matrices Lie algebra.
+\ethm
+
+\bex[Heisenberg]
+Let $\cg$ be the Heisenberg space, namely
+\[
+\cg = \mathrm{Span} \langle \partial_x - \frac{y}{2} \partial_z, \, \partial_y + \frac{x}{2} \partial_z, \, \partial_z \rangle.
+\]
+It is easy to see that this is isomorphic to the matrices algebra generated by
+\[
+\begin{pmatrix} 0 & x & z \\ 0 & 0 & y \\ 0 & 0 & 0 \end{pmatrix},
+\]
+where
+\[
+X = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}, \quad Y = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0 \end{pmatrix}, \quad Z = \begin{pmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}.
+\]
+\eex
+
+The next theorem asserts that finite-dimensional Lie algebras are always given by $\mathrm{Lie}(\G)$, where $\G$ is a Lie group which is uniquely determined if we require connected and simply connected.
+
+\bthm[Lie] \index{Lie's theorem}
+Let $\cg$ be a finite-dimensional real Lie algebra. Then there exists a Lie group $\G$ such that $\cg$ i its Lie algebra. Furthermore, there exists a unique $\G$ which is connected and simply connected.
+\ethm
+
+One might wonder if the proof of this result is easier if we use Ado's theorem to restrict ourselves to a smaller class of Lie algebras. However, this is not the case. Let $\cg$ be a Lie algebra contained in $\mathfrak{gl}(n, \, \R)$ and notice that
+\[
+\mathfrak{gl}(n, \, \R) = \mathrm{Lie}( \mathrm{GL}(n, \, \R) ), 
+\]
+the set of all matrices with nonzero determinant. Now $\exp_\G(\cg)$ is a "nice" submanifold close to the identity, but we get no information about the behaviour of faraway points.
+
+\bthm
+Let $\cg$ be a Lie algebra and let $\G$ be the unique connected and simply connected Lie group with $\mathrm{Lie}(\G) \cong \cg$. If $\mathbb{H}$ is a connected Lie group with $\mathrm{Lie}(\mathbb{H}) \cong \cg$, then $\mathbb{H}$ is isomorphic to a quotient of $\G$ modulo a discrete central subgroup.
+\ethm
+
+\bex
+For example, $\R$ is the unique connected and simply connected Lie group with Lie algebra isomorphic to $\R$. The torus $\mathbb{T}$ is, in fact, isomorphic to a quotient of $\R$:
+\[
+\mathbb{T} = \faktor{\R}{2 \pi \Z}.
+\]
+\eex
+
+\bex
+Let us consider
+\[
+\mathrm{SU}(2,\, \C) = \left\{ \begin{pmatrix} z_1 & - \bar{z_2} \\ z_2 & \bar{z_1} \end{pmatrix} \: : \: |z_1|^2 + |z_2|^2 = 1 \right\}
+\]
+and
+\[
+\mathrm{SO}(3,\, \R) = \left\{ R_{\theta, \, v} \: : \: \theta \in [0, \, 2 \pi), \, v \in \R^3, \, |v|=1 \right\}.
+\]
+It is easy to verify that $\mathrm{SU}(2,\, \C)$ is diffeomorphic to $S^3 \subset \C^2$ so it is connected and simply connected, while $\mathrm{SO}(3,\, \R)$ is connected but not simply connected. It can be proved that
+\[
+\mathfrak{su}(2, \, \C) \cong \mathfrak{so}(3, \, \R),
+\]
+and since the center of $\mathrm{SU}(2,\, \C)$ is $\{ \pm \mathrm{Id} \}$, then the unique possibility is that
+\[
+\mathrm{SO}(3, \, \R) = \faktor{\mathrm{SU}(2,\, \C)}{ \{ \pm \mathrm{Id} \}},
+\]
+which means that $\mathrm{SU}(2,\, \C)$ is a double covering of $\mathrm{SO}(3,\, \R)$.
+\eex
+
+\paragraph{Notation.} So far we introduced an exponential map which sends a vector field to its flow,
+\[
+\exp(tX) f(x) = f \circ \varphi_t(x),
+\]
+and an exponential map associated to a Lie group $\G$ that sends $\cg$ to $\G$. The connection between them follows easily if we identify $X_v \in \cg$ with $X_v \in T_e \G$ since
+\[
+\exp(t X_v) f(x) = f(x \exp_\G(tv)).
+\]
+Since Ado's theorem asserts that every finite-dimensional Lie algebra $\cg$ over $\R$ is isomorphic to a matrices Lie algebra, it only makes sense to study properties of $\mathrm{GL}(n, \ \R)$.
+
+\bex
+Recall that $\gln$ is a dense open set of $\R^{n \times n}$ so it quite clearly a Lie group. The tangent space is
+\[
+T_e \gln = \mathrm{M}(n, \, \R),
+\]
+the set of all $n \times n$ matrices, isomorphic to $\R^{n^2}$. Recall that for any $A \in \mathrm{M}(n, \, \R)$ the exponential
+\[
+\e^A = \sum_{n \in \N} \frac{A^n}{n!}
+\]
+is well-defined and converges absolutely since
+\[
+\left\| \sum_{n \in \N} \frac{A^n}{n!} \right\| \leq \sum_{n \in \N} \frac{\|A^n\|}{n!} \leq \sum_{n \in \N} \frac{\|A\|^n}{n!} = \e^{\|A\|}
+\]
+and the exponential of a real number is well-defined. Now let $\gamma_A(t) := \e^{At}$ and notice that this map satisfies the relations
+\[
+\gamma_A(s+t) = \gamma_A(t) \cdot \gamma_A(s) \quad \text{and} \quad \gamma_A(t) \cdot \gamma_A(-t) = \mathrm{id},
+\]
+so $\gamma_A(t)$ belongs to $\gln$ for all $A \in \mathrm{M}(n, \, \R)$. We can be more precise and prove that
+\[
+\mathrm{det} \, \e^A = \e^{\mathrm{Tr}(A)},
+\]
+which follows from the Jordan's normal form in $\C$ together with the obvious identity $\e^{PAP^{-1}} = P \e^A P^{-1}$, but we do not need to go as far. Anyway, $\gamma_A$ is a one-parameter group and its derivative is given by
+\[
+\gamma_A^\prime(t) = A \e^{At}.
+\]
+Now we want to prove that, given left-invariant vector fields $X_A$ and $X_B$ via the exponential identification, it turns out that
+\[
+[X_A, \, X_B] = X_{[A, \, B]},
+\]
+where $[A, \, B] = AB - BA$. Start by observing that
+\[ \begin{aligned}
+X_A f(x) & = \frac{\mathrm{d}}{\mathrm{d}t} \, \Big|_{t = 0} f(x \exp_\G(A)) = 
+\\[1em] & =  \frac{\mathrm{d}}{\mathrm{d}t} \, \Big|_{t = 0} f(x \left( \mathrm{id} + tA + \mathcal{O}(t^2) \right) ) =
+\\[1em] & =  \frac{\mathrm{d}}{\mathrm{d}t} \, \Big|_{t = 0} f(x + x tA) =
+\\[1em] & =  \frac{\mathrm{d}}{\mathrm{d}t} \, \Big|_{t = 0} f(x_1 + t (xA)_1, \, \dots, \, x_n + t(xA)_n) =
+\\[1em] & = \sum_{i, \, j = 1}^n (xA)_{i, \, j} \partial_{x_{i, \, j}} f(x)
+\end{aligned} \]
+from which it follows that
+\[
+X_A(e) = \sum_{i, \, j = 1}^n A_{i, \, j} \partial_{x_{i, \, j}}.
+\]
+If $B$ is another element, it is easy to see that
+\[ \begin{aligned}
+[X_A, \, X_B] f(e) & = X_A(X_B f) - X_B(X_A f) =
+\\[1em] & = \sum_{i, \, j} A_{i, \, j} \partial_{i, \, j} \left( \sum_{k, \, \ell} (xB)_{k, \, \ell} \partial_{k,\, \ell}\right) f(e) - \sum_{i, \, j} B_{i, \, j} \partial_{i, \, j} \left( \sum_{k, \, \ell} (xA)_{k, \, \ell} \partial_{k,\, \ell}\right) f(e)
+\\[1em] & = \sum_{i, \, j} A_{i,\, j} \sum_{k, \, \ell} \left[ \partial_{i, \, j} ( xB)_{k,\, \ell} \partial_{k, \, \ell} \right] f(e)
+\\[1em] &  = \sum_{i, \, j} \sum_\ell \left[ B_{j, \, \ell} \partial_k f \right] (e) 
+\\[1em] & = \sum_{i, \, \ell} (AB)_{i, \, \ell} \partial_{i, \, \ell} f(e) = X_{[A, \, B]}f(e)\end{aligned} \]
+The Lie algebra $\mathfrak{gl}(n, \, \R)$ can be identified with $\mathrm{M}(n, \, \R)$ and the exponential map $A \mapsto \e^A$, while nice close to zero, is far from being injective everywhere. Indeed,
+\[
+\exp \left( t \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} \right) = R_t,
+\]
+the rotation of angle $t$, is periodic with respect to $t$.
+\eex
+
+\section{Nilpotent Lie algebras}
+
+In this section, we take a closer look to nilpotent Lie algebras and Lie groups since in the final part of the course we will study the sublaplacian operator on a special subclass of nilpotent groups.
+
+\bthm \label{thm.algebraassocia}
+Let $\cg$ be a nilpotent Lie algebra of step $m$ and define
+\[
+S(a, \, b) = a + b + \frac{1}{2}[a, \, b] + \sum_{k = 3}^m c_k(a, \, b).
+\]
+Then $S$ is a multiplication law defining a Lie group structure on $\cg$ which Lie algebra is isomorphic to $\cg$.
+\ethm
+
+\begin{proof}
+First, notice that $S(a, \, 0) = a$ and $S(0, \, b) = b$ so the linear space $0$ plays the role of the identity in $\G$. Moreover,
+\[
+S(a, \, - a) = 0,
+\]
+so each element $a \in \G$ has an inverse which is given by $-a$. The associative property,
+\[
+S(S(a, \, b),\, c) = S(a, \, S(b,\,c),
+\]
+on the other hand, is difficult to prove. We use Ado's theorem and reduce to a simpler case since working on a manifold $\cong \R^N$ allows one to assume the simple connectedness.
+
+\paragraph{Associativity.} The following result is given for granted:
+
+\bl
+There exists a neighbourhood of $0$ in $\mathfrak{gl}(n, \, \R)$ such that for all $A, \, B \in U$ the Baker-Campbell-Hausdorff formula converges.
+\el
+
+Let $U$ be a neighbourhood of $0$ in $\mathfrak{gl}(n, \, \R)$ such that the restriction of the exponential map is a diffeomorphism with an open neighbourhood of the identity matrix $V$. Select a smaller neighbourhood $V'$ in such a way that
+\[
+V' \cdot V' \subset V,
+\]
+and, similarly, select an even smaller one such that
+\[
+V'' \cdot V'' \subset V'.
+\]
+Let $U'$ and $U''$ be the preimages of $V'$ and $V''$. We can assume that $U'$ satisfies the assumption of the lemma above (otherwise we can take a smaller one). It follows that
+\[
+\forall a, \, b \in U', \, \exp(S(a, \, b)) \in V.
+\]
+Now let $a, \, b, \, c \in U^{''}$. It is easy to see that $S(a,\, b), \, S(a, \, c), \, S(b, \, c) \in U'$ and thus
+\[
+\e^{S(S(a, \, b), \, c)} = \e^{S(a, \, b)} \e^c = \e^a \e^b \e^c = \e^a \e^{S(b, \, c)} = \e^{S(a, \, S(b, \, c))}.
+\]
+This shows that associativity rule holds in $U''$ and since this is a polynomial identity that holds for small parameters we can extend it everywhere by analytic continuation (since there is a finite number of addenda).
+\end{proof}
+
+\section{Homomorphisms of Lie algebras and dilations}
+
+Let $\Psi : \G \to \G'$, $\G$ connected, be a {\em homomorphism of Lie groups}\index{Lie group!homomorphism}, that is, a smooth\footnote{Requiring measurable here leads, surprisingly, to an equivalent definition.} map which is also a group homomorphism. Then
+\[
+\mathrm{d}\Psi_e : T_e \G \to T_e \G'
+\]
+induces a map $\Psi_\ast : \cg \to \cg'$ composing with the isomorphisms described earlier in the chapter that identify the Lie algebra with the tangent at the identity element. Let $v \in T_e \G$ and let $\gamma_v(t)$ be the relative one-parameter group ($\gamma_v^\prime(0) = v$). Then
+\[
+\gamma_{v'}(t) := \Psi \circ \gamma_v(t)
+\]
+is a one-parameter group in $\G'$ and hence turns out that $\Psi_\ast(v) = v'$.
+
+\bpr
+The map $\Psi_\ast$ is a Lie-algebra isomorphism, namely
+\[
+\Psi_\ast [u,\, v] = [\Psi_\ast u,\, \Psi_\ast v].
+\]
+\epr
+
+\begin{proof}
+Let $v \in \cg$. Then $\gamma_v(t) = \exp_\G(tv)$ and
+\[
+X_v f(x) = \frac{\rmd}{\rmd t} \, \Big|_{t = 0} f(x \cdot \exp_\G(tv)).
+\]
+is the corresponding left-invariant vector field. Let $h \in C^\infty(\G')$, $f := h \circ \Psi \in C^\infty(\G)$, and notice that
+\[ \begin{aligned}
+X_v f(x) & = \frac{\rmd}{\rmd t} \, \Big|_{t = 0} h \left( \Psi(x \cdot \exp_\G(tv)) \right)
+\\[1em] & = \frac{\rmd}{\rmd t} \, \Big|_{t = 0} h \left( \Psi(x) \cdot \exp_{\G'}(tv') \right)
+\\[1em] & = Y_{v'} h(\psi(x)) = Y_{v'} f(x),
+\end{aligned} \]
+which means that $X_v = Y_{\Psi_\ast(v)}$, where $Y_w$ is the left-invariant vector field relative to $w$ in the Lie algebra associated to $\G'$.
+\end{proof}
+
+\bpr
+If $\G$ is connected, then $\Psi_\ast$ uniquely determines $\Psi$.
+\epr
+
+\begin{proof}
+If $\Phi$ and $\Psi$ are two Lie groups homomorphisms with $\Phi_\ast = \Psi_\ast$, then
+\[
+\Phi(\exp_\G(tv)) = \exp_{\G'}( t \Phi_\ast v) = \exp_{\G'}( t \Psi_\ast v) = \Psi(\exp_\G(tv)).
+\]
+This means that $\Phi$ and $\Psi$ coincide in a neighbourhood $U$ of the identity element $e \in \G$, which we can assume to be symmetric. Then
+\[
+\Phi \equiv \Psi
+\]
+on each power $U^k$ of $U$, and hence we can consider $\mathcal{U} := \bigcup_{n \in \N} U^n$ subgroup of $\G$ since it is closed under multiplication and inverse. By definition, $\mathcal{U}$ is open and, using the identity
+\[
+\G \setminus \mathcal{U} = \bigcup_{p \notin \mathcal{U}} p \cdot \mathcal{U},
+\]
+we also infer that $\mathcal{U}$ is closed. Since $\G$ is compact the only possibility is $\mathcal{U} = \G$.
+\end{proof}
+
+\bcor
+The map $\ast : \homs(\G,\, \G') \to \homs(\cg, \, \cg')$ is injective.
+\ecor
+
+\brmk
+In general, it is not surjective. If $\G = \mathbb{T}^2$ and $\G' = \R$, then the unique Lie algebra homomorphism $\mathrm{id} : \R \to \R$ cannot be lifted to a map from $\mathbb{T}^2$ to $\R$.
+\ermk
+
+\bthm
+Let $\G$ be a connected and simply connected Lie group. If $\eta \in \homs(\cg,\, \cg')$, then there exists $\Psi \in \homs(\G,\, \G')$ such that
+\[
+\Psi_\ast = \eta.
+\]
+\ethm
+
+\brmk
+If $\eta \in \homs(\cg,\, \cg')$ and $\cg$ is nilpotent, then the subalgebra $\eta(\cg) \subset \cg'$ is also nilpotent.
+\ermk
+
+\begin{proof}
+We prove the result for $\G$ nilpotent. We proved that we can always assume $\G = \cg$ endowed with the Baker-Campbell-Hausdorff formula in place of the multiplication law. Notice that
+\[
+\G' = \faktor{\widetilde{\G'}}{D},
+\]
+so we can assume without loss of generality that $\G'$ is also connected and simply connected (up to replacing it with its universal covering). If $u,\, v \in \cg$, then
+\[
+u \cdot v = u + v + \frac{1}{2}[u,\,v] + \sum_{k \geq 3}^\iota c_k(u,\,v) =: S(u,\,v),
+\]
+and we can define
+\[
+\Psi(u) := \exp_{\G'}(\eta(u)).
+\]
+Then
+\[ \begin{aligned}
+\Psi(u) \cdot \Psi(v) & = \exp_{\G'}(\eta(u)) \exp_{\G'}(\eta(v))
+\\[1em] & = \exp_{\G'}(S(\eta(u),\, \eta(v)))
+\\[1em] & = \exp_{\G'}(\eta(S(u,\,v))) = \Psi(u\cdot v),
+\end{aligned} \]
+which means that $\Psi_\ast = \eta$.\end{proof}
+
+\bd[Dilations] \index{dilation}
+A one-parameter family of automorphisms $\{\eta_t\}_{t > 0} \subset \mathrm{Aut}(\cg)$ is a family of {\em dilations} if there exists a basis $\{e_1,\, \dots,\, e_q\}$ of $\cg$ and positive numbers $\lambda_1,\, \dots,\, \lambda_q \in \R_+$ such that
+\[
+\eta_t(e_j) = t^{\lambda_j} e_j.
+\]
+\ed
+
+\bex
+Consider $e_1,\, e_2$ orthonormal basis of $\R^2$ and define
+\[
+\eta_t(e_j) = t^{\lambda_j} e_j,
+\]
+where $\lambda_1 = 1$ and $\lambda_2 = 2$. The trajectories are half-parabolas as in the figure below:
+\eex
+
+\brmk
+We can decompose $\cg$ in such a way that $\lambda_1 < \cdots < \lambda_k$ and
+\[
+\cg = \mathfrak{w}_1 \oplus \cdots \oplus \mathfrak{w}_k,
+\]
+where $\eta_t \, \big|_{\mathfrak{w}_j} = t^{\lambda_j} \mathrm{id}$ for each $j = 1,\, \dots, \, k$. Moreover
+\[
+\eta_{t \cdot s} = \eta_t \circ \eta_s,
+\]
+and since $\eta_t$ is an automorphism of the Lie algebra, we also have that
+\[
+\eta_t([u,\,v]) = [\eta_t u,\, \eta_t v].
+\]
+This property has an immediate consequence, namely if $u \in \mathfrak{w}_j$ and $v \in \mathfrak{w}_\ell$, then the commutator $[u,\,v]$ belongs to $\mathfrak{w}_{j + \ell}$ (which may also coincide with $\{0\}$).
+\ermk
+
+Clearly, $\lambda_j + \lambda_\ell > \max\{\lambda_j,\, \lambda_\ell\}$ so the existence of a family of dilations gives an upper bound on the number of commutators that one can take before it gives zero.
+
+\bpr
+A Lie algebra with a family of dilations is nilpotent.
+\epr
+
+\brmk
+The opposite assertion is not true, but finding a counterexample requires a big effort since one needs commutators sufficiently complicated.
+\ermk
+
+\bex \label{ex.1.232.3}
+Let $e_1,\, e_2,\, e_3$ be vectors in $\R^3$ such that $[e_1,\,e_2] = e_3$. Then
+\[
+\eta_t(e_1) = t^\lambda e_1 \quad \text{and} \quad \eta_t(e_2) = t^\mu e_2
+\]
+implies $\eta_t(e_3) = t^{\lambda + \mu} e_3$. These are the unique dilations for which the $e_i$'s are all eigenvectors.
+\eex
+
+\bd
+If $\cg$ is a nilpotent Lie algebra with dilations $\delta_t$, then $\G = \cg$ endowed with the BCH formula has a family of automorphisms such that
+\[
+(\Psi_t)_\ast = \delta_t,
+\]
+which is usually referred to as {\em dilations of a Lie group}.
+\ed
+
+\section{Graded and stratified Lie algebras}
+
+We start with the definition of a particular class of Lie algebras which is rather important for the consequences the decomposition bears.
+
+\bd
+Let $\cg$ be a nilpotent group. If there exists a vector space decomposition
+\[
+\cg = \cw_1 \oplus \cdots \oplus \cw_k
+\]
+such that
+\[
+[\cw_i, \cw_j] \subseteq \cw_{i+j},
+\]
+then we say that $\cg$ is a {\em graded Lie algebra}\index{Lie algebra!graded}. 
+\ed
+
+\brmk
+Notice that a graded algebra is nilpotent, but it does not determine the step since, for example,
+\[
+\R^3 = \R \oplus \R \oplus \R = \R^2 \oplus \R.
+\]
+\ermk
+
+\bl
+If $\cg$ is a graded Lie algebra, the maps $\eta_t$ defined by setting
+\[
+\eta_t \, \big|_{\cw_j} := t^j \, \mathrm{Id}_{\cw_j}
+\]
+for $j = 1,\dots,k$ give a well-defined family of dilations on $\cg$.
+\el
+
+\bd\index{Lie algebra!stratified}
+If $\cg$ is a graded Lie algebra generated by $\cw_1$, we say that $\cg$ is {\em stratified}.
+\ed
+
+\bex
+The Heisenberg algebra described in \hyperref[ex.1.232.3]{Example \ref{ex.1.232.3}} is stratified if and only if $\lambda = \mu$ since we need both vectors $e_1$ and $e_2$ in $\cw_1$.
+\eex
+
+\bex
+Let $\cg$ be the Lie algebra given by upper-triangular matrices. Then we can take $\mathfrak{w}_j$ to be the subalgebra generated by the matrices with {\bf only} the $j$th over-diagonal nonzero, and this makes $\cg$ a stratified algebra.
+\eex
+
+\bd[Sublaplacian] \index{sublaplacian}
+Let $\cg$ be a stratified Lie algebra. If
+\[
+\mathfrak{w}_1 = \mathrm{Span} \langle e_1,\, \dots,\, e_m \rangle,
+\]
+then we can consider the differential operator
+\[
+- \Delta := - \sum_{j = 1}^m X_j^2.
+\]
+We say that $- \Delta$ is the {\em sublaplacian operator} on $\G$ since it is homogeneous of degree two.
+\ed
+
+\section{Homogeneous norms on Lie groups}
+
+Let $\cg$ be a nilpotent Lie algebra, $\{ \delta_t \}_{t > 0}$ a family of dilations and $\G$ the connected and simply connected Lie group given by $\cg$ equipped with the multiplication law \eqref{bchformula}.
+
+\bd \index{homogeneous norm}
+A {\em homogeneous norm} on $\G$ is a map $|\cdot| : \G \to [0,\,\infty)$ satisfying the following properties: \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item $x\mapsto |x|$ is continuous with respect to the topology on $\G$;
+\item $|x| = 0$ if and only if $x = 0$, the zero vector of $\cg$;
+\item if $\delta_t$ also denotes the dilations on $\G$, then $|\delta_t x| = t |x|$ for all $t > 0$.
+\end{enumerate}
+\ed
+
+We always refer to such a map as {\em homogeneous norm} because often, as we will see shortly, it does not satisfy the triangular inequality and thus it is not a norm.
+
+\brmk
+Let $\cg = \cv_1 \oplus \cdots \oplus \cv_k$ be the decomposition induces by the dilations in such a way that
+\[
+\delta_t \, \big|_{\mathfrak{v}_i} = t^{\lambda_i} \mathrm{Id}_{\cv_i}.
+\]
+If $\|\cdot \|$ is the norm inducing the topology on $\cg$, then it is easy to verify that
+\[
+|x| := \sum_{i = 1}^k \| x_i \|^{\frac{1}{\lambda_i}}
+\]
+is a homogeneous norm. This shows that in ({\romannumeral 1}) continuity is the ``right'' requirement because $|\cdot|$ is not even $C^1$ as soon as $\lambda_i \geq 2$ for some $i$.
+\ermk
+
+\bpr
+A homogeneous norm satisfies a quasi-triangular inequality\index{quasi-triangular inequality}. In other words, there exists a constant $C \geq 1$ such that
+\begin{equation} \label{quasitr}
+|x \cdot y| \leq C(|x| + |y|) \quad \text{for all $x,y\in\G$}.
+\end{equation}
+\epr
+
+\begin{proof}
+The set $B := \{ x \in \G \: : \: |x| \leq 1\}$ is compact and so is $B^2 := B\cdot B$ because the multiplication law is continuous. Consequently, there exists a constant $C \geq 1$ such that
+\[
+B^2 \subseteq \{ x \in \G \: : \: |x| \leq C \},
+\]
+which can be easily rewritten as follows:
+\[
+|x|,\,|y| \leq 1 \implies |x \cdot y| \leq C.
+\]
+Now take $x,\, y \neq 0$ and notice that, if $t := \frac{1}{|x|+|y|}$, then $|\delta_t x| \leq 1$ and $|\delta_t y| \leq 1$. Applying the inequality above shows that
+\[
+|\delta_t x \cdot \delta_t y| \leq C \implies |x \cdot y| \leq \frac{C}{t} = C(|x| + |y|).
+\]
+\end{proof}
+
+\brmk
+It follows from the definition and \eqref{quasitr} that the map $d(x,y) := |x^{-1}\cdot y|$ is a left-invariant homogeneous quasi-distance\index{quasi-distance} (distance if $C = 1$):
+\[
+d(x,y) = d(zx, zy) \quad \text{and} \quad d(\delta_t x, \delta_t y) = t d(x,y).
+\]
+\ermk
+
+Notice that a quasi-distance does not induce another topology on $\G$ in general, and this is the reason why we require $|\cdot|$ to be continuous with respect to the topology of $\G$
+
+\brmk
+The quasi-distance $d$ is, in general, not smooth. However, it is possible to obtain smoothness outside of the origin by taking the Euclidean sphere $S_\cg$ in $\G$ and setting
+\[
+|x| := \frac{1}{t} \quad \text{if $\delta_t x \in S_\cg$.}
+\]
+The reader should check that this is a homogeneous norm which is also smooth by the implicit function theorem (except at $x = 0$).
+\ermk
+
+In {\bf stratified} groups, it is easy to construct a homogeneous norm that satisfies \eqref{quasitr} with constant $C = 1$. For this, let $\cv_1 \oplus \cdots \oplus \cv_k$ be a stratification and write
+\[
+\cv_1 = \mathrm{Span} \langle e_1,\, \dots,\, e_q \rangle.
+\]
+The corresponding vector fields $X_1,\,\dots,\, X_q$ satisfy the H\"{o}rmander condition on $\G$, and hence we can consider the Carnot-Carathéodory distance
+\[
+d(x, y) := \left\{ L_\X(\gamma) \: : \: \text{$\gamma$ horizontal curve joining $x$ and $y$} \right\},
+\]
+where $L_\X$ is the length defined in \hyperref[nonisolength]{Section \ref{nonisolength}}. It is easy to verify that this is a homogeneous distance which is left-invariant and satisfies \eqref{quasitr} with $C=1$.
+
+\bthm[\cite{sik}]
+Every nilpotent connected and simply connected group with dilations has a homogeneous norm which satisfies the triangular inequality (i.e., $C = 1$) and is smooth outside of the origin.
+\ethm
+
+\bpr
+If $|\cdot|$ and $|\cdot|'$ are two homogeneous norm on a Lie group $\G$ equipped with the same family of dilations, then they are equivalent.
+\epr

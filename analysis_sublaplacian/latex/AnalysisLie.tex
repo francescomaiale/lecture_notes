@@ -1,0 +1,787 @@
+\chapter{Fourier Analysis on Lie Groups} \thispagestyle{empty}
+\label{chapter:FouLiegroups}
+
+The main goal of this chapter is to develop Fourier analysis on unimodular Lie groups and investigate fundamental solutions and local solvability of differential operators.
+
+\begin{customthm}{A}
+Let $\G$ be a locally compact and separable group. Then there exists a locally finite left-invariant measure on $\G$, which is unique up to a multiplicative constant.
+\end{customthm}
+
+If $\G$ is a unimodular group, then the convolution of two functions (or a function and a distribution) can easily be defined as in the Euclidean setting replacing $\dr x$ with the Haar measure. Namely, if $\Phi \in \cD'(\G)$ and $f \in C_c(\G)$, one can set
+\[
+\langle \Phi \ast f,\, g \rangle := \langle \Phi, g \ast \check{f} \rangle.
+\]
+We show that several properties valid in the Euclidean setting can be extended to unimodular Lie groups with little effort. Next, we introduce left-invariant differential operators
+\[
+D : C_c^\infty(\cM) \to C^\infty(\cM)
+\]
+and prove two characterizations in terms of polynomials defined on the corresponding Lie algebra. In conclusion, we show that some operators have fundamental solutions:
+
+\begin{customthm}{B}
+Let $Q$ be the homogeneous dimension of $\G$ and let $D$ be a left-invariant operator of homogeneity order $\beta \leq Q$, that is,
+\[
+D(f \circ \delta_t) = t^\beta (Tf) \circ \delta_t.
+\]
+Assume also that $D$ and $\transp{D}$ are hypoelliptic. Then $D$ has a fundamental solution with homogeneity order $-Q + \beta$.
+\end{customthm}
+
+\section{Existence of Haar measures}
+
+In this section, we recall a few properties concerning the existence and uniqueness of left-invariant measures defined on a {\bf topological} group $\G$.
+
+\bd[Radon measure] \index{Radon measure}
+Let $X$ be a Hausdorff topological space. A {\em Radon measure} is a measure on $\cB(X)$ that satisfies the following properties:
+\begin{enumerate}[label=(\roman*), topsep=.05em]
+\item It is finite on all compact sets;
+\item outer regular on all Borel sets; and
+\item inner regular on all open sets.
+\end{enumerate}
+\ed
+
+\bd[Push-forward] \index{measure!push-forward} Let $\mu$ be a positive Radon measure on $\X$, and let $f : \X \to \Y$ be a Borel function. The {\em push-forward} measure of $\mu$ via $f$ is defined by setting
+\[
+f_{\can}\mu(E) := \mu \left( f^{-1}(E) \right) \quad \text{for all $E \in \cB(\Y)$}. 
+\]
+\ed
+
+\brmk
+Let $\left(\X, \, \cB(\X) \right)$ and $\left(\Y, \, \cB(\Y) \right)$ be two measure spaces, and let $\mu$ be a positive Radon measure on $\X$. Then the push-forward $f_\can \mu$ is a well-defined measure on $\cB(\Y)$.
+\ermk
+
+Let $\G$ be a topological group. For any $y \in \G$, we denote by $\ell_y$ the left-multiplication map ($x \mapsto y \cdot x$) and by $r_y$ the right-multiplication map ($x \mapsto x \cdot y^{-1}$).
+
+\bd[Invariant Measure] \index{invariant measure}\index{Haar measure}
+Let $\mu$ be a measure defined on $\G$. We say that $\mu$ is a {\em left-invariant} measure if
+\[
+\left( \ell_y \right)_{\can} \mu = \mu \quad \text{for all $y \in \G$},
+\]
+and a {\em right-invariant} one if
+\[
+\left( r_y \right)_{\can} \mu = \mu \quad \text{for all $y \in \G$}.
+\]
+A measure $\mu$ which is both left-invariant and right-invariant is simply called \textit{invariant}.
+\end{definition}
+
+\bthm \label{theorem:1das}
+Let $\G$ be a compact group. Then there exists a unique left-invariant (or right-invariant) probability measure on $\G$, called {\bf Haar measure}.\index{Haar measure}
+\ethm
+
+We present the proof of this result under the additional assumption $\G$ commutative. The reader will find in \href{http://aurora.asc.tuwien.ac.at/~funkana/downloads_general/sem_kiesenhofer.pdf}{this paper} the proof of the result in the general case.
+
+\begin{proof}[Idea of the proof]
+Let $\G$ be a commutative group, and let $\cP(\G)$ be the space of probability measures defined on $\G$. For a given $g \in \G$, consider
+\[
+\cP_g := \left\{ \mu \in \cP(\G) \: \left| \: \left(\ell_g\right)_{\can} \mu = \mu \right. \right\},
+\]
+the subset of $\cP(\G)$ that contains all the $g$-invariant probability measures.
+
+\proofstep{Step 1} We claim that, for any $g \in \G$, the set $\cP_g$ is nonempty. Fix $\mu_0 \in \cP$ and define, for every $n \in \N$, the probability measure
+\[
+\mu_n := \frac{\mu_0 + \left(\ell_{g} \right)_{\can} \mu_0 + \cdots + \left(\ell_{g^n} \right)_{\can} \mu_0}{n+1} \in \cP(\G),
+\]
+where $g^{n} := g \cdots g$ is the product of $n$ copies of $g$. By compactness, there exists a subsequence $\mu_{n_k}$ weakly$\star$ converging to a measure $\mu_\infty$. It is easy to see that
+\[
+\left(\ell_g \right)_{\can} \mu_{n_k} \to \mu_\infty \implies \left(\ell_g\right)_{\can} \mu_\infty = \mu_\infty,
+\]
+which means that $\mu_\infty$ is $g$-invariant or, in other words, $\mu_\infty \in \cP_g$.
+
+\proofstep{Step 2} Let $g, \, h \in \G$ be two elements, let $\mu_0 \in \cP_g$ be an invariant measure, and let $\mu_\infty$ be the weak$\star$ limit of the sequence
+\[
+\mu_n := \frac{\mu_0 + \left(\ell_{h} \right)_{\can} \mu_0 + \dots + \left(\ell_{h^n} \right)_{\can} \mu_0}{n+1} \in \cP(\G).
+\]
+Since $\cP_g$ is weakly$\star$ closed, we conclude that $\mu_\infty \in \cP_g \cap \cP_h$. An inductive argument proves that the family $\{\cP_g\}_{g \in \G}$ has the finite intersection property which, by compactness, implies
+\[
+\bigcap_{g \in \G} \cP_g \neq \varnothing.
+\]
+
+\proofstep{Step 3} We claim that the intersection above only consists of one element. In order to prove that, we define the ``convolution of two measures'' by setting
+\[
+\mu_1 \ast \mu_2 (E) := \left(\mu_1 \times \mu_2 \right) \left( \{ (x_1, \, x_2) \: \left| \: x_1 + x_2 \in E \right. \} \right).
+\]
+The reader may prove that the convolution is commutative, and also that
+\begin{equation} \label{eq.zz.1}
+\mu_1 \ast \mu_2 = \mu_1,
+\end{equation}
+whenever $\mu_1$ is a left-invariant measure. Now, if $\lambda, \, \mu \in \cap_{g \in \G} \cP_g$ are two invariant measures, then property \eqref{eq.zz.1} implies the uniqueness:
+\[
+\mu = \mu \ast \lambda = \lambda \ast \mu = \lambda \implies \mu = \lambda.
+\]
+\end{proof}
+
+\bthm \label{thm.invmes}
+Let $\G$ be a locally compact and separable group. Then there exists a locally finite left-invariant measure on $\G$, unique up to a multiplicative constant.
+\ethm
+
+A proof of this theorem can be found in most geometric measure theory books, but for a quick overview the reader may consult \href{http://simonrs.com/HaarMeasure.pdf}{this paper}.
+
+\brmk
+Notice that \hyperref[thm.invmes]{Theorem \ref{thm.invmes}} gives the existence of a left-invariant measure $\mu$ and, with a similar proof, of a right-invariant measure $\lambda$. However, in general $\lambda \neq \mu$.
+\ermk
+
+\bd[Unimodular] \index{unimodular group}
+A locally compact and separable group $\G$ whose left-invariant measure is right-invariant is called {\em unimodular}.
+\ed
+
+We can immediately give a characterization of unimodular Lie groups in terms of the determinant of the adjoint representation; we first start off with a few definitions.
+
+\bd[Adjoint] \index{adjoint representation!of a Lie group}
+Let $\G$ be a Lie group and let
+\[
+\Psi : \G \to \mathrm{Aut}(\G)
+\]
+be the mapping that sends $g$ to $\Psi_g$, where $\Psi_g$ is the inner automorphism $h \mapsto g h g^{-1}$. The {\em adjoint map} is defined as
+\[
+\Ad_g = \mathrm{d} (\Psi_g)_e : \cg \to \cg
+\]
+using the identification $T_e \G \cong \cg$. The corresponding mapping
+\[
+\Ad : \G \ni g \longmapsto \Ad_g \in \mathrm{Aut}(\cg)
+\]
+is called {\em adjoint representation} of the group $\G$.
+\ed
+
+\bd[Adjoint] \index{adjoint representation!of a Lie algebra}
+Let $\cg$ be a Lie algebra over some field. Given $x \in \cg$ we can define the {\em adjoint action}\index{adjoint action} as
+\[
+\ad_x : \cg \ni y\longmapsto [x,y] \in \cg.
+\]
+Since the bracket is bilinear, this determines a linear mapping
+\[
+\ad : \cg \ni x \longmapsto \ad_x \in \End(\cg),
+\]
+which is usually called {\em adjoint representation} of the Lie algebra $\cg$.
+\ed
+
+\brmk
+A Lie group $\G$ is unimodular if and only if
+\[
+\left| \mathrm{det}(\Ad_g) \right| = 1 \quad \text{for all $g \in \G$}.
+\]
+For a connected Lie group $\G$, this is equivalent to requiring that the trace of $\ad_g$ is zero for all $g \in \cg$, as the reader might show to practice.
+\ermk
+
+\brmk
+The following classes of groups are unimodular: \mbox{}
+\begin{enumerate}[label=(\alph*), itemsep=.1em]
+\item compact groups;
+\item discrete groups;
+\item commutative locally compact groups;
+\item connected reductive Lie groups;
+\item locally compact nilpotent groups (in particular, nilpotent Lie groups).
+\end{enumerate}
+\ermk
+
+\bcor
+If $\G$ is unimodular and $\dr x$ is the invariant measure, then
+\[
+\int_\G f(x) \, \dr x = \int_\G f(x^{-1}) \, \dr x.
+\]
+\ecor
+
+Now let $\G$ be a nilpotent, connected and simply connected Lie group endowed with the BCH-coordinates (also known as {\em canonical coordinates of the first kind})\index{canonical coordinates of the first kind} and let
+\[
+\cg = \cg_0 \supset \cg_1 \supset \cdots \supset \cg_m = \{0\}
+\]
+be the {\em central descent sequence} given by the derivate groups. Let $\cv_1,\,\dots,\,\cv_m$ be linear spaces such that the following decomposition holds for all $0 \leq k \leq m-1$:
+\[
+\cg_k = \cg_{k+1} \oplus \cv_{k+1}.
+\]
+Then $\cg = \cv_1 \oplus \cdots \oplus \cv_m$ and $x \in \cg$ can be written as a $m$-tuple $(x_1,\dots,x_m)$ with $x_k \in \cv_k$ for all $k = 1,\dots,m$. Consequently, the product between any two elements is given by
+\[ \begin{aligned}
+x \cdot y = \Bigg(x_1 + y_1, x_2 + y_2 &+ \frac{1}{2}[x_1,y_1], \dots, x_k + y_k + P_k(x_1,\dots,x_{k-1},\,y_1,\dots,y_{k-1}),
+\\[1em]& \dots, x_m + y_m + P_m(x_1,\dots,x_{m-1},y_1,\dots,y_{m-1}) \Bigg),
+\end{aligned}\]
+where each $P_j$ is a polynomial of order $j$. Let $\dr x$ be the Lebesgue measure on $\cg$ (which is a linear space) and notice that the change of variables formula implies
+\[
+\int_\G f(a \cdot x) \, \dr x = \int_\G f(x) \, \dr x.
+\]
+This is easy to check because we can change one variable at a time starting from the last one ($x_m$). The reason is that, if we look at the formula above we have
+\[
+x_m + y_m + P_m(x_1,\,\dots,\,x_{m-1},\,y_1,\,\dots,\,y_{m-1}),
+\]
+and this depends {\bf linearly} on $x_m$ (that is, equal to $x_m + c$). We now summarize the result we obtained here in the following proposition: 
+
+\bpr
+Let $\G$ be a nilpotent, connected and simply connected Lie group. Then the Lebesgue measure is invariant (both left and right).
+\epr
+
+\brmk
+We can use the exponential map to introduce the so-called {\em canonical coordinates of the second kind}\index{canonical coordinates of the second kind}. Let $\cg = \cv_1 \oplus \cdots \oplus \cv_m$ and consider the mapping
+\[
+\Phi(x_1,\dots,x_m) := \exp_\G (x_1) \cdots \exp_\G (x_m).
+\]
+Then $\Phi$ is a local diffeomorphism, which can be used to parametrize $\G$ via coordinates which are the ones we just mentioned.
+\ermk
+
+\subsection{Homogeneous dimension}
+
+Let $\G$ be a homogeneous group, let $\cg = \cv_1 \oplus \cdots \oplus \cv_m$ be the decomposition induced by the family of dilations $\{\delta_t\}_{t > 0}$ and $\dr x$ the Haar measure. Then it is easy to verify that
+\begin{equation} \label{eq.zz.12}
+\int_\G f(\delta_t x) \, \mathrm{d}x = t^{-Q} \int_\G f(x) \, \mathrm{d}x,
+\end{equation}
+where $Q$ is the so-called {\em homogeneous dimension of $\G$}\index{homogeneous dimension} given by the sum
+\[
+Q = \sum_{i = 1}^m \lambda_i \, \dim (\cv_i),
+\]
+where $\delta_t \, \big|_{\cv_i} \equiv t^{\lambda_i} \, \mathrm{id}_{\cv_i}$. Using $f = \chi_A$ as a test function in \eqref{eq.zz.12} gives the identity
+\[
+\mu(\delta_t A) = t^Q \mu(A) \quad \text{for all $A \subseteq \G$}.
+\]
+Furthermore, the integral
+\[
+\int_{|x|<1} |x|^{-\alpha} \, \dr x
+\]
+converges if and only if $\alpha < Q$. This ``shows'' that the homogeneous dimension plays the role of the topological dimension in Lie groups equipped with a Haar measure.
+
+\section{Convolution on Lie groups}
+
+Let $\G$ be a {\bf unimodular} Lie group, $\dr y$ the invariant measure and $f,\,g \in C_c(\G)$. The {\em convolution}\index{Lie group!convolution} of $f$ and $g$ is the function defined by setting
+\[
+f \ast g(x) := \int_\G f(x \cdot y^{-1}) g(y) \, \dr y.
+\]
+A simple change of variables shows that
+\[
+f \ast g(x) = \int_\G f(y) g(y^{-1} \cdot x) \, \dr y,
+\]
+but this is different from the convolution
+\[
+g \ast f(x) = \int_\G f(y) g(x\cdot y^{-1}) \, \dr y.
+ \]
+The reason is that the product $y^{-1}\cdot x$ is not equal anymore to $x \cdot y^{-1}$ for all $x,\,y \in \G$ unless the group is commutative. We can actually prove a stronger characterization:
+
+\bpr
+The convolution is commutative on $C_c(\G)$ if and only if $\G$ is abelian.
+\epr
+
+\begin{proof}
+One implication is trivial. Therefore, assume that that $\G$ is not abelian and take any two points $x,y \in \G$ such that
+\[
+x\cdot y \neq y\cdot x.
+\]
+Let $U_1$ and $U_2$ be neighborhoods of $x$ and $y$ respectively which are disjoint. By continuity of the product, we can always find $V_1 \ni x$ and $V_2 \ni y$ such that
+\[
+V_1 \cdot V_2 \subseteq U_1 \quad \text{and} \quad V_2 \cdot V_1 \subseteq U_2.
+\]
+If $f \in C_c(V_1)$ and $g \in C_c(V_2)$, the well-known supports inclusions
+\[
+\mathrm{spt}(f \ast g) \subseteq \mathrm{spt}(f) \cdot \mathrm{spt}(g) \subseteq U_1 \quad \text{and} \quad \mathrm{spt}(g \ast f) \subseteq \mathrm{spt}(g) \cdot \mathrm{spt}(f) \subseteq U_2
+\]
+show that $f \ast g \neq g \ast f$ as they are supported on disjoint sets.
+\end{proof}
+
+\brmk
+If $f \in C_c^\infty(\G)$ and $g \in C_c(\G)$, then the convolution belongs to $C_c^\infty(\G)$ and
+\[
+X_j(f \ast g) = (X_j f) \ast g.
+\]
+\ermk
+
+\bd
+Let $\mu$ be a Radon measure on $\G$ and let $f \in C_c(\G)$. The convolution between these two objects is defined as follows:
+\[
+f \ast \mu(x) := \int_\G f(x \cdot y^{-1}) \, \dr \mu(y).
+\]
+In a similar fashion, one can define
+\[
+\mu \ast f(x) := \int_\G f(y^{-1} \cdot x) \, \dr \mu(y).
+\]
+\ed
+
+\brmk
+If $\mu := \delta_a$ is the Dirac delta, then it is easy to verify that
+\[
+f \ast \delta_a(x) = \int_\G f(x \cdot y^{-1}) \delta_a(y) \, \dr y = f(x\cdot a^{-1}) = R_{a^{-1}} f(x),
+\]
+and, similarly,
+\[
+\delta_a \ast f(x) = \int_\G f(y^{-1} \cdot x) \delta_a(y) \, \dr y = f( a^{-1} \cdot x) = L_a f(x).
+\]
+This means that for finite Radon measures $\mu$ and $\nu$ we can define the convolution as
+\[
+\int_\G f(x) \, \dr(\mu\ast\nu)(x) = \int_\G \int_\G f(x\cdot y) \, \dr \mu(x) \dr \nu(y)
+\]
+in such a way that the identity $\delta_a \ast \delta_b = \delta_{a \cdot b}$ holds.
+\ermk
+
+\bd
+Let $\Phi \in \D'(\G)$ be a distribution. Then we can define the left and right translations by setting
+\[\begin{aligned}
+& \langle L_a \Phi,\, f \rangle := \langle \Phi, L_{a^{-1}} f \rangle,
+\\[1em] & \langle R_a \Phi,\, f \rangle := \langle \Phi, R_{a^{-1}} f \rangle.
+\end{aligned}\]
+\ed
+
+The convolution between a distribution $\Phi \in \cD'(\G)$ and a function $f \in C_c(\G)$ is defined in the usual way by setting
+\[
+\langle \Phi \ast f,\, g \rangle := \langle \Phi, g \ast \check{f} \rangle,
+\]
+where $\check{f}(x) := f(x^{-1})$. Notice that the order of $g \ast \check{f}$ is important since $\G$ might not be commutative. It is easy to verify that $\Phi \ast f$ is actually a function defined by
+\[
+\Phi \ast f(x) = \langle \Phi, L_x \check{f} \rangle
+\]
+and, similarly,
+\[
+f \ast \Phi(x) = \langle \Phi, R_{x^{-1}} \check{f} \rangle.
+\]
+
+\brmk We can define the convolution between two distributions in a similar fashion, but there is something to take into account now. Since $\Phi \ast f$ is a function, to define
+\[
+\langle \Psi, \Phi \ast f \rangle,
+\]
+we need $\Phi \ast f$ to be {\bf compactly supported}. Therefore,
+\[
+\langle \Psi \ast \Phi, f \rangle := \langle \Psi, \check{\Phi} \ast f \rangle
+\]
+is well-defined provided that, for example, $\Psi \in \D'(\G)$, $f \in C_c(\G)$ and $\Phi$ is a compactly supported distribution.
+\ermk
+
+\subsection{Schwartz spaces}
+
+Defining $\cS(\G)$ for a general Lie group $\G$ is hard, but if we require nilpotent (connected and simply connected), then we can identify it with $\cg$ via \eqref{bchformula} and write
+\[
+\cS(\G) := \cS(\cg),
+\]
+where $\cg \cong \R^N$ for some $N \in \N$. That said, there are two problems we need to take care of: \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item The derivatives are rapidly decreasing, but what can we say about $X_j f$?
+\item The estimate asserts that 
+\[
+|\partial^\alpha f(x)| = o(|x|^{-M}),
+\]
+however, the norm $|\cdot|$ is the Euclidean one. What is the relation with the homogeneous norm on $\G$, if $\G$ is homogeneous?
+\end{enumerate}
+The problem ({\romannumeral 1}) is easy to solve since we can always write
+\[
+X_j f(x) = \partial_{x_j} f(x) + \sum a_{jk}(x) \partial_{x_k} f(x),
+\]
+where $a_{jk}$ is a {\bf polynomial function} that vanishes at the origin for each $k$. Since $a_{jk}$ is a polynomial, we easily infer that
+\[
+|\partial^\alpha f(x)| = o(|x|^{-M}) \implies |X_{j_1} \cdots X_{j_k} f(x)| = o(|x|^{-M}).
+\]
+The problem ({\romannumeral 2}), on the other hand, is harder to deal with and outside the scopes of this course.
+
+
+
+\section{Left-invariant differential operators}
+
+The goal of this section is to characterize left-invariant differential operators on Lie groups, but we first need to recollect some definitions on manifolds.
+
+\bd \index{differential operator!on a manifold}
+Let $\cM$ be a manifold. A {\em differential operator} on $\cM$ is a map
+\[
+D : C_c^\infty(\cM) \to C^\infty(\cM)
+\]
+such that we can write
+\[
+Df ( \varphi(t) ) = \sum_{|\alpha| \leq m} a_\alpha(t) \partial_t^\alpha (f \circ \varphi)(t)
+\]
+for all $f \in C_c^\infty(\cM)$ and all local coordinates $\varphi$, where $a_\alpha$ are $C^\infty(\cM)$ coefficients.
+\ed
+
+\bd
+Let $D$ be a differential operator on a manifold $\cM$ and fix $x_0 = \varphi(t_0)$ for some local coordinate $\varphi$. Then the {\em order of $D$ at $x_0$} is
+\[
+\ord(D,x_0) := \inf \left\{ k \in \N \: : \: \text{$a_\alpha \equiv 0$ for all $\alpha \: : \: |\alpha|=k+1$} \right\}.
+\]
+\ed
+
+\bexe
+Show that the order $\ord(D,x_0)$ does not depend on the choice of the local coordinate around $x_0$.
+\eexe
+
+\bthm[Peetre] \index{Peetre theorem}\label{petreetheorem}
+Let $\cM$ be a manifold. A linear operator $D : C_c^\infty(\cM) \to C^\infty(\cM)$ is a differential operator if and only if
+\[
+\spt(Df) \subseteq \spt(f) \quad \text{for all $f \in C_c^\infty(\cM)$}.
+\]
+\ethm
+
+The proof of this result is far beyond the purpose of this course. For more information, see the original articles \cite{pe1}, \cite{pe2} and the related works.
+
+\bd \index{differential operator!left-invariant}
+Let $\G$ be a Lie group and $D$ a differential operator. We say that $D$ is {\em left-invariant}, and we write $D \in \sD(\G)$, if
+\[
+D(L_x f) = L_x (Df).
+\]
+\ed
+
+\bthm\label{thm.ppp.2}
+Let $\cg$ be a Lie algebra and let $p(t)$ be a polynomial on $\cg$. Define
+\[
+D_p f(x) := p(\partial_t) \, \Big|_{t=0} \, f(x \exp_\G(t))
+\]
+for $x \in \G$. Then $D_p$ is a left-invariant differential operator and, conversely, given $D \in \sD(\G)$ there exists a unique polynomial $p$ such that $D = D_p$.
+\ethm
+
+\begin{proof}
+First, we notice that $D_p$ is linear so by \hyperref[petreetheorem]{Theorem \ref{petreetheorem}} to prove that $D_p$ is a differential operator it suffices to show that
+\[
+x \notin \spt(f) \implies x \notin \spt(D_p f).
+\]
+This is trivial because there exists $\delta > 0$ such that for all $|t| < \delta$ one has $f(x \exp_\G(t)) = 0$ and, given that $p(\partial_t) \, \Big|_{t=0} \, f(x \exp_\G(t))$ depends only on small values of $|t|$, we conclude that
+\[
+D_p f(x') = 0 \quad \text{for all $x'$ in a neighbourhood of $x$}.
+\]
+To check that $D_p$ is left invariant we simply notice that
+\[ \begin{aligned}
+D_p(L_y f)(x) & = p(\partial_t) \, \Big|_{t=0} \left( L_{(y^{-1}\cdot x)^{-1}} f \circ \exp_\G(t) \right)(0)
+\\[1em] & = L_y (D_p f)(x),
+\end{aligned} \]
+and this concludes the proof of the first part. Now let $D \in \sD(\G)$ and take the local chart around the origin $\varphi = \exp_\G$ so that the identity
+\[
+Df (\varphi(t)) = \sum_{|\alpha| \leq k} a_\alpha(t) \partial^\alpha(f \circ \varphi)(t)
+\]
+implies, by setting $t = 0$, that
+\[
+Df (e) = D_p f (e) \quad \text{where $p(t) = \sum_{|\alpha| \leq k} a_\alpha(0) t^\alpha$}.
+\]
+This is enough to conclude because both $D$ and $D_p$ are left-invariant and hence
+\[
+Df (x) = D_p f (x)\quad \text{for all $x \in \G$.}
+\]
+\end{proof}
+
+\brmk
+This shows that the order of $D$ does not depend on the point $x \in \G$ and is equal to the degree of the polynomial $p$ such that $D = D_p$.
+\ermk
+
+There is a different characterisation of these differential operators that requires the introduction of left-invariant vector fields. Let $(X_1,\,\dots,\,X_n)$ be a basis of $\cg$ and set
+\[
+X^\alpha := X_1^{\alpha_1} \cdots X_n^{\alpha_n}.
+\]
+
+\bthm[Poincaré-Birkhoff-Witt] \label{theorempbw}
+Let $D \in \sD(\G)$. Then $D$ admits a unique decomposition of the form
+\[
+D = \sum_{|\alpha| \leq k} c_\alpha X^\alpha =: \widetilde{D}_p,
+\]
+where $p(t) = \sum_{|\alpha| \leq k} c_\alpha t^\alpha$.
+\ethm
+
+\begin{proof}The reader may consult \cite{aas1} or the references therein. \end{proof}
+
+\brmk
+Let $p = \sum_{|\alpha| \leq k} c_\alpha t^\alpha$. The operator $\widetilde{D}_p$ introduced above can also be written as follows:
+\[
+\widetilde{D}_p = p(\partial_{t'}) \, \Big|_{t' = 0} \, f(x \exp_\G(t_1' X_1)  \cdots \exp_\G( t_n' X_n)).
+\]
+Therefore, using the chart $\psi(t') := \exp_\G(t_1' X_1) \cdots \exp_\G(t_n' X_n)$, we have
+\[
+\widetilde{D}_p = p(\partial_{t'}) \, \Big|_{t' = 0} \, (L_{x^{-1}}f) \circ \psi(t').
+\]
+Similarly, if we  consider the chart $\varphi(t) = \exp_\G(t_1 X_1 + \cdots + t_n X_n)$, we can write
+\[
+D_p f(x) = p(\partial_t) \, \Big|_{t = 0} \, (L_{x^{-1}}f) \circ \varphi(t).
+\]
+The change of coordinates is $t = \varphi^{-1} \circ \psi(t') = t' + \mathcal{O}(|t'|^2)$, and thus we can write
+\[
+\partial_{t'}^\alpha (g \circ u)(0) = \partial_{t}^\alpha (g \circ u)(0) + \cdots,
+\]
+which means that $\widetilde{D}_p$ and $D_p$ coincide up to lower order terms.
+\ermk
+
+\begin{proof}[Proof of Theorem \ref{theorempbw}]
+By induction on the degree of $p$. The base case is trivial, so we can assume that it holds for all $j < k$. By \hyperref[thm.ppp.2]{Theorem \ref{thm.ppp.2}} we can write
+\[
+D = D_p
+\]
+for some polynomial of order $k$. Then
+\[
+D_p - \widetilde{D}_p = D_{< k},
+\]
+where $D_{< k}$ is a differential operator of order strictly less than $k$. By inductive hypothesis, there exists a polynomial $q$ of degree $<k$ such that $D_{<k}' = \widetilde{D}_q$. It follows that
+\[
+D = D_p = \widetilde{D}_p + \widetilde{D}_q = \widetilde{D}_{p+q},
+\]
+and this concludes because $\deg(p+q) = k$.
+\end{proof}
+
+\bd \index{universal enveloping algebra}
+Let $\cg$ be a Lie algebra and $T(\cg)$ be the tensor algebra. The {\em universal enveloping algebra} $U(\cg)$ is defined by the quotient
+\[
+\faktor{T(\cg)}{\langle x \otimes y - y \otimes x - [x,\,y]\rangle}.
+\]
+\ed
+
+\bthm
+Let $\cg$ be a Lie algebra. Then $U(\cg)$ is isomorphic to $\sD(\G)$, where $\G$ is the unique connected and simply connected Lie group.
+\ethm
+
+\begin{proof} See \cite{aas1} and the references therein. \end{proof}
+
+\section{Solvability of left-invariant differential operators}
+
+We first recall the definition of locally solvable operator (at some point) in a manifold and then specialise it to Lie groups.
+
+\bd \index{locally solvable!on a manifold}
+Let $D$ be a differential operator on a manifold $\cM$. We say that $D$ is {\em locally solvable} at $x \in \cM$ if for all $k \in \N$ there exists $V_k \ni x$ neighbourhood such that
+\[
+\forall \psi \in \cD'(\cM), \, \exists \, u \in D_k'(V_k) \: : \: Du = \psi \quad \text{on $V_k$}.
+\]
+\ed
+
+We now recall a critical result that holds when $\cM = \R^n$ is the Euclidean space, which asserts that fundamental solutions exist for certain operators.
+
+\bthm[Malgrange–Ehrenpreis]
+Let $L$ be a linear differential operator with constant coefficients. Then there exists $\Phi \in \D^\prime(\R^n)$ satisfying
+\[
+L\psi = \delta_0.
+\]
+\ethm
+
+\bcor
+Linear differential operators with constant coefficients are locally solvable.
+\ecor
+
+Notice that linear differential operators with constant coefficients can be replaced with $\sD(\R^n)$, which means that one might expect the following result to be true:
+
+{\color{red}\bpr
+Every $D \in \sD(\G)$ is locally solvable.
+\epr}
+
+Unfortunately, this statement is {\bf false} for a general Lie group $\G$. Consider, for example, the Haus Levy's operator in $\R^3$ with coordinates $(x,y,t)$ given by
+\[
+L =\left( \frac{1}{2} \partial_x + y \partial_t \right) + \imath \left( \frac{1}{2} \partial_y - x \partial_t \right) =: X + \imath Y
+\]
+Notice that $[X,\,Y] = - \partial_t =: T$ and $\{ X,\, Y,\, T \}$ span $\R^3$ at all points $(x,y,t)$. Then $L \in \sD(H)$, where $H$ is the Heisenberg group, but we know that $L$ is not locally solvable.
+
+\bd
+Let $\G$ be a Lie group and $D$ a differential operator. A fundamental solution is $K \in \D'(\G)$ such that
+\[
+DK = \delta_e,
+\]
+where $e$ is the identity element of $\G$.
+\ed
+
+\bpr
+If there is a fundamental solution $K$ for $D \in \sD(\G)$, then it is locally solvable.
+\epr
+
+\begin{proof} Let $\varphi \in \D'(\G)$ with compact support. Let $u = \varphi \ast K$ (the order here is important) and notice that
+\[ \begin{aligned}
+Du(x) & = D(\varphi \ast K)(x)
+\\[1em] & = \int \varphi(y) D_x K(y^{-1}\cdot x) \, \mathrm{d} y
+\\[1em] & = \int \varphi(y) D_x (L_y K)(x) \, \mathrm{d} y
+\\[1em] & = \int \varphi(y) L_y(D_x K)(x) \, \mathrm{d} y = \varphi \ast D K(x).
+\end{aligned} \] \end{proof}
+
+\bpr
+A differential operator $D \in \sD(\G)$ is locally solvable if and only if there exists a local fundamental solution, namely there exists $V_0 \ni e$ neighbourhood and $K \in D_0'(V_0)$ such that
+\[
+DK = \delta_e \quad\text{on $V_0$}.
+\]
+\epr
+
+\bpr
+If $D \in \sD(\G)$ is hypoelliptic, then $\transp{D}\in\sD(\G)$ and it admits a local fundamental solution.
+\epr
+
+Now let $\G$ be a homogeneous Lie group with a family of dilations $\{\delta_s\}_{s > 0}$ and write $\cg = \sum_\lambda \cg_\lambda$ in such a way that
+\[
+\delta_s \, \big|_{\cg_\lambda} \equiv s^\lambda \mathrm{Id}.
+\]
+We would like to find sufficient conditions on a left-invariant differential operator $D$ for a fundamental solution to exist.
+
+\bd\index{distribution!homogeneous}
+A distribution $\phi \in \cD'(\G)$ is {\em homogeneous} of order $\alpha$ if
+\[
+\phi \circ \delta_s = s^\alpha \phi,
+\]
+where the left-hand side is defined by
+\[
+\langle \phi \circ \delta_s, f \rangle = \langle \phi, s^{-Q} f \circ \delta_{s^{-1}} \rangle.
+\]
+\ed
+
+\brmk \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item The Dirac delta at the origin $0 \in \G$ (using the BCH coordinates), $\delta_0$, is homogeneous of order $- Q$.
+\item If $\phi$ is homogeneous of order $\alpha$ and $X \in \cg_\lambda$, then $X \phi$ has homogeneity order $\alpha - \lambda$.
+\end{enumerate}
+\ermk
+
+\bd
+Let $Tf := f \ast K$ be the convolution operator. We say that $T$ is homogeneous of order $\beta$ if
+\[
+T(f \circ \delta_s) = s^\beta (Tf) \circ \delta_s
+\]
+so that, if $T = \mathrm{Id}$, then the order is zero.
+\ed
+
+\brmk \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item If $T = X \in \cg_\lambda$, then the homogeneity order of $T$ is equal to $\lambda$.
+\item $T$ is homogeneous of order $\beta$ if and only if $K$ is homogeneous of order $-Q-\beta$.
+\item If $T$ is homogeneous of order $\beta$ and $U$ is homogeneous of order $\alpha$, the composition $TU$ has homogeneity order $\alpha + \beta$.
+\end{enumerate}
+\ermk
+
+\bd\index{operator!homogeneous}
+A differential operator $D$ is homogeneous of order $\beta$ if
+\[
+D(f \circ \delta_s) = s^\beta (Df) \circ \delta_s.
+\]
+\ed
+
+\bex
+Let $D$ be a differential operator homogeneous of order $\beta$ and let $K$ be a homogeneous fundamental solution for $D$. Since
+\[
+DK = \delta_0,
+\]
+we can consider the convolution operator $Tf = f \ast K$ and find that
+\[
+D(Tf) = f \implies DT = \mathrm{Id}.
+\]
+It is easy to verify that, at this point, the unique possibility is that $K$ is homogeneous of order $-Q+\beta$.
+\eex
+
+\bex
+If $\G = \R^n$ and $D = \Delta$, then a fundamental solution must have homogeneity order $- n + 2$ and hence it must be
+\[
+\frac{c}{|x|^{n-2}}
+\]
+for $n \geq 3$. If $n = 2$, then there is no homogeneity and it can be proved that a fundamental solution for the Laplace operator is
+\[
+c \log |x|.
+\]
+\eex
+
+\bex
+Let $D = \partial_t - \Delta_x$ be the heat kernel on $\R \times \R^n$ and consider the dilations 
+\[
+\delta_s(t,x) = (s^2t,sx).
+\]
+Then the operator has homogeneity order equal to two and
+\[
+K(t,x) := \begin{cases} \frac{1}{(2 \pi t)^{\frac{n}{2}}} \e^{- \frac{|x|^2}{4t}} & \text{if $t > 0$}, \\0 & \text{otherwise}, \end{cases}
+\]
+is a fundamental solution. Since $\delta_s(t,x) = (s^2 t,sx)$ we have that
+\[
+K(s^2 t,sx) = s^{-n} K(t,x) \implies \text{the homogeneity order of $K$ is $n$.}
+\]
+\eex
+
+\bthm \label{thm.fshl2}
+Let $Q$ be the homogeneous dimension of $\G$ and suppose that \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item $D$ is a left-invariant operator of homogeneity order $\beta \leq Q$;
+\item $D$ and $\transp{D}$ are hypoelliptic.
+\end{enumerate}
+Then $D$ has a fundamental solution with homogeneity order $-Q + \beta$.
+\ethm
+
+\begin{proof}
+The operator $D$ has a fundamental solution $K$ defined on some neighborhood $V$ of the origin $0 \in \G$. Since $D$ is hypoelliptic, from
+\[
+DK = 0 \quad \text{on $V \setminus\{0\}$}
+\]
+we infer that $K$ must be smooth away from the origin. Let $\eta \in \cD(V)$ be a cutoff function taking values in $[0,1]$ and set
+\[
+K_1 := \eta K.
+\]
+Then $K_1$ is defined on all $\G$, smooth away from $0$, and satisfies the equation
+\[
+DK_1 = \delta_0 + \Phi,
+\]
+where $\Phi$ is compactly supported in a set that does not contain the origin. Notice that, once again, the hypoellipticity of $D$ implies $\Phi \in \cD(\G)$.
+
+\proofstep{Step 1} Fix a homogeneous norm $|\cdot|$ on $\G$. Then
+\[
+\spt( \Phi ) \subset \{x \: : \: a < |x| < b\}
+\]
+and, if we define $K_t := t^{\beta-Q} K_1 \circ \delta_{t^{-1}}$ and $\Phi_t := t^{-Q} \Phi \circ \delta_{t^{-1}}$, we also find that
+\[
+D K_t = t^{-Q} (D K_1) \circ \delta_{t^{-1}} = \delta_0 + \Phi_t
+\]
+because $\delta_0$ has degree of homogeneity equal to $-Q$ (as verified above). Since
+\[
+\spt(\Phi_t) = \delta_t \left( \spt (\Phi) \right) \subset \{ x \: : \: ta < |x| < tb \}
+\]
+we easily infer that $K_t$ is another local fundamental solution of $D$. Moreover, given that
+\[
+\lim_{t \to \infty} \Phi_t = 0
+\]
+in the sense of distributions, it is sufficient to prove that $\lim_{t \to \infty}K_t = K$ exists as a distribution to conclude that $K$ is a fundamental solution for $D$. If such $K$ exists, then
+\[
+s^{Q-\beta} K \circ \delta_s= \lim_{t \to \infty} s^{Q-\beta} K_t \circ \delta_s = \lim_{t \to \infty} K_{t/s} = K
+\]
+shows that it is homogeneous of degree $-Q+\beta$ as claimed.
+
+\proofstep{Step 2} Let $t > 1$. We would like to write $K_t$ as
+\[
+K_t = K_1 + \int_1^t \frac{\dr K_s}{\dr s} \, \dr s,
+\]
+but, a priori, the integrand might not be a well-defined distribution. To prove it, we start with noticing that for $\varphi \in \cD(\G)$ we have the identity
+\[ \begin{aligned}
+\lim_{s \to 1} \frac{1}{s-1} \langle K_s - K_1,\varphi\rangle & = \lim_{s \to 1} \frac{1}{s-1} \langle K_1, s^\beta \varphi \circ \delta_s - \varphi \rangle
+\\[1em] & = \left\langle K_1, \frac{\dr}{\dr s} \, \bigg|_{s=1} (s^\beta \varphi \circ \delta_s) \right\rangle.
+\end{aligned} \]
+Let $(x_1,\dots,x_n)$ be coordinates of $\G$ such that $\delta_s x = (s^{\lambda_1} x_1,\dots,s^{\lambda_n}x_n)$. Then
+\[
+\frac{\dr}{\dr s} \, \bigg|_{s=1} \varphi(\delta_s x) = \sum_{j=1}^n \left( \lambda_j \partial_{x_j} \varphi(x) \right) x_j = E \varphi(x),
+\]
+where $E$ is called {\em modified Euler operator}. It follows that
+\[
+\frac{\dr }{\dr s} \, \bigg|_{s=1} \langle K_s, \varphi \rangle = \langle K_1, \beta \varphi + E \varphi \rangle,
+\]
+which immediately gives the identity
+\[
+K_1' = \beta K_1 + \transp{E}K_1 = (\beta-Q)K_1 - E K_1.
+\]
+To prove that $K_1'$ is smooth (i.e., it belongs to $\cD(\G)$) simply notice that
+\[
+D K_1' = \frac{\dr}{\dr s} \, \bigg|_{s=1} (D K_s) = - Q \Phi - E \Phi,
+\]
+which is a smooth function. Since $D$ is hypoelliptic, $K_1'$ is smooth on $\G$ and it has compact support.
+
+\proofstep{Step 3} For any $s > 1$ we have
+\[ \begin{aligned}
+ \frac{\dr K_s}{\dr s} & = s^{-1}  \frac{\dr}{\dr u} \, \bigg|_{u=1} K_{su}
+ \\[.6em] & = s^{-1} s^{\beta-Q}  \frac{\dr}{\dr u} \, \bigg|_{u=1} K_{u} \circ \delta_{s^{-1}}
+ \\[.6em] & = s^{\beta-Q-1} K_1' \circ \delta_{s^{-1}}.
+\end{aligned} \]
+If $\varphi \in \cD(\G)$, then
+\[
+\int_1^t \langle s^{\beta-Q-1} K_1' \circ  \delta_{s^{-1}}, \varphi \rangle = \int_1^t s^{\beta-Q-1} \int_\G K_1'(\delta_{s^{-1}} x) \varphi(x) \, \dr x \dr s.
+\]
+Since $\beta < Q$, we have
+\[
+\int_1^t s^{\beta-Q-1} \int_\G |K_1'(\delta_{s^{-1}} x)| |\varphi(x)| \, \dr x \dr s \leq C \|\varphi\|_{L^1(\G)},
+\]
+showing that the integral is actually well-defined in the sense of distributions as $t \to \infty$.
+
+\proofstep{Step 4} The smoothness of $K$ away from zero follows from the hypoellipticity of $D$, or alternatively, from the fact that for all $x \neq 0$ we have
+\[
+K(x) = K_1(x) + \int_1^\infty s^{\beta-Q-1} K_1'(\delta_{s^{-1}} x) \, \dr s.
+\]
+
+\proofstep{Step 5} For the uniqueness, let $K$ and $H$ be two $(-Q+\beta)$-homogeneous fundamental solutions for $D$. Then
+\[
+D(K - H) = 0
+\]
+gives, by hypoellipticity, that $K - H \in C^\infty(\G)$, which is impossible because it is homogeneous of order $- Q + \beta$ which is always negative.
+\end{proof}
+
+\brmk
+If $D = X + \imath Y$ is the Levi's operator on the Heisenberg group, it is easy to see that $D$ is not hypoelliptic and hence it is not a counterexample to \hyperref[thm.fshl2]{Theorem \ref{thm.fshl2}}.
+\ermk
+
+\bex
+If $\G$ is stratified and $\cg = \cg_1 \oplus \cdots \oplus \cg_k$ with $\{X_1,\dots,X_k\}$ basis, then
+\[
+D = \sum_{j=1}^k X_j^2
+\]
+is homogeneous of order two. Therefore, for all $Q \geq 3$ we can apply the previous theorem to infer the existence of a fundamental solution for $D$.
+\eex
+
+\brmk
+In general $K(x) = |x|^{-Q+2}$, but $|\cdot|$ is the homogeneous norm on $\G$ which is in most cases a rather mysterious object.
+\ermk
+
+\bex
+In the Heisenberg group with $X_j = \partial_{x_j} - \frac{y_j}{2} \partial_t$ and $Y_j = \partial_{y_j} - \frac{x_j}{2} \partial_t$ we have the fundamental solution
+\[
+\Phi_k(\mathbf{z}, \, t) = \frac{2^k \Gamma(k/2)^2}{\pi^{k+1}} \left( |\mathbf{z}|^4 + t^2 \right)^{-\frac{k}{2}},
+\]
+which is, accordingly to a previous result, smooth away from the origin and homogeneous of degree $2 - Q$.
+\eex
