@@ -1,0 +1,132 @@
+\chapter{Differential Forms} \thispagestyle{empty}
+
+The main result of this chapter is the \textit{residue theorem} for compact Riemann surfaces, which will be extremely useful in some of the most significant results of this course (e.g., \textit{Serre duality theorem}).
+
+\section{Holomorphic $1$-forms}
+
+\begin{definition}[Holomorphic $1$-Forms]\index{Holomorphic!$1$-form} Let $V$ be an open subset of $\C$. A \textit{holomorphic $1$-form} (in the coordinate $z$) on $V$ is an expression $\omega$ of the form
+\begin{equation*} \omega = f(z) \, \mathrm{d}z, \end{equation*}
+where $f : V \to \C$ is a holomorphic function. \end{definition}
+
+Let $\omega_1 = f(z) \, \mathrm{d}z, \, \omega_2 = g(w) \, \mathrm{d}w$ be holomorphic $1$-forms, respectively in the coordinates $z$ and $w$, defined on open subsets $V_1, \, V_2 \subset \C$.
+
+\begin{definition}[Transformation] Let $T : V_2 \to V_1$ be a holomorphic map such that $z = T(w)$. We say that $\omega_1$ \textit{transforms} to $\omega_2$ under $T$ if and only if
+\begin{equation*} g(w) = f \left( T(w) \right) \cdot T^\prime(w), \qquad \forall \, w \in V_2. \end{equation*} \end{definition}
+
+\begin{remark}If $T$ is an invertible transformation and $S$ is its inverse, then $\omega_1$ transforms to $\omega_2$ under $T$ if and only if $\omega_2$ transforms to $\omega_1$ under $S$. \end{remark}
+
+\begin{definition}[Meromorphic $1$-Forms]\index{Meromorphic!$1$-form} Let $V$ be an open subset of $\C$. A \textit{meromorphic $1$-form} (in the coordinate $z$) on $V$ is an expression $\omega$ of the form
+\begin{equation*} \omega = f(z) \, \mathrm{d}z, \end{equation*}
+where $f : V \to \C$ is a meromorphic function. \end{definition}
+
+Let $\omega_1 = f(z) \, \mathrm{d}z, \, \omega_2 = g(w) \, \mathrm{d}w$ be meromorphic $1$-forms, respectively in the coordinates $z$ and $w$, defined on open subsets $V_1, \, V_2 \subset \C$.
+
+\begin{definition}[Transformation] Let $T : V_2 \to V_1$ be a holomorphic map such that $z = T(w)$. We say that $\omega_1$ \textit{transforms} to $\omega_2$ under $T$ if and only if
+\begin{equation*} g(w) = f \left( T(w) \right) \cdot T^\prime(w), \qquad \forall \, w \in V_2. \end{equation*}\end{definition}
+
+\paragraph{Differential forms on Riemann surfaces.} In this paragraph, we extend, in a natural way, the definition of holomorphic $1$-forms on Riemann surfaces.
+
+We denote by $X$ a Riemann surface, and we let $\mathcal{A} = \{ \varphi_\alpha : U_\alpha \to V_\alpha \subseteq \C \}_{\alpha \in I}$ be a complex atlas associated to $X$.
+
+\begin{definition}[Holomorphic Form, \cite{miranda}]\index{Holomorphic!$1$-form on Riemann surface} A \textit{holomorphic $1$-form} on $X$ is a collection of holomorphic $1$-forms $\{ \omega_\phi \}$, one for each chart $\phi : U \to V$ in the coordinate of the codomain $V$, such that if two charts have overlapping domains, then the associated holomorphic $1$-form $\omega_{\phi_1}$ transforms to $\omega_{\phi_2}$ under the change of coordinate $T := \phi_1 \circ \phi_2^{-1}$.\end{definition}
+
+On the other hand, to define a holomorphic $1$-form on a Riemann surface one does not need to give a holomorphic $1$-form on each chart, but only the charts of some atlas.
+
+\begin{lemma} Let $\{\omega_\alpha\}$ be a given collection of $1$-forms, one for each chart of the atlas $\mathcal{A}$, which transform to each other on their overlapping domains. Then there exists a unique holomorphic $1$-form on $X$ extending this collection on any of the charts of $X$. \end{lemma}
+
+\begin{definition}[Meromorphic Form, \cite{miranda}]\index{Meromorphic!$1$-form on Riemann surface} A \textit{meromorphic $1$-form} on $X$ is a collection of meromorphic $1$-forms $\{ \omega_\phi \}$, one for each chart $\phi : U \to V$ in the coordinate of the codomain $V$, such that if two charts have overlapping domains, then the associated holomorphic $1$-form $\omega_{\phi_1}$ transforms to $\omega_{\phi_2}$ under the change of coordinate $T := \phi_1 \circ \phi_2^{-1}$.\end{definition}
+
+\paragraph{Order.}\index{Meromorphic!$1$-form order} Let $p \in X$ be a point and let $\omega$ be a meromorphic $1$-form, defined in a neighborhood $U \subset X$ of a point $p$.
+
+Let $z$ be a local coordinate centered at $p$, in such a way that $\omega = f(z) \, \mathrm{d}z$ for some function $f : U \to \C$, meromorphic at the point $z = 0$.
+
+\begin{definition}The \textbf{order} of $\omega$ at $p$, denoted by $\mathrm{ord}_p(\omega)$, is the order of the function $f$ at the origin $z = 0$, i.e.,
+\begin{equation*}\mathrm{ord}_p(\omega) = \mathrm{ord}_0(f). \end{equation*} \end{definition}
+
+It is a simple exercise to prove that this definition does not depend on the particular local representation $f$ of $\omega$, nor on the neighborhood $U$ of $p$.
+
+\paragraph{$C^\infty$ Forms.} Let $X$ be a Riemann surface and let $p \in X$ be a point. If we take a chart
+\begin{equation*} \varphi : U_p \xrightarrow{\sim} V \subseteq \C \end{equation*}
+centered at $p$, with local coordinate $z$, then a straightforward computation yields to the following result:
+\begin{equation*} \frac{\partial}{\partial \, z} = \frac{1}{2} \left( \frac{\partial}{\partial \, x} - \imath \, \frac{\partial}{\partial \, y} \right), \qquad  \frac{\partial}{\partial \, \bar{z}} = \frac{1}{2} \left( \frac{\partial}{\partial \, x} + \imath \, \frac{\partial}{\partial \, y} \right). \end{equation*}
+In particular, a function $f : V \subset \C \to \C$ is holomorphic at $p$ if and only if
+\begin{equation*}\frac{\partial \, f}{\partial \, \bar{z}}(p) = 0. \end{equation*}
+Therefore the differential of a $C^\infty$ function $f : U_p \subset X \to \C$ is given by
+\begin{equation*} \mathrm{d}f = \frac{\partial \, f}{\partial \, z} \, \mathrm{d}z + \frac{\partial \, f}{\partial \, \bar{z}} \, \mathrm{d}\bar{z}. \end{equation*}
+A $1$-form $\omega$ of class $C^\infty$ is an expression of the form
+\begin{equation*}\omega = g_1(z, \, \bar{z}) \, \mathrm{d}z + g_2(z, \, \bar{z}) \, \mathrm{d}\bar{z}, \end{equation*}
+and it is holomorphic if and only if $g_1$ is a holomorphic function not depending on $\bar{z}$, and $g_2$ is identically equal to $0$, i.e., a holomorphic $1$-form of class $C^\infty$ is an expression of the form
+\begin{equation*}\omega = g_1(z) \, \mathrm{d}z. \end{equation*}
+In conclusion, if $\omega$ is a $1$-form of class $C^\infty$, then its differential $\mathrm{d}\omega$ is a $2$-form and it is given by the formula
+\begin{equation*}\mathrm{d} \omega = \left( \frac{ \partial \, g_2 }{\partial \, z} - \frac{ \partial \, g_1 }{\partial \, \bar{z}} \right) \, \mathrm{d}z \wedge \mathrm{d}\bar{z}.\end{equation*}
+
+\section{Integration of a $1$-form along paths}
+
+\paragraph{Path Integration.}\index{Path integration} Let $X$ be a Riemann surface and let
+\begin{equation*} \varphi : U \xrightarrow{\sim} V \subseteq \C\end{equation*}
+be any chart. If $\gamma : [a, \, b] \to X$ is a piece-wise differentiable path such that $\gamma \left([a, \, b] \right) \subset U$, then the composition $\varphi \circ \gamma : [a, \, b] \to V \subset \C$ is also a path, sending $t$ to $z(t)$.
+
+If we identify $U \simeq V$, then the $1$-form can be locally written in the form $\omega =  g_1(z, \, \bar{z}) \, \mathrm{d}z + g_2(z, \, \bar{z}) \, \mathrm{d}\bar{z}$ and thus we can define the integral along $\gamma$ as follows:
+\begin{equation} \label{eq:pathss} \int_{\gamma} \omega := \int_{a}^{b} \left[ g_1\left(z(t), \, \bar{z}(t) \right) \cdot z^\prime(t) + g_2\left(z(t), \, \bar{z}(t) \right) \cdot \bar{z}^\prime(t) \right] \, \mathrm{d}t. \end{equation}
+
+If $\gamma : [a, \, b] \to X$ is a generic path, then $\gamma \left([a, \, b] \right)$ is a compact set in $X$ and thus there exist a finite number of charts $\varphi_1 : U_1 \to V_1, \, \dots, \, \varphi_n : U_n \to V_n$ such that
+\begin{equation*} \gamma([a, \, b]) \subseteq \bigcup_{i = 1}^{n} U_i. \end{equation*}
+If we let $\gamma_i := \gamma \, \big|_{U_i}$, we can define the integral of $\omega$ along $\gamma$ as
+\begin{equation} \label{eq:pathss2} \int_{\gamma} \omega := \sum_{i=1}^{n} \int_{a_{i-1}}^{a_{i}} \left[ g_{1, \, i}\left(z(t), \, \bar{z}(t) \right) \, z^\prime(t) + g_{2, \, i}\left(z(t), \cdot \bar{z}(t) \right) \cdot \bar{z}^\prime(t) \right] \, \mathrm{d}t. \end{equation}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width = 14cm, height = 8cm]{images/GAC051.png}
+\label{fig:ex1}
+\caption{Covering of the path $\gamma$}
+\end{figure} 
+
+\paragraph{Winding Number.}\index{Winding number} Let $\gamma : [a, \, b] \to \C$ be a closed path around the origin. The integral
+\begin{equation*} I_\gamma(0) := \frac{1}{2 \, \pi \, \imath} \int_{\gamma} \frac{1}{z} \, \mathrm{d}z \end{equation*}
+is called \textit{winding number} of $\gamma$ and, intuitively, it counts the number of complete rotations around the origin.
+
+More precisely, it depends only on the class of homotopy of $\gamma$, and it is easy to prove that, if $\gamma$ is homotopic to $S^1$ counterclockwise oriented, then $I_\gamma(0) = 1$.
+
+\begin{lemma} Let $X$ be a Riemann surface, and let $p \in X$ be any point. If $\omega$ is a meromorphic $1$-form locally defined on a chart $U_p$ around $p$ and $\gamma$ is a simple path, contained in $U_p$, not enclosing any other pole of $f$, then
+\begin{equation*} \mathrm{Res}_{p} ( \omega ) = \frac{1}{2 \pi \imath} \int_\gamma \omega. \end{equation*}
+\end{lemma}
+
+Recall that the residue of $\omega$ at a certain point $p \in X$ is defined by looking at $\omega$ locally. More precisely, if $\omega = f(z) \, \mathrm{d}z$ in a neighborhood of $p$, then
+\begin{equation*} f(z) = \sum_{n \geq m} c_n \, z^n, \end{equation*}
+and the residue is exactly the coefficient of $1/z$, i.e., $c_{-1}$.
+
+\begin{theorem}[Stokes]\index{Stokes Theorem} Let $X$ be a Riemann surface and let $D \subset X$ be a triangulable domain, whose border is piece-wise differentiable. If $\omega$ is a $C^\infty$ $1$-form on $X$, then
+\begin{equation} \label{stokes} \int_{\partial \, D} \omega = \iint_{D} \mathrm{d} \omega. \end{equation} \end{theorem}
+
+\begin{theorem}[Residues Theorem]\index{Residues Theorem} \label{residui} Let $X$ be a compact Riemann surface and let $\omega$ be a meromorphic $1$-form on $X$. Then the sum of the residues is zero, i.e.,
+\begin{equation*} \sum_{p \in X} \mathrm{Res}_p(\omega) = 0. \end{equation*} \end{theorem}
+
+\begin{proof}The set of poles of $\omega$ is a discrete subset of $X$, thus it is finite by compactness of $X$. Assume that $p_1, \, \dots, \, p_n$ are the poles of $\omega$, and let $\gamma_1, \, \dots, \, \gamma_n$ be simple paths enclosing only the corresponding pole $p_i$. Let $D_i$ be closed sets such that $\partial \, D_i = \gamma_i$, and let $D = X \setminus \cup_{i = 1}^{n} D_i$; then
+\begin{equation*} \int_{\gamma_i} \omega = 2 \, \pi \, \imath \, \mathrm{Res}_{p_i}(\omega), \qquad \forall \, i = 1, \, \dots, \, n.\end{equation*}
+Formally $\partial \, D = - \sum_{i = 1}^{n} \gamma_i$ (see \hyperref[fig:reisdui]{Figure \ref{fig:reisdui}}), therefore
+\begin{equation*} 2 \, \pi \, \imath \, \sum_{i = 1}^{n} \mathrm{Res}_{p_i}(\omega) = \sum_{i = 1}^{n} \int_{\gamma_i} \omega = - \int_{\partial \, D} \omega = - \iint_{D} \mathrm{d}\omega = 0,\end{equation*}
+since $\omega$ is holomorphic on $D$.\end{proof}
+
+\begin{corollary} Let $X$ be a compact Riemann surface and let $f : X \to \C$ a nonconstant meromorphic function. Then the sum of the orders is zero, i.e.,
+\begin{equation*} \sum_{p \in X} \mathrm{ord}_p(f) = 0. \end{equation*} \end{corollary}
+
+\begin{proof} First, we observe that $\mathrm{ord}_p(f) = n$ if and only if - locally - it turns out that
+\begin{equation*} f(z) = c_n \, z^n + \mathcal{O}(z^{n+1}). \end{equation*}
+Consider the logarithmic differential\index{Logarithmic differential}
+\begin{equation*} \omega = \frac{1}{f} \, \mathrm{d}f, \end{equation*}
+and notice that the differential of $f$ is (locally) defined by
+\begin{equation*} \mathrm{d}f = f^\prime(z) \, \mathrm{d}z = n \, c_n \, z^{n - 1} \, \mathrm{d}z + \dots. \end{equation*}
+In particular, multiplying by $1/f$ we find that
+\begin{equation*} \frac{1}{f} \, \mathrm{d}f = \left( \frac{n}{z} + \dots \right),\end{equation*}
+and thus the key identity
+\begin{equation*} \mathrm{ord}_p(f) = \mathrm{Res}_{p} \left( \frac{1}{f} \, \mathrm{d}f \right), \end{equation*}
+which concludes the proof since the sum of the residues is zero by \hyperref[residui]{Theorem \ref{residui}}. \end{proof}
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 14cm, height = 8cm]{images/GC11p.png}
+\caption{Idea of the Residues Theorem proof}
+\label{fig:reisdui}
+\end{figure} 

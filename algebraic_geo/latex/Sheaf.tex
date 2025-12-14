@@ -1,0 +1,340 @@
+\chapter{Sheaf Theory} \thispagestyle{empty}
+
+In this chapter, we want to introduce and develop the sheaf language to simplify the comprehension of the next topics.
+
+In particular, we present the cohomology groups (which will ease the discussion of the divisor vector space $L(D)$), and we also prove the long exact sequence in cohomology theorem (which will be used extensively in the next chapters.)
+
+The reader may consult \href{https://www2.bc.edu/dawei-chen/Lecture-2013.pdf}{these notes} for a more in-depth dissertation.
+
+\section{Definitions and First Properties}
+
+\begin{definition}[Sheaf]\index{Sheaf} Let $X$ be a topological space. A \textit{sheaf} $\F$ on $X$ associates to each open set $U \subset X$ an abelian group $\F(U)$, along with a \textit{restriction map} $\rho_{V}^{U} : \F(V) \to \F(U)$ for any open sets $U \subset V$, satisfying the following conditions: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item \textbf{Compatibility Conditions.} 
+\begin{enumerate}[label=\textit{(1.\arabic*)}]
+\item  $\F(\emptyset) = 0$.
+\item  $\rho_{U}^{U} = \mathrm{id}_U$.
+\item If $W \subset V \subset U$, then $\rho_{W}^{U} = \rho_{W}^{V} \circ \rho_{V}^{U}$.
+\end{enumerate}
+\item \textbf{Locality Conditions.} 
+\begin{enumerate}[label=\textit{(2.\arabic*)}]
+\item If $\mathcal{U} := \{U_i\}_i$ is a covering of $U$, then
+\begin{equation*} \sigma \in \F(U) \: : \: \sigma \, \big|_{U_i} = 0 \quad \forall \, i \implies \sigma \equiv 0. \end{equation*}
+\item For any covering $\mathcal{U} := \{U_i\}_{i \in I}$ of $U$ and any collection $\{\sigma_i \}_{i \in I}$ of sections $\sigma_i \in \F(U_i)$ it turns out that, if
+\begin{equation*}\sigma_i \, \big|_{U_i \cap U_j} = \sigma_j \, \big|_{U_i \cap U_j}\end{equation*}
+for any $i, \, j$, then there exists $\sigma \in \F(U)$ such that $\sigma \, \big|_{U_i} = \sigma_i$.
+\end{enumerate}
+\end{enumerate}
+If $\F$ satisfies only the compatibility conditions, then we say that $\F$ is a \textit{presheaf}. \end{definition}
+
+\begin{definition}[Stalks]\index{Sheaf!stalks} Let $\F$ be a sheaf on a topological space $X$, and let $p \in X$. The \textit{stalk} at $p$, denoted by $\F_p$, is the direct limit of all sections containing $p$. \end{definition}
+
+More precisely, suppose that $U$ and $V$ are two open subsets, both containing $p$, with two section $\sigma_U$ and $\sigma_V$; define an equivalence relation
+\begin{equation*}\sigma_U \sim \sigma_V \iff \exists \, W \subset U \cap V \: : \: \sigma_U \, \big|_{W} = \sigma_V \, \big|_{W}. \end{equation*}
+Then the stalk at $p$ is defined by setting
+\begin{equation*} \F_p := \varinjlim_{U \ni p} \F(U) = \left( \bigsqcup_{U \ni p} \F(U) \right) \, / \, \sim. \end{equation*}
+There is a group homomorphism $\rho_U : \F(U) \to \F_p$ mapping a section $\sigma_\alpha$ to its equivalence class, and the image is called the \textit{germ} of $\sigma_\alpha$.
+
+\begin{example} To get accustomed with the definitions, the reader may try to check that the following are all sheaves. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The (locally) constant sheaf $U \mapsto \underline{\C}(U) = \C$,  denoted by $\underline{\C}$, whose restriction maps are the identities between the copies of $\C$.
+\item The sheaf of holomorphic functions $U \mapsto \mathcal{O}_X(U) := \left\{ f : U \to \C \: \left| \: \text{$f$ is holomorphic in $U$} \right. \right\}$. For any $p \in X$ the stalk is given by
+\begin{equation*}\mathcal{O}_{X, \, p} := \left\{ f : X \to \C \: \left| \: \text{$f$ is meromorphic outside of $p$} \right. \right\}. \end{equation*}
+\item The sheaf of meromorphic functions $U \mapsto \mathcal{M}_X(U) := \left\{ f : U \to \C \: \left| \: \text{$f$ is meromorphic in $U$} \right. \right\}$.
+\item The sheaf of the holomorphic differentials $U \mapsto \Omega_X^1(U) := \left\{ f(z) \, \mathrm{d}z \: \left| \: \text{$f$ is holomorphic in $U$} \right. \right\}$.
+\end{enumerate}
+\end{example}
+
+\paragraph{Morphisms of Sheaves.}\index{Sheaf!morphism} Let $\mathcal{E}$ and $\F$ be sheaves on $X$. A morphism $f : \mathcal{E} \to \F$ is a collection of group homomorphisms $f_U : \mathcal{E}(U) \to \F(U)$ such that the following diagram is commutative
+\begin{equation*}\begin{tikzcd}
+ \mathcal{E}(U) \arrow{rr}{f_U} \arrow{dd}{\rho_{U}^{V}} &&  \F(U) \arrow{dd}{\rho_{U}^{V}} \\ \\
+ \mathcal{E}(V)  \arrow{rr}{f_V} & & \F(V)
+\end{tikzcd}  \end{equation*}
+that is, $\left(f_U(\sigma) \right) \, \big|_{V} = f_V \left( \sigma \, \big|_V \right)$.
+
+\begin{example}[Inclusion Maps] The first kind of morphisms between sheaves we study are the inclusion maps. Indeed, they come up whenever, for any $U \subset X$, the group $\F(U)$ is a subgroup of the group $\G(U)$. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item \textit{Constant sheaves}: $\underline{\Z} \subset \underline{\R} \subset \underline{\C}$.
+\item \textit{Holomorphic/Meromorphic sheaves}: $\underline{\C} \subset \mathcal{O}_X \subset \mathcal{M}_X$.
+\item \textit{Nonzero holomorphic/meromorphic sheaves}: $\mathcal{O}_X^\ast \subset \mathcal{M}_X^\ast$.
+\item \textit{Sheaves of functions with bounded poles}: if $D_1 \leq D_2$ are divisors on $X$, then $\mathcal{O}_X[D_1] \subset \mathcal{O}_X[D_2]$.
+\end{enumerate}\end{example}
+
+\paragraph{Kernel.}\index{Sheaf!kernel} Suppose that $\phi : \F \to \G$ is sheaf map between two group sheaves on $X$. Define a subsheaf $\K \subset \F$, called the \textit{kernel} of $\phi$, by setting
+\begin{equation*} \K(U) := \mathrm{ker}(\phi_U) \end{equation*}
+for any $U \subseteq X$, that is, the group associated to the open set $U$ is exactly the kernel of the group homomorphism $\phi_U : \F(U) \to \G(U)$.
+
+\begin{proposition} Let $\phi : \F \to \G$ be a sheaf map between two group sheaves on $X$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The kernel $\K$ is a sheaf.
+\item The cokernel (which is defined in the same way) is a presheaf, but it is generally not a sheaf.\end{enumerate}\end{proposition}
+
+\paragraph{Associated Sheaf.}\index{Sheaf!associated sheaf} If $\F$ is a presheaf, then it is always possible to extend it to a sheaf $\widetilde{F}$, which is usually called associated sheaf.
+
+For example, we define $\mathrm{coker}(f) (U)$ to be a collection of sections $\sigma_\alpha \in \G(U_\alpha)$ for an open covering $\{U_\alpha\}_{\alpha}$ of $U$, such that for all $\alpha$ and $\beta$ it turns out that
+\begin{equation*} \sigma_\alpha \, \big|_{U_\alpha \cap U_\beta} - \sigma_{\beta} \, \big|_{U_\alpha \cap U_\beta} \in f_{U_\alpha \cap U_\beta} \left( \mathcal{F}(U_\alpha \cap U_\beta) \right). \end{equation*}
+The definition depends on the choice of an open covering. Thus we need to find a way to get rid of this obstacle.
+
+The idea, as we shall see also later in the course, is to use the direct limit. More precisely, we identify two collections $\left\{ (U_\alpha, \, \sigma_\alpha) \right\}$ and $\left\{ (V_\beta, \, \sigma_\beta) \right\}$ if for all $p \in U_\alpha \cap V_\beta$ there exists an open set $W$ satisfying $p \in W \subset U_\alpha \cap V_\beta$, such that
+\begin{equation*} \sigma_\alpha \, \big|_{W} - \sigma_{\beta} \, \big|_{W} \in f_{W} \left( \mathcal{F}(W) \right). \end{equation*}
+This identification yields an equivalence relation and correspondingly we define the coker sheaf as the group of equivalence classes of the above sections.
+
+\section{Exact Sequences}
+
+In this section, we introduce a fundamental notion that is used vastly in algebra and geometry: short exact sequences, and the long exact sequence in cohomology theorem.
+
+\paragraph{Short Exact Sequences of Sheaves.}\index{Sheaf!short exact sequence} We say that a sequence of sheaf maps
+\begin{equation*} 0 \xrightarrow{} \K \xrightarrow{} \F \xrightarrow{\phi} \G \xrightarrow{} 0\end{equation*}
+is a \textit{short exact sequence} if the sheaf map $\phi$ is surjective and $\K$ is the kernel sheaf associated to $\phi$.
+
+\begin{remark}There is an equivalent - and maybe more useful - definition of a short exact sequence of sheaf maps, which relies on the notion of a short exact sequence of abelian groups. More precisely, the sequence of sheaf maps
+\begin{equation*} 0 \xrightarrow{} \F \xrightarrow{\phi} \G \xrightarrow{\psi} \mathcal{H} \xrightarrow{} 0\end{equation*}
+is an exact short sequence if and only if
+\begin{equation*} 0 \xrightarrow{} \F_p \xrightarrow{\phi_p} \G_p \xrightarrow{\psi_p} \mathcal{H}_p \xrightarrow{} 0\end{equation*}
+is an exact sequence of abelian groups, for every $p \in X$. \end{remark}
+
+\begin{example} Here is a brief list of short exact sequences. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item On a Riemann surface, the sequence
+\begin{equation*} 0 \xrightarrow{} \underline{\C} \xrightarrow{} \mathcal{O}_X \xrightarrow{\mathrm{d} = \partial} \Omega_X^1 \xrightarrow{} 0\end{equation*}
+is exact, since the kernel sheaf of the differential map is exactly the (locally) constant sheaf.
+\item The sequence
+\begin{equation*} 0 \xrightarrow{} \underline{\Z} \xrightarrow{} \mathcal{O}_X \xrightarrow{\mathrm{e}^{2 \pi \, i \, \cdot}} \mathcal{O}_X^\ast \xrightarrow{} 0\end{equation*}
+is exact, since the kernel sheaf of the exponential map is exactly the integer-valued (locally) constant sheaf.
+\item The sequence
+\begin{equation*} 0 \xrightarrow{} \Omega_X^1 \xrightarrow{} \mathcal{E}_X^{1, \, 0} \xrightarrow{\bar{\partial}} \mathcal{E}_X^{2} \xrightarrow{} 0\end{equation*}
+is exact.
+\item The sequence
+\begin{equation*} 0 \xrightarrow{} \underline{\C} \xrightarrow{} C^\infty \xrightarrow{d} \mathrm{ker} \left( d : \mathcal{E}_X^1 \to \mathcal{E}_X^2 \right) \xrightarrow{} 0\end{equation*}
+is exact, since the kernel of $d$ in this setting is exactly the constant functions space.
+\end{enumerate}
+\end{example}
+
+\paragraph{Sheaves on Riemann surfaces.}\index{Sheaf!on Riemann surfaces} Let $X$ be a compact Riemann surface and let $p \in X$. The \textit{skyscraper sheaf} centered at $p$ is defined as
+\begin{equation*} \left( \C_p \right)_x = \begin{cases} 0 & \text{if $x \neq p$} \\ \C & \text{if $x = p$}. \end{cases} \end{equation*}
+We can also define the sheaf of holomorphic functions such that $p$ is a zero, that is,
+\begin{equation*} \mathcal{J}_{X, \, p} = \left\{ \text{$f$ is holomorphic and $f(p) = 0$}   \right\}, \end{equation*}
+which can be easily denoted using the divisors. In fact, if we let $f \in \mathcal{J}_p$, then it is easy to prove that $\mathrm{div}(f) \geq p$, and thus we may denote it by
+\begin{equation*} \mathcal{J}_{X, \, p} = \mathcal{O}_X[-p]. \end{equation*}
+
+\begin{proposition} Let $X$ be a compact Riemann surface. There exists an exact sequence of sheaf maps\begin{equation*} 0 \xrightarrow{} \mathcal{O}_X[-p] \xrightarrow{} \mathcal{O}_X \xrightarrow{f \mapsto f(p)} \C_p \xrightarrow{} 0. \end{equation*} \end{proposition}
+
+\begin{proof}[Idea of the Proof]Notice that, if $x \neq p$, then
+\begin{equation*} (\C_p)_x = 0 \qquad \text{and} \qquad (\mathcal{O}_X[-p])_x \cong \mathcal{O}_{X, \, x} \end{equation*}
+and that
+\begin{equation*} (\mathcal{O}_X[-p])_p \cong \left\{ \text{maximal ideals in $\mathcal{O}_{X, \, p}$} \right\} \qquad \text{and} \qquad \faktor{\mathcal{O}_{X, \, p}}{\mathcal{M}_X }\cong \C_p. \end{equation*} \end{proof}
+
+\section{Čech Cohomology of Sheaves}
+
+In this section will assume that every covering is \textit{locally finite}. This assumption is by no means necessary at this point, but it will come in handy (and, actually, necessary) soon.
+
+\paragraph{Čech Cochains.}\index{Cech!Cochains} Let $\F$ be a sheaf of abelian groups on a topological space $X$. Let $\mathcal{U} := \{U_i\}_i$ be an open covering of $X$, and fix an integer $n \geq 0$. For every collection of indices $(i_0, \, \dots, \, i_n)$, we denote the intersection of the corresponding open sets by
+\begin{equation*} U_{i_0, \, \dots, \, i_n} := U_{i_0} \cap \dots \cap U_{i_n}. \end{equation*}
+The deletion of the $k$-th index is denoted by the symbol $\hat{i_k}$, and it is clear by the definition that
+\begin{equation*} U_{i_0, \, \dots, \, i_n} \subset  U_{i_0, \, \dots, \widehat{i_k}, \, \dots \, i_n}. \end{equation*}
+
+\begin{definition} A \textit{Čech $n$-cochain} for the sheaf $\F$ over the open cover $\mathcal{U}$ is a collection of sections of $\F$, one over each $U_{i_0, \, \dots, \, i_n}$.
+\end{definition}
+
+The space of Čech $n$-cochains for $\F$ over $\mathcal{U}$ is denoted by $\widecheck{C}^n(\mathcal{U}, \, \F)$. In particular, a Čech $0$-cochain is simply a collection of sections, that is, one gives a section of $\F$ over each open set in the cover. Similarly, a $1$-cochain is a collection of sections of $\F$ over every intersection of two open sets of the cover; the typical notation for a $1$-cochain is $(f_{i, \, j}) \in \F  \left(U_i \cap U_j \right)$.
+
+\begin{remark}If $\phi : \F \to \G$ is a sheaf map, then it induces map on the cochains space
+\begin{equation*} \phi : \widecheck{C}^n(\U, \, \F) \to \widecheck{C}^n(\U, \, \G) \end{equation*}
+for any open covering $\U$, defined by
+\begin{equation*}(f_{i_0, \, \dots, \, i_n}) \longmapsto \left( \phi(f_{i_0, \, \dots, \, i_n}) \right). \end{equation*} \end{remark}
+
+\paragraph{Čech Cochains Complexes.}\index{Cech!complexes} Define a co-boundary operator
+\begin{equation*} d : \widecheck{C}^n(\U, \, \F) \to \widecheck{C}^{n+1}(\U, \, \F) \end{equation*}
+by setting
+\begin{equation*} d \left( (f_{i_0, \, \dots, \, i_n}) \right) := (g_{i_0, \, \dots, \, i_{n+1}}),\end{equation*}
+where
+\begin{equation*} g_{i_0, \, \dots, \, i_{n+1}} = \sum_{k = 0}^{n+1} (-1)^k \, \rho\left(f_{i_0, \, \dots, \, \widehat{i_k}, \, \dots, \, i_{n+1}} \right). \end{equation*}
+In the above formula $\rho$ denotes the restriction map for the sheaf $\F$ corresponding to the inclusion $U_{i_0, \, \dots, \, i_n} \subset  U_{i_0, \, \dots, \widehat{i_k}, \, \dots \, i_n}$.
+
+Any $n$-cochain $c$ with $d(c) = 0$ is called a \textit{$n$-cocycle}\index{Cech!cocycle}; the space of $n$-cocycles is denoted by $ \widecheck{Z}^n(\U, \, \F)$ and it is simply the kernel of $d$ at the $n$-th level.
+
+Any $n$-cochain $c$ with $c = d(c^\prime)$ for some $(n-1)$-cochain $c^\prime$ is called a \textit{$n$-coboundary}\index{Cech!coboundary}; the space of $n$-coboundaries is denoted by $\widecheck{B}^n(\U, \, \F)$.
+
+It is straightforward, but tedious, to prove that $d \circ d = 0$. Thus we have a \textit{Čech cochain complex}
+\begin{equation*} 0 \xrightarrow{0} \widecheck{C}^0(\U, \, \F) \xrightarrow{d} \widecheck{C}^1(\U, \, \F) \xrightarrow{d} \widecheck{C}^2(\U, \, \F) \xrightarrow{d} \dots. \end{equation*}
+
+\paragraph{Cohomology with respect to a Cover.}\index{Cech!cohomology} The fact that $d^2 = 0$ implies that for every $n \in \N$
+\begin{equation*} \widecheck{B}^n(\U, \, \F) \subset \widecheck{Z}^n(\U, \, \F). \end{equation*}
+
+\begin{definition}[Cohomology] The $n^{th}$ Čech cohomology group $\widecheck{H}^n(\U, \, \F)$ of $\F$ with respect to the open cover $\mathcal{U}$ is the quotient group
+\begin{equation*} \widecheck{H}^n(\U, \, \F) = \faktor{\widecheck{Z}^n(\U, \, \F)}{\widecheck{B}^n(\U, \, \F)}. \end{equation*}\end{definition}
+
+There is a lot of work behind the following definition (see \cite[pp. 295--297]{miranda}), but the main point is that we can define a Čech cohomology group \textbf{independent} of the cover $\mathcal{U}$. In fact, one introduces a refinement of $\mathcal{U}$ and proves that the cohomologies can be compared and they depend only on the particular coverings.
+
+\begin{definition}[Čech Cohomology] Fix a sheaf $\F$ and a integer $n \geq 0$. The $n^{th}$ Čech cohomology group of $\F$ on $X$ is the group
+\begin{equation*} H^n(X, \, \F) = \varinjlim_{\mathcal{U}} \widecheck{H}^n(\U, \, \F).\end{equation*}\end{definition}
+
+\begin{proposition} Let $X$ be a complex manifold, paracompact and smooth. If $\underline{\R}$ is the constant sheaf on $X$, then
+\begin{equation*} H^n(X, \, \underline{\R}) = H_{\mathrm{dr}}^n(X, \, \underline{\R}) = H_{\mathrm{sing}}^n(X, \, \underline{\R}).\end{equation*}\end{proposition}
+
+\begin{remark} \label{rmk:sdksdkskdksd} There is an isomorphism
+\begin{equation*} H^0(X, \, \F) \cong \F(X). \end{equation*}
+In fact, the $0$-coboundary is given by $\{0\}$, while the $0$-cycle is given by
+\begin{equation*} \widecheck{Z}^0(X, \, \F) = \left\{ \{f_\gamma\}_{\gamma \in \Gamma} \: \left| \: f_\alpha - f_\beta = 0\, \, \, \text{in $U_\alpha \cap U_\beta$ for any $\alpha, \, \beta \in \Gamma$} \right. \right\}.\end{equation*}
+Therefore $f_\alpha = f_\beta$ in the intersection $U_\alpha \cap U_\beta$ easily implies that it is possible to extend both $f_\alpha$ and $f_\beta$ to a function $f$ in $X$. \end{remark}
+
+In particular, if $X$ is a compact Riemann surface, then the $0$ cohomology group of the holomorphic sheaf is given by
+\begin{equation*} H^0(X, \, \mathcal{O}_X) = \mathcal{O}_X(X) = \C, \end{equation*}
+since a holomorphic function defined on the whole compact $X$ is bounded and thus constant.
+
+\section{Sheaves of $\mathcal{O}_X$-modules}
+
+\paragraph{Sheaves of $\mathcal{O}_X$-modules.} Let $X$ be a complex manifold (i.e., a manifold with a holomorphic structure).
+
+\begin{definition}[Coherent]\index{Sheaf!coherent} A sheaf $\F$ of $\mathcal{O}_X$-modules is \textit{coherent} if and only if for any $p \in X$ there exist an open neighborhood $U \subset X$ and an exact sequence
+\begin{equation*} \mathcal{O}_X^s(U) \xrightarrow{} \mathcal{O}_X^r(U) \xrightarrow{} \F(U) \xrightarrow{} 0, \end{equation*}
+i.e, if and only if it is finitely presented. \end{definition}
+
+\begin{example} Let $X$ be a Riemann surface. Then the holomorphic $1$-form sheaf $\Omega_X^1$ is invertible and the isomorphism is given by
+\begin{equation*} \Omega_X^1(U) \ni f(z) \, \mathrm{d}z \longmapsto f(z) \in \mathcal{O}_X(U). \end{equation*}
+\end{example}
+
+\begin{example}If $\mathrm{dim}_\C X = n$, then
+\begin{equation*} \mathcal{O}(X)^n \twoheadrightarrow \Omega_X^1(U), \qquad (f_1, \, \dots, \, f_n) \longmapsto f_1 \, \mathrm{d}z_1 + \dots + f_n \, \mathrm{d}z_n, \end{equation*}
+where $z_1, \, \dots, \, z_n$ are local coordinates. Clearly the sheaf is coherent but it is not invertible.
+\end{example}
+
+\paragraph{Fundamental Properties.} In this paragraph we briefly discuss some of the most important properties of the particular class of sheaves we just introduced.
+
+\begin{definition}[Support]\index{Sheaf!support} Let $\F$ be a sheaf on $X$. The \textit{support} of $\F$ is defined as the set of the nontrivial stalks, that is,
+\begin{equation*} \mathrm{spt}\left(\F \right) = \left\{ x \in X \: \left| \: \F_x \neq 0 \right. \right\}. \end{equation*}
+\end{definition}
+
+\begin{proposition} \label{prop:sptttt} Let $X$ be a compact complex manifold (with holomorphic structure) and let $\F$ be a coherent sheaf over $X$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The $p$-th cohomology group $H^p(X, \, \F)$ is a finite-dimensional $\C$-vector space.
+\item The $p$-th cohomology group is zero for any $p > \mathrm{dim}_\C X$.
+\end{enumerate} \end{proposition}
+
+\begin{corollary} Let $X$ be a compact Riemann surface and let $\F$ be a coherent sheaf over $X$. Then the $p$-th cohomology group is given by
+\begin{equation*} H^p(X, \, \F) \, \,  \begin{cases} = 0 & \text{if $p \geq 2$} \\ \neq 0 & \text{if $p = 0, \, 1$}. \end{cases} \end{equation*}
+\end{corollary}
+
+\begin{theorem} \index{Sheaf!long exact sequence}\label{longcomo} Let $X$ be a compact complex manifold (with holomorphic structure). If
+\begin{equation*} 0 \xrightarrow{} \F \xrightarrow{\varphi}\G \xrightarrow{\psi} \h \xrightarrow{} 0 \end{equation*}
+is an exact sequence of coherent $\mathcal{O}_X$-modules, then there is a long exact sequence in cohomology, that is, there exists $\partial$ such that
+\begin{equation*} 0 \xrightarrow{} H^0(\F) \xrightarrow{H^0(\varphi)}H^0(\G) \xrightarrow{H^0(\psi)} H^0(\h) \xrightarrow{\partial} H^1(\F) \xrightarrow{} \dots \end{equation*}
+is an exact long sequence.\end{theorem}
+
+\begin{proof}[Idea of the Proof] We can always choose a covering $\U := \{U_\alpha\}_{\alpha \in I}$ such that, for any $U_\alpha$, it turns out that
+\begin{equation*} 0 \xrightarrow{} \F(U_\alpha) \xrightarrow{\varphi_\alpha} \G(U_\alpha) \xrightarrow{\psi_\alpha} \h(U_\alpha) \xrightarrow{} 0 \end{equation*}
+is a short exact sequence. Consequently, the sequence
+\begin{equation*} 0 \xrightarrow{} H^0(\F) \xrightarrow{H^0(\varphi)}H^0(\G) \xrightarrow{H^0(\psi)} H^0(\h) \end{equation*}
+is exact, but the latter map may not be surjective (in general, it will not be). We want to define a map $\partial : H^0(\h) \to H^1(\F)$ that makes the sequence exact at $H^0(\h)$.
+
+Let $\sigma \in H^0(\h)$ and let us consider two open sets of the covering, e.g., $U_\alpha$ and $U_\beta$. We already know that there exists $s_\alpha \in \G(U_\alpha)$ such that $s_\alpha \mapsto \sigma \, \big|_{U_\alpha}$ and there exists $s_\beta \in \G(U_\beta)$ such that $s_\beta \mapsto \sigma \, \big|_{U_\beta}$. Let us set $\tilde{\delta} (\sigma) := s_\alpha - s_\beta = g_{\alpha, \, \beta}$.
+
+Clearly $g_{\alpha, \, \beta} \in Z^1 \left( U_\alpha \cap U_\beta \right) \subseteq \G\left( U_\alpha \cap U_\beta \right)$ and by the exactness of the local sequence, it turns out that $\psi(g_{\alpha, \, \beta}) = 0$ in $\h \left( U_\alpha \cap U_\beta \right)$ and therefore there exists $f_{\alpha, \, \beta} \in \F \left( U_\alpha \cap U_\beta \right) $ such that
+\begin{equation*} \varphi( f_{\alpha, \, \beta} ) = g_{\alpha, \, \beta}. \end{equation*}
+We can set
+\begin{equation*} \partial (\sigma) := \left\{ f_{\alpha, \, \beta} \right\}_{\alpha, \, \beta} \in H^1(\F) \end{equation*}
+and, by using the induction principle, we conclude the proof.
+\end{proof}
+
+\begin{corollary} Let $X$, $\F$, $\G$ and $\h$ be as above. Then
+\begin{equation*} \chi(\G) = \chi(\F) + \chi(\h), \qquad \text{where} \quad \chi(\F) := \sum_{i = 0}^{\mathrm{dim}_\C\left(\mathrm{spt}(\F) \right)} (-1)^i \, \mathrm{dim}_\C \, \left(H^i(\F) \right). \end{equation*} \end{corollary}
+
+\section{GAGA Principle}
+\index{GAGA Principle}
+
+Let $X$ be a projective manifold, equipped with the Zariski topology, and let
+\begin{equation*}\mathcal{O}_X^{\mathrm{alg}} := \left\{ f : X \to \C \: \left| \: \text{$f$ algebraic} \right. \right\}. \end{equation*}
+On the other side, let $X$ be a compact holomorphic manifold, equipped with the Hausdorff topology, and let
+\begin{equation*}\mathcal{O}_X^{\mathrm{h}} := \left\{ f : X \to \C \: \left| \: \text{$f$ holomorphic} \right. \right\}. \end{equation*}
+
+\begin{theorem} Let $X$ be a smooth projective manifold. Then there exists an application
+\begin{equation*} \F \longmapsto \F^h := \F \bigotimes_{\mathcal{O}_X^{\mathrm{alg}}} \mathcal{O}_X^{\mathrm{h}}, \end{equation*}
+where $\F$ is a coherent sheaf of $\mathcal{O}_X^{\mathrm{alg}}$-modules and $\F^h$ a coherent sheaf of $\mathcal{O}_X^{\mathrm{h}}$-modules, such that
+\begin{equation*} H_{\mathrm{Zar}}^i(X, \, \F) \cong H_{\mathrm{Hau}}^i(X, \, \F^h). \end{equation*} \end{theorem}
+
+
+\section{Invertible $\mathcal{O}_X$-module Sheaves}
+
+\begin{definition}[Invertible]\index{Sheaf!invertible} A sheaf $\mathcal{L}$ of $\mathcal{O}_X$-modules is \textit{invertible} if and only if there exists a covering $\mathcal{U} := \{ U_i \}_{i \in I}$ of $X$ such that: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item For any $i \in I$, there is an isomorphism $\phi_i : \mathcal{L}(U_i) \xrightarrow{\sim} \mathcal{O}_X(U_i)$.
+\item For any $i, \, j \in I$, there is an invertible function $f_{i, \, j}$, defined on $U_i \cap U_j$, such that $\phi_i = f_{i, \, j} \cdot \phi_j$.
+\end{enumerate} \end{definition}
+
+\begin{remark} Let $\mathcal{L}$ be an invertible sheaf of $\mathcal{O}_X$-modules and let $U_i, \, U_j, \, U_k \in \mathcal{U}$. It follows from the definition that, in the triple intersection, the following relation holds true:
+\begin{equation*} f_{i, \, k} = f_{i, \, j} \cdot f_{j, \, k}. \end{equation*} \end{remark}
+
+\begin{remark} Equivalently, a sheaf $\F$ of $\mathcal{O}_X$-modules is \textit{invertible} if and only if for every $p \in X$ there is an open neighborhood $U$ of $p$, such that $\mathcal{O} \, \big|_U \cong \F \, \big|_U$ as sheaves of $\mathcal{O} \, \big|_U$-modules on the space $U$.
+
+The invertible sheaves are locally free rank one $\mathcal{O}$-modules. An isomorphism $\phi_U : \mathcal{O} \, \big|_U \to \F \, \big|_U$ is called a \textit{trivialization} of $\F$ over $U$. \end{remark}
+
+\begin{remark}By definition, if $U$ is an open neighborhood of $p$ such that $\mathcal{O} \, \big|_U \cong \F \, \big|_U$, then there is an isomorphism $\phi_U : \mathcal{O}(U) \to \F(U)$.\end{remark}
+
+Let us consider the complex projective line $\p^1(\C)$ endowed with the usual atlas given by $U_0 = \left\{ [1 : z_1] \right\}$, with local coordinate $z := z_1/z_0$, and $U_1 = \left\{ [z_0 : 1] \right\}$, with local coordinate $w := z_0/z_1$.
+
+\begin{example}\label{ex:p23psadapdppewpw}For any fixed $m \in \Z$, we consider the invertible sheaf $\mathcal{O}_{\p^1}[m]$, which is defined as follows: \begin{enumerate}[label=\textbf{(\alph*)}]
+\item for $i = 1$ and $i=2$, there are isomorphisms $\mathcal{O}_{\p^1}[m](U_i) \cong \mathcal{O}(U_i) \cong \mathcal{O}(\C)$;
+\item the transition map is given by
+\begin{equation*} f_{1, \, 0} = \left( \frac{z_1}{z_0} \right)^m. \end{equation*}
+\end{enumerate}
+We are interested in computing the $0$-cohomology group of $\mathcal{O}_{\p^1}[m]$ for $m = 0$, $m = 1$ and $m \in \Z$.
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item If $m = 0$, then it is straightforward to prove that
+\begin{equation*} \mathcal{O}_{\p^1}[0] = \mathcal{O}_{\p^1} \qquad \text{and} \qquad H^0 \left( \p^1, \, \mathcal{O}_{\p^1} \right) = \C. \end{equation*}
+\item Let $m = 1$. By definition of the sheaf $\mathcal{O}_{\p^1}[1]$, it turns out that
+\begin{equation*} \begin{aligned} & \exists \, f(z) \in \mathcal{O}_{\p^1}(U_0) \quad \text{such that $f$ is holomorphic in $U_0$,} \\[1em] & \exists \, g(z) \in \mathcal{O}_{\p^1}(U_1) \quad \text{such that $g$ is holomorphic in $U_1$}. \end{aligned} \end{equation*}
+To compute the group $H^0 \left( \p^1, \, \mathcal{O}_{\p^1} \right)$ we need to check how $f$ and $g$ glue in the intersection $U_0 \cap U_1$. The assumption \textbf{(b)} on the transition map easily implies that
+\begin{equation*} f(z) = z \, g \left( \frac{1}{z} \right), \qquad \forall \, z \in U_0 \cap U_1. \end{equation*}
+If we use the Laurent develop, it turns out that
+\begin{equation*} f(z) = \sum_{i \geq 0} a_i \, z^i \qquad \text{and} \qquad g\left(z\right) = \sum_{i \geq 0} b_i \, z^{-i}, \end{equation*}
+hence $f(z) = z \cdot g(1/z)$ in the intersection if and only if
+\begin{equation*} f(z) = a_0 + a_1 \, z \qquad \text{and} \qquad g(z) = \frac{b_{-1}}{z} + b_0. \end{equation*}
+Therefore we can easily conclude that
+\begin{equation*}H^0 \left( \p^1, \, \mathcal{O}_{\p^1}[1] \right) \cong \left\{ \begin{gathered} \text{homogeneous polynomials} \\ \text{of degree $1$ in $z_0$ and $z_1$} \end{gathered} \right\}.  \end{equation*}
+\item Let $m > 0$ be any positive integer. There is an isomorphism
+\begin{equation*}\left\{ p(z_0, \, z_1) \: \left| \: \begin{gathered} \text{homogeneous polynomials} \\ \text{of degree $m$ in $z_0$ and $z_1$} \end{gathered} \right. \right\} \cong H^0 \left( \p^1, \, \mathcal{O}_{\p^1}[m] \right).  \end{equation*}
+which is defined by
+\begin{equation*} p(z_0, \, z_1) \longmapsto \begin{cases} \frac{p(z_0, \, z_1)}{z_0^m} & \text{in $U_0$} \\[0.8em] \frac{p(z_0, \, z_1)}{z_1^m} & \text{in $U_1$}. \end{cases} \end{equation*}
+The same result holds true for $m < 0$, but there are no polynomials of degree less than zero. In particular, the $H^0$ cohomology group is the trivial one, that is,
+\begin{equation*} H^0 \left( \p^1, \, \mathcal{O}_{\p^1}[m] \right) = 0, \qquad \forall \, m \in \Z^{-}.  \end{equation*}
+\end{enumerate}
+\end{example}
+
+\section{Operations on Sheaves}
+
+\paragraph{Tensor Product.}\index{Sheaf!tensor product} Let $\mathcal{L}$ and $\F$ be invertible sheaves of $\mathcal{O}_X$-modules. Their tensor product is the sheaf denoted by $\mathcal{L} \otimes \F$ which is defined, in terms of co-cycles, as follows:
+\begin{equation*} \left( \mathcal{L}, \, \F \right) \ni \left(\ell_{i, \, j}, \, f_{i, \, j} \right) \longmapsto \ell_{i, \, j} \cdot f_{i, \, j} \in \mathcal{L} \otimes \F. \end{equation*}
+For example, if $m, \, k \in \Z$, it is relatively easy to prove that the following isomorphism exists:
+\begin{equation*} \mathcal{O}_{\p^1}[m] \otimes \mathcal{O}_{\p^1}[k] \cong \mathcal{O}_{\p^1}[m + k]. \end{equation*}
+
+\paragraph{Inverse.}\index{Sheaf!inverse} Let $\mathcal{L}$ be an invertible sheaf. The inverse is denoted by $\mathcal{L}^{-1}$ and it is the unique sheaf such that
+\begin{equation*} \mathcal{L} \otimes \mathcal{L}^{-1} = \mathcal{O}_X. \end{equation*}
+In particular if $X$ is a Riemann surface or, more generally, a complete holomorphic manifold
+\begin{equation*} \left( \left\{ \text{invertible sheaves} \right\}, \, \bigotimes \right) \quad \text{is a group}. \end{equation*}
+For a more precise formulation of the above argument, the reader may jump directly to \hyperref[sec:pic]{Section \ref{sec:pic}}.
+
+\paragraph{Line Bundle.}\index{Sheaf!line bundles equivalence} There is a correspondence between invertible sheaf on a smooth manifold $X$ and line bundles, that is,
+\begin{equation*}\left\{ \begin{gathered} \text{Invertible sheaves} \\ \text{on $X$ smooth} \end{gathered}  \right\} \stackrel{\sim}{\longleftrightarrow} \left\{ \text{Line bundles} \right\}.  \end{equation*}
+If $X$ is an invertible Riemann surface, then
+\begin{equation*} \left\{ \text{$F \to X$ Line bundle} \right\}  \stackrel{\sim}{\longleftrightarrow} \begin{gathered} \text{$\exists \, \mathcal{U} := \{U_i\}_{i \in I}$ covering such that} \\ \text{$F_i : F \, \big|_{U_i} \to U_i \times \C$ which sends $z$ to $(z, \, f_i(z))$} \\ \text{and $f_i = g_{i, \, j} \cdot f_j$ in the intersection $U_i \cap U_j$}. \end{gathered} \end{equation*}
+A holomorphic section of $F$ is simply the holomorphic mapping $f_i : U_i \to \C$ such that
+\begin{equation*} f_i = g_{i, \, j} \cdot f_j \qquad \text{in $U_i \cap U_j$}. \end{equation*}
+In particular, there is a correspondence
+\begin{equation*}\text{$\F$ sheaf of the sections of $F$} \stackrel{\sim}{\longleftrightarrow} \text{$F \to X$ Line bundles}, \end{equation*}
+given by
+\begin{equation*} \text{$f_{i}$ (and $g_{i, \, j}$)} \longmapsto F \to U_i \times \C \: : \: z \mapsto \left(z, \, f_i(z) \right). \end{equation*}
+
+\paragraph{Algebraic Curves.}\index{Sheaf!and algebraic curves} Let $\F$ be an invertible sheaf. Clearly it corresponds locally to $\phi_i = z^{n_i}$ which is $0$ if and only if $z = 0$ is a point of multiplicity $n_i$ (an analogous argument works for $\infty$).
+
+If $X \subset \p^2(\C)$ is a smooth algebraic curve of degree $d$, then we can always consider the vector subspace made up of fixed degree smooth algebraic curves, that is,
+\begin{equation*} W := \left\{ \text{smooth algebraic curves of fixed degree $h$} \right\} \subset \p^2(\C). \end{equation*}
+By Bezout's theorem\footnote{Let $X$ and $Y$ be plane algebraic curves of degree $n$ and $m$ respectively. Then there are $m \cdot n$ points in the intersection $X \cap Y$, counted with the respective multiplicities, provided that $X$ and $Y$ have no common components.}, it follows that for any $Y \in W$, the intersection $Y \cap X$ is given by $h \cdot d$ points with the right multiplicities (this assertion is not very precise, but we only want to give a rough idea of this construction).
+
+Let $Y_1, \, Y_2 \in W$ and consider the points $p_i \in X \cap Y_1$ and $q_i \in Y_2$; since $W$ is a vector subspace, also the linear combinations of these two elements will individuate $Y_3 \in W$, such that the points $r_i \in X \cap Y_3$ are linear combinations of the previous points (see the \hyperref[fig:ksad2]{Figure \ref{fig:ksad2}}).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width = 15cm, height = 9cm]{images/GC12.png}
+\caption{Idea of the construction}
+\label{fig:ksad2}
+\end{figure} 

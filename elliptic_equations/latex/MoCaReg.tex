@@ -1,0 +1,27 @@
+\chapter{Regularity Theory in Morrey-Campanato Spaces}
+
+\section{Caccioppoli Inequality}
+
+\begin{lemma}Let $A(x) := \{a_{i, \, j}(x)\}_{i, \, j= 1, \, \dots, \, n}$ be a matrix, uniformly elliptic on the ball $B_r$. Assume that the coefficients $a_{i, \, j}(x)$ belongs to $L^\infty(B_r)$, and assume also that $u \in H^1(B_r)$ is a weak solution of the elliptic problem
+\begin{equation} \label{ellpr1} \sum_{i, \, j=1}^n D^i \left( a_{i, \, j}(x) \, D^j u(x) \right) = \sum_{i = 1}^n D^i f_i(x), \end{equation}
+where $f_i \in L^2(B_r)$ for each $i = 1, \, \dots, \, n$. Then there exists a constant $c(\nu) > 0$ such that, for every $\rho \in (0, \, r)$ and every $(n+1)$-tuple of real numbers $(s, \, s_1, \, \dots, \, s_n) \in \R^{n+1}$, it turns out that
+\begin{equation}\label{caccioppoli} \sum_{i = 1}^n \| D^i u \|_{0, \, 2, \, B_\rho}^2 \leq c(\nu) \left[ \frac{1}{(r - \rho)^2} \, \|u - s\|_{0, \, 2, \, B_r}^2 + \sum_{j = 1}^n \| f_j - s \|_{0, \, 2, \, B_r}^2 \right]. \end{equation}
+\end{lemma}
+
+\begin{proof} The elliptic problem \eqref{ellpr1} can be equivalently rewritten in its integral form, i.e.,
+\begin{equation} \label{ellpr2} \sum_{i, \, j=1}^n \int_{B_r} a_{i, \, j}(x) \, D^j \left[ u(x) - s \right] \, D^i \varphi(x) \, \mathrm{d}x = \sum_{i = 1}^n \int_{B_r} \left[f_i(x) - s_i \right] \ D^i \varphi(x), \qquad \forall \, \varphi \in H_0^1(B_r). \end{equation}
+Let $\theta \in C_c^\infty(\R^n)$ be a cutoff function satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textit{(\alph*)}]
+\item The support of $\theta$ is compactly contained in $B_r$, and $\theta \equiv 1$ on $B_\rho$.
+\item For every $x$ it turns out that $0 \leq \theta(x) \leq 1$.
+\item The derivative is bounded, i.e.,
+\begin{equation*}\| \nabla \, \theta \|_{\infty} \leq \frac{1}{r - \rho}.\end{equation*}
+\end{enumerate}
+We pick $\varphi(x) := \theta^2(x) \cdot \left[u(x) - s \right]$ in \eqref{ellpr2} as a test function, and we obtain the identity
+\begin{equation*} \begin{aligned} \sum_{i, \, j=1}^n & \int_{B_r} a_{i, \, j}(x) \, D^j \left[ u(x) - s \right] \,  \theta(x) \, D^i \left( (u(x) - s) \, \theta(x) \right) \, \mathrm{d}x+ \dots \\[1em] & \dots + \sum_{i, \, j=1}^n \int_{B_r} a_{i, \, j}(x) \, D^j \left[ u(x) - s \right] \,  \theta(x) \, D^i \left( (u(x) - s) \, \theta(x) \right) \, \mathrm{d}x  = \\[1em] & = \sum_{i = 1}^n \int_{B_r} \left[f_i(x) - s_i \right] \, \theta(x) \, D^i\left( \theta(x) \, [u(x) - s] \right) \, \mathrm{d}x + \dots \\[1em]&  \dots + \sum_{i = 1}^n \int_{B_r} \left[f_i(x) - s_i \right] \, D^i \left(\theta(x) \right) \, \theta(x) \, [u(x) - s]  \, \mathrm{d}x  \end{aligned}\end{equation*}
+from which it follows that
+\begin{equation*} \begin{aligned} \sum_{i, \, j=1}^n & \int_{B_r} a_{i, \, j}(x) \, D^j \left( (u(x) - s) \, \theta(x) \right)\, D^i \left( (u(x) - s) \, \theta(x) \right) \, \mathrm{d}x = \\[1em] & = \sum_{i, \, j=1}^n \int_{B_r} a_{i, \, j}(x) \, [u(x) - s]^2 \, D^j \theta(x) \, D^i \theta(x) \, \mathrm{d}x + \dots \\[1em] & \dots + \sum_{i = 1}^n \int_{B_r} \left[f_i(x) - s_i \right] \, \theta(x) \, D^i\left( \theta(x) \, [u(x) - s] \right) \, \mathrm{d}x + \dots \\[1em]&  \dots + \sum_{i = 1}^n \int_{B_r} \left[f_i(x) - s_i \right] \, D^i \left(\theta(x) \right) \, \theta(x) \, [u(x) - s]  \, \mathrm{d}x. \end{aligned}\end{equation*}
+If we take the modules of the identity above, then it turns out that
+\begin{equation*} \begin{aligned} \nu \, \sum_{i =1}^n \int_{B_r} \left| D^i \left[ (u(x) - s) \, \theta(x) \right] \right|^2 \, \mathrm{d}x & \leq c(a_{i, \, j}) \, \frac{c^2}{(r - \rho)^2} \, \sum_{i, \, j=1}^n \int_{B_r} [u(x) - s]^2 \, \mathrm{d}x + \dots \\[1em] & \dots + \frac{1}{2 \epsilon} \, \sum_{i = 1}^n \int_{B_r} \left[f_i(x) - s_i \right]^2 \mathrm{d}x + \dots \\[1em] & \dots + \frac{\epsilon}{2} \sum_{i = 1}^n \int_{B_r} \left| D^i \left[ \theta(x) \, (u(x) - s)^2 \right] \right|^2 \, \mathrm{d}x + \dots \\[1em] & \dots + \frac{c}{(r - \rho)^2} \, \sum_{i, \, j=1}^n \int_{B_r} [u(x) - s]^2 \, \mathrm{d}x + \dots \\[1em] & \dots + \frac{1}{2}\, \sum_{i = 1}^n \int_{B_r} \left[f_i(x) - s_i \right]^2 \mathrm{d}x, \end{aligned}\end{equation*}
+and we obtain the thesis by taking $\epsilon$ sufficiently small.
+\end{proof}

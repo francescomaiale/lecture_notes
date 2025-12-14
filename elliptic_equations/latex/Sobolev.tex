@@ -1,0 +1,307 @@
+\chapter{Regularity in Sobolev Spaces}
+
+In this chapter, we study the regularity of the solutions of second-order elliptic equations in divergence form in Sobolev spaces.
+
+The reader may jump \href{https://math.stackexchange.com/questions/435914/why-do-we-need-semi-norms-on-sobolev-spaces}{here} to have a brief overview of the reasons we need to introduce both the Sobolev norm and the Sobolev seminorm.
+
+\begin{notation}Let $v$ be a function defined on $\Omega \subseteq \R^n$ open subset. For every $i \in \{1, \, \dots, \, n\}$ and for every $h \in \R$, it turns out that
+\begin{equation*} \tau_{i, \, h} \, u(x) := \frac{u(x + h \, e_i) - u(x)}{h}, \end{equation*}
+where $\{e_1, \, \dots, \, e_n\}$ is the canonical basis of $\R^n$. \end{notation}
+
+\begin{notation}Let $u \in H^{k}(\Omega)$ be any Sobolev function. We denote by
+\begin{equation*} |u|_{k, \, 2, \, \Omega} := \left( \sum_{|\alpha| = k} \| D^\alpha \, u \|_{0, \, 2, \, \Omega} \right)^{\frac{1}{p}} \end{equation*}
+the seminorm $| \cdot |_{H^k(\Omega)}$, and we denote by
+\begin{equation*} \|u\|_{k, \, 2, \, \Omega} := \left( \sum_{|\alpha| \leq k} \| D^\alpha \, u \|_{0, \, 2, \, \Omega} \right)^{\frac{1}{p}} \end{equation*}
+the usual Sobolev norm.\end{notation}
+
+\section{Nirenberg Lemmas}
+
+\begin{lemma} \label{Nir1} Let $u \in W^{1, \, q} \left( B(0, \, \sigma) \right)$, $q \geq 1$, $t \in (0, \, 1)$, and let $h$ be real number such that $|h| < (1-t) \, \sigma$. Then
+\begin{equation*} \label{eq:ni1} \left\| \tau_{i, \, h} \, u \right\|_{L^q \left( B(0, \, t \, \sigma) \right)} \leq \left\| \frac{\partial \, u}{\partial \, x_i} \right\|_{L^q \left( B(0, \, \sigma) \right)}, \qquad i = 1, \, \dots, \, n. \end{equation*} \end{lemma}
+
+\begin{proof}By definition we have
+\begin{equation*} \begin{aligned} \tau_{i, \, h} \, u(x) & = \frac{1}{h} \, \int_{0}^{1} \frac{\partial}{\partial \, s} \, u(x + s \, h \, e_i) \, \mathrm{d}s = \frac{1}{h} \, \int_{0}^1 h \cdot \frac{\partial}{\partial \, x_i} \, u(x + s \, h \, e_i) \, \mathrm{d}s = \\[1em] & = \int_{0}^{1}  \frac{\partial}{\partial \, x_i} \, u(x + s \, h \, e_i) \, \mathrm{d}s.\end{aligned}\end{equation*}
+Consequently, we can easily estimate the $q$-th power
+\begin{equation*} \left| \tau_{i, \, h} \, u(x) \right|^q =  \left| \int_{0}^{1} \frac{\partial}{\partial \, x_i} \, u(x + s \, h \, e_i) \, \mathrm{d}s \right|^q \leq \int_{0}^{1} \left| \frac{\partial}{\partial \, x_i} \, u(x + s \, h \, e_i) \right|^q \, \mathrm{d}s, \end{equation*}
+and hence
+\begin{equation*} \begin{aligned} \left\| \tau_{i, \, h} \, u(x) \right\|_{L^q \left( B(0, \, t \, \sigma) \right)} & \leq \int_{B(0, \, t \, \sigma)} \left[ \int_{0}^{1} \left| \frac{\partial}{\partial \, x_i} \, u(x + s \, h \, e_i) \right|^q \, \mathrm{d}s \right] \, \mathrm{d}x = \\[1em] & = \int_{0}^{1} \left[ \int_{B(0, \, t \, \sigma)} \left| \frac{\partial}{\partial \, x_i} \, u(x + s \, h \, e_i) \right|^q \, \mathrm{d}x \right] \, \mathrm{d}s. \end{aligned}\end{equation*}
+Since the closure of the ball $B(0, \, t \, \sigma)$ is contained in $B(0, \, \sigma)$, it easily turns out that
+\begin{equation*} x \in B(0, \, t \, \sigma) \implies \left\| x + s \, h \, e_i \right\| \leq \sigma \implies x + s \, h \, e_i \in B(0, \, \sigma). \end{equation*}
+Therefore, we can make the change of variable $x \leadsto y := x + s \, h \, e_i$ in the above inequality and obtain
+\begin{equation*} \begin{aligned} \left\| \tau_{i, \, h} \, u(x) \right\|_{L^q \left( B(0, \, t \, \sigma) \right)} & \leq \int_{0}^{1} \left[ \int_{B(s \, h \, e_i, \, t \, \sigma)} \left| \frac{\partial}{\partial \, y_i} \, u(y) \right|^q \, \mathrm{d}y \right] \, \mathrm{d}s \, {\color{red}\leq} \\[1em] & \, {\color{red}\leq} \, \int_{0}^{1} \left[ \int_{B(0, \, \sigma)} \left| \frac{\partial}{\partial \, y_i} \, u(y) \right|^q \, \mathrm{d}y \right] \, \mathrm{d}s = \\[1em] & = \left\| \frac{\partial \, u}{\partial \, x_i} \right\|_{L^q \left( B(0, \, \sigma) \right)},\end{aligned}\end{equation*}
+where the {\color{red}red} inequality follows from the inclusion
+\begin{equation*} B(s \, h \, e_i, \, t \, \sigma) \subseteq B(0, \, \sigma), \end{equation*}
+while the last step follows from the fact that the integrand does not depend on $s$.
+\end{proof}
+
+\begin{lemma} \label{Nir2} Let $u \in L^q \left( B(0, \, \sigma) \right)$, $q \in (1, \, + \infty)$, $t \in (0, \, 1)$, and assume that there exists a positive constant $M > 0$ such that 
+\begin{equation*} \forall \, h \: : \: |h| < (1-t) \, \sigma \leadsto \left\| \tau_{i, \, h} \, u \right\|_{L^q( B(0, \, \sigma) )} \leq M. \end{equation*}
+Then $u \in W^{1, \, q}\left( B(0, \, \sigma) \right)$ and
+\begin{equation*} \label{eq:ni2} \left\| \frac{\partial \, u}{\partial \, x_i} \right\|_{L^q \left( B(0, \, \sigma) \right)} \leq M, \qquad i = 1, \, \dots, \, n. \end{equation*} \end{lemma}
+
+\begin{proof} First, we observe that for every $\varphi \in C_0^\infty \left( B(0, \, t \, \sigma) \right)$ function it turns out that
+\begin{equation*} \begin{aligned} \int_{ B(0, \, t \, \sigma) } \tau_{i, \, h} \, u(x) \, \varphi(x) \, \mathrm{d}x & = \frac{1}{h} \left[ \int_{B(0, \, t \, \sigma)} u(x + h \, e_i) \, \varphi(x) \, \mathrm{d}x - \int_{B(0, \, t \, \sigma)} u(x) \, \varphi(x) \, \mathrm{d}x \right] = \\[1em] & = \frac{1}{h} \left[ \int_{B(h \, e_i, \, t \, \sigma)} u(y) \, \varphi(y - h \, e_i) \, \mathrm{d}y - \int_{B(0, \, t \, \sigma)} u(x) \, \varphi(x) \, \mathrm{d}x \right] \, {\color{red}=} \\[1em] & \, {\color{red}=} \, \frac{1}{h} \left[ \int_{B(0, \, \sigma)} u(x) \, \varphi(x - h \, e_i) \, \mathrm{d}x - \int_{B(0, \, \sigma)} u(x) \, \varphi(x) \, \mathrm{d}x \right]  = \\[1em] & = - \int_{ B(0, \, \sigma) } u(x) \, \tau_{i, \, -h} \, \varphi(x) \, \mathrm{d}x,\end{aligned} \end{equation*}
+where the {\color{red}red} identity follows from the inclusions
+\begin{equation*} \mathrm{spt}(\varphi) \subset B(0, \, t \, \sigma) \subseteq B(0, \, \sigma) \quad \text{and} \quad \mathrm{spt}(\tau_{i, \, -h} \, \varphi) \subset B(h \, e_i, \, t \, \sigma) \subset B(0, \, \sigma).\end{equation*}
+The space $L^q \left( B(0, \, \sigma) \right)$ is reflexive Banach space for any $q \in (1, \, + \infty)$, hence there are an infinitesimal sequence $(h_n)_{n \in \N}$ and a function $v_i \in L^q \left( B(0, \, \sigma) \right)$ such that
+\begin{equation*} \tau_{i, \, h_{n_k}} \, u \rightharpoonup v_i \quad \text{weakly in $L^q$}.\end{equation*}
+Therefore, for every $\varphi \in C_0^\infty \left( B(0, \, t \, \sigma) \right)$ it turns out (up to subsequences) that
+\begin{equation*}\begin{tikzcd}[contains/.style = {draw=none,"=" description,sloped}]
+\displaystyle\lim_{n \to + \infty} \int_{B(0, \, t \, \sigma)} \tau_{i, \, h_n} \, u(x) \, \varphi(x) \, \mathrm{d}x \ar[r, contains] & \displaystyle\int_{B(0, \, t \, \sigma)} v_i(x) \, \varphi(x) \, \mathrm{d}x \\
+\displaystyle\lim_{n \to + \infty} \int_{B(0, \, \sigma)} u(x) \, \tau_{i, \, -h_n} \, \varphi(x) \, \mathrm{d}x \ar[u, contains] \ar[r, contains] & \displaystyle\int_{B(0, \, \sigma)} u(x) \left[ \lim_{n \to + \infty} \tau_{i, \, -h_n} \, \varphi(x) \right] \, \mathrm{d}x,
+\end{tikzcd} \end{equation*}
+where the latter identity follows from Lebesgue dominated convergence theorem since
+\begin{equation*} \left| u(x) \, \tau_{i, \, -h} \, \varphi(x) \right| \leq c \, |u(x)| \, \sup_{x \in B(0, \, \sigma)} \left\| D_i \, \varphi(x) \right\|_{\infty, \, B(0, \, \sigma)}. \end{equation*}
+We conclude that
+\begin{equation*} \int_{B(0, \, \sigma)} u(x) \, \frac{\partial \, \varphi}{\partial \, x_i}(x) \, \mathrm{d}x = - \int_{B(0, \, \sigma)} v_i(x) \, \varphi(x) \, \mathrm{d}x \qquad \forall \, \varphi \in C_0^\infty \left( B(0, \, \sigma) \right), \end{equation*}
+that is, $u \in W^{1, \, q}\left( B(0, \, \sigma) \right)$ with weak partial derivatives $v_i(x)$ as $i \in \{1, \, \dots, \, n\}$. In order to prove the estimate \eqref{eq:ni2}, observe that for every $\psi \in L^{q^\prime} \left( B(0, \, t\, \sigma) \right)$ it turns out that
+\begin{equation*} \left| \int_{B(0, \, t \, \sigma)} \tau_{i, \, h_n} \, u(x) \, \psi(x) \, \mathrm{d}x \right| \leq M \, \|\psi\|_{L^{q^\prime}\left( B(0, \, \sigma) \right)}, \end{equation*}
+and, by passing to the limit, we obtain
+\begin{equation*} \left| \int_{B(0, \, t \, \sigma)} \frac{\partial \, u}{\partial \, x_i}(x) \, \psi(x) \, \mathrm{d}x \right| \leq M \, \|\psi\|_{L^{q^\prime}\left( B(0, \, \sigma) \right)}. \end{equation*}
+\end{proof}
+
+\section{Interior Regularity Theory}
+
+Let $\Omega$ be an open bounded subset of $\R^n$, $n \geq 2$, and let $u \in H^1(\Omega)$ be a solution (in the sense of distribution) of the elliptic problem
+\begin{equation} \label{regpr} - \sum_{i, \, j = 1}^{n} D^j \left[ a_{i, \, j}(x) \, D^i \, u(x) \right] = f(x), \qquad x \in \Omega. \end{equation}
+
+\begin{theorem}\label{th:dlsdlsld}Assume that $A(x) := \{a_{i, \, j}(x)\}$ is a uniformly elliptic matrix on $\Omega$, the coefficients $a_{i, \, j}(x)$ are functions of class $C^1$ on $\Omega$, and $f \in L^2(\Omega)$. Then for every couple of open subsets
+\begin{equation*} \Omega^\prime \subset \Omega^{\prime \prime} \subset \Omega \: : \: \mathrm{dist} \left( \partial \, \Omega^\prime, \, \partial \, \Omega^{\prime \prime} \right) > 0, \end{equation*}
+it turns out that $u \in H^2(\Omega^\prime)$, and
+\begin{equation} \label{regthest} \left| u \right|_{2, \, 2, \, \Omega^\prime} \leq c \left[ \|f\|_{0, \, 2, \, \Omega^{\prime \prime}} + \| u \|_{1, \, 2, \, \Omega^{\prime \prime} } \right]. \end{equation} \end{theorem}
+
+\begin{proof} The computations here are quite involved. Hence we divide the proof into many little steps to ease the notation for the reader.
+
+\paragraph{Step 1.} Let us define
+\begin{equation*}\delta := \mathrm{dist} \left( \partial \, \Omega^\prime, \, \partial \, \Omega^{\prime \prime} \right) > 0 \qquad \text{and} \qquad \Omega_{\sigma} := \left\{ x \in \Omega^{\prime \prime} \: \left| \: d(x, \, \partial \, \Omega^\prime) \geq \sigma \right. \right\}, \end{equation*}
+and let us consider the cut-off function $\Theta(x) \in C_c^\infty(\R^n)$ which is identically equal to $1$ in $\Omega_{\delta}$, and it is zero outside of $\Omega_{\frac{2}{3} \, \delta}$.
+
+\paragraph{Step 2.} Recall that $u$ is a weak solution of \eqref{regpr} if and only if for every $\varphi \in H_0^1 \left(\Omega \right)$ it turns out that
+\begin{equation*} \sum_{i, \, j = 1}^{n} \int_{\Omega} a_{i, \, j}(x) \, D^i \, u(x) \, D^j \, \varphi(x) \, \mathrm{d}x = \int_{\Omega} f(x) \, \varphi(x) \, \mathrm{d}x. \end{equation*}
+This is equivalent to requiring that for any $\psi \in H^1(\Omega)$ it turns out that
+\begin{equation*} \sum_{i, \, j = 1}^{n} \int_{\Omega} a_{i, \, j}(x) \, D^i \, u(x) \, D^j \, \left( \Theta(x) \, \psi(x) \right) \, \mathrm{d}x = \int_{\Omega} f(x) \, \left( \Theta(x) \, \psi(x) \right) \, \mathrm{d}x. \end{equation*}
+The Leibniz rule for the derivative gives us the identity
+\begin{equation} \label{reg:s1}  \begin{aligned} \sum_{i, \, j = 1}^{n} \int_{\Omega} a_{i, \, j}(x) \, D^i \left( u(x) \right) \, &\Theta(x) \, D^j \left(\psi(x) \right) \, \mathrm{d}x = \int_{\Omega} f(x) \, \left( \Theta(x) \, \psi(x) \right) \, \mathrm{d}x - \dots \\[1em] & \dots - \sum_{i, \, j=1}^{n} \int_\Omega a_{i, \, j}(x) \, D^i \left( u(x) \right) \, \psi(x) \, D^j \left( \Theta(x) \right) \, \mathrm{d}x. \end{aligned}\end{equation}
+Notice that
+\begin{equation*} D^i \left( u(x) \right) \, \Theta(x) = D^i \left( u(x) \, \Theta(x) \right) - u(x) \, D^i \, \Theta(x), \end{equation*}
+thus, if we set
+\begin{equation*}\mathcal{U}(x) := u(x) \, \Theta(x) \qquad \text{and} \qquad F(x) = f(x) \, \Theta(x) - \sum_{i, \, j=1}^n a_{i, \, j}(x) \, D^i \, u(x) \, D^j \, \Theta(x), \end{equation*}
+then \eqref{reg:s1} may be rewritten as follows:
+\begin{equation} \label{reg:s2} \begin{aligned} \sum_{i, \, j = 1}^{n} \int_{\Omega} a_{i, \, j}(x) \, D^i & \, \mathcal{U}(x) \,  D^j \, \psi(x) \, \mathrm{d}x = \\ & = \int_{\Omega}\left( F(x) \, \psi(x)  - \sum_{i, \, j=1}^{n} a_{i, \, j}(x) \, u(x) D^i \, \Theta(x) \, D^j \, \psi(x) \right) \, \mathrm{d}x. \end{aligned}\end{equation}
+
+\paragraph{Step 3.} In the previous step, we determined that the identity \eqref{reg:s2} holds for every $\psi \in H_0^1\left(\Omega_{\frac{\delta}{2}} \right)$. Let us consider as a test function the incremental ratio
+\begin{equation*} \tau_{r, \, -h} \, \psi(x), \qquad 0 < |h| < \frac{\delta}{2}, \end{equation*}
+that is, if we use $\tau_{r, \, -h} \, \psi \in H_0^1 \left( \Omega^{\prime \prime} \right)$ as a test function in \eqref{reg:s2}, then it turns out that
+\begin{equation} \label{reg:s3} \begin{aligned} \sum_{i, \, j = 1}^{n} \int_{\Omega_{\frac{\delta}{2}}} a_{i, \, j}(x) \, D^i & \, \mathcal{U}(x) \,  D^j \, \left( \tau_{r, \, -h} \, \psi(x) \right) \, \mathrm{d}x =  \int_{\Omega} F(x) \, \tau_{r, \, -h} \,\psi(x) \, \mathrm{d}x + \\[1em] & + \int_{\Omega}\left( \sum_{i, \, j=1}^{n} a_{i, \, j}(x) \, u(x) D^i \, \Theta(x) \, D^j \, \left( \tau_{r, \, -h} \, \psi(x) \right) \right) \, \mathrm{d}x. \end{aligned}\end{equation}
+The left-hand side can be easily\footnote{We use the identity $\tau_{r, \, h} \left(f(x) \, g(x)\right) = f(x + h \, e_r) \, \tau_{r, \, h} \, g(x) + \left(\tau_{r, \, h} \, f(x) \right] \, g(x)$.} rewritten as
+\begin{equation} \label{reg:s4} \begin{aligned} & \sum_{i, \, j = 1}^{n} \int_{\Omega_{\frac{\delta}{2}}} \tau_{r, \, h} \left[ a_{i, \, j}(x) \, D^i  \, \mathcal{U}(x) \right] \,  D^j \, \psi(x) \, \mathrm{d}x  = \\[1em] & =  \sum_{i, \, j = 1}^{n} \int_{\Omega_{\frac{\delta}{2}}} \left\{ a_{i, \, j}(x + h \, e_r) \,\tau_{r, \, h} \left( D^i  \, \Theta(x) \right) \,  D^j \, \psi(x) + \tau_{r, \, h} \left( a_{i, \, j}(x) \right) \, D^i  \, \mathcal{U}(x) \,  D^j \, \psi(x) \right\} \mathrm{d}x.  \end{aligned}\end{equation}
+If we apply \eqref{reg:s4} to \eqref{reg:s3}, it turns out that
+\begin{equation} \label{reg:s5}  \sum_{i, \, j = 1}^{n} \int_{\Omega_{\frac{\delta}{2}}}  a_{i, \, j}(x + h \, e_r) \,\tau_{r, \, h} \left( D^i  \, \mathcal{U}(x) \right) \,  D^j \, \psi(x) \, \mathrm{d}x = I_1 + I_2 + I_3, \end{equation}
+where
+\begin{equation*} \begin{aligned} &I_1 := - \int_{\Omega_{\frac{\delta}{2}}} F(x) \, \tau_{r, \, -h} \, \psi(x) \, \mathrm{d}x, \\[1em] & I_2 := - \int_{\Omega_{\frac{\delta}{2}}} \sum_{i, \, j=1}^n a_{i, \, j}(x) \, D^i \, \Theta(x) \, D^j \left( \tau_{r, \, -h} \, \psi(x) \right) \, \mathrm{d}x, \\[1em] & I_3 := - \int_{\Omega_{\frac{\delta}{2}}} \sum_{i, \, j=1}^n \tau_{r, \, h} \, a_{i, \, j}(x) \, D^i \, \mathcal{U}(x) \, D^j \, \psi(x) \, \mathrm{d}x. \end{aligned} \end{equation*}
+
+\paragraph{Step 4.} In this paragraph, we given an estimate of the integrals $I_i$ for $i = 1, \, 2, \, 3$. First, we notice that
+\begin{equation*} \begin{aligned}
+|I_1| & \leq \|F\|_{0, \, 2, \, \Omega^{\prime \prime}} \, \| \tau_{r, \, -h} \, \psi \|_{0, \, 2, \,  \Omega_{\frac{2}{3}\delta}} \, {\color{red}\leq} \\[1em] & \, {\color{red}\leq} \, \|F\|_{0, \, 2, \, \Omega^{\prime \prime}} \, \| \psi \|_{1, \, 2, \, \Omega_{\frac{\delta}{2}}} \leq \\[1em] & \leq 2 \left( \|F\|_{0, \, 2, \, \Omega^{\prime\prime}} + \left\| \sum_{i, \, j = 1}^n a_{i, \, j} \, D^i \, u \, D^j \, \Theta \right\|_{0, \, 2, \, \Omega^{\prime \prime}} \right) \,  \| \psi \|_{1, \, 2, \,\Omega_{\frac{\delta}{2}}} \leq \\[1em] & \leq c \left( \|a_{i, \, j} \|_\infty, \, n, \, \delta \right) \, \left( \|f\|_{0, \, 2, \, \Omega^{\prime \prime}} + \|u\|_{1, \, 2, \, \Omega} \right) \,  \| \psi \|_{1, \, 2, \, \Omega_{\frac{\delta}{2}}}, 
+\end{aligned}\end{equation*}
+where the {\color{red}red} inequality follows from \hyperref[Nir1]{Lemma \ref{Nir1}}. In a similar fashion
+\begin{equation*} \begin{aligned}
+|I_2| & \leq \left| \sum_{i, \, j = 1}^n \int_{\Omega_{\frac{\delta}{2}}} \tau_{r, \, h} \left[ a_{i, \, j}(x) \, D^j \, \Theta(x) \right] \, u(x) \, D^j \, \psi(x) \, \mathrm{d}x \right| \leq \\[1em] & \leq c(\delta) \, \| \psi \|_{1, \, 2, \, \Omega_{\frac{\delta}{2}}} \, \left( \max_{i, \, j} \|a_{i, \, j} \|_{\infty, \, \Omega} \, \| \tau_{r, \, h} \, u \|_{0, \, 2, \, \Omega_{\frac{\delta}{2}}} + \max_{i, \, j} \|D^r \, a_{i, \, j} \|_{\infty, \, \Omega} \, \| u \|_{0, \, 2, \, \Omega} \right) \leq \\[1em] & \leq c(\delta) \, \| \psi \|_{1, \, 2, \, \Omega_{\frac{\delta}{2}}} \, \left( \max_{i, \, j} \|a_{i, \, j} \|_{\infty, \, \Omega} \, \|u \|_{1, \, 2, \, \Omega} + \max_{i, \, j} \|D^r \, a_{i, \, j} \|_{\infty, \, \Omega} \, \| u \|_{0, \, 2, \, \Omega} \right).
+\end{aligned}\end{equation*}
+In conclusion, we also have that
+\begin{equation*} |I_3| \leq \max_{i, \, j} \|D^r \, a_{i, \, j} \|_{\infty, \, \Omega} \, \left\| \mathcal{U} \right\|_{1, \, 2, \, \Omega_{\frac{\delta}{2}}} \, \| \psi \|_{1, \, 2, \, \Omega_{\frac{\delta}{2}}}. \end{equation*}
+
+\paragraph{Step 5.} It follows from \eqref{reg:s5} and from the previous step that
+\begin{equation} \begin{aligned} \label{reg:s6} & \left|  \sum_{i, \, j = 1}^{n} \int_{\Omega_{\frac{\delta}{2}}}  a_{i, \, j}(x + h \, e_r) \,\tau_{r, \, h} \left( D^i  \, \mathcal{U}(x) \right) \,  D^j \, \psi(x) \, \mathrm{d}x \right| \leq \\[1em] & \leq c \left( \|a_{i, \, j}\|_{\infty, \, \Omega}, \, \|D^r \, a_{i, \, j}\|, \, n, \, \delta \right) \cdot \left[ \|f\|_{0, \, 2, \, \Omega^{\prime \prime}} + \| u \|_{1, \, 2, \, \Omega^{\prime \prime}} \right] \, \left| \psi \right|_{1, \, 2, \, \Omega_{\frac{\delta}{2}}}.  \end{aligned}\end{equation}
+If we set $\psi := \tau_{r, \, h} \, \mathcal{U}$, then \eqref{reg:s6} gives us
+\begin{equation} \begin{aligned} \label{reg:s7} & \left|  \sum_{i, \, j = 1}^{n} \int_{\Omega_{\frac{\delta}{2}}}  a_{i, \, j}(x + h \, e_r) \,\tau_{r, \, h} \left( D^i  \, \mathcal{U}(x) \right) \,  D^j \, \left[ \tau_{r, \, h} \, \mathcal{U}(x) \right] \, \mathrm{d}x \right| \leq \\[1em] & \leq c \left( \|a_{i, \, j}\|_{\infty, \, \Omega}, \, \|D^r \, a_{i, \, j}\|, \, n, \, \delta \right) \cdot \left[ \|f\|_{0, \, 2, \, \Omega^{\prime \prime}} + \| u \|_{1, \, 2, \, \Omega^{\prime \prime}} \right] \, \left| \tau_{r, \, h} \, \mathcal{U} \right|_{1, \, 2, \, \Omega_{\frac{\delta}{2}}}.  \end{aligned}\end{equation}
+By coerciveness it turns out that
+\begin{equation*} \nu \, \left|\tau_{r, \, h} \, \mathcal{U} \right|_{1, \, 2, \, \Omega_{\frac{\delta}{2}}}^2 \leq c \left( \|a_{i, \, j}\|_{\infty, \, \Omega}, \, \|D^r \, a_{i, \, j}\|, \, n, \, \delta \right) \cdot \left[ \|f\|_{0,\, 2, \, \Omega^{\prime \prime}} + \| u \|_{1, \, 2, \, \Omega^{\prime \prime}} \right] \, \left| \tau_{r, \, h} \, \mathcal{U} \right|_{1, \, 2, \, \Omega_{\frac{\delta}{2}}}, \end{equation*}
+that is,
+\begin{equation*} \nu \, \left|\tau_{r, \, h} \, \mathcal{U} \right|_{1, \, 2, \, \Omega_{\frac{\delta}{2}}} \leq c \left( \|a_{i, \, j}\|_{\infty, \, \Omega}, \, \|D^r \, a_{i, \, j}\|, \, n, \, \delta \right) \cdot \left[ \|f\|_{0, \, 2, \, \Omega^{\prime \prime}} + \| u \|_{1, \, 2, \, \Omega^{\prime \prime}} \right]. \end{equation*}
+By \hyperref[Nir2]{Lemma \ref{Nir2}} we conclude that
+\begin{equation*} \nu \, \left|D^r \, \mathcal{U} \right|_{1, \, 2, \, \Omega_{\frac{\delta}{2}}} \leq c \left( \|a_{i, \, j}\|_{\infty, \, \Omega}, \, \|D^r \, a_{i, \, j}\|, \, n, \, \delta \right) \cdot \left[ \|f\|_{0, \, 2, \, \Omega^{\prime \prime}} + \| u \|_{1, \, 2, \, \Omega^{\prime \prime}} \right], \end{equation*}
+and the thesis follows from the fact that $u = \mathcal{U}$ on $\Omega^\prime$.
+\end{proof}
+
+\paragraph{Generalizations.} Let $u \in H^1(\Omega)$ be a solution (in the sense of distribution) of the elliptic problem
+\begin{equation} \label{regprgen} - \sum_{i, \, j = 1}^{n} D^j \left[ a_{i, \, j}(x) \, D^i \, u(x) \right] + \sum_{i=1}^n a_i(x) \, D^i \, u(x) + a(x) \, u(x) = f(x), \qquad x \in \Omega. \end{equation}
+
+\begin{theorem}\label{thskdkkdks} Assume that $A(x) := \{a_{i, \, j}(x)\}$ is a uniformly elliptic matrix on $\Omega$, the coefficients $a_{i, \, j}(x)$ are functions of class $C^1$ on $\Omega$, the coefficients $a_i(x)$ and $a(x)$ are functions of class $L^\infty$ on $\Omega$, and $f \in L^2(\Omega)$. Then for every couple of open subsets
+\begin{equation*} \Omega^\prime \subset \Omega^{\prime \prime} \subset \Omega \: : \: \mathrm{dist} \left( \partial \, \Omega^\prime, \, \partial \, \Omega^{\prime \prime} \right) > 0, \end{equation*}
+it turns out that $u \in H^2(\Omega^\prime)$, and
+\begin{equation} \label{regthestgen} \left| u \right|_{2, \, 2, \, \Omega^\prime } \leq c(a_{i, \, j}, \, a_i, \, a, \, \nu) \cdot \left[ \|f\|_{0, \, 2, \, \Omega^{\prime \prime}} + \| u \|_{1, \, 2, \, \Omega^{\prime \prime}} \right]. \end{equation} \end{theorem}
+
+\begin{proof}It suffices to apply \hyperref[th:dlsdlsld]{Theorem \ref{th:dlsdlsld}} to the elliptic problem
+\begin{equation*} - \sum_{i, \, j = 1}^{n} D^j \left[ a_{i, \, j}(x) \, D^i \, u(x) \right] = \tilde{f}(x), \end{equation*}
+where
+\begin{equation*} \tilde{f}(x) := - \sum_{i=1}^n a_i(x) \, D^i \, u(x) - a(x) \, u(x) + f(x)\in L^2(\Omega). \end{equation*}\end{proof}
+
+\begin{theorem}\label{rethrsdksd} Assume that $A(x) := \{a_{i, \, j}(x)\}$ is a uniformly elliptic matrix on $\Omega$, the coefficients $a_{i, \, j}(x)$ are functions of class $C^{k+1}$ on $\Omega$, the coefficients $a_i(x)$ and $a(x)$ are functions of class $C^k$ on $\Omega$, and $f \in H^k(\Omega)$. Then for every couple of open subsets
+\begin{equation*} \Omega^\prime \subset \Omega^{\prime \prime} \subset \Omega \: : \: \mathrm{dist} \left( \partial \, \Omega^\prime, \, \partial \, \Omega^{\prime \prime} \right) > 0, \end{equation*}
+it turns out that $u \in H^{k+2}(\Omega^\prime)$, and
+\begin{equation} \label{regthestgenc} \left\| u \right\|_{k+2, \, 2, \, \Omega^\prime} \leq c(a_{i, \, j}, \, a_i, \, a, \, \nu) \cdot \left[ \|f\|_{k, \, 2, \, \Omega^{\prime \prime}} + \| u \|_{k+1, \, 2, \, \Omega^{\prime \prime}} \right]. \end{equation} \end{theorem}
+
+\begin{proof}We prove this theorem by induction on the regularity $k$.
+
+\paragraph{Base Step.} We have already proved it for $k = 0$ (see \hyperref[thskdkkdks]{Theorem \ref{thskdkkdks}}).
+
+\paragraph{Inductive Step.} If we take the $\alpha$-th derivative of \eqref{regprgen}, for $|\alpha| = k$, then the thesis follows from \hyperref[thskdkkdks]{Theorem \ref{thskdkkdks}} applied to the function $w = D^\alpha \, u$. \end{proof}
+
+\section{Differentiability at the Boundary}
+
+\begin{notation}Let $B_r := B(0, \, r) \subset \R^n$ be the unitary open ball of $\R^n$. We denote by
+\begin{equation*} B_r^+ := B_r \cap \left\{ x \in \R^n \: \left| \: x_n > 0 \right. \right\} \end{equation*}
+the upper-half of the open ball, and we denote by
+\begin{equation*} \Gamma_r^+ := B_r \cap \left\{ x \in \R^n \: \left| \: x_n = 0 \right. \right\}\end{equation*}
+its lower border, i.e., the intersection between the ball and the hyperplane $\{x_n = 0\}$.\end{notation}
+
+In this section, we will be concerned with the following elliptic problem with values at the boundary:
+\begin{equation} \label{sob:pr1} \begin{cases}- \displaystyle\sum_{i, \, j = 1}^{n} D^j \left( a_{i, \, j}(x) \, D^i \, u(x) \right) = f(x) & x \in B_r^+, \\[2em] u(x) = 0 & x \in \Gamma_r. \end{cases} \end{equation}
+
+\begin{theorem}\label{sob:extreg}Let $u \in H^1 \left(B_r^+ \right)$ be a solution of \eqref{sob:pr1}, and assume that \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $A(x) := \{a_{i, \, j}(x)\}$ is a uniformly elliptic matrix on $B_r^+$;
+\item the coefficients $a_{i, \, j}(x)$ are functions of class $C^{1}$ on $\overline{B_r^+}$; and 
+\item $f \in L^2(B_r^+)$.
+\end{enumerate}
+Then for any $\rho \in (0, \, r)$ it turns out that $u \in H^2 \left(B_\rho^+ \right)$ and
+\begin{equation} \label{regthintgenc} \left| u \right|_{2, \, 2, \, B_\rho^+} \leq c(\nu, \, \rho, \, r, \, n, \, a_{i, \, j}) \cdot \left[ \|f\|_{0, \, 2, \, B_r^+} + \| u \|_{1, \, 2, \, B_r^+} \right]. \end{equation} \end{theorem}
+
+\begin{proof} Let us denote by $W_{\Gamma_0}^1 \left(B_r^+ \right)$ the closure of the set of all $C^1 \left( \overline{B_r^+} \right)$ functions vanishing in a neighborhood of $\Gamma_r$ with respect to the $W^1 \left(B_r^+ \right)$ norm. We consider the weak formulation of \eqref{sob:pr1}, i.e., $u$ is a solution of the problem
+\begin{equation} \label{sob:pr1weak} \begin{cases} \displaystyle\sum_{i, \, j = 1}^{n} \int_{B_r^+} a_{i, \, j}(x) \, D^i \, u(x) \, D^j \, \varphi(x)\, \mathrm{d}x = \int_{B_r^+} f(x) \, \varphi(x) \, \mathrm{d}x & \forall \, \varphi \in W_0^1 \left(B_r^+ \right), \\[2em] u \in W_{\Gamma_0}^1 \left(B_r^+ \right). \end{cases} \end{equation}
+Let $\Theta \in C_0^\infty(\R^n)$ be a cut-off function such that $\Theta$ is identically equal to $1$ on $B_\rho$, and it is supported in the ball of center the origin and radius $(r + \rho)/2$. Let us consider test functions of the form
+\begin{equation*}\varphi(x) = \Theta(x) \, \psi(x), \qquad \psi \in W_{\Gamma_0}^1 \left( B_r^+ \right), \end{equation*}
+and let us set as before
+\begin{equation*} F(x) = f(x) \, \Theta(x) - \sum_{i, \, j = 1}^n a_{i, \, j}(x) \, D^i \, u(x) \, D^j \, \Theta(x) \quad \text{and} \quad \mathcal{U}(x) = \Theta(x) \, u(x).\end{equation*}
+If we substitute the test function $\varphi$ in the equation \eqref{sob:pr1weak}, then it turns out that
+\begin{equation} \label{sob:pr11}\begin{aligned} \sum_{i, \, j = 1}^n  \int_{B_r^+} a_{i, \, j}(x) \, D^i \, \mathcal{U}(x) \, D^j \, \psi(x) \, \mathrm{d}x & = \int_{B_r^+} F(x) \, \psi(x) \, \mathrm{d}x + \dots \\[1em] & \dots + \sum_{i, \, j = 1}^{n} \int_{B_r^+} a_{i, \, j}(x) \, D^i \, \Theta(x) \, D^j \, \psi(x) \, u(x) \, \mathrm{d}x.\end{aligned} \end{equation}
+The identity \eqref{sob:pr11} holds for any $\psi \in W_{\Gamma_0}^1 \left(B_r^+ \right)$ vanishing outside of $B_{\frac{r + \rho}{2}}^+$. Hence we can consider the incremental ratios $\tau_{r, \, -h}$ as $r$ ranges in $r = 1, \, \dots, \, (n-1)$ and
+\begin{equation*} |h| < \frac{r + \rho}{2}. \end{equation*}
+A similar argument to the one used in the proof of \hyperref[th:dlsdlsld]{Theorem \ref{th:dlsdlsld}} proves that
+\begin{equation} \label{sob:pr12} \sum_{i = 1}^n \sum_{r = 1}^{n-1} \int_{B_\rho^+} \left| D^r \, D^i \, u(x) \right|^2 \, \mathrm{d}x \leq c(\nu, \, \rho, \, r, \, n, \, a_{i, \, j}) \cdot \left[ \|f\|_{0, \, 2, \, B_r^+} + \| u \|_{1, \, 2, \,  B_r^+ } \right], \end{equation}
+hence we only need to estimate the term $D^{n} \, D^n \, u(x)$. From the identity \eqref{sob:pr11} we have
+\begin{equation*} \begin{aligned} \int_{B_r^+} a_{n, \, n}(x) & \, D^n \, \mathcal{U}(x) \, D^n \, \psi(x) \, \mathrm{d}x  = \int_{B_r^+} F(x) \, \psi(x) \, \mathrm{d}x + \dots \\[1em] & \dots + \sum_{i, \, j= 1}^n \int_{B_r^+} a_{i, \, j}(x) \, D^i \, \Theta(x) \, D^j \, \psi(x) \, u(x) \, \mathrm{d}x - \dots \\[1em] & \dots \sum_{i = 1}^n \sum_{j = 1}^{n-1} \int_{B_r^+} a_{i, \, j}(x) \, D^i \, \mathcal{U}(x) \, D^j \, \psi(x) \, \mathrm{d}x - \dots \\[1em] & \dots - \sum_{i = 1}^{n-1} \int_{B_r^+} a_{i, \, j}(x) \, D^i \, \mathcal{U}(x) \, D^n \, \psi(x) \, \mathrm{d}x = \\[1em] & = \int_{B_r^+} H(x) \, \psi(x) \, \mathrm{d}x \end{aligned} \end{equation*}
+for any $\psi \in W_0^1 \left(B_r^+ \right)$, where
+\begin{equation*} \begin{aligned} H(x)  & = F(x) - \sum_{i, \, j = 1}^n D^j \left[ a_{i, \, j}(x) \, D^i \Theta(x) \, u(x) \right] + \dots \\[1em] & \dots + \sum_{i = 1}^n \sum_{j = 1}^{n-1} D^j \left[ a_{i, \, j}(x) \, D^i \, \mathcal{U}(x) \right] + \dots \\[1em] & \dots + \sum_{i = 1}^{n-1} D^n \left[ a_{i, \, j}(x) \, D^i \, \mathcal{U}(x) \right]. \end{aligned} \end{equation*}
+The argument above proves that $H \in L^2 \left(B_\rho^+ \right)$. Let us consider\footnote{By the uniform ellipticity condition, we obtain $a_{n, \, n}(x) \geq \nu > 0$.}
+\begin{equation*} \psi(x) = \frac{\xi(x)}{a_{n, \, n}(x)}, \qquad \xi \in C_0^\infty \left( B_\rho^+ \right). \end{equation*}
+By the assumption on the coefficients, it easily turns out that $\psi \in W_0^1 \left(B_\rho^+\right)$. If we substitute this into the above identity, we obtain the relation
+\begin{equation} \label{eq:sssasas} \int_{B_\rho^+} D^n \, u(x) \, D^n \, \xi(x) \, \mathrm{d}x = \int_{B_\rho^+} \left[ H(x) \, \frac{\xi(x)}{a_{n, \, n}(x)} + D^n \, u(x) \, \frac{\xi(x) \, D^n \, D^n \, a_{n, \, n}(x)}{a_{n, \, n}(x)} \right] \, \mathrm{d}x \end{equation}
+for any $\xi \in C_0^\infty \left( B_\rho^+ \right)$. If we set
+\begin{equation*} G(x) := \frac{H(x) - D^n \, u(x) \, D^n \, a_{n, \, n}(x)}{a_{n, \, n}(x)}, \end{equation*}
+then $G \in L^2 \left( B_\rho^+ \right)$ and the relation \eqref{eq:sssasas} becomes
+\begin{equation*} \int_{B_\rho^+} D^n \, u(x) \, D^n \, \xi(x) \, \mathrm{d}x = \int_{B_\rho^+} G(x) \, \xi(x) \, \mathrm{d}x \end{equation*}
+for every $\xi \in C_0^\infty \left( B_\rho^+ \right)$. We deduce that $D^n \, D^n \, u(x)$ exists in $B_\rho^+$, and it belongs to $L^2 \left( B_\rho^+ \right)$; more precisely, it turns out that
+\begin{equation*}D^n \, D^n \, u(x) = - G(x) \end{equation*}
+which implies the thesis.  \end{proof}
+
+\begin{theorem}Let $u \in H^{k+1}\left(B_r^+ \right)$ be a solution of \eqref{sob:pr1}, and assume that \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $A(x) := \{a_{i, \, j}(x)\}$ is a uniformly elliptic matrix on $B_r^+$;
+\item the coefficients $a_{i, \, j}(x)$ are functions of class $C^{k+1}$ on $\overline{B_r^+}$; and 
+\item $f \in H^k(B_r^+)$.
+\end{enumerate}
+Then for any $\rho \in (0, \, r)$ it turns out that $u \in H^{k+2} \left(B_\rho^+ \right)$ and
+\begin{equation} \label{regthintgenc2} \left| u \right|_{k+2, \, 2, \, B_\rho^+} \leq c(\nu, \, \rho, \, r, \, n, \, a_{i, \, j}) \cdot \left[ \|f\|_{k, \, 2, \, B_r^+} + \| u \|_{k+1, \, 2, \, B_r^+} \right]. \end{equation} \end{theorem}
+
+\begin{proof}The idea is to estimate the $L^2(B_\rho^+)$ norm of the $(k+2)$-th order (weak) derivatives, and combine them to obtain \eqref{regthintgenc2}. More precisely, we want to show that for every $|\alpha| = k$ and for every $i, \, j = 1, \, \dots, \, n$, it turns out that
+\begin{equation} \label{rethintgenc3} \left\| D^\alpha \, D_{i, \, j} \, u \right\|_{0, \, 2, \, B_\rho^+} \leq c_{i, \, j} \cdot \left[ \|f\|_{k, \, 2, \, B_r^+} + \| u \|_{k+1, \, 2, \, B_r^+} \right]. \end{equation}
+
+\paragraph{Base Step.} Set $\alpha = (\alpha_1, \, \dots, \, \alpha_{n-1}, \, h)$; we proceed by induction on $h$. If $h = 0$ and $|\alpha| = k$, then the function $w = D^\alpha \, u$ solves the Dirichlet problem
+\begin{equation} \label{sob:pr10} \begin{cases}- \displaystyle\sum_{i, \, j = 1}^{n} D^j \left( a_{i, \, j}(x) \, D^i \, w(x) \right) = G(x) + g(x) & x \in B_r^+, \\[2em] w(x) = 0 & x \in \Gamma_r \end{cases} \end{equation}
+which is nothing more than the $\alpha$-derivative of \eqref{sob:pr1}. We observe that $w(x) = 0$ on the boundary $\Gamma_r$ since the $n$-th index of $\alpha$ is zero by assumption. A straightforward computation shows that
+\begin{equation*} \begin{aligned} & g(x) = D^\alpha \, f(x), \\[1em] & G(x) = \sum_{i, \, j=1}^n \, \sum_{\substack{\beta \leq \alpha \\[0.4em] \beta \neq 0 }} \binom{\alpha}{\beta} \, D_j \left[ D^\beta \, a_{i, \, j}(x) \, D^{\alpha - \beta} \, D_i \, u(x) \right], \end{aligned} \end{equation*}
+hence the estimate \eqref{rethintgenc3} follows from \hyperref[rethrsdksd]{Theorem \ref{rethrsdksd}}.
+
+\paragraph{Inductive Step.} Suppose that the estimate \eqref{rethintgenc3} holds for every multi-index $\alpha$ such that $\alpha_n = h < k$ and $|\alpha| = k$. Let us consider the weak formulation of the Dirichlet problem \eqref{sob:pr1}, given by
+\begin{equation} \label{sob:pr1weak1} \sum_{i, \, j = 1}^{n} \int_{B_r^+} a_{i, \, j}(x) \, D^i \, u(x) \, D^j \, \varphi(x)\, \mathrm{d}x = \int_{B_r^+} f(x) \, \varphi(x) \, \mathrm{d}x \qquad \forall \, \varphi \in C_0^\infty \left(B_r^+ \right). \end{equation}
+Let us take the test function $\varphi = D^\beta \, \psi$, where $\psi \in C_0^\infty(B_r^+)$ is another test function, and $\beta = (\beta_1, \, \dots, \, \beta_{n-1}, \, h+1)$ a multi-index of length $|\beta| = k$. By substituting $\varphi$ in the identity \eqref{sob:pr1weak1}, it turns out that
+\begin{equation} \label{sob:pr1weak12} \sum_{i, \, j = 1}^{n} \int_{B_r^+} D^\beta \left[ a_{i, \, j}(x) \, D_i \, u(x) \right] \, D_j\, \psi(x)\, \mathrm{d}x = \int_{B_r^+} D^\beta \, f(x) \, \psi(x) \, \mathrm{d}x \qquad \forall \, \psi \in C_0^\infty \left(B_r^+ \right). \end{equation}
+If we expand the derivatives and we set aside the maximal-order terms, then for every $\psi \in C_0^\infty(B_r^+)$ it turns out that
+\begin{equation} \label{sob:pr1weak13} \begin{aligned}  \int_{B_r^+} & a_{n, \, n}(x) \, D_n \, D^\beta \, u(x) \, D_n \, \psi(x) \, \mathrm{d}x = \\[1em] & =- \sum_{\substack{i, \, j = 1 \\[0.4em] i \cdot j < n^2}}^{n} \, \sum_{ \substack{\gamma \leq \beta \\[0.4em] \gamma \neq 0}} \binom{\beta}{\gamma} \int_{B_r^+} D^\gamma \, a_{i, \, j}(x) \, D^{\beta - \gamma} \, D_i \, u(x) \, D_j \, \psi(x) \, \mathrm{d}x + \dots \\[1em] & \dots + \int_{B_r^+} D^\beta \, f(x) \, \psi(x) \, \mathrm{d}x = \int_{B_r^+} \left[G(x) + g(x) \right] \, \psi(x) \, \mathrm{d}x, \end{aligned} \end{equation}
+where
+\begin{equation*} \begin{aligned} & g(x) = D^\beta \, f(x), \\[1em] & G(x) =- \sum_{\substack{i, \, j=1 \\[0.4em] i \cdot j < n^2}}^n \, \sum_{\substack{\gamma \leq \beta \\[0.4em] \gamma \neq 0 }} \binom{\beta}{\gamma} \, D_j \left[ D^\gamma \, a_{i, \, j}(x) \, D^{\beta - \gamma} \, D_i \, u(x) \right]. \end{aligned} \end{equation*}
+Let $\xi \in C_0^\infty(B_\rho^+)$, and let us set
+\begin{equation*} \psi(x) := \frac{\xi(x)}{a_{n, \, n}(x)}. \end{equation*}
+Clearly $\psi$ belongs to $H_0^{k+1}(B_\rho^+)$, hence \eqref{sob:pr1weak13} becomes
+\begin{equation*} \int_{B_r^+} D_n \, D^\beta \, u(x) \, D_n \, \xi(x) \, \mathrm{d}x = \int_{B_r^+} \left[H(x) + \left(G(x) + g(x) \right) \, a_{n, \, n}(x) \right] \, \xi(x) \, \mathrm{d}x, \qquad \forall \, \xi \in H_0^{k+1}(B_\rho^+),\end{equation*}
+where
+\begin{equation*}H(x) = \frac{D_n \, a_{n, \, n}(x)}{a_{n, \, n}(x)} \, D^\alpha \, D_n \, u(x). \end{equation*}
+In conclusion, we notice that by assumption $H(x) + G(x) + g(x)$ belongs to $L^2(B_r^+)$, hence the estimate \eqref{rethintgenc3} follows from \hyperref[rethrsdksd]{Theorem \ref{rethrsdksd}}.
+\end{proof}
+
+\section{Global Regularity}
+
+\begin{theorem}Let $\Omega \subset \R^n$ be an open bounded subset with borderd $\partial \, \Omega$ of class $C^1$, and let $u \in H^1(\Omega)$ be a weak solution of the Dirichlet problem
+\begin{equation} \label{regpr:global} \begin{cases} - \displaystyle\sum_{i, \, j = 1}^{n} D^j \left[ a_{i, \, j}(x) \, D^i \, u(x) \right] = f(x), & x \in \Omega \\[1em] u(x) = 0, & x \in \partial \, \Omega. \end{cases} \end{equation}
+Assume that: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $A(x) := \{a_{i, \, j}(x)\}$ is a uniformly elliptic matrix on $\Omega$;
+\item the coefficients $a_{i, \, j}(x)$ are functions of class $C^{1}$ on $\overline{\Omega}$; and 
+\item $f \in L^2(\Omega)$.
+\end{enumerate}
+Then $u \in H^2(\Omega)$ and we have the additional estimate
+\begin{equation} \label{regthintgenc2:gen} \left| u \right|_{2, \, 2, \, \Omega} \leq c(a_{i, \, j}, \, n, \, \Omega) \cdot \left[ \|f\|_{0, \, 2, \, \Omega} + \| u \|_{1, \, 2, \, \Omega} \right]. \end{equation} \end{theorem}
+
+\begin{proof} The argument is rather involved. Hence we divide the proof into four different steps.
+
+\paragraph{Step 1.} Let us consider a covering of $\Omega$ given by the finite collection of open sets
+\begin{equation*}\left\{ \Omega^\prime, \, \Omega^{\prime \prime}, \, U_1, \, \dots, \, U_m, \, V_1, \, \dots, \, V_m \right\},  \end{equation*}
+where (see \hyperref[fig:dksaodosdos]{Figure \ref{fig:dksaodosdos}}) mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item $\Omega^\prime \subset \Omega^{\prime \prime} \subset \subset \Omega$, and the distance $d\left(\Omega^{\prime \prime}, \, \partial \, \Omega^\prime \right)$ is positive;
+\item $U_\ell$ and $V_\ell$ are neighborhoods centered at $x_\ell \in \partial \, \Omega$;
+\item $V_\ell \subset U_\ell$ for any $\ell = 1, \, \dots, \, m$;
+\item the boundary $\partial \, \Omega$ is contained in the finite union $\cup_{\ell = 1}^m V_\ell$;
+\item $\Omega$ is contained in the union $\cup_{\ell = 1}^{m} V_\ell \cup \Omega^\prime$.
+\end{enumerate}
+
+\paragraph{Step 2.} It follows from \hyperref[th:dlsdlsld]{Theorem \ref{th:dlsdlsld}} that $u \in H^2 \left(\Omega^\prime \right)$, and also that
+ \begin{equation*} \left\| u \right\|_{2, \, 2, \, \Omega^\prime} \leq c \cdot \left[ \|f\|_{0, \, 2, \, \Omega^{\prime \prime}} + \| u \|_{1, \, 2, \, \Omega^{\prime \prime}} \right]. \end{equation*} 
+It remains to study the regularity of the solution on the boundary. Let $\Phi_\ell$ be the diffeomorphism between the intersection $U_\ell \cap \Omega$ and an open set of $\R^n$ defined by
+\begin{equation*} \begin{aligned} & \Phi_i(x) = x_i, \qquad i = 1, \, \dots, \, n - 1; \\[1em] \Phi_n(x) = \psi_\ell(x^\prime) - x_n, \qquad x^\prime = (x_1, \, \dots, \, x_{n-1}), \end{aligned} \end{equation*}
+where $\psi_\ell : \R^{n-1} \to \R$ is a map of class $C^1$, whose graph is equal to $\partial \, \Omega \cap U_\ell$. One can easily check that
+\begin{equation*} \Phi(U_\ell \cap \Omega) \subset \left\{ y \in \R^n \: \left| \: y_n > 0 \right. \right\} \qquad \text{and} \qquad \Phi(U_\ell \cap \partial \, \Omega) \subset \left\{ y \in \R^n \: \left| \:  y_n = 0 \right. \right\}, \end{equation*}
+and also that the Jacobian of $\Phi$ has modulus of the determinant equal to $1$.
+
+\paragraph{Step 3.} Let $\tilde{u}$ be the function such that $u(x) = \left( \tilde{u} \circ \Phi \right)(x)$ defined on $U_\ell \cap \overline{\Omega}$. The weak formulation of the problem \eqref{regpr:global} is given by
+\begin{equation*}\sum_{i, \, j =1}^n \int_\Omega a_{i, \, j}(x) \, D^i \, u(x) \, D^j \, \varphi(x) \, \mathrm{d}x = \int_{\Omega} f(x) \, \varphi(x) \, \mathrm{d}x \qquad \forall \, \varphi \in H_0^1(\Omega), \end{equation*}
+and hence the identity also holds true for every $\varphi \in H_0^1( \Omega \cap U_\ell)$. The chain rule
+\begin{equation*} \frac{\partial \, u(x)}{\partial \, x_i} = \sum_{h= 1}^{n} \frac{\partial \, \tilde{u} \left( \Phi(x) \right)}{\partial \, y_h} \, \frac{\partial \, \Phi_h(x)}{\partial \, x_i} \end{equation*}
+implies that the weak formulation above can be easily rewritten\footnote{Set $\tilde{a}_{i, \, j} = a_{i, \, j} \circ \Phi^{-1}$, $\tilde{f} = f \circ \Phi^{-1}$, $\tilde{\varphi} = \varphi \circ \Phi^{-1}$, $\tilde{\Phi_{h, \, i}} = \frac{\partial \, \Phi_h \circ \circ \Phi^{-1}}{\partial \, x_i}$, and $\tilde{\Omega}_\ell = \Phi \left(U_\ell \cap \Omega \right)$.} as follows:
+\begin{equation*} \sum_{i, \, j =1}^n \, \sum_{h, \, k = 1}^n \int_{\tilde{\Omega_\ell}} \tilde{a}_{i, \, j}(x) \, D^h \, \tilde{u}(x) \, \tilde{\Phi}_{h, \, i}(x) \, D^k \, \tilde{\varphi}(x) \, \tilde{\Phi}_{k, \, j} \, \mathrm{d}x = \int_{\tilde{\Omega}_\ell} \tilde{f}(x) \, \tilde{\varphi}(x) \, \mathrm{d}x, \quad \forall \, \tilde{\varphi} \in H_0^1\left( \tilde{\Omega}_\ell \right). \end{equation*}
+
+\paragraph{Step 4.} Let
+\begin{equation*} A_{h, \, k}(x) := \sum_{i, \, j = 1}^n  \tilde{a}_{i, \, j}(x) \, \tilde{\Phi}_{h, \, i}(x) \, \tilde{\Phi}_{k, \, j}(x), \end{equation*}
+and observe that the above identity can be easily rewritten as follows:
+\begin{equation} \label{milleewwe232:2} \sum_{h, \, k = 1}^n \int_{\tilde{\Omega_\ell}}A_{h, \, j}(x) \, D^h \, \tilde{u}(x) \, D^k \, \tilde{\varphi}(x) \, \mathrm{d}x = \int_{\tilde{\Omega}_\ell} \tilde{f}(x) \, \tilde{\varphi}(x) \, \mathrm{d}x, \quad \forall \, \tilde{\varphi} \in H_0^1\left( \tilde{\Omega}_\ell \right). \end{equation}
+The thesis will easily follow from \hyperref[sob:extreg]{Theorem \ref{sob:extreg}}, provided we are able to prove that the matrix $\{A_{h, \, k}\}_{h, \, k = 1, \, \dots, \, n}$ is uniformly elliptic on $\tilde{\Omega}$. For any $\xi \in \R^n$ it turns out that
+\begin{equation*} \begin{aligned} \sum_{h, \, k=1}^n A_{h, \, k}(x) \, \xi_h \, \xi_k & = \sum_{h, \, k=1}^n\, \sum_{i, \, j = 1}^n  \tilde{a}_{i, \, j}(x) \, \tilde{\Phi}_{h, \, i}(x) \, \tilde{\Phi}_{k, \, j} (x)\, \xi_h \, \xi_k = \\[1em] & = \sum_{i, \, j = 1}^n \tilde{a}_{i, \, j}(x) \, \left( \sum_{h = 1}^n \tilde{\Phi}_{h, \, i}(x) \, \xi_h \right) \, \left( \sum_{k = 1}^n \tilde{\Phi}_{k, \, j}(x) \, \xi_k \right) \, {\color{red}\geq} \\[1em] & \, {\color{red}\geq} \, \nu \, \sum_{i = 1}^n \left( \sum_{h = 1}^n \tilde{\Phi}_{h, \, i}(x) \, \xi_h \right)^2 \geq c \, \nu \, \|\xi\|^2,  \end{aligned} \end{equation*}
+where the {\color{red}red} inequality is a consequence of the uniform ellipticity of $\{ \tilde{a}_{i, \, j} \}$.
+
+\paragraph{Step 5.} The boundary regularity result (see \hyperref[sob:extreg]{Theorem \ref{sob:extreg}}) applies to any semi-ball $B_r^+$ contained in $\tilde{\Omega}_\ell$. In particular, $\tilde{u} \in H^2 \left(B_\rho^+ \right)$ for any $\rho < r$, and hence it is enough to take
+\begin{equation*} U_\ell = \Phi^{-1}(B_r^+) \qquad \text{and} \qquad V_\ell = \Phi^{-1}(B_\rho^+). \end{equation*}
+\end{proof}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 10cm, height = 10cm]{Images/EE11.png}
+\caption{Covering of $\Omega$.}
+\label{fig:dksaodosdos}
+\end{figure} 
+
+\begin{corollary}Under these assumptions, it turns out that
+\begin{equation} \label{regthintgenc2:gen2} \left| u \right|_{2, \, 2, \, \Omega} \leq c(a_{i, \, j}, \, n, \, \Omega) \cdot \|f\|_{0, \, 2, \, \Omega}. \end{equation}\end{corollary}
+
+\begin{theorem}Let $\Omega \subset \R^n$ be an open bounded subset with borderd $\partial \, \Omega$ of class $C^1$, and let $u \in H^1(\Omega)$ be a weak solution of the Dirichlet problem
+\begin{equation} \label{regpr:global} \begin{cases} - \displaystyle\sum_{i, \, j = 1}^{n} D^j \left[ a_{i, \, j}(x) \, D^i \, u(x) \right] + \sum_{i = 1}^n a_i(x) \, D^i \, u(x) + a_0 \, u(x) = f(x), & x \in \Omega \\[1em] u(x) = 0, & x \in \partial \, \Omega. \end{cases} \end{equation}
+Assume that: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $A(x) := \{a_{i, \, j}(x)\}$ is a uniformly elliptic matrix on $\Omega$;
+\item the coefficients $a_{i, \, j}(x)$ are functions of class $C^{1}$ on $\overline{\Omega}$;
+\item the coefficients $a_i$ for $i = 0, \, \dots, \, n$ are functions of class $C^{0}$ on $\overline{\Omega}$; and
+\item $f \in L^2(\Omega)$.
+\end{enumerate}
+Then $u \in H^2(\Omega)$ and we have the additional estimate
+\begin{equation} \label{regthintgenc2:gen} \left| u \right|_{2, \, 2, \, \Omega} \leq c(a_{i, \, j}, \, a_i, \, n, \, \Omega) \cdot \left[ \|f\|_{0, \, 2, \, \Omega} + \| u \|_{1, \, 2, \, \Omega} \right]. \end{equation}  \end{theorem}

@@ -1,0 +1,73 @@
+\chapter{Introduction} \thispagestyle{empty}
+
+\section{Motivating Examples}
+
+Let $f : \R \to \R$ be the function defined by the formula $f(x) := \left(x^2 + x^3\right)^{\frac{1}{2}}$. We want to evaluate the integral between zero and minus one of $f$, that is, 
+\begin{equation*} I = \int_{-1}^{0} f(x) \, \mathrm{d}x. \end{equation*}
+Set $x := t^2 - 1$; the differential is given by $\mathrm{d}x = 2t \, \mathrm{d}t$, and, if we change variables in the integral above, then it turns out that
+\begin{equation*} I = \int_{-1}^{0} 2 t^2 \, (t^2 - 1) \, \mathrm{d}t, \end{equation*}
+and this can be easily computed by standard means. This substitution does not come out of nowhere; indeed, we can consider the curve in $\R^2$ defined by $\mathcal{C} \, : \, y^2 = x^3 + x^2$, and take the parametrization given by a beam of lines originating from the point $(0, \, 0)$.
+
+\vspace{2.5mm}
+\begin{wrapfigure}{l}{5.5cm}
+\includegraphics[width=5.5cm, height=5.5cm]{Images/Curva1.pdf}
+\caption{$y^2 = x^3 + x^2$}
+\label{fig:c1}
+\end{wrapfigure} 
+
+\noindent More precisely, let us consider the family of lines
+\begin{equation*}r_t \, : \, y = t x, \end{equation*}
+intersecting $\mathcal{C}$ in the origin. Clearly, it is singular point (of order $2$) in the intersection; thus by Bezout's theorem there exists a unique $p \in \mathcal{C}$ such that $r_t \cap \mathcal{C} = \{0, \, p\}$, and the order of $p$ is $1$. Consequently, we have
+\begin{equation*} \begin{cases} y^2 = x^3 + x^2 \\ y = t \, x \end{cases} \implies \begin{cases} x = t^2 - 1 \\ y = t \, (t^2 - 1), \end{cases} \end{equation*}
+i.e., the substitution used above: $x = t^2 - 1$.
+
+In other words, we used the same method (\textbf{rational} parametrization through lines) as in rational, trigonometric integral formulas, derived in the first year of calculus.
+
+\begin{remark}The curve $\mathcal{C}$ is rational, i.e., it is birational to $\mathbb{A}^1$ (or to $\mathbb{P}^1$ if we consider $t \in \mathbb{R} \cup \{\infty\}$). More precisely, the subset $\Gamma := \left\{ (x, \, f(x)) \, : \, x \in \R \right\} \subset \R^2$ can be parametrized by rational functions of $t$. \end{remark}
+
+\begin{definition}[Abelian Integrals\index{Abelian Integrals}] We say that
+\begin{equation} \label{eq:intab} \int_{\gamma} R\left(w, \, z(w)\right) \, \mathrm{d}w \end{equation}
+is an abelian integral if $\gamma : [0, \, 1] \to \C$ is a path, $R$ is a rational function and $w$ and $z(w)$ satisfy a polynomial relation $P\left(w, \, z\right) = 0$.
+\end{definition}
+
+\begin{example}\label{ex:12} Let us consider the relation $z = f(w) = w^2$. For every $\tilde{z} \neq 0, \, \infty$ there exist $w_1, \, w_2 \in \C$ such that $f(w_1) = f(w_2) = \tilde{z}$.
+
+   {\makeatletter
+\let\par\@@par
+\par\parshape0
+\everypar{}
+\begin{wrapfigure}{l}{4cm}
+\includegraphics[width=4cm, height=4cm]{Images/Curva2.pdf}
+\caption{$z(w) = w^2$}
+\label{fig:c2}
+\end{wrapfigure} 
+\noindent More precisely, outside of $\tilde{z} = 0, \, \infty$, we have a double cover of $\C$, thus it makes sense to consider two copies of the complex plane $\C_1 \cong \C$ and $\C_2 \cong \C$, such that $\C_i$ corresponds to $\{w_i\}$.
+
+\noindent However $f^{-1}(0) = \{0\}$ and there exists an action of monodromy in a neighborhood of $0$, i.e., any closed path of base point $\tilde{z}$ switch the two roots ($w_1 \mapsto w_2$, $w_2 \mapsto w_1$). Thus, the key idea is to modify (slightly) $\C_1$ and $\C_2$ in such a way as to, by monodromy, pass from $w_1$ to $w_2$.
+
+\noindent Consider the half line (from $0$ to $\infty$) given by 
+\begin{equation*} \{ \mathfrak{Re}(w) \geq 0, \, \mathfrak{Im}(w) = 0 \} \subset \C, \end{equation*}
+and cut both $\C_1$ and $\C_2$ along it. At this point we can enlarge both cuts, and glue together along  the corresponding edges, obtaining a surface homeomorphic to the sphere (see \hyperref[fig:c2_bis]{Figure \ref{fig:c2_bis}}).
+\par }%
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=12cm, height=7cm]{Images/GAC1.png}
+\caption{Topological moves of \hyperref[ex:12]{Example \ref{ex:12}}}
+\label{fig:c2_bis}
+\end{figure} 
+
+\end{example}
+
+\begin{example}\label{ex:13} Let us consider the polynomial relation $z^2 = f(w) = (w^2 - 1) \, (w^2 - 4)$. For every $w \neq \pm 1, \, \pm 2$ there exist $\C_1 \cong \C$ and $\C_2 \cong \C$, copies of the complex plane, for the possible values of $z$. Consider the half lines (from $\pm 1$ to $\pm 2$) given by 
+\begin{equation*} \{ \mathfrak{Re}(w) \in [-2, \, -1], \, \mathfrak{Im}(w) = 0 \} \subset \C, \end{equation*}
+\begin{equation*} \{ \mathfrak{Re}(w) \in [1, \, 2], \, \mathfrak{Im}(w) = 0 \} \subset \C. \end{equation*}
+Cut both $\C_1$ and $\C_2$ along them. At this point, we enlarge both the cuts and paste together the corresponding edges, obtaining (this time we are concerned about what happens at $\infty$) \hyperref[fig:c3_bis]{Figure \ref{fig:c3_bis}}.
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=12cm, height=7cm]{Images/GAC2.png}
+\caption{Topological moves of \hyperref[ex:13]{Example \ref{ex:13}}}
+\label{fig:c3_bis}
+\end{figure} 
+\end{example}

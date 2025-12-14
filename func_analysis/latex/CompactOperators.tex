@@ -1,0 +1,864 @@
+\chapter{Compact Operators on Banach Spaces} \thispagestyle{empty}
+
+In this chapter, we are mainly concerned with \textit{compact operators} and \textit{symmetric (compact) operators} between Banach spaces.
+
+In the first half, we study the ideal of compact operators and the spectral theory (e.g., the Fredholm alternative theorem), which gives us an excellent estimate of the spectral radius.
+
+In the second half, we investigate the fundamental properties of compact symmetric operators, for which the spectral theory gives us more precise pieces of information.
+
+\section{Main Definitions and Elementary Properties}
+
+\begin{definition}[Compact Operator]\index{compact operator} Let $X$ and $Y$ be two Banach spaces. An operator $T: X \longrightarrow Y$ is \textit{compact} if and only if the following properties hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The operator $T$ is continuous with respect to the strong topologies.
+\item The image $T(E)$ of every bounded subset $E \subseteq X$ is relatively compact\footnote{Let $\mathfrak{X}$ be a topological space. A subset $\mathfrak{Y} \subset \mathfrak{X}$ is relatively compact\index{relatively compact set} if the topological closure $\overline{\mathfrak{Y}}$ is compact in $\mathfrak{X}$. } in $Y$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}If the operator $T: X \longrightarrow Y$ is linear and continuous, we do not need to check it maps every bounded set in a relatively compact one. Indeed, it is enough to verify whether or not the image of the unit ball is relatively compact, that is, if $\overline{T(B_X)}$ is compact in $Y$.  \end{remark}
+
+\begin{lemma}\label{lemmadicaratterizzazione1}Let $T \in \mathcal{L}(X, \, Y)$ be a linear continuous operator between Banach spaces. Then $T$ is compact if and only if for every bounded sequence $(x_n)_{n \in \N} \subset B_X(0, \, c)$ there exists an increasing subsequence $(n_k)_{k \in \N}$ such that
+\begin{equation*} \exists \, y \in Y \: : \: \lim_{k \to + \infty} \left\| T x_{n_k} - y \right\|_Y = 0.\end{equation*} \end{lemma}
+
+The next goal is to give two compactness criteria, easy to check, that hold in reflexive (=$X \cong X^{\ast\ast}$) Banach spaces. Before we can do that, we need a characterization of the reflexivity in terms of the compactness of the ball with respect to a suitable topology.
+
+\begin{lemma} \label{lemma.banachepraibls} A Banach space $\mathfrak{X}$ is reflexive if and only if the closed unit ball $\overline{B_{\mathfrak{X}}(0, \, 1)}$ is weakly compact. \end{lemma}
+
+\begin{proof}First, we notice that the closed unit ball $\overline{B_{\mathfrak{X}}(0, \, 1)}$ is weakly compact if $\mathfrak{X}$ is a reflexive Banach space, as a consequence of the \hyperref[baseq]{Banach-Alaoglu Theorem}.
+
+Vice versa, if $B_X$ is weakly compact, then it is weakly-$\ast$ closed in $X^{\ast\ast}$. Since the weakly-$\ast$ closure of $B_X$ in $X^{\ast\ast}$ is $B_{X^{\ast\ast}}$, and we get
+\begin{equation*} B_X = B_{X^{\ast\ast}} \implies \text{$X$ is reflexive.}\end{equation*}
+
+%Vice versa, suppose that $\overline{B_{\mathfrak{X}}(0, \, 1)}$ is weakly compact and let $(x_n)_{n \in \N} \subset \mathfrak{X}$ be a Cauchy sequence. We may always assume without loss of generality that $(x_n)_{n \in \N} \subset \overline{B_{\mathfrak{X}}(0, \, 1)}$ since every Cauchy sequence is bounded. By assumption, there is a weak cluster point $x \in \mathfrak{X}$. Fix $\epsilon > 0$ and $N \in \N$ such that
+%\begin{equation*} \|x_n - x_m \| \leq \epsilon \quad \text{for all $n, \, m \geq N$,} \end{equation*}
+%and fix $n \geq N$. Let $f \in X^\ast$ be a linear continuous functional such that $\|f\|_\ast \leq 1$, and notice that there must be $m \in \N$ such that
+%\begin{equation*} \begin{cases} |f(x_m) - f(x)| \leq \epsilon, \\ |f(x_n) - f(x_m)| \leq \| x_n - x_m\| \leq \epsilon. \end{cases} \end{equation*}
+%It follows from the triangular inequality that
+%\begin{equation*} |f(x_n) - f(x)| = |f(x_n) \pm f(x_m) - f(x)| \leq 2 \epsilon, \end{equation*}
+%which means that
+%\begin{equation*} \sup_{\|f\|_\ast \leq 1} |f(x_n) - f(x)| \leq 2 \epsilon. \end{equation*}
+%If we consider the Hahn-Banach unitary extension (see \hyperref[ex:13]{Example \ref{ex:13}}), we can find a functional $f \in \overline{B_{X^\ast}(0, \, 1)}$ such that
+%\begin{equation*}\|x_n - x\| = |f(x_n) - f(x)| \leq 2 \epsilon, \end{equation*}
+%and this is enough to infer that the whole sequence $x_n$ converges strongly to $x$. 
+
+\end{proof}
+
+\begin{lemma}\label{lemma:banachseparabile} Let $X$ be a reflexive (separable) Banach space, and let $M$ be a closed linear subspace of $X$. Then $(M, \, \|\cdot\|_M)$ is also a reflexive (separable) Banach space, where
+\begin{equation*} \| \cdot \|_M = \| \cdot \| \, \big|_M. \end{equation*} \end{lemma}
+
+\begin{proof}[First Proof] Recall that $X$ is reflexive if and only if the closed unit ball is compact in the weak topology, as a consequence of \hyperref[lemma.banachepraibls]{Lemma \ref{lemma.banachepraibls}}.
+
+Therefore, it is enough to notice that the closed unit ball of $M$ is the intersection of the unit ball of $X$ with the closed subspace $M$, that is,
+\begin{equation*} \overline{B_M} = \overline{B_X} \cap M \implies \text{$\overline{B_M}$ is closed}. \end{equation*} \end{proof}
+
+\begin{proof}[Second Proof] Let $j_M : M \hookrightarrow X$ be the inclusion map. The dual operator
+\begin{equation*} j_M^\ast : X^\ast \longtwoheadrightarrow M^\ast \end{equation*}
+is surjective as a consequence of the \hyperref[theorem:hb]{Hahn-Banach Theorem \ref{theorem:hb}}, since it is nothing more than the restriction map:
+\begin{equation*} j_M^\ast : X^\ast \ni f \longmapsto f \, \big|_{M} \in M^\ast. \end{equation*}
+The dual of this operator, which is given by the bidual of the inclusion
+\begin{equation*} j_M^{\ast\ast} : M^{\ast\ast} \hookrightarrow X^{\ast\ast}, \end{equation*}
+is injective, and its image is weakly-$\ast$ closed\footnote{The rank $\rank j_M^\ast$ is weakly closed because $j_M^\ast$ is surjective and $M$ is closed w.r.t. the subspace topology. It follows from the \hyperref[closedrank]{Closed Rank Theorem \ref{closedrank}} that the rank of dual operator $j_M^{\ast\ast}$ is weakly-$\ast$ closed.}, that is, the rank is $\sigma(X^{\ast\ast}, \, X^\ast)$-closed. On the other hand, it can be easily identified with the closure of $M$ by noticing that
+\begin{equation*} \begin{aligned} M^\ast \cong \faktor{X^\ast}{M^\perp} \implies M^{\ast\ast} & \cong \left(\faktor{X^\ast}{M^{\perp, \, \sigma(X, \, X^\ast)}} \right)^\ast \cong \\[1em] & \cong \left( M^{\perp, \, \sigma(X, \, X^\ast)} \right)^{\perp, \, \sigma(X^\ast, \, X^{\ast\ast})} \cong \\[1em] & \cong \left(M_{\perp, \, \sigma(X^{\ast \ast}, \, X^\ast)} \right)^{\perp, \, \sigma(X^\ast, \, X^{\ast\ast})} \cong \\[1em] & \cong \overline{M}^{\sigma(X^{\ast\ast}, \, X^\ast)}. \end{aligned} \end{equation*}
+If $X$ is a reflexive Banach space, it turns out that $\sigma(X^{\ast \ast}, \, X^\ast) = \sigma(X, \, X^\ast)$ is the weak topology, and therefore
+\begin{equation*} M^{\ast\ast} \cong  \overline{M}^{\sigma(X^{\ast\ast}, \, X^\ast)} \cong \overline{M}^{\tau_W} = M \end{equation*}
+since we assumed $M$ to be a closed subspace of $X$.
+\end{proof}
+
+\begin{lemma} \label{weakbounded} Let $X$ be a Banach space. Every weakly converging sequence in $X$ is bounded. \end{lemma}
+
+\begin{proof}Let $(x_n)_{n \in \N} \subset X$ be a weakly convergent sequence in $X$, and let $T_n \in X^{\ast\ast}$ be defined by
+\begin{equation*}T_n(\ell) := \ell(x_n) \quad \text{for all $\ell \in X^\ast$ and $n \in \N$}. \end{equation*}
+If we consider $\Gamma := \{T_n \: : \: n \in \N\}$, then the weak convergence of $x_n$ implies that $\Gamma$ is a pointwise bounded family in a second-category set. It follows from the \hyperref[stein]{Banach-Steinhaus Theorem} that
+\begin{equation*} \sup_{n \in \N} \|x_n\|_X = \sup_{n \in \N} \| T_n \|_{X^{\ast\ast}} < + \infty, \end{equation*}
+which means that $(x_n)_{n \in \N} \subset X$ is bounded. \end{proof}
+
+\begin{lemma} \label{weakbounded.2} Let $X$ be a Banach space, and let $(x_n)_{n \in \N} \subset X$ be a sequence. If every subsequence $(n_k)_{k \in \N}$ admits a sub-subsequence $(n_{k_\ell})_{\ell \in \N}$ such that
+\begin{equation*} \lim_{\ell \to + \infty} \| x_{n_{k_\ell}} \|_X = 0, \end{equation*}
+then the whole sequence converges strongly to $0$, that is,
+\begin{equation*} \lim_{n \to + \infty} \| x_n \|_X = 0. \end{equation*}\end{lemma}
+
+\begin{proof}We argue by contradiction. Fix $\epsilon > 0$. We claim that for every $k \in \N$, there exists $n_k > k$ such that
+\begin{equation} \label{eq.eq.100} \| x_{n_k}  \| \geq \epsilon. \end{equation}
+If the claim holds, then it suffices to notice that the subsequence $x_{n_k}$ does not admit any converging sub-subsequence, which yields to a contradiction.
+
+To prove that the claim \eqref{eq.eq.100} holds true, notice that, if for some $k \in \N$ there is no bigger index $n_k > k$ such that $ \| x_{n_k}  \| \geq \epsilon$, then
+\begin{equation*} \|x_m  \| \leq \epsilon \quad \text{for all $m \geq k$,} \end{equation*}
+and therefore the sequence $x_n$ converges strongly to $0$, in contradiction with what we have assumed.\end{proof}
+
+\begin{lemma}\label{lemmmasldsdl}Let $X$ be a reflexive Banach space. A linear continuous operator $T \in \mathcal{L}(X, \, Y)$ is compact if and only if every sequence $(x_n)_{n \in \N} \subset X$, weakly converging to $0$, has the property that the image $\left(T x_n \right)_{n \in \N} \subset Y$ converges strongly (=w.r.t the norm $\| \cdot \|_Y$) to $0$ in $Y$. \end{lemma}
+
+\begin{proof} We divide the argument into two steps to ease the notation.
+
+\paragraph{$"\implies"$} Suppose that $T : X \longrightarrow Y$ is compact and let $(x_n)_{n \in \N} \subset X$ be a sequence such that
+\begin{equation*} x_n \rightharpoonup 0.\end{equation*}
+The set $\{ x_n \: \left| \: n \in \N \right. \}$ is bounded in $X$, as a consequence of \hyperref[weakbounded]{Lemma \ref{weakbounded}}, and thus (since $T$ is compact) there exists an increasing subsequence $(n_k)_{k \in \N}$ such that
+\begin{equation*} T x_{n_k} \xrightarrow{\| \cdot \|_Y} y \in Y. \end{equation*}
+On the other hand, the operator $T$ is continuous; hence $T x_n \rightharpoonup 0$ since
+\begin{equation*}\left\langle \varphi, \, T x_n \right\rangle = \left\langle T^\ast \varphi, \, x_n \right\rangle \xrightarrow{n \to + \infty} 0. \end{equation*}
+The uniqueness of the limit immediately implies that $y = 0$, and thus the usual argument based on the behavior of the sub-subsequences (see \hyperref[weakbounded.2]{Lemma \ref{weakbounded.2}}) proves the whole sequence $\left(T \, x_n \right)_{n \in \N}$ converges strongly to $0$.
+
+
+\paragraph{$"\impliedby"$} Vice versa, let $(x_n)_{n \in \N} \subset X$ be a sequence weakly converging to $0$, and let 
+\begin{equation*} X_0 := \overline{\mathrm{Span}\left\langle x_n \: : \: n \in \N \right\rangle} \end{equation*}
+be the closure of the linear span generated by the sequence.
+
+By \hyperref[lemma:banachseparabile]{Lemma \ref{lemma:banachseparabile}}, it follows that $X_0$ is a separable reflexive Banach space, and thus, by \hyperref[baseq]{Banach-Alaoglu Theorem \ref{baseq}}, the unit ball of $X_0^\ast$ is sequentially weakly-$\ast$ compact. On the other hand, since $X_0$ is a reflexive space, the weak-$\ast$ topology on $X_0^\ast$ is equal to the weak topology on $X_0$, and hence the unit ball of $X_0$ is weakly compact, that is, there is a subsequence $(n_k)_{k \in \N}$ such that
+\begin{equation*} x_{n_k} \rightharpoonup x_\infty \in X. \end{equation*}
+The sequence $\left( x_{n_k} - x_\infty \right)_{k \in \N}$ converges weakly to $0$. Therefore, by assumption, it follows immediately that
+\begin{equation*} \left\| T x_{n_k} - T  x_\infty \right\| \xrightarrow{n \to + \infty} 0 \end{equation*}
+in $Y$, which is enough to infer that the set $\{ T x_n \: \left| \: n \in \N \right. \}$ is relatively compact with respect to the strong topology in $Y$.
+\end{proof}
+
+\begin{lemma} Let $X$ and $Y$ be reflexive Banach spaces. A linear and continuous operator $T : X \longrightarrow Y$ is compact if and only if for any sequence $(x_n)_{n \in N} \subset X$ weakly converging to $0$ and any sequence $(y_n^\ast)_{n \in \N} \subset Y^\ast$ weakly-$\ast$ converging to $0$, it turns out that
+\begin{equation*} \left\langle y_n^\ast, \, T x_n \right\rangle \xrightarrow{n \to + \infty} 0. \end{equation*}\end{lemma}
+
+%\begin{proof} Recall that the spaces are reflexives; thus the weak-$\ast$ topologies on the duals coincide with the weak topologies on $X$ and $Y$ respectively.
+
+%Suppose that $T$ is compact. The sequence $\{x_n\}_{n \in \N}$ is bounded; hence $\left(T x_n\right)_{n \in \N}$ is relatively compact in $Y$, which means that there is a subsequence $(n_k)$ such that
+%\begin{equation*}T x_{n_k} \xrightarrow{\| \cdot \|_Y} 0 \implies T x_{n_k} \rightharpoonup 0. \end{equation*}
+%It follows that
+%\begin{equation*} \left\langle y_{n_k}^\ast, \, T x_{n_k} \right\rangle \xrightarrow{n \to + \infty} 0, \end{equation*}
+%and this concludes the first part of the proof (using the usual sub-subsequences argument). The vice versa is left to the reader as an exercise.
+%\end{proof} 
+
+\subsection{Ideals of Finite-Rank Operators and Compact Operators}
+
+In this section, we prove that compact operators give rise to an ideal and we investigate some of its main properties (e.g., if it is closed), included the relation with finite-rank operators.
+
+Let $X, \, Y$ be Banach spaces. We denote by $\mathcal{L}_c(X, \, Y)$ the subset of the linear and continuous operators which are also compact.
+
+\begin{definition}[Totally Bounded] \index{totally bounded metric space} A metric space $\left(M, \, d \right)$ is \textit{totally bounded} if and only if for every $\epsilon > 0$ there is a finite collection of open balls $B(x_1, \, \epsilon), \, \dots, \, B(x_N, \, \epsilon)$ of radius $\epsilon$ covering the space, that is,
+\begin{equation*} M \subseteq \bigcup_{i = 1}^{N} B \left(x_i, \, \epsilon \right). \end{equation*}
+\end{definition}
+
+\begin{lemma} \label{totbound} Let $(M, \, d)$ be a complete metric space. A subset $Y \subseteq M$ is totally bounded if and only if $Y$ is relatively compact.\end{lemma}
+
+\begin{lemma}[Ideal of Compact Operators] \label{lemma:cmoascprorps}\mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The set of linear continuous compact operators $\mathcal{L}_c(X, \, Y)$ is a closed subspace of $\mathcal{L}(X, \, Y)$.
+\item Let $T \in \mathcal{L}(X, \, Y)$ and $S \in \mathcal{L}(Y, \, Z)$ be two operators. If either of them is compact, then the composition $S \circ T$ is also compact.
+\item The subspace $\mathcal{L}_c(X)$ is a closed bilateral ideal in the operator algebra with respect to the composition.
+\item The subspace $\mathcal{L}_f(X)$ of finite-dimensional rank operators is an ideal in the operator algebra, but it is, in general, not closed. Moreover, it is the minimal nonzero ideal.
+\end{enumerate} \end{lemma}
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Let $T \in \overline{\mathcal{L}_c(X, \, Y)}$ and let $S \in \mathcal{L}_c(X, \, Y)$ be a compact operator. The inclusion
+\begin{equation} \label{totbouns123023} T \left(B_X\right) \subseteq S \left(B_X \right) + \| T - S \| \cdot B_Y \end{equation}
+holds as a consequence of the triangular inequality. For any $\epsilon > 0$ there exist $S_\epsilon \in \mathcal{L}_c(X, \, Y)$ such that $\|T - S_\epsilon\| < \epsilon/2$, and a finite\footnote{The operator $S_\epsilon$ is compact and $Y$ is a Banach (complete) space. It follows that the image of the unit ball $B_X$ (a bounded set) is relatively compact in $Y$, and hence also totally bounded.} subset $F \subseteq S \left(B_X\right)$ such that
+\begin{equation*} S_\epsilon  \left(B_X\right) \subseteq F + \frac{\epsilon}{2} \cdot B_Y. \end{equation*}
+Therefore, the inclusion \eqref{totbouns123023} may be rewritten as follows
+\begin{equation*} T \left(B_X\right) \subseteq F + \epsilon \cdot B_Y, \end{equation*}
+and this is enough to conclude that $T \left(B_X \right)$ is totally bounded. Since $Y$ is a complete space, we infer from \hyperref[totbound]{Lemma \ref{totbound}} that $T \left(B_X \right)$ is also relatively compact, i.e., $T$ is a compact operator.
+\item This assertion is a straightforward consequence of the fact that any linear continuous operator sends bounded   (resp. relatively compact) sets in bounded (resp. relatively compact) sets.
+\item The subspace $\mathcal{L}_c(X)$ is closed by \textbf{(1)}, and it is a bilateral ideal by \textbf{(2)}.
+\item Let $\mathcal{I}$ be a nonzero ideal of $\mathcal{L}(X)$, and let $T \neq 0$ be an element of $\mathcal{I}$. Let $x_0 \in X$ be any point such that $T x_0 \neq 0$, and let $\alpha, \, \beta \in X^\ast$ be linear continuous forms.
+
+Recall that, for every fixed $y \in X$, the operators of the form
+\begin{equation*}x \longmapsto y \left\langle \alpha, \, x \right\rangle \end{equation*}
+have rank equal to $1$. Therefore, if we consider the composition with $T$ (which is still an element of $\mathcal{I}$ by assumption), then for $y_0 \in X$ fixed it turns out that
+\begin{equation*} \left[ y_0 \langle \beta, \, \cdot \rangle \right] \circ T \circ \left[ x_0 \langle \alpha, \, \cdot \rangle \right] \in \mathcal{I}. \end{equation*}
+If we let $\langle \beta, \, T  x_0 \rangle = 1$, then the composition above is given by
+\begin{equation*} x \longmapsto y_0 \langle \alpha, \, x \rangle, \end{equation*}
+and thus $\mathcal{I}$ contains all the operators with rank of dimension $1$.
+\end{enumerate}
+\end{proof}
+
+In particular, the minimal closed ideal in the operator algebra is $\overline{\mathcal{L}_f(X)}$. It has been for long an open problem to determine whether it is equal to $\mathcal{L}_c(X)$ or if the inclusion can be strict.
+
+In the $'73$ the mathematician Enflo showed that the equality could be strict in a particular Banach space \cite{Enflo1973}.
+
+\begin{lemma} \label{lemma:compactseprable} Let $X$ and $Y$ be normed spaces, and let $T \in \mathcal{L}_c(X, \, Y)$ be a compact operator. Then
+\begin{equation*} \text{$T(X) \subset Y$ is a separable Banach space}.\end{equation*} \end{lemma}
+
+\begin{proof} Note that
+\begin{equation*}X = \bigcup_{n \in \N} B(0, \, n), \end{equation*}
+and every ball $B(0, \, n)$ is a bounded subset of $X$, which means that its image via $T$ is relatively compact in $Y$. On the other hand, a relatively compact set is always separable and
+\begin{equation*}T(X) = \bigcup_{n \in \N} T\left(B(0, \, n) \right) \end{equation*}
+is a countable union of separable set, meaning that it is also separable. \end{proof}
+
+\begin{lemma} Let $X$ be a Hilbert space. Then the closure of the finite-rank operators is the ideal of the compact operators, i.e.,
+\begin{equation*} \mathcal{L}_c(X) = \overline{\mathcal{L}_f(X)}. \end{equation*} \end{lemma}
+
+\begin{proof} First, we notice that every finite-rank operator is compact. Since the ideal $\mathcal{L}_c(X)$ is closed, the first inclusion follows:
+\begin{equation*} \mathcal{L}_c(X) \supseteq \overline{\mathcal{L}_f(X)}. \end{equation*}
+Let $T : X \longrightarrow X$ be a compact operator. The closure of the image $\overline{T (X)}$ is a separable Hilbert space (see \hyperref[lemma:compactseprable]{Lemma \ref{lemma:compactseprable}}). Thus, we can always consider a sequence of projections $(P_n)_{n \in \N}$ over the $n$-dimensional subspaces
+\begin{equation*}P_n : X \longrightarrow \mathrm{Span} \langle e_1, \, \dots, \, e_n \rangle, \end{equation*}
+in such a way that
+\begin{equation*} \overline{ \bigcup_{n \in \N} P_n (X) } = \overline{T (X) } \cong \ell_2. \end{equation*}
+The convergence criterion (see \hyperref[convcrite]{Lemma \ref{convcrite}} below) implies that $P_n T \to T$ strongly (in norm), which means that
+\begin{equation*} \lim_{n \to + \infty} \left\| P_n T - T \right\|_{X^\ast} = 0. \end{equation*}
+On the other hand, by construction $P_n T$ is a finite-rank operator for all $n \in \N$. Therefore, we just proved that $T$ is the limit of a sequence of finite-rank operators with respect to the operator norm, which means that
+\begin{equation*} \mathcal{L}_c(X) \subseteq \overline{\mathcal{L}_f(X)}. \end{equation*}
+\end{proof}
+
+\begin{lemma} \label{convcrite} Let $H$ be a Hilbert space and let $(x_n)_{n \in N} \subset H$ be a sequence. Then $x_n \to x \in H$ strongly if and only if $x_n \rightharpoonup x$ weakly and $\|x_n\| \to \|x\|$. \end{lemma}
+
+\begin{proof} Suppose that $x_n \to x$ strongly (in norm). The weak topology is coarser than the topology induced by the norm; therefore strong convergence always implies weak convergence.
+
+Moreover, the norm $\| \cdot \|_H$ is a continuous function with respect to the norm topology as a consequence of the reversed triangular inequality:
+\begin{equation*} \left| \|x_n\| - \|x\| \right| \leq \|x_n - x\| \xrightarrow{n \to + \infty} 0. \end{equation*}
+Vice versa, suppose that $x_n \rightharpoonup x$ weakly and that $\|x_n\| \to \|x\|$. By definition we have that
+\begin{equation*}\| x_n - x \|^2 = \left\langle x_n - x, \, x_n - x \right\rangle = \left(\|x_n\|^2 + \|x\|^2 \right) - 2 \left\langle x_n, \, x \right\rangle, \end{equation*}
+and it is easy to see that the first term converges to $2 \|x\|^2$, while the second converges to $- 2  \|x\|^2$.\end{proof}
+
+\begin{lemma}\label{closedsubspace} Let $H$ be a Hilbert space and let $T \in \mathcal{L}(H)$ be a continuous linear operator. If $T$ is not compact, then there exists an infinite-dimensional closed subspace $M \subset H$ such that
+\begin{equation*}\text{$T \, \big|_{M} : M \xrightarrow{\sim} T(M)$ is an isomorphism}\end{equation*}
+and $T(M) \subset H$ is a closed infinite-dimensional subset of $H$.
+\end{lemma}
+
+\begin{proposition}Let $H$ be a separable Hilbert space. The compact operators form the unique bilateral closed ideal in the operators algebra. \end{proposition}
+
+\begin{proof}Let $\mathcal{I}$ be a nonempty bilateral closed ideal in the operator algebra $\mathcal{L}(H)$, and suppose that there exists $T \in \mathcal{I}$ that is not compact.
+
+By \hyperref[closedsubspace]{Lemma \ref{closedsubspace}} there exists an infinite-dimensional closed subspace $M \subset H$ such that $T \, \big|_M$ is invertible onto its image. On the other hand, since $M$ and $T(M)$ are both infinite-dimensional spaces, it turns out that
+\begin{equation*} \text{$H$ separable} \implies M \cong T (M) \cong H. \end{equation*}
+Consequently, the operator given by the composition
+\begin{equation*} S : H \xrightarrow{\sim} M \xrightarrow{T} T(M) \xrightarrow{\sim} H \end{equation*}
+belongs to $\mathcal{I}$, and this concludes the proof since $S$ is invertible and $S \in \mathcal{I}$ means that $\mathcal{I}$ is equal to the whole operator algebra. \end{proof} 
+
+\subsection{Schauder Theorem}
+
+\begin{theorem}[Schauder] \index{Schauder Theorem} Let $X, \, Y$ be Banach spaces. An operator $T \in \mathcal{L}(X, \, Y)$ is compact if and only if $T^\ast \in \mathcal{L}(Y^\ast, \, X^\ast)$ is compact. \end{theorem}
+
+\begin{proof} We divide the argument into three steps to ease the notation.
+
+\paragraph{Step 1.} Suppose that $T$ is a compact operator and let $(y_n^\ast)_{n \in \N} \subset Y^\ast$ be a bounded sequence, that is, there exists $C > 0$ such that
+\begin{equation*} \|y_n^\ast\| \leq C. \end{equation*}
+Consider the sequence defined by the restrictions on the closure of the image of the unit ball
+\begin{equation*} \left( z_n^\ast \right)_{n \in \N} := \left( y_n^\ast \, \big|_{\overline{T (B_X)}} \right)_{n \in \N}, \end{equation*}
+and notice that $z_n^\ast$ is a continuous function defined on the compact metric space $\overline{T(B_X)}$ (since $B_X$ is a bounded set in $X$ and $T$ is compact).
+
+\paragraph{Step 2.} The sequence $(z_n^\ast)_{n \in \N}$ is clearly equibounded and equi-Lipschitz continuous with constant $0 < L \leq C$. It follows from the Ascoli-Arzelà theorem that one can find an increasing subsequence $(n_k)_{k \in \N}$ such that
+\begin{equation*} z_{n_k}^\ast \doublerightarrow z \in \left(\overline{T(B_X)} \right)^\ast. \end{equation*}
+In particular, it is a Cauchy sequence with respect to the uniform norm (since the convergence is uniform) on the closure of the image of the unit ball, and therefore
+\begin{equation*} \begin{aligned} \left\| y_{n_k}^\ast - y_{n_j}^\ast \right\|_{\infty, \, \overline{T (B_X)}} & =  \left\| y_{n_k}^\ast - y_{n_j}^\ast \right\|_{\infty, \, T (B_X)} = \\[1em] & = \left\| y_{n_k}^\ast \circ T - y_{n_j}^\ast \circ T \right\|_{\infty, \, B_X} = \\[1em] & = \left\| T^\ast y_{n_k}^\ast - T^\ast y_{n_j}^\ast \right\|_{\infty, \, B_X} = \left\| T^\ast  y_{n_k}^\ast - T^\ast  y_{n_j}^\ast \right\|_{X^\ast}. \end{aligned} \end{equation*}
+In conclusion, we infer that $\left( T^\ast y_{n_k}^\ast \right)_{k \in \N}$ is a Cauchy sequence in $X^\ast$, which is complete, and thus it converges.
+
+\paragraph{Step 3.} Vice versa, assume that the dual operator $T^\ast$ is compact. The previous steps prove that the bidual operator $T^{\ast\ast}$ is compact, that is,
+\begin{equation*} \text{$T^{\ast\ast}(B_X)$ has compact closure in $Y^{\ast\ast}$.} \end{equation*}
+Since $T(B_X) = T^{\ast\ast}(B_X)$ and $Y$ is closed in $Y^{\ast\ast}$, we conclude that $T(B_X)$ has compact closure in $Y$, which is exactly what we wanted to prove.
+\end{proof}
+
+\section{Riesz-Fredholm Spectral Theory}
+
+In this section, we state and prove the so-called \textit{Fredholm alternative theorem} for compact operators, which asserts that compact perturbation of the identity behaves in a very controlled manner.
+
+\begin{theorem}[Fredholm alternative] \index{Fredholm Alternative Theorem}\index{Fredholm Alternative Theorem!for compact operators}\label{fa}Let $T \in \mathcal{L}_c(X)$ be a compact operator and let $X$ be a Banach space. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The kernel $\mathrm{Ker}(\I - T)$ is a closed, $T$-invariant and finite-dimensional subspace of $X$.
+\item The kernels $K_n := \left( \mathrm{Ker}\left(\I - T \right)^n \right)_{n \in \N}$ form an increasing and stable sequence of closed, $T$-invariant and finite-dimensional subspaces of $X$.
+\item The rank $\mathrm{Ran}(\I - T)$ is a closed, $T$-invariant and finite-codimensional subspace of $X$.
+\item The ranks $R_n := \left( \mathrm{Ran}\left(\I - T \right)^n \right)_{n \in \N}$ form a decreasing and stable sequence of closed, $T$-invariant and finite-codimensional subspaces of $X$.
+\end{enumerate} \end{theorem}
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The kernel $\mathrm{Ker}(\I - T)$ is clearly closed, while the $T$-invariance follows from a simple computation:
+\begin{equation*} x \in \mathrm{Ker}(\I - T) \implies x - T x = 0 \implies T x \in \mathrm{Ker}(\I - T). \end{equation*}
+Therefore, the restriction operator
+\begin{equation*}T \, \big|_{K_1} : \mathrm{Ker}(\I - T) \longrightarrow \mathrm{Ker}(\I - T) \end{equation*}
+is compact and equal to the identity ($x = Tx$). On the other hand, if $\mathcal{B}$ is a Banach space, then the identity $\mathrm{id}_{\mathcal{B}}$ is compact if and only if $\mathcal{B}$ is locally compact if and only if $\mathcal{B}$ is a finite-dimensional space.
+\item If we expand the binomial $(\I - T)^n$ using the Newton formula, we obtain an operator of the form $\I - T^\prime$, for some $T^\prime \in \mathcal{L}_c(X)$. In particular, the sequence $(K_n)_{n \in \N}$ is increasing and made up of closed, $T$-invariant and finite-dimensional subspaces.
+
+We only need to prove that the sequence is stable, that is, there exists $n_0 \in \N$ such that
+\begin{equation*} K_{n_0} = K_m \quad \text{for all $m \geq n_0$}. \end{equation*}
+We argue by contradiction. Namely, we suppose that there exists a strictly increasing subsequence $(n_j)_{j \in \N}$ such that $K_{n_j} \subset K_{n_{j + 1}}$ is a strict inclusion. First, we claim that for all $j \in \N$ there exists a point $x_{n_j} \in K_{n_j}$ such that
+\begin{equation} \label{cond1} \|x_{n_j}\| \leq 2 \quad \text{and} \quad d\left(x_{n_j}, \, x_{n_{j-1}} \right) = 1. \end{equation}
+
+\paragraph{Proof Claim.} Let $K \subset L$ be closed subspaces of a Banach space $\mathcal{B}$. Then there exists a point $x \in L \setminus K$ such that
+\begin{equation*} d\left(x, \, K \right) = 1. \end{equation*}
+Since the distance between a point and a set is given by the infimum of the distances, there must be a point $k \in K$ such that $d(x, \, k) \leq 2$. Hence the point $u := x - k$ belongs to $L$ and it turns out that
+\begin{equation*}  \|u\| = d(x, \, k) \leq 2 \quad \text{and} \quad d\left(u, \, K \right) = d(x, \, K) = 1. \end{equation*}
+
+Back to the proof of \textbf{(b)}, for all $i < j$ we have that
+\begin{equation*} \left\| T x_{n_j} - T x_{n_i} \right\| = \| \underbrace{x_{n_j}}_{\in K_{n_j}} - ( \underbrace{x_{n_j} - T x_{n_j}}_{\in K_{n_{j-1}}} + \underbrace{T x_{n_i}}_{\in K_{n_{i}} \subset K_{n_{j-1}}}) \| \geq 1, \end{equation*}
+since $\I - T : K_n \longrightarrow K_{n - 1}$ and $d(x_{n_j}, \, K_{n_{j-1}}) = 1$.
+
+This is in contradiction with the assumption that $T$ is compact since the sequence $\left(T x_{n_j} \right)_{j \in \N}$ does not admit any converging subsequence.
+\item The kernel $\mathrm{Ker}(\I - T)$ is a finite-dimensional closed subspace of a Banach space. Therefore, there exists $X_0 \subseteq X$ such that
+\begin{equation*} \text{$X_0$ is closed and $X = X_0 \oplus \mathrm{Ker}(\I - T)$ topological direct sum,} \end{equation*}
+that is, the application $+ : X_0 \times K_1 \longrightarrow X$ is linearly invertible.
+
+\paragraph{N.B.} If $X$ is a Banach space and $K \subset X$ is a closed infinite-dimensional subspace of $X$, then the existence of such a decomposition is, in general, not certain.
+
+On the other hand, if $K$ and the algebraic supplement $K^\prime$ are closed, then it holds true (e.g, as a consequence of the \hyperref[opt]{Open Mapping Theorem \ref{opt}}).
+
+Back to the proof of \textbf{(c)}, notice that the restriction $\left( \I - T \right) \, \big|_{X_0}$ is injective and it has the same rank. Therefore, the operator
+\begin{equation*} \left(\I - T \right) \,\big|_{X_0} : X_0 \longrightarrow \mathrm{Ran}(\I - T) \end{equation*}
+is bijective, linear and continuous. If we can prove that $\mathrm{Ran}(\I - T)$ is complete, then we will be able to conclude that it is also closed. Clearly, it suffices to prove that
+\begin{equation*} \left(\I - T \right)^{-1} : \mathrm{Ran}(\I - T) \longrightarrow X_0 \end{equation*}
+is continuous. We argue by contradiction. If the restriction is not a homeomorphism, then there is a sequence $(x_k)_{k \in \N} \subset X_0$ of elements, whose norm is uniformly equal to $1$, such that
+\begin{equation*} \left\|x_k - T x_k \right\| \xrightarrow{k \to + \infty} 0. \end{equation*}
+Since $T$ is a compact operator, up to subsequences, it turns out that $T x_k \to \xi$. It follows from the relation above that also $x_k \to \xi \in X_0$, and the norm of $\xi$ is also equal to $1$. This yields to a contradiction since
+\begin{equation*} \xi \in \partial B_X(0, \, 1) \cap X_0 \cap \mathrm{Ker}(\I - T) = \partial B_X(0, \, 1) \cap \{0\} = \varnothing. \end{equation*}
+\item If we expand the binomial $(\I - T)^n$, we obtain an operator of the form $\I - T^\prime$ for a certain $T^\prime \in \mathcal{L}_c(X)$. In particular, the sequence $(R_n)_{n \in \N}$ is decreasing and made up of closed, $T$-invariant and finite-codimensional (see \hyperref[theo:Sd]{Theorem \ref{theo:Sd}}) subspaces.
+
+We only need to prove that the sequence is stable, that is, there exists $n_0 \in \N$ such that
+\begin{equation*} R_{n_0} = R_m \quad \text{for all $m \geq n_0$}. \end{equation*}
+We argue by contradiction. Namely, we suppose that there exists a strictly increasing subsequence $(n_j)_{j \in \N}$ such that $R_{n_j} \supset R_{n_{j + 1}}$ is a strict inclusion. First, we claim that for every $j \in \N$ there is a point $x_{n_j} \in R_{n_j}$ such that
+\begin{equation} \label{cond2} \|x_{n_j}\| \leq 2 \qquad \text{and} \qquad d\left(x_{n_j}, \, x_{n_{j+1}} \right) = 1. \end{equation}
+For every $i < j$, it turns out that
+\begin{equation*} \left\| T x_{n_j} - T x_{n_i} \right\| = \| \underbrace{x_{n_i}}_{\in R_{n_i}} - ( \underbrace{x_{n_i} - T  x_{n_i}}_{\in R_{n_{i+1}}} + \underbrace{T x_{n_j}}_{\in R_{n_{j}} \subset R_{n_{i + 1}}}) \| \geq 1, \end{equation*}
+since $\I - T : R_n \longrightarrow R_{n + 1}$ and $d(x_{n_i}, \, R_{n_{i+1}}) = 1$.
+
+This is in contradiction with the assumption that $T$ is compact since the sequence $\left(T x_{n_i} \right)_{i \in \N}$ does not admit any converging subsequence.
+\end{enumerate}\end{proof}
+
+\begin{lemma}\label{invertt} Let $T \in \mathcal{L}_c(X)$ be a compact operator. Then
+\begin{equation*} \text{$\I - T$ is injective if and only if $\I - T$ is surjective.} \end{equation*} \end{lemma}
+
+\begin{proof} \mbox{}
+
+\paragraph{$"\implies"$} Suppose that $\I - T$ is injective, but not surjective, and let $y \in X$ be a point that does not belongs to the image, i.e., $y \notin \mathrm{Ran}(\I - T)$. Then it is easy to prove that
+\begin{equation*} (\I - T)^n y \in R_n \setminus R_{n+1} \implies \text{the sequence $(R_n)_{n \in \N}$ is not stable}, \end{equation*}
+and this is absurd, as a consequence of the \hyperref[fa]{Fredholm Alternative Theorem \ref{fa}}.
+
+\paragraph{$"\impliedby"$}Suppose now that $\I - T$ is surjective, but not injective, and let $y \in X$ be a nonzero point of the kernel, i.e., $y \neq 0$ and $(\I - T) \, y = 0$. For every $n \in \N$ there exists $y_n \in X$ such that
+\begin{equation*} \left(\I - T \right)^n y_n = y \neq 0 \quad \text{and} \quad \left(\I - T \right)^{n+1} y_n = 0. \end{equation*}
+It follows that the sequence $(K_n)_{n \in \N}$ is not stable, and this is absurd for the same reason mentioned above. \end{proof}
+
+\begin{theorem}\label{theo:Sd}Let $T \in \mathcal{L}_c(X)$ be a compact operator. Then
+\begin{equation*} \mathrm{dim} \, K_n = \mathrm{codim} \, R_n = \mathrm{codim} \, R_n^\ast = \mathrm{dim} \, K_n^\ast, \end{equation*}
+where
+\begin{equation*}K_n^\ast = \kers (\I - T^\ast)^n \quad \text{and} \quad R_n^\ast = \rank (\I - T^\ast)^n. \end{equation*} \end{theorem}
+
+\begin{proof}Let us consider the projection
+\begin{equation*}P : X \longrightarrow K_1 \end{equation*}
+onto the finite-dimensional subspace $\mathrm{Ker}(\I - T)$, corresponding to the direct sum $X = X_0 \oplus K_1$ mentioned above. Let $s : K_1 \longrightarrow Y \subset X$ be a surjective (or injective\footnote{Both the kernel $K_1$ and the algebraic supplement $Y$ of the rank are vector spaces (one of which finite-dimensional), and therefore we can always find an injective or surjective map, depending on the respective dimensions.}) mapping between $K_1$ and the algebraic supplement $Y$ of $\mathrm{Ran}(\I - T)$, that is, the subspace $Y$ such satisfying the following properties:
+\begin{equation*} Y \cap \mathrm{Ran}(\I - T) = \varnothing \qquad \text{and} \qquad X = Y + \mathrm{Ran}(\I - T). \end{equation*}
+If we prove that $s$ is a bijection, then the following identity will arise automatically:
+\begin{equation*} \mathrm{dim} \, \mathrm{Ker} (\I - T)  =  \mathrm{dim} \, Y =  \mathrm{codim} \, \mathrm{Ran} (\I - T). \end{equation*}
+
+\paragraph{Step 1.} Let us consider the operator defined by
+\begin{equation*} \I - T^\prime := \I - (T - s\circ P). \end{equation*}
+Since the composition $s \circ P \in \mathcal{L}_f(X)$ is a finite-rank operator, we can apply \hyperref[invertt]{Lemma \ref{invertt}} and infer that
+\begin{equation*} \text{$s$ is surjective $\iff \I - T^\prime$ is surjective $\iff \I - T^\prime$ is injective $\iff s$ is injective}, \end{equation*}
+and this concludes the first part of the proof.
+
+\paragraph{Step 2.} Recall that, if $T$ is a compact operator, then $T^\ast$ is also a compact operator. Therefore, it is enough to prove that
+\begin{equation*} \mathrm{dim} \, \mathrm{Ker} (\I - T) =  \mathrm{dim} \, \mathrm{Ker} (\I - T^\ast). \end{equation*}
+Indeed, a straightforward computation shows that
+\begin{equation*}\begin{aligned}\mathrm{dim} \, \mathrm{Ker}(\I - T)  & = \mathrm{codim} \, \rank(\I - T) =
+\\[1em] & = \mathrm{dim} \left( \faktor{X}{\rank(\I - T)} \right) = \\[1em] & \stackrel{{\color{blue}{(\ast)}}}{=} \mathrm{dim} \, \left( \faktor{X}{\mathrm{Ker}(\I - T^\ast)_\perp} \right) = \\[1em] & \stackrel{{\color{red}{(\ast)}}}{=} \mathrm{dim} \, \left( \faktor{X}{\mathrm{Ker}(\I - T^\ast)_\perp} \right)^\ast = \\[1em] & = \mathrm{dim} \, \left(\mathrm{Ker}(\I - T^\ast)_\perp \right)^\perp = \mathrm{dim} \, \left( \mathrm{Ker}(\I - T^\ast) \right),  \end{aligned}\end{equation*}
+where ${\color{blue}{(\ast)}}$ follows from the \hyperref[closedrank]{Closed Rank Theorem \ref{closedrank}}, and ${\color{red}{(\ast)}}$ follows from the fact that the quotients are finite-dimensional (and $V^\ast \cong V$ if $\mathrm{dim}(V) < + \infty$).
+
+\paragraph{Step 3.} In conclusion, the generalization to $n > 1$ is an easy consequence of the fact that
+\begin{equation*} \left( \I - T \right)^n = \I + \sum_{i=1}^{n} (-1)^i \, \binom{n}{i} \, T^i = \I - T \circ \sum_{i=1}^{n} (-1)^i \, \binom{n}{i} \, T^{i-1},  \end{equation*}
+since the composition between an operator and a compact operator is still compact.
+\end{proof}
+
+\begin{corollary} \label{chorsd}Let $T \in \mathcal{L}_c(X)$ be a compact operator defined on a Banach space, and let $n_0 \in \N$ be the natural number such that, for all $n \geq n_0$, it turns out that
+\begin{equation*} \mathrm{Ker}(\I - T)^n = \mathrm{Ker}(\I - T)^{n_0} \quad \text{and} \quad \mathrm{Ran}(\I - T)^n = \mathrm{Ran}(\I - T)^{n_0} .\end{equation*}
+Then, for any $n \geq n_0$, the space $X$ admits the $T$-invariant decomposition given by
+\begin{equation*} X = \mathrm{Ker}(\I - T)^n \oplus \mathrm{Ran}(\I - T)^n.\end{equation*}
+\end{corollary}
+
+\begin{proof}Let $x \in \mathrm{Ker}(\I - T)^n \cap \mathrm{Ran}(\I - T)^n$, and let $y \in X$ be such that $(\I - T)^n \, y = x$. The sequences of subspaces are both stable after $n_0$; thus
+\begin{equation*} (\I-T)^{2n} \, y = (\I - T)^{n} \, x = 0 \implies y \in \mathrm{Ker}(\I - T)^{2n} = \mathrm{Ker}(\I - T)^{n}, \end{equation*}
+and this implies that $x = 0$. Moreover, it is easy to check that
+\begin{equation*} X = \mathrm{Ker}(\I - T)^n + \mathrm{Ran}(\I - T)^n,\end{equation*}
+since, by \hyperref[theo:Sd]{Theorem \ref{theo:Sd}}, the dimension of the kernel is exactly equal to the codimension of the rank.
+\end{proof}
+
+\section{Spectrum of a Compact Operator}
+
+In this section, we investigate the basic properties of the spectrum of a compact operator, and we give an estimate from above of the spectral radius.
+
+\paragraph{Introduction.} Let $\lambda \in \C \setminus \{0\}$ be any complex number. The results obtained in the previous section can be easily generalized to operators of the form $\lambda \cdot \I - T$ since one could always consider the compact perturbation
+\begin{equation*} \lambda \left( \I - \frac{1}{\lambda} \cdot T \right). \end{equation*}
+
+\begin{definition}[Spectrum] \index{spectrum} Let $T \in \mathcal{L}(X)$ be a linear and continuous operator. The \textit{spectrum} of $T$ is defined as the space of all $\lambda$ such that $(\lambda \cdot \I - T)$ is not invertible, that is,
+\begin{equation*}\sigma(T) := \left\{ \lambda \in \C \: \left| \: \lambda \cdot \I - T \notin \mathrm{G_L}(X) \right. \right\}. \end{equation*}
+The \textit{eigenvalue spectrum}\index{eigenvalue spectrum} of $T$ is defined by
+ \begin{equation*}\sigma_{e}(T) := \left\{ \lambda \in \C \: \left| \: \mathrm{Ker} \left( \lambda \cdot \I - T\right) \neq 0 \right. \right\}. \end{equation*}
+Furthermore, the elements of the eigenvalue spectrum are called \textit{eigenvalues}, while the nonzero elements of $\mathrm{Ker} \left( \lambda \cdot \I - T\right)$ are called \textit{eigenvectors} (or eigenstates). \end{definition}
+
+\begin{definition}[Multiplicity] \index{multiplicity!algebraic}\index{multiplicity}\index{multiplicity!geometric} Let $T \in \mathcal{L}_c(X)$ be a compact operator defined on a Banach space $X$, and let $\lambda \in \C \setminus \{0\}$. The \textit{algebraic multiplicity} of $\lambda$ is defined by
+\begin{equation} \label{ma} m_a(\lambda) := m_a(\lambda, \, T) = \mathrm{dim} \, \mathrm{Ker}( \lambda \cdot \I - T)^n, \end{equation}
+where $n \geq n_0$. The \textit{geometric multiplicity} of $\lambda$ is defined as
+\begin{equation} \label{mg} m_g(\lambda) := m_g(\lambda, \, T) = \mathrm{dim} \, \mathrm{Ker}( \lambda \cdot \I - T). \end{equation}
+\end{definition}
+
+\begin{notation} Let $T \in \mathcal{L}_c(X)$ be a compact operator, and let $n_0 \in \N$ be a natural number big enough that the sequences $(K_n)_{n \in \N}$ and $(R_n)_{n \in \N}$ are stable at $n_0$. We denote by $V(\lambda)$ the generalized autospace associated to $\lambda$, that is,
+\begin{equation*} V(\lambda) := \mathrm{Ker}( \lambda \cdot \I - T)^n, \end{equation*}
+and we denote by $R(\lambda)$ the generalized rank associated to $\lambda$, that is,
+\begin{equation*} R(\lambda) := \mathrm{Ran}( \lambda \cdot \I - T)^n. \end{equation*}
+\end{notation}
+
+\begin{remark} Let $\lambda \in \C \setminus \{0\}$ be a nonzero complex number. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The algebraic multiplicity $m_a(\lambda)$ is always bigger than or equal to the geometric multiplicity $m_g(\lambda)$, as it follows from the \hyperref[fa]{Fredholm Theorem \ref{fa}}.
+\item The complex number $\lambda$ is an eigenvalue for $T$ if and only if $m_a(\lambda) > 0$ if and only if $m_g(\lambda) > 0$.
+\item If $T$ is a compact operator, then $m_a(\lambda, \, T) = m_a(\lambda, \, T^\ast)$ and, similarly, $m_g(\lambda, \, T) = m_g(\lambda, \, T^\ast)$.
+\end{enumerate}\end{remark}
+
+In particular, as a consequence of \hyperref[chorsd]{Corollary \ref{chorsd}}, the Banach space $X$ admits a \textit{spectral decomposition}\index{spectral decomposition} with respect to $\lambda$, that is $X$ is the direct sum of the generalized spaces:
+\begin{equation*} X = V(\lambda) \oplus R(\lambda). \end{equation*}
+The decomposition is $T$-invariant, and the restriction $(\lambda \cdot \I - T) \, \big|_{V(\lambda)} : V(\lambda) \longrightarrow V(\lambda)$ is a nilpotent operator, while the restriction $(\lambda \cdot \I - T) \, \big|_{R(\lambda)} : R(\lambda) \longrightarrow R(\lambda)$ is an invertible operator.
+ 
+\begin{remark} If $T$ is defined on an infinite-dimensional Banach space, then, in general, the spectrum $\sigma(T)$ contains the eigenvalue spectrum $\sigma_e(T)$ strictly (see, e.g., \hyperref[shiftspectrum]{Exercise \ref{shiftspectrum}}). \end{remark}
+
+\begin{remark} If $T \in \mathcal{L}_c(X)$ is a compact operator, then
+\begin{equation*} \sigma(T) \setminus \{0\} = \sigma_e(T) \setminus \{0\}. \end{equation*} \end{remark}
+
+\begin{lemma}Let $T \in \mathcal{L}(X)$ be a linear continuous operator. The spectrum $\sigma(T)$ is a closed subset of $\C$, and it is contained in the closed ball of center $0$ and radius $\|T\|$, i.e.,
+\begin{equation*} \sigma(T) \subseteq \overline{B_{\C}(0, \, \|T\|)}. \end{equation*} \end{lemma}
+
+\begin{proof}The first assertion is an easy consequence of the fact that
+\begin{equation*}A \in \mathrm{G_L}(X) \implies B\left( A, \, \|A^{-1}\|^{-1}\right) \subseteq \mathrm{G_L}(X), \end{equation*}
+that is, the complement of $\sigma(T)$ is an open subset of $\C$. On the other hand, if $\lambda$ is a complex number such that $|\lambda| > \|T\|$ strictly, then
+\begin{equation*}\lambda \cdot \I - T = \lambda \cdot \left( \I - \frac{T}{\lambda} \right), \end{equation*}
+and it is easy to prove that the operator $\I - \frac{T}{\lambda}$ is invertible (e.g., notice that the modulus of any eigenvalue is bigger than or equal to $1 - \|T\|/\lambda > 0$.)
+\end{proof}
+
+\begin{remark}[Spectrum of Compact Operators] \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $X$ is an infinite-dimensional Banach space, then $0 \in \sigma(T)$ for any $T \in \mathcal{L}_c(X)$.
+
+Indeed, a compact operator is invertible if and only if $X$ is locally compact if and only if $X$ is finite-dimensional.
+\item There are compact operators such that $\sigma(T) = \{0\}$ and $T \not \equiv 0$ (see, e.g., \hyperref[zerospectrum]{Exercise \ref{zerospectrum}}).
+\end{enumerate}\end{remark}
+
+\begin{lemma}\label{lemma:Sasfasd}Let $T$ be a compact operator. The eigenvalue spectrum $\sigma_e(T)$ is made up of isolated points, i.e., for any $\lambda \in \sigma_e(T)$ there exists $\epsilon > 0$ such that
+\begin{equation*} B_{\C}(\lambda, \, \epsilon) \cap \sigma_e(T) = \{ \lambda \}. \end{equation*} \end{lemma}
+
+\begin{proof} Let $\lambda, \, \mu \in \sigma_e(T)$ be two complex numbers such that $\lambda \neq \mu$. The spectral decomposition associated to $\lambda$, i.e.
+\begin{equation*} X = V(\lambda) \oplus R(\lambda), \end{equation*}
+is invariant under the action of the operator $\mu \cdot \I - T$. Moreover, the identity
+\begin{equation*} \mu \cdot \I - T = \left(\mu - \lambda \right) \cdot \I + \left( \lambda \cdot \I - T \right) \end{equation*}
+implies that $\mu \cdot \I - T$ is equal to a nonzero multiple of the identity, minus a nilpotent operator on $V(\lambda)$. Hence, a simple algebraic lemma proves that $\mu \cdot \I - T$ is invertible on $V(\lambda)$.
+
+In conclusion, since the operator $\mu \cdot \I - T$ is invertible for $\lambda$ sufficiently near to $\mu$ (the condition is open, as mentioned before), the unique possibility is that $\lambda$ is an isolated point. \end{proof}
+
+If $T \in \mathcal{L}_c(X)$ is a compact operator defined on a infinite-dimensional Banach space, then $\sigma(T)$ is given by the singlet $\{0\}$ and it contains all the nonzero eigenvalues whose algebraic multiplicity is strictly greater than $0$, that is,
+\begin{equation*}T \in \mathcal{L}_c(X) \implies \sigma(T) = \{0\} \cup \sigma_e(T). \end{equation*}
+Moreover, as a consequence of \hyperref[lemma:Sasfasd]{Lemma \ref{lemma:Sasfasd}}, it turns out that $0$ is an cluster point for the eigenvalue spectrum of $T$, that is, the nonzero eigenvalues of $T$ form a sequence which converges to $0$.
+
+\begin{remark}In the proof of \hyperref[lemma:Sasfasd]{Lemma \ref{lemma:Sasfasd}}, we have proved that, if $\mu$ and $\lambda$ are "far enough", then
+\begin{equation*} V(\lambda) \subset R(\mu) \qquad \text{and} \qquad V(\mu) \subset R(\lambda). \end{equation*} \end{remark} 
+
+\paragraph{Iterated Decomposition.}\index{iterated decomposition} Let $\lambda, \, \mu \in \C \setminus\{0\}$ be two complex numbers such that $\lambda \neq \mu$, and let $P_\lambda : X \longrightarrow V(\lambda)$ and $P_\mu : X \longrightarrow V(\mu)$ be the projections. It is easy to see that there is a spectral decomposition associated to both $\lambda$ and $\mu$, that is,
+\begin{equation*} X = V(\lambda) \oplus V(\mu) \oplus \left( R(\lambda) \cap R(\mu) \right). \end{equation*}
+Since $P_\lambda \circ P_\mu = P_\mu \circ P_\lambda = 0$, it tuns out that $(\I - P_\mu - P_\lambda)$ is an idempotent operator (a projection), and it is clearly the one associated with the decomposition above.
+
+\begin{notation} Let $\lambda \in \sigma_e(T)$. If $T$ is a compact operator, then the projection associated with the spectral decomposition is denoted by $E(\lambda) : X \longrightarrow V(\lambda)$, and it is called \textit{spectral projection}.
+
+In a similar fashion, the projection onto the rank is denoted by $D(\lambda) : X \longrightarrow R(\lambda)$, and it is defined as the orthogonal projection to the spectral one, i.e. $D(\lambda) := \I - E(\lambda)$. \end{notation}
+
+In particular, for any finite subset $F \subset \sigma(T)$ (e.g., $F = \sigma(T) \setminus B(0, \, \epsilon)$) we have a spectral decomposition
+\begin{equation*} X = \left( \bigoplus_{\lambda \in F} V(\lambda) \right) \bigoplus \left( \bigcap_{\lambda \in F} R(\lambda) \right). \end{equation*}
+
+\paragraph{Complexification.} Let $X$ be a real Banach space. The complexification of $X$ is the space
+\begin{equation*} X_\C := \C \otimes_{\R} X, \end{equation*}
+with a complex structure induced by the action of the operator
+\begin{equation*} J = \begin{pmatrix}0 & - \I \\ \I & 0 \end{pmatrix}, \end{equation*}
+where $(a + \imath \, b) \cdot z := az + b \, Jz$, as $z$ ranges in $X \oplus X$.
+
+Let $T \in \mathcal{L}^{\R}(X, \, Y)$ be an operator between real topological vector spaces. The complexification of $T$ is the operator defined by
+\begin{equation*} T_\C = \begin{pmatrix}T & 0 \\ 0 & T \end{pmatrix} \in \mathcal{L}^{\C}(X_\C, \, Y_\C).\end{equation*}
+
+\section{Symmetric Operators}
+
+In this section, we introduce a new class of operators, called \textit{symmetric operators}, defined on a Hilbert space $H$. We investigate some of their main properties, and we prove that the kernel and the rank behave nicely with respect to the orthogonal.
+
+\begin{definition}[Hilbert Adjoint] \index{adjoint operator} Let $A : H \longrightarrow K$ be a linear continuous operator between two Hilbert spaces $H$ and $K$. The hilbertian adjoint of $A$ is the operator $A^\ast : K \longrightarrow H$ defined by the formula
+\begin{equation}\label{hiladd} \left(A  x, \, y \right)_K =  \left(x, \, A^\ast y \right)_H,\end{equation}
+for all $x\in H$ and all $y \in K$.\end{definition}
+
+\begin{remark}Let $A : H \longrightarrow K$ be a linear continuous operator between Hilbert spaces $H$ and $K$. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item For every complex number $\lambda \in \C \setminus \{0\}$ it turns out that
+\begin{equation*} \left(\lambda \cdot A \right)^\ast = \overline{\lambda} \cdot A^\ast. \end{equation*}
+Indeed, if we replace $A$ with $\lambda \cdot A$ in the left-hand side of \eqref{hiladd}, then
+\begin{equation*} \begin{aligned} \left(\lambda \cdot A x, \, y \right)_K & = \lambda \left( A \, x, \, y \right)_K = \\[1em] & = \lambda \left(x, \, A^\ast y \right)_H = \left(x, \, \overline{\lambda} \cdot A^\ast y \right)_H. \end{aligned}\end{equation*}
+\item The map $\mathcal{L}(H, \, K) \ni A \longmapsto A^\ast \in \mathcal{L}(K, \, H)$ is semi-linear.
+\end{enumerate} \end{remark}
+
+\begin{definition}[Symmetric Operator] \index{symmetric operator} Let $A : H \longrightarrow H$ be a linear continuous operator defined on a Hilbert space $H$. We say that $A$ is \textit{symmetric} if $A = A^\ast$, and we denote by $\Ls(H)$ the space of all symmetric operator defined on a Hilbert space $H$. \end{definition}
+
+\begin{proposition}\label{prop:ranksym} Let $A \in \Ls(H)$ be a symmetric operator. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $\left(\mathrm{Ran}(A) \right)^\perp = \mathrm{Ker}(A)$.
+\item $\left(\mathrm{Ker}(A) \right)^\perp = \overline{\mathrm{Ran}(A)}$.
+\item If $H_0 \subseteq H$ is an $A$-invariant subset, then $\overline{H_0}$ and $H_0^\perp$ are also $A$-invariant.
+\item The spectrum is contained in the open ball of radius $\|A\|$ of $\R$, that is,
+\begin{equation*} \sigma(A) \subset \left[ - \|A\|, \, \|A\| \right] \subset \R. \end{equation*}
+\item If $\lambda, \, \mu \in \sigma_e(A)$ are eigenvalues of $A$ such that $\lambda \neq \mu$, then the corresponding eigenvectors are orthogonal.
+\item The eigenvalues are \textit{semisimple}, that is,
+\begin{equation*} m_a(\lambda) = m_g(\lambda), \qquad \forall \, \lambda \in \sigma_e(A). \end{equation*}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item This assertion follows from \hyperref[inclsuos]{Lemma \ref{inclsuos}} since the operator is symmetric (i.e., it is equal to its dual.)
+\item This assertion follows from \hyperref[inclsuos]{Lemma \ref{inclsuos}}. Indeed, the operator $A$ is symmetric and one can show that in a Hilbert space $H$, given two closed subsets $M$ and $N$, it turns out that\footnote{It suffices to notice that, for example, $\left(M^\perp\right)_\perp  = \left(M^\perp\right)^\perp = M$, as we have proved in the first chapter. }
+\begin{equation*} \left(M^\perp\right)_\perp = M \quad \text{and} \quad \left(N_\perp \right)^\perp = N. \end{equation*}
+\item Both the assertion follows easily from the definition; we prove the second one, and leave the first one as a simple exercise for the reader.
+
+Let $x \in H_0^\perp$ be any point. For any $y \in H_0$, it turns out that
+\begin{equation*} \left(A x, \, y \right)_H = \left(x, \, A y \right)_H = 0,  \end{equation*}
+and hence $A x \in H_0^\perp$, which is what we wanted to prove.
+\item First, we prove that the any element of the spectrum belongs to $\R$. Let $a \in \R$ and $b \in \R \setminus \{0\}$ be given; the idea is to show that operator $(a + \imath b) \cdot \I + A$ is always invertible.
+
+We claim that the (composition) operator
+\begin{equation*} \left[ \left( a - \imath b \right) \cdot \I + A \right] \circ \left[ \left( a + \imath b \right) \cdot \I + A \right] \end{equation*}
+is invertible. Indeed, if we evaluate the product, it turns out that
+\begin{equation*} \left[ \left( a - \imath b \right) \cdot \I + A \right] \circ \left[ \left( a + \imath b \right) \cdot \I + A \right] = b^2 \left( \I + \left( \frac{a + A}{b} \right)^2 \right), \end{equation*}
+and thus it is enough to prove that $\I + A^2$ is invertible for every symmetric operator $A \in \Ls(H)$. The estimate
+\begin{equation*} \left\| (\I + A^2) x \right\|_H^2 \geq \|x\|^2 > 0\qquad \forall \, x \neq 0, \end{equation*}
+proves that $\I + A^2$ is injective with closed image (see \hyperref[corollary:skdsd]{Corollary \ref{corollary:skdsd}}). In conclusion, the assertion \textbf{(b)} implies $\I + A^2$ surjective, and thus bijective.
+\item This assertion follows from a straightforward computation:
+\begin{equation*} \begin{aligned} \left( \lambda x, \, y \right) & = (Ax, \, y) = (x, \, Ay) = \\[1em] & = (x, \, \mu  y) = \\[1em] & = (\mu x, \, y) \iff (\lambda - \mu) (x, \, y) = 0 \iff (x, \, y) = 0 \iff x \perp y. \end{aligned}\end{equation*}
+\item It is enough to prove that $\mathrm{Ker}(\lambda \cdot \I - T)^2 = \mathrm{Ker}(\lambda \cdot \I - T)$; the assertion will follow by means of a simple induction.
+
+Let $x \in H$ be an element such that $(\lambda \cdot \I - T)^2 x = 0$. Then
+\begin{equation*}\begin{cases} (\lambda \cdot \I - A) x \in \mathrm{Ker}(\lambda \cdot \I - A) \\[0.8em] (\lambda \cdot \I - A) x \in \mathrm{Ran}(\lambda \cdot \I - A) \end{cases} \implies (\lambda \cdot \I - A) x = 0 \implies x \in \mathrm{Ker}(\lambda \cdot \I - A). \end{equation*}
+\end{enumerate}\end{proof}
+
+\paragraph{Quadratic Form.} Let $q_A : H \longrightarrow \R$ be the quadratic form\index{quadratic form} associated to an operator $A$, that is,
+\begin{equation*} q_A(x) := \left( A x, \, x \right)_H. \end{equation*}
+It is easy to prove that the following inequality holds (even in a more general setting than Hilbert spaces, e.g., Banach spaces):
+\begin{equation*}r_A := \sup_{\|x\| \leq 1} |q_A(x)| \leq \sup_{ \substack{\|x\| =1 \\[0.1em] \|y\| = 1}}  \left| \left\langle Ax, \, y \right\rangle \right| = \sup_{\|x\| = 1} \|Ax\| = \| A \|. \end{equation*}
+On the other hand, in our particular case of Hilbert spaces, the \textit{polarization equality} characterizes the scalar product in terms of the quadratic form:
+\begin{equation} \label{polid} \left(A  x, \, y \right)_H =\frac{1}{4} \, \left[ q_A(x + y) - q_A(x - y) \right]. \end{equation}
+It follows that
+\begin{equation*}\left| \left(Ax, \, y \right)_H \right| \leq \frac{1}{4}  \left[ \|x+ y\|^2 + \|x-y\|^2 \right] \cdot r_A = \frac{1}{2} r_A  \left( \|x\|^2 + \|y\|^2 \right), \end{equation*}
+and thus we infer that $r_A$ is equal to the operator norm of $A$.
+
+\paragraph{Variational Characterization.} Let $A \in \Ls(H)$. The \textit{Rayleigh quotient}\index{Rayleigh quotient} is the function
+\begin{equation} \label{Rq} f_A(x) = \frac{\left(Ax, \, x \right)_H}{(x, \, x)_H} : H \setminus \{0\} \longrightarrow \R, \end{equation}
+which is clearly a $C^\infty$ function (in the sense of Fréchet derivatives). Then
+\begin{equation*} \nabla  f_A(x) = \frac{2}{\|x\|^2} \left( Ax - f_A(x), \, x \right)_H, \end{equation*}
+and hence a couple $(\lambda, \, x) \in \R \times (H \setminus \{0\})$ is a (eigenvalue, eigenvector) couple if and only if $x$ is a critical point for $f_A$ and $\lambda = f_A(x)$. 
+
+\section{Compact Symmetric Operators}
+
+In this section, we investigate the compact symmetric operators, and we prove that the standard \textit{spectral theorem} holds true even in infinite-dimensional spaces.
+
+\begin{lemma} \label{lemmaaaa1} Let $A \in \mathcal{L}_c(H)$ be a compact operator defined on a Hilbert space $H$. If
+\begin{equation*} \alpha := \sup_{\|x\| = 1} \left\langle A x, \, x \right\rangle \neq 0,\end{equation*}
+then there exists $x_0 \in \partial B_H(0, \, 1)$ such that $\alpha = \left( A x_0, \, x_0 \right) $.  \end{lemma}
+
+\begin{proof}We can assume that $H$ is a separable Hilbert space. Indeed, we can always consider the decomposition
+\begin{equation*}H = \mathrm{Ker}(A) \oplus \overline{\mathrm{Ran}(A)},\end{equation*}
+and restrict, without loss of generality, the quadratic form $q_A$ to $\overline{\mathrm{Ran}(A)}$, which is always a separable Hilbert space (see \hyperref[lemma:compactseprable]{Lemma \ref{lemma:compactseprable}}). Let $(x_n)_{n \in \N} \subset H$ be a maximizing sequence, that is,
+\begin{equation*} \|x_n\| = 1 \qquad \text{and} \qquad \left\langle Ax_n, \, x_n \right\rangle \xrightarrow{n \to + \infty} \alpha. \end{equation*}
+By \hyperref[baseq]{Banach-Alaoglu Theorem \ref{baseq}} it turns out that there exists an increasing subsequence $(n_k)_{k \in \N}$ such that $x_{n_k} \rightharpoonup x$ weakly. Notice also that the limit point $x$ has norm $\|x\| \leq 1$ since
+\begin{equation*}\|x\|^2 = \left\langle x, \, x \right\rangle = \lim_{n \to + \infty} \left\langle x_n, \, x \right\rangle \leq \|x\| \|x_{n_0}\| = \|x\|. \end{equation*}
+To prove that the norm of $x$ is exactly one, let us set $y = x/\|x\|$ and observe that
+\begin{equation*} \alpha \geq \left\langle A y, \, y \right\rangle = \alpha \frac{1}{\|x\|^2} \iff \|x\| = 1, \end{equation*}
+The operator $A$ is compact. Therefore (see \hyperref[lemmadicaratterizzazione1]{Lemma \ref{lemmadicaratterizzazione1}}) there exists an increasing subsequence such that $A  x_{n_k} \to A x$ strongly (in norm), and this implies that 
+\begin{equation*} \left\langle Ax, \, x \right\rangle_H = \alpha, \end{equation*}
+that is, the limit point $x$ is the sought one. \end{proof} 
+
+\begin{lemma} \label{crit2} Let $H$ be a Hilbert space. If $(x_n)_{n \in \N} \subset H$ is a sequence weakly converging to $x$, and $(y_n)_{n \in \N} \subset H$ is a sequence strongly converging to $y$, then
+\begin{equation*} \left( x_n, \, y_n \right) \xrightarrow{n \to + \infty} \left(x, \, y \right). \end{equation*}
+\end{lemma}
+
+\begin{theorem}\label{th:asdsda} Let $A \in \mathcal{L}_c^{\mathrm{sym}}(H)$ be a symmetric compact operator defined on a Hilbert space $H$, and let $q_A$ be the associated quadratic form. Then either $\|A\|$ or $- \|A\|$ is an element of $\sigma_{e}(A)$.\end{theorem}
+
+\begin{proof} In the previous section, we have proved that
+\begin{equation*}A \in \Ls(H)\implies \|A\| = \sup_{\|x\| = 1} \left| q_A(x) \right|. \end{equation*}
+It follows that
+\begin{equation*}\begin{aligned}\|A\| & = \sup_{\|x\| = 1} \left| \left( A x, \, x \right) \right| = \sup_{\|x\|=1} \, \max \left\{ \left( A  x, \, x \right), \, - \left( A x, \, x \right) \right\} = \\[1em] & = \max \left\{ \sup_{\|x\| = 1} \left( A  x, \, x \right), \, - \inf_{\|x\| = 1} \left( A x, \, x \right) \right\}, \end{aligned}\end{equation*}
+and hence either $\| A \| = \sup_{\|x\| = 1} \left( A x, \, x \right)$ or $- \|A\| = \inf_{\|x\|=1} \left( Ax, \, x \right)$. We now assume, without loss of generality, that
+\begin{equation*} \| A \| = \sup_{\|x\| = 1} \left( A x, \, x \right). \end{equation*}
+The operator $A$ is compact; hence, by \hyperref[lemmaaaa1]{Lemma \ref{lemmaaaa1}}, there exists $x \in H$ such that $\|x\| \leq 1$, and there is a maximizing sequence $x_n \rightharpoonup x$ such that
+\begin{equation*} \left< A x_n, \, x_n \right> \xrightarrow{n \to + \infty} \left< A x, \, x \right> = \| A \| \neq 0 \implies x \neq 0. \end{equation*}
+To prove that the norm of $x$ is exactly one, let us set $y = x/\|x\|$ and observe that
+\begin{equation*} \alpha \geq \left< A y, \, y \right> = \alpha \, \frac{1}{\|x\|^2} \iff \|x\| = 1, \end{equation*}
+so that, by \hyperref[convcrite]{Lemma \ref{convcrite}}, the convergence $x_n \to x$ is strong (it is not needed for the proof, but it is an interesting fact worth remarking on).
+
+The variational characterization (in terms of the Rayleigh quotient) concludes the proof, since we have proved that $x$ is a critical point of $f_A$ and $\|A\|$ is exactly equal to $f_A(x)$.
+\end{proof}
+
+\begin{corollary} \label{coorss231} Let $A \in \mathcal{L}_c^{\mathrm{sym}}(H)$ be a symmetric compact operator defined on a Hilbert space $H$. Each nonempty, closed and invariant subspace $H_0 \subseteq H$ contains the eigenvector of $A$ associated either to the eigenvalue $\|A\|_{H_0}$ or to $-\|A\|_{H_0}$. \end{corollary}
+
+\begin{theorem}[Spectral Theorem]\index{spectral theorem} \label{sptthr}Let $A \in \mathcal{L}_c^{\mathrm{sym}}(H)$ be a symmetric compact operator defined on a Hilbert space $H$. There exists an orthogonal basis of eigenvectors, i.e., the operator $A$ is diagonalizable.\end{theorem}
+
+\begin{proof}We can assume without loss of generality that $H$ is a separable Hilbert space, since the same argument of \hyperref[lemmaaaa1]{Lemma \ref{lemmaaaa1}} holds.
+
+Let $\{e_k\}_{k \in \N}$ be an orthonormal system of eigenvectors for $A$, and suppose that it is maximal with respect to the inclusion (simple application of Zorn lemma). We claim that
+\begin{equation*} \overline{\mathrm{Span}\left<e_k \: : \: k \in \N \right>} = H. \end{equation*}
+If not, by \hyperref[coorss231]{Corollary \ref{coorss231}}, there would be an eigenvector in $H_0 := \left(\mathrm{Span}\left<e_k \: : \: k \in \N \right> \right)^\perp \neq \varnothing$, and this is absurd since the system $\{e_k\}_{k \in \N}$ is maximal.\end{proof}
+
+In particular, any $A \in \mathcal{L}_c^{\mathrm{sym}}(H)$ is unitary equivalent to a multiplication operator defined on $\ell_2(\N)$ by an element of $c_0$, i.e., there is $\lambda \in c_0$ such that
+\begin{equation*} \begin{tikzcd} H \arrow[r, "A"] \arrow[leftrightarrow]{d} & H \arrow[leftrightarrow]{d} \\ \ell_2 \arrow[r, "\cdot \lambda"] & \ell_2 \end{tikzcd} \end{equation*}
+
+\section{Applications of the Spectral Theorem}
+
+\paragraph{Minimax Principle.} Let $A \in \mathcal{L}_c^{\mathrm{sym}}(H)$ be a symmetric compact operator defined on a Hilbert space $H$. The \hyperref[sptthr]{Spectral Theorem \ref{sptthr}} allows us to index the positive eigenvalues with positive integers, that is,
+\begin{equation*}\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_n \geq \dots,\end{equation*}
+where an eigenvalue $\lambda$ is repeated as many times as its multiplicity. In a similar fashion, we can index the negative eigenvalues
+\begin{equation*}\lambda_{-1} \leq \lambda_{-2} \leq \dots \leq \lambda_{-m} \leq \dots.\end{equation*}
+
+The set of indices $I \subset \Z$ allows us to identify the Hilbert space $H$ with $\ell_2(I)$, and the operator $A$ with the multiplication operator
+\begin{equation*} x \longmapsto \sum_{i \in I} x_i \lambda_i \, e_i. \end{equation*}
+
+\begin{theorem}[Courant-Fisher] \index{Courant-Fisher Theorem} \label{c-f-t} Let $A \in \mathcal{L}_c^{\mathrm{sym}}(H)$. For every $n \in I$ it turns out that
+\begin{equation*} \lambda_n = \inf_{\substack{E \subseteq H \\[0.1em] \mathrm{codim}(E) < n}}  \, \sup_{\substack{x \in E \\[0.1em] \|x\|=1}} \left( A x, \, x \right) = \sup_{\substack{E \subseteq H \\[0.1em] \mathrm{dim}(E) \geq n}}  \, \inf_{\substack{x \in E \\[0.1em] \|x\|=1}} \left( Ax, \, x \right). \end{equation*}
+Similarly, for any $-n \in I$ it turns out that
+\begin{equation*} \lambda_{-n} = \sup_{\substack{E \subseteq H \\[0.1em] \mathrm{codim}(E) < n}}  \, \inf_{\substack{x \in E \\[0.1em] \|x\|=1}} \left( A x, \, x \right) = \inf_{\substack{E \subseteq H \\[0.1em] \mathrm{dim}(E) \geq n}}  \, \sup_{\substack{x \in E \\[0.1em] \|x\|=1}} \left( Ax, \, x \right). \end{equation*}\end{theorem}
+
+\begin{proof} The second assertion follows immediately from the first one since
+\begin{equation*} \lambda_{-n}(A) = - \lambda_n(-A). \end{equation*}
+Let us identify $H$ with $\ell_2(I)$ and $A$ with the multiplication operator $\cdot \lambda$. Let $\{e_i\}_{i \in I}$ be the set of eigenvectors of $A$, and let us consider
+\begin{equation*} E_n := \mathrm{Span} \left<e_1, \, \dots, \, e_n \right>, \qquad E_{n-1}^\perp = \overline{ \mathrm{Span}\left< e_i \: \left| \: i \in I \setminus \{1, \, \dots, \, n -1\} \right. \right>}. \end{equation*}
+We consider the restriction operators
+\begin{equation*} \begin{aligned} &A \, \big|_{E_n} : x \longmapsto \sum_{i = 1}^{n} \lambda_i x_i \, e_i \quad \text{has eigenvalues $\lambda_1, \, \dots, \, \lambda_{n}$} \\[1em] & A \, \big|_{E_{n-1}^\perp} : x \longmapsto \sum_{i \in I \setminus \{1, \, \dots, \, n-1\} } \lambda_i x_i \, e_i \quad \text{has eigenvalues $\lambda_n, \, \dots$} \end{aligned} \end{equation*}
+from which it follows that
+\begin{equation*} \sup_{\substack{x \in E_{n-1}^\perp \\[0.1em] \|x\|=1}} \left( A x, \, x \right) = \lambda_n = \inf_{\substack{x \in E_n \\[0.1em] \|x\|=1}} \left( A x, \, x \right). \end{equation*}
+If we take the infimum of the left-hand side and the supremum of the right-hand side, we obtain the first inequality:
+\begin{equation*} \inf_{\substack{E \subseteq H \\[0.1em] \mathrm{codim}(E) < n}}  \, \sup_{\substack{x \in E \\[0.1em] \|x\|=1}} \left(A x, \, x \right) \leq  \lambda_n  \leq \sup_{\substack{E \subseteq H \\[0.1em] \mathrm{dim}(E) \geq n}}  \, \inf_{\substack{x \in E \\[0.1em] \|x\|=1}} \left( Ax, \, x \right). \end{equation*}
+Let $E \subseteq H$ be a subspace of codimension strictly less than $n$, and let $F \subseteq H$ be a subspace of dimension at least $n$. It follows easily that
+\begin{equation*} \begin{aligned} & E \cap E_n \cap \partial B(0, \, 1) \neq \varnothing \\[1em] & F \cap E_{n-1}^\perp \cap \partial B(0, \, 1) \neq \varnothing, \end{aligned} \end{equation*}
+and thus there exist points $x_0$ in the first intersection and $y_0$ in the second intersection. We conclude the proof by noticing that
+\begin{equation*} \begin{aligned} \sup_{\substack{x \in E \\[0.1em] \|x\|=1}} \left( Ax, \, x \right) & \geq \left(A x_0, \, x_0\right) \geq
+\\[1em] & \geq \min_{\substack{x \in E_n \\[0.1em] \|x\|=1 }} \left( Ax, \, x \right) = \lambda_n = 
+\\[1em] & = \max_{\substack{x \in E_{n-1}^\perp \\[0.1em] \|x\|=1}} \left( Ax, \, x \right) \geq
+\\[1em] & \geq \left(A y_0, \, y_0 \right) \geq \inf_{\substack{x \in F \\[0.1em] \|x\|=1}} \left( Ax, \, x \right). \end{aligned} \end{equation*}
+\end{proof}
+
+\begin{theorem}[Alternating Eigenvalues Principle] Let $A \in \mathcal{L}_c^{\mathrm{sym}}(H)$, and let $H_0 \subset H$ be a closed hyperplane of $H$. Let $P_0 : H \longrightarrow H_0$ be the projection, and set $A_0 := P_0 \circ A \, \big|_{H_0} : H_0 \longrightarrow H_0$. Then $A_0 \in \mathcal{L}_c^{\mathrm{sym}}(H_0)$, and for any $n \in I$
+\begin{equation*} \lambda_{n+1}(A) \leq \lambda_{n}(A_0) \leq \lambda_n(A).\end{equation*} \end{theorem} 
+
+\begin{proof} It is a simple consequence of the \hyperref[c-f-t]{Courant-Fisher Theorem \ref{c-f-t}}. More precisely, it turns out that
+\begin{equation*} \begin{aligned} \lambda_{n+1}(A) & =  \sup_{\substack{E \subseteq H \\[0.1em] \mathrm{dim}(E) \geq n + 1}}  \, \inf_{\substack{x \in E \\[0.1em] \|x\|=1}} \left( Ax, \, x \right) \leq
+\\[1em] & \leq  \sup_{\substack{E \subseteq H \\[0.1em] \mathrm{dim}(E \cap H_0) \geq n}}  \, \inf_{\substack{x \in E \\[0.1em] \|x\|=1}} \left( Ax, \, x \right) \leq 
+\\[1em] & \leq  \sup_{\substack{E \subseteq H \\[0.1em] \mathrm{dim}(E \cap H_0) \geq n}}  \, \inf_{\substack{x \in E \cap H_0 \\[0.1em] \|x\|=1}} \left( Ax, \, x \right) =
+\\[1em] & =  \sup_{\substack{E \subseteq H_0 \\[0.1em] \mathrm{dim}(E) \geq n}}  \, \inf_{\substack{x \in E \\[0.1em] \|x\|=1}} \left( Ax, \, x \right) = 
+\\[1em] & = \lambda_n(A_0) \leq  \sup_{\substack{E \subseteq H \\[0.1em] \mathrm{dim}(E) \geq n}}  \, \inf_{\substack{x \in E \\[0.1em] \|x\|=1}} \left( Ax, \, x \right) = \lambda_{n}(A).\end{aligned}\end{equation*}\end{proof}
+
+\section{Spectral Theory of Banach Spaces}
+
+Let $X$ be a Banach space. The space of linear continuous operators $\left(\La(X), \, +, \, \circ \right)$ is an algebra satisfying the inequality
+\begin{equation} \label{ineqsdsd} \| A \circ B \| \leq \|A\| \cdot \|B\|, \end{equation}
+for any $A, \, B \in \La(X)$.
+
+\begin{definition}[Banach Algebra] \index{Banach algebra} The normed space $\left(X, \, \| \cdot \|_X \right)$ is a \textit{Banach algebra} if the following properties are satisfied: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $X$ is a Banach space.
+\item There are $+ : X \times X \longrightarrow X$ and $\cdot : \mathbb{K} \times X \longrightarrow X$ such that $\left(X, \, +, \, \cdot\right)$ is an associative algebra over $\mathbb{K}$.
+\item For any $x, \, y \in X$, it turns out that
+\begin{equation*} \| x \cdot y \| \leq \|x\| \, \|y\|. \end{equation*}
+\end{enumerate}\end{definition}
+
+\begin{notation}The \textit{resolvent set}\index{resolvent set} associated to a linear operator $A \in \La(X)$ is defined as the set of complex numbers such that $A - \lambda\cdot \I$ is invertible, that is,
+\begin{equation*} \rho(A) := \left\{ \lambda \in \C \: \left| \: \text{$A - \lambda \cdot \I$ is invertible} \right. \right\}. \end{equation*}
+The \textit{spectrum} is the complement of the resolvent, and it is denoted by
+\begin{equation*} \sigma(A) := \C \setminus \rho(A). \end{equation*}
+The \textit{resolvent operator}, defined on $\rho(A)$, it denoted by $R(\lambda, \, A)$ and it is defined by setting
+\begin{equation*} R(\lambda, \, A) := \left(\lambda \cdot \I - A \right)^{-1}.\end{equation*}
+Finally, the \textit{spectral radius} is defined as the supremum of $\sigma(A)$, i.e.,
+\begin{equation*} r_A := \sup_{\lambda \in \sigma(A)} |\lambda|. \end{equation*}
+\end{notation}
+
+\begin{lemma} Let $X$ be a Banach space, and let $A \in \La(X)$ be a linear continuous operator on $X$. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The resolvent $\rho(A)$ is an open subset of $\C$.
+\item The spectral radius $r_A$ is less or equal than $\|A\|$.
+\item The map defined by the resolvent operator
+\begin{equation*} \rho(A) \ni \lambda \mapsto R(\lambda, \, A) =: R(\lambda) \in \La(X) \end{equation*}
+is analytic. If $\lambda > \|A\|$, then its power series is given by
+\begin{equation*} R(\lambda) = \sum_{i = 0}^{+ \infty} \lambda^{-i-1} \, A^i. \end{equation*}
+\item  The map defined by the resolvent operator admits a local representation as
+\begin{equation*} R(\lambda) = \sum_{i = 0}^{+\infty} \left(\lambda - \lambda_0\right)^i \, R(\lambda_0)^{i+1}, \qquad \forall \lambda \in B \left( \lambda_0, \, \|R(\lambda_0)\|^{-1} \right). \end{equation*}
+\item \textbf{Resolvent Identity.} For any $\mu, \, \lambda \in \rho(A)$, it turns out that
+\begin{equation} \label{residen} R(\lambda) - R(\mu) = (\mu - \lambda) \, R(\mu) \, R(\lambda). \end{equation}
+\end{enumerate}\end{lemma}
+
+The central goal of this section is to prove that the spectral radius is equal to the limit of the sequence $\|A^n\|^{1/n}$. We will give two proofs of this fact: the first one relies on holomorphic function theory, while the second one relies on a variational argument (Palais-Smale sequences).
+
+\begin{lemma}\label{sequencelemma} Let $(a_n)_{n \in \N} \subset \R$ be a subadditive sequence ($a_{m+n} \leq a_m + a_n$). Then the limit of the sequence $\left(1/n \cdot a_n \right)_{n \in \N}$ exists and it is equal to the infimum, that is,
+\begin{equation*}\lim_{n \to + \infty} \left( \frac{1}{n} \, a_n \right) = \inf_{n \in \N} \left( \frac{1}{n} \, a_n \right). \end{equation*} \end{lemma}
+
+\begin{proof}Let $d$ be a positive natural number. For any $n \in \N$ there are $p \in \N$ and $k \in \{0, \, \dots, \, d-1\}$ such that
+\begin{equation*} n = p \cdot d + k, \qquad \text{where} \, \, p = \left\lfloor \frac{n}{d} \right\rfloor. \end{equation*}
+For every $n \in \N$ it turns out that
+\begin{equation*} \begin{aligned} \inf_{m \in \N}\left( \frac{1}{m} \, a_m \right) & \leq \frac{a_n}{n} \leq \frac{ a_{p\cdot d} + a_k}{n} \leq \\[1em] & \leq \frac{1}{n} \, \left( p \cdot a_d + a_k \right) = \left( \frac{1}{d} + \mathcal{O}\, (1) \right) \cdot a_d + \mathcal{O} \, (1) \, =  \\[1em] & = \frac{a_d}{d} + \mathcal{O} \, (1).\end{aligned} \end{equation*}
+Thus we can take the superior limit of the left-hand side of the inequality above
+\begin{equation*} \inf_{m \in \N}\left( \frac{1}{m} \, a_m \right) \leq \limsup_{n \to + \infty}\left( \frac{1}{n} \, a_n \right) \leq \frac{a_d}{d} \implies \inf_{n \in \N} \left( \frac{1}{n} \, a_n \right) = \lim_{n \to + \infty} \left( \frac{1}{n} \, a_n \right), \end{equation*}
+and this concludes the proof.
+\end{proof}
+
+\begin{theorem}[Spectral Radius] \index{spectral radius} \label{srad}Let $A \in \La(X)$ be any linear continuous operator defined on a Banach space $X$. The spectral radius of $A$ is given by
+\begin{equation*} r_A = \lim_{n \to + \infty} \|A^n\|^{\frac{1}{n}} = \inf_{n \in \N} \|A^n\|^{\frac{1}{n}}. \end{equation*}
+\end{theorem}
+
+\begin{proof}[Holomorphic Proof] Let us consider the sequence $a_n = \log \left( \|A^n\| \right)$.
+
+\paragraph{Step 1.} The logarithm is subadditive; thus we can apply \hyperref[sequencelemma]{Lemma \ref{sequencelemma}} and infer that
+\begin{equation*} \lim_{n \to + \infty} \frac{1}{n} \cdot \log \left( \|A^n\| \right) =  \inf_{n \to + \infty} \frac{1}{n} \cdot \log \left( \|A^n\| \right), \end{equation*}
+that is, the second identity is true:
+\begin{equation*}\lim_{n \to + \infty} \|A^n\|^{\frac{1}{n}} = \inf_{n \in \N} \|A^n\|^{\frac{1}{n}}. \end{equation*}
+It remains to prove that this quantities coincide with the spectral radius $r_A$ of $A$.
+
+\paragraph{Step 2.} One inequality is trivial since $\lambda \in \sigma(A)$ implies $\lambda \cdot \I - A$ not invertible; hence, for every $n \in \N$, the operator $\lambda^n \cdot \I - A^n$ is not invertible, and this easily implies that
+\begin{equation*} \text{$\lambda^n \in \sigma \left(A^n \right)$ and $r_{A^n} \leq \|A^n\|$} \implies |\lambda|^n \leq \|A^n\| \implies |\lambda| \leq \|A^n\|^{\frac{1}{n}}. \end{equation*}
+Vice versa, let us fix $x \in X$, $x^\ast \in X^\ast$ and let us consider the \textbf{holomorphic} function
+\begin{equation*} \C \supseteq \left\{ t \in \C \: \left| \: \left| t \right| < \frac{1}{r_A} \right. \right\} \ni t \longmapsto \left< x^\ast, \, \left(\I - t \cdot A \right)^{-1} \, x \right> \in \C, \end{equation*}
+where $< \cdot, \, \cdot>$ is the duality $(X, \, X^\ast)$. Consequently, the series
+\begin{equation*}\Phi(t) = \sum_{k = 0}^{+ \infty} \left< x^\ast, \, A^k x \right> \, t^k \end{equation*}
+converges at any point $x \in B$, where $B$ is the maximal ball contained in the domain. Therefore, when $r > r_A$, it turns out that
+\begin{equation*} \sup_{k \in \N} \, \left| \left< x^\ast, \, \left( \frac{A}{r} \right)^k x \right> \right| \leq C < + \infty \end{equation*}
+for every $x \in X$ and $x^\ast \in X^\ast$. By \hyperref[stein]{Banach-Steinhaus Theorem \ref{stein}} it turns out that $\| (A/r)^k \|$ is bounded, and thus
+\begin{equation*} \left\|A^k\right\|^{\frac{1}{k}} \leq c \cdot r \implies \inf \left\|A^k\right\|^{\frac{1}{k}} \leq r \end{equation*}
+for every $r > r_A$, which is enough to conclude that $\inf \left\|A^k\right\|^{\frac{1}{k}} \leq r_A$.
+\end{proof}
+
+\begin{remark}The same result holds true in the more general setting of Banach algebras.\end{remark}
+
+\begin{theorem}[Spectral Map] \index{spectral map theorem} \label{theorem:sm}Let $p(z) \in \C[z]$ be a complex polynomial of degree $n$, and let $A \in \La(X)$ be a linear continuous operator defined on a Banach space $X$. Then
+\begin{equation*} p \left( \sigma(A) \right) = \sigma \left( p(A) \right), \end{equation*}
+where $ p \left( \sigma(A) \right) = \left\{ p(\lambda) \: \left| \: \lambda \in \sigma(A) \right. \right\}$. \end{theorem}
+
+\begin{proof} Suppose that $p(z)$ is a monic polynomial. For any $\lambda \in \C$, we can factorize the polynomial $p(z) - \lambda$ as follows:
+\begin{equation*} p(z) - \lambda = \prod_{i = 1}^{n} \left(z - \mu_j^{(\lambda)} \right), \end{equation*}
+where $\mu_j^{(\lambda)}$ are the roots of the polynomial, eventually repeated. Clearly, by construction, we have that
+\begin{equation*}p(\mu) = \lambda \iff \exists \, j \in \{1, \, \dots, \, n\} \: : \: \mu = \mu_j^{(\lambda)}. \end{equation*}
+Therefore $\lambda \in \sigma \left(p(A) \right)$ if and only if $p(A) - \lambda \cdot \I$ is not invertible if and only if there is a factor which is not invertible, that is, there exists $j \in \{1, \, \dots, \, n \}$ such that $A - \mu_j^{(\lambda)} \cdot \I$ is not invertible. \end{proof}
+
+\paragraph{Symmetric Operators.} Let $H$ be a Hilbert space, and let $A \in \Ls(H)$ be a symmetric continuous linear operator. We can introduce a partial ordering on $\Ls(H)$ by setting
+\begin{equation*} A \geq 0 \iff \left< A x, \, x \right> \geq 0 \qquad \forall \, x \in H, \end{equation*}
+from which it follows that $A \geq B$ if and only if $A - B \geq 0$.
+
+\begin{proposition} \label{prop:symesd}Let $H$ be a Hilbert space, and let $A \in \Ls(H)$ be a symmetric operator. Then
+\begin{equation*} \begin{aligned} & m_A : = \inf_{\|x\|=1} \left\langle A x, \, x \right\rangle = \min \sigma(A), \\[1em] & M_A := \sup_{\|x\|=1} \left\langle A x, \, x \right\rangle = \max  \sigma(A). \end{aligned} \end{equation*} \end{proposition}
+
+\begin{proof} First, we observe that any positive operator $A \in \Ls(H)$ (i.e., such that $A \geq 0$) has the following property: the operator $\I + A$ is invertible or, equivalently, minus one is not an element of the spectrum $\sigma(A)$. Indeed, for every $x \in H$ it turns out that
+\begin{equation*} \left\| (\I + A)(x) \right\|^2 = \|x\|^2 + \underbrace{\|A x\|^2}_{\geq 0} + 2 \, \underbrace{\left< A x, \, x \right>}_{\geq 0} \geq \|x\|^2 , \end{equation*}
+and hence by \hyperref[rmk:injclos]{Remark \ref{rmk:injclos}} it is injective and with closed rank. By \hyperref[prop:ranksym]{Proposition \ref{prop:ranksym}} it implies that the operator is injective and surjective, that is, bijective. In particular, if $t < m_A$, then
+\begin{equation*} -1 \notin \sigma \left( \frac{A - m_A}{m_A- t} \right) \end{equation*}
+since it is a positive symmetric operator, and thus $A - m_A \cdot \I + (m_A - t) \cdot \I = A - t \cdot \I$ is invertible. If we replace $m_A$ with $M_A$, a similar argument proves that
+\begin{equation*} \text{$t < m_A$ or $t > M_A$} \implies t \notin \sigma(A) \implies \sigma(A) \subseteq [m_A, \, M_A]. \end{equation*}
+It remains to prove that the extremal points $m_A$ and $M_A$ are actually attained, i.e., they belong to $\sigma(A)$. Clearly, it is enough to prove it for $M_A$ (we obtain $m_A$ by replacing $A$ with $-A$). Let
+\begin{equation*} a(u, \, v) := (M_A u - Au, \, v), \end{equation*}
+and notice that $a(\cdot, \, -)$ is symmetric and such that
+\begin{equation*} a(u, \, u) \geq 0 \quad \text{for all $u \in H$}. \end{equation*}
+It follows from the Cauchy-Schwartz inequality that
+\begin{equation*} |a(u, \, v)| \leq a(u, \, u)^{\frac{1}{2}}a(v, \, v)^{\frac{1}{2}} \quad \text{for all $u, \, v \in H$}, \end{equation*}
+and this implies that
+\begin{equation*} \left| M_A u - A u \right| \leq C \cdot a(u, \, u)^{\frac{1}{2}} \quad \text{for all $u \in H$}. \end{equation*}
+Let $(u_n)_{n \in \N} \subset H$ be a sequence such that
+\begin{equation*} \|u_n\| = 1 \quad \text{and} \quad (Au_n, \, u_n) \xrightarrow{n \to + \infty} M_A, \end{equation*}
+and notice that the estimate above yields to
+\begin{equation*} \left| M_A u_n - A u_n \right| \xrightarrow{n \to + \infty} 0. \end{equation*}
+We infer that $M_A \in \sigma(A)$ since, if $M_A \in \rho(A)$, then
+\begin{equation*} u_n = \left( M_A - A \right)^{-1} (M_A u_n - A u_n) \xrightarrow{n \to + \infty} 0, \end{equation*}
+and this is impossible because $\| u_n \| = 1$ for all $n \in \N$. In conclusion, we want to prove that the maximum between $|M_A|$ and $|m_A|$ is equal to $\|A\|$. A simple computation shows that
+\begin{equation*} \|A\|^2 = \sup_{\|x\| = 1} \left\|A x \right\|^2 = \sup_{\|x\|= 1} \left< A x, \, Ax \right> = \sup_{\|x\| = 1} \left< A^2 x, \, x \right> = \|A^2\|. \end{equation*}
+In particular, we can consider the subsequence $(2^n)_{n \in \N} \subset (n)_{n \in \N}$ and observe that
+\begin{equation*} \|A\| = \left\|A^{2^n} \right\|^{\frac{1}{2^n}} \implies r_A = \lim_{n \to + \infty} \|A^n\|^{\frac{1}{n}} = \lim_{n \to + \infty}  \left\|A^{2^n} \right\|^{\frac{1}{2^n}} \implies \max \{ |M_A|, \, |m_A| \} = r_A = \|A\|. \end{equation*}\end{proof}
+
+\paragraph{Variational Approach to Spectral Radius.} Let $A \in \Ls(H)$ be a symmetric operator defined on a Hilbert space $H$. The couple $\left(x, \, \lambda \right) \in H \times \C$ is an eigenvector-eigenvalue couple if and only if $x$ is a critical point of the Rayleigh quotient $f_A$ and $\lambda = f_A(x)$.
+
+\begin{lemma}Let $A \in \Ls(H)$ be a symmetric operator defined on a Hilbert space $H$. A complex number $\lambda$ is an eigenvalue of $A$ if and only if there exists a sequence $(x_n)_{n \in \N} \subset \partial \, B_X(0, \, 1)$ such that $(x_n)_{n \in \N} \in \left( \mathrm{PS} \right)_\lambda$, i.e., it is a Palais-Smale sequence at the level $\lambda$. \end{lemma}
+
+\begin{proof}The details are left to the reader. The main idea is to prove that Rayleigh quotient $f_A$ is lower semi-continuous and that it satisfies the Palais-Smale condition. \end{proof}
+
+Behind this Lemma, there is the following general variational principle (named after \textbf{Ekeland}).
+
+\begin{theorem}[Ekeland] Let $f : X \to \R$ be a lower semi-continuous function, and let $X$ be a complete metric space. If $\inf_{x \in X}f(x) > - \infty$, then for any $x_0 \in X$ and $\delta, \, \epsilon > 0$ such that
+\begin{equation*}f(x_0) < \inf_{x \in X}f(x) + \epsilon,\end{equation*}
+there exists $y \in X$ satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $d(y, \, x_0) < \delta$;
+\item $\displaystyle\sup_{ \substack{u \neq y \\ u \in X}} \frac{f(y) - f(u)}{d(y, \, u)} < \frac{\epsilon}{\delta}$.
+\end{enumerate} \end{theorem}
+
+Therefore, if $(x_n)_{n \in \N} \subset H$ is a minimizing sequence, then there exists a sequence $(y_n)_{n \in \N}$, equivalent in the sense of Cauchy, such that $(y_n)_{n \in \N} \left( \mathrm{PS} \right)_{\inf f}$.
+
+\section{Exercises}
+
+\begin{exercise} Let $k \in L^2 \left([0, \, 1] \times [0, \, 1] \right)$. The integral operator
+\begin{equation*}T_k :  L^2 \left([0, \, 1] \times [0, \, 1] \right) \longrightarrow L^2 \left([0, \, 1] \right), \end{equation*}
+defined by setting
+\begin{equation*}T_k(u)(x) := \int_0^1 k(x, \, y) u(x, \, y) \, \mathrm{d}y \end{equation*}
+is well-defined, linear, continuous and compact. \end{exercise}
+
+\begin{proof}[Solution] First, we notice that the operator $T_k$ is well-defined as a consequence of both the Fubini theorem and the Hölder inequality. Namely, a simple computation shows that
+\begin{equation*} \begin{aligned}\|T_k(u)\|_{L^2([0, \, 1])}^2 & = \int_0^1 \left| \int_0^1 k(x, \, y) u(x, \, y) \, \mathrm{d}y  \right|^2 \mathrm{d}x \leq
+\\[1em] & \leq \int_0^1 \|k(x, \, \cdot)\|_{L^2([0, \, 1])}^2 \|u(x, \, \cdot)\|_{L^2([0, \, 1])}^2 \, \mathrm{d}x \leq
+\\[1em] & \leq \left[ \left\| \|k(x, \, \cdot) \|_{L^2([0, \, 1])} \right\|_{L^2([0, \, 1])} \left\| \|u(x, \, \cdot)\|_{L^2([0, \, 1])} \right\|_{L^2([0, \, 1])} \right]^2 =
+\\[1em] & = \|k\|_{L^2([0, \, 1] \times [0, \, 1])}^2 \|u\|_{L^2([0, \, 1] \times [0, \, 1])}^2 < + \infty,\end{aligned} \end{equation*}
+which means that $T_k$ sends $L^2 \left([0, \, 1] \times [0, \, 1] \right)$ in $L^2 \left([0, \, 1] \right)$, and the operator norm of $T_k$ is less than or equal to the $L^2$-norm of $k$.
+
+\paragraph{Compactness} The operator $T_k$ is clearly linear, and therefore the computation above shows that it is also continuous (since it is bounded). To prove that $T_k$ is compact, we shall show that there is a sequence $(T_k^n)_{n \in \N}$ of finite-rank operator such that
+\begin{equation*} \lim_{n \to + \infty} \left\| T_k - T_k^n \right\| = 0. \end{equation*}
+Let $\{ \phi_i \}_{i \in \N}$ be a orthonormal basis of $L^2 \left([0, \, 1]\right)$. Then one can easily show that
+\begin{equation*} \left\{ \phi_i \phi_j \right\}_{i, \, j \in \N} \end{equation*}
+is a orthonormal basis of the product space $L^2 \left([0, \, 1] \times [0, \, 1]\right)$. In particular, if we set
+\begin{equation*} k_{i, \, j} := \iint_{[0, \, 1]^2} k(x, \, y) \phi_i(x) \phi_j(y) \, \mathrm{d}x \mathrm{d}y \quad \text{for all $i, \, j \in \N$},\end{equation*}
+then the kernel $k$ is given by the following sum:
+\begin{equation*} k(x, \, y) = \sum_{i = 1}^{+ \infty} \sum_{j = 1}^{+ \infty} k_{i, \, j} \phi_i(x) \phi_j(y).\end{equation*}
+We now define the partial kernel
+\begin{equation*} k_n(x, \, y) := \sum_{i = 1}^{n} \sum_{j = 1}^{+ \infty} k_{i, \, j} \phi_i(x) \phi_j(y)\end{equation*}
+and the associated operator
+\begin{equation*}T_k^n(u)(x) := \int_0^1 k_n(x, \, y) u(x, \, y) \, \mathrm{d}y. \end{equation*}
+The operator $T_k^n$ maps $L^2([0, \, 1] \times [0, \, 1])$ into a finite-dimensional linear subspace of $L^2([0, \, 1])$, and therefore $T_k^n$ is a finite-rank operator. In conclusion, note that
+\begin{equation*} \begin{aligned}\|T_k(u) - T_k^n(u) \|_{L^2([0, \, 1])}^2 & = \left\| \int_0^1 k_n(x, \, y) u(x, \, y) \, \mathrm{d}y - \int_0^1 k_n(x, \, y) u(x, \, y) \, \mathrm{d}y \right\|_{L^2([0, \, 1])}^2  \leq
+\\[1em] & \leq \|k - k_n\|_{L^2([0, \, 1] \times [0, \, 1])}^2 \|u\|_{L^2([0, \, 1] \times [0, \, 1])} =
+\\[1em] & = \left[ \sum_{i = n + 1}^{+ \infty} \sum_{j = 1}^{+ \infty} |k_{i, \, j}|^2 \right] \|u\|_{L^2([0, \, 1] \times [0, \, 1])},\end{aligned} \end{equation*}
+and the last term goes to zero as $n \to + \infty$ since the sum is finite
+\begin{equation*}\sum_{i = 1}^{+ \infty} \sum_{j = 1}^{+ \infty} |k_{i, \, j}|^2 = \|k\|_{L^2([0, \, 1] \times [0, \, 1])}^2 < + \infty.\end{equation*}
+\end{proof}
+
+\begin{exercise} Let $\lambda \in c_b$ be a bounded sequence and let us consider the operator
+\begin{equation*}T_\lambda : \ell_2(\N) \longrightarrow \ell_2(\N) \end{equation*}
+defined by setting
+\begin{equation*} \mathbf{x} := (x_1, \, x_2, \, \dots) \longmapsto (\lambda_1 x_1, \, \lambda_2 x_2, \dots ) =: \lambda \cdot \mathbf{x}. \end{equation*}
+Prove that
+\begin{equation*} \|T_\lambda \| = \|\lambda\|_{\infty}, \end{equation*}
+and $T_\lambda$ is compact if and only if $\lambda \in c_0$. \end{exercise}
+
+\begin{proof}[Solution] The operator norm $\|T_\lambda \|$ can be computed by standard means. Here we only show that $T_\lambda$ is compact if and only if $\lambda$ is an infinitesimal sequence.
+
+\paragraph{$"\implies"$} This implication is left as an easy exercise for the reader. The main idea is to use the definition of compact operator, choose an adequate sequence in $(\mathbf{z}^n)_{n \in \N} \subset \ell_2(\N)$, and show that $\lambda$ must be infinitesimal for $T(\mathbf{z}^n)$ to have a converging subsequence.
+
+\paragraph{$"\impliedby"$} To prove that $T_\lambda$ is compact, we simply need to show that it is the limit (in the operator norm) of a sequence of finite-rank operators $T_\lambda^n$. Let us define
+\begin{equation*} \lambda^n := (\lambda_1, \, \lambda_2, \, \dots, \, \lambda_n, \, 0, \, \dots) = \sum_{i = 1}^n \lambda_i e_i \in c_0, \end{equation*}
+and consider the operator
+\begin{equation*}T_\lambda^n (\mathbf{x}) := \lambda^n \cdot \mathbf{x}. \end{equation*}
+The operator $T_\lambda^n$ maps $\ell_2(\N)$ into the finite-dimensional linear subspace of $\ell_2(\N)$ spanned by $e_1, \, \dots, \, e_n$, and therefore $T_\lambda^n$ is a finite-rank operator. In conclusion, note that
+\begin{equation*} \begin{aligned}\|T_\lambda(\mathbf{x}) - T_\lambda^n(\mathbf{x}) \|_{\ell_2(\N)}^2 & = \left\| \lambda \cdot \mathbf{x} - \lambda^n \cdot \mathbf{x} \right\|_{\ell_2(\N)}^2  \leq
+\\[1em] & \leq \|\lambda - \lambda^n \|_{\infty}^2 \|\mathbf{x}\|_{\ell_2(\N)}^2 =
+\\[1em] & = \sup_{i > n} |\lambda_i|^2 \|\mathbf{x}\|_{\ell_2(\N)}^2,\end{aligned} \end{equation*}
+and the last term goes to zero as $n \to + \infty$ since the $\lambda$ is an infinitesimal ($c_0$) sequence by assumption.
+\end{proof}
+
+\begin{exercise}\label{shiftspectrum}Let $S : \ell_2(\N) \longrightarrow \ell_2(\N)$ be the \textit{shift} operator defined by
+\begin{equation*}(x_1, \, x_2, \, \dots) \longmapsto (x_2, \, x_3, \, \dots). \end{equation*}
+Prove that $\sigma(S)$ is equal to $\overline{B_\C(0, \, 1)}$, but none of them is an eigenvalue. \end{exercise}
+
+\begin{proof}[Solution] The spectrum $\sigma(S)$ is contained in the closure of the ball of center zero and radius $1$ because the spectral radius of $S$ is equal to $1$. The opposite implication is left to the reader.
+
+\paragraph{Eigenvalues.} We argue by contradiction. Suppose that $S$ admits an eigenvalue $\lambda \in \C \setminus \{0\}$ with eigenstate $\mathbf{x} \in \ell_2(\N)$. Then
+\begin{equation*}(\lambda x_1, \, \lambda x_2, \, \dots) = ( x_2, \, x_3, \, \dots), \end{equation*}
+which means that
+\begin{equation*} x_i = \frac{x_{i + 1}}{\lambda} \quad \text{for all $i = 1, \, \dots$} \end{equation*}
+In particular, the sequence $\mathbf{x}$ is uniquely determined by the value of the first coefficient $x_1$, i.e.
+\begin{equation*}\mathbf{x} = (x_1, \, \frac{x_1}{\lambda}, \, \frac{x_1}{\lambda^2}, \, \dots), \end{equation*}
+and therefore $\mathbf{x}$ cannot be an element of $\ell_2(\N)$ since
+\begin{equation*}\| \mathbf{x} \|_{\ell_2(\N)} = \sum_{i = 1}^{+ \infty} \left| \frac{x_1}{\lambda^{i-1}} \right|^2 = |x_1|^2 \sum_{i = 0}^{+ \infty} |\lambda^{-i}|^2 = + \infty \end{equation*}
+for all values of $\lambda \in \C \setminus \{0\}$ such that $|\lambda| \leq 1$, and this is exactly what we wanted to prove.
+\end{proof}
+
+\begin{exercise}\label{zerospectrum}Let $X := C^0\left([0, \, 1] \right)$, and let us consider the Volterra operator $T : C^0\left([0, \, 1] \right) \to C^0\left([0, \, 1] \right)$, defined by
+\begin{equation*} u \longmapsto \int_{0}^x u(t) \, \mathrm{d}t. \end{equation*}
+Prove that $T$ is a compact operator with no eigenvalues, i.e.,
+\begin{equation*} \sigma_e(T) = \{0\}. \end{equation*}
+Furthermore, find an explicit formula for the inverse operator $\left( \lambda \cdot \mathrm{id}_X - T\right)^{-1}$, as $\lambda$ ranges in the resolvent set $\rho(T)$.\end{exercise}
+
+\begin{exercise}Let $H = L^2(X, \, \Sigma, \, \mu)$, and let $f \in L^\infty(X, \, \Sigma, \, \mu)$. The operator
+\begin{equation*} M_f : H \longrightarrow H, \qquad g \mapsto f g\end{equation*}
+is linear and continuous. Prove that: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The norm operator of $M_f$ is equal to $\|f\|_\infty$.
+\item The spectrum of $M_f$ is given by
+\begin{equation*} \sigma(M_f) = \bigcap_{ \text{$N$ null-set} } \overline{ g(X \setminus N) }, \end{equation*}
+where $g \in [f]$ is any function in the equivalence class. More precisely, $\lambda \in \sigma(M_f)$ if and only if for any $\epsilon > 0$ the support of $g_\ast(\mu)$ intersects $B(\lambda, \, \epsilon)$ in a set of positive measure.
+\item The eigenvalues spectrum of $M_f$ is given by
+\begin{equation*} \sigma_e(M_f) = \left\{ \lambda \in \C \setminus \{0\} \: \left| \: \mu (f^{-1}(\lambda)) \neq 0 \right. \right\}. \end{equation*}
+\end{enumerate} \end{exercise}

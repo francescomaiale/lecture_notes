@@ -1,0 +1,375 @@
+\chapter{Banach-Steinhaus and Open Mapping Theorem} \thispagestyle{empty}
+
+In the first half of this chapter, we formally introduce the notion of \textit{topological vector space}, and we investigate some of its fundamental properties (e.g., separability, special neighborhoods of the origin, and metrizability).
+
+The next section is entirely devoted to state and prove the uniform boundedness theorem (due to Banach and Steinhaus) for families of operators between topological vector spaces.
+
+In the final section, we exploit the boundedness principle to derive two fundamental results in functional analysis: the open mapping theorem, and the closed graph theorem (both widely used).
+
+\section{Topological Vector Spaces}
+\label{sec:tvs}
+
+\begin{definition}[Topological Vector Space] \index{topological vector spaces} A \textit{topological vector space} is a $\mathbb{K}$ vector space $X$ endowed with a compatible topology $\tau$, that is, a topology such that the operations
+\begin{equation*} + : X \times X \longrightarrow X \qquad \text{and} \qquad \cdot : \mathbb{K} \times X \longrightarrow X \end{equation*}
+are both $\tau$-continuous. \end{definition}
+
+\begin{remark} Let $(X, \, \tau)$ be a topological vector space. The topology is translation-invariant, which means that $\tau$ can be completely determined by a local basis of neighborhoods of the origin. \end{remark}
+
+\begin{lemma} \label{lemma:svtpro} Let $(X, \, \tau)$ be a topological vector space. Then the following properties hold: \mbox{}
+\begin{enumerate}[label = \textbf{(\arabic*)}]
+\item Every neighborhood of the origin is absorbing.
+\item Every neighborhood $U$ of the origin contains a neighborhood of the origin $V$ such that
+\begin{equation*} V + V \subseteq U \quad \text{and} \quad V = - V. \end{equation*}
+\item Every neighborhood $U$ of the origin contains a balanced\footnote{\textbf{Definition.} A subset $C \subset X$ of a vector space is balanced if and only if $\theta \cdot C \subseteq C$ for every $|\theta| \leq 1$.} neighborhood of the origin $V \subseteq U$.
+\end{enumerate} \end{lemma}
+
+\begin{proof} The assertion \textbf{(1)} is rather obvious since the product is continuous and
+\begin{equation*} x \in X \leadsto \lim_{t \to 0^+} tx = 0 \implies tx \in U \quad \text{for all $t \in [0, \, \tau]$}. \end{equation*}
+\mbox{}
+\begin{enumerate}[label = \textbf{(\arabic*)}, start=2]
+\item Recall that, in a topological vector space $(X, \, \tau)$, the sum is $\tau$-continuous. Consequently, there are $V_1$ and $V_2$ neighborhoods of $0$ such that
+\begin{equation*} (x, \, y) \in V_1 \times V_2 \implies x + y \in U. \end{equation*}
+In particular, we have the inclusion $V_1, \, V_2 \subseteq U$ and, since the family of the neighborhoods of a point is closed under intersection, we also have that $W := V_1 \cap V_2$ is a neighborhood of the origin. In conclusion, if we set $V := W \cap (-W)$, then it is easy to prove that that $V$ is the sought neighborhood of the origin, that is,
+\begin{equation*} V + V \subseteq U \quad \text{and} \quad V = - V. \end{equation*}
+\item Recall that, in a topological vector space, the product is $\tau$-continuous. In particular, there is a positive real number $\delta > 0$ and a neighborhood $W$ of $0$ such that
+\begin{equation*} \alpha \cdot W \subseteq U, \qquad \forall \alpha \: : \: |\alpha| < \delta. \end{equation*}
+Let us denote by $V$ the union of the scalings $\alpha \cdot W$, i.e.
+\begin{equation*} V := \bigcup_{|\alpha| < \delta} \alpha \cdot W. \end{equation*}
+It is easy to see that $V$ is a neighborhood of the origin, and also that $V \subseteq U$. In conclusion, to prove that $V$ is balanced, it suffices to take $|\beta| \leq 1$ and compute the product:
+\begin{equation*} \beta \cdot V = \bigcup_{|\alpha| < \delta} (\beta \alpha) \cdot W, \end{equation*}
+but $|\beta \alpha| < \delta$ for any $|\alpha| < \delta$, which is enough to infer that $V$ is balanced.
+\end{enumerate} 
+ \end{proof}
+
+\begin{lemma} Let $X$ be a vector space, and let $\mathcal{U}$ be a collection of subsets satisfying the following properties:
+\mbox{}
+\begin{enumerate}[label = \textbf{(\arabic*)}]
+\item The origin belongs to all $U \in \mathcal{U}$.
+\item For all $U, \, V \in \mathcal{U}$, there exists $W \in \mathcal{U}$ such that $W \subseteq U \cap V$.
+\item Every set $U \in \mathcal{U}$ is absorbing.
+\item For all $U \in \mathcal{U}$ one can find $V \in \mathcal{U}$ such that
+\begin{equation*} V + V \subseteq U \quad \text{and} \quad V = - V. \end{equation*}
+\item For all $U \in \mathcal{U}$ one can find a balanced $V \in \mathcal{U}$ such that $V \subseteq U$.
+\end{enumerate}
+Then $\mathcal{B}_x := \left\{ x + \mathcal{U} \right\}$ is a local basis of neighborhoods for all $x \in X$. The generated topology $\tau$ on $X$ is compatible with the vector space operations, and it turns out that
+\begin{equation*} A \in \tau \iff \forall \, x \in A,  \, \exists \, \, U \in \mathcal{U} \: : \: x \in U \subset A. \end{equation*} \end{lemma}
+
+\subsection{Locally Convex Spaces}
+
+In this brief subsection, we investigate some of the fundamental properties of locally convex topologies (since most of the spaces we will deal with are locally convex.)
+
+\begin{definition}[Locally Convex] \index{topological vector space!locally convex}\label{def:lcsld} Let $(X, \, \tau)$ be a topological vector space. We say that $\tau$ is \textit{locally convex} if there exists a local basis of convex neighborhoods of $0$. \end{definition}
+
+\begin{remark}Equivalently, a topological vector space $X$ is locally convex if and only if there exists a family $\mathcal{U}$ of subsets such that: \mbox{}
+\begin{enumerate}[label = \textbf{(\arabic*)}]
+\item The origin belongs to all $U \in \mathcal{U}$.
+\item For all $U, \, V \in \mathcal{U}$, there exists $W \in \mathcal{U}$ such that $W \subseteq U \cap V$.
+\item Every set $U \in \mathcal{U}$ is absorbing.
+\item For all $U \in \mathcal{U}$ one can find $V \in \mathcal{U}$ such that
+\begin{equation*} V + V \subseteq U \quad \text{and} \quad V = - V. \end{equation*}
+\item For all $U \in \mathcal{U}$ one can find a convex balanced set $V \in \mathcal{U}$ such that $V \subseteq U$.
+\end{enumerate}
+\end{remark}
+
+\begin{example}Here we give a short list of locally convex spaces, and we also furnish a brief explanation of what the notions of convergence are.
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item The space of all continuous functions on the real line $C^0(\R; \, \R)$ equipped with the family of seminorms $P_K := \|\cdot\|_{\infty, \, K}$, where $K \subset \R$ is a compact subset. The notion of convergence is the uniform convergence on compact subsets.
+\item The space of all differentiable functions on a bounded subset $C^k(\Omega)$ equipped with the family of seminorms $P_{\alpha, \, K} := \|D^\alpha \, \cdot\|_{\infty, \, K}$, where $K \subset \Omega$ is a compact subset. The notion of convergence is the uniform convergence of \textbf{all} derivatives on compact subsets.
+\item The space of distributions $\mathcal{D}(\Omega)$.
+\item The space of all sequences $\R^{\N}$ (or its subset made up of compactly supported sequences) is a locally convex space with the finer topology that makes the inclusions continuous).
+\end{enumerate} \end{example}
+
+\begin{theorem}[Seminorm Characterization] \label{theorem:seminor} Let $X$ be a vector space, and let $\mathcal{P} = \{ p_\alpha \}_{\alpha \in I}$ be a family of seminorms defined on $X$. The following properties hold true: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The ball $B_{p_\alpha}$ is absorbing, convex and balanced for every $\alpha \in I$. 
+\item The family of neighborhoods
+\begin{equation*} \mathcal{U} := \left\{ \bigcap_{ \alpha \in S \subset I} B_{p_\alpha} \: \left| \:  \text{$S$ finite subset of indices of $I$} \right. \right\} \end{equation*}
+satisfies the properties \textbf{(1)}-\textbf{(5)} described above, and hence it defines a locally convex topology $\tau$ on $X$.
+\item The extended family of seminorms, i.e.
+\begin{equation*} \widetilde{\mathcal{P}} := \left\{ \widetilde{p}_S := \max_{\alpha \in S} p_\alpha \: \left| \: \text{$S$ finite subset of indices of $I$} \right. \right\} \end{equation*}
+induces a family of balls
+\begin{equation*} \widetilde{\mathcal{U}} := \left\{B_{\widetilde{p}_S} \: \left| \:  \text{$S$ finite subset of indices of $I$} \right. \right\} \end{equation*}
+which defines the same locally convex topology $\tau$ of \textbf{(b)}.
+\item Let $\mathcal{U}$ be a local basis of the origin made up of absorbing, convex and balanced sets, and let $\sigma$ be the locally convex topology induced on $X$. Then the family of the Minkowski functionals
+\begin{equation*} \mathcal{P}  := \left\{ p_U \: \left| \: U \in \mathcal{U} \right. \right\} \end{equation*}
+is a family of seminorms, which generates the same topology $\sigma$.
+\end{enumerate}\end{theorem}
+
+\begin{remark} Let $X$ be a topological vector space, and let $\mathcal{U}$ be a local basis of neighborhoods of the origin. The following topological properties hold:\mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item The space $X$ is $\mathrm{T_1}$ if and only if $X$ is $\mathrm{T_0}$.
+\item The space $X$ is $\mathrm{T_1}$ if and only if $\{0\}$ is closed if and only if $\bigcap_{U \in \mathcal{U}} U = \{0\}$ or, equivalently, if and only if $p(x) = 0$ for any $p \in \mathcal{P}$ implies $x = 0$.
+\item The space $X$ is $\mathrm{T_0}$ if and only if $X$ is $\mathrm{T_2}$ (i.e., Hausdorff).
+\item Assume that $(X, \, \tau)$ is a locally convex $\mathrm{T_0}$ space, and assume also that there exists a countable separated family of seminorms generating $\tau$. Then $X$ is metrizable.
+\end{enumerate}\end{remark}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item Any topological group which is $\mathrm{T}_0$ is automatically $\mathrm{T}_1$. The converse is always true.
+\item Recall that a topological space is $\mathrm{T}_1$ if and only if each singlet $\{x\}$ is closed. But if $\{0\}$ is closed in a topological vector space, then every $\{x\}$ is closed as $x$ ranges in $X$.
+\item Fix $x, \, y \in X$. The singlet $\{ x\}$ is always compact, while the singlet $\{y\}$ is closed because of the $\mathrm{T_1}$ assumption. Therefore, the existence of open neighborhoods separating $x$ and $y$ follows immediately from \hyperref[lemma:sep]{Lemma \ref{lemma:sep}}.
+\item Let us set
+\begin{equation}\label{eq:disadosods} d(x, \, y) := \max_{k \in \mathbb{N}} \left[ 2^{-k} \frac{p_k(x - y)}{1 + p_k(x - y)} \right].\end{equation}
+The reader may check by herself that \eqref{eq:disadosods} is a distance on $X$. For example, it is easy to see that
+\begin{equation*} d(x, \, y) = 0 \implies p_k(x - y) = 0 \quad \text{for all $k \in \N$},\end{equation*}
+and this is enough to infer that $x$ is necessarily equal to $y$, as a consequence of the fact that the family of seminorms is separated.
+
+Furthermore, the function $d$ is translation-invariant. Thus we only need to prove that the collection of open balls
+\begin{equation*} B_r(0) := \{x \in X \: \left| \: d(x, \, 0) < r \right. \} \end{equation*}
+is a local basis of neighborhoods of the origin, which induces the very same topology $\tau$.
+
+\paragraph{Step 1.} The condition $d(x, \, 0) < r$ easily implies that
+\begin{equation*} \left(2^{-k} - r \right) p_k(x) < r, \end{equation*}
+and this inequality is automatically satisfied for all $k > \log_2 (1/r) =: r^\ast$. The finite number of remaining indices satisfy the inequality
+\begin{equation*} p_k(x) < \frac{r}{2^{-k}-r} =: r_k,\end{equation*}
+and thus $B_r$ contains the intersection of a finite number of $\mathcal{P}$-balls, that is,
+\begin{equation*} \bigcap_{k = 0}^{\floor{r^\ast}} r_k \cdot B_{p_k} \subseteq B_r(0). \end{equation*}
+In particular, the metric ball $B_r(0)$ contains a $\tau$-neighborhood of the origin.
+
+\paragraph{Step 2.} Vice versa, given a $\tau$-neighborhood $V$ of the origin, it follows from the definition of local basis that one can always find positive real numbers $r_j > 0$ such that
+\begin{equation*} \bigcap_{j = 0}^{m} r_j \cdot B_{p_j} \subseteq V. \end{equation*}
+If we take $r$ satisfying the inequality
+\begin{equation*} 2 r < \max \left\{ 2^{-j} \cdot r_j \: \left| \: j = 1, \, \dots, \, m \right. \right\}, \end{equation*}
+then any $x \in B_r(0)$ satisfies the inequality
+\begin{equation*} d(x, \, 0) < r < \frac{2^{-j} \cdot r_j}{2} \implies p_j(x) < r_j \quad \text{for all $j = 1, \, \dots, \, m$}. \end{equation*}
+Consequently, the metric ball $B_r(0)$ is contained in the finite intersection of the balls $r_j \cdot B_{p_j}$, and therefore it is also contained in $V$.
+\end{enumerate}\end{proof}
+
+\begin{theorem} A $\mathrm{T_0}$ topological vector space $X$ is second-countable if and only if it is metrizable.  \end{theorem}
+
+\begin{proof}[Hint] Take a countable basis of neighborhoods of the origin such that each element is balanced and monotone (with respect to the inclusion) $U_{n+1} + U_{n+1} \subseteq U_n$. Then define
+\begin{equation*}\rho(x) = \inf \left\{ \sum_{i=1}^{n} 2^{-k_i} \: \left| \: k_i \in \N, \, \, x \in U_{k_1}+\dots+U_{k_n} \right. \right\} \end{equation*}
+and prove that $\rho(x - y) = d(x, \, y)$ is a metric on $X$.
+
+The proof of this theorem is rather technical and I will not write it down, but it can be found e.g. in \textbf{W. Rudin, Functional Analysis} (Theorem 1.24).
+\end{proof}
+
+\section{The Uniform Boundedness Principle}
+
+Let $X$ be a topological vector space. In this section, we shall denote by $\mathcal{U}_p(X)$ a local basis of neighborhoods around $p \in X$.
+
+\begin{definition}[Bounded]\index{topological vector space!bounded set} A set $E \subset X$ is \textit{bounded} if and only if for every $U \in \mathcal{U}_0(X)$ there exists $r > 0$ such that $E \subseteq r \cdot U$. \end{definition}
+
+\begin{remark} If $X$ is a metric space, a set is bounded in the sense above if and only if it is bounded with respect to the metric. \end{remark}
+
+\begin{lemma} \label{lemma.closureclos} Let $X$ be a topological vector space and let $S \subset X$ be any subset. The closure of $S$ is given by the (possibly) infinite intersections of the $\mathcal{U}$-translations:
+\begin{equation*} \overline{S} = \bigcap_{U \in \mathcal{U}_0(X)} S + U. \end{equation*} \end{lemma}
+
+In particular, any point $x \in X$ admits a local basis of \textit{closed neighborhoods}. Indeed, it is straightforward to prove that
+\begin{equation*} \left\{ V + x \: \left| \: V \in \mathcal{U}_0(X) \right. \right\} \end{equation*}
+is a local basis of neighborhoods of $x$, and hence
+\begin{equation*} \left\{ \overline{V} + x \: \left| \: V \in \mathcal{U}_0(X) \right. \right\} \end{equation*}
+is also a local basis.
+
+\begin{lemma} Let $X$ be a topological vector space, and let $E \subset X$ be a bounded subset. Then the closure $\overline{E}$ is also bounded.\end{lemma}
+
+\begin{proof} By definition, for every $U \in \mathcal{U}_0(X)$ there exists a positive real number $r > 0$ such that $E \subset r \cdot U$. Hence, by taking the closure we obtain the chain of inclusions
+\begin{equation*} \overline{E} \subseteq r \cdot \overline{U} \subset (r + \epsilon) \cdot U, \end{equation*}
+for some $\epsilon > 0$, as a consequence of \hyperref[lemma.closureclos]{Lemma \ref{lemma.closureclos}}.
+\end{proof}
+
+\begin{lemma} Let $X$ and $Y$ be topological vector spaces. If $L \in \mathcal{L}(X, \, Y)$ is a linear and continuous operator, then it is bounded. The converse is true if, e.g., $X$ is locally bounded. \end{lemma}
+
+\begin{theorem}A topological vector space $X$ is normable if and only if it is both locally convex and locally bounded.\end{theorem}
+
+We now present a simple criterion to show whether or not a set is bounded looking at the behavior of all the sequences.
+
+\begin{lemma} Let $X$ be topological vector space and let $E \subset X$. Then $E$ is bounded if and only if for every sequence $(\alpha_n)_{n \in \N} \subset \mathbb{K}$ converging to $0$ and every sequence $(x_n)_{n \in \N} \subset E$, it turns out that
+\begin{equation*} \alpha_n x_n = o(1) \quad \text{for $n \to + \infty$}. \end{equation*}  \end{lemma}
+
+\begin{proof} Suppose that $E$ is a bounded subset of $X$. Fix $U \in \mathcal{U}_0(X)$ neighborhood of the origin in $X$, and let $r > 0$ be the positive real number such that $E \subset r \cdot U$. It follows that
+\begin{equation*} x_n \in r \cdot U \implies \frac{x_n}{r} \in U \quad \text{for $n \in \N$}. \end{equation*}
+Therefore, we can always choose $N \in \N$ in such a way that $\alpha_N < 1/r$, that is,
+\begin{equation*}  \alpha_n x_n \in U \quad \text{for all $n \geq N$}. \end{equation*}
+The opposite implication is trivial (e.g., one could consider $x_n := x$ to be the constant sequence). \end{proof}
+
+\begin{corollary} If $E$ is relatively compact (or relatively sequentially compact), then $E$ is bounded. \end{corollary}
+
+\begin{remark} Let $(X, \, \|\cdot\|)$ be a normed space. Then: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item A subset $E \subset X$ is strongly bounded if and only if $\sup_{x \in E} \|x\| < +\infty$.
+\item A subset $E \subset X$ is weakly bounded if and only if for all $f \in X^\ast$ we have $\sup_{x \in E} \langle f, \, x \rangle < +\infty$.
+\item A subset $E \subset X^\ast$ is weakly-$\ast$ bounded if and only if for all $u \in X$ we have $\sup_{f \in E} \langle f, \, u \rangle < +\infty$.
+\end{enumerate}\end{remark}
+
+\begin{notation} Let $X$ and $Y$ be topological vector spaces, and let $\Gamma$ be a family (eventually uncountable) of linear and continuous applications from $X$ to $Y$. For every set $S \subset X$, we denote by $\Gamma(S)$ the union of the images, that is
+\begin{equation*} \Gamma(S) := \bigcup_{T \in \Gamma} T(S), \end{equation*}
+and, for every $R \subset Y$, we denote by $\Gamma^{-1}(R)$ the intersection of the preimages, that is
+\begin{equation*} \Gamma^{-1}(R) := \bigcap_{T \in \Gamma} T^{-1}(R). \end{equation*}
+In particular, the inclusion $\Gamma(S) \subset R$ is a compact way to express that
+\begin{equation*} T(S) \subset R \quad \text{for every $T \in \Gamma$}, \end{equation*}
+and, similarly, it is also equivalent to the inclusion
+\begin{equation*} S \subset T^{-1}(R) \quad \text{for every $T \in \Gamma$}. \end{equation*}\end{notation}
+
+\begin{definition}[Equicontinuous] \index{equicontinuous} Let $X$ and $Y$ be topological vector spaces. A family $\Gamma \subset \mathcal{L}(X, \, Y)$ of linear and continuous applications is \textit{equicontinuous} if and only if
+\begin{equation*} \forall \, V \in \mathcal{U}_0(Y), \, \exists U \in \mathcal{U}_0(X)\: : \: \Gamma(U) \subset V. \end{equation*} \end{definition}
+
+\begin{remark} If $X$ and $Y$ are metric spaces, this notion is completely equivalent to the equicontinuity in the sense of $\epsilon$-$\delta$.\end{remark}
+
+\begin{remark}If $X$ and $Y$ are normed spaces, a family $\Gamma$ is equicontinuous if and only if $\Gamma$ is equibounded in $\mathcal{L}(X, \, Y)$ with respect to the operator norm.\end{remark}
+
+\begin{definition}[Meager Set] \index{meager set} Let $(X, \, \tau)$ be a topological space, and let $S \subset X$. We say that $S$ is a \textit{meager} (or \textit{first-category}) set if and only if there exists a countable cover made up of nowhere dense subsets of $X$, that is,
+\begin{equation*} S = \bigcup_{n \in \N} X_n, \qquad \mathrm{Int} \, \overline{X_n} = \varnothing. \end{equation*}
+Furthermore, we say that $S$ is a \textit{second-category} set if it is not a first-category set. \end{definition}
+
+\begin{theorem}[Baire] \index{Baire Theorem} \label{bairetheorem}Let $X$ be either a complete metric space or a locally compact topological space. Then each open nonempty subset of $X$ is a second-category set. \end{theorem}
+
+\begin{theorem}[Banach-Steinhaus]\index{Banach-Steinhaus Theorem} \label{stein}Let $X$ and $Y$ be topological vector spaces and let $\Gamma \subset \mathcal{L}(X, \, Y)$ be a collection (eventually uncountable) of linear and continuous applications. If
+\begin{equation*} E := \left\{ x \in X \: \left| \: \text{$\Gamma(\{x\})$ is bounded} \right. \right\} \end{equation*}
+is a second-category set (i.e., $\Gamma$ is pointwise bounded in a second-category set), then $\Gamma$ is a equicontinuous family. \end{theorem}
+
+\begin{proof} Fix $U \in \mathcal{U}_0(Y)$ neighborhood of the origin in $Y$. Recall that we can always find a neighborhood $V \in \mathcal{U}_0(Y)$ closed, balanced and satisfying the the inclusion $V + V \subset U$.
+
+By assumption, for all $x \in E$ there exists a positive natural number $m(x) \in \N$ such that $\Gamma(x) \subset m(x) \cdot V$ (or, equivalently, $x \in m(x) \cdot \Gamma^{-1}(V)$). In particular, we have that
+\begin{equation*} E \subseteq \bigcup_{n \in \N} n \cdot \Gamma^{-1}(V) \quad \text{and} \quad \text{$\Gamma^{-1}(V)$ closed}. \end{equation*}
+Since $E$ is a second-category set, there exists $m \in \N$ such that $m \cdot \Gamma^{-1}(V)$ has nonempty internal part (and, hence, the same applies to $n \cdot \Gamma^{-1}(V)$ for every $n \in \N$). In particular, it turns out that
+\begin{equation*}\mathfrak{V} := \Gamma^{-1}(V) - \Gamma^{-1}(V) \in \mathcal{U}_0(X), \end{equation*}
+and by linearity of $\Gamma$ we also have that
+\begin{equation*} \Gamma(\mathfrak{V}) = \Gamma(\Gamma^{-1}(V)) - \Gamma(\Gamma^{-1}(V)) = V - V \subseteq U. \end{equation*}
+Therefore, the set $\mathfrak{V}$ is a neighborhood of the origin in $X$ whose image is contained in $U$, and this is exactly what we wanted to prove.\end{proof}
+
+\begin{remark} The theorem is false if $\Gamma$ is a family of linear (but not necessarily continuous) operators from $X$ to $Y$. The easiest counterexample is the following: Consider a Banach space $X$, and let $Y := \R$ and $\Gamma := \{L\}$, for any $L$ discontinuous linear functional. \end{remark}
+
+\paragraph{Applications.} In this brief paragraph, we investigate some basic results which may be obtained through a simple application of the uniform boundedness principle.
+
+\begin{theorem} Let $X$ be a complete metric space, and let $Y$ and $Z$ be topological vector spaces. If
+\begin{equation*} B : X \times Y \longrightarrow Z \end{equation*}
+is a bilinear application separately sequentially continuous, then $B$ is jointly sequentially continuous (i.e., seq. continuous w.r.t. the couple). \end{theorem}
+
+\begin{proof} We first prove a particular case, and then we generalize it with a simple algebraic trick.
+
+\paragraph{Step 1.} Let $(x_n)_{n \in \N} \subset X$ be a sequence converging to $0$, and let $(y_n)_{n \in \N} \subset Y$ be a converging sequence. The linear mapping
+\begin{equation*} B(\cdot, \, y_n) : X \longrightarrow Z \end{equation*}
+is clearly continuous for every $n \in \N$, and it is pointwise bounded. Indeed, for $u \in X$ fixed, the subset
+\begin{equation*} \left\{ B(u, \, y_n) \right\}_{n \in \N} \subset Z \end{equation*}
+is bounded in $Z$, since converging sequences are bounded. The \hyperref[bairetheorem]{Baire Theorem \ref{bairetheorem}} holds in the complete metric space $X$, and hence the \hyperref[stein]{Banach-Steinhaus Theorem \ref{stein}} implies that for every $U \in \mathcal{U}_0(Z)$ there exists $V \in \mathcal{U}_0(X)$ such that
+\begin{equation*} B \left( V, \, y_n \right) \subset U \quad \text{for every $n \in \N$}. \end{equation*}
+The sequence $(x_n)_{n \in \N}$ converges to $0$; thus, $x_n \in V$ definitively, and this means that $B(x_n, \, y_n)$ belongs to $U$ for $n$ sufficiently large, that is, $B(x_n, \, y_n) \to 0$.
+
+\paragraph{Step 2.} If $x_n \to x \in X$, then the thesis follows from the previous step if one notices that the difference $(x_n - x)_{n \in \N}$ converges to $0$. Then
+\begin{equation*} B(x_n, \, y_n) = B(x_n - x, \, y_n) + B(x, \, y_n) \xrightarrow{n \to + \infty} 0 + B(x, \, y) = B(x, \, y).\end{equation*}
+\end{proof}
+
+\begin{corollary} Let $(T_n)_{n \in \N} \subset \mathcal{L}(X, \, Y)$ be a family of linear and continuous operators between two Banach spaces, and assume that the sequence is pointwise bounded, that is,
+\begin{equation*}\sup_{n \in \N} \|T_n(x) \| < + \infty \quad \text{for all $x \in X$}. \end{equation*}
+Then $T_n$ is equibounded,that is, there exists a positive constant $C > 0$ such that
+\begin{equation*}\sup_{n \in \N} \|T_n\|_{\mathcal{L}(X, \, Y)} \leq C < + \infty. \end{equation*} \end{corollary}
+
+\begin{remark} Let $(T_n)_{n \in \N} \subset \mathcal{L}(X, \, Y)$ be a family of linear and continuous operators between two Banach spaces, and suppose that
+\begin{equation*} T_n(x) \xrightarrow{n \to + \infty} T(x) \quad \text{w.r.t. the strong convergence in $X$}. \end{equation*}
+Then $T_n \to T \in \mathcal{L}(X, \, Y)$ in the operator norm, and the convergence is uniform on any compact set. \end{remark}
+
+\begin{proof}The sequence $(T_n)_{n \in \N}$ is pointwise bounded. Therefore, the previous corollary asserts that it is also equibounded, that is, there exists a positive constant $c$ such that
+\begin{equation*} \sup_{n \in \N} \|T_n \| = c < \infty. \end{equation*}
+It follows that
+\begin{equation*} \| T_n  x\| \leq c \| x\| \quad \text{for all $x \in X$}, \end{equation*}
+which means that $T_n$ is also an equi-Lipschitz continuous sequence.
+
+The Ascoli-Arzelà theorem allows us to extract a subsequence $(n_k)_{k \in \N}$ such that $T_{n_k}$ converges, uniformly on compact sets, to a linear operator $T$. Furthermore, the assumption
+\begin{equation*} \| T_n  x\| \leq c \| x\| \quad \text{for all $x \in X$}, \end{equation*}
+is preserved under the limit for $n \to + \infty$, and therefore $T$ is a continuous operator, which means that
+\begin{equation*}T_{n_k} \xrightarrow{k \to + \infty} T \in \mathcal{L}(X, \, Y), \end{equation*}
+uniformly on compact sets.\end{proof}
+
+\section{The Open Mapping Theorem}
+
+The statement and the proof of the open mapping theorem are both taken \textbf{verbatim} from the Brezis book \cite{brezis}.
+
+\begin{theorem}[Open Mapping] \index{Open Mapping Theorem} \label{opt}Let $X$ and $Y$ be two Banach spaces, and let $T$ be a continuous linear operator from $X$ to $Y$ that is surjective (=onto). Then there exists a constant $c > 0$ such that
+\begin{equation*} T \left( B_X(0, \, 1) \right) \supset B_Y(0, \, c). \end{equation*} \end{theorem}
+
+\begin{remark} The conclusion of the open mapping theorem is equivalent to saying that $T$ is an open map. Indeed, let us suppose that $U$ is open in $X$ and let us prove that $T(U)$ is open in $Y$.
+
+Fix any point $y_0 \in T(U)$, so that $y_0 = T \, x_0$ for some $x_0 \in U$. Let $r > 0$ be such that $B(x_0, \, r) \subset U$, i.e., $x_0 + B(0, \, r) \subset U$. It follows that
+\begin{equation*} y_0 + T \left( B(0, \, r) \right) \subset T(U). \end{equation*}
+Then by open mapping theorem it follows that
+\begin{equation*} T \left( B(0, \, r) \right) \supset B(0, \, rc) \end{equation*}
+and therefore
+\begin{equation*} B(y_0, \, rc) \subset T(U). \end{equation*} \end{remark}
+
+\begin{proof} We split the argument into two steps.
+
+\paragraph{Step 1.} Assume that $T$ is a linear surjective operator from $X$ onto $Y$. Then there exists a constant $c > 0$ such that
+\begin{equation*} \overline{T \left(B_X(0, \, 1) \right)} \supset B_Y(0, \, 2c). \end{equation*}
+Set $X_n = n \cdot\overline{T \left(B_X(0, \, 1) \right)}$. Since $T$ is surjective, we clearly have
+\begin{equation*} Y = \bigcup_{n \in \N} X_n, \end{equation*}
+and by Baire category theorem there exists some $N$ such that $\mathrm{Int} X_N \neq \varnothing$. It follows that the same holds true (by homeomorphisms) for any other $X_n$ and thus
+\begin{equation*} \mathrm{Int} \left(\overline{T \left(B_X(0, \, 1) \right)} \right) \neq \varnothing. \end{equation*}
+Pick $c > 0$ and $y_0 \in Y$ such that
+\begin{equation*} B_Y(y_0, \, 4 c) \subset \overline{T \left(B_X(0, \, 1) \right)}. \end{equation*}
+In particular, $y_0 \in \overline{T \left(B_X(0, \, 1) \right)}$, and by symmetry, 
+\begin{equation*} - y_0 \in \overline{T \left(B_X(0, \, 1) \right)}. \end{equation*}
+Therefore
+\begin{equation*} B_Y(0, \, 4c) \subset \overline{T \left(B_X(0, \, 1) \right)} + \overline{T \left(B_X(0, \, 1) \right)}. \end{equation*}
+On the other hand, since $ \overline{T \left(B_X(0, \, 1) \right)}$ is convex, we have
+\begin{equation*}\overline{T \left(B_X(0, \, 1) \right)} + \overline{T \left(B_X(0, \, 1) \right)} = 2 \cdot \overline{T \left(B_X(0, \, 1) \right)}, \end{equation*}
+and the first claim follows.
+
+\paragraph{Step 2.} Assume that $T$ is continuous linear operator from $X$ into $Y$ that satisfies the first claim. Then we have
+\begin{equation*} T \left(B_X(0, \, 1) \right) \supset B_Y(0, \, c). \end{equation*}
+Choose any $y \in Y$ with $\|y\| < c$. The goal is to find some $x \in X$ such that
+\begin{equation*} \|x\| < 1 \qquad \text{and} \qquad T x = y. \end{equation*}
+We know that
+\begin{equation*} \text{$\forall \epsilon > 0, \:\: \exists \, z \in X$ such that $\|z\| < \frac{1}{2}$ and $\| y - T z \| < \epsilon$}.\end{equation*}
+Choosing $\epsilon = c/2$, we find some $z_1 \in X$ such that
+\begin{equation*} \| z_1 \| < \frac{1}{2} \qquad \text{and} \qquad \| y - T z_1 \| < \frac{c}{2}. \end{equation*}
+Proceeding similarly, by induction we obtain a sequence $(z_n)_{n \in \N} \subset X$ such that
+\begin{equation*} \| z_n \| < \frac{1}{2^n} \qquad \text{and} \qquad \| y - T (z_1 + \dots + z_n) \| < \frac{c}{2^n}, \quad \text{for any $n \in \N$}. \end{equation*}
+
+It follows that the sequence $x_n = z_1 + \dots + z_n$ is a Cauchy sequence. Let $x$ be its limit (since $X$ is complete) with, clearly, $\|x\| < 1$ and $y = Tx$ (since $T$ is continuous).
+\end{proof}
+
+\begin{corollary} \label{corqeuodd}Let $X$ and $Y$ be Banach spaces, and let $T$ be a bijective continuous and linear operator from $X$ to $Y$. Then $T^{-1}$ is a continuous operator from $Y$ to $X$. \end{corollary}
+
+\begin{proof} The \hyperref[opt]{Open Mapping Theorem \ref{opt}}, together with the assumption that $T$ is injective, is enough to infer that
+\begin{equation*} x \in X \: : \: \|T x\|_Y < c \implies \|x \|_X < 1. \end{equation*}
+By homogeneity, it turns out that
+\begin{equation*} \|x\|_X \leq \frac{1}{c} \, \|T x \|_Y, \qquad \forall \, x \in X, \end{equation*}
+and hence $T^{-1}$ is continuous.\end{proof}
+
+\begin{corollary} \label{corwequ}Let $X$ be a vector space provided with two norms, $\| \cdot \|_1$ and $\| \cdot \|_2$. Assume that $X$ is Banach with respect to both norms, and assume that there exists a constant $C \geq 0$ such that
+\begin{equation*} \|x\|_2 \leq C \, \|x\|_1, \qquad \forall \, x \in X. \end{equation*}
+Then the two norms are \textbf{equivalent}, i.e., there is a constant $c > 0$ such that
+\begin{equation*} \|x\|_1 \leq c \, \|x\|_2, \qquad \forall \, x \in X. \end{equation*} \end{corollary}
+
+\begin{proof}It suffices to apply \hyperref[corqeuodd]{Corollary \ref{corqeuodd}} with
+\begin{equation*} X:= (X, \, \| \cdot \|_1), \qquad Y := (X, \, \| \cdot \|_2) \quad \text{and} \quad T = \mathrm{id}_X. \end{equation*} \end{proof}
+
+\begin{remark} The assumption that the two norms are comparable is critical. Indeed, if $(X, \, \|\cdot\|)$ is an infinite-dimensional Banach space, then one can always find a linear form $\ell : X \longrightarrow \R$ which is not continuous. Therefore, we may define a non-continuous operator $A : X \longrightarrow X$ as follows. Pick a point $x_0 \in X$ such that $T x_0 = 1$, and set
+\begin{equation*} A(x) := x - 2 x_0 \, \langle \ell, \, x \rangle. \end{equation*}
+We can easily define a norm
+\begin{equation*} \|x\|_A := \| A x \|_X, \end{equation*}
+which makes $A$ an isometry of $X$ (and thus continuous), if seen as an operator between $(X, \, \|\cdot\|_X)$ and $(X, \, \| \cdot \|_A)$.
+
+The reader may check as an exercise that the corollary above fails since $(X, \, \| \cdot \|_A)$ is also a Banach space, but $\|\cdot\|_A$ and $\| \cdot \|$ are not equivalent norms.\end{remark}
+ 
+\begin{theorem}[Closed Graph] \index{Closed Graph Theorem} Let $X$ and $Y$ be two Banach spaces, and let $T : X \longrightarrow Y$ be a linear operator. Then $T$ is continuous if and only if the graph of $T$, denoted by $\Gamma(T)$, is closed in the Cartesian product $X \times Y$. \end{theorem}
+
+\begin{proof} First, we notice that the graph
+\begin{equation*} \Gamma(T) := \left\{ \left(x, \, T x\right) \: \left| \: x \in X \right. \right\} \end{equation*}
+is the kernel of the map
+\begin{equation*} X \times Y \ni (x, \, y) \longmapsto T x - y. \end{equation*}
+
+\paragraph{Step 1.} If $T$ is continuous, then the map $(x, \, y) \longmapsto T x - y$ is also continuous. Therefore, the preimage of the singlet $\{0\}$, which is closed, is exactly equal to the graph $\Gamma(T)$.
+
+\paragraph{Step 2.} Vice versa, let us consider on $X$ the two norms
+\begin{equation*} \|x\|_1 := \|x\|_X + \|T x\|_Y \qquad \text{and} \qquad \|x\|_2 := \|x\|_X. \end{equation*}
+It is easy to check, using the assumption that $G(T)$ is closed, that $X$ is a Banach space for the norm $\| \cdot \|_1$. On the other hand, by assumption, $X$ is also a Banach space for $\|\cdot\|_2$ and clearly
+\begin{equation*} \|x\|_1 \geq \|x\|_2 .\end{equation*}
+It follows from \hyperref[corwequ]{Corollary \ref{corwequ}} that the two norms are equivalent; hence there exists a constant $c > 0$ such that $\|x\|_1 \leq c \, \|x\|_2$, from which it follows that
+\begin{equation*} \|T x\|_Y \leq c^\prime \, \|x\|_X, \end{equation*}
+i.e. $T$ is continuous.
+\end{proof}
+
+%\section{Exercises}
+
+%\begin{exercise} Let $X$ and $Y$ be two Banach spaces and let $T$ be a continuous linear operator from $X$ to $Y$. Assume that $\mathrm{R}(T) \subset Y$ is a linear space of finite co-dimension in $Y$. Prove that $\mathrm{R}(T)$ is closed, and thus $T : X \to T(X)$ is an open map.
+%\end{exercise}
+
+%\begin{exercise}  Let $X$ and $Y$ be two Banach spaces and let $T$ be a surjective continuous linear operator from $X$ onto $Y$. Then
+%\begin{equation*}\begin{tikzcd}%
+%X \arrow{r}{T} \arrow{dr}{\pi} & Y \\
+% & \sfrac{X}{\mathrm{Ker}(T)} \arrow[dotted]{u}{T^\prime} 
+%\end{tikzcd} \end{equation*}
+%the operator $T^\prime$ induced on the quotient by $T$ is \textbf{invertible}.
+%\end{exercise}

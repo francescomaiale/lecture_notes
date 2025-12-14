@@ -1,0 +1,487 @@
+\chapter{Functional Calculus} \thispagestyle{empty}
+
+From \href{https://en.wikipedia.org/wiki/Functional_calculus}{Wikipedia}: \textit{"In mathematics, a functional calculus is a theory allowing one to apply mathematical functions to mathematical operators. It is now a branch (more accurately, several related areas) of the field of functional analysis, connected with spectral theory."}
+
+\section{Continuous Functional Calculus}
+
+In this section, we only develop the functional calculus of continuous functions defined on the spectrum of linear bounded symmetric operators on a Hilbert space $H$. Therefore, unless stated otherwise, we assume that $A \in \Ls(H)$ throughout this paragraph.
+
+First, we present a few motivational examples of functional calculus in a Hilbert space with finite dimension, and we also discuss what may happen in an infinite-dimensional setting using a computation that was already considered in the previous chapter.
+
+\begin{example} \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item The Cauchy problem
+\begin{equation*} \begin{cases} \dot{x}(t) = A x(t) \\ x(0) = x_0 \end{cases} \end{equation*}
+admits one and only one solution, that is, 
+\begin{equation*} x(t) = \mathrm{exp}(tA) \, x_0. \end{equation*}
+It follows that
+\begin{equation*} \mathrm{e}^A := \sum_{n = 0}^{+ \infty} \frac{A^n}{n !} \end{equation*}
+is the result of the exponential function $\mathrm{exp}(\cdot)$ applied to an operator, and it is still an operator.
+\item If $\|A\| < 1$, then we have already proved that
+\begin{equation*} \left( \I - A \right)^{-1} = \sum_{n = 0}^{+\infty} A^n. \end{equation*}
+More precisely, we can obtain the inverse of the operator $\left( \I - A \right)$ simply by applying a function, defined by its Taylor series, to the operator $A$.
+\item Assume that $H$ is a finite-dimensional Hilbert space. Then $A$ is diagonalizable, that is, there exists a unitary operator $U$ such that
+\begin{equation*} A = U D U^{-1}, \qquad \text{where $D = \mathrm{diag} \left( \lambda_1, \, \dots, \, \lambda_n \right)$}. \end{equation*}
+If $f : \sigma(A) \subset \C \longrightarrow \C$ is a function defined on the spectrum of $A$, then we can easily infer that
+\begin{equation*} f(A) = U f(D) U^{-1}, \qquad \text{where $f(D) = \mathrm{diag} \left( f(\lambda_1), \, \dots, \, f(\lambda_n) \right)$}. \end{equation*}
+\end{enumerate} \end{example}
+
+\paragraph{Real Polynomials.} Let $p(x) \in \R[x]$ be a real polynomial defined by
+\begin{equation*} p(x) = a_n x^n + \dots a_1 x + a_0, \quad \text{with $a_i \in \R$ for all $i = 0, \, \dots, \, n$}. \end{equation*}
+Set $B := p(A)$. The operator $B$ is linear continuous and symmetric (i.e. $B\in \Ls(H)$) because
+\begin{equation*}( Bx, \, y) = \sum_{i = 1}^n a_i (A^i x, \, y) + a_0(x, \, y) = \sum_{i = 1}^n a_i (x, \, A^i y) + a_0(x, \, y) = (x, \, By),  \end{equation*}
+where the last equality holds because $a_i$ is real, and hence
+\begin{equation*} a_i (x, \, A^i y) = (x, \, \bar{a}_i A^i y) = (x, \, a_i A^i y). \end{equation*}
+Therefore, the operator norm of $B$ is given by the maximum absolute value of the eigenvalues of $B$, that is,
+\begin{equation*} \|B\| = \sup_{\|x\| \leq 1} \left| \left< B \, x, \, x \right> \right| = \max_{\lambda \in \sigma(B)} \left|\lambda \right|. \end{equation*}
+On the other hand, the \hyperref[theorem:sm]{Spectral Map Theorem \ref{theorem:sm}} shows that the spectrum of $B$ is related to the spectrum of $A$ via the polynomial $p$, that is,
+\begin{equation*} \sigma(B) = p\left(\sigma(A) \right). \end{equation*}
+It follows that the operator norm of $B$ is also equal to
+\begin{equation} \label{iso22} \|B\| = \max_{\lambda \in p\left(\sigma(A) \right)} |\lambda| = \max_{\lambda \in \sigma(A)} \left| p(\lambda) \right| = \left\| p \right\|_{\infty, \, \sigma(A)}, \end{equation}
+that is, it is equal to the uniform norm of the restriction to the spectrum $\sigma(A)$ of the polynomial $p$.
+
+\paragraph{Complex Polynomials.} Let $p(z) \in \C[z]$ be a complex polynomial defined by
+\begin{equation*} p(z) = a_n z^n + \dots a_1 z + a_0, \quad \text{with $a_i \in \C$ for all $i = 0, \, \dots, \, n$}. \end{equation*}
+It induces: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item A function $\sigma(A) \subseteq \C \longrightarrow \C$, also denoted by $p$, defined on the spectrum of the operator $A$.
+\item A bounded symmetric operator $p(A)$ if $p$ is a real-valued polynomial, and a linear bounded (but, generally, not symmetric) operator if $p(z) \in \C[z] \setminus \R[x]$.
+\end{enumerate}
+In particular, there exists an isometric correspondence between \textbf{(a)} and \textbf{(b)}. More precisely, it turns out that by sending a polynomial $p$ to $p(A)$ we have a one-to-one map
+\begin{equation*} \left\{ \text{polynomial functions $\sigma(A) \to \C$} \right\} \longleftrightarrow \left\{ \text{operators of the form $p(A)$} \right\} = \C[A], \end{equation*}
+where $\C[A]$ is the \textbf{commutative} algebra spanned by $A$. Furthermore, the correspondence is also an isometry as a consequence of \eqref{iso22}, since they are endowed with the subspace norms induced by $\left( C^0 \left( \sigma(A), \, \C \right), \, \| \cdot \|_{\infty, \, \sigma(A)} \right)$ and $\left( \La(H), \, \| \cdot \| \right)$ respectively.
+
+\begin{proposition} \label{pro1212} Let $A \in \Ls(H)$ be a symmetric bounded operator. There exists a unique continuous homomorphism of algebras
+\begin{equation*} \Phi : C^0 \left( \sigma(A), \, \C \right) \longrightarrow \overline{\C[A]} \end{equation*}
+with the additional requirement that $\Phi \left( \mathrm{id}_{\sigma(A)} \right) = A$. Furthermore, the homomorphism $\Phi$ satisfies the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The map $\Phi$ is an isometry.
+\item If $f \in C^0 \left( \sigma(A), \, \C \right)$ is a positive function, then the operator $\Phi(f) := f(A)$ is symmetric and positive, that is,
+\begin{equation*} \lambda \in \sigma \left( f(A) \right) \implies \lambda \geq 0. \end{equation*}
+\item For any $f \in C^0 \left( \sigma(A), \, \C \right)$ it turns out that
+\begin{equation*} \Phi(f)^\ast = \Phi \left(\overline{f} \right). \end{equation*}
+\item For all $B \in \La(H)$ such that $[A, \, B] = 0$ and for all continuous function $f \in C^0 \left( \sigma(A), \, \C \right)$, it turns out that
+\begin{equation*}[\Phi(f), \, B] = 0. \end{equation*}
+\end{enumerate}\end{proposition}
+
+\begin{proof} To ease the notation for the reader, we divide the proof into many little steps. \mbox{}
+
+\paragraph{Uniqueness.} Suppose that there exists a homomorphism of algebras $\Phi$, and suppose that it satisfies the properties $\mathbf{(a)}-\mathbf{(d)}$. $\Phi$. The requirement that $\Phi \left(\mathrm{id}_{\sigma(A)}\right) = A$ allows us to extend $\Phi$ to all the polynomials as follows:
+\begin{equation*}p \longmapsto p(A). \end{equation*}
+Since $\Phi$ is an isometry, it follows from Stone-Weierstrass\footnote{Suppose that $X$ is a compact Hausdorff space and $A$ is a subalgebra of $C^0 \left(X; \; \C \right)$ which contains a non-zero constant function. Then $A$ is dense if and only if it separates points.} (note that $\sigma(A)$ is compact) that $\Phi$ can be uniquely extended by density to the whole space $C^0 \left( \sigma(A), \, \C \right)$.
+
+\paragraph{Existence.} The map $\Phi$ is already well-defined from the complex polynomials to $\C[A]$. To prove that it can be extended up to the closures of these spaces, we simply need to show the property $\mathbf{(a)}$, that is, $\Phi$ is an isometry.
+\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let $p(z) \in \C[z]$ be a complex polynomial, and let $B := p(A)$. A straightforward computation shows that
+\begin{equation*} \begin{aligned} \left\|p(A) \right\|_{\La(H)}^2 & {\color{red}=} \left\| p(A)^\ast \, p(A) \right\|_{\La(H)} {\color{blue}=} \\[1em] &  {\color{blue}=}  \left\| \overline{p}(A) \, p(A) \right\|_{\La(H)} {\color{green}=} \\[1em] & {\color{green}=} \left\| \left( \overline{p} \, p \right) (A) \right\|_{\La(H)} = \\[1em] & = \max_{\lambda \in \sigma(A)} \left| \overline{p} \, p(\lambda) \right| = \| p \|_{\infty, \, \sigma(A)}^2, \end{aligned} \end{equation*}
+that is, $\Phi$ is an isometric homomorphism that sends $\mathrm{id}_{\sigma(A)}$ to $A$. Therefore, there exists an unique extension of $\Phi$ up to the closures, that is,
+\begin{equation*} \Phi : C^0 \left( \sigma(A), \, \C \right) \to \overline{\C[A]}. \end{equation*}
+Notice that the closure of the complex polynomials defined on $\sigma(A)$ is $C^0 \left( \sigma(A), \, \C \right)$ as a consequence of the Stone-Weierstrass and the compactness of $\sigma(A)$. 
+
+To conclude the proof of this first property (and, thus, of the existence of $\Phi$), it remains to justify the identities we used to infer that $\Phi$ is an isometry. 
+
+The {\color{red}red} identity is true under more general assumptions, that is, it is satisfied by any linear bounded operator $B$. Indeed, the operator $B^\ast B$ is always symmetric and thus
+\begin{equation*} \|B \|_{\La(H)}^2 = \left( \sup_{\|x\| = 1} \left\|  B x \right\| \right)^2 = \sup_{\|x\| \leq 1} \left\langle B^\ast B x, \, x \right\rangle = \left\| B^\ast B \right\|_{\La(H)} \end{equation*}
+
+The {\color{blue}blue} identity follows easily from $\left( \imath A \right)^\ast = - \imath  A^\ast$, while the {\color{green}green} identity follows from the fact that $\Phi$ is a homomorphism of algebras.
+\end{enumerate}
+In a similar fashion, the properties $\mathbf{(b)}$, $\mathbf{(c)}$ and $\mathbf{(d)}$ are certainly true when $f \in C^0 \left( \sigma(A), \, \C \right)$ is a polynomial, and they are preserved under the isometric extension.
+
+The reader may fill the details as an exercise. Notice that $\mathbf{(b)}$ follows immediately from $\mathbf{(c)}$ and the \hyperref[theorem:sm]{Spectral Map Theorem \ref{theorem:sm}}. \end{proof}
+
+In this paragraph we introduce a more general class of operators, and we show that a similar (but slightly more technical) result holds true.
+
+\begin{definition}[Normal Operator] A linear bounded operator $A$ defined on a Hilbert space $H$ is \textit{normal} if and only if
+\begin{equation*}\left[A, \, A^\ast \right] := A A^\ast - A^\ast A = 0. \end{equation*} \end{definition}
+
+\begin{example}Here we give some examples of normal operators. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item If $A \in \Ls(H)$, then $A$ is normal.
+\item If $A$ is a linear bounded unitary operator, then $A$ is also normal.
+\item If $A \in \Ls(H)$ and $\lambda \in \C \setminus \R$, then $\lambda A$ is a normal operator which is, generally, not symmetric.
+\item If $A \in \Ls(H)$ and $f \in C^0 \left(\sigma(A), \, \C \right)$, then $f(A)$ is a normal operator, but it may fail to be symmetric as we proved above.
+\end{enumerate} \end{example}
+
+\begin{lemma}[Spectral Radius] \label{normalsr} Let $A \in \La(H)$ be a normal operator. Then the spectral radius of $A$, denoted by $r_A$, is equal to $\|A\|$. \end{lemma}
+
+\begin{proof}Since $A$ is a linear bounded operator, \hyperref[srad]{Theorem \ref{srad}} proves that the spectral radius $r_A$ is given by
+\begin{equation*} r_A = \lim_{n \to + \infty} \|A^n\|^{\frac{1}{n}} = \inf_{n \in \N} \|A^n\|^{\frac{1}{n}}. \end{equation*}
+Therefore, it is enough to prove that $\lim_{n \to + \infty} \|A^n\|^{\frac{1}{n}}$ is equal to $\|A\|$. Recall that this property has already been proved for symmetric operators (see \hyperref[prop:symesd]{Proposition \ref{prop:symesd}}). It follows that
+\begin{equation*} \begin{aligned} \|A\| & = \left\| A^\ast A \right\|^{\frac{1}{2}} =
+\\[1em] & = \lim_{n \to + \infty} \left\| \left(A^\ast A \right)^n \right\|^{\frac{1}{2n}} =
+\\[1em] & \stackrel{(\star)}{=} \left[ \lim_{n \to + \infty} \left\| \left(A^\ast \right)^n  A^n \right\|^{\frac{1}{n}} \right]^{\frac{1}{2}} \leq \\[1em] & \leq  \left[ \lim_{n \to + \infty} \left\| \left(A^\ast \right)^n \right\|^{\frac{1}{n}} \lim_{n \to + \infty} \left\| A^n \right\|^{\frac{1}{n}} \right]^{\frac{1}{2}} = 
+\\[1em] & = \left(r_{A^\ast} \cdot r_A \right)^{\frac{1}{2}} = r_A,
+\end{aligned} \end{equation*}
+where the equality $(\star)$ follows from the normality of $A$. The proof is now concluded because the opposite one ($\|A\| \geq r_A$) is trivially satisfied by any linear bounded operator $A$.
+\end{proof}
+
+\section{Borel Functional Calculus}
+
+The functional calculus of symmetric operators does not work anymore since $p(A)^\ast p(A)$ is not a polynomial in the sole variable $A$, but it depends on \textbf{both} $A$ and $A^\ast$.
+
+Moreover, $\sigma(A)$ may have a nonempty internal part, which, in turn, would imply that the polynomials are not dense anymore.
+
+The fundamental idea here is to first develop a functional calculus in one variable, assuming that $f$ is a Borel function (that is, there is no need for $f$ to be continuous.)
+
+\begin{remark} Let $H$ be a Hilbert space. Then there is a canonical isomorphism
+\begin{equation*} \La(H) = \La_c(H)^{\ast \ast}. \end{equation*}
+We will not prove this fact, but it is important to know because it proves that $\La(H)$ is the dual of a Banach space, and thus we can endow it with a weak-$\ast$ topology. \end{remark}
+
+\begin{theorem}[Riesz-Markov] \label{th:rm} Let $\Sigma$ be a compact metric space. The map
+\begin{equation*} \mathcal{M} \left(\Sigma; \; \C \right) \ni \mu \longrightarrow \Lambda_\mu \in C^0 \left(\Sigma; \; \C \right)^\ast \: : \: \Lambda_\mu(f) := \int_\Sigma f(x) \, \mathrm{d}\mu(x) \end{equation*}
+is an isometry, where $\mathcal{M} \left(\Sigma; \; \C \right)$ is equipped with the total variation norm.
+ \end{theorem}
+
+\begin{proposition} \label{primaprop} Let $A \in \Ls(H)$ be a symmetric operator. There exists a sesquilinear application
+\begin{equation*} H \times H \ni (x, \, y) \longmapsto \mu_{x, \, y} \in \mathcal{M} \left(\sigma(A), \, \C \right), \end{equation*}
+where $\mu_{x, \, y}$ is a complex-valued Borel measure, whose support is contained in $\sigma(A)$, such that the following properties are satisfied: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The mapping
+\begin{equation*}\Psi_{x, \, y} : C^0 \left(\sigma(A); \; \C \right) \ni f \longmapsto \left( f(A) \, x, \, y \right)_H \in \C \end{equation*}
+is linear and continuous, that is, $\Psi_{x, \, y} \in C^0 \left(\sigma(A); \; \C \right)^\ast$. Furthermore, for all $x, \, y \in H$ we have
+\begin{equation*} \left( f(A) x, \, y \right) = \int_{\sigma(A)} f(t) \, \mathrm{d}\mu_{x, \, y}(t). \end{equation*}
+\item For all $x, \, y \in H$ it turns out that
+\begin{equation*} \mu_{y, \, x} = \overline{\mu_{x, \, y}}. \end{equation*}
+\item For all $x, \, y \in H$ it turns out that
+\begin{equation*} \|\mu_{x, \, y} \| := \left| \mu_{x, \, y} \right|\left( \sigma(A) \right) \leq \|x\| \|y\|, \end{equation*}
+where the absolute value of a measure $\nu$ is defined by
+\begin{equation*} \left| \nu \right|\left(E \right) := \sup_{\pi} \sum_{A \in \pi} |\nu(A)| \quad \text{for all $E \subset \sigma(A)$}.\end{equation*}
+\item The measure $\mu_x := \mu_{x, \, x}$ is positive and the total variation of $\mu_x$ is exactly equal to the norm of $x$ squared, that is,
+\begin{equation*} \left| \mu_x \right|\left( \sigma(A) \right) = \|x\|^2. \end{equation*}
+\item For any $f \in C^0 \left(\sigma(A); \; \C \right)$, it turns out that the Radon-Nikodym derivative is given by
+\begin{equation*} \frac{\mathrm{d}\mu_{f(A) x, \, y}}{\mathrm{d}\mu_{x, \, y}} = f. \end{equation*}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}The existence of the sesquilinear application follows immediately from the first property and the Riesz-Markov representation theorem, as mentioned below. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item For any couple $(x, \, y) \in H \times H$, the mapping
+\begin{equation*} \Psi_{x, \, y} : C^0 \left( \sigma(A); \; \C \right) \ni f \longmapsto \left(f(A) \, x, \, y \right) \in \C \end{equation*}
+is linear since it is equal to the composition of the following linear operators:
+\begin{equation*} f \longmapsto f(A) \longmapsto f(A) x \longmapsto \left( f(A) x, \, y \right).\end{equation*}
+Furthermore, $\Psi_{x, \, y}$ is bounded as a consequence of the definition of operator norm and the Cauchy-Schwartz inequality:
+\begin{equation*} \begin{aligned} |\Psi_{x, \, y}(f)| & = \left| \left(f(A) x, \, y \right) \right| \leq
+\\[1em] & \leq \|f(A)x\| \|y\| \leq 
+\\[1em] & \leq \|f(A)\| \|x\| \|y\| = \|f\|_{\infty, \, \sigma(A)} \|x\| \|y\|, \end{aligned} \end{equation*}
+and hence $\Psi_{x, \, y}$ belongs to the dual space $C^0 \left(\sigma(A); \; \C \right)^\ast$. It follows from the \hyperref[th:rm]{Riesz-Markov Theorem \ref{th:rm}} that, for any $x$ and $y$ in $H$, there exists a unique complex-valued measure $\mu_{x, \, y} \in \mathcal{M} \left(\sigma(A), \, \C \right)$ such that
+\begin{equation*} \left( f(A) x, \, y \right) = \int_{\sigma(A)} f(t) \, \mathrm{d}\mu_{x, \, y}(t). \end{equation*}
+\item The identification with the dual space $C^0 \left(\sigma(A); \; \C \right)^\ast$ immediately implies that the two measures are equal if and only if they are equal against every continuous function $f$. A simple computation shows that
+\begin{equation*} \begin{aligned} \left\langle \mu_{y, \, x}, \, f \right\rangle & = \left( f(A) y, \, x \right) =
+\\[1em] & = \left( y, \, f(A)^\ast x \right) = 
+\\[1em] & = \left(y, \, \overline{f}(A) \, x \right) =
+\\[1em] & = \overline{ \left( \overline{f}(A) x, \, y \right) } \: {\color{red}=} \: \left< \overline{\mu}_{x, \, y}, \, f \right>, \end{aligned} \end{equation*}
+where the {\color{red}red} identity follows from the following, general, property:
+\begin{equation*}\overline{\int_{\Sigma} f(t) \, \mathrm{d}\mu(t)} = \int_{\Sigma} \overline{f(t)} \, \mathrm{d} \overline{\mu}(t). \end{equation*}
+\item This estimate follows immediately from the argument used above to show $\mathbf{(a)}$.
+\item The measure $\mu_x$ is positive if and only if for any positive function $f \in C^0 \left( \sigma(A); \; \C \right)$ it turns out that
+\begin{equation*} \int_{\sigma(A)} f(t) \, \mathrm{d}\mu(t) \geq 0. \end{equation*}
+This is an easy consequence of the fact that $f \geq 0 \implies f(A)$ is a positive operator (see \hyperref[pro1212]{Proposition \ref{pro1212}}).
+\item For all functions $g \in C^0 \left( \sigma(A); \; \C \right)$ it turns out that
+\begin{equation*} \begin{aligned} \left\langle \mu_{f(A) x, \, y}, \, g \right\rangle & = \int_{\sigma(A)} g(t) \, \mathrm{d}\mu_{f(A) x, \, y}(t) = 
+\\[1em] & = \left( g(A) \left(f(A) x \right), \, y \right) = 
+\\[1em] & = \left(g \cdot f(A) x, \, y \right) = \left\langle \mu_{x, \, y}, \, g \cdot f \right\rangle. \end{aligned} \end{equation*}
+Therefore, the Radon-Nikodym density of $\mu_{f(A) x, \, y}$ with respect to $\mu_{ x, \, y}$ is the function $f$.
+\end{enumerate} \end{proof}
+
+\paragraph{Lax-Milgram Theorem.} We now introduce a fundamental result in functional analysis and partial differential equations, which is also the main ingredient needed to extend the functional calculus from continuous to Borel functions.
+
+\begin{theorem}[Lax-Milgram] \label{lms} Let $H$ be a complex Hilbert space, and let $b : H \times H \longrightarrow \C$ be a sesquilinear form. Suppose that $b$ is bounded, that is, there exists a constant $C > 0$ such that
+\begin{equation*} \left|b(x, \, y) \right| \leq C\cdot \|x\| \|y\| \quad \text{for all $(x, \, y) \in H \times H$}. \end{equation*}
+Then there exists a continuous linear operator $B \in \La(H, \, H)$ such that
+\begin{equation}\label{relsdds} b(x, \, y) = \left(B x, \, y \right) \quad \text{for all $(x, \, y) \in H \times H$}. \end{equation} \end{theorem}
+
+\begin{proof}For $x \in H$ fixed, the application
+\begin{equation*} H \ni y \longmapsto \overline{b(x, \, y)} \in \C \end{equation*}
+is linear and continuous. Therefore, a straightforward application of the \hyperref[theorem:riesz]{Riesz Representation Theorem \ref{theorem:riesz}} proves that there exists a unique element $v \in H$ such that
+\begin{equation*} \overline{b(x, \, y)} = \left(v, \, y \right) \quad \text{for every $y \in H$}. \end{equation*}
+If we denote by $B(x)$ the element $v \in H$, then we find an operator $B : H \longrightarrow H$ satisfying the identity
+\begin{equation*} b(x, \, y) = \left(B (x), \, y \right), \end{equation*}
+and thus it is enough to prove that $B$ is linear and continuous. The uniqueness of the vector $v \in H$ (given by the representation theorem) is enough to infer that $B$ is linear since the two elements
+\begin{equation*} \alpha B(x) + \beta B(y) \quad \text{and}  \quad B\left(\alpha x + \beta y \right) \end{equation*}
+both satisfies the relation \eqref{relsdds}. More precisely, we have that
+\begin{equation*}\begin{aligned} \left( B(\alpha x + \beta y), \, z \right) & = b( \alpha x + \beta y, \, z) = 
+\\[1em] & = \alpha b(x, \, z) + \beta b(y, \, z) =
+\\[1em] & = \alpha (B(x), \, z) + \beta (B(y), \, z) = (\alpha B(x) + \beta B(y), \, z)\end{aligned}\end{equation*}
+for all $x, \, y \in H \times H$ and $z \in H$. It follows that (since $B$ is linear) to prove the continuity, it suffices to prove the boundedness of $B$. It follows from the assumption that for any $x \in H$ we have
+\begin{equation*} \left| b(x, \, y) \right| \leq C \cdot \|x\| \|y\| \implies \left\| B x \right\| \leq C \cdot \|x\|, \end{equation*}
+and this concludes the proof.\end{proof}
+
+\paragraph{Notions of Convergence.} In this brief paragraph, we introduce a different notion of convergence on the space of bounded Borel functions, and we also recall the strong convergence for continuous linear operators.
+
+\begin{notation}Let $\Sigma$ be a compact subset of $\C$. From now on, we shall denote by $\bor\left(\Sigma; \; \C \right)$ the set of all bounded Borel functions defined on $\Sigma$.\end{notation}
+
+\begin{definition}Let $(f_n)_{n \in \N} \subset \bor\left(\Sigma; \; \C \right)$ be a sequence of functions. We say that $f_n$ converges \textit{dominantly pointwise} to $f$ if and only if the following properties are satisfied: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item For every $x \in \Sigma$ it turns out that
+\begin{equation*} f_n(x) \xrightarrow{n \to + \infty} f(x). \end{equation*}
+\item There exists a positive constant $C > 0$ such that
+\begin{equation}\label{eq:conv1} \left\|f_n \right\|_{\infty, \, \Sigma} \leq C < + \infty \end{equation}
+\end{enumerate}
+\end{definition}
+
+\begin{remark} \label{l22d}Let $\mu$ be a finite measure, and let $\Sigma \subset \C$ be a compact set. Then every sequence of function $(f_n)_{n \in \N} \subset \bor\left(\Sigma; \; \C \right)$ converging to some $f$ dominantly pointwise, also converges to $f$ with respect to the $L^2(\Sigma, \, \mu)$ norm.\end{remark}
+
+\begin{proof}It suffices to notice that the difference $|f_n(x) - f(x)|^2$ is uniformly bounded, and it converges $\mu$-almost everywhere (in $\Sigma$) to zero.  \end{proof}
+
+\begin{lemma}Let $\mathscr{P}(\Sigma; \; \C)$ be the set of all polynomials defined on $\Sigma$. The sequential closure of $\mathscr{P}(\Sigma; \; \C)$ with respect to the dominantly pointwise convergence is the space $\bor\left(\Sigma; \; \C \right)$.  \end{lemma}
+
+\begin{proof}[Road Map] We do not prove this statement here, but the reader may try to fill in the details as an exercise. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $V \subseteq \bor\left(\Sigma; \; \C \right)$ is a subspace, then $\overline{V}^{seq} \subseteq \bor\left(\Sigma; \; \C \right)$ is also a subspace.
+\item If $V \subseteq \bor\left(\Sigma; \; \C \right)$ is a lattice, then $\overline{V}^{seq} \subseteq \bor\left(\Sigma; \; \C \right)$ is also a lattice.
+\item If $V = C^0 \left(\Sigma; \; \C \right)$, then
+\begin{equation*} \left\{ E \subseteq \Sigma \: \left| \: \chi_E \in \overline{V}^{seq} \right. \right\} \end{equation*}
+is a $\sigma$-algebra containing the Borel $\sigma$-algebra.
+\end{enumerate}\end{proof}
+
+\begin{definition} Let $(T_n)_{n \in \N} \subset \La(H) $ be a sequence of linear bounded operators. We say that $T_n$ converges \textit{strongly} to $T$ if and only if
+\begin{equation}\label{eq:conv2} T_n(x) \xrightarrow{n \to +\infty} T(x) \quad \text{for all $x \in H$}, \end{equation}
+that is, if and only if $T_n$ is pointwise convergent to $T$. \end{definition}
+
+\begin{remark} The \hyperref[stein]{Banach-Steinhaus} theorem implies that, if $T_n x$ converges for all $x \in H$, then there exists a linear bounded operator $T$ such that $T_n \to T$ strongly. \end{remark}
+
+\begin{remark}A sequence of linear bounded operators $(T_n)_{n \in \N} \subset \La(H)$ converges weakly to some $T \in \La(H)$ if and only if
+\begin{equation}\label{eq:conv3} \left\langle T_n x, \, y \right\rangle_H \xrightarrow{n \to + \infty} \left\langle T  x, \, y \right\rangle \quad \text{for every $x, \, y \in H$}. \end{equation} \end{remark}
+
+\begin{lemma} \label{convdebole} Let $(T_n)_{n \in \N} \subset \La(H)$ be a weakly converging sequence, and let $T \in \La(H)$ be its limit. Then the following assertions hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $S \in \La(H)$ is a linear bounded operator, then $T_n S$ converges weakly to the product $TS$.
+\item If $S \in \La(H)$ is a linear bounded operator, then $B T_n$ converges weakly to the product $ST$.
+\end{enumerate} \end{lemma}
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The sequence $(T_n)_{n \in \N} \subset \La(H)$ is weakly convergent; therefore, for every $x, \, y \in H$, it turns out that
+\begin{equation*} \left\langle T_n S x, \, y \right\rangle  = \left\langle T_n \left( Sx \right), \, y \right\rangle  \xrightarrow{n \to + \infty} \left\langle T \left( S x \right), \, y \right\rangle,\end{equation*}
+which is exactly what we wanted to prove.
+\item The sequence $(T_n)_{n \in \N} \subset \La(H)$ is weakly convergent; therefore, for all $x, \, y \in H$, it turns out that
+\begin{equation*} \left\langle S T_n  x, \, y \right\rangle = \left\langle T_n x, \, S^\ast y \right\rangle  \xrightarrow{n \to + \infty} \left\langle Tx, \, S^\ast y \right> = \left\langle ST x, \, y \right\rangle.\end{equation*}
+\end{enumerate}\end{proof}
+
+\begin{definition}[$\star$-Homomorphism] Let $A$ and $B$ be $\star$-algebras. A $\star$-homomorphism $f : A \longrightarrow B$ is an algebra homomorphism that is compatible with the involutions of $A$ and $B$, that is,
+\begin{equation*} f(a^\ast) = f(a)^\ast \quad \text{for all $a \in A$}. \end{equation*} \end{definition}
+
+We are finally ready to state and prove the main result concerning the functional calculus for bounded Borel functions.
+
+\begin{proposition}\label{prop:borel22} Let $A \in \Ls(H)$ be a symmetric operator, and let $\sigma(A) := \Sigma$. There exists a unique $\star$-homomorphism of $\star$-algebras
+\begin{equation*} \Phi : \bor\left(\Sigma; \; \C \right) \longrightarrow \La(H) \end{equation*}
+such that $\Phi\left(\mathrm{id}_\Sigma \right) = A$. Moreover, it satisfies the following properties:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The mapping $\Phi$ is sequentially continuous if we endow $\bor\left(\Sigma; \; \C \right)$ with the dominate pointwise convergence and $\La(H)$ with the weak convergence of operators.
+\item The mapping
+\begin{equation*}\Psi_{x, \, y} : \bor \left(\Sigma; \; \C \right) \ni f \longmapsto \left( \Phi(f) x, \, y \right) \in \C \end{equation*}
+is linear and continuous, that is, $\Psi_{x, \, y} \in\bor \left(\Sigma; \; \C \right)^\ast$. Furthermore, there exists a unique complex-valued measure $\mu_{x, \, y}$ satisfying
+\begin{equation*} \left( \Phi(f) x, \, y \right) = \int_{\Sigma} f(t) \, \mathrm{d}\mu_{x, \, y}(t). \end{equation*}
+\item For any $f \in \bor \left(\Sigma; \; \C \right)$ it turns out that
+\begin{equation*} \left\| \Phi(f) \right\| \leq \|f\|_{\infty, \, \Sigma}. \end{equation*}
+\item For any $f \in \bor \left(\Sigma; \; \C \right)$ it turns out that
+\begin{equation*} B \in \La(H) \: : \: \left[A, \, B \right] = 0 \implies \left[ \Phi(f), \, B \right] = 0. \end{equation*}
+\item For any $f \in \bor \left(\Sigma; \; \C \right)$ it turns out that
+\begin{equation*} f \geq 0 \implies \Phi(f) \geq 0.\end{equation*}
+\item The mapping $\Phi$ is sequentially continuous if we endow $\bor\left(\Sigma; \; \C \right)$ with the dominate pointwise convergence and $\La(H)$ with the strong convergence of operators.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}We first prove that if such a map exists, then it must be unique. Then, we use the formula obtained in the uniqueness step and show that it actually defines a map with the desired properties.
+
+\paragraph{Uniqueness.} The map $\Phi$ is unique because it is the unique isometric extension of the continuous functional calculus (see \hyperref[pro1212]{Proposition \ref{pro1212}}). Moreover, from the formula
+\begin{equation} \label{f111} \left( \Phi(f)  x, \, y \right) = \int_\Sigma f(t) \, \mathrm{d}\mu_{x, \, y}(t)\end{equation}
+valid for all $f \in C^0 \left(\Sigma; \; \C \right) $, it follows that the functional $\Psi_{x, \, y}$, defined in the statement, can be extended to the whole $\bor \left(\Sigma; \; \C \right)$ by (sequential) continuity.
+
+\paragraph{Existence.} The mapping
+\begin{equation*}H \times H \ni (x, \, y) \longmapsto \Psi_{x, \, y}(f) \in \C, \end{equation*} 
+defined by formula \eqref{f111}, is a sesquilinear application satisfying the assumptions of the \hyperref[lms]{Lax-Milgram Theorem \ref{lms}}. Therefore, there exists a continuous linear operator, denoted by $\Phi(f)$, such that
+\begin{equation*} \Psi_{x, \, y}(f) = \left( \Phi(f)x, \, y \right)_H, \end{equation*}
+which is exactly what we wanted to prove.
+
+\paragraph{Sequential Continuity $\mathbf{(a)}$.} If we endow $\bor\left(\Sigma; \; \C \right)$ with the dominate pointwise convergence and $\La(H)$ with the weak convergence of operators, then the sequential continuity is an immediate consequence of the properties of the spectral measures (see \hyperref[primaprop]{Proposition \ref{primaprop}}).
+
+\paragraph{Properties $\mathbf{(b)-(e)}$}. Recall that the properties $\mathbf{(b)-(e)}$ have already been proved in \hyperref[pro1212]{Proposition \ref{pro1212}} for the continuous functional calculus. Since $\Phi$ is a $\star$-homomorphism, we infer that these properties are already satisfied when $f \in C^0 \left( \Sigma; \; \C \right)$.
+
+The reader may complete the proof of this step by noticing that these properties can all be extended by continuity to $\bor\left(\Sigma; \; \C \right)$.
+
+\paragraph{Sequential Continuity $\mathbf{(f)}$.} Let $(f_n)_{n \in \N} \subset \bor \left( \Sigma; \; \C \right)$ be a sequence of functions such that
+\begin{equation*} f_n(x) \xrightarrow{n \to + \infty} f(x) \quad \text{for all $x \in \Sigma$} \quad \text{and} \quad \|f_n\|_{\infty, \, \Sigma} \leq C. \end{equation*}
+The goal is to prove that the sequence of continuous linear operators $\left( \Phi(f_n) \right)_{n \in \N} \subset \La(H)$ converges to the continuous linear operator $\Phi(f)$ pointwise. Indeed, if $\| \cdot \|_H$ denotes the norm on the Hilbert space $H$, then it turns out that
+\begin{equation*} \begin{aligned} \| \Phi(f_n)(x) - \Phi(f)(x) \|_H^2 & = \left( \left(\Phi(f_n) - \Phi(f) \right) x, \, \left(\Phi(f_n) - \Phi(f) \right) x \right)_H \: {\color{red}=}
+\\[1em]  & \: {\color{red}=} \: \left( \Phi \left(f_n - f \right) \Phi \left( \overline{f_n - f} \right)  x, \, x \right)_H \: {\color{blue}=} 
+\\[1em] & \:  {\color{blue}=} \: \left( \Phi \left( \left(f_n - f \right) \left( \overline{f_n - f} \right) \right) x, \, x \right)_H =
+\\[1em] & = \left( \Phi \left(|f_n - f|^2 \right)  x, \, x \right)_H = 
+\\[1em] & = \int_{\Sigma} |f_n(t) - f(t)|^2 \, \mathrm{d}\mu_x(t) = 
+\\[1em] & = \|f_n - f\|_{L^2(\Sigma, \, \mu_x)}^2 \xrightarrow{n \to + \infty} 0 \end{aligned} \end{equation*}
+since by \hyperref[l22d]{Remark \ref{l22d}} the dominated pointwise convergence is stronger than the $L^2$ convergence.
+
+The {\color{red}red} identity follows from the fact that $\Phi(f)^\ast = \Phi \left( \overline{f} \right)$, while the {\color{blue}blue} identity follows from the fact that $\Phi$ is a $\star$-homomorphism.\end{proof}
+
+\section{Multivariable Functional Calculus}
+
+The primary goal of this section is to generalize the functional calculus to a multivariable setting, that is, when we have to deal with more than one operator.
+
+\begin{remark} Let $A \in \La(H)$ be a normal operator. Then $A$ is the sum of symmetric operators $B, \, C \in \Ls(H)$, defined in the following way:
+\begin{equation*} A = B + \imath C, \qquad \text{where} \quad B = \frac{A + A^\ast}{2} \quad \text{and} \quad C = \frac{A - A^\ast}{2 \imath}. \end{equation*}
+Since $A$ commutes with its adjoint $A^\ast$, a simple computation shows that $B$ commutes with $C$, i.e.,
+\begin{equation*}[A, \, A^\ast] = 0 \implies [B, \, C] = 0. \end{equation*}
+In particular, the functional calculus for normal operators will follows immediately from the multivariable functional calculus, which we shall develop throughout this section.
+\end{remark}
+
+\begin{proposition}\label{prop:multivarborl} Let $A_1, \, \dots, \, A_n \in \Ls(H)$ be symmetric operators such that
+\begin{equation*} [A_i, \, A_j] = 0 \quad \text{for all $i, \, j \in \{1, \, \dots, \, n\}$}. \end{equation*}
+For each index $i$ let $I_i := \left[- \|A_i\|, \, \|A_i\| \right]$, and let
+\begin{equation*} I := \prod_{i = 1}^n I_i. \end{equation*}
+There exists a unique $\star$-homomorphism of $\star$-algebras
+\begin{equation*} \Phi : \bor\left(I; \; \C \right) \longrightarrow \La(H) \end{equation*}
+sequentially continuous with respect to the dominated pointwise convergence and the strong convergence of operators respectively, sending the projection $\pi_i$ to $A_i$ for each index $i$, that is,
+\begin{equation*} \pi_i : I \longrightarrow I_i \implies \Phi(\pi_i) = A_i. \end{equation*}
+Furthermore, it satisfies the following properties:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The mapping
+\begin{equation*}\Psi_{x, \, y} : \bor \left(I; \; \C \right) \ni f \longmapsto \left( \Phi(f) x, \, y \right) \in \C \end{equation*}
+is linear and continuous, that is, $\Psi_{x, \, y} \in\bor \left(I; \; \C \right)^\ast$. Furthermore, there exists a unique complex-valued measure $\mu_{x, \, y}$ such that
+\begin{equation*} \left( \Phi(f) x, \, y \right) = \int_{I} f(t_1, \, \dots, \, t_n) \, \mathrm{d}\mu_{x, \, y}(t_1, \, \dots, \, t_n). \end{equation*}
+\item For any $f \in \bor \left(I; \; \C \right)$ it turns out that
+\begin{equation*} \left\| \Phi(f) \right\| \leq \|f\|_{\infty, \, I}. \end{equation*}
+\item For any $f \in \bor \left(I; \; \C \right)$ it turns out that
+\begin{equation*} B \in \La(H) \: : \: \left[A_i, \, B \right] = 0 \quad \text{for every $i = 1, \, \dots, \, n$} \implies \left[ \Phi(f), \, B \right] = 0. \end{equation*}
+\item For any $f \in \bor \left(I; \; \C \right)$ it turns out that
+\begin{equation*} f \geq 0 \implies \Phi(f) \geq 0.\end{equation*}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} We first suppose that such an operators satisfying these properties exists, and we prove that it must be uniquely determined. Then, we prove the existence of $\Phi$ and give the idea on how it can be extended to the space of Borel bounded functions.
+
+\paragraph{Uniqueness.} First, we notice that if $f$ is a function that depends on a single variable $x_i$, then $\Phi(f)$ coincides with the result of the usual Borel functional calculus
+\begin{equation*} f \longmapsto f(A_i). \end{equation*}
+On the other hand, since $\Phi$ is a homomorphism, for every collection $E_1 \subset I_1, \, \dots, \, E_n \subset I_n$ of Borel subsets, it turns out that
+\begin{equation} \label{formual123} \Phi \left( \chi_{E_1 \times \dots \times E_n} \right) = \prod_{i = 1}^n \chi_{E_i}(A_i). \end{equation}
+Therefore, $\Phi$ is uniquely determined by its value on simple functions (finite sums of characteristics of Borel subsets $E \subset I$) and, by pointwise convergence density, it turns out that $\Phi$ can be extended in a unique way to the whole space $\bor\left(I; \; \C \right)$.
+
+\paragraph{Existence, Step 1.} Let $\mathcal{P}_i$ be a finite and measurable partition of $I_i$ for all $i \in \{1, \, \dots, \, n\}$, and let us denote by $\mathcal{P}$ the product partition of $I$, that is,
+\begin{equation*} \mathcal{P} := \left\{ E_1 \times \dots \times E_n \: \left| \: \text{$E_i \in \mathcal{P}_i$ for every $i \in \{1, \, \dots, \, n\}$} \right. \right\}. \end{equation*}
+Let $\mathscr{F}_i$ be the finite algebra generated by the partition $\mathcal{P}_i$ (i.e., its power set), and let $\mathscr{F}$ be the finite algebra generated by $\mathcal{P}$. Let $\Phi$ be a Borel function defined on $\mathscr{F}$. By construction, it turns out that
+\begin{equation*} \Phi \in \mathcal{B}_{\mathscr{F}} := \mathrm{Span}  \left\{ \chi_E \: \left| \: E \in \mathcal{P} \right. \right\}, \end{equation*}
+as the reader may readily check using \eqref{formual123}. The map $\Phi$ is certainly a $\star$-homomorphism since 
+\begin{equation*} \left[ \chi_{E_i}(A_i), \, \chi_{E_j}(A_j)\right] = 0\end{equation*}
+for all $i, \, j \in \{1, \, \dots, \, n\}$. Indeed, it follows easily from \hyperref[prop:borel22]{Proposition \ref{prop:borel22}}, which asserts that in the Borel functional calculus each operator $B \in \La(H)$ such that $[B, \, A] = 0$ also commutes with $\Phi(f)$, that is, $[\Phi(f), \, B] = 0$.
+
+The map $\Phi$ is also \textit{ordinate}, that is, it sends positive functions $f \geq 0$ to positive operators $\Phi(f)$. Indeed, since $\Phi$ is a $\star$-homomorphism it turns out that
+\begin{equation*}f = \left( \sqrt{f} \right)^2 \implies \Phi(f) = \Phi \left( \sqrt{f} \right)^2 = \Phi(f)^\ast \, \Phi(f), \end{equation*}
+and the latter operator is always positive.
+
+\paragraph{Existence, Step 2.} A refinement of the partition $\mathcal{P}_i$ for all $i \in \{1, \, \dots, \, n\}$ yields to a different function $\Phi$, which extends the one constructed previously. Hence $\Phi$ is well-defined on the set
+\begin{equation*} \bigcup_{\mathcal{P}} \mathcal{B}_{\mathscr{F}} \: : \: \text{$\mathscr{F}$ algebra generated by the finite partition $\mathcal{P}$.} \end{equation*}
+There are now two different, but equivalent, ways to extend $\Phi$ to the set of Borel bounded functions: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item  We first extend $\Phi$ to $C^0 \left(I; \; \C \right)$ by density. Then we extend it to the space $\bor \left(I; \; \C \right)$, as we have already done in the case of a single variable (that is, we define suitable spectral measures and prove an equivalent assertion to \hyperref[prop:borel22]{Proposition \ref{prop:borel22}}).
+\item We extend $\Phi$ directly to $\bor \left(I; \; \C \right)$ by density.
+\end{enumerate}
+
+\paragraph{Properties.} The map $\Phi : \bor\left(I; \; \C \right) \to \La(H)$ is clearly a $\star$-homomorphism, and a similar argument to the one used in the previous section, is enough to prove that the properties $\mathbf{(a)}-\mathbf{(d)}$ hold true. For example, if $f \in \bor(I)$ is a real-valued function, then
+\begin{equation*} \begin{aligned} -\|f\|_{\infty, \, I} \leq f \leq \|f\|_{\infty, \, I} & \stackrel{\Phi}{\implies} - \|f\|_{\infty, \, I} \mathrm{id}_H \leq \Phi(f) \leq \|f\|_{\infty, \, I} \mathrm{id}_H \implies \\[1em] & \implies \|\Phi(f)\| \leq \|f\|_{\infty, \, I}. \end{aligned} \end{equation*}
+If $f \in \bor\left( I; \; \C \right)$ is a bounded Borel function, then the previous inequality implies that
+\begin{equation*} \| \Phi \left( |f| \right) \| \leq \|f\|_{\infty, \, I},\end{equation*}
+and this is enough to conclude that \textbf{(b)} holds true since
+\begin{equation*}\Phi \left(|f| \right) = \sqrt{ \Phi^\ast(f) \, \Phi(f)} \implies \left\| \Phi(f) \right\| = \left\| \Phi \left( |f| \right) \right\|. \end{equation*}
+\end{proof}
+
+\paragraph{Multiplicative Operator.} In this paragraph, we briefly introduce one of the most important applications of the functional calculus and, in the next section, we will see why it is so important.
+
+\begin{proposition} \label{ex:osdos} Let $\left(X, \, \Theta, \, m \right)$ be a measure space, and assume that $m(X) < + \infty$. If $a : X \to \R$ is a measurable function such that
+\begin{equation*} a \cdot L^2 \left(X, \, \Theta, \, m \right) \subseteq L^2 \left(X, \, \Theta, \, m \right), \end{equation*}
+then $a$ is essentially bounded, that is, $a \in L^\infty \left(X, \, \Theta, \, m \right)$. \end{proposition}
+
+\begin{proposition}Let $\left(X, \, \Theta, \, m \right)$ be a measure space, and assume that $m(X) < + \infty$. Let  $H = L^2 \left(X, \, \Theta, \, m \right)$ and let $\alpha \in L^\infty \left(X, \, \Theta, \, m \right)$ be a class of equivalence of measurable essentially bounded real-valued functions $X \to \R$. The multiplicative operator
+\begin{equation*} M_\alpha : H \to H, \qquad u \longmapsto \alpha \cdot u \end{equation*}
+satisfies the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The kernel of $M_\alpha - \lambda \, \mathrm{Id}_H$ is equal to $L^2\left(\mathrm{spt}(\lambda), \, \Theta, \, m \right)$, where 
+\begin{equation*} \mathrm{spt}(\lambda) := \alpha^{-1}(\lambda) \subseteq X. \end{equation*}
+\item The rank of $M_\alpha - \lambda \, \mathrm{Id}_H$ is equal to
+\begin{equation*} \mathrm{Ran} \left(M_\alpha - \lambda \, \mathrm{Id}_H \right) = \left\{ u \in L^2 \left(X, \, \Theta, \, m \right) \: \left| \: \exists \, v \in L^2 \left(X, \, \Theta, \, m \right), \, \, u = (\alpha - \lambda)\, v \right. \right\}.  \end{equation*}
+\item The operator $M_\alpha - \lambda \, \mathrm{Id}_H$ is surjective if and only if
+\begin{equation*} \frac{1}{\alpha - \lambda} \in L^\infty \left(X, \, \Theta, \, m \right) \end{equation*}
+if and only if there exists $\epsilon > 0$ such that
+\begin{equation*}m \left( \left\{ |\alpha - \lambda| < \epsilon \right\} \right) = 0 \end{equation*}
+if and only if there exists $\epsilon > 0$ such that
+\begin{equation*}\alpha_{\symbol{35}} \, m \left(B(\lambda, \, \epsilon) \right) = 0. \end{equation*}
+\item For any $f \in \bor\left(\sigma(M_\alpha); \; \C \right)$ it turns out that
+\begin{equation*} f \left(M_\alpha \right) = M_{f \circ \alpha}. \end{equation*}
+\item For any $u, \, v \in H$ and for any $f \in \bor\left(\sigma(M_\alpha); \; \C \right)$ the spectral measure is given by
+\begin{equation*} \mu_{u,\, v} = \alpha_{\symbol{35}} \left( uv \cdot m \right). \end{equation*}
+\end{enumerate} \end{proposition}
+
+\section{Unitary Conjugation of Symmetric Operators}
+
+\paragraph{Introduction.} In this final section, we show that any symmetric operator $A$ defined on a complex Hilbert space is conjugated, via a unitary operator, to the multiplication operator in $L^2(\sigma(A), \, \mu_\xi)$ if its spectrum is simple. We also show how this property can be generalized if the spectrum is not simple, using a particular orthogonal decomposition.
+
+\vspace{1.3mm}
+\noindent Let $A \in \Ls(H)$ be a linear bounded symmetric operator defined on a Hilbert space $H$. For any $\xi \in H$ we denote by $H_\xi$ the minimal closed $A$-invariant subspace of $H$ containing $\xi$, that is,
+\begin{equation*}H_\xi = \overline{ \mathrm{Span} \left< A^n \, \xi \: : \: n \in \N \right>}. \end{equation*}
+Let $p \in \C[z]$ be a complex-valued polynomial. The reader may easily check that the subspace $H_\xi$ is defined in such a way that it is also invariant under the action operator $p(A)$, that is,
+\begin{equation*}p(z) = a_n z^n + \dots + a_1 z + a_0  \implies p(A)\eta = a_n A^n \eta + \dots + a_1 A \eta + a_0 \eta \in H_\xi. \end{equation*}
+Furthermore, the subspace
+\begin{equation*} \left\{ T \in \La(H) \: \left| \: \text{$H_\xi$ is $T$-invariant} \right. \right\} \subset \La(H) \end{equation*}
+is closed with respect to the weak topology of the operators, since
+\begin{equation*}T_n \rightharpoonup T \iff \langle T_n, \, \eta \rangle \xrightarrow{n \to + \infty} \langle T, \, \eta \rangle, \end{equation*}
+and this implies that, for any $\eta \in H_\xi$, we have
+\begin{equation*}\langle T_n, \,  \eta \rangle \in H_\xi \quad \text{for all $n \in \N$} \implies \langle T, \, \eta \rangle \in H_\xi. \end{equation*}
+Therefore, it follows from \hyperref[prop:borel22]{Proposition \ref{prop:borel22}} that the subspace $H_\xi$ is invariant under the operator $f(A)$ for every $f \in \bor \left( \sigma(A); \; \C \right)$.
+
+\begin{lemma} \label{lemma:prv2} Let $\xi \in H$ be any element. For any $\xi^\prime \in H$ it turns out that
+\begin{equation*} \xi^\prime \perp H_\xi \iff H_{\xi^\prime} \perp H_\xi. \end{equation*}  \end{lemma}
+
+\begin{proof} Recall that the operator $A$ is symmetric, which means that $\left(A^n \right)^\ast = A^n$ for any $n \in \N$. A straightforward computation shows that
+\begin{equation*} \begin{aligned}\xi^\prime \perp H_\xi & \iff \left< \xi^\prime, \, A^{n + m} \, \xi \right> = 0 \quad \text{for all $n, \, m \in \N$} \\[1em] & \iff  \left< A^m \, \xi^\prime, \, A^{n} \, \xi \right> = 0 \quad \text{for all $n, \, m \in \N$} \\[1em] & \iff H_{\xi^\prime} \perp H_\xi, \end{aligned} \end{equation*}
+and this concludes the proof. \end{proof}
+
+\paragraph{Orthogonal Decomposition.} The previous \hyperref[lemma:prv2]{Lemma \ref{lemma:prv2}} suggest the possibility that the complex Hilbert space $H$ may be decomposed as the direct orthogonal sum of closed $A$-invariant subspaces, that is, there exists $\Xi \subset H$ such that
+\begin{equation*} H = \bigoplus_{\xi \in \Xi} H_\xi. \end{equation*}
+We shall give this decomposition for granted, but the interested reader may try to fill in the details using the statement of \hyperref[th:hbbb]{Theorem \ref{th:hbbb}}. Indeed, if we consider $H$ as a Hilbert module with scalar ring $\C[z]$ and action defined by
+\begin{equation*} \C[z] \times H \ni p \cdot v \longmapsto p(A)v \in H, \end{equation*}
+then the mentioned theorem proves the existence of a maximal family $\Xi$.
+
+\begin{remark}We also observe that, if $H$ is a separable Hilbert space, then $\Xi$ is at most countable. \end{remark}
+
+\paragraph{Relation between $H_\xi$ and $\mu_\xi$.} Set $\mu_\xi := \mu_{\xi, \, \xi}$. For all $f \in C^0 \left( \sigma(A); \; \C \right)$, it turns out that $f(A) \, \xi \in H_\xi$, and a straightforward computation yields to
+\begin{equation*} \begin{aligned} \|f(A)  \xi \|_H^2 & = \left(f(A) \xi, \, f(A) \, \xi \right)_H =
+\\[1em] & = \left(f(A)^\ast f(A) \xi, \, \xi \right)_H =
+\\[1em] & = \left( |f|^2(A) \, \xi, \, \xi \right)_H =
+\\[1em] & = \int_{\sigma(A)} |f|^2 \mathrm{d}\mu_\xi = \|f\|_{L^2(\mu_\xi)}^2. \end{aligned} \end{equation*}
+In particular, the map defined by setting
+\begin{equation*} C^0 \left( \sigma(A); \; \C \right) \to H_\xi, \qquad f \longmapsto f(A)  \xi \end{equation*}
+is an isometry, and thus it can be extended to the closures of the sets, that is,
+\begin{equation*} U : L^2 \left( \sigma(A), \, \mu_\xi \right) \to H_\xi, \qquad f \longmapsto f(A) \xi .\end{equation*}
+Let $M_x$ be the multiplicative operator that acts on $L^2(\sigma(A), \, \mu_\xi)$. Then there is a commutative diagram
+\begin{equation*}\begin{tikzcd}[contains/.style = {draw=none,"\in" description,sloped}]
+   & L^2 \left( \sigma(A), \, \mu_\xi \right) \ar[d, "M_x"]  \ar[r, "U"]                                            & H_\xi \ar[d, "A"]  \\
+   & L^2 \left( \sigma(A), \, \mu_\xi \right)\ar[r, "U"]                                                   & H_\xi  \\
+\end{tikzcd} \end{equation*}
+as the reader may easily verify that
+\begin{equation*}\begin{aligned} & f \longmapsto f(A) \xi \longmapsto A \left[ f(A) \xi\right] ,
+\\[1em] & f \longmapsto x f(x) \longmapsto A \left[ f(A) \xi \right] \end{aligned} \end{equation*}
+are, respectively, the composition $A \circ U$ and $U \circ M_x$.
+
+\vspace{1.3mm}
+The brief discussion above has many important consequences. We first study a possible outcome when the spectrum of $A$ has a particularly simple form.
+
+\begin{definition}[Simple Spectrum] The spectrum of a linear bounded symmetric operator $A \in \Ls(H)$, defined on a complex Hilbert space $H$, is \textit{simple} if there exists $\xi \in H$ such that
+\begin{equation*} H_\xi = H. \end{equation*} \end{definition}
+
+\begin{corollary}If $A \in \Ls(H)$ has a simple spectrum, then $A$ is conjugate to the multiplication operator $M_x$, defined on $L^2 \left( \sigma(A), \, \mu_\xi \right)$, via a unitary operator $U$.\end{corollary}
+
+In the general case, as we mentioned above, the space $H$ may be written as the orthogonal sum of $A$-invariant subspaces as follows:
+\begin{equation*} H = \bigoplus_{\xi \in \Xi} H_\xi. \end{equation*}
+Let us consider the topological product $\sigma(A) \times \Xi$, endowed with the $\sigma$-algebra product
+\begin{equation*} \mathcal{B}((\sigma(A)) \otimes \mathcal{P}(\Xi) \end{equation*}
+where $\mathcal{B}((\sigma(A))$ is the Borel $\sigma$-algebra generated by the spectrum $\sigma(A)$, and $\mathcal{P}(\Xi)$ is the power set of $\Xi$. The measure $\mu$ that makes it a measure space is defined in the usual way, that is,
+\begin{equation*} \mu(E) = \sum_{\xi \in \Xi} \mu_\xi \left(E_\xi \right), \qquad \text{where} \quad E = \bigcup_{\xi \in \Xi} E_\xi \times \{\xi\}. \end{equation*}
+In this case we have a slightly more complex commutative diagram
+\begin{equation*}\begin{tikzcd}[contains/.style = {draw=none,"\in" description,sloped}]
+   L^2 \left( \sigma(A) \times \Xi, \, \mathcal{B} \times P(\Xi), \,  \mu \right) \ar[ddd, "M_x"]  \ar[rrr, "U = \oplus_{\xi \in \Xi} U_\xi"]                                          && & H \ar[ddd, "A"]  \\ \\ \\
+   L^2 \left( \sigma(A) \times \Xi, \, \mathcal{B} \times P(\Xi), \,  \mu \right) \ar[rrr, "U = \oplus_{\xi \in \Xi} U_\xi"]                                                   &&& H  \\
+\end{tikzcd} \end{equation*}
+where $M_x$ is the multiplicative operator defined by setting
+\begin{equation*} M_x \left(f(x, \, \xi) \right) := x \, f(x, \, \xi). \end{equation*}
+As a consequence of the decomposition and of what we have already proved above, a simple generalization of the previous corollary holds.
+
+\begin{corollary}If $A \in \Ls(H)$, then $A$ is conjugate to the multiplication operator $M_x$, defined on $L^2 \left( \sigma(A) \times \Xi, \, \mathcal{B} \times P(\Xi), \,  \mu \right)$, via a unitary operator $U$.\end{corollary}

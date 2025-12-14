@@ -1,0 +1,314 @@
+\chapter{Introduction To Elliptic Problems}
+
+\begin{notation}In this course, we use the multi-index notation. If $\alpha = (\alpha_1, \, \dots, \, \alpha_n) \in \N^n$ is an $n$-tuple of natural numbers and $\xi \in \R^n$ is a real vector, then
+\begin{equation*} \xi^\alpha := \xi_1^{\alpha_1} \, \dots \, \xi_n^{\alpha_n}. \end{equation*}
+The length of a multi-index $\alpha$ is denoted by
+\begin{equation*} |\alpha| := \alpha_1 + \dots + \alpha_n, \end{equation*}
+and, as a consequence, the $\alpha$-derivative operator is given by
+\begin{equation*} D^\alpha := D_{x_1}^{\alpha_1} \, \dots \, D_{x_n}^{\alpha_n}. \end{equation*}
+\end{notation}
+
+\section{Ellipticity Condition}
+
+Let $a_\alpha : \R^n \to \C$ be collection of complex-valued functions, as $p$ ranges in a certain subset of $\N^n$, and let $\ell$ be a natural number. A linear differential operator of order $\ell$ is an operator of the form
+\begin{equation} \label{eq:opdiff} A(x, \, D) \, u(x) := \sum_{\left| \alpha \right| \leq \ell} a_\alpha(x) \, D^\alpha \, u(x),\end{equation}
+as $x$ ranges in $\Omega \subseteq \R^n$. The operator
+\begin{equation}\label{eq:opdiffpri}A_0(x, \, D) \, u(x) := \sum_{\left| \alpha \right| = \ell} a_\alpha(x) \, D^\alpha \, u(x), \end{equation}
+is the \textbf{principal part} of $A(x, \, D)$, while
+\begin{equation} \label{eq:opdiffeq} \R^n \ni \xi \longmapsto A_0(x, \, \xi) := \sum_{\left| \alpha \right| = \ell} a_\alpha(x) \, \xi^\alpha \in \C \end{equation}
+is the \textbf{characteristic polynomial} associated to $A_0(x, \, D)$.
+
+\begin{definition}[Elliptic Operator] The linear differential operator $A(x, \, D)$ is an \textit{elliptic operator} at the point $x \in \R^n$ if its principal part is non-vanishing, that is,
+\begin{equation*}A_0(x, \, \xi)\neq 0, \qquad \forall \, \xi \in \R^n \setminus \{0\}. \end{equation*}\end{definition}
+
+\begin{theorem}Let $A(x, \, D)$ be an elliptic operator of order $\ell$ at the point $x \in X$. Then $\ell$ is even if either \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item the coefficients $a_p(x)$ are real-valued functions; or
+\item the dimension of the space is $n \geq 3$.
+\end{enumerate} \end{theorem}
+
+\begin{proof}Suppose that \textbf{(1)} holds true, and set $\xi = (\xi^\prime, \, \xi_n) \in \R^{n-1} \times \R$. Let us consider the polynomial
+\begin{equation*} P(x, \, \xi^\prime, \, \xi_n) := A_0(x, \, \xi) = \sum_{|\alpha| = \ell} a_\alpha(x) \, \xi_1^{\alpha_1} \, \dots \, \xi_n^{\alpha_n}, \end{equation*}
+and let us set
+\begin{equation*} b_0(x) := P(x, \, 0, \, \dots, \, 0, \, 1) = a_{(0, \, \dots, \, 0, \, 1)}. \end{equation*}
+The polynomial above can be decomposed as a sum of homogeneous terms in $\xi_n$ as follows
+\begin{equation*} P(x, \, \xi^\prime, \, \xi_n) = b_0(x) \, \xi_n^\ell + b_1(x, \, \xi^\prime) \, \xi_{n}^{\ell - 1} + \dots + b_{\ell -1}(x, \, \xi^\prime) \, \xi_n + b_\ell(x, \, \xi^\prime), \end{equation*}
+where the $b_i(x, \, \xi^\prime)$'s are polynomials of degree equal to $i$ with respect to the variable $\xi^\prime$, for any $i = 1, \, \dots, \, \ell$. 
+
+Suppose that $b_0(x) > 0$ (the opposite case is symmetrical) and suppose also, by contradiction, that $\ell$ is an odd natural number. For any fixed $\xi^\prime \neq 0$, it turns out that
+\begin{equation*} \lim_{\xi_n \to \pm \infty} P(x, \, \xi^\prime, \, \xi_n) = \pm \infty, \end{equation*}
+that is there exists a point $\xi_n \in \R$ such that $P(x, \, \xi^\prime, \, \xi_n) = 0$, but this is absurd since we assumed $A(x, \, D)$ to be an elliptic operator.
+
+\vspace{3mm}
+\noindent Suppose that \textbf{(2)} holds true, and let $\xi_0^\prime \neq 0$ a fixed vector in $\R^{n-1}$. The polynomial
+\begin{equation*} \R \ni \xi_n \longmapsto P(x, \, \xi_0^\prime, \, \xi_n) \end{equation*}
+has non-real roots (because of the ellipticity condition), that is, roots whose imaginary part is nonzero $\mathfrak{Im}(\xi_n) \neq 0$.
+
+Let $N^+(x, \, \xi_0^\prime)$ be the number of roots whose imaginary part is greater than $0$, and let $N^-(x, \, \xi_0^\prime)$ be the number of roots whose imaginary part is less than $0$.
+
+Let $\Gamma$ be a path containing (see \hyperref[Path:Gamma]{Figure \ref{Path:Gamma}}) all the $N^+(x, \, \xi_0^\prime)$ roots with positive imaginary part, so that $P(x, \, \xi_0^\prime, \, \xi_n) \neq 0$ on $\Gamma$. By continuity of $P$ with respect to $\xi^\prime$, there exists a neighborhood $U^\prime$ of $\xi_0^\prime$ such that for any $\xi^\prime \in U^\prime$ it turns out that
+\begin{equation*}\left| P(x, \, \xi_0^\prime, \, \xi_n) - P(x, \, \xi^\prime, \, \xi_n) \right| < \left| P(x, \, \xi_0^\prime, \, \xi_n) \right|, \qquad \forall \, \xi_n \in \Gamma.\end{equation*}
+By Rouché theorem\footnote{\textbf{Rouché Theorem.} Let $K \subset G$ be a bounded region with continuous boundary $\partial \, K$. Two holomorphic functions $f, \, g \in \mathcal{H}(G)$ have the same number of roots (counting multiplicity) in $K$, if the strict inequality
+\begin{equation*}\left|f(z) - g(z)\right| < \left|f(z)\right| + \left|g(z)\right|\end{equation*}
+holds for every $z \in \partial \, K$.}, it follows that the polynomials $P(x, \, \xi_0^\prime, \, \xi_n)$ and $P(x, \, \xi^\prime, \, \xi_n)$ have the same number of roots inside $\Gamma$, i.e.,
+\begin{equation*}N^+(x, \, \xi^\prime) = N^+(x, \, \xi_0^\prime), \qquad \forall \, \xi^\prime \in U^\prime.\end{equation*}
+Since $N^+(x, \, \cdot)$ is a continuous integer-valued function, it is constant on connected components. It suffices to observe that $\{ \xi^\prime \in \R^{n-1} \} \setminus \{0\}$ is connected for any $n \geq 3$ to infer that
+\begin{equation*}N^+(x, \, \xi^\prime) = N^+(x, \, - \xi^\prime) \quad \text{and} \quad N^-(x, \, \xi^\prime) = N^-(x, \, - \xi^\prime).\end{equation*}
+The polynomial is homogeneous of degree $\ell$, hence
+\begin{equation*}P(x, \, -\xi^\prime, \, -\xi_n) = (-1)^\ell \, P(x, \, \xi^\prime, \, \xi_n), \end{equation*}
+and this implies that
+\begin{equation*}N^+(x, \, \xi^\prime) = N^-(x, \, - \xi^\prime) \implies \ell = 2 \, N^+(x, \, \xi^\prime),\end{equation*}
+i.e. $\ell$ is even.\end{proof}
+
+\vspace{2.5mm}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 12cm, height = 6cm]{Images/EE1.png}
+\label{Path:Gamma}
+\caption{The path $\Gamma$ introduced in the proof.}
+\end{figure} 
+
+\vspace{2.5mm}
+
+\begin{example}[Elliptic Operators] \mbox{}
+\begin{enumerate}
+\item[(1)]The \textbf{Cauchy-Riemann} operator is defined by
+\begin{equation} \label{eq:c-r} A(D) := \frac{\partial}{\partial \, x_1} + \imath \, \frac{\partial}{\partial \, x_2}. \end{equation}
+It's straightforward to see that this is an operator of order $\ell = 1$, whose coefficients are complex-valued constant functions. It is also elliptic, since
+\begin{equation*}A_0(D) = \xi_1 + \imath \, \xi_2 = 0 \iff \left(\xi_1, \, \xi_2\right) = (0, \, 0). \end{equation*}
+\item[(2)]The \textbf{Laplace} operator is defined by
+\begin{equation} \label{eq:laplacian} \Delta := \sum_{i = 1}^{n} \frac{\partial^2}{\partial \, x_i^2} . \end{equation}
+It's straightforward to see that this is an operator of even order $\ell = 2$, coherently with the fact that its coefficients are real-valued (constant) functions. It is elliptic since
+\begin{equation*}A_0(D) = \| \xi \|^2 \iff \left(\xi_1, \,\dots, \, \xi_n \right) = (0, \, \dots, \, \, 0). \end{equation*}
+\item[(3)]The \textbf{Bi-Laplace} operator is defined by
+\begin{equation*} \Delta \, \Delta := \sum_{i = 1}^{n} \frac{\partial^2}{\partial \, x_i^2}  \left( \sum_{j = 1}^{n} \frac{\partial^2}{\partial \, x_j^2}  \right).\end{equation*}
+It's straightforward to see that this is an operator of even order $\ell = 4$, coherently with the fact that its coefficients are real-valued (constant) functions. It is elliptic since
+\begin{equation*}A_0(D) = \sum_{i=1}^{n} \xi_i^2 \, \| \xi \|^2 = \|\xi\|^4 = 0 \iff \left(\xi_1, \,\dots, \, \xi_n \right) = (0, \, \dots, \, \, 0). \end{equation*}
+\end{enumerate}
+\end{example}
+
+\begin{definition}[Uniformly Elliptic Operator] An elliptic operator $A$ is called \textit{uniformly elliptic} on an open subset $\Omega \subset \R^n$ if there exists a positive constant $\nu > 0$ such that
+\begin{equation*} \left|A_0(x, \, \xi) \right| \geq \nu \, \left| \xi \right|^\ell, \qquad \forall \, x \in \Omega, \, \, \forall \, \xi \in \R^n \end{equation*}
+if the coefficients $a_\alpha(x)$ are complex-valued functions, and
+\begin{equation*} A_0(x, \, \xi)  \geq \nu \, \left| \xi \right|^\ell, \qquad \forall \, x \in \Omega, \, \, \forall \, \xi \in \R^n \end{equation*}
+if the coefficients $a_\alpha(x)$ are real-valued functions.\end{definition}
+
+\begin{remark}If $A$ is an elliptic operator on a bounded subset $\Omega \subset \R^n$, and the coefficients $a_\alpha(x)$ are of class $C^0(\bar{\Omega})$, then $A$ is also uniformly elliptic. \end{remark}
+
+In this course we shall be mainly concerned with two classes of elliptic operators, each of which has developed its own existence, regularity, etc... theory: \mbox{}
+\begin{enumerate}[label={\color{red}\textbf{(\Roman*)}}]
+\item The elliptic operator in \textbf{divergence} (or variational) form, i.e.
+\begin{equation} \label{eq:var} A(x, \, D) \, u(x) = \sum_{|\beta| = m} \sum_{|\alpha| = m} D^\alpha \left( a_{\alpha, \, \beta}(x) \, D^\beta \, u(x) \right) . \end{equation}
+\item The elliptic operator in \textbf{non-divergence} (or non-variational) form, i.e.
+\begin{equation} \label{eq:nonvar} A(x, \, D) \, u(x) = \sum_{|\alpha| = 2 \, m} a_{\alpha}(x) \, D^\alpha \, u(x) . \end{equation}
+\end{enumerate}
+
+Clearly the two forms can be equivalent (up to terms of lower order) if the coefficients are sufficiently regular - for example of class $C^{m}\left(\bar{\Omega}\right)$.
+
+However, in the general case, the two forms are not equivalent and the existence, uniqueness, regularity, etc... results we shall study latex on, are completely different - for example, elliptic problems in non-variational form rarely admits a solution.
+
+The operators of the \textbf{second order} are particularly interesting because the coefficients identify a square matrix, thus the uniformly ellipticity condition (in the real case) can be rewritten in a more intuitive way (i.e. the matrix is positive-definite):
+\begin{equation*} \sum_{i, \, j=1}^{n} a_{i, \, j}(x) \, \xi_i \, \xi_j  \geq \nu \, \left| \xi \right|^2, \qquad \forall \, x \in \Omega, \, \, \forall \, \xi \in \R^n. \end{equation*}
+If an operator of the second order is in non-variational form \eqref{eq:nonvar}, then we may always assume - without loss of generality - that $(a_{i, \, j})_{i, \, j=1, \, \dots, \, n}$ is a symmetric matrix, provided that $u(x)$ is a regular function, e.g. of class $C^2$ or $H^2$.
+
+In fact, if we set $a_{i, \, j} = a_{i, \, j}^+ + a_{i, \, j}^-$ (the sum of the symmetric and antisymmetric part), then
+\begin{equation*} \begin{aligned} A(x, \, D) \, u(x) & = \sum_{i, \, j = 1}^{n} \left[a_{i, \, j}^+ + a_{i, \, j}^- \right] \, D^{i, \, j} \, u(x) = \\[1em] & = \sum_{i, \, j = 1}^{n} a_{i, \, j}^+ \, D^{i, \, j} \, u(x) +  \sum_{i, \, j = 1}^{n} a_{i, \, j}^- \, D^{i, \, j} \, u(x) = \\[1em] & =  \sum_{i, \, j = 1}^{n} a_{i, \, j}^+ \, D^{i, \, j} \, u(x) +  \sum_{i, \, j = 1}^{n} \frac{a_{i, \, j}(x) - a_{j, \, i}(x)}{2} \, D^{i, \, j} \, u(x) = \\[1em] & =  \sum_{i, \, j = 1}^{n} a_{i, \, j}^+ \, D^{i, \, j} \, u(x) +  \sum_{i, \, j = 1}^{n} \frac{a_{i, \, j}}{2} \, D^{i, \, j} \, u(x) - \sum_{i, \, j = 1}^{n} \frac{a_{j, \, i}}{2} \, D^{j, \, i} \, u(x) = \\[1em] & =  \sum_{i, \, j = 1}^{n} a_{i, \, j}^+ \, D^{i, \, j} \, u(x),\end{aligned}\end{equation*}
+as a consequence of the Schwartz theorem\footnote{\textbf{Schwartz Theorem.} Let $f : \Omega \subset \R^n$ be a function of class $C^2$ defined on an open bounded subset $\Omega$. Then for any $i, \, j \in \{1, \, \dots, \, n\}$ it turns out that
+\begin{equation*} \frac{\partial}{\partial \, x_i} \, \frac{\partial}{\partial \, x_j} \, f(x) = \frac{\partial}{\partial \, x_j} \, \frac{\partial}{\partial \, x_i} \, f(x). \end{equation*} }.
+
+\begin{remark}If the coefficients of the matrix are real, then by symmetry its eigenvalues are necessarily real. On the other hand, the ellipticity condition implies that they are all positive.
+
+Vice versa, any $n\times n$ matrix $B(x)$ whose eigenvalues at $x$ are real and positive defines an elliptic operator at the point $x$ in non-divergence form by setting
+\begin{equation*}A(x, \, D) \, u(x) = \sum_{i, \, j = 1}^n B_{i, \, j}(x) \, D^{i, \, j} \, u(x) . \end{equation*}\end{remark}
+
+\section{Elliptic Systems}
+
+Let $\Omega \subseteq \R^n$ be any subset and assume that the coefficients are real-valued functions. We are particularly interested in elliptic system whose associated operator can be written as
+\begin{equation} \label{eq:es} A(x, \, D) \, u(x) = \sum_{|\alpha| \leq m} \,  \sum_{ |\beta| \leq m} (-1)^{|\alpha|} \, D^\alpha \left[ A_{\alpha, \, \beta}(x) \, D^\beta \, u(x) \right], \end{equation}
+where $u$ is a vector-valued function from $\Omega$ to $\R^N$ and $A_{\alpha, \, \beta} \in \mathcal{M}_{N \times N}\left( \R \right)$ is a real-valued square matrix for any admissible couple $(\alpha, \, \beta)$.
+
+\begin{definition}[Legendre Condition] Let $A(x, \, D)$ be the operator \eqref{eq:es}. We say that $A$ satisfies the \textit{Legendre condition} (or, $A$ is \textit{strongly elliptic}) on $\Omega$ if there exists a positive constant $\nu > 0$ such that, for any system of vectors $\{ \xi^\alpha \}_{|\alpha| = m}$ of $\R^N$ and for any $x \in \Omega$,
+\begin{equation} \label{eq:l1} \nu  \sum_{|\alpha| = m} \| \xi^\alpha \|_{\R^N}^{2} \leq \sum_{|\alpha| = m} \sum_{ |\beta| = m} \left( A_{\alpha, \, \beta}(x) \, \xi^\beta, \, \xi^\alpha \right)_{\R^N}, \end{equation}
+where $(\cdot, \, \cdot)_{\R^N}$ denotes the standard scalar product in $\R^N$. \end{definition}
+
+\begin{definition}[Legendre-Hadamard Condition] Let $A(x, \, D)$ be the operator \eqref{eq:es}. We say that $A$ satisfies the \textit{Legendre-Hadamard condition} (or, $A$ is \textit{elliptic}) if there exists a positive constant $\nu > 0$ such that, for any $\eta \in \R^N$, for any $\lambda \in \R^n$ and for any $x \in \Omega$,
+\begin{equation} \label{eq:l2} \nu \, \left( \|\lambda\|_{\R^n} \right)^{2m} \, \| \eta \|_{\R^N}^2 \leq \sum_{|\alpha| = m} \sum_{ |\beta| = m} \left( A_{\alpha, \, \beta}(x) \, \eta, \, \eta \right)_{\R^N} \, \lambda^{\alpha} \, \lambda^{\beta}. \end{equation} \end{definition}
+
+Clearly, any $A$ satisfying the Legendre condition also satisfies the Legendre-Hadamard condition. In fact, if we set $\xi_i^{\alpha} = \lambda^\alpha \, \eta_i$ for $i = 1, \, \dots, \, N$, then \eqref{eq:l1} implies \eqref{eq:l2}.
+
+On the other hand, the opposite is generally \textbf{not} true. A simple counterexample ($N = n = 3$) is given by the operator of linear elasticity defined as
+\begin{equation*} A(D) \, u(x) = a \, \Delta u(x) + (a + 2 \, \ell) \, \mathrm{grad} \left( \mathrm{div} \, u(x) \right), \end{equation*}
+where $a, \, \ell > 0$ are (strictly) positive real constants. It's straightforward (but tedious) to prove that $A$ satisfies the condition \eqref{eq:l2}, but it doesn't satisfy the strong condition \eqref{eq:l1}.
+
+\begin{remark} If an operator $A$ is elliptic, then the diagonal operators $A_{i, \, i}$ are also elliptic. In fact, if we set $\eta = e_i$, then the ellipticity condition \eqref{eq:l2} implies that
+\begin{equation*} \nu \, \|\lambda\|_{\R^n}^{2m} \leq  \sum_{|\alpha| = m} \sum_{ |\beta| = m} A_{\alpha, \, \beta}^{i, \, i} (x) \, \lambda^{\alpha} \, \lambda^{\beta}. \end{equation*}
+A similar argument proves that if $A$ is a strongly elliptic operator, then the diagonal operators are also strongly elliptic. In fact, if we set $\xi = e_i$ then \eqref{eq:l1} implies that
+\begin{equation*} \nu \leq \sum_{|\alpha| = m} \sum_{ |\beta| = m}  A_{\alpha, \, \beta}^{i, \, i}(x) . \end{equation*} %?
+\end{remark}
+
+\begin{example}[Strong Ellipticity] Let $N = n = 2$. The operator
+\begin{equation*} A = \begin{pmatrix} \Delta & 0 \\ 0 & \Delta \end{pmatrix} \end{equation*}
+is strongly elliptic and, coherently with the argument above, its diagonal elements are also strongly elliptic. On the other hand, the operator
+\begin{equation*} A = \begin{pmatrix} \Delta & \epsilon \, D_1^2 \\ \epsilon \, D_2^2 & \Delta \end{pmatrix} \end{equation*}
+is strongly elliptic, but $\epsilon \, D_i^2$ are not even elliptic for any $|\epsilon| < 2$.\end{example}
+
+We conclude this section by introducing the conditions \eqref{eq:l1} and \eqref{eq:l2} in the particular case of second-order operators.
+
+\begin{definition}[Second-Order Legendre Condition] Let $A(x, \, D)$ be the operator \eqref{eq:es} of second-order. We say that $A$ satisfies the \textit{Legendre condition} (or $A$ is \textit{strongly elliptic}) if there exists a positive constant $\nu > 0$ such that, for any $\tau \in \R^{nN}$ and for any $x \in \Omega$, the following inequality holds true:
+\begin{equation} \label{eq:l21} \nu  \sum_{i = 1}^{n} \| \tau^i \|_{\R^N}^{2} \leq \sum_{i, \, j = 1}^n \, \sum_{h, \,k = 1}^n A_{i, \, j}^{h, \, k}(x) \, \tau_i^h \, \tau_j^k. \end{equation} \end{definition}
+
+\begin{definition}[Legendre-Hadamard Condition] Let $A(x, \, D)$ be the operator \eqref{eq:es} of second-order. We say that $A$ satisfies the \textit{Legendre-Hadamard condition} (or $A$ is \textit{elliptic}) if there exists a positive constant $\nu > 0$ such that, for any $\eta \in \R^N$, for any $\xi \in \R^n$ and for any $x \in \Omega$, the following inequality holds true:
+\begin{equation} \label{eq:l22} \nu \, \| \xi \|_{\R^n}^{2} \, \| \eta \|_{\R^N}^2 \leq \sum_{i, \, j = 1}^n \, \sum_{h, \,k = 1}^n A_{i, \, j}^{h, \, k}(x) \, \xi_i \, \xi_j \, \eta_h \, \eta_k. \end{equation} \end{definition}
+
+\section{Definitions of Solution}
+
+The elliptic problems in non variational form (class {\color{red}(II)}) are, generally, in the following form:
+\begin{equation*} A(x, \, D) \, u(x)= \sum_{|\alpha| \leq 2m} a_p(x) \, D^p \, u(x) = f(x). \end{equation*}
+Therefore, if $f$ is a continuous function, we would like to find solution(s) of class $C^{2m}(\Omega)$, but unfortunately it is generally not possible.
+
+In fact, $C^k(\Omega)$ is not a \textit{good} space to look into when studying the regularity (or even the existence) of solution(s) of an elliptic problem. The general method consists of two simple steps: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Prove the existence of solution(s) in bigger spaces, e.g. the Sobolev spaces $H^{2m, \, p}(\Omega)$ or the Campanato-Morrey spaces.
+\item Use regularity theory and prove that the solution(s) in the weaker space are, actually, a lot more regular. As we shall see later on, we can generally prove that solution(s) are of class $C^{2m, \, \alpha}(\Omega)$ (i.e. functions of class $C^2$, whose second derivative is $\alpha$-Hölder continuous), provided that $f$ is also $\alpha$-Hölder.
+\end{enumerate}
+
+\begin{definition}[Classical Solution] Let $\Omega \subseteq \R^n$, let $f \in C^0\left(\bar{\Omega}; \; \R^N \right)$ and let $A_\alpha \in C^0\left(\bar{\Omega}; \; \R^N \times \R^N \right)$ for any $|\alpha| \leq 2m$. Then $u : \bar{\Omega} \to \R^N$ is a \textit{classical solution} of the elliptic problem
+\begin{equation*}A(x, \, D) \, u(x) = f(x), \qquad x \in \Omega \end{equation*}
+if $u \in C^{2m}\left(\Omega; \; \R^N \right) \cap C^0\left(\bar{\Omega}; \; \R^N \right)$ and $u$ satisfies the equation for any $x \in \bar{\Omega}$. \end{definition}
+
+\begin{example}Let $\Omega = \left\{(x, \, y) \in \R^2 \: \left| \: x^2 + y^2 < r < 1 \right. \right\} \setminus \{(0, \, 0)\}$, let
+\begin{equation*} u(x, \, y) = (x^2 - y^2) \cdot \sqrt{ - \log \, \sqrt{x^2 + y^2} }, \end{equation*}
+and let
+\begin{equation*} f(x, \, y) = \begin{cases} \frac{y^2 - x^2}{2x^2 + 2y^2} \cdot \left[ \frac{4}{\sqrt{ - \log \, \sqrt{x^2 + y^2} }} + \frac{1}{2 \, \sqrt{ - \log^6 \, \sqrt{x^2 + y^2} }} \right] & \text{if $(x, \, y) \neq (0, \, 0)$} \\ 0 & \text{if $(x, \, y) = (0, \, 0)$}. \end{cases} \end{equation*}
+It's straightforward, but extremely tedious, to prove that $f \in C^0\left(\bar{\Omega} \right)$ and $u \in C^0\left(\bar{\Omega} \right) \cap C^\infty \left( \bar{\Omega} \setminus \{(0, \, 0)\} \right)$.
+
+Surprisingly, it turns out that $u$ is not a classical solution of the elliptic problem $\Delta u(x, \, y) = f(x, \, y)$, since
+\begin{equation*} \lim_{(x, \, y) \to (0, \, 0)} \frac{ \partial^2 \, u}{\partial \, x^2} (x, \, y) = + \infty.\end{equation*}\end{example}
+
+\begin{definition}[Strong Solution] Let $\Omega \subseteq \R^n$, let $f \in L^p\left(\Omega; \; \R^N \right)$ for $p > 1$ and let $A_\alpha \in L^\infty \left(\Omega; \; \R^N \times \R^N \right)$ for any $|\alpha| \leq 2m$. Then $u : \bar{\Omega} \to \R^N$ is a \textit{strong solution} of the problem
+\begin{equation*}A(x, \, D) \, u(x) = f(x), \qquad x \in \Omega \end{equation*}
+if $u \in H^{2m, \, p}\left(\Omega; \; \R^N \right)$, and it solves the elliptic problem for almost every $x \in \bar{\Omega}$.\end{definition}
+
+\begin{definition}[Weak Solution] Let $\Omega \subseteq \R^n$, let $f_\beta \in L^p\left(\Omega; \; \R^N\right)$ for $p > 1$ and let $A_\alpha \in L^\infty\left(\Omega; \; \R^N \times \R^N \right)$ for any $|\alpha|, \, |\beta| \leq m$. Then $u : \bar{\Omega} \to \R^N$ is a \textit{weak solution} of the problem
+\begin{equation*} \sum_{|\alpha| \leq m} \sum_{|\beta| \leq m}  (-1)^{|\beta|} \, D^\beta \left( A_{\alpha, \, \beta}(x) \, D^\alpha \, u(x) \right) = \sum_{|\beta| \leq m} (-1)^{|\beta|} \, D^\beta \, f_\beta(x) \end{equation*}
+if $u \in H^{m, \, p}\left(\Omega; \; \R^N \right)$ and, for any $\varphi \in H^{m, \, p^\prime}\left(\Omega; \; \R^N \right)$,
+\begin{equation*} \int_{\Omega} \left[ \sum_{|\alpha|, \, |\beta| \leq m} \left( A_{\alpha, \, \beta}(x) \, D^\alpha \, u(x), \, D^\beta \varphi(x) \right)_{\R^N} \right]\, \mathrm{d}x = \int_{\Omega} \left[ \sum_{|\beta| \leq m} \left( f_\beta(x), \, D^\beta \, \varphi(x) \right)_{\R^N} \right] \, \mathrm{d}x.\end{equation*}\end{definition}
+
+\section{Boundary Problems}
+
+\paragraph{Posedness} In this section we introduce the notion of \textit{boundary} elliptic problem and the notion of \textit{well-posed} boundary elliptic problem.
+
+Let $\Omega \subseteq \R^n$ be an open and bounded subset of $\R^n$, let $A(x, \, D)$ be an elliptic operator and let $B(x, \, D)$ be a linear boundary operator. The system
+\begin{equation*} \label{eq:sys} \begin{cases} A(x, \, D) \, u(x) = f(x) & \text{a.e. $x \in \Omega$} \\ B(x, \,D) \, u(x) = g(x) & \text{$x \in \partial \, \Omega$} \end{cases} \end{equation*}
+is called a \textit{boundary} elliptic problem.
+
+\begin{definition}[Well-Posed] The problem \eqref{eq:sys} is \textit{well-posed} (in sense of Hadamard) if there exists \textbf{one and only one} solution that depends \textbf{continuously} on the initial data.\end{definition}
+
+\begin{example}Let $\Omega = \left\{ (t, \, x) \:  \left| \: t > 0, \, \, x \in \R \right. \right\}$ and let
+\begin{equation*} \Delta \, u = \frac{\partial^2 \, u}{\partial \, t^2} + \frac{\partial^2 \, u}{\partial \, x^2}. \end{equation*}
+The problem
+\begin{equation*} \begin{cases} \Delta u(t, \, x) = 0 & \text{$(t, \, x) \in \Omega$} \\ u(0, \, x) = \Phi(x) & \text{$x \in \R$} \\ u_t(0, \, x) = \Psi(x) & \text{$x \in \R$}\end{cases} \end{equation*}
+is not well posed for any choice of $\Phi$ and $\Psi$. In fact, if we let
+\begin{equation*} \begin{cases} \Phi_n(x) = \mathrm{e}^{-\sqrt{n}} \, \sin (nx) \\ \Psi_n(x) = \mathrm{e}^{-\sqrt{n}} \, n \, \sin (nx),\end{cases} \end{equation*}
+there there's one and only one classical solution for any $n \in \N$, given by
+\begin{equation*} u_n(x) = \mathrm{e}^{-\sqrt{n} + nt} \, \sin (nx).\end{equation*}
+On the other hand, for any $\epsilon > 0$, there exists $n_\epsilon \in \N$ such that
+\begin{equation*} \sup_{x \in \R} |\Phi_n(x)| \leq \epsilon \quad \text{and} \quad \sup_{x \in \R} |\Psi_n(x)| \leq \epsilon,\end{equation*}
+for any $n \geq n_\epsilon$. The reason is simple: the limit as $n \to + \infty$ of both $\Phi_n(x)$ and $\Phi_n(x)$ is $0$, uniformly with respect to $x$ (therefore we can take the supremum and the limit is still zero).
+
+The solution doesn't depend continuously on the initial data. In fact, for any $t_0 > 0$ fixed, it turns out that
+\begin{equation*} \lim_{n \to + \infty} \sup_{x \in \R} |u_n(t_0, \, x)| \sim \lim_{n \to + \infty} \mathrm{e}^{n - \sqrt{n}} = + \infty. \end{equation*}
+\end{example}
+
+More precisely, let $U$ and $W$ be topological vector spaces. Let $u \in U$ be a solution of a given problem and let $f \in W$ be the given data; the problem is \textbf{well posed} if: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*})]
+\item For any $f$ there exists a solution $u$ of the problem.
+\item The solution is unique.
+\item The solution depends continuously on $f$.
+\end{enumerate}
+
+If these condition are not satisfied, the problem is said to be \textbf{ill-posed}. Notice that even problems with a physical meaning may be ill-posed (the reader should think about a string equilibrium problem, for example).
+
+\paragraph{Boundary Operators} In this paragraph we are interested in introducing general conditions on the boundary operator, so that the problem becomes well-posed.
+
+Let $\Omega$ be a subset of $\R^n$ with a sufficiently regular boundary, let $A$ be an operator of order $2m$ and let $B_j(x, \, D)$, for $j = 0, \, \dots, \, k- 1$ be boundary operators defined by
+\begin{equation} B_j(x, \, D) \, \varphi(x) = \sum_{ |\alpha| \leq m_j } b_{j, \, \alpha}(x) \, D^\alpha \, \varphi(x), \qquad x \in \partial \, \Omega. \end{equation}
+More precisely $B_j(x, \, D)$ represent the following operator
+\begin{equation} \varphi \longmapsto \sum_{ |\alpha| \leq m_j } b_{j, \, \alpha}(x) \, \gamma_0 \left(D^\alpha \, \varphi (x)\right),\end{equation}
+where $\varphi$ is a function defined on the close $\bar{\Omega}$ and $\gamma_0(\cdot)$ is the \textbf{trace} map in the classical sense or, if needed, in the Sobolev space sense. Let us consider the problem
+\begin{equation*} \label{eq:sys} \begin{cases} A(x, \, D) \, u(x) = f(x) & \text{a.e. $x \in \Omega$} \\ B(x, \,D) \, u(x) = g(x) & \text{$x \in \partial \, \Omega$}. \end{cases} \end{equation*}
+
+\begin{definition}[Normal] A system of operators $\left\{B_j(x, \, D)\right\}_{j = 0, \, \dots, \, k-1}$ is \textit{normal} if the following properties are satisfied: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*})]
+\item The polynomial $\sum_{|\alpha| = m_j} b_{j, \, \alpha} \, \xi^\alpha \neq 0$ for any $\xi \neq 0$ and it is orthogonal to $\partial \, \Omega$.
+\item The orders are different, that is, $m_i \neq m_j$ for any $i \neq j$.
+\end{enumerate}
+\end{definition}
+
+Moreover, if we assume that $k = m$, then we can give another important definition.
+
+\begin{definition}[Covering] A system of operators $\left\{B_j(x, \, D)\right\}_{j = 0, \, \dots, \, m-1}$ is a \textit{covering} of the operator $A$ on $\partial \, \Omega$ if for any $x \in \partial \, \Omega$, for any $\xi \in \R^n \setminus \{0\}$ tangent to $\partial \, \Omega$ at $x$ and any $\xi^\prime \in \R^n \setminus \{0\}$ orthogonal to $\partial \, \Omega$ at $x$, the polynomials of the complex variable $\tau$
+\begin{equation*}\sum_{|\alpha| = m_j} b_{j, \, \alpha} \, \left( \xi + \tau \, \xi^\prime \right)^\alpha, \qquad j = 0, \, \dots, \, m - 1\end{equation*}
+are linearly independent modulo the polynomial
+\begin{equation*}\prod_{i = 1}^{m} \left( \tau - \tau_i^+(x, \, \xi, \, \xi^\prime) \right),\end{equation*}
+where $\tau_i^+(x, \, \xi, \, \xi^\prime)$ are the roots with positive imaginary part of the polynomial $A_0(x, \, \xi + \tau \, \xi^\prime)$.
+\end{definition}
+
+In particular, some of the most important assumption on \eqref{eq:sys} are the following ones: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*})]
+\item The operator $A$ is uniformly elliptic in $\bar{\Omega}$, with coefficients in a suitable functional space.
+\item The boundary operators $B_j$ are $m$, with coefficients in a suitable functional space.
+\item The system $\left\{B_j(x, \, D)\right\}_{j = 0, \, \dots, \, m-1}$ is \textit{normal} on $\partial \, \Omega$.
+\item The system $\left\{B_j(x, \, D)\right\}_{j = 0, \, \dots, \, m-1}$ \textit{covers} the operator $A$ on $\partial \, \Omega$.
+\item The order of $B_j$ is less or equal to $2 \, m - 1$, for any $j$.
+\end{enumerate}
+
+\begin{example} The most common example of boundary operators satisfying the conditions above is given by the system of the Dirichlet conditions, that is,
+\begin{equation*} B_j = \gamma_j = \frac{\partial^j}{\partial \, \nu^j}, \qquad j = 0, \, \dots, \, m -1 \end{equation*}
+where $\nu$ is the normal to $\partial \, \Omega$ pointing toward the interior part of $\Omega$. The problem
+\begin{equation*} \begin{cases}A(x, \, D)u = f & \text{$x \in \Omega$} \\ \gamma_0 \, u = \varphi_0 & \text{$x \in \partial \, \Omega$} \\ \dots \\ \dots \\ \gamma_{m-1}\, u = \varphi_{m-1} & \text{$x \in \partial \, \Omega$}, \end{cases} \end{equation*}
+is called \textbf{Dirichlet problem}.\end{example}
+
+\begin{example} Another common example of boundary operators satisfying the conditions above is given by the system of the Navier conditions, that is,
+\begin{equation*} B_j(x, \, D) \, u = \Delta_{j-1} \, u, \qquad j = 1, \, \dots, \, m \end{equation*}
+so that $m_j = 2(j - 1)$. The associated problem is
+\begin{equation*} \begin{cases}A(x, \, D)u = f & \text{$x \in \Omega$} \\ u = \varphi_0 & \text{$x \in \partial \, \Omega$} \\ \dots \\ \dots \\ \Delta_{m-1}\, u = \varphi_{m-1} & \text{$x \in \partial \, \Omega$}. \end{cases} \end{equation*}
+is called \textbf{Navier problem}.\end{example}
+
+\begin{remark}Let $\Omega$ be a subset of $\R^n$ with a sufficiently regular boundary. A function $u \in H_0^m(\Omega)$ if and only if $u \in H^m(\Omega)$ and $\gamma_0 = \dots = \gamma_{m-1} = 0$ on $\partial \, \Omega$. Therefore the Dirichlet problem can be equivalently written as
+\begin{equation*} \begin{cases}A(x, \, D)u = f & \text{$x \in \Omega$} \\ u \in H_0^m(\Omega). \end{cases} \end{equation*} \end{remark}
+
+\section{The Laplacian Operator and The Calculus of Variations}
+
+Let $\Omega \subset \R^n$ be an open subset and let $\varphi : \partial \, \Omega \to \R$ be a given function. The \textit{energy functional} associated to the laplacian operator is defined by setting
+\begin{equation} \label{eq:laspdl} E(u) = \frac{1}{2} \int_\Omega \left| \nabla \, u(x) \right|^2 \, \mathrm{d}x - \int_\Omega f(x) \, u(x) \, \mathrm{d}x = \mathcal{E}_e(u) - \mathcal{E}_p(u), \end{equation}
+where $\mathcal{E}_p$ is the internal elastic energy, while $\mathcal{E}_p$ is the exogenous potential energy. We also require that $u$ is an element of the \textit{eligible class}, given by
+\begin{equation*} \mathcal{A} = \left\{ u : \Omega \to \R \: \left| \: \text{$u(x) = \varphi(x)$ for any $x \in \partial \, \Omega$ and $E(u) < + \infty$} \right. \right\}. \end{equation*}
+
+\begin{theorem}Let $\mathcal{A} \neq \emptyset$. If there exists $\underline{u} \in \mathcal{A}$ such that $\underline{u}$ is a minimizer of the energy $E$, that is, for any $u \in \mathcal{A}$
+\begin{equation*} E(\underline{u}) \leq E(u), \end{equation*}
+then $\underline{u}$ is a solution to the Dirichlet problem
+\begin{equation} \label{dir} \begin{cases} - \Delta \, \underline{u}(x) = f(x) & \text{$x \in \Omega$} \\ \underline{u}(x) = \varphi(x) & \text{$x \in \partial \, \Omega$}. \end{cases} \end{equation} \end{theorem}
+
+Before we get to the proof, some questions arise naturally (which we solve during the proof): \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*})]
+\item What assumptions do we need on $\varphi$ and $\Omega$ to assure that $\mathcal{A} \neq \emptyset$?
+\item There exists at least a minimum point of $E$ in $\mathcal{A}$?
+\end{enumerate}
+
+\begin{proof} Let $\mathcal{A}_0$ be the vector space associated to the solution space, that is, 
+\begin{equation*} \mathcal{A}_0 = \left\{ u : \Omega \to \R \: \left| \: \text{$u(x) = 0$ for any $x \in \partial \, \Omega$ and $E(u) < + \infty$} \right. \right\}. \end{equation*}
+Let $\underline{u} \in \mathcal{A}$ and $v \in \mathcal{A}_0$ and let
+\begin{equation*} F(t) := \frac{1}{2} \int_\Omega \left| \nabla \, (\underline{u} + t \, v)(x) \right|^2 \, \mathrm{d}x - \int_\Omega f(x) \, \left(\underline{u}(x) + t \, v(x) \right) \, \mathrm{d}x, \end{equation*}
+then, by assumption, $t = 0$ is a local minimum of $F$. If we compute the derivative of $F$ in $t = 0$ and set it equal to $0$, it turns out that
+\begin{equation*}\int_{\Omega} \left[ \nabla \, \underline{u}(x) \cdot \nabla \, v(x) - f(x) \, v(x) \right] \, \mathrm{d}x = 0, \qquad \forall \, v \in \mathcal{A}_0.\end{equation*}
+The point $\underline{u}$ is thus a \textbf{weak} solution of the Dirichlet problem \eqref{dir}. To prove that it is a strong solution we need to use the Gauss-Green formula, and this can only be done if we assume $u$ and $f$ to be sufficiently regular (e.g. $f \in L^2(\Omega)$ and $u \in H^2(\Omega)$ would be fine).
+
+\noindent Suppose that we can apply the Gauss-Green formula, then we integrate by parts and obtain the relation
+\begin{equation*}\int_{\Omega} \left[ - \Delta \, \underline{u}(x) - f(x)\right] \, v(x) \, \mathrm{d}x = 0, \qquad \forall \, v \in \mathcal{A}_0.\end{equation*}
+Finally, we apply the Fundamental Lemma of Calculus of Variations \footnote{Let $u \in L^1(\Omega)$. Suppose that, for any $v \in L^1(\Omega)$ which is compactly supported, it turns out that \begin{equation*} \int_\Omega u(x) \, v(x) \, \mathrm{d}x = 0. \end{equation*}
+
+Then $u(x) = 0$ for almost every $x \in \Omega$.} and we conclude that $\underline{u}$ is a strong solution of the Dirichlet problem \eqref{dir}.\end{proof}
+
+A similar argument allows us to study another important physic model: the \textbf{Kirchoff-Love} model for a thin plate. We don't give the details of this problem, bur the reader may find them in \textbf{Tarsia's notes}.

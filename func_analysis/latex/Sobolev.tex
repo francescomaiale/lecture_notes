@@ -1,0 +1,836 @@
+\chapter{Sobolev Spaces} \thispagestyle{empty}
+
+In this final chapter, we use all the theory we have developed so far to introduce and study the main properties of the Sobolev spaces $W^{m, \, p}(\Omega)$, whose importance is well-known in the partial differential equations field.
+
+\section{Introduction and Elementary Properties}
+
+\paragraph{Introduction.} In this paragraph, we denote by $I$ an open interval $(a, \, b)$ of the real line $\R$ (eventually unbounded), unless stated otherwise.
+
+\begin{definition}[Weak Derivative] \index{weak derivative} Let $f \in \Ll(I)$ be a locally summable function. A function $g \in \Ll(I)$ is the \textit{weak derivative} of $f$ if and only if
+\begin{equation} \label{wd} \int_I f(x) \varphi^\prime(x) \, \mathrm{d}x = - \int_I g(x) \varphi(x) \, \mathrm{d}x \quad \text{for every $\varphi \in \Cc(I)$}. \end{equation}  \end{definition}
+
+\begin{proposition}\label{prop:312}Let $f \in \Ll(I)$. The following properties hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $g \in \Ll(I)$ is the weak derivative of $f$, then it is unique up to the a.e. equivalence relation. More precisely, if $g_1 \in \Ll(I)$ and $g_2 \in \Ll(I)$ are both weak derivatives of $f$, then
+\begin{equation*} g_1(x) = g_2(x) \quad \text{for almost every $x \in I$}. \end{equation*}
+\item If $f \in C^1(I)$, then a representative of the weak derivative equivalence class coincides with the usual derivative $f^\prime$.
+\item Let $f \in C^0(I)$ be a continuous function such that the usual derivative $f^\prime(x)$ exists at all $x \in I \setminus D$, where $D$ is at most countable. Then the weak derivative of $f$ exists, and a representative of the equivalence class is given by $f^\prime$.
+\end{enumerate}\end{proposition}
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Suppose that $g_1$ and $g_2$ are both weak derivatives of $f$. It follows from \eqref{wd} that
+\begin{equation*} \int_I \left[g_1(x) - g_2(x) \right] \varphi(x) \, \mathrm{d}x = 0 \quad \text{for all $\varphi \in \Cc(I)$}, \end{equation*}
+and hence $g_1(x) = g_2(x)$ for almost every $x \in I$ as a consequence of the fundamental lemma in calculus of variations\footnote{\textbf{Lemma.} Let $f \in \Ll(I)$. If
+\begin{equation*} \int_{I} f(x) \varphi(x) \, \mathrm{d}x = 0 \quad \text{for all $\varphi \in \Cc(I)$} \implies \text{$f(x) = 0$ for almost every $x \in I$}. \end{equation*}}.
+\item It suffices to integrate by parts
+\begin{equation*} \int_I f(x) \varphi^\prime(x) \, \mathrm{d}x = 0, \end{equation*}
+and apply the same argument of the previous point.
+\end{enumerate}\end{proof}
+
+\begin{remark}Let $f \in C^0(\Omega)$ be a continuous function, and suppose that $f^\prime(x)$ exists at almost every $x \in I$. Then
+\begin{equation*} g(x) := f^\prime(x) \quad \text{a.e. $x \in I$} \notimplies \text{$g$ is the weak derivative of $f$}. \end{equation*} \end{remark}
+
+\begin{proof}Recall that the Cantor function $f_C : [0, \, 1] \to \R$ is the unique continuous increasing function satisfying the following relations:
+\begin{equation*} f_C(x) + f_C(1-x) = 1 \quad \text{and} \quad f_C \left( \frac{x}{3} \right) = \frac{1}{2} f_C(x), \end{equation*}
+for every $x \in [0, \, 1]$. The Cantor function is locally constant on the complement of the Cantor set $C$ since
+\begin{equation*} \text{$f$ constant on the interval $J$} \implies \text{$f$ constant on $\frac{1}{3} J$ and $1 - \frac{1}{3} J$}. \end{equation*}
+Therefore $f_C$ is locally constant on a set of full measure (note that the Cantor set $C$ is uncountable and has measure zero).
+
+\paragraph{Conclusion.} The usual derivative $f_C^\prime$ exists at almost all $x \in [0, \, 1]$, and it must be equal to $0$ a.e. because $f_C$ is locally constant almost everywhere. If the function identically equal to zero were the weak derivative of $f_C$, then a variation of the fundamental lemma in the calculus of variation\footnote{\textbf{Lemma.} (Paul du Bois-Reymond.) Let $f \in \Ll(I)$. If
+\begin{equation*} \int_{I} f(x) \, \varphi(x) \, \mathrm{d}x = 0 \qquad \forall \, \varphi \in \Cc(I) \: : \: \int_{I} \varphi(x) \, \mathrm{d}x = 0, \end{equation*}
+then $f(x) = c$ for almost every $x \in I$.} would imply $f_C$ constant, which gives the sought contradiction.\end{proof}
+
+\begin{proof}[Alternative Proof] We argue by contradiction. If $f_C \in \Ll \left( [0, \, 1] \right)$ is a weakly differentiable function, then \hyperref[wabs]{Proposition \ref{wabs}} proves that the Cantor function $f_C$ admits an absolutely continuous representative, and thus it maps null-sets to null-sets.
+
+But $f_C$ maps the Cantor set (a set of measure zero) to its complement (a set of strictly positive measure), and this is yields to a contradiction.\end{proof}
+
+\begin{definition}[Absolutely Continuous] \index{absolutely continuous} A function $f : I \longrightarrow \R$ is \textit{absolutely continuous} if and only if for all $\epsilon > 0$ there exists $\delta(\epsilon) := \delta > 0$ such that, for any finite \textbf{disjoint} family $J_1, \, \dots, \, J_n \subset I$ of open intervals $(a_i, \, b_i)$ satisfying the property
+\begin{equation*} \sum_{i = 1}^n |J_i| = \sum_{i = 1}^n |b_i - a_i| \leq \delta, \end{equation*}
+it turns out that
+\begin{equation*} \sum_{i=1}^n \left| f(b_i) - f(a_i)\right| \leq \epsilon. \end{equation*} \end{definition}
+
+\begin{definition}[Oscillation] \index{oscillation} Let $f : I \longrightarrow \R$ be a continuous function, and let $J \subset I$ be a subset. The \textit{oscillation} of $f$ in $J$ is defined by setting
+\begin{equation*}\mathrm{osc} \left( f, \, J \right) := \sup \left\{|f(x) - f(y)| \: : \: x, \, y \in J \right\}. \end{equation*} \end{definition}
+
+\begin{remark} There are many equivalent definitions of absolute continuity of a function, whose proof is left to the reader. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item A function $f : I \longrightarrow \R$ is \textit{absolutely continuous} if and only if for all $\epsilon > 0$ there exists $\delta(\epsilon) := \delta > 0$ such that, for any finite \textbf{disjoint} family $J_1, \, \dots, \, J_n \subset I$ of open intervals $(a_i, \, b_i)$ satisfying the property
+\begin{equation*} \sum_{i = 1}^n |J_i| = \sum_{i = 1}^n |b_i - a_i| \leq \delta, \end{equation*}
+it turns out that
+\begin{equation*} \sum_{i=1}^n \mathrm{osc} \left( f, \, J_i \right) \leq \epsilon. \end{equation*} 
+\item A function $f : I \longrightarrow \R$ is \textit{absolutely continuous} if and only if for all $\epsilon > 0$ there exists $\delta(\epsilon) := \delta > 0$ such that, for any countable \textbf{disjoint} family $J_1, \, \dots, \, J_n, \, \dots \subset I$ of open intervals $(a_i, \, b_i)$ satisfying the property
+\begin{equation*} \sum_{i = 1}^{+ \infty} |J_i| = \sum_{i = 1}^{+ \infty} |b_i - a_i| \leq \delta, \end{equation*}
+it turns out that
+\begin{equation*} \sum_{i=1}^{+\infty} \mathrm{osc} \left( f, \, J_i \right) \leq \epsilon. \end{equation*} 
+\end{enumerate}\end{remark}
+
+\begin{proposition}\label{prop:12od} A finite measure $\mu$ defined on the Borel $\sigma$-algebra $\mathcal{B}(\R)$ is absolutely continuous with respect to the Lebesgue measure if and only if the cumulative distribution function\index{cumulative distribution function}
+\begin{equation*} F_\mu(x) = \mu \left( (- \infty, \, x] \right) \end{equation*}
+is absolutely continuous. \end{proposition}
+
+\begin{theorem}\label{th:sob2ed} A function $f \in \Ll(I)$ is (locally) absolutely continuous if and only if there exists $g \in \Ll(I)$ such that
+\begin{equation} \label{eq:sob2ed} f(x) - f(y) = \int_{x}^{y} g(t) \, \mathrm{d}t. \end{equation}
+More precisely, any absolutely continuous function is a.e. differentiable, and the usual derivative is a representative of the weak derivative equivalence class. \end{theorem}
+
+\begin{proof} Let $J := [a, \, b] \subset I$ be a closed interval. The function $f$ is absolutely continuous in $J$, and hence we can define a measure $\mu$ by setting
+\begin{equation*} \mu \left([x, \, y) \right) := f(y) - f(x). \end{equation*}
+We can easily prove that the cumulative distribution function is absolutely continuous, and therefore $\mu$ is absolutely continuous with respect to the Lebesgue measure, as a consequence of \hyperref[prop:12od]{Proposition \ref{prop:12od}}. It follows from the \hyperref[th:rnnn]{Radon-Nikodym Theorem} that there exists $g \in L^1(J)$ such that
+\begin{equation*} f(y) - f(x) = \int_{x}^{y} g(t) \, \mathrm{d}t \quad \text{for all $x, \, y \in J$}. \end{equation*}
+Therefore, $f$ is differentiable at almost every $x \in J$, and we can easily prove that $g$ is a representative of the weak derivative equivalence class (using the integration by parts formula). \end{proof}
+
+\begin{proposition} \label{wabs} Let $f \in \Ll(I)$ be a weakly differentiable function. There exists an absolutely continuous representative in the equivalence class of $f$. \end{proposition}
+
+\begin{proof} Suppose that $f \in \Ll(I)$ is a weakly differentiable function, and let $g \in \Ll(I)$ be the weak derivative. It is easy to prove that
+\begin{equation*} \eqref{wd} \iff \int_I f(x) \varphi^\prime(x) \, \mathrm{d}x = - \int_I g(x) \varphi(x) \, \mathrm{d}x \quad \text{for all $\varphi \in \mathrm{PW} C_c^1(I)$}, \end{equation*} 
+where $\mathrm{PW} C_c^1(I)$ denotes the space of all piecewise continuously differentiable functions with compact support in $I$.
+
+\paragraph{Conclusion.} Let $x < y \in I$, and let us consider the function
+\begin{equation*} \Phi_{\eta}^{\epsilon}(t) := \begin{cases} 0 & t \leq x - \epsilon, \\ 1 & x + \epsilon < t < y - \eta, \\ 0 & t \geq y + \eta. \end{cases} \end{equation*}
+Denote by $\Phi_{\eta}^{\epsilon}$ the obvious piecewise differentiable extension to the whole interval $I$. It is easy to compute the left-hand side of \eqref{wd} since
+\begin{equation*} \int_I f(t)  \left( \Phi_{\eta}^{\epsilon} \right)^\prime(t) \, \mathrm{d}t = \frac{1}{2 \epsilon} \int_{ x-\epsilon}^{x + \epsilon} f(t) \, \mathrm{d}t - \frac{1}{2 \eta} \int_{y - \eta}^{y + \eta} f(t) \, \mathrm{d}t, \end{equation*}
+and, similarly, the right-hand side is given by
+\begin{equation*} \int_I g(t) \Phi_{\eta}^{\epsilon}(t) \, \mathrm{d}t = \int_{x}^{y} g(t) \, \mathrm{d}t + o(1) \quad \text{for $\epsilon, \, \eta \to 0^+$}. \end{equation*}
+If we let
+\begin{equation*} \chi_\epsilon(t) := \frac{1}{2 \epsilon}  \chi_{[- \epsilon, \, \epsilon]} \quad \text{and} \quad  \chi_\eta(t) := \frac{1}{2  \eta} \chi_{[- \eta, \, \eta]} \end{equation*}
+then the left-hand side may be rewritten as follows:
+\begin{equation*} \int_I f(t)  \left( \Phi_{\eta}^{\epsilon} \right)^\prime(t) \, \mathrm{d}t = f \ast \chi_\epsilon(x) - f \ast \chi_\eta(y). \end{equation*}
+If we take the limit as $\epsilon \to 0^+$, and then we take the limit as $\eta \to 0^+$, it turns out that
+\begin{equation*} f(x) - f(y) = \int_{x}^{y} g(t) \, \mathrm{d}t \implies f(y) - f(x) = \int_{x}^{y} (-g)(t) \, \mathrm{d}t, \end{equation*}
+and \hyperref[th:sob2ed]{Theorem \ref{th:sob2ed}} concludes the proof.
+\end{proof}
+
+\section{$W^{1, \, p}$ Spaces}
+
+\paragraph{Introduction.} In this section, we denote by $I$ an open interval $(a, \, b)$ of the real line $\R$ (eventually unbounded), unless stated otherwise.
+
+\begin{definition}[Sobolev Space] \index{Sobolev space} Let $p \in [1, \, + \infty]$. The $(1, \, p)$-Sobolev space, denoted by $W^{1, \, p}(I)$, is the space of all the $L^p(I)$ functions with weak derivative in $L^p(I)$, that is,
+\begin{equation*} W^{1, \, p}(I) := \left\{ f \in L^p(I) \: \left| \: D f \in L^p(I) \right. \right\}. \end{equation*} \end{definition}
+
+\paragraph{Normed Space.} In this paragraph, we briefly discuss the main idea that allows one to define a norm on $W^{1, \, p}(I)$ that makes it a Banach space.
+
+\begin{remark}The Sobolev space $W^{1, \, p}(I)$ is a vector space, and the derivative map
+\begin{equation*} D : W^{1, \, p}(I) \longrightarrow L^p(I), \qquad f \longmapsto D f \end{equation*}
+is well-defined and linear. \end{remark}
+
+\begin{lemma} The graph of the operator $D : W^{1, \, p}(I) \longrightarrow L^p(I)$ is closed, that is,
+\begin{equation*} \Gamma(D) := \left\{ \left(f, \, D f \right) \: \left| \: f \in W^{1, \, p}(I) \right. \right\} \subset L^p(I) \times L^p(I) \end{equation*}
+is closed with respect to the subspace topology.
+\end{lemma}
+
+\begin{proof} Let $\left(f_n, \, D f_n \right)_{n \in \N} \subset \Gamma(D)$ be a converging sequence, and let $(f, \, g) \in L^p \times L^p$ be its limit in the product norm, that is,
+\begin{equation*} f_n \xrightarrow{L^p} f \quad \text{and} \quad D f_n \xrightarrow{L^p} g. \end{equation*}
+The identity
+\begin{equation*} \int_I f_n(t) \varphi^\prime(t) \, \mathrm{d}t = - \int_I D f_n(t) \varphi(t) \, \mathrm{d}t \end{equation*}
+holds for every $n \in \N$ and for every $\varphi \in C_c^\infty(I)$. Recall that the $L^p$ convergence implies the pointwise convergence of a subsequence, and therefore we can take the limit as $n$ goes to $+ \infty$ of the identity above to obtain
+\begin{equation*} \int_I f(t) \varphi^\prime(t) \, \mathrm{d}t = - \int_I g(t) \varphi(t) \, \mathrm{d}t, \end{equation*}
+which means that $g = Df$, i.e., the graph is closed. \end{proof}
+
+\begin{corollary} The mapping
+\begin{equation*} W^{1, \, p}(I) \longrightarrow L^p(I) \times L^p(I), \qquad f \longmapsto \left(f, \, D f  \right)\end{equation*}
+is linear, injective and onto the rank. More precisely, it turns out that
+\begin{equation*} W^{1, \, p}(I) \longrightarrow \Gamma(D) \end{equation*}
+is linear and bijective. \end{corollary}
+
+In conclusion, the product $L^p \times L^p$ induces on $\Gamma(D)$ the subspace topology by taking the restriction of the product norm $\| \cdot \|_p + \| - \|_p$. More precisely, if we endow $W^{1, \, p}$ with the topology generated by the norm
+\begin{equation} \label{sobnorm} \|f\|_{W^{1, \, p}(I)} := \|f\|_{L^p(I)} + \| D f \|_{L^p(I)}, \end{equation}
+then one can easily prove that $W^{1, \, p}$ is complete (and thus a Banach space).
+
+\begin{remark} Clearly \eqref{sobnorm} may be replaced by any equivalent norm in the product $L^p \times L^p$. In particular, when $p = 2$, it is particularly useful to consider the equivalent norm
+\begin{equation} \label{sobnorm2} \|f\|_{H^1(I)} := \left( \|f\|_{L^2(I)}^2 + \| D f \|_{L^p(I)}^2 \right)^{\frac{1}{2}} \end{equation}
+since it makes $H^1(I) := W^{1, \, 2}(I)$ a Hilbert space, with scalar product given by the formula
+\begin{equation} \label{sobsp2} (u, \, v)_{H^1(I)} = (u, \, v)_{L^2(I)} + (D u, \, D v)_{L^2(I)}. \end{equation} \end{remark}
+
+\begin{remark} The method employed in this paragraph to define a complete norm can be easily extended to any linear subspace of a Banach space. Indeed, let
+\begin{equation*} T : \mathfrak{Y} \longrightarrow \mathcal{B} \end{equation*}
+be a linear operator between a linear space $\mathfrak{Y} \subseteq \mathcal{B}$ and a Banach space $\left(\mathcal{B}, \, \|\cdot\|_{\mathcal{B}} \right)$. If $T$ is a closed operator, then the operator
+\begin{equation*} \mathfrak{Y} \longrightarrow \mathrm{Grap}(D) \subset \mathcal{B} \times \mathcal{B}, \qquad f \longmapsto (f, \, Tf) \end{equation*}
+is linear and bijective. In particular, it turns out that $\mathfrak{Y}$ is a Banach space endowed with the norm
+\begin{equation*} \|f\|_{\mathfrak{Y}} := \|f\|_{\mathcal{B}} + \| T \, f \|_{\mathcal{B}}. \end{equation*}\end{remark}
+
+\begin{proposition} Let $p \in [1, \, + \infty]$. Then for every $f \in W^{1, \, p}(I)$ there is an absolutely continuous representative of the equivalence class. In other words, the inclusion
+\begin{equation*} W^{1, \, p}(I) \subseteq C^0(I) \end{equation*}
+is a linear and continuous, i.e., there exists a positive constant $C$ such that
+\begin{equation*} \|f\|_{C^0(I)} \leq C \|f\|_{W^{1, \, p}(I)}. \end{equation*}  \end{proposition}
+
+\begin{proof} This follows directly from \hyperref[wabs]{Proposition \ref{wabs}}. \end{proof}
+
+\begin{proposition} \label{prop:alphsd} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item A function $f : I \longrightarrow \R$ is Lipschitz if and only if it belongs to $W^{1, \, \infty}(I)$.
+\item If $p \in (1, \, + \infty)$, then
+\begin{equation*} f \in W^{1, \, p}(I) \implies f \in C^{0, \, \frac{1}{p^\prime}}(I), \end{equation*}
+where $p^\prime$ is the conjugate of $p$. Vice versa, 
+\begin{equation*} f \in C^{0, \, \alpha}(I) \notimplies f \in W^{1, \, p}(I). \end{equation*}
+\item The Sobolev space $W^{1, \, p}(I)$ is isomorphic to a closed subset of $L^p(I) \times L^p(I)$. In particular, it is separable for $p \in [1, \, + \infty)$ and it is reflexive for $p \in (1, \, + \infty)$.
+\end{enumerate} \end{proposition}
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item This assertion is left as a simple exercise. For the solution, the reader may refer to \href{https://math.stackexchange.com/questions/874982/relation-between-sobolev-space-w1-infty-and-the-lipschitz-class}{this post}.
+\item Let $f \in W^{1, \, p}(I)$ be a $p$-summable function, for some $p \in (1, \, + \infty)$. By \hyperref[wabs]{Proposition \ref{wabs}} there is an absolutely continuous representative, which we still denote by $f$, such that
+\begin{equation*}f(x) - f(y) = \int_{y}^{x} D f(t) \, \mathrm{d}t. \end{equation*}
+If we take the absolute values and apply the Hölder inequality, we find that
+\begin{equation*} \left| f(x) - f(y) \right| \leq \|D f\|_{L^p(I)} \cdot |x - y|^{\frac{1}{p^\prime}}, \end{equation*}
+which means that $f$ is $1/p^\prime$-Hölder continuous.
+
+Vice versa, the reader may check for herself that the Weierstrass function is Hölder continuous, but is not absolutely continuous, and is not of bounded variation either.
+\end{enumerate} \end{proof}
+
+\paragraph{Dual Space.} Let $p \in [1, \, + \infty)$. The dual space of $W^{1, \, p}(I)$ can be easily represented as
+\begin{equation*} W^{1, \, p}(I) \ni u \longmapsto \int_I \left[ u(x) f(x) + \left(D u(x)\right) g(x) \right]\, \mathrm{d}x, \end{equation*}
+as $f$ and $g$ range in $L^{p^\prime}$ (i.e., the dual space $L^p$ for $p \neq + \infty$). This is an easy consequence of the fact that the dual of a product is the product of the duals
+\begin{equation*} \left( L^p \times L^p \right)^\ast = L^{p^\prime} \times L^{p^\prime}, \end{equation*}
+endowed with a suitable norm (see \hyperref[es:dualsi]{Exercise \ref{es:dualsi}}).
+
+\begin{remark} The representation is \textbf{not} unique. Indeed, the following \hyperref[prop:repvla]{Proposition \ref{prop:repvla}} explains partially why (since $\phi$ can be chosen almost arbitrarily). \end{remark}
+
+\begin{proposition}\label{prop:repvla} Let $x \in I$, and let $p \in [1, \, + \infty)$. Then there exists a function $\Psi_x \in L^{p^\prime}$ such that the valuation functional $j_x \in \left(W^{1, \, p}(I) \right)^\ast$ can be represented as
+\begin{equation*} j_x(u) = \int_{I} u(t) \phi(t) \, \mathrm{d}t + \int_I D u(t) \Psi_x(t) \, \mathrm{d}t, \end{equation*}
+where $\phi : I \longrightarrow \R$ is a continuous function with compact support.\end{proposition}
+
+\begin{proof} Let $\phi : I \longrightarrow \R$ be a continuous function with compact support and unitary mass
+\begin{equation*} \int_I \phi(t) \, \mathrm{d}t = 1. \end{equation*}
+Let $u$ be the absolutely continuous representative of the equivalence class $u \in W^{1, \, p}(I)$. In particular, we have that
+\begin{equation*} u(x) = u(y) + \int_{y}^x D u(t) \, \mathrm{d}t \quad \text{for every $y < x \in I$}, \end{equation*}
+and thus, if one multiplies by $\phi(y)$ and integrate in $\mathrm{d}y$ both members, then it turns out that
+\begin{equation*} u(x) = \int_{I} u(y) \phi(y) \, \mathrm{d}y + \int_{I}\left( \int_{y}^x D u(t) \, \mathrm{d}t \right) \phi(y) \, \mathrm{d}y. \end{equation*} 
+By Fubini-Tonelli theorem
+\begin{equation*} u(x) = \int_{I} u(y) \phi(y) \, \mathrm{d}y + \int_{I} \left[ \mathbbm{1}_{(- \infty, \, x]}(t) \int_I \mathbbm{1}_{(- \infty, \, t]}(y)  \phi(y) \, \mathrm{d}y \right] D u(t) \, \mathrm{d}t, \end{equation*}
+and this implies that
+\begin{equation*} u(x) = \int_{I} u(y) \phi(y) \, \mathrm{d}y + \int_{I} D  u(y) \Psi_x(y) \mathrm{d}y, \end{equation*} 
+where
+\begin{equation*} \Psi_x(y) := \mathbbm{1}_{(- \infty, \, x)}(y) \int_{- \infty}^{y} \phi(t) \, \mathrm{d}t. \end{equation*}\end{proof}
+
+\paragraph{Inclusion in Bounded Functions.} It follows from \hyperref[prop:repvla]{Proposition \ref{prop:repvla}} that, given $p \in [1, \, + \infty)$ and $u \in W^{1, \, p}(I)$, we have the estimate
+\begin{equation*} \left| u(x) \right| \leq \|u\|_{L^p(I)} \, \|\phi\|_{L^{p^\prime}(I)} + \| D \, u \|_{L^p(I)} \, \| \Psi_x \|_{L^{p^\prime}(I)}. \end{equation*}
+Moreover, the $L^{p^\prime}$-norm of $\Psi_x$ does not depend on $x$, and hence there exists a positive constant $C > 0$ such that
+\begin{equation*} \left| u(x) \right| \leq C \|u\|_{W^{1, \,p}(I)} ,\end{equation*}
+which means that the inclusion
+\begin{equation*} W^{1, \, p}(I) \hookrightarrow \left( C_b^0(I), \, \|\cdot\|_{\infty, \, I} \right) \end{equation*}
+is continuous with respect to the uniform norm.
+
+\begin{proposition}Let $I$ be a \textbf{bounded} interval of $\R$, and let $p \in (1, \, + \infty]$. Then the inclusion
+\begin{equation*} W^{1, \, p}(I) \hookrightarrow C^0\left( \overline{I} \right) \end{equation*}
+is continuous and compact.
+\end{proposition}
+
+\begin{proof}We have already proved in \hyperref[prop:alphsd]{Proposition \ref{prop:alphsd}} that the inclusion is continuous, and
+\begin{equation*} \left| u(x) - u(y) \right| \leq \| D u \|_{L^p(I)} \cdot |x - y|^{ \frac{1}{p^\prime}}. \end{equation*} 
+Namely, the elements of the unitary ball in $W^{1, \, p}(I)$ are equicontinuous (as they are also equi-Hölder of parameter $1/p^\prime$). Moreover, the $L^p$-norm is bounded by $1$, and thus it follows from the main-value theorem that for all $u \in B_{W^{1, \, p}(I)}(0, \, 1)$ there exists a point $x_0 := x_0(u) \in I$ such that
+\begin{equation*} |u(x_0)| \leq C < + \infty, \end{equation*}
+which, in turn, implies that
+\begin{equation*} |u(x)| \leq |u(x_0)| + \|D u \|_{L^p(I)} \cdot |x - x_0|^{ \frac{1}{p^\prime}}. \end{equation*}
+In particular, every sequence $(u_n)_{n \in \N} \in B_{W^{1, \, p}(I)}(0, \, 1)$ is equibounded and equicontinuous. The interval $I$ is bounded; hence the closure is compact and we conclude that the inclusion
+\begin{equation*} W^{1, \, p}(I) \hookrightarrow C^0\left( \overline{I} \right) \end{equation*}
+is compact as a straightforward corollary of the Ascoli-Arzelà theorem.\end{proof}
+
+\begin{remark}The inclusion
+\begin{equation*} W^{1, \, p}(\R) \hookrightarrow C_b^0\left( \R\right) \end{equation*}
+is not compact. Indeed, the action of the group of translations $\mathcal{T}_\R$ preserves the norm, that is,
+\begin{equation*} u \in W^{1, \, p}(\R) \implies \left\| T_h u \right\|_{W^{1, \, p}(\R)} = \|u\|_{W^{1, \, p}(\R)}. \end{equation*}
+Let $u \in W^{1, \, p}(\R)$ be any function of norm $1$, and let $\left( \tau_n u\right)_{n \in \N} \subset W^{1, \, p}(\R)$ be a sequence. The weak limit is clearly the function identically zero, but
+\begin{equation*}\| \tau_n u \|_{W^{1, \, p}(\R^n)} = 1 \quad \text{for all $n \in \N$} \implies \text{$u_n \not \to 0$ strongly}. \end{equation*} \end{remark} 
+
+\subsection{Extension Operator}
+
+Let $r : W^{1, \, p}(\R) \longrightarrow W^{1, \, p}(I)$ be the restriction operator defined by setting
+\begin{equation*} r(f) := f \, \big|_{I}. \end{equation*}
+
+\begin{definition}[Extension Operator] \index{extension operator} A linear continuous operator
+\begin{equation*} E : W^{1, \, p}(I) \longrightarrow W^{1, \, p}(\R) \end{equation*}
+is called \textit{extension operator} if it is a right inverse of $r$, i.e., if
+\begin{equation*} r(E(f)) = f. \end{equation*} \end{definition}
+
+\begin{example}Let $u \in W^{1, \, p}(I)$, and assume that $I$ is an open interval of the form $(a, \, b)$. We have proved earlier that there always is an absolutely continuous function in the class of equivalence $u$, which we still denote by $u$. It turns out that the value at the extremal points of the interval can be computed as follows:
+\begin{equation*} u(a) = \lim_{n \to + \infty} u \left( a + \frac{1}{n} \right) = \lim_{x \to a^+} u(x) \quad \text{and} \quad u(b) = \lim_{n \to + \infty} u \left( b - \frac{1}{n} \right) = \lim_{x \to b^-} u(x). \end{equation*}
+Let $\delta > 0$ be a real number, and consider the following extension of $u$, given by
+\begin{equation*} \tilde{u}(x) := \begin{cases} 0 & x \in (- \infty, \, a - \delta], \\ \text{linear interpolation} & x \in (a-\delta, \, a], \\ u(x) & x \in (a, \, b] \\ \text{linear interpolation}, & x \in (b, \, b + \delta], \\ 0 & x \in (b + \delta, \, + \infty).\end{cases} \end{equation*}
+The reader may check by herself, as an exercise, that $\tilde{u}$ belongs to $W^{1, \, p}(\R)$. More precisely, it is enough to check that \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $\tilde{u}$ belongs to $L^p(\R)$, and
+\item $\tilde{u}$ is the primitive (in the sense of formula \eqref{eq:sob2ed}) of some $\tilde{v} \in L^p(\R)$.
+\end{enumerate}  \end{example}
+
+\begin{example}Let $u \in W^{1, \, p}(I)$ be any function, and assume that $I = [0, \, a)$. We can always consider the extension by reflection, that is,
+\begin{equation*} \tilde{u}(x) := \begin{cases} u(x) & x \in (-a, \, 0] \\ u(x) & x \in [0, \, a).\end{cases} \end{equation*}
+Again, the reader may verify, as an exercise, that
+\begin{equation*} \tilde{u} \in W^{1, \, p}\left( (-a, \, a) \right). \end{equation*} \end{example}
+
+The following theorem asserts that for all $p \in [1, \, + \infty]$, one can always find an extension operator $P$ satisfying the additional property that the inclusions
+\begin{equation*} P : W^{1, \, p}(I) \hookrightarrow L^p(\R) \quad \text{and} \quad P : W^{1, \, p}(I) \hookrightarrow W^{1, \, p}(\R) \end{equation*}
+are both continuous.
+
+\begin{theorem}[\cite{brezis}]\label{th:ext} Let $1 \leq p \leq \infty$. There exists a bounded linear operator $P : W^{1, \, p}(I) \longrightarrow W^{1,\, p}(\R)$, called an extension operator, satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The map $P$ is an actual extension, that is,
+\begin{equation*} P u \, \big|_{I} = u \quad \text{for every $u \in W^{1, \, p}(I)$}. \end{equation*}
+\item The inclusion $P : W^{1, \, p}(I) \hookrightarrow L^p(\R)$ is continuous with respect to the $L^p$-norm, that is,
+\begin{equation*} \|P  u \|_{L^p(\R)} \leq C  \|u \|_{L^p(I)} \quad \text{for every $u \in W^{1, \, p}(I)$}. \end{equation*}
+\item The inclusion $P : W^{1, \, p}(I) \hookrightarrow W^{1, \, p}(\R)$ is continuous, that is,
+\begin{equation*} \|P  u \|_{W^{1, \, p}(\R)} \leq C \|u \|_{L^p(I)} \quad \text{for every $u \in W^{1, \, p}(I)$}. \end{equation*}
+\end{enumerate}
+Furthermore, the constant $C$ depends only on the length of the interval $I$. \end{theorem}
+
+\subsection{Characterizations of $W^{1, \, p}(I)$}
+
+In this section, we investigate some possible characterization of the space $W^{1, \, p}(I)$, for a suitable range of $p$'s, in terms of the $L^p$-continuity property.
+
+\begin{proposition}\label{char:ppp1} Let $p \in (1, \, + \infty]$. If $u \in L^p(I)$, then the following assertions are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The function $u$ belongs to $W^{1, \, p}(I)$.
+\item For every $\varphi \in \Cc(I)$ it turns out that
+\begin{equation*} \left| \int_I u(t)  \varphi^\prime(t) \, \mathrm{d}t \right| \leq C(u) \|\varphi\|_{L^{p^\prime}(I)}. \end{equation*}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} We divide the proof into two steps.
+
+\paragraph{Step 1.} Assume that $u \in W^{1, \, p}(I)$ is a Sobolev function, and let $\varphi \in \Cc(I)$ be a test function. By definition, we have the identity
+\begin{equation*}\left| \int_I u(t) \varphi^\prime(t) \, \mathrm{d}t \right| =  \left| -\int_I D  u(t) \varphi(t) \, \mathrm{d}t \right|, \end{equation*}
+and thus by the Hölder inequality it turns out that
+\begin{equation*}\left| \int_I u(t) \varphi^\prime(t) \, \mathrm{d}t \right| \leq \left\| D \, u \right\|_{L^p(I)} \cdot \|\varphi\|_{L^{p^\prime}(I)}, \end{equation*}
+which is exactly what we wanted to prove.
+
+\paragraph{Step 2.} The functional
+\begin{equation*} \Cc(I) \ni \varphi \longmapsto \int_I u(t) \varphi^\prime(t) \, \mathrm{d}t \in \R \end{equation*}
+is linear and, by assumption, continuous with respect to the $L^{p^\prime}$ norm. The inclusion
+\begin{equation*} \Cc(I) \subset L^{p^\prime}(I) \end{equation*}
+is dense, which means that the functional can be extended to the whole $L^{p^\prime}$ isometrically. By the \hyperref[theorem:riesz]{Riesz Representation Theorem \ref{theorem:riesz}} there exists\footnote{Here we need $p \neq 1$ since $L^p$ is the dual space of $L^{p^\prime}$ whenever $p^\prime \neq + \infty$.} an element $f \in L^p(I)$ such that
+\begin{equation*} \int_I f(t) \varphi(t) \, \mathrm{d}t = \left\langle f, \, \varphi \right\rangle_2 = \int_{I} u(t) \varphi^\prime(t) \, \mathrm{d}t \quad \text{for all $\varphi \in \Cc(I)$}, \end{equation*}
+and therefore $- f \in L^p(I)$ is the weak derivative of $u$.
+\end{proof}
+
+\begin{proposition}[$L^p$-continuity] Let $p \in [1, \, + \infty)$, and let $u \in L^p(\R)$. Then there exists a modulus of $L^p$-continuity $\omega : [0, \, + \infty] \longrightarrow [0, \, + \infty]$ such taht
+\begin{equation} \label{eq,sdsld} \left\| \tau_h f - f \right\|_{L^p(\R)} = \omega(|h|) \searrow 0.\end{equation} 
+\end{proposition}
+
+\begin{proof} We divide the proof into two steps.
+
+\paragraph{Step 1.} The property \eqref{eq,sdsld} clearly holds true for all compactly supported continuous functions.
+
+\paragraph{Step 2.} Let us consider the subspace
+\begin{equation*}\mathcal{G} := \left\{ g \in L^p(\R) \: \left| \: \text{\eqref{eq,sdsld} is satisfied by $g$} \right. \right\} \subset L^p(\R). \end{equation*}
+The first step proves that $C_c^0(\R) \subseteq \mathcal{G}$, which means that if we can prove \eqref{eq,sdsld} for any function on the closure with respect to the $L^p$ norm of $\mathcal{G}$, then \eqref{eq,sdsld} will be true for the closure of $C_c^0(\R)$ in $L^p(\R)$, which coincides with $L^p(\R)$ itself.
+
+\paragraph{Step 3.} Let $f \in \overline{\mathcal{G}}$ be any element of the closure so that for any positive $\epsilon > 0$ there exists a function $g_\epsilon \in \mathcal{G}$ such that
+\begin{equation*} \| f - g_\epsilon \|_{L^p(\R)} \leq \epsilon. \end{equation*}
+It follows that
+\begin{equation*}\begin{aligned} \| \tau_h  f - f \|_{L^p(\R)} & \leq  \| \tau_h f - \tau_h g_\epsilon \|_{L^p(\R)} +  \| \tau_h g_\epsilon - g_\epsilon \|_{L^p(\R)} +  \| f - g_\epsilon \|_{L^p(\R)} = \\[1em] & = 2  \| f - g_\epsilon \|_{L^p(\R)} + \| \tau_h  g_\epsilon - g_\epsilon \|_{L^p(\R)} \leq \\[1em] & \leq 2  \epsilon + \| \tau_h g_\epsilon - g_\epsilon \|_{L^p(\R)}.\end{aligned} \end{equation*}
+By taking the limit as $|h| \to 0$, it turns out that 
+\begin{equation*}\limsup_{|h| \to 0} \| \tau_h f - f \|_{L^p(\R)} \leq 2 \, \epsilon, \end{equation*}
+and this is enough to conclude the proof since $\epsilon$ was chosen to be arbitrarily small.
+\end{proof}
+
+We are finally ready to state the main result of this section, namely the characterization of $W^{1, \, p}(I)$ in terms of the $L^p$-continuity property stated above.
+
+\begin{proposition} \label{prop:rllsdlsdl} Let $p \in (1, \, + \infty)$. If $u \in L^p(I)$, then the following assertions are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The function $u$ belongs to $W^{1, \, p}(\R)$.
+\item For every translation $\tau_h \in \mathcal{T}_\R$, it turns out that
+\begin{equation*} \left\| \tau_h u - u \right\|_{L^p(\R)} \lesssim |h|. \end{equation*}
+\end{enumerate}
+\end{proposition}
+
+\begin{remark} Let $f \in L^p(\R^n)$ be any $p$-summable function. As we mentioned above $f$ satisfies, for all $p \neq + \infty$, the $L^p$-continuity property, that is,
+\begin{equation*} \| \tau_h f - f \|_{L^p(\R^n)} = o(1) \quad \text{as $|h| \to 0$}. \end{equation*}
+Equivalently, $f$ admits a \textit{modulus of $L^p$-continuity}, i.e., there exists an increasing continuous function $\omega : [0, \, + \infty] \longrightarrow [0, \, + \infty]$ satisfying the properties
+\begin{equation*} \omega(0) = 0 \quad \text{and} \quad \text{$\omega(t) = o(1)$ for $t \to 0$}, \end{equation*}
+such that
+\begin{equation} \label{mccc} \| \tau_h \, f - f \|_{L^p(\R^n)} \leq \omega \left( |h| \right). \end{equation}\end{remark}
+
+\begin{proof}[Proof of Proposition \ref{prop:rllsdlsdl}] We divide the proof into two steps.
+
+\paragraph{Step 1.} Assume that $u \in W^{1, \, p}(\R)$, and let $u$ be its absolutely continuous representative. For any positive number $h > 0$, we have that
+\begin{equation*} u(x + h) - u(x) = \int_{x}^{x + h} D u(t) \, \mathrm{d}t. \end{equation*}
+Hence, we can easily estimate the absolute value of the left-hand side using the Hölder inequality
+\begin{equation*}  \left| u(x + h) - u(x) \right| \leq \int_x^{x+h} \left| D  u(t) \right| \, \mathrm{d}t \leq \left\| D u \right\|_{L^p(\R)} \, |h|^{1/p^\prime}, \end{equation*}
+where $p^\prime$ is the conjugate of $p$. Consequently, we have
+\begin{equation*} \begin{aligned}  \left\| u - \tau_h u \right\|_{L^p(\R)}^p & \leq \overbrace{|h|^{p^\prime \cdot p}}^{= h^{p - 1}} \iint_{\R \times \R} \mathbbm{1}_{[x, \, x+ h]}(t)  \left| D u(t) \right| \, \mathrm{d}t \mathrm{d}x \: {\color{red}=} \\[1em] & \: {\color{red}=} \: h \cdot |h|^{p-1} \int_{\R} \left| D u(t) \right|^p \, \mathrm{d}t = \\[1em] & = \left\| D u\right\|_{L^p(\R)}^{p} \cdot |h|^p, \end{aligned}\end{equation*}
+where the {\color{red}red} identity follows from the Fubini-Tonelli theorem. Taking the $p$th root of both the left-hand side and the right-hand side, it turns out that
+\begin{equation*} \left\| u - \tau_h \, u \right\|_{L^p(\R)} \lesssim |h|,\end{equation*}
+where the constant depends on $u$ only $c := \left\| D u \right\|_{L^p(\R)}$, and is finite by assumption.
+
+\paragraph{Step 2.} Vice versa, we use the characterization given by \hyperref[char:ppp1]{Proposition \ref{char:ppp1}} and prove instead that
+\begin{equation*} \left\| u - \tau_h u \right\|_{L^p(\R)} \lesssim |h| \implies \left| \int_{\R} u(t) \varphi^\prime(t) \, \mathrm{d}t \right| \leq C(u)  \|\varphi\|_{L^{p^\prime}(\R)} \end{equation*}
+for every $\varphi \in C_c^\infty(\R)$. Recall that the translation is a self-adjoint operator, that is,
+\begin{equation*} \int_{\R} \tau_h u(t) \varphi(t) \, \mathrm{d}t = \int_{\R}  u(t) \tau_{-h} \varphi(t) \, \mathrm{d}x, \end{equation*}
+and hence
+\begin{equation*}\int_\R u(t) \frac{\varphi(t) - \varphi(t - h)}{h} \, \mathrm{d}t = - \frac{1}{h} \int_{\R} \left[ \tau_h u(t) - u(t) \right] \varphi(t) \, \mathrm{d}t. \end{equation*}
+If we take the absolute value, then it turns out that
+\begin{equation*} \begin{aligned} \left| \int_\R u(t) \frac{\varphi(t) - \varphi(t - h)}{h} \, \mathrm{d}t \right| & \leq \frac{1}{|h|} \left| \int_{\R} \left[\tau_h u(t) - u(t) \right] \varphi(t) \, \mathrm{d}t \right| \leq \\[1em] & \leq \frac{1}{|h|}  \| \tau_h  u - u \|_{L^p(\R)} \cdot \| \varphi \|_{L^{p^\prime}(\R)} \lesssim \\[1em] & \lesssim \frac{1}{|h|} |h| \|\varphi\|_{L^{p^\prime}(\R)} \simeq \| \varphi \|_{L^{p^\prime}(\R)}, \end{aligned} \end{equation*}
+and we conclude by taking the limit as $h \to 0$ since the right-hand side of the inequality does not depend on $h$ anymore.
+\end{proof}
+
+\section{Compactness in $L^p(\R^n)$}
+
+First, we recall a definition that will be extremely useful in what follows in this section.
+
+\begin{definition}[Modulus of Continuity] \index{modulus of continuity} A modulus of continuity is any real-extended valued function 
+\begin{equation*} \omega : [0, \, \infty] \longrightarrow [0, \, \infty], \end{equation*}
+vanishing at $0$ and continuous at $0$, that is,
+\begin{equation*} \lim_{|h| \to 0} \omega(|h|) = 0. \end{equation*}\end{definition}
+
+Let $f \in L^p(\R^n)$ be any $p$-summable function defined on the whole real line. The following properties are trivial:\mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The $L^p$-norm of $f$ is finite, i.e., $\|f\|_{L^p(\R^n)} < + \infty$.
+\item There is a modulus of $L^p$-continuity $\omega : [0, \, + \infty] \to [0, \, + \infty]$ such that
+\begin{equation} \label{modcontbas} \| \tau_h f - f \|_{L^p(\R^n)} \leq \omega( |h| ). \end{equation}
+\item There is a modulus of $L^p$-continuity $\alpha : [0, \, + \infty] \to [0, \, + \infty]$ such that
+\begin{equation} \label{modcontalt} \| f \|_{L^p\left(B_R^\complement \right)} \leq \alpha \left( \frac{1}{R} \right). \end{equation}
+\end{enumerate}
+
+\begin{remark}If $\mathcal{F} = \{f_1, \, \dots, \, f_n\} \subset L^p(\R^n)$ is a finite family of functions, then the properties \textbf{(1)}, \textbf{(2)} and \textbf{(3)} hold uniformly. More precisely, we have that:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The $L^p$-norm of the $f_i$'s is bounded by a uniform constant. Namely, it turns out that
+\begin{equation*} \|f_i\|_{L^p(\R^n)} \leq \max_{j = 1, \, \dots, \, n} \|f_j\|_{L^p(\R^n)} =: C < + \infty \end{equation*}
+for all $i = 1, \, \dots, \, n$.
+\item There is a modulus of $L^p$-continuity $\omega : [0, \, + \infty] \to [0, \, + \infty]$ such that
+\begin{equation*} \| \tau_h f_i - f_i \|_{L^p(\R^n)} \leq \omega( |h| )\quad \text{for all $i \in  \{1, \, \dots, \, n\}$}, \end{equation*}
+and it is given by the maximum of the moduli of continuity of the $f_i$'s, that is,
+\begin{equation*} \omega(t) := \max_{j = 1, \, \dots, \, n} \omega_j(t). \end{equation*}
+\item There is a modulus of $L^p$-continuity $\omega : [0, \, + \infty] \to [0, \, + \infty]$ such that
+\begin{equation*} \| f_i \|_{L^p(B_R^\complement)} \leq \alpha \left( \frac{1}{R} \right) \quad \text{for all $i \in  \{1, \, \dots, \, n\}$},\end{equation*}
+and it is given by the maximum of the moduli of continuity of the $f_i$'s, that is,
+\begin{equation*} \alpha(r) := \max_{j = 1, \, \dots, \, n} \alpha_j(r). \end{equation*}
+\end{enumerate}\end{remark}
+
+\begin{remark}In a similar fashion, one could prove that any compact family $\mathcal{F} \subset L^p(\R^n)$ satisfies the properties \textbf{(1)}, \textbf{(2)} and \textbf{(3)} uniformly. \end{remark}
+
+We are now ready to state a complete characterization of relatively compact sets (and thus compact sets) in the $L^p$ space for all $p \in [1, \, + \infty)$.
+
+\begin{theorem}[Fréchet-Kolmogorov] \label{frekol} \index{Fréchet-Kolmogorov Theorem}\index{Compactness Theorem in $L^p$} A set $E \subset L^p(\R^n)$, for $p \in [1, \, + \infty)$, is relatively compact if and only if $E$ satisfies the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The set $E$ is equibounded in $L^p(\R^n)$, that is, there exists a constant $c > 0$ such that
+\begin{equation*} \|f\|_{L^p(\R^n)} \leq c \quad \text{for all $f \in E$}. \end{equation*}
+\item The set $E$ is equicontinuous in $L^p(\R^n)$, that is, there exists a modulus of $L^p$-continuity $\omega : [0, \, + \infty] \longrightarrow [0, \, + \infty]$ such that
+\begin{equation*} \| \tau_h f - f \|_{L^p(\R^n)} \leq \omega( |h| )  \quad \text{for all $f \in E$}. \end{equation*}
+\item The set $E$ is equiconcentrated in  $L^p(\R^n)$, that is, there exists a modulus of $L^p$-continuity $\alpha : [0, \, + \infty] \longrightarrow [0, \, + \infty]$ such that
+\begin{equation*} \| f \|_{L^p\left(B_R^\complement\right)} \leq \alpha\left( \frac{1}{R} \right) \quad \text{for all $f \in E$}. \end{equation*}
+\end{enumerate}\end{theorem}
+
+Before we give the complete proof of this result, we discuss briefly the case $p = + \infty$ and why the same statement does not hold.
+
+\begin{proposition}A set $E \subseteq C_0^0(\R^n)$ is relatively compact with respect to the uniform topology if and only if $E$ satisfies the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The set $E$ is equibounded in $L^\infty(\R^n)$, that is, there exists a constant $c > 0$ such that
+\begin{equation*} \|f\|_{L^\infty(\R^n)} \leq c \quad \text{for all $f \in E$}. \end{equation*}
+\item The set $E$ is equicontinuous in $L^\infty(\R^n)$, that is, there exists a modulus of $L^\infty$-continuity $\omega : [0, \, + \infty] \longrightarrow [0, \, + \infty]$ such that
+\begin{equation*} \| \tau_h f - f \|_{L^\infty(\R^n)} \leq \omega( |h| )  \quad \text{for all $f \in E$}. \end{equation*}
+\item The set $E$ is equiconcentrated in  $L^\infty(\R^n)$, that is, there exists a modulus of $L^\infty$-continuity $\alpha : [0, \, + \infty] \longrightarrow [0, \, + \infty]$ such that
+\begin{equation*} \| f \|_{L^\infty\left(B_R^\complement\right)} \leq \alpha\left( \frac{1}{R} \right) \quad \text{for all $f \in E$}. \end{equation*}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}The idea is to first prove uniform convergence on compact sets (closed balls), and then generalize it to the whole space.
+
+\paragraph{Step 1.} Let $(f_n)_{n \in \N} \subset E$ be an arbitrary sequence, and fix $R > 0$. The properties $\mathbf{(a)}$ and $\mathbf{(b)}$ allows us to apply the Ascoli-Arzelà theorem and find a subsequence $(f_{n_k, \, R})_{k \in \N}$ uniformly converging to some $f_R$ in the closed ball of center $0$ and radius $R$.
+
+The argument does not depend on the particular value of $R$, therefore we can find such a subsequence for all $R > 0$. The diagonal method allows us to extract a sub-subsequence, still denoted by $(f_{n_k})_{k \in \N} \subset E$, such that
+\begin{equation*}f_{n_k} \doublerightarrow f \, \big|_{\overline{B_R}} \quad \text{for all $R > 0$, uniformly in $\overline{B_R}$}. \end{equation*}
+
+\paragraph{Step 2.} In conclusion, the property $\mathbf{(c)}$ implies that $E$ is relatively compact with respect to the uniform norm since one can always write
+\begin{equation*} \| f_n - f \|_{\infty, \, \R^n} \leq \|f_n - f\|_{\infty, \, \overline{B_R}} + 2 \, \alpha(R) = \|f_n - f\|_{\infty, \, \overline{B_R}} + o(1) \quad \text{as $R \to + \infty$}. \end{equation*} \end{proof}
+
+\begin{proof}[Proof of Theorem \ref{frekol}] The proof presented here is rather involved, and requires a lot of work. Thus we divide it into five steps to ease the notation a little.
+
+\paragraph{Step 1.} First, observe that, for any $R > 0$, the property $\mathbf{(3)}$ implies that
+\begin{equation} \label{eq:frekol1} \| f - \chi_{B_R} f \|_{L^p(\R^n)} = \| f \|_{L^p(B_R^\complement)} \leq \alpha\left(\frac{1}{R} \right), \end{equation}
+where $\chi_{B_R}$ is the indicator function of the ball of radius $R$.
+
+\paragraph{Step 2.} In a similar fashion, for every positive mollifier $\varphi \in C_c^0(\R^n)$ with mass equal to $1$ and diameter of the support $d > 0$, it turns out that
+\begin{equation} \label{eq:frekol2} \| f \ast \varphi - f \|_{L^p(\R^n)} \leq \sup_{|h| \leq d} \, \| \tau_h f - f \|_{L^p(\R^n)} \leq \omega(d). \end{equation}
+The estimate \eqref{eq:frekol2} requires a little bit of work to be justified completely. Indeed, for every such mollifier $\varphi \in C_c^0(\R^n)$, we have
+\begin{equation*} \begin{aligned} \left| f \ast \varphi(x) - f(x) \right| & = \left| \int_{\R^n} \varphi(y) \left[ f(x) - f(x - y) \right] \, \mathrm{d}y \right| = \\[1em] & = \left| \int_{\R^n} \varphi^{1/p}(y) \left[ f(x) - f(x - y) \right] \varphi^{1/p^\prime}(y) \,  \mathrm{d}y \right| \leq \\[1em] & \leq \left( \int_{\mathrm{spt}(\varphi)} \varphi(y) \left| f(x) - f(x - y) \right|^p \, \mathrm{d}y \right)^{1/p} \, \left( \underbrace{\int_{\R^n} |\varphi(y)| \, \mathrm{d}y}_{=1} \right)^{1/p^\prime}. \end{aligned} \end{equation*}
+It follows that
+\begin{equation*} \begin{aligned} \left\| f \ast \varphi - f \right\|_{L^p(\R^n)}^p & \leq \int_{\R^n} \left[ \int_{\mathrm{spt}(\varphi)} \varphi(y) \left| f(x) - f(x - y) \right|^p \, \mathrm{d}y \right] \, \mathrm{d}x  = \\[1em] & = \int_{\mathrm{spt}(\varphi)} \left[ \int_{\R^n} \left| \tau_y  f(x) - f(x) \right|^p \, \mathrm{d}x  \right] \, \varphi(y) \, \mathrm{d}y \leq \\[1em] & \leq \sup_{|y| \leq d} \| \tau_y \, f - f \|_{L^p(\R^n)}^p, \end{aligned} \end{equation*}
+where the last inequality follows easily from the fact that the support of $\varphi$ has diameter $d$.
+
+\paragraph{Step 3.} The space $L^p(\R^n)$ is a complete normed space, which means that, as a consequence of \hyperref[totbound]{Lemma \ref{totbound}}, it is enough to prove that
+\begin{equation*} \mathbf{(1)} + \mathbf{(2)} + \mathbf{(3)} \implies \text{$E$ is totally bounded.}\end{equation*}
+Let $B$ denotes the unitary ball $B_{L^p(\R^n)}(0, \, 1)$. Note that the estimates \eqref{eq:frekol1} and \eqref{eq:frekol2} respectively prove the following inclusions:
+\begin{equation*} \begin{cases} E \subseteq \chi_{B_R} \cdot E + \alpha\left( \frac{1}{R} \right) \cdot B, \\[0.6em] E \subseteq \varphi \ast E + \omega(d) \cdot B. \end{cases} \end{equation*}
+Moreover, if $E$ is equicontinuous and $R > 0$, then the family of functions $\chi_{B_R}\cdot E$ is also equicontinuous (although, with a different modulus of $L^p$-continuity, which we denote by $\omega^R$). More precisely,
+\begin{equation*}\begin{aligned} \left\| \varphi \ast \left( \chi_{B_R} f \right) - f \right\|_{L^p(\R^n)} & \leq \left\| \varphi \ast \left( \chi_{B_R} f \right) - \chi_{B_R} f \right\|_{L^p(\R^n)} + \left\|  \chi_{B_R} f -   f \right\|_{L^p(\R^n)} \leq \\[1em] & \leq \omega^R(d) + \alpha\left(\frac{1}{R}\right),\end{aligned} \end{equation*} 
+which means that
+\begin{equation*} E \subseteq \chi_{B_R} \cdot E + \alpha\left( \frac{1}{R} \right) \cdot B \subseteq \varphi \ast \left( \chi_{B_R} \cdot E \right) + \left( \omega^R(d) + \alpha\left(\frac{1}{R}\right) \right) \cdot B. \end{equation*}
+
+\paragraph{Step 4.} Fix $\epsilon >0$. One can always find real numbers $R > 0$ and $d > 0$ such that the constant on the right-hand side can be estimated by $2 \epsilon$, that is,
+\begin{equation*} E \subseteq \varphi \ast \left( \chi_{B_R} \cdot E \right) + 2 \, \epsilon \cdot B. \end{equation*}
+Therefore, we can equivalently prove that the set $\varphi \ast \left( \chi_{B_R} \cdot E \right)$ is totally bounded in $C_c^0(B_{R + d})$ with respect to the uniform norm. In fact, this is enough to come to the same conclusion in the $L^p$ topology (since it is weaker, and thus there are less open sets to check).
+
+\paragraph{Step 5.} For any $f \in L^p(\R^n)$ and any $\varphi \in C_c^0(\R^n)$, it turns out that
+\begin{equation*} \begin{aligned} \left\| \tau_h \left( \varphi \ast f \right) - \varphi \ast f \right\|_{\infty} & = \left\| \varphi \ast \left( \tau_h f - f \right) \right\|_{\infty} \; {\color{red} \leq} \\[1em] & \; {\color{red} \leq} \; \| \varphi\|_{L^{p^\prime}(\R^n)} \cdot \| \tau_h f - f \|_{L^{p}(\R^n)}, \end{aligned} \end{equation*}
+where the {\color{red}red} inequality follows from a straightforward application of Young inequality\footnote{\textbf{Young Inequality.} Let $f \in L^p(\R^n)$ and $g \in L^q(\R^n)$, and assume that
+\begin{equation*}1 + \frac{1}{r} = \frac{1}{p} + \frac{1}{q}.\end{equation*}
+The convolution $f \ast g$ belongs to $L^r(\R^n)$, and the following inequality holds:
+\begin{equation} \label{eq:youngcont} \|f \ast g \|_{L^r(\R^n)} \leq \| f \|_{L^p(\R^n)} \| g \|_{L^q(\R^n)}. \end{equation}}. In particular, for every $f \in E$, it turns out that
+\begin{equation*} \left\| \tau_h \left( \varphi \ast f \right) - \varphi \ast f \right\|_{\infty} \leq \| \varphi\|_{L^{p^\prime}(\R^n)} \cdot \| \tau_h f - f \|_{L^{p}(\R^n)} \leq \| \varphi\|_{L^{p^\prime}(\R^n)} \cdot \omega(|h|),\end{equation*}
+from which it also follows that
+\begin{equation*} \left\|  \varphi \ast f  \right\|_{\infty} \leq \| \varphi \|_{L^{p^\prime}(\R^n)} \cdot \| f\|_{L^p(\R^n)},\end{equation*}
+i.e., the set $\varphi \ast \left( \chi_{B_R} \cdot E \right)$ is equibounded and equicontinuous with respect to the uniform topology (=uniform norm). A straightforward application of the Ascoli-Arzelà theorem proves that the set $\varphi \ast \left( \chi_{B_R} \cdot E \right)$ is relatively compact in $C_c^0(B_{R + d})$ with respect to the uniform norm, and hence it is relatively compact in $L^p(\R^n)$.
+\end{proof}
+
+There is a different way to prove this theorem using the regularization by convolution only, but we will not give the details here. The interested reader can try to fill in the missing information in the following road-map.
+
+\begin{proof}[Alternative Proof] Consider the inclusion
+\begin{equation*} E \subseteq \varphi \ast E + \omega(d) \cdot B \end{equation*}
+proved in the third step of the previous proof. The set $\varphi \ast E$ is compact in $C_0^0(\R^n)$ since one can easily prove that the following properties hold true: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item For every $f \in E$ it turns out that
+\begin{equation*} \| \varphi \ast f \|_\infty \leq \|\varphi\|_{L^{p^\prime}(\R^n)} \cdot \|f\|_{L^p(\R^n)}. \end{equation*}
+\item For every $f \in E$ and for every $h \in \R$ it turns out that
+\begin{equation*} \| \tau_h \left(\varphi \ast f  \right) - \varphi \ast f\|_\infty \leq \|\varphi\|_{L^{p^\prime}(\R^n)} \cdot \omega(|h|). \end{equation*}
+\item For every $f \in E$ and for every $R$ sufficiently large it turns out that
+\begin{equation*} \|  \varphi \ast f\|_{B_R^\complement, \, \infty} \leq \alpha\left( \frac{1}{R-d} \right). \end{equation*}
+\end{enumerate}
+In particular, the set $\varphi \ast E$ is compact in $L_{\mathrm{loc}}^p(\R^n)$, and we can conclude that it is also continuously included in $L^p(\R^n)$ by using the property $\mathbf{(3)}$.\end{proof}
+
+\section{Sobolev Space $W^{m, \, p}(\Omega)$}
+
+The primary goal of this section is to generalize the notion of Sobolev space from the interval $I \subseteq \R$ to an arbitrary (and eventually unbounded) open set $\Omega \subseteq \R^n$ for $n \geq 2$.
+
+\begin{remark} \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Let $\alpha \in \N^n$ be a multi-index. The $\alpha$th derivative operator, denoted by $D^\alpha$, is defined on the space $C_c^\infty(\Omega)$ as follows:
+\begin{equation*} D^\alpha u(x_1, \, \dots, \, x_n) := \frac{\partial^{\alpha_1}}{\partial x_1^{\alpha_1}} \dots  \frac{\partial^{\alpha_n}}{\partial x_n^{\alpha_n}} u(x_1, \, \dots, \, x_n). \end{equation*}
+\item For every $f \in C^1(\Omega)$ and for every $g \in C_c^\infty(\Omega)$, it turns out that
+\begin{equation*} \int_{\Omega} \frac{\partial}{\partial x_i} f(x) g(x) \, \mathrm{d}x = - \int_{\Omega} f(x) \frac{\partial}{\partial x_i} g(x) \, \mathrm{d}x. \end{equation*}
+In particular, for any multi-index of length $|\alpha| \leq k$ and any $f \in C^{k}(\Omega)$, the formula above can be generalized as follows:
+\begin{equation} \label{sobgen1} \int_{\Omega} D^\alpha f(x) g(x) \, \mathrm{d}x = (-1)^{|\alpha|} \int_{\Omega} f(x)  D^\alpha g(x) \, \mathrm{d}x. \end{equation}
+\end{enumerate}\end{remark}
+
+\begin{definition}[Weak Derivative] \index{weak derivative!higher order} Let $f \in \Ll(\Omega)$ be a locally summable function. A function $g \in \Ll(\Omega)$ is the $\alpha$th \textit{weak derivative} of $f$, and we denote $g$ by $D^\alpha f$, if and only if
+\begin{equation} \label{wdgen} \int_{\Omega} f(x) \partial^\alpha \varphi(x) \, \mathrm{d}x = (-1)^{|\alpha|} \int_{\Omega} g(x)  \varphi(x) \, \mathrm{d}x, \qquad \forall \, \varphi \in \Cc(\Omega). \end{equation}  \end{definition}
+
+\begin{proposition}\label{prop:312gen}Let $f \in \Ll(\Omega)$. Then the following properties hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $g \in \Ll(\Omega)$ is the $\alpha$th weak derivative of $f$, then it is unique up to the almost everywhere equivalence relation.
+\item The definition \eqref{wdgen} is local. Namely, if there exists a neighborhood $U_x \subset \Omega$ where $f$ is $\alpha$-weakly differentiable for every $x \in \Omega$, then $f$ admits a global $\alpha$-weak derivative $g$ in $\Omega$.
+\end{enumerate}\end{proposition}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Suppose that $g_1$ and $g_2$ are both $\alpha$-th weak derivatives of $f$. It follows from the definition formula \eqref{wdgen} that
+\begin{equation*} \int_{\Omega} \left[g_1(x) - g_2(x) \right] \varphi(x) \, \mathrm{d}x = 0 \qquad \forall \, \varphi \in \Cc(\Omega), \end{equation*}
+and therefore $g_1(x) = g_2(x)$ for almost every $x \in \Omega$ as a consequence of the fundamental lemma in calculus of variations\footnote{\textbf{Lemma.} Let $f \in \Ll(\Omega)$. If
+\begin{equation*} \int_{\Omega} f(x) \, \varphi(x) \, \mathrm{d}x = 0 \qquad \forall \, \varphi \in \Cc(\Omega), \end{equation*}
+then $f(x) = 0$ for almost every $x \in \Omega$.}.
+\item Let us consider an open covering
+\begin{equation*} \mathcal{U} := \left\{ U_i \right\}_{i \in \N} \end{equation*}
+of $\Omega$, and the collection $g_i \in \Ll(U_i)$ of weak derivatives of $f \, \big|_{U_i}$. Let us consider also the partition of unity
+\begin{equation*} \left\{ \rho_i : \Omega \longrightarrow \R_{\geq 0} \right\}_{i \in \N}\end{equation*}
+subordinated to the covering $\mathcal{U}$. We claim that the function
+\begin{equation*} g(x) := \sum_{i = 0}^{+ \infty} \rho_i(x) \cdot g_i(x) \end{equation*}
+is the (global) weak derivative of $f$, that is, the following properties are satisfied: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The function is locally summable, that is, $g \in \Ll(\Omega)$.
+\item The function $g$ is the weak derivative of $f$, that is, it satisfies \eqref{wdgen}.
+\end{enumerate}
+Let $K \subset \Omega$ be a compact subset. The partition is locally finite; hence the first assertion follows easily from the estimate
+\begin{equation*} \| g \|_{L^1(K)} = \left\| \sum_{i = 1}^\ell \rho_i \cdot g_i \right\|_{L^1(K)} \leq \sum_{i = 1}^{\ell} \| g_i \|_{L^1(K)} < + \infty, \end{equation*}
+since the $g_i$'s are locally summable by assumption. 
+
+Let $\varphi \in \Cc(\Omega)$, and let $K \subset \Omega$ be a compact set containing the support of $\varphi$. Then
+\begin{equation*}\begin{aligned} \int_{\Omega} f(x) D^\alpha \varphi(x) \, \mathrm{d}x & = \int_{K} f(x)  D^\alpha \varphi(x) \, \mathrm{d}x = \\[1em] & = \int_{K} \left(\sum_{i = 1}^{\ell} \rho_i(x) \right) f(x) D^\alpha  \varphi(x) \, \mathrm{d}x = \\[1em] & = \sum_{i = 1}^{\ell} \int_{K} \left( \rho_i(x)  f(x) \right)  D^\alpha  \varphi(x) \,\mathrm{d}x = \\[1em] & = \sum_{i = 1}^{\ell} \int_{U_i} \left( \rho_i(x) f(x) \right) D^\alpha \varphi(x) \,\mathrm{d}x = \\[1em] & = (-1)^{|\alpha|} \sum_{i = 1}^{\ell} \int_{U_i} \left( \rho_i(x) g_i(x) \right)  \varphi(x) \,\mathrm{d}x = \\[1em] & = (-1)^{|\alpha|} \int_{K} g(x) \varphi(x) \, \mathrm{d}x,\end{aligned}\end{equation*}
+which is exactly what we wanted to prove.
+\end{enumerate}\end{proof}
+
+\begin{definition}[Sobolev Space] \index{Sobolev space!$W^{m, \, p}$}Let $p \in [1, \, + \infty]$, and let $m \in \N$. The $(m, \, p)$-Sobolev space, denoted by $W^{m, \, p}(\Omega)$, is the space of all $L^p(\Omega)$ functions with $\alpha$ weak derivatives in $L^p(\Omega)$ for every $|\alpha| \leq m$, that is,
+\begin{equation*} W^{k, \, p}(I) := \left\{ f \in L^p(\Omega) \: \left| \: \text{$D^\alpha f \in L^p(\Omega)$ for all $|\alpha| \leq m$}  \right. \right\}. \end{equation*} \end{definition}
+
+\paragraph{Normed Space.} In this paragraph, we discuss briefly the main idea that allows us to define a norm on $W^{m, \, p}(\Omega)$ that makes it a Banach space.
+
+\begin{remark}The Sobolev space $W^{m, \, p}(\Omega)$ is a vector space, and the application
+\begin{equation*} D^\alpha : W^{m, \, p}(\Omega) \to L^p(\Omega), \qquad f \longmapsto D^\alpha f \end{equation*}
+is well-defined and linear for all multi-indices $\alpha \in \N^n$ such that $|\alpha| \leq m$.\end{remark}
+
+\begin{lemma} The graph of the operator $D^\alpha : W^{k, \, p}(\Omega) \longrightarrow L^p(\Omega)$ is closed for every $\alpha \in \N^n$ of length $|\alpha| \leq m$, that is,
+\begin{equation*}\Gamma(D^\alpha) := \left\{ \left(f, \, D^\alpha f \right) \: \left| \: f \in W^{k, \, p}(\Omega) \right. \right\} \subset L^p(\Omega) \times L^p(\Omega) \end{equation*}
+is closed with respect to the subspace topology.
+\end{lemma}
+
+\begin{lemma}Let $N$ denote the cardinality of the set $\mathfrak{N} := \left\{ \alpha \in \N^n \: : \: |\alpha| \leq m \right\}$. The graph of the operator $T$, defined by setting
+\begin{equation*} T : W^{k, \, p}(\Omega) \longrightarrow \left( L^p(\Omega) \right)^{N}, \qquad f \longmapsto \left(D^\alpha f\right)_{\alpha \in \mathfrak{N}}, \end{equation*}
+is closed with respect to the subspace topology.\end{lemma}
+
+\begin{proof} Let $\left(f_j \right)_{j \in \N} \subset W^{m, \, p}(\Omega)$ be a converging sequence, i.e.,
+\begin{equation*}\begin{cases} f_j \xrightarrow{L^p} f \in L^p(\Omega), \\[1em] D^\alpha  f_j \xrightarrow{L^p} f_\alpha \in L^p(\Omega) & \text{for all $\alpha \in \mathfrak{N}$.} \end{cases} \end{equation*}
+If we are able to prove that $f_\alpha$ is nothing else than the $\alpha$th weak derivative of $f$ for all $\alpha \in \mathfrak{N}$, then we can easily infer that $f$ belongs to $W^{m, \, p}(\Omega)$. By definition of weak derivative, it turns out that
+\begin{equation*} \int_{\Omega} f_j(x) D^\alpha \varphi(x) \, \mathrm{d}x = (-1)^{|\alpha|} \int_{\Omega} D^\alpha  f_j(x) \varphi(x) \, \mathrm{d}x, \qquad \forall \varphi \in \Cc(\Omega) \end{equation*}
+holds for every $j \in \N$ and for every admissible $\alpha$.
+
+Therefore, we can pass the identity to the limit using the Lebesgue dominated convergence theorem. This is possible because the $L^p$ convergence implies (up to a subsequence) the a.e. pointwise convergence of the sequence, i.e.
+\begin{equation*}\begin{cases} f_{j_k}(x) \xrightarrow{k \to + \infty} f(x) & \text{for almost every $x \in \Omega$}, \\[1em] D^\alpha  f_{j_k}(x) \xrightarrow{k \to + \infty} f_\alpha(x) & \text{for almost every $x \in \Omega$ and for all $\alpha \in \mathfrak{N}$.} \end{cases} \end{equation*} \end{proof}
+
+\begin{corollary} The operator
+\begin{equation*} T : W^{m, \, p}(\Omega) \longrightarrow \left( L^p(\Omega) \right)^N\end{equation*}
+is linear, injective and onto its rank. More precisely, it turns out that
+\begin{equation*} T : W^{m, \, p}(\Omega) \longrightarrow \Gamma(T) \end{equation*}
+is linear and bijective. \end{corollary}
+
+In particular, the product $(L^p(\Omega))^N = L^p(\Omega) \times  \dots \times L^p(\Omega)$ induces on the graph $\Gamma(T)$ the subspace topology, that is, the topology generated by the restriction of the product norm
+\begin{equation*} \| -_1 \|_p + \dots + \| -_N \|_p. \end{equation*}
+More precisely, for $p \neq + \infty$, if we endow $W^{m, \, p}(\Omega)$ with the topology generated by the norm
+\begin{equation} \label{sobnormgen} \|f\|_{m, \, p, \, \Omega} := \left( \sum_{|\alpha| \leq m} \left\| D^\alpha f \right\|_{L^p(\Omega)}^p \right)^{\frac{1}{p}}, \end{equation}
+then $W^{m, \, p}(\Omega)$ is a Banach space. Similarly, if $p = + \infty$, then the norm
+\begin{equation} \label{sobnormgeninfty} \|f\|_{m, \, \infty, \, \Omega} := \sup_{\substack{|\alpha| \leq m \\[0.2em] x \in \Omega}} \left| D^\alpha f(x) \right|, \end{equation}
+gives to $W^{m, \, \infty}(\Omega)$ the structure of a Banach space. In any case, there is an isometry
+\begin{equation*} \left( W^{m, \, p}(\Omega), \, \|\cdot\|_{m, \, p, \, \Omega} \right) \xrightarrow{\sim} \left( \Gamma(T), \, \|\cdot\|_{(L^p(\Omega))^N} \, \big|_{\Gamma(T)} \right) \end{equation*}
+which makes the following properties trivially true: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The Sobolev space $W^{m, \, p}(\Omega)$ is isomorphic to a closed subset of $\left(  L^p(\Omega) \right)^N$.
+\item If $1 \leq p < + \infty$, then $W^{m, \, p}(\Omega)$ is a separable Banach space. If $p = + \infty$, then $W^{m, \, \infty}(\Omega)$ is not separable.
+\item If $1 < p < + \infty$, then $W^{m, \, p}(\Omega)$ is a reflexive Banach space.
+\end{enumerate}
+
+\paragraph{Dual Space.} \index{Sobolev space!dual}The elements $g$ of the dual space $\left(W^{m, \, p}(\Omega) \right)^\ast$ can be easily represented by
+\begin{equation*} g \: : \: W^{m, \, p}(\Omega) \ni u \longmapsto \sum_{|\alpha| \leq m}  \int_{\Omega} g_\alpha(x)  D^\alpha f(x) \, \mathrm{d}x, \end{equation*}
+where $g_\alpha \in L^{p^\prime}(\Omega)$, and $p^\prime$ is the conjugate of $p$.
+
+\begin{remark} Contrarily to the one-variable case, in general, it is not true that
+\begin{equation*} W^{m, \, p}(\Omega) \subset C^0(\Omega). \end{equation*}
+For example, the space $W^{0, \, p}(\Omega) = L^p(\Omega)$ is not contained in the space of all continuous functions on $\Omega$ since a $L^p$ function need not be continuous (nor there is a continuous representative in each class) when the dimension is at least $n \geq 2$. In a similar fashion (see \hyperref[ex:unsdksd]{Exercise \ref{ex:unsdksd}}), one can show that
+\begin{equation*} W^{m, \, p}(\Omega) \not \subset L^\infty(\Omega). \end{equation*}\end{remark}
+
+\begin{theorem}[Sobolev Embedding Theorem, \cite{lawrencepde}] \index{Sobolev Embedding Theorem} Let $\Omega$ be a bounded open subset of $\R^n$, with a $C^1$ boundary. Let $f \in W^{m, \, p}(\Omega)$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If
+\begin{equation*} m < \frac{n}{p}, \end{equation*}
+then $f$ belongs to $L^{q}(\Omega)$, where
+\begin{equation*} \frac{1}{q} = \frac{1}{p} - \frac{k}{n}. \end{equation*}
+We have in addition the estimate
+\begin{equation*} \| f \|_{L^q(\Omega)} \leq C(m, \, p, \, n, \, \Omega) \, \| f\|_{W^{m, \, p}(\Omega)}. \end{equation*}
+\item If
+\begin{equation*} m > \frac{n}{p}, \end{equation*}
+then $f \in C^{k - \floor{n/p} - 1, \, \gamma}(\bar{\Omega})$, where
+\begin{equation*} \gamma = \begin{cases} \floor{\frac{n}{p}} + 1 - \frac{n}{p}, & \text{if $\frac{n}{p}$ is not an integer} \\[1em] \text{any positive number $< 1$,} & \text{if $\frac{n}{p}$ is an integer}. \end{cases} \end{equation*}
+We have in addition the estimate
+\begin{equation*} \| f \|_{C^{k - \floor{n/p} - 1, \, \gamma}(\bar{\Omega})} \leq C(m, \, \gamma, \, p, \, n, \, \Omega) \, \| f\|_{W^{m, \, p}(\Omega)}. \end{equation*}
+\end{enumerate}\end{theorem}
+
+\begin{remark}The space $W^{m, \, 2}(\Omega)$ is a Hilbert space for any $m \in \N$. \end{remark}
+
+\subsection{Operations on Sobolev Space $W^{m, \, p}(\Omega)$}
+
+\paragraph{Product.} In this brief paragraph, we introduce the main properties of the multiplication operator in Sobolev spaces.\index{Sobolev space!product closure}
+
+\begin{lemma}\label{ex:product} Let $f \in W^{m, \, p}(\Omega)$, and let $\varphi \in C_c^\infty(\Omega)$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The support of the product is smaller than the support of the test function, that is,
+\begin{equation*}\mathrm{spt}( f  \varphi ) \subseteq \mathrm{spt}(\varphi). \end{equation*}
+\item The product is a closed operator, that is,
+\begin{equation*}f \varphi \in W^{m, \, p}(\Omega). \end{equation*}
+Moreover, the Leibniz rule holds true for any (integer) derivative, that is,
+\begin{equation} \label{leibniz100} D^\alpha \left( f \cdot \varphi \right) = \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} \, D^\beta \, f\, D^{\alpha - \beta} \, \varphi. \end{equation}
+\end{enumerate}\end{lemma}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Obvious.
+\item First, we check the two assertions for the derivatives of order one, and then we generalize it by induction. Indeed, for every test function $\psi$ it turns out that
+\begin{equation*} \begin{aligned} \int_\Omega & \left[ f(x) \frac{\partial \varphi(x)}{\partial x_j} + \varphi(x) D^j \left( f(x) \right) \right] \psi(x) \, \mathrm{d}x =  \\[1em] & = \int_\Omega f(x) \frac{\partial \varphi(x)}{\partial x_j}  \psi(x) \, \mathrm{d}x + \int_{\Omega} \varphi(x) D^j \left( f(x) \right) \psi(x) \, \mathrm{d}x = \\[1em] & = \int_\Omega f(x) \left( \frac{\partial \varphi(x)}{\partial x_j} \psi(x) \right) \, \mathrm{d}x + \int_{\Omega} \varphi(x)  D^j \left( f(x) \right)  \psi(x) \, \mathrm{d}x \: {\color{red}=} \\[1em] & \: {\color{red}=} \: - \int_{\Omega} \left( f(x) \varphi(x) \right)  \frac{\partial \psi(x)}{\partial x_j} \, \mathrm{d}x,  \end{aligned} \end{equation*}
+where the {\color{red}red} equality follows from the formula
+\begin{equation*} \frac{\partial \varphi(x)}{\partial  x_j}  \psi(x) =\frac{\partial  \left( \varphi \psi \right)(x)}{\partial  x_j} - \varphi(x)  \frac{\partial  \psi(x)}{\partial  x_j}. \end{equation*}
+The reader may check by herself that Sobolev spaces can be equivalently defined as
+\begin{equation*} f \in W^{m, \, p}(\Omega) \iff \begin{cases} D^j f \in W^{m-1, \, p}(\Omega) & \forall \, j =1, \, \dots, \, n \\[1em] f \in L^p(\Omega), \end{cases} \end{equation*}
+and hence the thesis follows by induction on the length of the multi-indices $\alpha \in \N^n$.
+\end{enumerate}\end{proof}
+
+\paragraph{Regularization by Convolution $(1 \leq p < + \infty)$.} Let $f \in W_c^{m, \, p}(\Omega)$ be a Sobolev function with compact support, and let $\varphi \in C_c^\infty(\Omega)$ be a function such that
+\begin{equation*} \mathrm{diam} \left( \mathrm{spt}(\varphi) \right) < d \left( \mathrm{spt}(f), \, \Omega^c \right). \end{equation*}
+It is a well-known fact that the support of the convolution is contained in the sum of the supports. As a consequence of the condition above, we have that
+\begin{equation*} \mathrm{spt} \left( f \ast \varphi \right) \subset \subset \Omega, \end{equation*}
+and the inclusion is compact. Furthermore, one can easily prove that
+\begin{equation*} f \ast \varphi \in C_c^\infty(\Omega), \end{equation*}
+that is, the usual informal assertion \textit{"the regularity of the convolution is the maximum between the regularity of the elements"} holds true.
+
+\vspace{1.3mm}
+Suppose that $\Phi \in C_c^\infty(B(0, \, 1))$ is a mollifier (that is, a positive function with total mass equal to $1$), and let $\Phi_\epsilon$ be the rescaled associated function defined by setting
+\begin{equation*} \Phi_\epsilon(x) := \frac{1}{\epsilon^n} \, \Phi \left( \frac{x}{\epsilon} \right). \end{equation*}
+
+A natural question now arises: \textit{The convolution product $\Phi_\epsilon \ast f$ converges to $f$ in the $W^{m, \, p}(\Omega)$ topology (=with respect to the $\| \cdot \|_{m, \,p, \, \Omega}$ norm) when $\epsilon \to 0^+$?}
+
+\begin{lemma}Let $\Phi \in L^1(\R^n)$, and let $f \in W^{m, \, p}(\R^n)$. The convolution product belongs to $W^{m, \, p}(\R^n)$ and, for every $|\alpha| \leq m$, it turns out that
+\begin{equation} \label{es:eqq1} D^\alpha \left( f \ast \Phi \right) = D^\alpha f \ast \Phi = f \ast D^\alpha \Phi. \end{equation} \end{lemma}
+
+\begin{proof}Suppose that \eqref{es:eqq1} holds true. By Young's inequality \eqref{eq:youngcont} it turns out that
+\begin{equation*}\left\| D^\alpha \left(f \ast \Phi \right) \right\|_{L^p(\R^n)} = \left\| D^\alpha f \ast \Phi \right\|_{L^p(\R^n)} \leq \| \Phi \|_{L^1(\R^n)} \cdot \|D^\alpha f\|_{L^p(\R^n)}  \end{equation*}
+for every $|\alpha| \leq m$. Therefore the convolution product belongs to $W^{m, \, p}(\R^n)$.\end{proof}
+
+The answer to the question raised above is thus affirmative. Indeed, it follows from \eqref{es:eqq1} that
+\begin{equation*} D^\alpha \left( \Phi_\epsilon \ast f \right) = \Phi_\epsilon \ast D^\alpha f, \end{equation*}
+and this converges to $D^\alpha f$ in the $L^p(\Omega)$ topology (= with respect to the $L^p$ norm) for every $|\alpha| \leq m$, which means that
+\begin{equation*}\left\|  \Phi_\epsilon \ast f - f \right\|_{m, \, p, \, \Omega} \xrightarrow{\epsilon \to 0^+} 0. \end{equation*}
+
+\section{Sobolev Spaces: $W_0^{m, \, p}(\Omega)$ and $H^{m, \, p}(\Omega)$}
+
+In this final section, we introduce the spaces $W_0^{m, \, p}(\Omega)$ and $H^{m, \, p}(\Omega)$, and we also give a sketch of the proof of the well-known result "$H = W$".
+
+\begin{definition}\index{Sobolev space!$W_0^{m, \, p}$} The $(m, \, p, \, 0)$-Sobolev space is the closure of the space of test functions with respect to the $(m, \, p)$-norm, that is,
+\begin{equation*} W_0^{m, \, p}(\Omega) := \overline{ C_c^\infty(\Omega)}^{\| \cdot\|_{m, \, p, \, \Omega}}. \end{equation*}
+\end{definition}
+
+\begin{remark}The primary idea behind the notion of $W_0^{m, \, p}(\Omega)$ is to give a meaning to the Dirichlet boundary condition $u(x) = 0$ in the weak formulation of partial differential equations. \end{remark}
+
+\begin{remark}The inclusion
+\begin{equation*} W_0^{m, \, p}(\Omega) \subseteq W^{m, \, p}(\Omega) \end{equation*}
+is always true since $C_c^\infty(\Omega)$ is a subspace of $W^{m, \, p}(\Omega)$, and so is its closure. On the other hand, if $\Omega= \R^n$, then it turns out that
+\begin{equation*} W_0^{m, \, p}(\R^n) = W^{m, \, p}(\R^n), \end{equation*}
+coherently with the intuitive meaning of "being zero at the boundary".\end{remark}
+
+\begin{proof}It suffices to prove the inclusion
+\begin{equation*} W_0^{m, \, p}(\R^n) \supseteq W^{m, \, p}(\R^n), \end{equation*}
+that is, every function $f \in W^{m, \, p}(\R^n)$ is the limit of a sequence of functions $C_c^\infty(\R^n)$ with respect to the Sobolev norm $\| \cdot \|_{m, \, p, \, \Omega}$.
+
+\paragraph{Step 1.} Let us consider a cut-off function such that
+\begin{equation*} \eta \in C_c^\infty \left( B(0, \, 2) \right), \quad \eta \, \big|_{B(0, \, 1)} \equiv 1 \quad \text{and} \quad \eta(x) \in [0, \, 1],\end{equation*}
+and let us consider the rescaling function
+\begin{equation*}\eta_R(x) := \eta \left( \frac{x}{R} \right). \end{equation*}
+By \hyperref[ex:product]{Lemma \ref{ex:product}} it turns out that the product function $\eta_R \cdot f$ belongs to $W^{k, \, p}(\Omega)$, and from the Leibniz formula we infer that
+\begin{equation*}D^\alpha \left( \eta_R \cdot f \right) = \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} \, D^\beta ( \eta_R) \, D^{\alpha - \beta} (f). \end{equation*}
+The $\gamma$th derivative of $\eta_R$ goes to $0$ as $R^{- |\gamma|}$ for $R \to + \infty$, and therefore one can easily prove that
+\begin{equation*} \sum_{\substack{\beta \leq \alpha \\[0.3em] \beta \neq 0}} \binom{\alpha}{\beta} \, D^\beta ( \eta_R) \, D^{\alpha - \beta} (f) \xrightarrow{R \to + \infty} 0, \end{equation*}
+e.g., as a consequence of the dominated convergence theorem.
+
+\paragraph{Step 2.} In particular, for any fixed $\epsilon > 0$ there exists $R > 0$ such that
+\begin{equation*} \left\| \eta_R \cdot f - f \right\|_{m, \, p} \leq \epsilon. \end{equation*}
+Let $\Phi \in C_c^\infty(\R^n)$ be a smooth mollifier, and let $\Phi_r$ be its rescaling. The convolution $\Phi_r \ast \left( \eta_R \cdot f \right)$ is smooth, and we find that
+\begin{equation*} \Phi_{r} \ast \left( \eta_R \cdot f \right) \xrightarrow{r \to 0^+} \eta_R \cdot f \quad \text{with respect to the $W^{m, \, p}$ norm}. \end{equation*}
+Set $r := 1/R$. We infer that
+\begin{equation*} \Phi_{\frac{1}{R}} \ast \left( \eta_R \cdot f \right)  \xrightarrow{R \to + \infty} f \quad \text{with respect to the $W^{m, \, p}$ norm}, \end{equation*}
+and this is exactly what we wanted to prove.
+\end{proof}
+
+\begin{definition}[Nikol'skii space] \index{Nikol'skii space} Let $\Omega \subseteq \R^n$ be an open set. The space $H^{m, \, p}(\Omega)$ is the completion of the space
+\begin{equation*} \left\{ f \in C^m(\Omega) \: \left| \: \text{$D^\alpha  f \in L^p(\Omega)$ for all $|\alpha| \leq m$} \right. \right\} \end{equation*}
+with respect to the Sobolev norm $\| \cdot \|_{m, \, p, \, \Omega}$.\end{definition}
+
+\begin{theorem}[Meyers-Serrin]\index{Meyers-Serrin Theorem} Let $\Omega \subseteq \R^n$ be an open subset, and let $p \in [1, \, + \infty)$. Then
+\begin{equation*} H^{m, \, p}(\Omega) = W^{m, \, p}(\Omega). \end{equation*}\end{theorem}
+
+\begin{remark}The identity, in general, does not hold for the value $p = + \infty$. Indeed, in this particular case, the statement depends also on the regularity of the boundary of $\Omega$. \end{remark}
+
+\begin{proof}The inclusion
+\begin{equation*} H^{m, \, p}(\Omega) \subseteq W^{m, \, p}(\Omega) \end{equation*}
+is trivial because
+\begin{equation*} \left\{ f \in C^m(\Omega) \: \left| \: \text{$D^\alpha  f \in L^p(\Omega)$ for all $|\alpha| \leq m$} \right. \right\}  \subseteq W^{m, \, p}(\Omega), \end{equation*}
+and therefore the completion with respect to its norm is also contained in $W^{m, \, p}(\Omega)$.
+
+The opposite inclusion, on the other hand, requires a little bit more work. We divide the proof into four steps to ease the notation, and we leave to the reader to fill in the missing details.
+
+\paragraph{Step 1.} Let us consider the family (as $k$ ranges in $\N$) of open sets
+\begin{equation*}\mathcal{U}_k := \left\{ x \in \Omega \: \left| \: \text{$d(x, \, \Omega^c) > \frac{1}{k}$ and $|x| < k$} \right. \right\},\end{equation*}
+and notice that it is increasing
+\begin{equation*}\mathcal{U}_k \subset \subset \mathcal{U}_{k+1} \subset \subset \dots \subset \subset \Omega \implies \overline{\mathcal{U}_k} \subset \mathcal{U}_{k + 1},\end{equation*}
+and such that every $\mathcal{U}_k$ has compact closure.
+
+\paragraph{Step 2.} Let us consider a collection of open sets $\left\{V_k\right\}_{k \in \N}$ satisfying the following property:
+\begin{equation*} \mathcal{U}_{k + 1} \supset V_k \supset \overline{U_k}. \end{equation*}
+For every $k \geq 1$ there exists a cut-off function $\eta_k \in C_c^\infty \left(\mathcal{U}_k \right)$ such that
+\begin{equation*} \eta_k \, \big|_{V_{k-1}} \equiv 1 \quad \text{and} \quad \eta_k \, \big|_{\mathcal{U}_k^c} \equiv 0. \end{equation*}
+Let $\Omega_k := \mathcal{U}_k \setminus \overline{\mathcal{U}_{k-2}}$, and let
+\begin{equation*} \varphi_k := \eta_k - \eta_{k - 2} \end{equation*}
+be a partition of unity associated with the covering $\{\Omega_k\}_{k \geq 2}$. Indeed, it is easy to check that
+\begin{equation*} \sum_{k \geq 2} \varphi_k(x) = 1 \quad \text{for all $x \in \Omega$}, \end{equation*}
+and also that the sum is locally finite since
+\begin{equation*} \Omega_k \cap \Omega_j \neq \emptyset \iff |k - j| = 1. \end{equation*}
+
+\paragraph{Step 3.} Let $f \in W^{m, \, p}(\Omega)$. If we set $f_k(x) := f(x) \cdot \varphi_k(x) \in W_c^{m, \, p}(\Omega_k)$, then we can write
+\begin{equation*} f(x) = \sum_{k \geq 2} f_k(x). \end{equation*}
+Let $\epsilon > 0$ be a fixed real number. By definition, one can always find a collection of functions $g_k \in C_c^\infty(\Omega_k)$ such that
+\begin{equation*} \| g_k - f_k \|_{m, \, p, \, \Omega_k} =  \| g_k - f_k \|_{m, \, p, \, \R^n} \leq \frac{\epsilon}{2^k}. \end{equation*}
+
+\paragraph{Step 4.} Let
+\begin{equation*} g(x) := \sum_{k \geq 2} g_k(x). \end{equation*}
+The reader may prove by herself, as an exercise, that
+\begin{equation*} g \in W^{m, \, p}(\Omega) \quad \text{and} \quad \| f - g \|_{m, \, p, \, \Omega} = \mathcal{O}(\epsilon), \end{equation*}
+that is, the test functions are dense in $W^{m, \, p}(\Omega)$ with respect to the norm $\| \cdot \|_{m, \, p, \, \Omega}$. \end{proof}
+
+\section{Exercises}
+
+In this section, we denote by $I$ an open interval $(a, \, b)$ of the real line $\R$ (eventually unbounded), unless otherwise stated.
+
+\begin{exercise}Let $I = (0, \, 1)$, and let $p \in (1, \, + \infty]$. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The inclusion $W^{1, \, 1}(I) \subseteq C^0\left(\overline{I}\right)$ is not compact. 
+\item The inclusion
+\begin{equation*} W^{1, \, 1}(I) \hookrightarrow L^q(I) \end{equation*}
+is compact for every $1 \leq q < \infty$.
+\end{enumerate}\end{exercise}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Let us consider the sequence $(u_n)_{n \geq 2} \subset W^{1, \, 1} \left( (0, \, 1) \right)$ defined by
+\begin{equation*} u_n(x) = \begin{cases} 0 & \text{if $x \in [0, \, \frac{1}{2}]$}, \\[0.5em] n \cdot \left(x - \frac{1}{2}\right) & \text{if $x \in (\frac{1}{2}, \, \frac{1}{2}+\frac{1}{n}),$} \\[0.5em] 1 & \text{if $x \in [\frac{1}{2} + \frac{1}{n}, \, 1]$}. \end{cases} \end{equation*}
+The weak derivatives sequence is clearly given by
+\begin{equation*} D \, u_n(x) = \begin{cases} 0 & \text{if $x \in [0, \, \frac{1}{2}]$}, \\[0.5em] n & \text{if $x \in (\frac{1}{2}, \, \frac{1}{2}+\frac{1}{n}),$} \\[0.5em] 0 & \text{if $x \in [\frac{1}{2} + \frac{1}{n}, \, 1]$}, \end{cases} \end{equation*}
+hence
+\begin{equation*} \begin{aligned} \left\| u_n \right\|_{1, \, 1, \, I} & = n \cdot \int_{\frac{1}{2}}^{\frac{1}{2} + \frac{1}{n}} \left(x - \frac{1}{2} \right) \, \mathrm{d}x + \frac{1}{2} - \frac{1}{n} + n \cdot \int_{\frac{1}{2}}^{\frac{1}{2} + \frac{1}{n}} \mathrm{d}x \\[1em] & = \frac{1}{n} + \frac{1}{2} - \frac{1}{n} + 1 = \frac{3}{2}, \end{aligned} \end{equation*}
+that is, the sequence is bounded in $W^{1, \, 1}$.
+
+We now observe that sequence $u_n(x)$ converges pointwise to the bump function
+\begin{equation*}u(x) = \begin{cases} 0 & \text{if $x \in [0, \, \frac{1}{2}]$}, \\[0.5em] 1 & \text{if $x \in [\frac{1}{2}, \, 1]$}. \end{cases}  \end{equation*}
+On the other hand, for any $n \geq 2$ it turns out that
+\begin{equation*} \left\| u_n - u \right\|_{\infty}= 1,\end{equation*}
+hence no subsequence of $(u_n)_{n \geq 2}$ can converge to $u$ in the uniform norm.
+\item Let $B$ be the unit ball in $W^{1, \, 1}(I)$. Let $P$ be the extension operator of \hyperref[th:ext]{Theorem \ref{th:ext}} and set $\mathcal{F} := P(B)$, so that $B = \mathcal{F} \, \big|_I$.
+
+The set $\F$ is bounded in $W^{1, \, 1}(\R)$ by construction; hence it is bounded also in $L^q(\R)$ for all $1 \leq q < + \infty$. If we are able to prove that for every $f \in \F$ there is a modulus of $L^q$-continuity such that
+\begin{equation*} \left\| \tau_h \, f - f \right\|_{L^q(\R)} \leq \omega(|h|), \end{equation*}
+then we can apply the compactness result (\hyperref[frekol]{Theorem \ref{frekol}}) to infer that $B$ has compact closure in $L^q(\R)$. From \hyperref[char:ppp1]{Proposition \ref{char:ppp1}} it turns out that
+\begin{equation*} \left\| \tau_h \, f - f \right\|_{L^1(\R)} = \mathcal{O}(|h|), \end{equation*}
+and hence
+\begin{equation*} \left\| \tau_h \, f - f \right\|_{L^q(\R)}^q \leq \left( 2 \, \|f\|_{L^\infty(\R)} \right)^{q - 1} \cdot \left\| \tau_h \, f - f \right\|_{L^1(\R)} \leq C \cdot |h|.\end{equation*}
+If we take the $q$-th root, then we obtain the estimate
+\begin{equation*} \left\| \tau_h \, f - f \right\|_{L^q(\R)} \leq \ C \cdot |h|^{\frac{1}{q}},\end{equation*}
+and this concludes the proof since we can set $\omega(|h|) := C \cdot |h|^{\frac{1}{q}}$ for every $1 \leq q < + \infty$.
+\end{enumerate}\end{proof}
+
+\begin{exercise}The Sobolev space $W^{1, \, p}(I)$ is a function algebra, that is,
+\begin{equation*}u, \, v \in W^{1, \, p}(I) \implies u \cdot v \in W^{1, \, p}(I), \end{equation*}
+and the Leibniz rule also holds true for the weak derivative operator.\end{exercise}
+
+\begin{exercise}[Convolution] Let $u \in W^{1, \, p}(\R)$, and let $v \in L^1(\R)$ be a convolution kernel. Prove that
+\begin{equation*} u \ast v \in W^{1, \, p}(\R) \quad \text{and} \quad D \left(u \ast v \right) = u \ast v^\prime. \end{equation*}\end{exercise}
+
+\begin{exercise}[Mollification] Let $\varphi \in C_c^\infty(\R)$ be a convolution kernel, and let us set
+\begin{equation*} \varphi_\epsilon(x) := \frac{1}{\epsilon} \, \varphi\left(\frac{x}{\epsilon} \right). \end{equation*}
+For any $p \in [1, \, + \infty)$ and for every $u \in W^{1, \, p}(\R)$, it turns out that
+\begin{equation*} u_\epsilon := u \ast \varphi_\epsilon \: \xrightarrow{\epsilon \to 0^+} \: u \qquad \text{in $W^{1, \, p}(\R)$}, \end{equation*}
+that is,
+\begin{equation*} \begin{cases} u_\epsilon \to u & \text{in $L^p(\R)$} \\[1em] D u_\epsilon \to D  u & \text{in $L^p(\R)$}. \end{cases} \end{equation*}\end{exercise}
+
+\begin{exercise}[Density] For any $p \in [1, \, +\infty)$, the inclusion
+\begin{equation*}W^{1, \, p}(I) \cap C_c^\infty(I) \subset W^{1, \, p}(I)\end{equation*}
+is dense.\end{exercise}
+
+\begin{exercise}Let $g \in C^1(I)$ be a differentiable function such that $\| g^\prime \|_{\infty, \, I} < + \infty$. Prove that, for any $u \in W^{1, \, p}(I)$, it turns out that
+\begin{equation*} g \circ u \in W^{1, \, p}(I) \quad \text{and} \quad \frac{\mathrm{d}}{\mathrm{d}x} \left[ g \left(u(x) \right) \right] = g^\prime(u(x)) D u(x). \end{equation*}\end{exercise}
+
+\begin{exercise}Prove that, as a particular case of the previous exercise, it turns out that
+\begin{equation*} u \in W^{1, \, p}(I) \implies |u| \in W^{1, \, p}(I). \end{equation*}\end{exercise}
+
+\begin{exercise}[*] Let $I$ be a bounded interval. If $g : \R \longrightarrow \R$ is a Lipschitz function, then
+\begin{equation*}u \in W^{1, \, p}(I) \implies \frac{\mathrm{d}}{\mathrm{d}x} \left[ g \left(u(x) \right) \right] = g^\prime(u(x)) Du(x) \quad \text{for almost every $x \in I$}. \end{equation*}
+If $I$ is an unbounded interval, then the same formula holds true if we require $g$ to be essentially bounded, that is, if $\|g\|_{L^\infty(I)} < + \infty$.
+\end{exercise}
+
+\begin{proof}[\textbf{Solution}] The reader may refer to \cite[Theorem 2.1.11]{wdf} for a proof of this statement.\end{proof}
+
+\begin{exercise}Prove that the Sobolev space $W^{1, \, p}(I)$ is a lattice. \end{exercise}
+
+\begin{exercise}\label{ex:unsdksd}Prove that there exists a function $f \in W^{1, \, 2}(\R^2)$ such that $f$ is unbounded.\end{exercise}
+
+\begin{proof}[\textbf{Solution}] Here we only present a road map of the solution. The reader may try to fill in the missing details as an easy computational exercise.
+
+\paragraph{Step 1.} The function
+\begin{equation*} g(x, \, y) = \log \left[ \log \left(1 + \frac{1}{\sqrt{x^2 + y^2}} \right) \right] \end{equation*}
+is unbounded, but one can prove as an exercise that it belongs to $W^{1, \, 2}\left(\mathrm{Int}(B(0, \, 1)) \right)$.
+
+\paragraph{Hint.} Take the derivative of $g$, find an estimate from above of its absolute value and then compute the integral using the polar coordinates.
+
+\paragraph{Step 2.} Let $\Phi$ be a cut-off function such that $\phi \, \big|_{B(0, \, 1)} \equiv 1$ and $\mathrm{spt} \, \Phi \subset B(0, \, 2)$. The function
+\begin{equation*} f(x, \, y) :=  \left( g \cdot \Phi \right)(x, \, y) \end{equation*}
+is an unbounded function on $\R^2$ with compact support. On the other hand, based on what we have proved in the first step, it follows immediately that $f \in W^{1, \, 2}(\R^2)$.
+ \end{proof}

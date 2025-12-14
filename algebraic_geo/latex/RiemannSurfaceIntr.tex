@@ -1,0 +1,304 @@
+\chapter{Introduction to Riemann Surfaces} \thispagestyle{empty}
+
+In this chapter, we introduce the notion of \textit{Riemann surface}, and we profoundly analyze the fundamental example: \textit{smooth algebraic projective curves}.
+
+In the final part, we discuss two examples - both of which will appear many times in the remainder of this course: the Riemann sphere, and the complex torus.
+
+\section{Main Definitions and Basic Properties}
+
+In this section, we give the definition of Riemann surface. The reader should pay attention to the fact that a Riemann surface does not need to be \textit{connected}, but we will ask for it in the definition because we will mostly be dealing with connected compact Riemann surfaces.
+
+\begin{definition}[Riemann Surface] \index{Riemann Surface} Let $X$ be a topological manifold. We say that $X$ is a \textit{Riemann surface} if the following properties are satisfied: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $\mathrm{dim}_{\mathbb{R}} \, X = 2$.
+\item $X$ is Hausdorff, second-countable (i.e., there exists a countable basis) and connected.
+\item $X$ has a \index{Complex Atlas}complex structure. Namely, there exists an atlas
+\begin{equation*} \mathcal{U} = \left\{ \varphi_i : U_i \to V_i \subseteq \C \right\}_{i \in I}\end{equation*}
+such that $\varphi : U_i \to V_i$ is a homeomorphism of open sets, and the transition maps $\varphi_{i, \, j} := \varphi_j \circ \varphi_{i}^{-1}$ are biholomorphic functions. In particular, the map
+\begin{equation*}\varphi_{i, \, j} : \varphi_i \left(U_i \cap U_j\right) \subset \C \to \varphi_j \left(U_i \cap U_j\right) \subset \C \end{equation*}
+is holomorphic with respect to the complex variable $z$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Biholomorphic] \index{Biholomorphic functions} Let $f : U \subset \C^n \to V \subset \C^n$ be a complex function. We say that $f$ is \textit{biholomorphic} if $f$ is holomorphic, bijective and its inverse $f^{-1} : V \to U$ is also holomorphic.
+\end{definition}
+
+\begin{remark}A Riemann surface $X$ is always orientable. In fact, the Jacobian of the transition maps is always strictly positive (since $\varphi_{i, \, j}$ is holomorphic), hence the atlas is orientated. The interested reader may find a complete proof of this fact \href{https://math.stackexchange.com/a/174365}{here}. \end{remark}
+
+\begin{theorem}[Structure] \index{Structure Theorem} Let $X$ be a compact Riemann surface. Then $X$ is either homeomorphic to a sphere ($g(X) = 0$), a torus ($g(X) = 1$) or a $n$-torus ($g(X) = n$). \end{theorem}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=16cm, height=10cm]{Images/GAC001.png}
+\label{fig:classth}
+\caption{Structure Theorem for Compact Riemann Surfaces.}
+\end{figure} 
+
+\section{Projective Curves}
+
+Let $\p^2(\C)$ be the complex projective space of dimension $2$, and let $[z_1 : z_2 : z_0]$ be the coordinates so that $\{ z_0 = 0\}$ is the line at infinity. An algebraic curve is defined as
+\begin{equation*} X := \left\{ F(z_1, \, z_2, \, z_0) = 0 \right\}, \end{equation*}
+where $F$ is a homogeneous\footnote{For every $\lambda \in \C$, it turns out that $F(\lambda \, z_1, \, \lambda \, z_2, \, \lambda \, z_0) = \lambda^d \, F(z_1, \, z_2, \, z_0)$.} polynomial of degree $d$. Recall that \index{Reduced and Irreducible, Curves} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $X$ is irreducible $\iff$ $F$ is irreducible;
+\item $X$ is reduced $\iff$ $\mathcal{I}(F) = \sqrt{ \mathcal{I}(F)}$,
+\end{enumerate}
+where $\mathcal{I}(F)$ is the ideal associated to $F$ (in this case, simply $\mathcal{I}(F) = (F)$).
+
+\paragraph{N.B.} From now on we will assume that $X$ is an \textit{irreducible} and \textit{reduced} (projective) algebraic curve.
+
+\begin{definition}[Singular points \index{Singular Points!of a curve}] A point $p \in X$ is \textit{singular} for $X$ if
+\begin{equation*}F(p) = \frac{\partial \, F}{\partial \, z_i}(p) = 0, \qquad \forall \, i = 0, \, 1, \, 2. \end{equation*}
+\end{definition}
+
+\begin{definition}[Smooth] \index{Algebraic curve!Smoothness} The (projective) algebraic curve $X \subset \p^2(\C)$ is \textit{smooth} if and only if no point $p \in X$ is singular.
+\end{definition}
+
+\begin{remark}The projective complex plane $\p^2(\C)$ admits a standard atlas $\mathcal{U} := \left\{ (U_i, \, \varphi_i) \right\}_{i = 0, \, 1, \, 2}$, which is defined by setting
+\begin{equation*}U_i := \{ z_i \neq 0\} \qquad \text{and} \qquad \varphi_i : U_i \longrightarrow \C^2, \quad [z_1 : z_2 : z_0] \longmapsto \left( \frac{z_j}{z_i}, \, \frac{z_k}{z_i} \right). \end{equation*}
+Then $\mathcal{U}$ induces, by restriction, an atlas on $X$, which is given by
+\begin{equation*}\mathcal{X} := \left\{ (U_i \cap X, \, \varphi_i \, \big|_{X}) \right\}_{i = 0, \, 1, \, 2}. \end{equation*} \end{remark}
+
+\begin{proposition}The projective algebraic curve $X$ is smooth if and only if the affine algebraic curve $X_i := X \cap U_i \subset U_i \cong \C^2$ is a smooth for every $i = 0, \, 1, \, 2$. \end{proposition}
+
+\begin{theorem}[Implicit function] \label{implfunc}Let $F \in \C[z_1, \, z_2]$ be any polynomial, and denote by $X := \{ F = 0 \} \subset \C^2$ the associated algebraic variety.
+
+Let $p \in X$ be a point such that $\partial_{z_2} \, F(p) \neq 0$. There are a neighborhood $U_p$ of $p$ and a holomorphic function $G : U \to V$ such that
+\begin{equation*} X \cap U = \left\{ (z_1, \, G(z_1)) \, \left| \, z_1 \in V \right. \right\}. \end{equation*}
+ \end{theorem}
+
+\begin{corollary}Let $p \in X$ be a smooth point. There exists a neighborhood $U_p$ of $p$ (which is exactly the one given by \hyperref[implfunc]{Theorem \ref{implfunc}}), such that $X$ has a local complex structure, that is,
+\begin{equation*} U \cap X = \left\{ (z_1, \, G(z_1)) \right\} \stackrel{\simeq}{\longrightarrow} \left\{ z_1 \, \left| \, z_1 \in V \right. \right\}.\end{equation*}
+\end{corollary}
+
+\begin{theorem}\index{Algebraic curve!Classification theorem} Let $X \subset \p^2(\C)$ be a smooth algebraic curve of degree $d$. Then $X$ is a compact Riemann surface, and its genus is equal to
+\begin{equation*} g(X) = \frac{(d-1)(d-2)}{2}. \end{equation*} \end{theorem}
+
+\begin{proof}We will prove this result later, but the reader which is already interested in a simple proof of this fact, may jump and take at look at \href{https://math.la.asu.edu/~paupert/degreegenus.pdf}{this paper}. \end{proof}
+
+\subsection{Multiplicities}
+
+\paragraph{Recall.} Let $X \subseteq \p^2(\C)$ be any irreducible and reduced algebraic curve, and let us denote it by
+\begin{equation*}X := \{ F(z_1, \, z_2, \, z_0) = 0\},\end{equation*}
+where $F$ is an homogeneous irreducible polynomial of degree $d$ such that the associated ideal $(F)$ is radical. Let $p \in X$ be a singular point of $X$, that is, a point where $F$ and all its derivatives vanish:
+\begin{equation*}F(p) = \frac{\partial \, F}{\partial \, z_1}(p) = \frac{\partial \, F}{\partial \, z_2}(p) = \frac{\partial \, F}{\partial \, z_0}(p) = 0. \end{equation*}
+
+\begin{definition}[Multiplicity] \index{Singular Points!multiplicities} The \textit{multiplicity} of a point $p$ in $X$ is the least integer $k$ among all the multiplicities of $p$ with respect to the intersection between $X$ and the lines passing through $p$. \end{definition}
+
+\noindent More precisely, we define
+\begin{equation*}\mathrm{molt}_p \left(X\right) := \min \left\{ \mathrm{molt}_p \left(r, \, X\right) \: : \: r \, \, \text{line passing through $p$} \right\}. \end{equation*}
+It is straightforward to prove that a point $p \in X$ is smooth if and only if its multiplicity $\mathrm{molt}_p \left(X\right)$ is equal to $1$. In particular, any singular point has multiplicity greater or equal than $2$.
+
+\begin{proposition} Assume that $p := (0, \, 0, \, 1)$ belongs to $X$. The dehomogenization\index{Dehomogenization} of $F$ with respect to the coordinate $z_0$ (i.e., in $X_0 = X \cap \mathcal{U}_0$) is given by
+\begin{equation*}F(z_1, \, z_2, \, 1) = \sum_{k \geq m} F_k(z_1, \, z_2), \end{equation*}
+where the $F_k$ are homogeneous polynomials of degree $k$. Then the multiplicity of $X$ at $p$ is the minimum degree of the dehomogenization, that is,
+\begin{equation*}\mathrm{molt}_p \left(X\right) = m. \end{equation*}
+ \end{proposition}
+
+\begin{definition}[Ordinary point] \index{Singular Points!ordinary}Let $p \in X$ be any singular point, and suppose that its multiplicity is equal to $m$. We say that $p$ is an \textit{ordinary multiple point} if, locally,
+\begin{equation*}F = \prod_{j = 1}^{m} H_j, \end{equation*}
+where the $H_j$ are linear forms such that $H_j = H_i \iff i = j$.\end{definition}
+
+\begin{example} \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item An ordinary double point is locally (in a neighborhood of $p:=(0, \, 0, \, 1)$) given by the equation $z_1 \cdot z_2 = 0$ (see e.g. \hyperref[fig:punti]{Figure \ref{fig:punti}}, left).
+\item A non-ordinary double point is locally given by an equation of the form $z_1^3 = z_2^2$, and it corresponds to a singular cuspid kind of point (see e.g. \hyperref[fig:punti]{Figure \ref{fig:punti}}, right). \end{enumerate}
+\end{example}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=16cm, height=8cm]{Images/GAC002.png}
+\caption{Examples of singular points: left ordinary, right non-ordinary.}
+\label{fig:punti}
+\end{figure} 
+
+\subsection{Resolution of the Singularities}
+\label{sec:blow}
+
+\paragraph{Introduction.} Let $X$ be a singular projective algebraic curve. The primary goal of this subsection is to give to the reader two methods which are useful to resolve the singularities of $X$, that is, to find a smooth algebraic curve $\widetilde{X}$ and a surjective map 
+\begin{equation*}\Phi : \widetilde{X} \longtwoheadrightarrow X. \end{equation*}
+
+\paragraph{Topological Approach.} Let $p \in X$ be an ordinary multiple point, and let $\mathcal{U}$ be a neighborhood of $p$ that does not contain any other singular point of $X$. By definition, the polynomial $F$ is locally (i.e., in $\mathcal{U}$) given by the product of $m$ linear forms:
+\begin{equation*}F = \prod_{j = 1}^{m} H_j. \end{equation*}
+If we denote by $\Delta$ the Poincaré disk\index{Poincaré disk}, that is,
+\begin{equation*} \Delta := \left\{ z \in \C \: \left| \: |z| < 1 \right. \right\} \qquad \text{and} \qquad \Delta^\ast := \Delta \setminus \{0\}, \end{equation*}
+then the algebraic curve - without the singular point $p$ - is locally homeomorphic to the union of $m$ copies of $\Delta^\ast$; more precisely, it turns out that
+\begin{equation*} \left( \mathcal{U} \cap \left\{ H_j = 0 \right\} \right) \setminus \{p\} \cong \Delta^\ast, \qquad \forall \, j \in \{1, \, \dots, \, m\}. \end{equation*}
+Consequently, the algebraic curve $X$ is \textit{locally} homeomorphic to the wedge of $m$ disks ($\Delta$) of center $p$, that is, there is a homeomorphism
+\begin{equation*} \mathcal{U} \cap X \cong \bigwedge_{j = 1}^{m} \Delta. \end{equation*}
+If we remove the singular point $p$, the wedge is clearly homeomorphic to the disjoint union of the $m$ disks deprived of their centers, i.e.,
+\begin{equation*} \left( \mathcal{U} \cap X \right) \setminus \{p\} \cong \bigsqcup_{j = 1}^{m} \Delta^\ast. \end{equation*}
+At this point, the resolution of the singularity $p$ is entirely straightforward: we add a center to each disk $\Delta^\ast$. Formally, we define the smooth manifold
+\begin{equation*} \widetilde{X} := \left( X \setminus \{p\} \right) \cup \left\{ q_1, \, \dots, \, q_m \right\}, \end{equation*}
+and we prove that it is homeomorphic to a disjoint union of balls, i.e.,
+\begin{equation*} \widetilde{X} \cong \bigsqcup_{j = 1}^{m} \left( \Delta^\ast \cup \{q_j\}\right) \cong \bigsqcup_{j = 1}^{m} \Delta. \end{equation*}
+In the general case, we give a brief sketch of what the ideas behind are. Take any $p \in X$ and any chart which sends $p$ to the origin of $\C$ in such a way that there exists (locally) a function $f:X \to \C$ with the additional property that
+\begin{equation*} f : f^{-1} \left(\Delta^\ast\right) \to \Delta^\ast \end{equation*}
+is a covering of order $m$.
+
+On the other hand, we know that the connected coverings of $\Delta^\ast \cong S^1$ are all and only of the form $z \mapsto z^m$. Thus we only need to add $m$ points \textit{over} the point $(0, \, 0)$.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=18cm, height=10cm]{Images/GAC003.png}
+\caption{Idea behind the topological approach.}
+\label{fig:ta}
+\end{figure} 
+
+\paragraph{Blowup Approach.} \index{Blowup}Let $p = (0, \, 0) \in \C^2$. The blowup of $\C^2$ at the point $p$ is defined as follows:
+\begin{equation*} \mathrm{Bl}_{p} \left( \C^2 \right) := \left\{ \left(z_1, \, z_2; \; [a : b]\right) \: \left| \: z_1 \, b = z_2 \, a  \right.\right\} \subseteq \C^2 \times \p^1(\C). \end{equation*}
+There exists a map
+\begin{equation*} \pi : \mathrm{Bl}_{p} \left( \C^2 \right) \longrightarrow \C^2 \end{equation*}
+such that $\pi^{-1}(p) \cong \p^1(\C)$. We denote by $E$ the fiber $\pi^{-1}(p)$, and, from now on, we will refer to it as the \textit{exceptional line}\index{Blowup!Exceptional line} (since it contains the directions of the lines passing through $p$).
+
+Consequently, the complement of $E$ in the blowup is homeomorphic to the complement of the fiber, that is,
+\begin{equation*} \mathrm{Bl}_{p} \left( \C^2 \right) \setminus E \cong \pi^{-1} \left( \C^2 \setminus \{(0, \, 0)\} \right).  \end{equation*}
+
+Assume that $p = (0, \, 0) \in X_0$ is a singular point of the affine algebraic curve $X_0 := \left\{ F(z_1, \, z_2) = 0 \right\} \subseteq \C^2$. Then $F$ is a sum of homogeneous polynomials of order $\geq m$, that is,
+\begin{equation*}F(z_1, \, z_2, \, 1) = \sum_{k \geq m} F_k(z_1, \, z_2), \end{equation*}
+and we may assume, without loss of generality, that $\{z_1 = 0 \}$ is not tangent to $X_0$ (i.e., $a \neq 0$).
+
+If we set $v := b/a$, then we can define the \textbf{strict transform}\index{Strict transform} of $F$ with respect to the coordinates $(z_1, \, v)$ as follows:
+\begin{equation} \label{eq:stricttansfor} \widetilde{F}(z_1, \, v) := F(z_1, \, z_1 \cdot v) \cdot z_1^{-m}. \end{equation}
+In a neighborhood $\mathcal{U}$ of $p$ the map 
+\begin{equation*}\widetilde{X_0} := \left\{ \widetilde{F} = 0 \right\} \implies \widetilde{X_0} \cap \mathcal{U} \longtwoheadrightarrow X_0 \cap \mathcal{U}\end{equation*}
+is surjective, and it is straightforward to prove that $u$ is a slope coefficient of a tangent line at $p$ to $X_0$ if and only if it belongs to $E$.
+
+\begin{remark}If $X$ is a singular algebraic curve, then there is no guarantee that $\widetilde{X}$ will be smooth after a single application of the blowup approach.
+
+The next result states that a finite sequence of blowups is enough to obtain a smooth algebraic curve, and in \hyperref[example_3]{Example \ref{example_3}} we describe a case where two steps are necessary.\end{remark}
+
+\begin{theorem}Let $X$ be a singular algebraic curve. There exists a finite sequence of blowups 
+\begin{equation*} \widetilde{X}^n \longtwoheadrightarrow \widetilde{X}^{n-1} \longtwoheadrightarrow \dots \longtwoheadrightarrow \widetilde{X}^1 \longtwoheadrightarrow X \end{equation*}
+such that $\widetilde{X}^n$ is a compact Riemann surface (thus a smooth algebraic curve). \end{theorem}
+
+\begin{proof}[Idea] The proof of this result is divided into three steps. The reader may try to prove it as an exercise.
+
+\paragraph{Step 1.} There are only finitely many singular points in $X$. \textit{Hint: apply Bezout's theorem applied to the polynomials $(F, \, F^\prime)$, where $F^\prime$ is the usual derivative of $F$}.
+
+\paragraph{Step 2.} Local resolution of the singularities.
+
+\paragraph{Step 3.} For every singular point $p \in X$, the quantity $\mathrm{molt}_p \left(X\right)$ eventually decreases to $0$ as the second step is repeated. \end{proof}
+
+\begin{definition}[Infinitely Near]\index{Singular Points!Infinitley near} Let $p \in X$ be a singular point. A point $q$ is \textit{infinitely near} to $p \in X$, and we denote it by $q \in E(p)$, if $q$ belongs to the exceptional line $E$.\end{definition}
+
+\begin{theorem}\index{Algebraic curve!Resolution theorem}Let $X \subset \p^2(\C)$ be an irreducible and reduced algebraic curve. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $X$ is smooth, then $X$ is a compact Riemann surface of genus
+\begin{equation*} g(X) = \frac{(d-1)(d-2)}{2}. \end{equation*}
+\item If $X$ is singular, then there exist a compact Riemann surface $\widetilde{X}$ and a birational morphism $\pi : \widetilde{X} \longtwoheadrightarrow X$ (that is, an isomorphism outside of singular points) such that
+\begin{equation*} g\left(\widetilde{X}\right) = \frac{(d-1)(d-2)}{2} - \sum_{p \in \mathrm{Sing}(X)} \delta_p, \end{equation*}
+where $\delta_p$ is equal to
+\begin{equation*} \delta_p = \frac{m_p \, (m_p - 1)}{2} + \sum_{q \in E(p)} \frac{m_q \, (m_q - 1)}{2}.  \end{equation*}\end{enumerate}\end{theorem}
+
+\subsection{Examples}
+
+In this brief subsection, we describe the resolution of singularities in very few simple cases, and we come back to the first example of the course.
+
+\begin{example} \label{example_1} Let $X$ be, locally, the algebraic curve defined by the polynomial
+\begin{equation*}F(z_1, \, z_2) := z_1^2 - z_2^2 = 0.\end{equation*}
+The reader may check that $p = (0, \, 0)$ is singular, and its multiplicity is equal to $2$. If we set $z_2 := v \cdot z_1$, then the strict transform of $F$ is given by
+\begin{equation*} \widetilde{F}(z_1, \, v) = \left[ z_1^2 - v^2 \, z_1^2 \right] z_1^{-2} = 1 - v^2. \end{equation*}
+Consequently, the intersection $E \cap \{ \widetilde{F}(z_1, \, v) = 0\}$ is made of two points ($v = \pm 1$), corresponding to the singular cross of lines in $X$ (see \hyperref[fig:esdl]{Figure \ref{fig:esdl}}, left).  \end{example}
+
+\begin{example} \label{example_2}Let $X$ be, locally, the algebraic curve defined by the polynomial
+\begin{equation*}F(z_1, \, z_2) := z_1^3 - z_2^2 = 0. \end{equation*}
+The point $p = (0, \, 0)$ is singular, and its multiplicity is also equal to $2$. If we set $z_2 := v \cdot z_1$, then the strict transform of $F$ is given by
+\begin{equation*} \widetilde{F}(z_1, \, v) = \left[ z_1^3 - v^2 \, z_1^2 \right] \, z_1^{-2} = z_1 - v^2. \end{equation*}
+Clearly the point $q \in E(p)$ is smooth, but it is tangent to the exceptional line $E$, thus the contribution of $\delta_p$ is nonzero (see \hyperref[fig:esdl]{Figure \ref{fig:esdl}}, center).  \end{example}
+
+\begin{example} \label{example_3} Let $X$ be, locally, the algebraic curve defined by the polynomial
+\begin{equation*}F(z_1, \, z_2) := z_1^4 - z_2^2 = 0.\end{equation*}
+The point $p = (0, \, 0)$ is singular, and its multiplicity is also $2$. If we set $z_2 := v \cdot z_1$, then the strict transform of $F$ is given by
+\begin{equation*} \widetilde{F}(z_1, \, v) = \left[ z_1^4 - v^2 \, z_1^2 \right] \, z_1^{-2} = z_1^2 - v^2. \end{equation*}
+The algebraic curve $\widetilde{X}^1$ is singular and, actually, it is the same algebraic curve of \hyperref[example_1]{Example \ref{example_1}}. If we set $z_1 := h \cdot v$, then the second strict transform of $F$ is
+\begin{equation*} \widetilde{F}^{(2)}(h, \, v) = 1 - h^2, \end{equation*}
+thus $\widetilde{X}^2 \longtwoheadrightarrow \widetilde{X}^1 \longtwoheadrightarrow X$ is the resolution of singularities $X$ (see \hyperref[fig:esdl]{Figure \ref{fig:esdl}}, right).\end{example}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=16cm, height=10cm]{Images/GCBUE.png}
+\caption{From left to right: Examples \ref{example_1}, \ref{example_2} and \ref{example_3}}
+\label{fig:esdl}
+\end{figure} 
+
+\begin{example}[Global] Let $\underline{X} \subset \C^2$ be the affine curve defined by the equation
+\begin{equation*}z_2^2 - (z_1^2 - 1)(z_1^2 - 4) = 0.\end{equation*}
+Its projective closure is obtained via homogenization\index{Homogenization} of the equation, that is,
+\begin{equation*} X := \left\{ F(z_1, \, z_2, \, z_0 ) = 0 \right\} \subset \p^2(\C), \qquad F(z_1, \, z_2, \, z_0) = (z_1^2 - z_0^2)(z_1^2 - 4 \, z_0^2) - z_0^2 \, z_2^2. \end{equation*}
+It is a simple exercise to prove that the only singular point is $p_\infty = (0, \, 1, \, 0)$ and that it belongs to the line at infinity.
+
+Consequently, about $p_\infty$ it makes sense to use the chart with coordinates $(z_1, \, 1, \, z_0)$ in such a way that, at least locally, the algebraic curve is given by the equation
+\begin{equation*}X = \left\{ z_0^2 - (z_1^2 - z_0^2)(z_1^2 - 4 \, z_0^2) = 0 \right\} \stackrel{\sim p_\infty}{=} \left\{ z_0^2 = (z^\prime)^4 \right\}. \end{equation*}
+As a consequence, around $p_\infty$ the situation is similar to the one studied in \hyperref[example_3]{Example \ref{example_3}}. In particular, there is a compact Riemann surface $\widetilde{X}$, whose genus is given by\footnote{Indeed, it is straightforward to prove that $m_{p_\infty} = 2$, $m_{q_\infty} = 2$ and $m_{\widetilde{q_\infty}} = 1$.}
+\begin{equation*}g\left(\widetilde{X} \right) = 3 - \delta_{p_\infty} = 1, \end{equation*}
+and a surjective map $\widetilde{X} \longtwoheadrightarrow X$. We conclude that $\widetilde{X} \cong \mathbb{T}$, that is, $\widetilde{X}$ is homeomorphic to the complex torus (see \hyperref[ex:13]{Example \ref{ex:13}}).
+
+The result is coherent with the fact that the algebraic curve $X$ may be obtained from a $3$-torus by gluing together the two extremal holes and throttling them in such a way to get a $1$-torus with a weird point $p_\infty$. 
+\end{example}
+
+\begin{remark}The genus that we have introduced in this subsection is called \textit{arithmetic genus} of a planar algebraic curve, and it is equal to the leading coefficient of the Hilbert polynomial (associated to the local coordinate ring).
+
+This notion of genus is equivalent to the topological one if $X$ is a smooth algebraic curve, where
+\begin{equation*}g_{top} \left(X \right) := \frac{h^1\left(X, \, \mathbb{Z} \right)}{2}, \qquad h^1 := \mathrm{dim} \, H^1\left(X, \, \mathbb{Z}\right). \end{equation*}
+Recall that, equivalently, we have
+\begin{equation*}g_{top}(X) := \frac{\chi_{top}(X) + 2}{2}, \end{equation*}
+where $\chi_{top}(X)$ is the topological \textit{Euler characteristic}.
+\end{remark}
+
+\section{First Examples Riemann Surfaces}
+
+Recall that a Riemann surface $X$ is a Hausdorff, second-countable, connected manifold endowed with a complex structure.
+
+\paragraph{Riemann Sphere $C_\infty$.}\index{Riemann Surface!Riemann Sphere} Let $S^2 := \{ (x_1, \, x_2, \, x_3) \in \R^3 \: : \: x_1^2 + x_2^2 + x_3^2 = 1 \}$ be the two-dimensional sphere, and let us consider the atlas given by the stereographic projections:
+\begin{equation*} \begin{aligned} & \varphi_0 : U_0 := S^2 - \{N\} \to \C, \qquad \varphi_0(x_1, \, x_2, \, x_3) := \frac{x_1}{1 - x_3} + \imath \, \frac{x_2}{1-x_3},\\[1em] & \varphi_1 : U_1 := S^2 - \{S\} \to \C, \qquad \varphi_1(x_1, \, x_2, \, x_3) := \frac{x_1}{1 + x_3} + \imath \, \frac{x_2}{1+x_3}. \end{aligned} \end{equation*}
+If we set $\mathcal{A}^\prime := \left\{ (U_0, \, \varphi_0), \, (U_1, \, \varphi_1) \right\}$, then one can easily check that it is not a holomorphic atlas since the transition map
+\begin{equation*}\varphi_{0, \, 1} = \varphi_1 \circ \varphi_0^{-1}(x, \, y) = \frac{x}{x^2 + y^2} + \imath \, \frac{y}{x^2 + y^2} \end{equation*}
+does not satisfy the Riemann-Cauchy equations\footnote{A function $f = u + \imath \, v : A \subseteq \C \longrightarrow \C$ is holomorphic if and only if
+\begin{equation*}\partial_x \, u = \partial_y \, v \qquad \text{and} \qquad \partial_y \, u = - \partial_x \ v. \end{equation*}}. Therefore, we try to modify one of the charts above, e.g. we take the conjugate of $\varphi_1$:
+\begin{equation*} \overline{\varphi_1} : U_1 := S^2 - \{S\} \to \C, \qquad \varphi_1(x_1, \, x_2, \, x_3) := \frac{x_1}{1 + x_3} - \imath \, \frac{x_2}{1+x_3}. \end{equation*}
+The transition map becomes
+\begin{equation*}\varphi_{0, \, 1} = \overline{\varphi_1} \circ \varphi_0^{-1}(x, \, y) = \frac{x}{x^2 + y^2} - \imath \, \frac{y}{x^2 + y^2} = \frac{1}{z}, \end{equation*}
+and it is an easy exercise to check that it is holomorphic, that is,
+\begin{equation*}\mathcal{A} := \left\{ (U_0, \, \varphi_0), \, (U_1, \, \overline{\varphi_1}) \right\}\end{equation*}
+is a holomorphic atlas of $C_\infty$. In particular, the atlas $\mathcal{A}$ induces a holomorphic structure on the Riemann sphere $C_\infty$ and, as a consequence, it turns out that $\C_\infty$ is biholomorphic to $\p^1(\C)$.
+
+In fact, if we consider the complex projective space with coordinates $[z_0 : z_1]$, together with the atlas
+\begin{equation*} U_0 := \left\{ z_0 \neq 0 \right\}, \quad U_1 := \left\{ z_1 \neq 0 \right\}, \end{equation*}
+then the coordinate in $U_0$ is $z = \frac{z_1}{z_0}$, the coordinate in $U_1$ is $w = \frac{z_0}{z_1}$ and the transition map above is the change of coordinates from $U_0$ to $U_1$
+\begin{equation*} z \in U_0 \mapsto w = \frac{1}{z} \in U_1. \end{equation*}
+
+\paragraph{Complex Tori $\mathbb{T}$.}\index{Riemann Surface!Complex Torus} Let $\Lambda \subset \C$ be a lattice of the form $\mathbb{Z} \, \omega_1 + \mathbb{Z} \, \omega_2$, where $\{\omega_1, \, \omega_2\}$ are linearly independent over $\R$, that is,
+\begin{equation*}\tau := \frac{\omega_1}{\omega_2} \in \C \setminus \R. \end{equation*}
+The \textit{complex torus} is defined as the quotient space $\mathbb{T} = \faktor{\C}{\Lambda}$ which is topologically homeomorphic to the product $S^1 \times S^1$.
+
+Let $\pi : \C \to \faktor{\C}{\Lambda}$ be the standard projection. The topology on $\T$ is the quotient topology, thus we only need to equip it with a complex structure.
+
+For any point $z \in \C \setminus \Lambda$ there is a neighborhood $U_z \subset \C$ such that $U_z \cap \Lambda = \emptyset$. If we set
+\begin{equation*} \delta := \min \left\{ d(\xi_1, \, \xi_2) \: : \: \xi_1, \, \xi_2 \in \Lambda \right\}, \end{equation*}
+then, given $z \in \C \setminus \Lambda$ and $p = \pi(z) \in \T$, the key idea is to find a neighborhood of $p$, starting from the image of $U_z$ via the map $\pi$. Indeed, the set
+\begin{equation*}\Delta(z, \, \epsilon) := \left\{ \xi \in \C \: : \: |\xi - z| < \epsilon, \, \, \epsilon < \delta \right\}, \end{equation*}
+is strictly contained in $U_z$ for a suitable choice of $\epsilon > 0$, thus we can find a local holomorphic structure at each point $p$ by using the covering
+\begin{equation*} \mathcal{F} := \left\{ \left( v(p, \, \epsilon), \, \pi^{-1} \, \big|_{v(p, \, \epsilon)} \right) \right\}_{p \in \T}, \end{equation*}
+where $v(p, \, \epsilon)$ is homeomorphic to $\Delta(z, \, \epsilon)$ via $\pi$.
+
+For any $p_0, \, p_1 \in \T$ there are charts $\varphi_0 : U_0 := v(p_0, \, \epsilon) \to \Delta(z_0, \, \epsilon)$ and $\varphi_1 : U_1 := v(p_1, \, \epsilon) \to \Delta(z_1, \, \epsilon)$; thus the transition map is given by the composition
+\begin{equation*} \varphi_1 \circ \varphi_0^{-1} : \C \to \C. \end{equation*}
+If $\varphi_0(U_0)$ and $\varphi_1(U_1)$ belong to the same fundamental parallelogram of $\C \setminus \Lambda$, then there is nothing to prove since we can define the transition map as the identity on the intersection. 
+
+On the other hand, if $\varphi_0(U_0)$ and $\varphi_1(U_1)$ belong to different fundamentals parallelograms, then it turns out that
+\begin{equation*} \pi \left( \varphi_1 \circ \varphi_0^{-1} (z) \right) = \pi (z), \qquad \forall z \in \varphi_0(U_0) \cap \varphi_1(U_1). \end{equation*}
+Consequently, the function $\eta(z) :=  \varphi_1 \circ \varphi_0^{-1} (z) - z$ is continuous and with values in $\Lambda$, a discrete set, thus it needs to be locally constant. In particular, the transition map is locally given by
+\begin{equation*} \varphi_1 \circ \varphi_0^{-1} = z + c,\end{equation*}
+which is clearly holomorphic. Therefore the atlas $\mathcal{F}$ induces a complex structure on $\T$.
+
+\begin{remark} If $\T_1$ and $\T_2$ are two complex tori, then we will prove in \hyperref[sec:42]{Section \ref{sec:42}} that $\T_1$ is not necessarily biholomorphic to $\T_2$.
+
+On the other hand, the first example shows that every Riemann surface, whose genus is $g = 0$, is biholomorphic to $\p^1(\C)$. \end{remark}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=8cm]{Images/GACNEW.png}
+\label{fig:CT}
+\caption{Complex Tori}
+\end{figure} 

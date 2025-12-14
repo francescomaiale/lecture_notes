@@ -1,0 +1,193 @@
+\chapter{Serre Duality} \thispagestyle{empty}
+
+The primary goal of this chapter is to use everything we have introduced so far to prove the notorious Serre Duality Theorem, which we used to justify different results in the previous sections.
+
+\begin{theorem}[Serre] \label{serreduality1} Let $X$ be a compact connected Riemann surface, let $K_X$ be a canonical divisor and let $D$ be any divisor on $X$. Then there is an isomorphism
+\begin{equation*} H^1 \left(X, \, \mathcal{O}_X[D] \right)^{v} \cong H^0 \left(X, \, \mathcal{O}_X \left[K_X - D \right] \right). \end{equation*}\end{theorem}
+
+\section{Mittag-Leffler Problems}
+
+Let $X$ be a compact Riemann surfaces. Let $P_1, \, \dots, \, P_s \in X$ be given, and suppose that for any $i = 1, \, \dots, \, s$ there is a polar polynomial, that is,
+\begin{equation*} h_i(z) = \sum_{k = - n_i}^{-1} a_k \, z^k, \qquad \text{in $U(P_i) \cong \Delta$ neighborhood of $p$ with coordinate $z$}. \end{equation*}
+In this section, we investigate the Mittag-Leffler problem, that is, we want to determine if there exists a function meromorphic on $X$ such that: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The function $f: X \to \C$ is holomorphic outside $\{P_1, \, \dots, \, P_s\}$.
+\item The principal part of $f$ in $U(P_i)$ is equal to $h_i$.
+\end{enumerate}
+A meromorphic function $f: X \to \C$ satisfying these properties exists locally, but the problem is to find one globally defined. The answer, as we shall be able to prove soon, depends on
+\begin{equation*} H^0 \left( X, \, \mathcal{O}_X[D] \right) \qquad \text{and} \qquad H^1 \left( X, \, \mathcal{O}_X[D] \right), \end{equation*}
+where the divisor is simply defined by
+\begin{equation*} D := \sum_{i = 1}^{s} n_i \cdot P_i. \end{equation*}
+
+\paragraph{Laurent Tails.} Let $X$ be a Riemann surface, let $P \in X$ be a point, and let $U(P) \ni P$ be a neighborhood with coordinate $z$. A \textit{Laurent tail} with respect to $P$ is given by a function
+\begin{equation*} r_P(z) = \sum_{i = - n_P}^{k_P} a_i \, z^i. \end{equation*}
+
+\begin{definition} A \textit{Laurent tail divisor} on $X$ is a finite formal sum
+\begin{equation*} \sum_{P \in X} r_P(z_P) \cdot P, \end{equation*}
+where $r_P(z_P)$ is a Laurent polynomial in the coordinate $z_P$, that is, a Laurent series with a finite number of terms. \end{definition}
+
+\begin{notation}Let $X$ be a Riemann surface. We denote by $\mathcal{T}(X)$ the set of Laurent tail divisors on $X$. \end{notation}
+
+\begin{definition}[Laurent Tail Sheaf] Let $D = \sum_{P \in X} D(P) \cdot P \in \Div(X)$ be a divisor. The Laurent tail divisor sheaf is defined by setting
+\begin{equation}\label{sjesd} U \longmapsto \mathcal{T}[D](U) := \left\{\left. \sum_{P \in X} r_P \cdot P \: \right| \: \forall \, P \in U \leadsto k_P < - D(P) \right\}. \end{equation} \end{definition}
+
+The reader may check by herself that \eqref{sjesd} actually defines a sheaf. Moreover, there is a truncation map
+\begin{equation*} t_D : \mathcal{T}(X) \to \mathcal{T}[D](X), \end{equation*}
+which sends the Laurent tail divisor $\sum_P r_P \cdot P$ to the Laurent tail divisor $\sum_P t_D(r_P) \cdot P$, where
+\begin{equation*} t_D(r_P)(z) = \sum_{i = - n_P}^{- D(P) - 1} a_i \, z^i.\end{equation*}
+\paragraph{Meromorphic Field.} Let us consider the field
+\begin{equation*} \M := \left\{ \text{field of meromorphic function on $X$} \right\}. \end{equation*}
+The constant presheaf can be also defined by setting
+\begin{equation*} \M(X)(U) := \left\{ f : U \to \M \: \left| \: \text{$f$ continuous and $\M$ has the discrete topology} \right. \right\}, \end{equation*}
+in such a way that
+\begin{equation*} \text{$U$ connected} \implies \M(X)(U) \cong \M, \end{equation*}
+and the restriction maps are the identity maps. If we denote by $\M$ the associated sheaf, then one can prove that \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $H^0 \left(X, \, \M(X) \right) \cong \M$, and
+\item $H^1 \left(X, \, \M(X) \right) = 0$.
+\end{enumerate}
+Therefore there exists an homomorphism of sheaf
+\begin{equation*} \alpha_D : \M \to \mathcal{T}[D], \qquad f \longmapsto \sum_{P \in X} r_P \cdot P, \end{equation*}
+where
+\begin{equation*} X \ni P \leadsto f(z) = \sum_{i \geq - N_P} a_i \, z^i \longmapsto r_P(z) = \sum_{i = - n_P}^{- D(P) - 1} a_i \, z^i. \end{equation*}
+By definition the kernel of $\alpha_D$ is isomorphic to $\mathcal{O}_X[D]$, hence there is a short exact sequence of sheaf maps
+\begin{equation*} 0 \xrightarrow{} \mathcal{O}_X[D] \xrightarrow{} \M \xrightarrow{\alpha_D} \mathcal{T}[D] \xrightarrow{} 0 \end{equation*}
+inducing a long exact sequence in cohomology, that is,
+\begin{equation*} 0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[D] \right) \xrightarrow{} H^0 \left(X, \, \M \right) \xrightarrow{\alpha_D} H^0 \left(X, \, \mathcal{T}[D] \right) \xrightarrow{} H^1 \left(\mathcal{O}_X[D] \right) \xrightarrow{} 0. \end{equation*}
+Clearly
+\begin{equation*} H^0 \left(X, \, \M \right) \cong \M \qquad \text{and} \qquad H^0 \left(X, \, \mathcal{T}[D] \right) \cong \mathcal{T}[D](X), \end{equation*}
+hence it follows that
+\begin{equation*} L(D) := H^0 \left(X, \, \mathcal{O}_X[D] \right) \cong \mathrm{ker}(\alpha_D) \qquad \text{and} \qquad H^1 \left( \mathcal{O}_X[D] \right) \cong \mathrm{coker}(\alpha_D). \end{equation*}
+Finally, we notice that
+\begin{equation*} \mathcal{O}_X[K_x - D] \cong \Omega_X^1[-D] \end{equation*}
+immediately implies that
+\begin{equation*} \begin{aligned} H^0 \left(X, \, \mathcal{O}_X[K_x - D]\right) & \cong H^0 \left(\Omega_X^1[-D] \right) = \\\\ & = \left\{ \omega = f(z) \, \mathrm{d}z \: \left| \: \text{$f$ meromorphic and $\mathrm{ord}_P(f) \geq D(P)$} \right. \right\}. \end{aligned} \end{equation*}
+
+\section{Proof of Serre Duality Theorem}
+
+\paragraph{Road Map.} In this section, we finally give a proof of \hyperref[serreduality1]{Serre Theorem \ref{serreduality1}} based on what we have proved so far. The road map of the proof is the following: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item There exists a pairing
+\begin{equation*} \mathrm{Res}(\cdot, \, \cdot) : H^0 \left( X, \, \Omega_X^1[-D] \right) \times \mathcal{T}(D) \to \C. \end{equation*}
+\item The map defined above pass to the quotient. More precisely, it turns out that
+\begin{equation*} \mathrm{Res}(\cdot, \, T) \equiv 0 \qquad \forall \, T \in \mathrm{Im}(\alpha_D), \end{equation*}
+and hence there exists a pairing
+\begin{equation*} \mathrm{Res}(\cdot, \, \cdot) : H^0 \left( X, \, \Omega_X^1[-D] \right) \times \mathrm{coker}(\alpha_D) \to \C. \end{equation*}
+\item The pairing defined in the previous step is non degenerate.
+\end{enumerate}
+
+\begin{proof}[Proof of Theorem \ref{serreduality1}] The argument is rather involved. Hence we divide it into many different steps.
+
+\paragraph{Step 1.} Let
+\begin{equation*} \mathrm{Res}(\cdot, \, \cdot) : H^0 \left( X, \, \Omega_X^1[-D] \right) \times \mathcal{T}(D)(X) \to \C, \qquad (\omega, \, T) \mapsto \mathrm{Res}(\omega, \, T) \end{equation*}
+be the map defined by
+\begin{equation*} \mathrm{Res}(\omega, \, T) := \sum_{p \in X} \mathrm{Res}_p(T_p \, \omega). \end{equation*}
+Locally (i.e., in a neighborhood $U_p$ of a point $p \in X$ with coordinate $z_p$) it turns out that
+\begin{equation*}\omega = \sum_{i \geq D(p)} \left( c_i \, z_p^i \right) \, \mathrm{d}z_p \qquad \text{and} \qquad T_p = \sum_{i \leq D(p) - 1} a_i \, z_p^i, \end{equation*}
+in such a way that
+\begin{equation*}\mathrm{Res}_p(T_p \, \omega) = \sum_{i \geq D(p)} a_{-i - 1} \cdot c_i \end{equation*}
+is equal to the coefficient of $z_p^{-1}$. 
+
+\paragraph{Step 2.} In this step, the primary goal is to prove that the map defined above descends to the quotient in the second variable, that is, to
+\begin{equation*} \sfrac{\mathcal{T}(D)(X)}{\mathrm{Im}(\alpha_D)}. \end{equation*}
+Let $f \in \mathcal{M}$ be a meromorphic function, let $p \in X$ be any point, and let $z_p$ be the associated local coordinate; then
+\begin{equation*} f(z_p) = \sum_{i \geq - n} a_i \, z_p^i \longmapsto \alpha_D(f)(z_p) = \sum_{i \geq - n}^{- D(p) - 1} a_i \, z_p^i. \end{equation*}
+The residue at $p$ is thus given by
+\begin{equation*}\mathrm{Res}_p(f \cdot \omega) = \sum_{i \geq D(p)} a_{-i - 1} \cdot c_i = \mathrm{Res}_p(\alpha_D(f) \cdot \omega) \end{equation*}
+since the terms with index $j \geq - D(p)$ of $\alpha_D(f)$ do not give any contribute to the sum above. The \hyperref[residui]{Residue Theorem \ref{residui}} immediately implies that
+\begin{equation*}\sum_{p \in X} \mathrm{Res}_p(f \cdot \omega) = 0 \implies \mathrm{Res} \left( \alpha_D(f) \cdot \omega \right) = 0,\end{equation*}
+which is exactly what we wanted to prove.
+
+\paragraph{Step 3.} In this step, we want to prove that the functional
+\begin{equation} \label{serre:fun} \mathrm{Res} : H^0 \left(X, \, \mathcal{O}_X[K_X - D] \right) \to \left( H^1 \left(X, \, \mathcal{O}_X[D] \right) \right)^\ast, \qquad \omega \mapsto \mathrm{Res}(\omega, \, -) \end{equation}
+is an isomorphism (i.e., the pairing is non degenerate). \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item \textbf{Linear.} The linearity of the map \eqref{serre:fun} follows easily from the properties of the residue.
+\item \textbf{Injective.} Let $D = \sum_{p \in X} D(p) \cdot p$, and let $\omega$ be such that
+\begin{equation*} \mathrm{Res}\left(T \cdot \omega \right) = 0, \qquad \forall \, T = \sum_{p \in X} T_p \cdot p. \end{equation*}
+Let $p \in X$ be a point, let $z_p$ be the local coordinate, and let $k = \mathrm{ord}_p(\omega)$ (i.e., $- 1 - k < - D(p)$). It follows that
+\begin{equation*} z_p^{-1-k} \cdot p \in \mathcal{T}(D)(X), \end{equation*}
+and also that, if we set $\omega := \sum_{i \geq k} \left( c_i \, z_p^i \right) \, \mathrm{d}z_p$, with the lowest coefficient $c_k \neq 0$, then
+\begin{equation*} \mathrm{Res}(\omega, \, z^{-1-k} \cdot p) = \mathrm{Res}_p (z_p^{-1-k} \cdot \sum_{i \geq k} c_i \, z_p^i \, \mathrm{d}z_p^i = c_k, \end{equation*}
+which is not zero. This contradiction shows that $\mathrm{Res}(\omega, \, -)$ cannot be the identically zero map on $H^1\left(X, \, \mathcal{O}_X[D] \right)$, unless $\omega = 0$.
+\item \textbf{Surjective.} Recall that
+\begin{equation*} H^1\left(X, \, \mathcal{O}_X[D] \right) \cong \sfrac{ \mathcal{T}(D)(X) }{\mathrm{Im}(\alpha_D)}. \end{equation*}
+Let us consider a functional $\Phi : \mathcal{T}(D)(X) \to \C$ such that $\Phi \, \big|_{\mathrm{Im}(\alpha_D)} \equiv 0$. We want to construct a differential form $\omega \in H^0 \left(X, \, \Omega_X^1[-D] \right)$ such that
+\begin{equation*} \Phi(-) = \mathrm{Res}(\omega, \, -). \end{equation*}
+The proof of this property is a consequence of two technical lemmas; hence we interrupt the argument for a few pages and resume it when we are ready to conclude.
+\end{enumerate}
+\end{proof}
+
+\paragraph{Truncation Maps.} Let $D_1, \, D_2 \in \Div(X)$ be divisors such that $D_1 \leq D_2$. There exists a truncation map $t_2^1 : \mathcal{T}[D_1](X) \to \mathcal{T}[D_2](X)$ defined by
+\begin{equation*} \sum^{- D_1(p) - 1} a_i \, z^i \longmapsto \sum^{- D_2(p) - 1} a_i \, z^i. \end{equation*}
+Let $D \sim D^\prime$ be linearly equivalent divisors (i.e., $D^\prime = D - \mathrm{div}(f)$). Let $p \in X$, $r_p \in \mathcal{T}[D](X)$ given by
+\begin{equation*} r_p = \sum_{i \geq - n}^{-D(p) - 1} a_i \, z^i, \end{equation*}
+and let $f = z^h$ be a map of order $h$ at $p$ (i.e., $z$ is the local coordinate at $p$), so that
+\begin{equation*} f \cdot r_p = \sum_{i \geq - n}^{-D(p) - 1} a_i \, z^{i + h} \qquad \text{and} \qquad \mathrm{deg}(f \cdot r_p) < - D(p) + \mathrm{ord}_p(f) = - D^\prime(p). \end{equation*}
+We conclude that there exists an isomorphism
+\begin{equation*} \mu_f : \mathcal{T}[D](X) \xrightarrow{\sim} \mathcal{T}[D - \mathrm{div}(f)](X), \qquad \sum_{p \in X} r_p \cdot p \longmapsto \sum_{p \in X} \left( f \cdot r_p \right) \cdot r_p, \end{equation*}
+whose inverse is given by $\mu_{\frac{1}{f}} = \mu_f(1/f)$.
+
+\begin{remark} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item One may also write the isomorphism as
+\begin{equation*} \mu_f : \mathcal{T}[D + \mathrm{div}(f)](X) \xrightarrow{\sim} \mathcal{T}[D](X). \end{equation*}
+\item Let $\Phi : \mathcal{T}(D)(X) \to \C$ be a linear functional. The composition $\Phi \circ \mu_f$ is identically equal to $0$ on the whole image of $\alpha_{D + \mathrm{div}(f)}$.
+\end{enumerate} \end{remark}
+
+\begin{lemma} \label{lemma:serre1} Let $\Phi_1$ and $\Phi_2$ be two linear functionals on $H^1\left(X, \, \mathcal{O}_X[A]\right)$ for some divisor $A \in \Div(X)$. There is a positive divisor $C$ and nonzero meromorphic functions $f_1, \, f_2 \in H^0\left(X, \, \mathcal{O}_X[C]\right)$ such that
+\begin{equation*} \Phi_1 \circ t_{A}^{A - C - \mathrm{div}(f_1)} \circ \mu_{f_1} = \Phi_2 \circ t_A^{A - C - \mathrm{div}(f_2)} \circ \mu_{f_2} \end{equation*}
+as functionals on $H^1\left(X, \, \mathcal{O}_X[A - C]\right)$. In other words, the two maps on $\mathcal{T}[A - C](X)$ in the diagram
+\begin{equation*} \begin{tikzcd}& \mathcal{T}[A - C - \mathrm{div}(f_1)](X) \ar[r, "t"] & \mathcal{T}[A](X) \ar[dr, "\Phi_1"] & 
+\\ \mathcal{T}[A - C](X) \ar[ur, "\mu_{f_1}"] \ar[dr, "\mu_{f_2}"]& & & \C \\
+& \mathcal{T}[A - C - \mathrm{div}(f_2)](X) \ar[r, "t"] & \mathcal{T}[A](X) \ar[ur, "\Phi_2"] & \end{tikzcd} \end{equation*}
+are equal for some $C$ and some $f_1, \, f_2 \in H^0\left(X, \, \mathcal{O}_X[C]\right) \setminus \{0\}$. \end{lemma}
+
+\begin{proof}We argue by contradiction. Suppose that no such divisor $C$ and functions $f_i$ exist. Then for every positive divisor $C$ it turns out that the $\C$-linear map
+\begin{equation*} H^0\left(X, \, \mathcal{O}_X[C]\right) \times H^0\left(X, \, \mathcal{O}_X[C]\right) \to \left(H^1\left(X, \, \mathcal{O}_X[A-C]\right)\right)^\ast \end{equation*} 
+defined by sending a pair $(f_1, \, f_2)$ to $\Phi_1 \circ t_{A}^{A - C - \mathrm{div}(f_1)} \circ \mu_{f_1} - \Phi_2 \circ t_A^{A - C - \mathrm{div}(f_2)} \circ \mu_{f_2}$ is injective. In particular, for every such $C$ we must have
+\begin{equation} \label{lemma:serre1:eq1}  h^1 \left(X, \, \mathcal{O}_X[A-C]\right) \geq 2 \cdot h^0\left(X, \, \mathcal{O}_X[C]\right), \end{equation}
+and, as a consequence of the \hyperref[RiemannRoch]{Riemann-Roch Theorem \ref{RiemannRoch}}, we also infer that
+\begin{equation} \label{lemma:serre1:eq2} h^1 \left(X, \, \mathcal{O}_X[A-C]\right) = h^0 \left(X, \, \mathcal{O}_X[A-C]\right) + g(X) - 1 - \mathrm{deg}(A - C). \end{equation}
+On the other hand, $C$ is a positive divisor hence
+\begin{equation*}h^0 \left(X, \, \mathcal{O}_X[A-C]\right) \leq h^0 \left(X, \, \mathcal{O}_X[A]\right) \qquad \text{and} \qquad \mathrm{deg}(A - C) \leq \mathrm{deg}(A). \end{equation*}
+It follows from \eqref{lemma:serre1:eq1} that
+\begin{equation*}h^1 \left(X, \, \mathcal{O}_X[A-C]\right) \geq 2 \cdot h^0\left(X, \, \mathcal{O}_X[C]\right) \geq 2 \, \mathrm{deg}(C) + 1 - g(X) = \mathrm{deg}(C) + K_1, \end{equation*}
+where $K_1$ is a constant, and it follows from  \eqref{lemma:serre1:eq2} that
+\begin{equation*} h^1 \left(X, \, \mathcal{O}_X[A-C]\right) \leq \mathrm{deg}(C) + \left( h^0\left(X, \, \mathcal{O}_X[A] \right) + g(X) - 1 - \mathrm{deg}(A) \right) = \mathrm{deg}(C) + K_2, \end{equation*}
+where $K_2$ is another constant. These growth rate are clearly incompatible for $\mathrm{deg}(C)$ sufficiently big, and this gives the sought contradiction.
+\end{proof}
+
+\begin{lemma} \label{lemma:serre2} Let $D_1 \in Div(X)$ be a divisor, and let $\omega \in H^0\left(X, \, \Omega_X^1[-D] \right)$ be a differential form. Suppose that there is another divisor $D_2 \geq D_1$ such that the residue map
+\begin{equation*} \mathrm{Res}(\omega, \, -) : \mathcal{T}[D_1](X) \to \C \end{equation*}
+vanishes on the kernel
+\begin{equation*} \mathrm{Ker}\left( t_{D_2}^{D_1} \right) :  \mathcal{T}[D_1](X) \to  \mathcal{T}[D_2](X).\end{equation*}
+Then $\omega$ belong to $H^0 \left(X, \, \Omega_X^1[D_2] \right)$. \end{lemma}
+
+\begin{proof}We argue by contradiction. If $\omega \notin H^0 \left(X, \, \Omega_X^1[D_2] \right)$, then there exists a point $p \in X$ with $k = \mathrm{ord}_p(\omega) < D_2(p)$. Let us consider the Laurent tail divisor
+\begin{equation*} Z = z_p^{-k-1} \cdot p. \end{equation*}
+Then $Z \in \mathrm{ker}(t_{D_2}^{D_1})$, but the residue map does not vanish; this contradiction proves the lemma.\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{serreduality1}, Part II] We are now ready to finish the proof of the Serre duality theorem. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\setcounter{enumi}{3}
+\item \textbf{Surjective, Part II.} Let $\Phi : H^1 \left(X, \, \mathcal{O}_X[D] \right) \to \C$ be a functional, which we consider as a functional on $\mathcal{T}[D](X)$, zero on $\alpha_D(\mathcal{M}(X))$.
+
+Let $\omega$ be a holomorphic $1$-form, and let $K = \mathrm{div}(\omega)$ be a canonical divisor so that
+\begin{equation*} \omega \in H^0 \left(X, \, \mathcal{O}_X[K] \right) = H^0 \left(X, \, \Omega_X^1 \right). \end{equation*}
+Let us set $\Phi_A := \Phi \circ t_D^A : \mathcal{T}[A](X) \to \C$. By \hyperref[lemma:serre1]{Lemma \ref{lemma:serre1}} it turns out that there exists a divisor $C \geq 0$ and $f_1, \, f_2$ meromorphic functions such that
+\begin{equation} \label{proofserre:eq1} \Phi_A \circ t_A^{A - C - \mathrm{div}(f_1)} \circ \mu_{f_1} = \mathrm{Res}(\omega, \, -) \circ t_A^{A - C - \mathrm{div}(f_2)} \circ \mu_{f_2}. \end{equation}
+In the right-hand side of \eqref{proofserre:eq1} we have the map $\mathrm{Res}(\omega, \, -) \circ t_A^{A - C - \mathrm{div}(f_2)}$, which is nothing else than the residue map $\mathrm{Res}(\omega, \, -)$ acting on $\mathcal{T}[A - C - \mathrm{div}(f_2)](X)$; on the other hand, the composition $\mathrm{Res}(\omega, \, -) \circ \mu_{f_2}$ is exactly equal to
+\begin{equation*} \mathrm{Res}(f_2 \cdot \omega, \, -) : \mathcal{T}[A-C](X) \to \C, \end{equation*}
+and hence the identity \eqref{proofserre:eq1} becomes
+\begin{equation*} \Phi_A \circ t_A^{A - C - \mathrm{div}(f_1)} \circ \mu_{f_1} = \mathrm{Res}(f_2 \cdot \omega, \, -). \end{equation*}
+Composing with $\mu_{1/f_1}$ it turns out that
+\begin{equation*} \Phi_A \circ t_A^{A - C - \mathrm{div}(f_1)} = \mathrm{Res}\left(\frac{f_2}{f_1} \cdot \omega, \, - \right) \end{equation*}
+as functionals on $\mathcal{T}[A - C - \mathrm{div}(f_1)](X)$. We observe that $(f_2/f_1) \, \omega$ belongs to $H^0\left(X, \, \mathcal{O}_X[C + \mathrm{div}(f_1) - A] \right)$, and also that
+\begin{equation*} \mathrm{Res}\left(\frac{f_2}{f_1} \cdot \omega, \, - \right) \equiv 0 \quad \text{on $\mathrm{Ker}\left( t_A^{A - C - \mathrm{div}(f_1) } \right)$}. \end{equation*}
+By \hyperref[lemma:serre2]{Lemma \ref{lemma:serre2}} we have that $(f_2/f_1) \, \omega \in H^0 \left( X, \, \mathcal{O}_X[K_X - A] \right)$, and hence
+\begin{equation*} \mathrm{Res}\left(\frac{f_2}{f_1} \cdot \omega, \, - \right) = \Phi_A. \end{equation*}
+By definition, the map $\Phi_A$ is the composition between $\Phi$ and $t_D^A$; hence the residue map above vanishes on the kernel of $\mathrm{Ker}(t_D^A)$, which, in turn, implies that
+\begin{equation*} \frac{f_2}{f_1} \cdot \omega \in H^0 \left( X, \, \mathcal{O}_X[K_X - A] \right) \implies \Phi = \mathrm{Res} \left( \frac{f_2}{f_1} \cdot \omega, \, - \right) : H^1 \left(X, \, \mathcal{O}_X[D]\right) \to \C, \end{equation*}
+and this completes the proof of the theorem.
+\end{enumerate} \end{proof}

@@ -1,0 +1,269 @@
+\chapter{Abel's Theorem} \thispagestyle{empty}
+\label{chap:11}
+
+In this final chapter, we first investigate the relation between the divisor group $\left(\Div(X), \, +\right)$ with the Picard group $\left( \Pic(X), \, \otimes \right)$, where $X$ is a compact Riemann surface.
+
+Successively, we introduce the \textit{Jacobian manifold} associated with a compact Riemann surface $X$, and we prove that there is an isomorphism
+\begin{equation*} \Pic^0(X) \cong \Jac(X). \end{equation*}
+In particular, we derive this result from the Abel theorem (simply stated) and the Jacobi inversion theorem (entirely proved).
+
+\section{Picard Group}
+\label{sec:pic}
+
+In this section, we denote by $\mathcal{O}_X$ and $\mathcal{M}_X$ the set of all the holomorphic (respectively, meromorphic) functions $f: X \to \C$ - where $X$ is a compact Riemann surface -. Moreover, we denote by $\mathcal{O}_X^\ast$ and $\mathcal{M}_X^\ast$ respectively, the nonzero elements.
+
+\begin{proposition} Let $X$ be a Riemann surface. There is a canonical isomorphism
+\begin{equation*}\varphi : \left( \Div(X), \, + \right) \xrightarrow{\quad\sim \quad} H^0 \left( X, \, \faktor{\mathcal{M}_X^\ast}{\mathcal{O}_X^\ast} \right), \end{equation*}
+which is also a group homomorphism. \end{proposition}
+
+\begin{proof}In the literature, the sheaf $\faktor{\mathcal{M}_X^\ast}{\mathcal{O}_X^\ast}$ is called the \textit{divisor sheaf}\index{Divisor!sheaf} of $X$.
+
+\paragraph{Step 1.} Let
+\begin{equation*}\sigma \in H^0 \left( X, \, \faktor{\mathcal{M}_X^\ast}{\mathcal{O}_X^\ast} \right)\end{equation*}
+be a global section, and let $\mathcal{U} = \{ U_\alpha \}_{\alpha \in I}$ be an open covering of $X$ satisfying the usual properties, that is,
+\begin{equation*}\sigma \, \big|_{U_\alpha} = f_\alpha, \qquad \text{$f_\alpha : U_\alpha \to \C$ meromorphic function} \end{equation*}
+such that
+\begin{equation*}f_\alpha \neq 0 \qquad \text{and} \qquad \frac{f_\alpha}{f_\beta} \in \mathcal{O}_X^\ast \left( U_\alpha \cap U_\beta \right). \end{equation*}
+In particular, for any $p \in U_\alpha \cap U_\beta$ it turns out that
+\begin{equation*} \mathrm{ord}_p \, f_\alpha = \mathrm{ord}_p \, f_\beta, \end{equation*}
+and hence the divisor
+\begin{equation*}D = \sum_{p \in X} \mathrm{ord}_p \, f_{\alpha_p} \cdot p \end{equation*}
+is well-defined, where $U_{\alpha_p}$ is an element of $\mathcal{U}$ that contains $p$.
+
+\paragraph{Step 2.} Let $D = \sum_{p \in X} n(p) \cdot p$ be a divisor of $X$. There exists an open covering $\{ U_\alpha \}_{\alpha \in I}$ of $X$ with the property that for $p$ there is a neighborhood $U_p$ and there is a holomorphic function $g_{p, \, \alpha} \in \mathcal{O}_X(U_\alpha)$ such that
+\begin{equation*} \mathrm{div} \left( g_{p, \, \alpha} \, \big|_{U_p \cap U_\alpha} \right) = p. \end{equation*}
+We define
+\begin{equation*}f_\alpha = \prod_{p \in X} \left( g_{\alpha, \, p} \right)^{n(p)} \in \mathcal{M}_X^\ast(U_\alpha),\end{equation*}
+and it is easy to prove that the collection $\{f_\alpha\}_{\alpha}$ defines a global section of $\faktor{\mathcal{M}_X^\ast}{\mathcal{O}_X^\ast}$.
+\end{proof}
+
+\paragraph{Picard Group.} Recall that the invertible sheaves on $X$ form a group, called the \textit{Picard group} of $X$, with the tensor product; more precisely, we have the isomorphism
+\begin{equation*} \left( \Pic(X), \, \otimes \right) \cong H^1 \left( X, \, \mathcal{O}^\ast \right). \end{equation*}
+The short exact sequence
+\begin{equation*} 0 \xrightarrow{} \mathcal{O}_X^\ast \xrightarrow{} \mathcal{M}_X^\ast \xrightarrow{} \faktor{\mathcal{M}_X^\ast}{\mathcal{O}_X^\ast} \xrightarrow{} 0 \end{equation*}
+induces a long exact sequence in cohomology, i.e.,
+\begin{equation*} \begin{aligned} 0 \xrightarrow{} \: & H^0 \left(X, \,  \mathcal{O}_X^\ast \right) \xrightarrow{} H^0 \left(X, \,  \mathcal{M}_X^\ast \right) \xrightarrow{} H^0 \left(X, \,  \faktor{\mathcal{M}_X^\ast}{\mathcal{O}_X^\ast} \right) \xrightarrow{} \dots \\[1em] & \dots \xrightarrow{} H^1 \left(X, \,  \mathcal{O}_X^\ast \right) \xrightarrow{} H^1 \left(X, \,  \mathcal{M}_X^\ast \right) \xrightarrow{} H^1 \left(X, \,  \faktor{\mathcal{M}_X^\ast}{\mathcal{O}_X^\ast} \right) \xrightarrow{} 0. \end{aligned} \end{equation*}
+By \hyperref[prop:abj12]{Proposition \ref{prop:abj12}} - which is proved afterwards - we have
+\begin{equation*} H^1 \left(X, \, \mathcal{M}_X^\ast \right) = H^1 \left(X, \, \mathcal{M}_X \right) = 0. \end{equation*}
+Hence the isomorphisms above, along with the definitions, prove that the long exact sequence reduces to the shorter exact sequence given by
+\begin{equation*} 0 \xrightarrow{} \C^\ast \xrightarrow{} H^0 \left(X, \,  \mathcal{M}_X^\ast \right) \xrightarrow{} \Div(X)  \xrightarrow{} \Pic(X) \xrightarrow{} 0,\end{equation*}
+and hence
+\begin{equation*} \Div(X) \longtwoheadrightarrow \Pic(X). \end{equation*}
+
+\paragraph{Equivalent Assertion.} Given an invertible sheaf $\mathcal{L}$, there is a covering $\{ U_i \}_{i \in I}$ of $X$ and there are maps
+\begin{equation*} \psi_i : \mathcal{L} \, \big|_{U_i} \to \mathcal{O}_X(U_i), \qquad \sigma \mapsto f_i \cdot \sigma, \end{equation*}
+and hence we can take $D \, \big|_{U_i} = \mathrm{div}(f_i)$.
+
+\begin{proposition}Let $\sim$ be the equivalence relation on $\Div(X)$ given by
+\begin{equation*} D_1 \sim D_2 \iff D_1 - D_2 = \mathrm{div}(g). \end{equation*}
+The map $\varphi : \Div(X) \longrightarrow \Pic(X)$ passes to the quotient, and it induces an isomorphism
+\begin{alignat*}{2}
+  \widetilde{\varphi} : \faktor{\Div(X)}{\sim} & \longrightarrow & \Pic(X) \\[1em]
+  D&\longmapsto& \: \mathcal{O}_X[D],
+\end{alignat*}
+which is also a group homomorphism.\end{proposition}
+
+\begin{proof} Let $\{ U_i \}_{i \in I}$ be a covering of $X$, and let $f_i$ be the local equation of $D$, that is,
+\begin{equation*} \mathrm{div} \, f_i = D \, \big|_{U_i}. \end{equation*}
+The map $\psi_i : \mathcal{O}_X(U_i) \longrightarrow \mathcal{O}_X[D](U_i)$ sends $1$ to $\frac{1}{f_i}$ for every $i \in I$, and hence we have a nice local explicit expression for $\Psi$.
+
+\paragraph{Injective.} We claim that
+\begin{equation*} \varphi(D) = 0 \iff D = \mathrm{div}(h) \iff D \sim 0. \end{equation*}
+If $D = \mathrm{div} \, h$, then the sheaf $\mathcal{O}_X[D]$ is globally defined by $\frac{1}{h}$, and hence it is isomorphic to $\mathcal{O}_X$, that is, $\varphi(D) = 0$.
+
+Vice versa, if $\varphi(D) = 0$, then the map $\mathcal{O}_X[D] \longrightarrow \mathcal{O}_X$ is an isomorphism and it defined by the product with a function $h$, i.e.,
+\begin{equation*} \Psi : \mathcal{O}_X[D] \to \mathcal{O}_X, \qquad \sigma \longmapsto h \cdot \sigma. \end{equation*}
+In particular, the divisor $D$ is equal to $\mathrm{div} \, \frac{1}{h}$ by definition, and this is enough to prove that the claim holds.
+
+\paragraph{Group Homomorphism.} We want to prove that
+\begin{equation*} \varphi(D_1 + D_2) \: \stackrel{?}{=} \: \mathcal{O}_X[D_1] \otimes \mathcal{O}_X[D_2]. \end{equation*}
+But this is an easy consequence of the fact that there is an isomorphism given by
+\begin{equation*} \mathcal{O}_X[D_1] \otimes \mathcal{O}_X[D_2] \xrightarrow{\sim} \mathcal{O}_X[D_1 + D_2], \qquad \sigma_1 \otimes \sigma_2 \longmapsto \sigma_1 \cdot \sigma_2. \end{equation*}
+\end{proof}
+
+\paragraph{Structure of $\Pic(X)$.} The Picard group of $X$ may also be seen as the countable disjoint union of "Picard strips", that is,
+\begin{equation*} \Pic(X) = \bigsqcup_{d \in \Z} \Pic^d(X), \end{equation*}
+where
+\begin{equation*} \Pic^d(X) = \left\{ \mathcal{L} \in \Pic(X) \: \left| \: \text{deg} \, \mathcal{L} = d  \right.\right\}. \end{equation*}
+The \textit{degree} of an invertible sheaf may be defined by the surjective map $\Div(X) \twoheadrightarrow \Pic(X)$ simply considering the image of $\Div^d(X)$. In a similar fashion, one may define it as
+\begin{equation*} \text{deg} \, \mathcal{L} := \chi \left(X, \,  \mathcal{L} \right) - \chi \left(X, \,  \mathcal{O}_X \right), \end{equation*}
+coherently with the fact that
+\begin{equation*} \mathrm{deg} \, D = d \implies \text{deg} \, \mathcal{O}_X[D] = d, \end{equation*}
+as a straightforward consequence of the \hyperref[RiemannRoch]{Riemann-Roch Theorem \ref{RiemannRoch}}
+
+\begin{remark} For every divisor $d \in \Z$ there is an isomorphism
+\begin{equation*} \Pic^d(X) \xrightarrow{\quad \sim \quad} \Pic^0(X), \qquad \mathcal{L} \longmapsto \mathcal{L} \otimes \mathcal{O}_X[- d \cdot p], \end{equation*}
+which can also be seen via $\varphi$ as
+\begin{equation*} \Div^d(X) \xrightarrow{\quad \sim \quad} \Div^0(X), \qquad D \longmapsto D - d \cdot p. \end{equation*} \end{remark}
+
+\section{Jacobian of $X$}
+
+Let $X$ be a compact Riemann surface of genus $g(X) := g$, and let us consider the symplectic basis\footnote{\textbf{Definition.} A symplectic basis is a basis $e_1, \, f_1, \, \dots, \, e_n, \, f_n$ of a vector space endowed with a nondegenerate alternating bilinear form satisfying \eqref{10239dldlsd}.} of the first homology group $H_1(X, \, \Z)$ given by the closed paths $a_1, \, \dots, \, a_g, \, b_1, \, \dots, \, b_g$ (see \hyperref[Figure:Toro]{Figure \ref{Figure:Toro}}), satisfying the intersection conditions
+\begin{equation} \begin{cases} a_i \cdot b_i = 1 & \forall \, i =1, \, \dots, \, g, \\[0.5em] a_j \cdot b_k = 0 & otherwise.\end{cases} \label{10239dldlsd} \end{equation}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 14cm, height =8cm]{images/GAC201.png}
+\caption{The generators of the $\pi_1(\T_g)$.}
+\label{Figure:Toro}
+\end{figure} 
+
+\begin{remark} Recall that, for every divisor $D \in \Div(X)$,
+\begin{equation*} \Omega_1^X[D] = \mathcal{O}_X[K_X + D]. \end{equation*}
+By \hyperref[serreduality1]{Serre Duality Theorem \ref{serreduality1}} it turns out that
+\begin{equation*} H^0 \left(X, \, \Omega_X^1 \right) \cong H^0 \left(X, \, \mathcal{O}_X[K_X] \right) \implies H^0 \left(X, \, \Omega_X^1 \right) \cong H^1 \left(X, \, \mathcal{O}_X \right) . \end{equation*} \end{remark}
+
+\begin{definition}[Period]\index{Period} A \textit{period} is a linear functional
+\begin{equation*} H^0 \left(X, \, \Omega_X^1 \right) \ni \omega \longmapsto \int_{[\mathcal{C}]} \omega \in \C, \end{equation*}
+where $\left[\mathcal{C}\right]$ is a class of $H_1 \left(X, \, \Z \right)$. \end{definition}
+
+\paragraph{Periods Matrix.}\index{Periods Matrix} Fix a basis $\{ \omega_1, \, \dots, \, \omega_g \}$ of $H^0 \left(X, \, \Omega_X^1 \right)$, and let us consider the symplectic basis $\{a_1, \, \dots, \, a_g, \, b_1, \, \dots, \, b_g\}$ of $H_1 \left(X, \, \Z \right)$. The matrix
+\begin{equation*} \begin{pmatrix} \int_{a_1} \omega_1 & \dots & \dots & \int_{a_g} \omega_1 & \int_{b_1} \omega_1 & \dots & \dots & \int_{b_g} \omega_1 \\ \vdots & \ddots & & \vdots & \vdots & \ddots & & \vdots \\ \vdots &  & \ddots& \vdots & \vdots & & \ddots & \vdots \\ \int_{a_1} \omega_g & \dots & \dots & \int_{a_g} \omega_g & \int_{b_1} \omega_g & \dots & \dots & \int_{b_g} \omega_g  \end{pmatrix} \in \mathrm{M}\left(\C, \, g \times 2g \right),\end{equation*}
+is called the \textit{periods matrix}, and it has the form $(A \left| B \right. )$. From now on, we shall denote by
+\begin{equation*} \begin{aligned} & A_i = \left( \int_{a_i} \omega_j \right)_{j = 1, \, \dots, \, g}, \\[1em] & B_i = \left( \int_{b_i} \omega_j \right)_{j = 1, \, \dots, \, g}, \end{aligned} \end{equation*}
+the columns of the these two matrices.
+
+\begin{lemma} \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The matrices $A, \, B \in \mathrm{M}\left(\C, \, g \times g \right)$ are invertible.
+\item The column vectors $A_i, \, B_i$ are a real basis of $\C^g$, i.e., they are $2g$ $\R$-linear vectors.
+\item The transpose commutes, that is,
+\begin{equation*}A^T B = B^T A. \end{equation*}
+\end{enumerate}
+\end{lemma}
+
+\begin{definition}[Jacobian]\index{Jacobian} The Jacobian of $X$ is the quotient between the dual space of $\Omega_X^1$ and the lattice induced by the matrix of periods, that is,
+\begin{equation*} \Jac(X) := \frac{H^0 \left( X, \, \Omega_X^1  \right)^v}{ \left( \int_{a_i} \omega_j, \, \int_{b_i} \omega_j \right)_{i, \, j = 1, \, \dots, \, g}}. \end{equation*} \end{definition}
+
+\begin{remark}The Jacobian of $X$ is also equal to the quotient
+\begin{equation*} \Jac(X) = \frac{H^0\left(X, \, \mathcal{O}_X[K_X] \right)^v}{ \imath \left( H^1(X, \, \Z) \right)}, \end{equation*}
+where $\imath : H^1(X, \, Z) \to H^0 \left(X, \, \Omega_X^1 \right)^v$ is the map sending a class of equivalence $[\mathcal{C}]$ to the functional
+\begin{equation*}H^0 \left(X, \, \Omega_X^1 \right) \ni \omega \longmapsto \int_{[\mathcal{C}]} \omega \in \C. \end{equation*}\end{remark}
+
+\begin{remark}Let us consider $\Lambda$ - the lattice in $\C^g$ generated by $a_1, \, \dots, \, a_g, \, b_1, \, \dots, \, b_g$ -, that is,
+\begin{equation*} \Lambda := \left\{ \sum_{i = 1}^g m_i \cdot A_i + \sum_{j = 1}^g n_j \cdot B_j \: \left| \: m_i, \, n_j \in \Z \right. \right\}. \end{equation*}
+The Jacobian of $X$ is isomorphic to the quotient $\faktor{\C^g}{\Lambda}$ via the inclusion maps, and it is hence a complex (compact) torus. \end{remark}
+
+\section{Abel-Jacobi Map}
+
+Let us fix a point $p_0 \in X$. The Abel-Jacobi map\index{Abel-Jacobi map} is defined by
+\begin{equation*} A_{p_0} : X \longrightarrow \Jac(X) \qquad p \longmapsto \begin{pmatrix}  \displaystyle\int_{p_0}^p \omega_1 \\[1em] \vdots \\[1em]  \displaystyle\int_{p_0}^p \omega_g \end{pmatrix} \qquad \left( \text{mod $\Lambda$} \right), \end{equation*}\index{Abel-Jacobi map!on points}
+where
+\begin{equation*} \int_{p_0}^p = \int_\gamma, \end{equation*}
+for any path $\gamma$ starting from $p_0$ and ending in $p$.
+
+\begin{remark}The Abel-Jacobi map is well-defined. Indeed, if $\gamma$ and $\gamma^\prime$ are two paths between $p_0$ and $p$, then
+\begin{equation*} \int_\gamma \omega - \int_{\gamma^\prime} \omega = \int_\eta \omega \in \Lambda, \end{equation*} 
+where $\eta$ is a closed path with base point $p_0$ (see \hyperref[fig:201]{Figure \ref{fig:201}}).\end{remark}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 12cm, height =8cm]{images/GAC202.png}
+\caption{Well-definition of the Abel-Jacobi map}
+\label{fig:201}
+\end{figure} 
+
+The map $A_{p_0} : X \to \Jac(X)$ may be extended by linearity to $\Div(X)$, and from now on we shall denote by $A_0$ the restriction of $A_{p_0}$ to $\Div^0(X)$. \index{Abel-Jacobi map!on divisors}
+
+\begin{remark}The map $A_0$ does not depend on the base point $p_0$. Indeed, if we consider a divisor
+\begin{equation*} D = \sum_{i = 1}^n p_i - \sum_{i = 1}^n q_i \in \Div^0(X), \end{equation*}
+then
+\begin{equation*} A_0(p_i - q_i) = \begin{pmatrix}  \displaystyle\int_{\alpha_i} \omega_1 \\[1em] \vdots \\[1em]  \displaystyle\int_{\alpha_i} \omega_g \end{pmatrix} - \begin{pmatrix}  \displaystyle\int_{\beta_i} \omega_1 \\[1em] \vdots \\[1em]  \displaystyle\int_{\beta_i} \omega_g \end{pmatrix} = \begin{pmatrix}  \displaystyle\int_{\alpha_i} \omega_1 - \int_{\beta_i} \omega_1 \\[1em] \vdots \\[1em]  \displaystyle\int_{\alpha_i} \omega_g - \int_{\beta_i} \omega_g \end{pmatrix}\qquad \left( \text{mod $\Lambda$} \right).\end{equation*}
+The reader may jump to \hyperref[fig:202]{Figure \ref{fig:202}} to have a better understating of what is going on here. For every $i$ the closed path $\eta_i := \alpha_i - \gamma_i - \beta_i$ belongs to $H_1 \left(X, \, \Z \right)$, and hence
+\begin{equation*}\left( \int_{\eta_i} \omega_1, \, \dots, \, \int_{\eta_i} \omega_g \right)^T  = (0, \, \dots, \, 0)^T.\end{equation*}
+As a consequence, we obtain
+\begin{equation*} A_0(p_i - q_i) = \begin{pmatrix}  \displaystyle\int_{\gamma_i} \omega_1 \\[1em] \vdots \\[1em]  \displaystyle\int_{\gamma_i} \omega_g \end{pmatrix} \qquad  \left( \text{mod $\Lambda$} \right),\end{equation*}
+which implies that $A_0 : \Div^0(X) \to \Jac(X)$ does not depend on the base point $p_0$.\end{remark}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 12cm, height =12cm]{images/GAC203.png}
+\caption{Independence of $A_0$ from $p_0$.}
+\label{fig:202}
+\end{figure} 
+
+\section{Abel-Jacobi Theorems}
+
+In this final section, we state and partially prove two fundamental results concerning the Abel-Jacobi map $A_0$, and we conclude by showing the main consequences they lead us to.
+
+\begin{theorem}[Abel's Theorem]\index{Abel's Theorem}\label{th:abel} Let $X$ be a compact Riemann surface, and let $D \in \Div^0(X)$. Then $A_0(D) = 0$ if and only if there exists a meromorphic function $f : X \to \C$ such that $D = \mathrm{div}(f)$, i.e., $D \sim 0$. \end{theorem}
+
+\begin{theorem}[Jacobi Inversion Theorem]\index{Jacobi Theorem}\label{th:jacobi} Let $X$ be a compact Riemann surface, and fix $p_0 \in X$. For any $\lambda \in \Jac(X)$, there are $p_1, \, \dots, \, p_g \in X$ points such that
+\begin{equation*} A_0 \left( \sum_{i = 1}^g (p_i - p_0) \right) = \lambda. \end{equation*}
+Moreover, if $\lambda$ is a generic point, then the divisor $D = \sum_{i =1}^g p_i$ is unique.\end{theorem}
+
+\begin{corollary}There are isomorphisms
+\begin{equation*} \mathrm{Pic}^0(X) \cong \faktor{\Div^0(X)}{\sim} \cong \Jac(X). \end{equation*}\end{corollary}
+
+\paragraph{Abel-Jacobi Map in Positive Degree.}\index{Abel-Jacobi map!on divisors of degree $d$} Fix $p_0 \in X$, and let us consider the set of all positive divisor of degree $d$, that is,
+\begin{equation*} \Div_+^d(X) := \left\{ D \in \Div^d(X) \: \left| \: D \geq 0 \right. \right\}. \end{equation*}
+The map $A_d$ is defined by taking the restriction of $A_{p_0}$ to $\Div_+^d(X)$ and, in particular, it is defined by setting
+\begin{equation*} A_d : \Div_+^d(X) \longrightarrow \Jac(X), \qquad D \longmapsto \begin{pmatrix}  \displaystyle \sum_{i = 1}^{d} \int_{p_0}^{p_i} \omega_1 \\[1em] \vdots \\[1em]  \displaystyle\sum_{i = 1}^{d} \int_{p_0}^{p_i} \omega_g \end{pmatrix} \qquad \left( \text{mod $\Lambda$} \right). \end{equation*}
+The Abel-Jacobi map induces a commutative diagram given by
+\begin{equation*} \begin{tikzcd} \Div_+^d(X) \ar[d, "\tau"] \ar[r, "A_d"] & \Jac(X) \ar[d] \ar[r, dotted, "\sim"] & \Pic^d(X) \ar[d, "t"]
+\\[1em] \Div^0(X) \ar[r, "A_0"] & \Jac(X)\ar[u] \ar[r, dotted, "\sim"] & \Pic^0(X)  \end{tikzcd} \end{equation*}
+where
+\begin{equation*} \tau(D) = D - d \cdot p_0 \qquad \text{and} \qquad t(\mathcal{L}) = \mathcal{L} \otimes \mathcal{O}_X[-d \cdot p_0]. \end{equation*}
+Observe that $X$ is canonically isomorphic to $\Div_+^1(X)$, hence the Abel-Jacobi map induces
+\begin{equation*} A_1 : X \longrightarrow \Jac(X), \qquad D \longmapsto \begin{pmatrix}  \displaystyle \int_{p_0}^{p} \omega_1 \\[1em] \vdots \\[1em]  \displaystyle \int_{p_0}^{p} \omega_g \end{pmatrix} \qquad \left( \text{mod $\Lambda$} \right). \end{equation*}
+
+\begin{proposition}\label{prop:211}Let $X$ be a compact connected Riemann surface of genus $g(X) \geq 1$. Then the Abel-Jacobi map $A_1 : X \to \Jac(X)$ is injective. \end{proposition}
+
+\begin{proof}We argue by contradiction. Let $p, \, q \in X$ be points such that $A_1(p) = A_1(q)$, and observe that the divisor $p - q$ has degree zero. Therefore
+\begin{equation*} A_1(p) - A_1(q) = A_0(p - q) = 0, \end{equation*}
+and by \hyperref[th:abel]{Abel Theorem} it follows that $p - q = \mathrm{div}(f)$, where $f$ is a function with a zero and a pole. The resulting morphism $f : X \to \p^1(\C)$ has degree one, and thus $X \cong \p^1(\C)$, which is absurd since the genii are different by assumption. \end{proof}
+
+\begin{remark}Let $\lambda \in \Jac(X)$ be a point such that
+\begin{equation*} \lambda = A_{p_0}(D) \end{equation*}
+for some divisor $D \in \Div_+^d(X)$. Then
+\begin{equation*} A_{p_0}^{-1}(\lambda) = |D| \end{equation*}
+since $A_{p_0}(D) = A_{p_0}(D^\prime)$ if and only if $D^\prime \sim D$ (see the proof of \hyperref[prop:211]{Proposition \ref{prop:211}}).\end{remark}
+
+\begin{proposition}\label{prop:212} Let $X$ be a compact connected Riemann surface, and let $D \in \Div_+^{g(X)}(X)$ be a generic divisor. Then $h^1 \left(X, \, \mathcal{O}_X[D] \right) = 0$. \end{proposition}
+
+\begin{proof}By \hyperref[th:jacobi]{Jacobi Theorem} it turns out that for any $\lambda \in \Jac(X)$ generic point there exists a unique divisor $D \in \Div_+^{g(X)}(X)$ such that $A_{p_0}(D) = \lambda$. The previous remark, on the other hand, asserts that
+\begin{equation*} A_{p_0}^{-1}(\lambda) = |D|, \end{equation*}
+and hence $|D| = \{D\}$ is given by the divisor itself only. Hence $h^0 \left(X, \, \mathcal{O}_X[D] \right) = 1$, and by the \hyperref[RiemannRoch]{Riemann-Roch Theorem} it follows that
+\begin{equation*}  h^1 \left(X, \, \mathcal{O}_X[D] \right) = h^0 \left(X, \, \mathcal{O}_X[D] \right) - \mathrm{deg} \, D - 1 + g(X) = g(X) + 1 - g(X) - 1 = 0. \end{equation*}
+\end{proof}
+
+\begin{proposition}\label{prop:abj12}Let $X$ be a compact Riemann surface, and let $\mathcal{M}$ be the field of all the meromorphic functions defined on $X$, and let $\mathcal{M}_X$ be the constant sheaf on $X$. Then
+\begin{equation*} h^1 \left(X, \, \mathcal{M}_X \right) = 0. \end{equation*} \end{proposition}
+
+\begin{proof}Let $D \in \Div(X)$ be a divisor such that $h^1\left(X, \, \mathcal{O}_X[D] \right) = 0$ (which exists by \hyperref[prop:212]{Proposition \ref{prop:212}}). There is a long exact sequence in cohomology given by
+\begin{equation*} \begin{aligned} 0 \xrightarrow{} & H^0\left(X, \, \mathcal{O}_X[D] \right) \xrightarrow{} H^0\left(X, \, \mathcal{M}_X \right) \xrightarrow{} H^0\left(X, \, \tau_X[D] \right) \xrightarrow{} \dots \\[1em]
+&\dots \xrightarrow{} H^1\left(X, \, \mathcal{O}_X[D] \right) \xrightarrow{} H^1\left(X, \, \mathcal{M}_X \right) \xrightarrow{} H^1\left(X, \, \tau_X[D] \right). \end{aligned} \end{equation*}
+The sheaf $\tau_X[D]$ is supported on a finite set of points, hence the dimension $h^1\left(X, \, \tau_X[D]) \right)$ is equal to zero; by construction we also have that $h^1\left(X, \, \mathcal{O}_X[D] \right) = 0$, thus the thesis holds true.\end{proof}
+
+\paragraph{Conclusion.} In this last paragraph, we only give a proof of the Jacobi inversion theorem. The Abel theorem requires a lot of work, and we will give it for granted (the reader may consult \cite[pp. 250-263]{miranda} for a lengthy proof).
+
+\begin{proof}[Proof of Jacobi Theorem] Let us denote by $X^{(g)}$ the symmetric product of $g(X)$ copies of $X$, that is, the quotient
+\begin{equation*} X^{(g)} = \faktor{X \times \dots \times X}{\sigma_g}. \end{equation*}
+First, we observe that $\mathrm{dim}_\C \, X = 1$ is a particular case because it allows us to conclude that $X^{(g)}$ is a $g$-manifold\footnote{The reader may refer to \href{https://arbourj.wordpress.com/2014/05/11/jacobis-inversion-theorem/}{this post} for a proof of this fact.} (i.e., $X^{(g)}$ is not singular, as it could have been in higher dimension). Let
+\begin{equation*} A^{(g)} : X^{(g)} \longrightarrow \Jac(X), \qquad \begin{pmatrix}p_1 \\[1em] \vdots \\[1em] p_g \end{pmatrix} \longmapsto \begin{pmatrix}  \displaystyle \sum_{i = 1}^{g} \int_{p_0}^{p_i} \omega_1 \\[1em] \vdots \\[1em]  \displaystyle\sum_{i = 1}^{g} \int_{p_0}^{p_i} \omega_g \end{pmatrix} \qquad \left( \text{mod $\Lambda$} \right). \end{equation*}
+be the Abel-Jacobi map naturally defined on $X^{(g)}$. It is enough to prove that for any generic point $(p_1, \, \dots, \, p_g) \in X^{(g)}$, the Abel-Jacobi map $A^{(g)}$ is a \textbf{local isomorphism}.
+
+\paragraph{Step 1.} Let $\{\omega_1, \, \dots, \, \omega_g\}$ be a basis for $H^0 \left( X, \, \Omega_X^1 \right)$, and take $p_1, \, \dots, \, p_g \in X$ distinct points such that
+\begin{equation*} \omega_i = h_i \, \mathrm{d}z_i, \end{equation*}
+where $z_i$ is the local coordinate relative to $p_i$ and $(z_1, \, \dots, \, z_g)$ local coordinates of $X^{(g)}$, and also satisfying the following property: the $g \times g$ complex matrix
+\begin{equation*} \left( h_j(p_i) \right)_{i, \, j = 1, \, \dots, \, g} \end{equation*}
+is upper triangular, and it is not degenerate.
+
+\paragraph{Step 2.} In a neighborhood of $(p_1, \, \dots, \, p_g) \in X^{(g)}$ it turns out that
+\begin{equation*} A^{(g)} (p_1, \, \dots, \,  p_g) = \begin{pmatrix}  \displaystyle \sum_{i = 1}^{g} \int_{p_0}^{p_i + z_i} \omega_1 \\[1em] \vdots \\[1em]  \displaystyle\sum_{i = 1}^{g} \int_{p_0}^{p_i + z_i} \omega_g \end{pmatrix} \qquad \left( \text{mod $\Lambda$} \right), \end{equation*}
+and hence
+\begin{equation*} \frac{\partial}{\partial \, z_i} \, A^{(g)} (p_1, \, \dots, \,  p_g) = \frac{\partial}{\partial \, z_i} \,  \begin{pmatrix}  \displaystyle \sum_{i = 1}^{g} \int_{p_0}^{p_i + z_i} h_1 \, \mathrm{d}z_1\\[1em] \vdots \\[1em]  \displaystyle\sum_{i = 1}^{g} \int_{p_0}^{p_i + z_i} h_g \, \mathrm{d}z_g \end{pmatrix} = \begin{pmatrix} h_1(p_1) \\[1em] \vdots \\[1em] h_g(p_g) \end{pmatrix}. \end{equation*}
+The matrix associated with the differential $\mathrm{d} A^{(g)}$ is thus given by
+\begin{equation*} \left( h_j(p_i) \right)_{i, \, j = 1, \, \dots, \, g}, \end{equation*}
+which is a maximal rank matrix by construction (recall that we chose the $p_i$'s in such a way to have this property), and hence $A^{(g)}$ is a local isomorphism.
+
+\paragraph{Step 4.} The surface $X$ is irreducible and compact. Hence the map $A^{(g)}$ is proper, the manifold $\Jac(X)$ is irreducible and $A^{(g)}$ is also a dominant map\footnote{The reader may jump \href{http://stacks.math.columbia.edu/tag/01RI}{here} for an overview of dominant morphisms between schemes.
+
+\begin{definition} A morphism $f:X \to S$ of schemes is \textit{dominant} if the image of $f$ is a dense subset of $S$. \end{definition}
+
+\begin{lemma}Let $f : X \to S$ be a morphism of schemes. If every generic point of every irreducible component of $S$ is in $\mathrm{Im} \, f$, then $f$ is dominant.\end{lemma}}, that is, $A^{(g)}$ is surjective.
+
+\paragraph{Step 5.} The fiber of $A^{(g)}$ is isomorphic to the linear system $|p_1 + \dots + p_g|$, and this is isomorphic to the projectivization of the global sections, i.e.,
+\begin{equation*}|p_1 + \dots + p_g| \cong \p \left( H^0 \left(X, \, \mathcal{O}_X[p_1 + \dots + p_g] \right) \right). \end{equation*}
+Since $A^{(g)}$ is a local isomorphism, it turns out that the dimension of the fiber is zero and hence there exists one and only one divisor $p_1 + \dots + p_g$ (if a projective subspace contains two points, then it contains the whole line between them).
+\end{proof}

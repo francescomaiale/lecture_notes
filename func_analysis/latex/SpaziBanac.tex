@@ -1,0 +1,221 @@
+\chapter{Banach Spaces} \thispagestyle{empty}
+
+In this chapter, we generalize the concept of Hilbert space when a scalar product inducing the norm does not exist. More precisely, we introduce the notion of \textit{Banach space}, and describe the main properties (e.g., completeness) of the space of all linear operators between two Banach spaces
+
+\section{Definitions and Elementary Properties}
+
+\begin{definition}[Norm] \index{norm} \index{normed space} Let $X$ be a (real or) complex vector space. A \textit{norm} is an application $\| \cdot \| : X \longrightarrow \R_+$ satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The norm is always positive and equal to $0$ only for $x = 0$, that is,
+\begin{equation*}\text{$\|x\| \geq 0$ for every $x \in X$} \quad \text{and} \quad \|x\| = 0 \iff x = 0. \end{equation*}
+\item The norm is positively homogeneous, that is,
+\begin{equation*} \|\lambda x\| = |\lambda| \|x\| \quad \text{for all $\lambda \in \C$ and $x \in X$}. \end{equation*}
+\item The norm satisfies the triangular inequality, that is,
+\begin{equation} \|x + y\| \leq \|x\| + \|y\| \quad \text{for every $x, \, y \in X$}. \label{itm:ntriangolare}\index{triangular inequality} \end{equation} 
+\end{enumerate}\end{definition}
+
+\begin{remark}Any normed space $\left(E, \, \|\cdot\|_E \right)$ is also a metric space\index{metric space}. Indeed, it is straightforward to check that the mapping $\rho : X \times X \longrightarrow \R$, defined by
+\begin{equation*} \label{oss:distanzaindotta} \rho(x, y) := \|x - y\|,\end{equation*}
+satisfies the conditions \textbf{(a)}-\textbf{(c)} introduced in the previous definition. The opposite implication is false, that is, a metric space is generally not a normed space.\end{remark}
+
+\begin{proof}The first assertion is evident. To find a metric space which is not a normed space, the reader may consider a \textbf{bounded} metric $d$ on a topological space $X$. \end{proof}
+
+\begin{definition}[Banach Space] \index{Banach space} A normed space $(B, \, \| \cdot \|_B)$ is a \textit{Banach space} if it is complete with respect to the \hyperref[oss:distanzaindotta]{induced distance} $\rho$.\end{definition}
+
+\begin{definition}[Seminorm] \index{seminorm} Let $X$ be a complex vector space. A \textit{seminorm} is a mapping $p : X \longrightarrow \R$ satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item \textit{Positive}, that is, $p(x) \geq 0$ for all $x \in X$.
+\item \textit{Positively homogeneous}, that is $p(\lambda x) = |\lambda| p(x)$ for all $\lambda \in \C$ and $x \in X$.
+\item Satisfies the \textit{triangular inequality}, that is
+\begin{equation} \label{itm:ntriangolare2} p(x+ y) \leq p(x) + p(y) \quad \text{for every $x, \, y \in X$}. \end{equation} 
+\end{enumerate} \end{definition}
+
+\begin{remark}Let $\left(X, \,p_X \right)$ be a seminormed space\index{seminormed space}. The map $\rho_s : X \times X \longrightarrow \R$, defined by setting
+\begin{equation*} \label{oss:semidistanzaindotta} \rho_s(x, y) := p_X(x - y), \end{equation*}
+is a \textit{pseudometric}\index{pseudometric} on $X$, that is, a positive function satisfying all the properties of a metric, except
+\begin{equation*}x = y \iff \rho_s(x, \, y) = 0. \end{equation*}\end{remark}
+
+In general, if $\left(X, \,p_s \right)$ is a seminormed space, then the topology induced on $(X, \, \rho_s)$ is not Hausdorff, that is, the points are not separable since $\rho_s(x, \, y) = 0$ does \textbf{not} imply $x = y$.
+
+\begin{example}The reader may check that $L^2 \left([0, \, 1] \right)$, endowed with the seminorm
+\begin{equation*} p_2(f) = \int_0^1 |f(x)|^2 \, \mathrm{d}x, \end{equation*}
+is not a Hausdorff space. The reader may jump to \hyperref[ex:closedquo]{Exercise \ref{ex:closedquo}}, where we investigate this property more in-depth.\end{example}
+
+\begin{theorem} \index{Banach space!completeness criterion}\label{theorem:comp}Let $(X, \, \|\cdot\|)$ be a normed space. The following are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The space $X$ is complete with respect to $\| \cdot \|$.
+\item Every absolutely converging series
+\begin{equation*} \sum_{n \in \mathbb{N}} \|x_n\| < \infty \end{equation*}
+is convergent, that is,
+\begin{equation*}\exists x \in X \: : \: \lim_{n \to + \infty} \left\| \sum_{k = 0}^n x_k - x \right\| = 0. \end{equation*}
+\item Every absolutely convergent geometric\footnote{\textbf{Definition.} Let $(X, \, \|\cdot\|)$ be a normed space. The series $\sum_n x_n$ is geometric if $\|x_n\| \leq 2^{-n}$ for every $n \in \N$.} series
+\begin{equation*} \sum_{n \in \mathbb{N}} \|x_n\| < \infty \end{equation*}
+is convergent, that is,
+\begin{equation*}\exists x \in X \: : \: \lim_{n \to + \infty} \left\| \sum_{k = 0}^n x_k - x \right\| = 0. \end{equation*}
+\end{enumerate}\end{theorem}
+ 
+\begin{remark} \label{rmk:prev}Let $(X, \, d)$ be a metric space. If $(x_n)_{n \in \mathbb{N}}$ is a Cauchy sequence, and $(x_{n_k})_{k \in \N}$ is a subsequence converging to some $x \in X$, then $(x_n)_{n \in \mathbb{N}}$ also converges to $x$. \end{remark}
+
+\begin{proof}The triangular inequality implies that
+\begin{equation*} d(x_n, \, x) \leq d(x_n, \, x_{n_k}) + d(x_{n_k}, \, x), \end{equation*} 
+for every $n \in \N$. Since $(x_n)_{n \in \N}$ is a Cauchy sequence, there exists a natural number $N_1 \in \mathbb{N}$ such that 
+\begin{equation*}d(x_n, \, x_m) \leq \epsilon, \qquad \forall \, n, \, m > N_1. \end{equation*}
+In a similar fashion, the subsequence $(x_{n_k})_{k \in \N}$ converges to $x$, and hence there exists a natural number $N_2 \in \mathbb{N}$ such that
+\begin{equation*}d(x_{n_k}, \, \underline{x}) \leq \epsilon, \qquad \forall \, n_k > N_2. \end{equation*}
+In conclusion, if we let $N := \max\{N_1, \, N_2\}$, then it turns out that
+\begin{equation*} d(x_n, \, x) \leq 2 \, \epsilon, \qquad \forall n \, > N, \end{equation*}
+that is, $x_n \to x$ as $n$ goes to $+ \infty$.\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{theorem:comp}] The assertion \textbf{"(b) $\implies$ (c)"} follows directly from the definitions; therefore we only show the remaining two implications here.
+
+\paragraph{\textbf{"(a) $\implies$ (b)"}} Suppose that $X$ is complete, and let $(x_n)_{n \in \N}$ be an absolutely convergent sequence, that is,
+\begin{equation*} \sum_{n \in \mathbb{N}} \|x_n\| < \infty. \end{equation*}
+If we denote by $(S_k)_{k \in \mathbb{N}}$ the sequence of the partial sums, i.e.
+\begin{equation*} S_k := \sum_{n = 0}^k x_n, \end{equation*}
+then the thesis is equivalent to the existence of $S \in X$ such that
+\begin{equation*}S_k \xrightarrow{k \to + \infty} S.\end{equation*}
+By completeness, it is enough to prove that $(S_k)_{k \in \mathbb{N}}$ is a Cauchy sequence in $X$. But this follows easily from the following estimate:
+\begin{equation*} \| S_j - S_k \|  = \left\| \sum_{n = k}^{j} x_n \right\| \leq \sum_{n = k}^{j} \|x_n\| = o(1), \qquad \text{for $k, \, j \to + \infty$}.\end{equation*}
+
+\paragraph{\textbf{"(c) $\implies$ (a)}"} Let $(x_n)_{n \in \N}$ be a Cauchy sequence in $X$. A standard argument implies that there always exists a subsequence $(x_{n_k})_{k \in \mathbb{N}} \subset (x_n)_{n \in \mathbb{N}}$ such that
+\begin{equation*} \left\| x_{n_{k+1}} - x_{n_k} \right\| \leq 2^{-k}. \end{equation*}
+Let $(y_k)_{k \in \mathbb{N}} := \left(x_{n_{k+1}} - x_{n_k} \right)_{k \in \N}$. Clearly, the sum
+\begin{equation*}S_k:= \sum_{k \in \mathbb{N}} y_k \end{equation*}
+is an absolutely convergent geometric series, and thus by assumption it converges to a certain element $S \in X$. On the other hand, we have the identity
+\begin{equation*} x_{n_{k+1}} = x_{n_0} + S_k, \end{equation*}
+and therefore there exists $\underline{x} = x_{n_0} + S \in X$ such that
+\begin{equation*}x_{n_k} \xrightarrow{k \to + \infty} \underline{x}.\end{equation*}
+In particular, we proved that a Cauchy sequence $(x_n)_{n \in \N}$ always admits a converging subsequence. By \hyperref[rmk:prev]{Remark \ref{rmk:prev}} we finally infer that $(x_n)_{n \in \mathbb{N}}$ converges to $\underline{x}$ as well, which means that $X$ is complete.
+\end{proof}
+
+\begin{proposition}[Bounded Functions] \index{space of bounded functions} \label{ex:bf}Let $S$ be a set, and let $(X, \, \|\cdot\|_X)$ be a Banach space. The space of all the bounded functions with values in $X$, denoted by
+\begin{equation*} \left( \mathcal{B}\left(S; \; X \right), \, \| \cdot \|_{\infty, \, S} \right), \end{equation*}
+is complete with respect to the uniform norm. \end{proposition}
+
+\begin{proof} Let $(f_k)_{k \in \mathbb{N}} \subset \mathcal{B}\left(S; \; X \right)$ be a sequence such that
+\begin{equation*} \sum_{k \in \mathbb{N}} \|f_k\|_{\infty, \, S} < \infty. \end{equation*}
+For every $s \in S$, it turns out that
+\begin{equation*} \sum_{k \in \mathbb{N}} \|f_k(s)\|_{X} \leq \sum_{k \in \mathbb{N}} \|f_k\|_{\infty, \, S}< \infty, \end{equation*}
+and thus (by completeness) the series $\sum_{k \in \N} f_k(s)$ converges in $X$. For every $s \in S$ it turns out that
+\begin{equation*} \left\| \sum_{k \in \mathbb{N}} f_k(s) \right\|_X \leq \sum_{k \in \mathbb{N}} \|f_k(s)\|_{X}< \infty, \end{equation*}
+and hence the map
+\begin{equation*}F : S \longrightarrow X, \qquad s \longmapsto  \sum_{k = 0}^{+\infty} f_k(s) \end{equation*}
+is a bounded function. In conclusion, we notice that the convergence is uniform since
+\begin{equation*} \left\| F - \sum_{k=0}^N f_k \right\|_{\infty, \, S} = \left\| \sum_{k=N+1}^{+\infty} f_k \right\|_{\infty, \, S} \leq \sum_{k \geq N+1} \|f_k\|_{\infty, \, S} = o(1) \end{equation*}
+for $N \to + \infty$, and this is enough to conclude the proof.
+\end{proof}
+
+\begin{remark}\label{rmk1023914} Let $E$ be a topological space. The inclusion
+\begin{equation*} \left( C_b^0\left(E; \; X\right), \, \| \cdot \|_{\infty} \right) \subset \left( \mathcal{B}\left(E; \; X \right), \, \| \cdot \|_{\infty} \right) \end{equation*}
+is closed. Therefore, the space $C_b^0\left(E; \; X\right)$ is complete as a corollary of \hyperref[ex:bf]{Proposition \ref{ex:bf}}.\end{remark}
+
+\begin{proposition}\label{prop:f1o2ldsadlwe}Let $X$ be a topological space, and let $\mu$ be any reasonable measure on a $\sigma$-algebra $\mathcal{F}$ of $X$. The space of all $\mu$-summable functions, denoted by $L^1(X; \; \mu)$, is complete. \end{proposition}
+
+\begin{proof} Let $(f_k)_{k \in \mathbb{N}} \subset L^1(X; \; \mu)$ be a sequence such that
+\begin{equation*} \sum_{k \in \mathbb{N}} \|f_k\|_{L^1(X; \; \mu)} < \infty, \end{equation*}
+and let us define
+\begin{equation*} g_n(x) := \sum_{k = 0}^n |f_k(x)|, \qquad \forall \, n \in \mathbb{N}. \end{equation*}
+Clearly $(g_n)_{n \in \mathbb{N}}$ is an increasing sequence of positive and measurable functions; thus the Beppo-Levi\footnote{Let $\left(X, \, \Sigma, \, \mu \right)$ be a measure space, and let $(f_k)_{k \in \N}$ be a sequence of non-decreasing (point-wise), positive and measurable functions. Then the punctual limit $f(x) := \lim_k f_k(x)$ is measurable and \begin{equation*} \int f_k \, \mathrm{d}\mu \xrightarrow{k \to + \infty} \int f \, \mathrm{d}\mu. \end{equation*} } property implies that
+\begin{equation*} \sum_{k = 0}^{+ \infty} \|f_k\|_{L^1(X; \; \mu)} = \lim_{n \to + \infty} \int_X g_n(x) \, \mathrm{d}\mu(x) = \int_X \left( \sum_{k = 0}^{+ \infty} |f_k(x)| \right) \, \mathrm{d}\mu(x), \end{equation*}
+that is, the series $\sum_k |f_k(x)|$ converges $\mu$-almost everywhere. But $\R$ is a complete space; hence the mapping
+\begin{equation*}F : X \longrightarrow \R, \qquad x \longmapsto F(x) := \sum_{k = 0}^{+\infty} f_k(x) \end{equation*}
+is well-defined and, as the reader may easily check, also an element of $L^1(X; \; \mu)$ since
+\begin{equation*}\left|F(x)\right| \leq \sum_{k=0}^{+ \infty} |f_k(x)| \in L^1(X; \; \mu). \end{equation*}
+In conclusion, we observe that
+\begin{equation*} \left\| F - \sum_{k=0}^N f_k \right\|_{L^1(X; \; \mu)} \leq \sum_{k \geq N+1} \left\|f_k\right\|_{L^1(X; \; \mu)} = o(1), \end{equation*}
+for $N \to + \infty$, to infer that the convergence is uniform.
+\end{proof}
+
+\begin{remark}\label{ex:cptS} In a similar fashion, one can prove that $L^p(X; \; \mu)$ is complete for every $p \geq 1$ and any reasonable measure $\mu$.
+
+\paragraph{Step 1.} Let $(f_k)_{k \in \mathbb{N}} \subset L^p(X; \; \mu)$ be a sequence such that
+\begin{equation*} \sum_{k \in \mathbb{N}} \|f_k\|_{p} < \infty, \end{equation*}
+and assume that $\mu(X) < \infty$ and $1 \leq p < + \infty$. The inclusion
+\begin{equation*} L^p(X; \; \mu) \hookrightarrow L^1(X; \; \mu) \end{equation*}
+is continuous, and thus $\sum_k f_k$ is also a absolutely converging series in $L^1(X; \; \mu)$. It follows from \hyperref[prop:f1o2ldsadlwe]{Proposition \ref{prop:f1o2ldsadlwe}} that it converges in $L^1(X; \; \mu)$ to an element $f \in L^1(X; \; \mu)$ and, up to a subsequences, it converges to $f$ $\mu$-almost everywhere.
+
+\paragraph{Step 2.} For every $n \in \N$, it turns out that
+\begin{equation*} \left| f_m(x) - f_n(x) \right| \xrightarrow{m \to + \infty} \left| f(x) - f_n(x) \right|,\end{equation*}
+and thus - by Fatou's Lemma\footnote{Let $\left(X, \, \Sigma, \, \mu \right)$ be a measure space, and let $(f_k)_{k \in \N}$ be a sequence of positive and measurable functions. If$f(x) := \liminf_k f_k(x)$, then \begin{equation*} \int_X f \, \mathrm{d}\mu \leq \liminf_{k \to + \infty} \int_X f_k \, \mathrm{d}\mu. \end{equation*} } - we find that
+\begin{equation*} \|f - f_n\|_{L^p(X; \; \mu)}^p \leq \liminf_{m \to + \infty} \| f_m - f_n \|_{L^p(X; \; \mu)}^p = o(1),\end{equation*}
+for $n \to + \infty$, and this is enough to conclude.
+
+\paragraph{Step 3.} If $X$ is a $\sigma$-finite set, then we can find a $\mu$-almost everywhere converging subsequence and use the same argument in a exhaustion by compact sets (e.g., diagonal procedure).
+
+If $X$ is not $\sigma$-finite, it is enough to notice that the support of a $L^p(X; \; \mu)$ function needs to be $\sigma$-finite and that the countable union of $\sigma$-finite sets is also $\sigma$-finite.
+\end{remark}
+
+\section{Linear Operators between Banach Spaces}
+
+We denote the space of all the linear bounded operators $L : X \longrightarrow Y$ by $\mathcal{L}(X, \, Y)$. Coherently with the case $Y = \C$, there is a naturally induced norm, i.e.
+\begin{equation*}\|L\|_{\mathcal{L}(X, \, Y)} := \| L \|_{\infty, \, \overline{B_X}} = \sup_{\|x\|_X \leq 1} \|Lx\|_Y, \end{equation*}
+where $\overline{B_X}$ is the closed ball of $X$, centered at $0$ with radius $1$.
+
+\begin{definition}[BL Operator] \index{operator}\index{operator!bounded and linear} Let $L \in \mathcal{L}(X, \, Y)$ be a linear operator. We say that $L$ is \textit{bounded} if 
+\begin{equation*} \|L\|_{\mathcal{L}(X, \, Y)} <  +\infty,\end{equation*}
+that is, if the set $L\left(\overline{B_X} \right)$ is bounded as a subset of $Y$. \end{definition}
+
+\begin{lemma} \label{lemma:lipequ} Let $L \in \mathcal{L}(X, \, Y)$ be a linear operator. The following properties are all equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $L$ is Lipschitz.
+\item $L$ is continuous.
+\item $L$ is continuous at $x = 0$.
+\item $L$ is locally bounded, that is there exists a neighborhood $U$ of the origin whose image $L(U)$ is bounded in $Y$.
+\end{enumerate}\end{lemma}
+ 
+\begin{proof}The only nontrivial implication is $\mathbf{(d)} \implies \mathbf{(a)}$. First, we notice that for a locally bounded linear operator $L$ there are positive constants $r, \, s > 0$ such that
+\begin{equation} \label{eq.2.1} L \left( \overline{B_X(0, \, r)} \right) \subseteq\overline{B_Y(0, \, s)}. \end{equation}
+Let $x \in X$ be a point. The inclusion \eqref{eq.2.1} implies that
+\begin{equation*} L x = \frac{\|x\|}{r} L \, \left( \frac{r x}{\|x\|} \right) = \frac{\|x\|}{r} y \quad \text{for some $y$ such that $\|y\| \leq s$}, \end{equation*}
+from which it follows that
+\begin{equation*} \|L x\| \leq \frac{s}{r} \|x\|. \end{equation*}
+In particular, the operator $L$ is Lipschitz, and the Lipschitz constant is exactly equal to the operator norm $\|L\|_{\mathcal{L}(X, \, Y)}$ introduced above.
+\end{proof}
+ 
+\begin{proposition} \label{prop:svpd} Let $L_1, \, L_2 \in \mathcal{L}(X, \, Y)$ be linear bounded operators, and let $\lambda \in \mathbb{K}$ be an element of the scalar field. The following properties hold true: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $L_1 + L_2 \in \mathcal{L}(X, \, Y)$.
+\item $\lambda L_1 \in \mathcal{L}(X, \, Y)$.
+\item If $L_1, \, L_2 \in \mathcal{L}(X, \, X)$, then both $L_1 L_2$ (=$L_1 \circ L_2$) and $L_2 L_1$ (=$L_2 \circ L_1$) belong to $\mathcal{L}(X, \, X)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{theorem}\label{BanachSecondo} The space $\mathcal{L}(X, \, Y)$ is Banach, provided that $Y$ is a Banach space. \index{completeness!of linear bounded operators} \end{theorem}
+
+We now present two similar arguments to prove that the space $\mathcal{L}(X, \, Y)$ of linear and continuous function is complete. We will see that the completeness of $Y$ plays a fundamental role in both.
+
+\begin{proof}[Proof 1] The main idea behind this argument is to employ the completeness of the space $\mathcal{B}(S, \, Y)$ with respect to the uniform norm, choosing $S$ to be the unit closed ball of $X$. \mbox{}
+
+\paragraph{Step 1.} The embedding
+\begin{equation*} \left( \mathcal{L}(X, \, Y), \, \| \cdot\|_{\mathcal{L}(X, \, Y)} \right) \hookrightarrow \left( \mathcal{B}(\overline{B_X}, \, Y), \, \|\cdot\|_\infty \right), \end{equation*}
+defined by sending $L$ to its restriction to the unit ball $L \, \big|_{\overline{B_X}}$, is continuous since
+\begin{equation*} \| L \, \big|_{\overline{B_X}} \|_{\infty} = \| L \|_{\mathcal{L}(X, \, Y)}. \end{equation*}
+In particular, it is an \textit{isometric} embedding. Therefore, if we can prove that
+\begin{equation*} \mathcal{L}(X, \, Y) \subseteq C_b^0(X, \, Y) \end{equation*}
+is a closed inclusion (even with respect to the pointwise convergence), then we can infer that $\mathcal{L}(X, \, Y)$ is complete as a result of \hyperref[rmk1023914]{Remark \ref{rmk1023914}}.
+
+\paragraph{Step 2.} Let $(L_n)_{n \in \N} \subset  \mathcal{L}(X, \, Y)$ be a sequence of linear and continuous operators converging to a bounded continuous application $L \in C_b^0(X, \, Y)$, that is,
+\begin{equation*} L_n(x) \xrightarrow{n \to + \infty} L(x) \quad \text{for all $x \in X$}. \end{equation*}
+The sequence given by the restrictions to the closed unit ball $\left(L_n \, \big|_{\overline{B_X}}\right)_{n \in \N}$ converges uniformly to the restriction $L\, \big|_{\overline{B_X}}$, which is bounded by \hyperref[lemma:lipequ]{Lemma \ref{lemma:lipequ}}. 
+
+\paragraph{Step 3.} It follows that the operator $L$ is linear (by definition) and with bounded restriction to the unit closed ball. On the other hand, the operator norm is equal to the uniform norm of the restriction, and hence $L \in \mathcal{L}(X, \, Y)$, that is,
+\begin{equation*} \imath : \mathcal{L}(X, \, Y) \hookrightarrow C_b^0(X, \, Y)\end{equation*}
+is a closed inclusion, and this concludes.\end{proof}
+
+The previous proof is simple, but it exploits the completeness of another function space; here we give a slightly different proof of \hyperref[BanachSecondo]{Theorem \ref{BanachSecondo}}, which shows more explicitly what happens.
+
+\begin{proof}[Proof 2] The space of all the linear continuous operators $\mathcal{L}(X, \, Y)$ is a normed vector space, as it follows immediately from \hyperref[prop:svpd]{Proposition \ref{prop:svpd}}.
+
+\paragraph{Step 1.} Let $(L_n)_{n \in \N} \subset \mathcal{L}(X, \, Y)$ be a Cauchy sequence, that is, $\| L_n - L_m \| \to 0$ as $n, \, m \to + \infty$. The thesis is equivalent to the existence of a bounded linear operator $L \in \mathcal{L}(X, \, Y)$ such that
+\begin{equation*} \| L_n - L \| \xrightarrow{n \to + \infty} 0. \end{equation*}
+Indeed, for every $x \in X$, it turns out that
+\begin{equation*} \left\| (L_n - L_m) x \right\|_{Y} \leq \|L_n - L_m \| \|x\|_X \xrightarrow{n, \, m \to + \infty} 0, \end{equation*}
+and thus the sequence $(L_n x)_{n \in \N} \subset Y$ is a Cauchy sequence in a complete space. In particular, there exists an element $y \in Y$ such that
+\begin{equation*} \left\|L_n x - y  \right\|_Y \xrightarrow{n \to + \infty} 0. \end{equation*}
+
+\paragraph{Step 2.} Let us define $L$ as the pointwise limit of the sequence $L_n$, that is,
+\begin{equation*} L x := y = \lim_{n \to + \infty} L_n x. \end{equation*}
+The operator $L : X \longrightarrow Y$ is clearly linear. Furthermore, by \hyperref[lemma:lipequ]{Lemma \ref{lemma:lipequ}} it suffices to show that $L$ is bounded to infer that $L$ is continuous. Using the fact that $(L_n)_{n \in \N}$ is a Cauchy sequence, it follows that $\sup_{n \in \N} \| L_n \| < \infty$, and thus
+\begin{equation*} \|L x\|_Y = \lim_{n \to + \infty} \|L_n x\|_Y \leq K \|x\|_X, \quad \text{for all $x \in X$}, \end{equation*}
+that is, $L \in \mathcal{L}(X, \, Y)$.
+\end{proof}

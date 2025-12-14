@@ -1,0 +1,780 @@
+\chapter{Applications of Riemann-Roch Theorem} \thispagestyle{empty}
+\label{chap:10}
+
+In this chapter, we fully exploit the Serre duality theorem and the Riemann-Roch theorem to show major results about both high-degree and low-degree divisors.
+
+Moreover, we prove that, if $X$ is a compact Riemann surface and $D \in \Div(X)$ is a divisor such that $\mathrm{deg} \, D \geq 2 \, g(X) + 1$, then the analytic manifold
+\begin{equation*} \varphi_{|D|} (X) := Y \subseteq \p^n \end{equation*}
+is also an algebraic curve.
+
+In the last sections, we investigate the \textit{canonical map}, and we set the ground for the notorious \textit{Clifford theorem}.
+
+\section{Very Ample Divisors}
+
+\begin{definition}[Very Ample Divisor]\index{Divisor!very ample} Let $X$ be a holomorphic manifold. A divisor $D \in \Div(X)$ is said \textit{very ample} if the associated map
+\begin{equation*}\phiD : X \to \p^n(\C) = \p \left( H^0 \left(X, \, \mathcal{O}_X[D] \right)^v \right)\end{equation*}
+is an \textit{embedding}. \end{definition}
+
+\begin{remark}In particular, a divisor $D \in \Div(X)$ is very ample if and only if \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*})]
+\item the linear system $|D|$ is b.p.f.;
+\item the morphism $\phiD$ is injective;
+\item the differential $\mathrm{d}\left(\phiD\right)_p$ is injective at all points $p \in X$.
+\end{enumerate}\end{remark}
+
+\begin{definition}[Ample]\index{Divisor!ample} Let $X$ be a holomorphic manifold. A divisor $D \in \Div(X)$ is \textit{ample} if there exists a natural number $k \in \N$ such that the divisor $k \cdot D$ is very ample. \end{definition}
+
+\begin{remark}Let $D$ be a b.p.f. divisor. The morphism $\phiD : X \to \p^n(\C)$ is defined by
+\begin{equation*} p \longmapsto \left( \sigma_0(p), \, \dots, \, \sigma_n(p) \right), \end{equation*}
+where $\sigma_0, \, \dots, \, \sigma_n$ is a basis for $H^0 \left(X, \, \mathcal{O}_X[D] \right)$.\mbox{}
+\begin{enumerate}[label=\textbf{\arabic*})]
+\item The morphism $\phiD$ is injective if and only if, for any $p, \, q \in X$, there is a global section $f \in H^0 \left(X, \, \mathcal{O}_X[D] \right)$ such that $f(p) \neq f(q)$.
+
+Equivalently, $\phiD$ is injective if and only if \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item there is $f \in H^0 \left(X, \, \mathcal{O}_X[D] \right)$ such that $f(p) = 0$ and $f(q) \neq 0$; 
+\item there exists $E \in |D|$ such that $p \in \mathrm{spt}(E)$ and $q \notin \mathrm{spt}(E)$.
+\end{enumerate}
+\item The differential $\mathrm{d}\left(\phiD\right)_p$ sends the tangent space $T_P \, X$ to the tangent $T_{\phiD(P)} \, \p^n$, thus it is injective if and only if there exists $f \in H^0 \left(X, \, \mathcal{O}_X[D] \right)$ such that $\mathrm{ord}_p \left(f - f(p) \right) = 1$.
+\end{enumerate}
+\end{remark}
+
+\begin{theorem}[Very Ample - Numerical Criterion]\index{Numerical Criterion}\label{doasodls} Let $X$ be a compact connected Riemann surface, and let $D \in \Div(X)$ be a divisor. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The linear system $|D|$ is b.p.f. if and only if, for any $p \in X$, it turns out that
+\begin{equation*} h^0 \left( X, \, \mathcal{O}_X[D - p] \right) =  h^0 \left( X, \, \mathcal{O}_X[D] \right) - 1. \end{equation*}
+\item The divisor $D$ is very ample if and only if, for any $p, \, q \in X$ (eventually $p=q$), it turns out that
+\begin{equation*} h^0 \left( X, \, \mathcal{O}_X[D - p - q] \right) =  h^0 \left( X, \, \mathcal{O}_X[D] \right) - 2. \end{equation*}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let $p \in X$. By \hyperref[exas]{Proposition \ref{exas}} there is a short exact sequence of sheaf maps
+\begin{equation*} 0 \xrightarrow{} \mathcal{O}_X[D - p] \xrightarrow{} \mathcal{O}_X[D] \xrightarrow{} \C_p \xrightarrow{} 0,\end{equation*}
+which induces a long exact sequence in cohomology (see \hyperref[longcomo]{Theorem \ref{longcomo}}):
+\begin{equation*} 0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[D - p] \right) \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[D] \right) \xrightarrow{f \mapsto f(p)} H^0\left(X, \, \C_p \right) \xrightarrow{} \dots.\end{equation*}
+Observe that there exists a global section $f \in H^0 \left(X, \, \mathcal{O}_X[D] \right)$ such that $f(p) \neq 0$ if and only if $H^0 \left(X, \, \mathcal{O}_X[D] \right) \longtwoheadrightarrow \C_p$, which is equivalent to the identity
+\begin{equation*} H^0 \left(X, \, \mathcal{O}_X[D - p] \right) = \mathrm{Ker} \left(H^0 \left(X, \, \mathcal{O}_X[D] \right) \xrightarrow{f(p)} H^0 \left(X, \, \C_p \right) \right). \end{equation*}
+The dimension of $H^0(X, \, \C_p)$ is equal to $1$, thus we can infer that
+\begin{equation*} h^0\left(X, \, \mathcal{O}_X[D - p] \right) = h^0 \left( X, \, \mathcal{O}_X[D] \right) - 1, \end{equation*}
+which is exactly what we wanted to prove.
+\item Assume that $|D|$ is a b.p.f. linear system.
+
+\paragraph{Step 1.} Suppose that there are two points $p, \, q \in X$ such that $\phiD(p) = \phiD(q)$, that is, $\phiD$ is \textit{not} injective. It follows that, as vector spaces,
+\begin{equation*} H^0 \left(X, \, \mathcal{O}_X[D - p] \right) = H^0 \left(X, \, \mathcal{O}_X[D-q] \right), \end{equation*}
+which in turn implies that
+\begin{equation*} h^0 \left(X, \, \mathcal{O}_X[D - p] \right) = h^0 \left(X, \, \mathcal{O}_X[D-q] \right) = h^0 \left(X, \, \mathcal{O}_X[D] \right) - 1. \end{equation*}
+On the other hand, the assumption allows us to infer that
+\begin{equation*} H^0 \left(X, \, \mathcal{O}_X[D - p] \right) = H^0 \left(X, \, \mathcal{O}_X[D - p - q] \right)  =  H^0 \left(X, \, \mathcal{O}_X[D-q] \right), \end{equation*}
+as vector spaces, and hence
+\begin{equation*} h^0 \left(X, \, \mathcal{O}_X[D - p - q] \right) =  h^0 \left(X, \, \mathcal{O}_X[D] \right) - 1 \neq h^0 \left(X, \, \mathcal{O}_X[D] \right) - 2.  \end{equation*}
+Vice versa, suppose that the formula does not hold true, i.e., there are $p, \, q \in X$ such that
+\begin{equation*} h^0 \left(X, \, \mathcal{O}_X[D - p - q] \right) =  h^0 \left(X, \, \mathcal{O}_X[D] \right) - 1. \end{equation*}
+By \hyperref[exas]{Proposition \ref{exas}} there is a short exact sequence
+\begin{equation*} 0 \xrightarrow{} \mathcal{O}_X[D - p - q] \xrightarrow{} \mathcal{O}_X[D - p] \xrightarrow{} \C_{q} \xrightarrow{} 0, \end{equation*}
+which induces a long exact sequence in cohomology (see \hyperref[longcomo]{Theorem \ref{longcomo}}):
+\begin{equation*} 0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[D - p - q] \right) \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[D - p] \right) \xrightarrow{} H^0\left(X, \, \C_q \right) \xrightarrow{} \dots.\end{equation*}
+The assumption on the dimension proves that
+\begin{equation*} H^0 \left(X, \, \mathcal{O}_X[D - p - q] \right) \cong H^0 \left(X, \, \mathcal{O}_X[D - p] \right), \end{equation*}
+is an isomorphism, and hence
+\begin{equation*}H^0 \left( X, \, \mathcal{O}_X[D - p] \right) = \mathrm{Ker} \left( H^0 \left(X, \, \mathcal{O}_X[D - p] \right) \xrightarrow{f \mapsto f(q)} H^0\left(X, \, \C_q \right) \right). \end{equation*}
+In particular, for any $f \in H^0 \left(X, \, \mathcal{O}_X[D] \right)$ it follows that
+\begin{equation*}f(p) = 0 \leadsto f(q) = 0, \end{equation*}
+since 
+\begin{equation*}f(p) = 0 \implies f \in H^0 \left(X, \, \mathcal{O}_X[D - p] \right) \implies f(q) = 0. \end{equation*}
+
+\paragraph{Step 2.} We now want to prove that $\mathrm{d}\left(\phiD\right)_p$ is injective if and only if
+\begin{equation*} h^0 \left( X, \, \mathcal{O}_X[D - 2\cdot p] \right) =  h^0 \left( X, \, \mathcal{O}_X[D] \right) - 2. \end{equation*}
+First, we observe that
+\begin{equation*} \begin{tikzcd}[ifandonly/.style = {draw=none,"\iff" description,sloped}]
+ \text{$\mathrm{d}\left(\phiD\right)_p : T_p \, X \to T_{\phiD(p)} \, \p^n$ is injective} \arrow[rr, ifandonly] \arrow[d, ifandonly] & & H^0 \left(X, \, \mathcal{O}_X[D] \right) \twoheadrightarrow \faktor{\mathcal{M}_{X, \, p}}{\mathcal{M}_{X, \, p}^2} \arrow[lld, ifandonly] \\ \exists \, f \in H^0 \left(X, \, \mathcal{O}_X[D] \right) \: : \: \mathrm{ord}_p\left(f - f(p) \right) = 1. & \end{tikzcd} \end{equation*}
+If we set $\Delta = 2 \cdot p$, then one can easily prove that
+\begin{equation*} \begin{cases} H^0 \left(X, \, \mathcal{O}_X[D] \right) \longtwoheadrightarrow H^0\left(X, \, \C_p \right) \\ \\ H^0 \left(X, \, \mathcal{O}_X[D] \right) \longtwoheadrightarrow \faktor{\mathcal{M}_{X, \, p}}{\mathcal{M}_{X, \, p}^2} \end{cases} \iff H^0 \left(X, \, \mathcal{O}_X[D] \right) \longtwoheadrightarrow H^0 \left(X, \, \mathcal{O}_\Delta \right). \end{equation*}
+Indeed, locally $p$ corresponds to $z = 0$ and $\Delta$ corresponds to $z^2 = 0$; hence $\mathcal{O}_\Delta$ is isomorphic to the quotient $\faktor{\C[[z]]}{z^2}$. Then we have that
+\begin{equation*}  H^0 \left(X, \, \mathcal{O}_X[D] \right) \longtwoheadrightarrow H^0 \left(X, \, \mathcal{O}_\Delta \right)\end{equation*}
+if and only if
+\begin{equation*}0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[D - 2\cdot p] \right) \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[D] \right) \xrightarrow{} H^0\left(X, \, \mathcal{O}_\Delta \right) \xrightarrow{} 0 \end{equation*}
+is a short exact sequence; thus
+\begin{equation*} h^0 \left( X, \, \mathcal{O}_X[D - 2 \cdot p ] \right) =  h^0 \left( X, \, \mathcal{O}_X[D] \right) - 2, \end{equation*}
+and this is exactly what we wanted to prove.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[High-Degree Divisors]\index{Divisor!of high degree} \label{hdd}Let $X$ be a compact connected Riemann surface of genus $g(X)$, and let $D \in \Div(X)$ be a divisor of degree $d$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $d \geq 2 \,g(X) - 1$, then
+\begin{equation*}H^1 \left( X, \, \mathcal{O}_X[D] \right) = \{0\}. \end{equation*}
+\item If $d \geq 2 \, g(X)$, then $|D|$ is a b.p.f. linear system.
+\item If $d \geq 2 \, g(X) + 1$, then $D$ is very ample.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let $K_X$ be a canonical divisor. By \hyperref[cor:dincan]{Corollary \ref{cor:dincan}} it turns out that
+\begin{equation*} \mathrm{deg} \left(K_X - D \right) = \mathrm{deg} \left(K_X \right) - \mathrm{deg}\left(D\right) < 0, \end{equation*}
+and hence the \hyperref[serreduality1]{Serre Duality Theorem \ref{serreduality1}} implies that
+\begin{equation*} H^1 \left( X, \, \mathcal{O}_X[D] \right)^v \cong H^0 \left( X, \, \mathcal{O}_X[K_X - D] \right) = \{0\}. \end{equation*}
+\item Let $p \in X$ be any point. By \hyperref[exas]{Proposition \ref{exas}} there is a short exact sequence of sheaf maps
+\begin{equation*} 0 \xrightarrow{} \mathcal{O}_X[D - p] \xrightarrow{} \mathcal{O}_X[D] \xrightarrow{} \C_{p} \xrightarrow{} 0,\end{equation*}
+inducing a long exact sequence in cohomology (see \hyperref[longcomo]{Theorem \ref{longcomo}}):
+\begin{equation*} \begin{aligned} 0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[D - p] \right) & \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[D] \right) \xrightarrow{} H^0\left(X, \, \C_p \right) \xrightarrow{} \dots \\[1em] & \dots \xrightarrow{} H^1 \left(X, \, \mathcal{O}_X[D - p] \right) \xrightarrow{} H^1 \left(X, \, \mathcal{O}_X[D] \right) \xrightarrow{} 0.\end{aligned}\end{equation*}
+By assumption, the degree of the divisor $D - p$ is greater of equal than $2 \, g(X) - 1$, and hence by \textbf{(a)} it follows that
+\begin{equation*} H^1 \left(X, \, \mathcal{O}_X[D] \right) = 0 \qquad \text{and} \qquad H^1 \left(X, \, \mathcal{O}_X[D - p] \right) = 0. \end{equation*}
+Therefore $H^0 \left(X, \, \mathcal{O}_X[D] \right) \twoheadrightarrow H^0 \left(X, \, \C_p \right)$ is surjective, and this is enough to conclude that the linear system $|D|$ is b.p.f., as a consequence of the numerical criterion (i.e.,  \hyperref[doasodls]{Theorem \ref{doasodls}}).
+\item Let $p, \, q \in X$ be points, and let us set $\Delta := p + q$. There is a short exact sequence, deriving from \hyperref[exas]{Proposition \ref{exas}},
+\begin{equation*} 0 \xrightarrow{} \mathcal{O}_X[D - p - q] \xrightarrow{} \mathcal{O}_X[D] \xrightarrow{} \C_{\Delta} \xrightarrow{} 0,\end{equation*}
+which induces a long sequence in cohomology (see \hyperref[longcomo]{Theorem \ref{longcomo}}):
+\begin{equation*} \begin{aligned} 0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[D - p - q] \right) & \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[D] \right) \xrightarrow{} H^0\left(X, \, \mathcal{O}_\Delta \right) \xrightarrow{} \dots \\[1em] & \dots \xrightarrow{} H^1 \left(X, \, \mathcal{O}_X[D - p - q] \right) \xrightarrow{} H^1 \left(X, \, \mathcal{O}_X[D] \right) \xrightarrow{} 0.\end{aligned}\end{equation*}
+By assumption, the divisor $D - p - q$ has degree greater or equal than $2 \, g(X) - 1$, and thus it follows from \textbf{(a)} that
+\begin{equation*}H^1 \left(X, \, \mathcal{O}_X[D - p - q] \right) = 0. \end{equation*}
+Therefore $H^0 \left(X, \, \mathcal{O}_X[D] \right) \twoheadrightarrow H^0\left(X, \, \mathcal{O}_\Delta \right)$ is surjective and, since $H^0\left(X, \, \mathcal{O}_\Delta \right)$ has dimension $2$, it follows that
+\begin{equation*}h^0\left(X, \, \mathcal{O}_X[D] \right) - 2 = H^0\left(X, \, \mathcal{O}_X[D - p - q] \right). \end{equation*}
+In conclusion, the numerical criterion (\hyperref[doasodls]{Theorem \ref{doasodls}}) implies that $D$ is a very ample divisor, which is exactly what we wanted to prove.
+\end{enumerate}
+\end{proof}
+
+\begin{corollary} Let $X$ be a compact connected Riemann surface. If $D \in \Div(X)$ is an effective divisor, then $D$ is ample. \end{corollary}
+
+\begin{corollary} Let $X$ be a compact connected Riemann surface. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item If $g(X) = 0$, then $X \cong \p^1(\C)$.
+\item If $g(X) = 1$, then $X \cong \{F_3 = 0\} \subseteq \p^2$ is a cubic plane curve.
+\end{enumerate}\end{corollary}
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Let $p \in X$ be a point, and let us consider the divisor $D := 1\cdot p$. Clearly $\mathrm{deg} \, D \geq 2 \, g(X) + 1 = 1$, thus $D$ is very ample and $h^1 \left(X, \, \mathcal{O}_X[D] \right) = 0$. By \hyperref[RiemannRoch]{Riemann-Roch \ref{RiemannRoch}} it follows that
+\begin{equation*}h^0  \left(X, \, \mathcal{O}_X[D] \right) = \mathrm{deg} \, D + 1 - g(X) = 2,\end{equation*}
+and hence $\phiD : X \to \p^1$ is an embedding of degree equal to $1$; since $X$ is compact and connected, we infer that $\phiD$ is the sought isomorphism.
+\item Let $p \in X$ be a point, and let us consider the divisor $D := 3\cdot p$. Clearly $\mathrm{deg} \, D \geq 2 \,g(X) + 1 = 3$, thus $D$ is very ample and $h^1 \left(X, \, \mathcal{O}_X[D] \right) = 3$. By \hyperref[RiemannRoch]{Riemann-Roch \ref{RiemannRoch}} it follows that
+\begin{equation*}h^0  \left(X, \, \mathcal{O}_X[D] \right) = \mathrm{deg} \, D + 1 - g(X) = 3,\end{equation*}
+therefore $\phiD : X \to \p^2$ is an embedding, and $D$ is a divisor relative to a section of an hyperplane of dimension $3$, that is, $\phiD$ is cubic (see \hyperref[rdslds]{Theorem \ref{rdslds}}).
+\end{enumerate}
+\end{proof}
+
+\section{Algebraic Curves and Riemann Surfaces}
+
+In this section, the primary goal is to prove that there exists a $1$-$1$ correspondence of categories
+\begin{equation*} \left\{ \begin{gathered} \text{Riemann surfaces} \\ \text{compact and connected} \end{gathered} \right\} \xleftrightarrow{\quad \sim \quad} \left\{ \begin{gathered} \text{Smooth algebraic} \\ \text{projective curves} \end{gathered} \right\}. \end{equation*}
+
+\paragraph{Algebraic Curves.} In this paragraph, the primary goal is to prove the following statement: If $X$ is a compact Riemann surface and $D \in \Div(X)$ is a divisor of degree $\mathrm{deg} \, D \geq 2 \, g(X) + 1$, then the analytic manifold
+\begin{equation*} \varphi_{|D|} (X) := Y \subseteq \p^N(\C) \end{equation*}
+is also an algebraic manifold. More precisely, we will sketch the proof of the following theorem:
+
+\begin{theorem} \label{rdslds} Let $X$ be a compact connected Riemann surface, and let $D \in \Div(X)$ be a divisor of degree $\mathrm{deg} \, D \geq 2 \, g(X) + 1$. Then
+\begin{equation*} \varphi_{|D|} (X) := Y \subseteq \p^N( \C ) \end{equation*}
+is an algebraic curve, that is,
+\begin{equation*} Y = \mathcal{V}(g_1, \, \dots, \, g_r),\end{equation*}
+where $g_1, \, \dots, \, g_r \in \C[x_0, \, \dots, \, x_N]$ are homogeneous polynomials.\end{theorem}
+
+\begin{remark}There is a more general theorem, proved by Wei-Liang Chow, which asserts that $Y \subset \p^N(\C)$ analytic manifold is an algebraic manifold (see \cite{chow}). \end{remark}
+
+\begin{proof} The argument is rather involved. Hence we divide the proof into many steps, and we state and prove everything we need in this environment.
+
+\paragraph{Step 1.} Let us consider the graded algebra
+\begin{equation} \label{rd} R(D) := \bigotimes_{n \geq 0} H^0 \left(X, \, \mathcal{O}_X[ n \cdot D ] \right), \end{equation}
+along with the maps
+\begin{equation*}H^0 \left(X, \, \mathcal{O}_X[n \cdot D] \right) \otimes H^0 \left(X, \, \mathcal{O}_X[m \cdot D] \right) \longrightarrow H^0 \left(X, \, \mathcal{O}_X[(n+m) \cdot D] \right) \end{equation*}
+defined by sending the tensor product $s \otimes t$ to $s \cdot t$, as $n$ and $m$ range in the set of all natural numbers.
+
+\begin{example}[Projective Space] Let $X = \p^1(\C)$ with coordinates $[x_0, \, x_1]$, and let $D := [0 : 1]$ be a divisor. We have already proved that
+\begin{equation*} \begin{aligned} & H^0 \left( X, \, \mathcal{O}_X[D] \right) = \left< x_0, \, x_1 \right>, \\[1em] & H^0 \left( X, \, \mathcal{O}_X[2\cdot D] \right) \cong \left< x_0^2, \, x_0 \, x_1, \, x_1^2 \right>, \end{aligned} \end{equation*}
+hence
+\begin{equation*} H^0 \left( X, \, \mathcal{O}_X[D] \right) \otimes H^0 \left( X, \, \mathcal{O}_X[2\cdot D] \right) \to H^0 \left( X, \, \mathcal{O}_X[3\cdot D] \right)\end{equation*}
+is a well-defined map, which sends $p \otimes q$ to $p \cdot q$, where $p$ and $q$ are homogeneous polynomials of degree respectively one and two (coherently with the definition of degree for polynomials).
+\end{example}
+
+\paragraph{Step 2.} Now, we state a result concerning the graded algebra $R(D)$ which will be essential in this proof; the reader may refer to \href{https://arxiv.org/pdf/math/0311534.pdf}{this paper}.
+
+\vspace{2.5mm}
+\noindent\fbox{
+\parbox{\textwidth}{ \begin{theorem}[Castelnuovo-Mumford] \label{cmm} Let $X$ be a compact Riemann surface, and let $D \in \Div(X)$ be a divisor such that $\mathrm{deg} \, D \geq 2 \, g(X) + 1$. Then the graded algebra $R(D)$, defined in \eqref{rd}, is generated in degree one, that is, for every $n \in \N$ there is a surjective map
+\begin{equation*} H^0 \left(X, \, \mathcal{O}_X[D] \right)^{\otimes n} \longtwoheadrightarrow H^0 \left(X, \, \mathcal{O}_X[n\cdot D] \right). \end{equation*} \end{theorem} }}
+
+\vspace{2.5mm}
+\noindent We observe that, for any $n \in \N$, the left-hand side may be written as the direct sum between the symmetric and the antisymmetric part, i.e.,
+\begin{equation*} H^0 \left(X, \, \mathcal{O}_X[D] \right)^{\otimes n} = \Lambda^n \left( H^0 \left(X, \, \mathcal{O}_X[D] \right) \right) \oplus \mathrm{Sym}^n \left(H^0 \left(X, \, \mathcal{O}_X[D] \right) \right).   \end{equation*}
+The product $\cdot$ is commutative; hence
+\begin{equation*} \Lambda^n \left( H^0 \left(X, \, \mathcal{O}_X[D] \right) \right) \ni t \otimes s - s \otimes t \longmapsto t \cdot s - s \cdot t = 0 \in H^0 \left(X, \, \mathcal{O}_X[n \cdot D] \right),\end{equation*}
+which means that for every $n \in \N$
+\begin{equation*} H^0 \left(X, \, \mathcal{O}_X[D] \right)^{\otimes n} \twoheadrightarrow H^0 \left(X, \, \mathcal{O}_X[n\cdot D] \right) \iff   \mathrm{Sym}^n \left(H^0 \left(X, \, \mathcal{O}_X[D] \right) \right) \twoheadrightarrow H^0 \left(X, \, \mathcal{O}_X[n\cdot D] \right).\end{equation*}
+
+\paragraph{Step 3.} There is a natural identification
+\begin{equation*} H^0 \left(X, \, \mathcal{O}_X[D] \right) = \left\langle x_0, \, \dots, \, x_N \right\rangle \left( \cong \left(\C^{N + 1}\right)^v \right), \end{equation*}
+from which it follows that for every $n \in \N$ there is an isomorphism
+\begin{equation*} \mathrm{Sym}^n \left(H^0 \left(X, \, \mathcal{O}_X[D] \right) \right) \cong \C[x_0, \, \dots, \, x_N]_n,\end{equation*}
+where $\C[x_0, \, \dots, \, x_N]_n$ is the set of all homogeneous polynomials in the variables $x_0, \, \dots, \, x_N$ of degree $n$. If we set
+\begin{equation*} Y := \varphi_{|D|}(X) \subseteq \p^N(\C), \end{equation*}
+where $x_0, \, \dots, \, x_N$ are the coordinates of $\p^N(\C)$, then the surjective map
+\begin{equation*} \bigotimes_{n \geq 0} \mathrm{Sym}^n \left(H^0 \left(X, \, \mathcal{O}_X[D] \right) \right) \longtwoheadrightarrow \bigotimes_{n \geq 0} H^0 \left(X, \, \mathcal{O}_X[n\cdot D] \right),\end{equation*}
+which exists as a consequence of \hyperref[cmm]{Theorem \ref{cmm}}, induces a different surjective map - by composing with the isomorphism above -, that is,
+\begin{equation*} \alpha : \C[x_0, \, \dots, \, x_N] = \bigoplus_{n \geq 0} \C[x_0, \, \dots, \, x_N]_n \longtwoheadrightarrow R(D). \end{equation*}
+
+\paragraph{Step 4.} Let us consider the ideal
+\begin{equation*} I := \mathrm{Ker}(\alpha), \end{equation*}
+and let us denote by $Z$ the \textit{algebraic variety} associated with $I$, that is, set
+\begin{equation*}Z := \mathcal{V}(I). \end{equation*}
+Every polynomial $p \in I$ vanishes on $Y$, as a consequence of the fact that the support of the graded algebra $R(D)$ is entirely contained in $Y$. More precisely, the following inclusion holds
+\begin{equation*} Y \subseteq V(I) = Z, \end{equation*}
+and therefore the thesis is equivalent to showing that the opposite containment also holds.
+
+\begin{remark}[Irreducibility] \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The graded algebra $R(D)$ is an integral domain since $X$ is a connected surface; hence $X$ is an irreducible surface.
+
+On the other hand, the surface $Y$ is the image via embedding of $X$, and it is thus irreducible as well. 
+\item The reader may check, as a simple exercise, that the ideal $I$ is prime; consequently, the algebraic variety $Z$ is irreducible.
+\end{enumerate} \end{remark}
+
+\begin{remark} As a consequence of the previous \textit{Remark}, it is enough to prove that the dimension $\mathrm{dim}_\C (Z)$ is equal to $1$ to  infer that $Y = Z$. \end{remark}
+
+\paragraph{Step 5.} In this final step, we briefly introduce the concept of \textit{Hilbert polynomial}, and we state a major result - due to Hilbert and Serre - concerning the relation between the dimension of $Z$ over $\C$ and the behavior of the polynomial at infinity.
+
+\begin{definition}[Hilbert Polynomial] Let $Z \subseteq \p^N(\C)$ be an algebraic variety. The \textit{Hilbert polynomial} associated to $Z$ is the polynomial such that
+\begin{equation*} t \gg 0 \implies p_Z(t) = \mathrm{dim}_\C \, S(Z)_t, \end{equation*}
+where $S(Z)_t := \faktor{\C[x_0, \, \dots, \, x_N]_t}{I}$, that is, the $t$-degree part of $S(Z)$.\end{definition}
+
+\begin{theorem}[Hilbert-Serre] \label{hss} Let $Z \subseteq \p^N(\C)$ be a $1$-dimensional algebraic variety. For every $t$, the Hilbert polynomial is given by
+\begin{equation*} p_Z(t) = a_1 \, t + a_0. \end{equation*}
+In particular, it turns out that
+\begin{equation*} \mathrm{deg}(p_Z) = \mathrm{dim}_\C (Z). \end{equation*} \end{theorem}
+
+\vspace{1.8mm}
+\noindent In the previous steps we have proved that there is a commutative diagram
+\begin{equation*} \begin{tikzcd}[contains/.style = {draw=none,"\simeq" description,sloped}]
+ \C[x_0, \, \dots, \, x_N]_t \arrow[d, contains] \arrow[r, twoheadrightarrow] & S(Z)_t \arrow[d, contains] \\ \mathrm{Sym}^t \left( H^0 \left(X, \, \mathcal{O}_X[D] \right) \right) \arrow[r, twoheadrightarrow] & H^0 \left(X, \, \mathcal{O}_X[t \cdot D] \right) \end{tikzcd} \end{equation*}
+hence
+\begin{equation*} p_Z(t) = \mathrm{dim}_\C \, S(Z)_t = h^0 \left(X, \, \mathcal{O}_X[t \cdot D] \right). \end{equation*}
+Finally, the \hyperref[RiemannRoch]{Riemann-Roch Theorem \ref{RiemannRoch}} allows us to find the Hilbert polynomial, which is given by
+\begin{equation*} h^0 \left(X, \, \mathcal{O}_X[t \cdot D] \right) = t \cdot \mathrm{deg} \, D + 1 - g(X) \implies \mathrm{dim}_\C \, Z = 1,  \end{equation*}
+and this concludes the proof of \hyperref[rdslds]{Theorem \ref{rdslds}}. \end{proof}
+
+\paragraph{Equivalence of Categories.} In this final paragraph, we state and prove three relevant results which will allow us to demonstrate the equivalence theorem mentioned at the beginning.
+
+\begin{proposition}\label{prop:peoro}Let $Y \subseteq \p^N(\C)$ be an algebraic curve of degree $d$, and assume $N \geq 4$. Then there exists a point $O \in \p^N(\C)$ such that the canonical projection, centered at $O$, given by
+\begin{equation*}\pi_O : \p^N(\C) \to \p^{N-1}(\C) \end{equation*}
+has the additional property that
+\begin{equation*} \pi_O(Y) \cong Y. \end{equation*}\end{proposition}
+
+\begin{proof}The projection centered at $O$ has the property $\pi_O(Y) \cong Y$ if and only if \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $\pi_O \, \big|_Y$ is injective, if and only if $O \notin \{ \text{secant lines to $Y$} \}$;
+\item $\mathrm{d} \left(\pi_O \, \big|_Y \right)$ is injective, if and only if $O \notin \{ \text{tangent lines to $Y$} \}$.
+\end{enumerate}
+
+\paragraph{Secant.} The set of all the secant lines to $Y$ is given by
+\begin{equation*} \mathrm{sec}(Y) := \overline{ \left\{ \mathrm{Span} \langle p, \, q \rangle \: \left| \: p \neq q \in Y \right. \right\} }, \end{equation*}
+and hence there exists a morphism
+\begin{equation*} \Phi : \p^1 \times \left( Y \times Y \setminus \Delta_Y \right) \longrightarrow \mathrm{sec}(Y), \end{equation*}
+where $\Delta_Y := \{(p, \, p) \: \left| \: p \in Y \right. \}$ is the diagonal of $Y$, which is defined by
+\begin{equation*}\left( [\lambda_0 :\lambda_1], \, p, \, q \right) \longmapsto \left( \lambda_0 \, p + \lambda_1 \, q \right). \end{equation*}
+
+\paragraph{Tangent.} The set of all the tangent lines to $Y$ may be \textit{locally} identified by the isomorphism
+\begin{equation*} \mathrm{tan}(Y) \cong \overline{ \left\{ \left(p, \, [\lambda_0 : \lambda_1] \right) \: \left| \: p \in Y, \, \, [\lambda_0 \: : \: \lambda_1] \in \p^1(\C) \right. \right\} }, \end{equation*}
+which is defined by
+\begin{equation*} \Psi : Y \times \p^1(\C) \to \mathrm{tan}(Y), \qquad \left(p, \, [\lambda_0 : \lambda_1] \right) \longmapsto p + v \cdot \frac{\lambda_0}{\lambda_1}, \end{equation*}
+where $v$ is a tangent vector.
+
+\paragraph{Dimensional Argument.} The previous points allow us to infer that
+\begin{equation*}\begin{aligned} & \mathrm{dim} \left( \mathrm{sec}(Y) \right) \leq 2 \cdot \mathrm{dim}(Y) + 1 = 3, \\[1em] & \mathrm{dim} \left( \mathrm{tan}(Y) \right) \leq \mathrm{dim}(Y) + 1 = 2, \end{aligned} \end{equation*}
+which, in turn, imply the following estimate on the dimension:
+\begin{equation*} \mathrm{dim} \left( \mathrm{sec}(Y) \cup \mathrm{tan}(Y) \right) \leq 3. \end{equation*}
+In conclusion, the assumption $N \geq 4$ is sufficient to infer that such a point $O$ - satisfying \textbf{(a)} and \textbf{(b)} - must exist.
+\end{proof}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 8cm, height = 8cm]{images/GEOC1.png}
+\caption{Idea of \hyperref[prop:peoro]{Proposition \ref{prop:peoro}}}
+\label{fig:12i}
+\end{figure} 
+
+\begin{corollary}\label{cor:pdsppdpsd}Let $X$ be a compact connected Riemann surface. There exists an isomorphism
+\begin{equation*} \Phi : X \xrightarrow{\quad \sim \quad} Y \subseteq \p^3(\C), \end{equation*}
+where $Y$ is an algebraic curve.\end{corollary}
+
+\begin{proof}Let $D \in \Div(X)$ be a divisor such that $\mathrm{deg} \, D \geq 2 \, g(X) + 1$. The morphism
+\begin{equation*} \varphi_{|D|} : X \hookrightarrow Y_0 \subseteq \p^N(\C) \end{equation*}
+is an embedding; if we compose it with a sequence $\pi_1, \, \dots, \, \pi_{N-3}$ of adequate projections (whose existence is a consequence of \hyperref[prop:peoro]{Proposition \ref{prop:peoro}}), then we obtain that
+\begin{equation*} X \xrightarrow{\varphi_{|D|}} Y_0 \xrightarrow{\pi_{N-3} \circ \dots \circ \pi_1} Y \subseteq \p^3(\C) \end{equation*} 
+is an isomorphism, since it is composition of isomorphisms.
+\end{proof}
+
+\begin{proposition}\label{prop:oewoe} Let $Y$ be an algebraic curve of degree $d$ in $\p^3(\C)$. There exists a point $O \in \p^3(\C)$ such that the projection centered at $O$
+\begin{equation*}\pi_O : \p^3(\C) \to \p^2(\C) \end{equation*}
+has the property that $\pi_O(Y) \subseteq \p^2(\C)$ is an algebraic curve of degree $d$, with a finite number of simple knots.\end{proposition}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 6cm, height = 8cm]{images/GEOC2.png}
+\caption{Idea of the proof of \hyperref[prop:oewoe]{Proposition \ref{prop:oewoe}}}
+\label{fig:123i}
+\end{figure} 
+
+\paragraph{Equivalence of Categories.} We are now ready to state and prove the main result of the section.
+
+\begin{theorem}\label{th:eccc}There is a $1$-$1$ correspondence
+\begin{equation*} \left\{ \begin{gathered} \text{Riemann surfaces} \\ \text{compact and connected} \end{gathered} \right\} \xleftrightarrow{\quad \sim \quad}  \left\{ \begin{gathered} \text{Smooth algebraic} \\ \text{projective curves} \end{gathered} \right\}. \end{equation*} \end{theorem}
+
+\begin{proof}Let $X$ be a compact connected Riemann surface, and let $p \in X$ be a point. The divisor
+\begin{equation*} D = ( 2 \, g(X) + 1) \cdot p \in \Div(X)\end{equation*}
+induces an embedding
+\begin{equation*} \varphi_{|D|} : X \xrightarrow{\sim} Y \subseteq \p^N(\C), \end{equation*}
+and this is exactly what we wanted to prove.
+
+Vice versa, let $Y \subseteq \p^N(\C)$ be an algebraic curve. A finite number of applications of \hyperref[prop:peoro]{Proposition \ref{prop:peoro}} yields to a projection $\widetilde{\pi}$ such that
+\begin{equation*}\widetilde{\pi}(Y) := \widetilde{Y} \subseteq \p^3(\C)\end{equation*}
+has the property that, for every $p \in \widetilde{Y}$, there is an affine neighborhood $U_p \ni p$ such that
+\begin{equation*} \widetilde{Y} \cap U_p = V(g_1, \, g_2) \cap U_p \qquad \text{and} \qquad \mathrm{rank} \left( \frac{\partial \, g_i}{\partial \, x_j} \right) = 2. \end{equation*}
+The conclusion follows immediately if one applies the maximal rank theorem\footnote{\textbf{Maximal Rank Theorem:} If $F : M \to N$ has maximal rank near a point $p \in M$, then there exist a neighborhood $U$ of $p$ and $V$ of $F(p)$, and there are diffeomorphisms $u : T_p \, M \xrightarrow{\sim} U$ and $v : T_{F(p)} \, N \xrightarrow{\sim} V$ such that $F(U) \subseteq V$ and
+\begin{equation*} \mathrm{d}F_p = v^{-1} \circ F \circ u. \end{equation*} }.
+
+\paragraph{Alternative Approach.} Let $\pi : \p^N(\C) \to \p^2(\C)$ be the projection, and let $\widetilde{Y}$ be the algebraic curve with a finite number of simple knots (see \hyperref[prop:oewoe]{Proposition \ref{prop:oewoe}}).
+
+The construction of the Riemann surfaces follows from the blowup method introduced in \hyperref[sec:blow]{Subsection \ref{sec:blow}}, but it is quite a lot harder.\end{proof}
+
+\subsection{Equivalence Theorem}
+
+In this subsection, we want to give a different proof of \hyperref[th:eccc]{Theorem \ref{th:eccc}} that allows us, via a third category, to be more precise about the category morphisms.
+
+\begin{theorem}[Chow]\index{Chow Theorem}\label{chow} Let $Y \subseteq \p^N(\C)$ be an analytic manifold. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $Y$ is an algebraic variety, that is, $Y = \mathcal{V}(I_Y)$.
+\item Any meromorphic function on $Y$ is rational.
+\item Any holomorphic map $f :  Y \to Y^\prime$ is given by rational functions.
+
+More precisely, if we let
+\begin{equation*} \C[Y] = \faktor{\C[x_0, \, \dots, \, x_N]}{I_Y} \qquad \text{and} \qquad \C(Y) = \mathrm{Frac}\left(\C[Y] \right), \end{equation*}
+then the field of all the meromorphic functions $f : Y \to \C$, denoted by $\mathcal{M}(Y)$, is isomorphic to $\C(Y)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark} If $Y$ is an algebraic curve, i.e. $\mathrm{dim}_\C \, Y = 1$, then the field
+\begin{equation*} \M(Y) \cong \C(Y) \end{equation*}
+has transcendental degree one over $\C$. \end{remark}
+
+\begin{theorem}\label{th:ecccgen}There is a $1$-$1$ correspondence between the following three categories:
+\begin{equation*} \begin{tikzcd} \left\{ \begin{gathered} \text{Riemann surfaces} \\ \text{compact and connected} \end{gathered} \right\} \ar[rr, leftrightarrow] \ar[dr, leftrightarrow]& &\ar[dl, leftrightarrow] \left\{ \begin{gathered} \text{Smooth algebraic} \\ \text{projective curves} \end{gathered} \right\} \\ & \left\{ \begin{gathered} \text{Field of the form $\C(X)$} \\ \text{with transcendental degree} \\ \text{one over $\C$} \end{gathered} \right\} & .\end{tikzcd} \end{equation*}\end{theorem}
+
+\begin{proof}We divide the argument into three steps.
+
+\paragraph{Step 1.1.}Let us consider the functor
+\begin{equation*} \Phi :  \left\{ \begin{gathered} \text{Riemann surfaces} \\ \text{compact and connected} \end{gathered} \right\} \longrightarrow \left\{ \begin{gathered} \text{Field of the form $\C(X)$} \\ \text{with transcendental degree} \\ \text{one over $\C$} \end{gathered} \right\}\end{equation*}
+defined by
+\begin{equation*} \Phi(X) := \mathcal{M}(X), \end{equation*}
+that is, it sends a compact connected Riemann surfaces to the field of meromorphic functions defined on $X$, and also
+\begin{equation*} \mathrm{Hom}(X, \, Y) \ni f \longmapsto f^\ast \in \mathrm{Hom} \left( \M(Y), \, \M(X) \right), \end{equation*}
+where $f$ is a surjective (i.e., nonconstant) morphism, and
+\begin{equation*} f^\ast (h) := h \circ f. \end{equation*}
+This functor is \textit{essentially surjective}, as a consequence of the following result which we will not prove.
+
+\vspace{2.5mm}
+\noindent\fbox{
+\parbox{14cm}{ \begin{theorem} Let $\mathcal{M}$ be a field with transcendental degree one over $\C$. Then $\M$ is isomorphic to the field of quotient of
+\begin{equation*} \faktor{ \C[x, \, y] }{(F)}, \end{equation*}
+where $F$ is an irreducible polynomial. \end{theorem}}}
+
+\vspace{2.5mm}
+\noindent In particular, every $\M$ in the codomain induces an affine algebraic curve given by
+\begin{equation*} \widetilde{X} = \mathcal{V}(F) \subseteq \C^2. \end{equation*}
+The Riemann surface $X$ such that $\Phi(X) = \M$ can be easily defined starting from $\widetilde{X}$: take the projectivization in $\p^2(\C)$, and then resolve the singularities (see \hyperref[sec:blow]{Subsection \ref{sec:blow}}).
+
+\paragraph{Step 1.2.} The functor $\Phi$ is fully faithful\footnote{\textbf{Definition.} The map
+\begin{equation*}\Phi_{X, \, Y} : \mathrm{Hom}(X, \, Y) \xrightarrow{\quad \sim \quad} \mathrm{Hom} \left( \Phi(X), \, \Phi(Y) \right) \end{equation*}
+is an isomorphism for every $X, \, Y$ objects.}. Indeed, let us set $X_1 = \mathcal{V}(F)$ and $X_2 = \mathcal{V}(G)$, and let us consider the morphism
+\begin{equation*} \varphi : \M_1 \longrightarrow \M_2. \end{equation*}
+We may always consider for the maps
+\begin{equation*} \alpha_i : \C(X_i) \xrightarrow{\quad \sim \quad} \M_i, \qquad i = 1, \, 2,\end{equation*}
+sending the projections $\pi_x$ and $\pi_y$ respectively to $f_i$ and $g_i$. Let
+\begin{equation*} \Psi : \C^2 \to \C^2, \qquad \Psi := \left( \alpha_2^{-1} \circ \varphi(f_2), \, \alpha_2^{-1} \circ \varphi(g_2) \right) =: \left(R_1(x, \, y), \, T_1(x, \, y) \right) \end{equation*}
+be a function such that the following diagram is commutative:
+\begin{equation*} \begin{tikzcd} \M_1 \ar[r,"\varphi"] & \M_2 \\ \C(X_1)\ar[u, "\alpha_1"] \ar[r, "\Psi^\ast"]& \C(X_2) \ar[u, "\alpha_2"] \end{tikzcd} \end{equation*}
+Therefore $\Psi$ induces a map between Riemann surfaces
+\begin{equation*} \Psi : X_2 \to X_1 \qquad \text{with $\Psi^\ast = \alpha_2^{-1} \circ \varphi \circ \alpha_1$}, \end{equation*}
+and, actually, it turns out that
+\begin{equation*} 0 = G(f_2, \, g_2) \implies 0 = \alpha_2^{-1} \circ \varphi \circ G(f_2, \, g_2) \end{equation*}
+which, in turn, implies that
+\begin{equation*} 0 = G \left( \alpha_2^{-1} \circ \varphi(f_2), \, \alpha_2^{-1} \circ \varphi(g_2) \right) = G(R_1, \, T_1) \in \M_2 \cong \C(X_2). \end{equation*}
+
+\paragraph{Step 2.} In this paragraph, we give the idea behind the correspondence
+\begin{equation*} \left\{ \begin{gathered} \text{Smooth algebraic} \\ \text{projective curves} \end{gathered} \right\}  \xleftrightarrow{\quad \sim \quad} \left\{ \begin{gathered} \text{Field of the form $\C(X)$} \\ \text{with transcendental degree} \\ \text{one over $\C$} \end{gathered} \right\}.\end{equation*}
+Let $X \subseteq \p^N(\C)$ be a smooth algebraic curve; by \hyperref[prop:oewoe]{Proposition \ref{prop:oewoe}} it turns out that it is birational to an algebraic curve $X^\prime \subseteq \p^2(\C)$. On the other hand
+\begin{equation*} Y \subseteq \p^2(\C) \xrightarrow{\sim} \widetilde{Y} \subseteq \C^2 \end{equation*}
+is also a birational correspondence, and hence
+\begin{equation*} X \xrightarrow{\sim} \widetilde{Y} \subseteq \C^2 \end{equation*}
+is a birational map, as it is the composition of birational maps. We conclude by noticing that
+\begin{equation*} \C\left(\widetilde{Y}\right) \cong \mathrm{Frac} \left( \faktor{ \C[x, \, y] }{(F)} \right). \end{equation*}
+
+\paragraph{Step 3.} The third equivalence was already proved in \hyperref[th:eccc]{Theorem \ref{th:eccc}}. The morphisms are easily defined using the commutativity of the diagram.
+\end{proof}
+
+\section{Existence of Globally Defined Meromorphic Functions}
+\label{sec:merglo}
+
+Let $X$ be a compact Riemann surface, let $p \in X$ be a point, and let
+\begin{equation*} D := n \cdot p, \qquad n \geq 2 \, g(X) -1 \end{equation*}
+be a \textit{simple} divisor. By \hyperref[exas]{Proposition \ref{exas}} there is a short exact sequence
+\begin{equation*} 0 \xrightarrow{} \mathcal{O}_X \xrightarrow{} \mathcal{O}_X[D] \xrightarrow{} \mathcal{O}_D \xrightarrow{} 0, \end{equation*}
+which induces a long exact sequence in cohomology (see \hyperref[longcomo]{Theorem \ref{longcomo}}):
+\begin{equation*} \begin{aligned} 0 \xrightarrow{}  H^0 \left( X, \, \mathcal{O}_X \right) \xrightarrow{} & H^0 \left(X, \,  \mathcal{O}_X[D] \right)  \xrightarrow{} H^0 \left(X, \,  \mathcal{O}_D \right) \xrightarrow{} \dots \\[1em] & \dots \xrightarrow{} H^1 \left(X, \,  \mathcal{O}_X \right) \xrightarrow{} H^1 \left(X, \,  \mathcal{O}_X[D] \right) \xrightarrow{} 0. \end{aligned} \end{equation*}
+As a consequence of \hyperref[hdd]{Theorem \ref{hdd}}, it turns out that
+\begin{equation*} n \geq 2 \, g(X) - 1 \implies H^1 \left( \mathcal{O}_X[D] \right) = 0, \end{equation*}
+and hence
+\begin{equation*}0 \xrightarrow{}  H^0 \left( X, \, \mathcal{O}_X \right) \xrightarrow{} H^0 \left(X, \,  \mathcal{O}_X[D] \right) \xrightarrow{} H^0 \left(X, \,  \mathcal{O}_D \right) \xrightarrow{} H^1 \left(X, \,  \mathcal{O}_X \right) \xrightarrow{} 0. \end{equation*}
+is an exact sequence. It follows that
+\begin{equation*} h^0 \left( \mathcal{O}_X[D] \right) = n - g(X) + 1 \geq g(X), \end{equation*}
+thus the second term of the sequence above cannot be trivial, that is,
+\begin{equation*} H^0 \left( \mathcal{O}_X[D] \right) \neq 0. \end{equation*}
+In particular, there exists a global meromorphic function $f$ such that $\mathrm{div}_\infty (f) \leq n \cdot p$, that is, $f$ has a pole of order at most $n$ at $p$.
+
+\section{Low Degree Divisors}
+\label{sec:ldd} \index{Divisor!of low degree}
+
+In this section, we denote by $X$ a compact connected Riemann surface (since we require both of the assumptions to hold true in most of the results we will be presenting).
+
+\paragraph{Recall.} We have proved that the following result holds true for divisors of (relatively) \textit{high degree}:
+
+\begin{theorem}[High-Degree Divisors] Let $X$ be a compact connected Riemann surface of genus $g(X)$, and let $D \in \Div(X)$ be a divisor of degree $d$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $d \geq 2 \,g(X) - 1$, then
+\begin{equation*}H^1 \left( X, \, \mathcal{O}_X[D] \right) = \{0\}. \end{equation*}
+\item If $d \geq 2 \, g(X)$, then $|D|$ is a b.p.f. linear system.
+\item If $f \geq 2 \, g(X) + 1$, then $D$ is very ample.
+\end{enumerate}
+\end{theorem}
+
+In this section, we shall be mainly concerned with the properties of small order divisors (precisely: divisors of order $0$, $1$ or $2$.) We start the discussion with two simple remarks.
+
+\begin{remark}\index{Divisor!of degree $0$}Let $D \in \Div(X)$ be a divisor of degree $\mathrm{deg} \, D = 0$. Then
+\begin{equation*}h^0 \left(X, \, \mathcal{O}_X[D] \right) = 1 \iff D \sim 0, \end{equation*}
+or, equivalently,
+\begin{equation*} h^0 \left(X, \, \mathcal{O}_X[D] \right) = 0 \iff D \not \sim 0.\end{equation*}\end{remark}
+
+\begin{proof}We have proved in \hyperref[lemma:consdodfkf]{Lemma \ref{lemma:consdodfkf}} that - assuming $X$ is a compact Riemann surface - there is a $1$-$1$ correspondence
+\begin{equation*} \p \left( H^0 \left(X, \, \mathcal{O}_X[D] \right) \right) \cong |D|. \end{equation*}
+In particular, it turns out that
+\begin{equation*}h^0 \left(X, \, \mathcal{O}_X[D] \right) = 1 \iff \mathrm{dim} \, |D| = 0 \iff |D| = \{0\}, \end{equation*}
+that is, if and only if $D \sim 0$. In a similar fashion, one could prove the equivalent formulation, i.e.,
+\begin{equation*}h^0 \left(X, \, \mathcal{O}_X[D] \right) = 0 \iff \mathrm{dim} \, |D| = -1 \iff |D| = \emptyset. \end{equation*} \end{proof}
+
+\begin{remark} Let $D \in \Div(X)$ be a divisor of degree $2 \, g(X) - 2$. The \hyperref[serreduality1]{Serre Duality Theorem \ref{serreduality1}}, together with the remark above, proves that
+\begin{equation*} h^1 \left(X, \, \mathcal{O}_X[D] \right) = 1 \iff D \sim K_X,\end{equation*}
+or, equivalently,
+\begin{equation*} h^1 \left(X, \, \mathcal{O}_X[D] \right) = 0 \iff D \not \sim K_X. \end{equation*}\end{remark}
+
+\paragraph{Low Degree Divisors.} Recall that we have proved in \hyperref[prop:stimah0]{Proposition \ref{prop:stimah0}} that there is a rough estimate on the dimension of the $0$th cohomology group if $D$ is a divisor of positive degree:
+\begin{equation} \label{roughestimate} h^0 \left(X, \, \mathcal{O}_X[D] \right) \leq \mathrm{deg} \, D + 1. \end{equation}
+
+\begin{proposition}\label{prop:ccdsdsd}Let $X$ be a compact connected Riemann surface, and let $D \in \Div(X)$ be a divisor of degree equal to $1$. Then
+\begin{equation*} h^0 \left(X, \, \mathcal{O}_X[D] \right) \geq 2 \iff \begin{gathered}\text{$h^0 \left(X, \, \mathcal{O}_X[D] \right) = 2$, $X = \p^1(\C)$,} \\[1em] \text{and $\varphi_{|D|} : X \xrightarrow{\sim} \p^1(\C)$ is the isomorphism}. \end{gathered} \end{equation*}\end{proposition}
+
+\begin{proof}The estimate \eqref{roughestimate} proves that
+\begin{equation*}\mathrm{deg} \, D = 1 \implies \left( h^0 \left(X, \, \mathcal{O}_X[D] \right) \geq 2 \iff h^0 \left(X, \, \mathcal{O}_X[D] \right) = 2 \right). \end{equation*}
+The idea is to show that
+\begin{equation*}\varphi_{|D|} : X \to \p \left( H^0 \left(X, \, \mathcal{O}_X[D] \right)^v \right) \cong \p^1(\C) \end{equation*}
+is a morphism (i.e., the linear divisor system $|D|$ is b.p.f.) of degree $1$. For any $p \in X$ there is a short exact sequence
+\begin{equation*} 0 \xrightarrow{} H^0 \left( X, \, \mathcal{O}_X[D - p] \right) \xrightarrow{} H^0 \left( X, \, \mathcal{O}_X[D] \right) \xrightarrow{} H^0\left(X, \, \C_p \right) \end{equation*}
+from which it follows that
+\begin{equation*} \begin{cases} \mathrm{deg}(D - p) = 0 \\[0.5em]  h^0 \left( X, \, \mathcal{O}_X[D] \right) = 2 \\[0.5em] h^0\left(X, \,\C_p \right) = 1\end{cases} \implies \begin{cases} h^0 \left( X, \, \mathcal{O}_X[D - p] \right) = 1 \\[1em] H^0 \left( X, \, \mathcal{O}_X[D] \right) \longtwoheadrightarrow \C_p.\end{cases} \end{equation*}
+By \hyperref[doasodls]{Theorem \ref{doasodls}} it turns out that $|D|$ is b.p.f., and the morphism $\varphi_{|D|}$ has degree equal to $\mathrm{deg} \, D = 1$\footnote{The reader should pay attention that this is not always true; see \cite[pp 164-165]{miranda}. In this case it is true since $\p^1(\C)$ is a Riemann surface.}, which is exactly what we wanted to prove.
+
+\paragraph{Alternative Conclusion.} For every $p \in X$
+\begin{equation*} h^0 \left( X, \, \mathcal{O}_X[D - p] \right) = 1 \implies D \sim p, \end{equation*}
+and this, in turn, implies that
+\begin{equation*} \mathcal{O}_X[D] \cong \mathcal{O}_X[p] \qquad \forall \, p \in X. \end{equation*}
+More precisely, the points are all equivalent; since this is a property that characterizes $\p^1(\C)$, we infer that $X$ is the complex projective line\footnote{It is easy to prove that $p, \, q \in \p^1(\C)$ are always equivalent, e.g. consider the function
+\begin{equation*}f(z) = \frac{ p_0 \, z_1 - p_1 \, z_0 }{ q_0 \, z_1 - q_1 \, z_0 }.\end{equation*}}.
+\end{proof}
+
+\begin{definition}[Hyperelliptic]\index{Hyperelliptic curve} A compact connected Riemann surface $X$ of genus  $g(X) \geq 2$ is \textit{hyperelliptic} if there exists a divisor $D \in \Div(X)$ such that
+\begin{equation*} \mathrm{deg} \, D = 2 \qquad \text{and} \qquad h^0 \left(X, \, \mathcal{O}_X[D] \right) = 2. \end{equation*} \end{definition}
+
+\begin{remark}Equivalently, a Riemann surface $X$, satisfying the same assumptions as above, is \textit{hyperelliptic} if there exists a divisor $D \in \Div(X)$ such that: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The linear divisor system $|D|$ is b.p.f. (as a consequence of \hyperref[prop:ccdsdsd]{Proposition \ref{prop:ccdsdsd}}).
+\item The morphism $\varphi_{|D|} : X \xrightarrow{\cdot 2} \p^1(\C)$ has degree $2$. In the remainder of the section, we shall denote it by $g_2^1$.
+\end{enumerate}\end{remark}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 10cm, height = 8cm]{images/GEOMALGC51.png}
+\caption{The point $w$ is called \textit{Weierstrass ramification point}\index{Weierstrass ramification point}. By Riemann-Hurwitz there are only $2 \, g(X) + 2$.}
+\label{fig:wrp}
+\end{figure}
+
+\newpage
+
+\begin{proposition}Let $X$ be a hyperelliptic Riemann surface. The morphism \index{$g_2^1$}$g_2^1 : X \to \p^1(\C)$ is unique. \end{proposition}
+
+\begin{proof}We argue by contradiction.
+
+\paragraph{Step 1.} Let $D_1, \, D_2 \in \Div(X)$, and let $\varphi_{|D_i|} : X \xrightarrow{\cdot 2} \p^1(\C)$ be the associated morphisms. By assumption
+\begin{equation*} \mathrm{deg}(D_i) = 2 \qquad \text{and} \qquad h^0 \left(X, \, \mathcal{O}_X[D_i] \right) = 2, \end{equation*}
+hence there are divisors in $|D_i|$ (which will still be denoted by $D_i$) such that
+\begin{equation*} D_1 = p + q \qquad \text{and} \qquad D_2 = p + r. \end{equation*}
+
+\paragraph{Step 2.} Let $L := p + q + r$ be the minimal divisor containing both; we claim that
+\begin{equation*}h^0 \left(X, \, \mathcal{O}_X[L] \right) = 3. \end{equation*}
+Suppose that $h^0 \left(X, \, \mathcal{O}_X[L] \right) < 3$. Then it is necessarily equal to $2$, and we can easily derive a contradiction looking at the exact sequences below:
+\begin{equation*} \begin{aligned} & 0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[p+q] \right)\xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[L] \right)\xrightarrow{} H^0 \left( X, \, \C_r \right), \\[1em] & 0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[p+r] \right)\xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[L] \right)\xrightarrow{} H^0 \left( X, \, \C_q \right).\end{aligned} \end{equation*}
+The middle terms are the same, hence there are exact sequences
+\begin{equation*} \begin{aligned} & 0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[p+q] \right)\xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[L] \right)\xrightarrow{} H^0 \left( X, \, \C_q \right), \\[1em] & 0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[p+r] \right)\xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[L] \right)\xrightarrow{} H^0 \left( X, \, \C_r \right),\end{aligned} \end{equation*}
+and by the assumption on the dimension it turns out that
+\begin{equation*}H^0 \left(X, \, \mathcal{O}_X[p+q] \right) = H^0 \left(X, \, \mathcal{O}_X[L] \right) = H^0 \left(X, \, \mathcal{O}_X[p+r] \right) \end{equation*}
+which is absurd.
+
+\paragraph{Step 3.} Let $s, \, t \in X$ be points, and let us set $\Delta := s + t$. There is an exact sequence
+\begin{equation*} 0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[L - s - t] \right)\xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[L] \right)\xrightarrow{} H^0 \left( X, \, \C_\Delta \right), \end{equation*}
+and we immediately observe that $\mathrm{dim} \, \C_\Delta = 2$, and the divisor $L - s - t$ has degree equal to $1$. Thus, by \hyperref[prop:ccdsdsd]{Proposition \ref{prop:ccdsdsd}}, it turns out that 
+\begin{equation*} \mathrm{dim} \, H^0 \left(X, \, \mathcal{O}_X[L - s - t] \right) \leq 1, \end{equation*}
+which, in turn, implies that
+\begin{equation*} H^0 \left(X, \, \mathcal{O}_X[L] \right) \twoheadrightarrow H^0 \left( X, \, \C_\Delta \right). \end{equation*}
+
+\paragraph{Step 4.} The numerical criterion (see \hyperref[doasodls]{Theorem \ref{doasodls}}) implies that the divisor $L$ is very ample. We have already proved that
+\begin{equation*} \mathrm{deg}(L) = h^0  \left( X, \, \mathcal{O}_X[L] \right) = 3, \end{equation*}
+hence the morphism $\varphi_{|L|} : X \hookrightarrow \p^2(\C)$ is an embedding, whose image $\varphi_{|L|}(X)$ is an algebraic curve of degree equal to $3$, in contradiction with the fact that $g(X) \geq 2$ since
+\begin{equation*}g\left( \text{algebraic curve of degree $3$ in $\p^2$} \right) = \frac{2 \cdot (2 - 1)}{2} = 1.\end{equation*}
+\end{proof}
+
+\begin{remark}Let $X$ be a compact connected Riemann surface of genus $g(X) = 2$. A canonical divisor $K_X$ has the additional properties
+\begin{equation*} \mathrm{deg}(K_X) = h^0  \left( X, \, \mathcal{O}_X[K_X] \right) = 2, \end{equation*}
+and hence $X$ is always hyperelliptic. \end{remark}
+
+\section{Canonical Map}
+\index{Canonical map}
+
+In this section, the primary goal is to study the \textit{canonical map}, that is, the map associated to the canonical divisor $K_X$.
+
+More precisely, we will prove that, if $X$ is a compact connected Riemann surface of genus $g(X) \geq 2$ which is not hyperelliptic, then $\varphi_{|K_X|}$ is an embedding.
+
+\begin{theorem} \label{thbpf} Let $X$ be a compact connected Riemann surface of genus $g(X) \geq 2$. Then the canonical divisor $K_X$ is b.p.f., i.e., the map
+\begin{equation*} \varphi_{|K_X|} : X \to \p^{g(X) - 1}(\C) \end{equation*}
+is a morphism. \end{theorem}
+
+\begin{proof}Fix $p \in X$. There is a short exact sequence (see \hyperref[exas]{Proposition \ref{exas}}) given by
+\begin{equation*} 0 \xrightarrow{} \mathcal{O}_X[K_X - p] \xrightarrow{} \mathcal{O}_X[K_X] \xrightarrow{} \C_p \xrightarrow{} 0\end{equation*}
+which induces a long sequence in cohomology (see \hyperref[longcomo]{Theorem \ref{longcomo}}):
+\begin{equation*} \begin{aligned} 0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[K_X - p] \right) & \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[K_X] \right) \xrightarrow{} H^0\left(X, \, \C_p \right) \xrightarrow{} \dots \\[1em] & \dots \xrightarrow{} H^1 \left(X, \, \mathcal{O}_X[K_X - p] \right)  \xrightarrow{} H^1 \left(X, \, \mathcal{O}_X[K_X] \right) \xrightarrow{} 0. \end{aligned}\end{equation*}
+It follows from the \hyperref[serreduality1]{Serre Duality Theorem \ref{serreduality1}} that
+\begin{equation*} \begin{aligned} & H^1 \left(X, \, \mathcal{O}_X[K_X] \right) \cong H^0 \left(X, \, \mathcal{O}_X \right)^v \cong \C, \\[1em] & H^1 \left(X, \, \mathcal{O}_X[K_X-p] \right) \cong H^0 \left(X, \, \mathcal{O}_X[p] \right)^v \cong \C,  \end{aligned}\end{equation*}
+where the latter isomorphism is a consequence of the fact that $\mathrm{deg} \, p = 1$ is an effective divisor, but $X$ is not isomorphic to $\p^1(\C)$ since the genus is strictly greater than zero (see \hyperref[prop:ccdsdsd]{Proposition \ref{prop:ccdsdsd}}). As a consequence, there is an isomorphism
+\begin{equation*} H^1 \left(X, \, \mathcal{O}_X[K_X-p] \right) \xrightarrow{ \sim} \C \xrightarrow{\sim} H^1 \left(X, \, \mathcal{O}_X[K_X] \right), \end{equation*}
+which, in turn, implies that
+\begin{equation*}H^0 \left(X, \, \mathcal{O}_X[K_X-p] \right) \longtwoheadrightarrow H^0 \left( X, \, \C_p \right) \end{equation*}
+is a surjective map.
+
+By arbitrariness of $p \in X$, we conclude that the thesis holds true as a consequence of the numerical criterion (see \hyperref[doasodls]{Theorem \ref{doasodls}}).
+
+\paragraph{Equivalent Approach.} By \hyperref[RiemannRoch]{Riemann-Roch \ref{RiemannRoch}} it turns out that
+\begin{equation*}h^0 \left(X, \, \mathcal{O}_X[K_X-p] \right) - \underbrace{h^1 \left(X, \, \mathcal{O}_X[K_X-p] \right)}_{=1} = \underbrace{\mathrm{deg}(K_X - p)}_{=2 \, g(X) - 3} + 1 - g(X),\end{equation*}
+which, in turn, implies that
+\begin{equation*}h^0 \left(X, \, \mathcal{O}_X[K_X-p] \right) = g(X) - 1 = h^0 \left(X, \, \mathcal{O}_X[K_X] \right) - 1.\end{equation*}
+Since this equality holds for every $p \in X$, the numerical criterion allows us again to infer that the thesis holds true. \end{proof}
+
+\begin{theorem}\index{Canonical map!for nonhyperelliptic curve} Let $X$ be a compact connected Riemann surface of genus $g(X) \geq 2$. The canonical divisor $K_X$ is very ample if and only if $X$ is not hyperelliptic.\end{theorem}
+
+\begin{proof}First, we observe that \hyperref[thbpf]{Theorem \ref{thbpf}} asserts that the linear divisor system $|K_X|$ is b.p.f. under these assumptions. Let $p, \, q \in X$, set $\Delta := p + q$, and consider the exact sequence in cohomology given by
+\begin{equation*} \begin{aligned} 0 \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[K_X - p - q] \right) & \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[K_X] \right) \xrightarrow{} H^0\left(X, \, \C_\Delta \right) \xrightarrow{} \dots \\[1em] & \dots \xrightarrow{} H^1 \left(X, \, \mathcal{O}_X[K_X - p - q] \right)  \xrightarrow{} H^1 \left(X, \, \mathcal{O}_X[K_X] \right) \xrightarrow{} 0. \end{aligned}\end{equation*}
+By \hyperref[serreduality1]{Serre Duality Theorem \ref{serreduality1}} it turns out that
+\begin{equation*} \begin{aligned}& H^1 \left(X, \, \mathcal{O}_X[K_X] \right) \cong H^0 \left(X, \, \mathcal{O}_X \right)^v \cong \C, \\[1em] & H^1 \left(X, \, \mathcal{O}_X[K_X - p - q] \right) \cong H^0 \left(X, \, \mathcal{O}_X[p + q] \right)^v.\end{aligned} \end{equation*}
+In conclusion, it follows from \hyperref[doasodls]{Theorem \ref{doasodls}} that
+\begin{equation*}\text{$D$ is very ample} \iff H^0 \left(X, \, \mathcal{O}_X[K_X] \right) \longtwoheadrightarrow H^0 \left(X, \, \C_\Delta \right),\end{equation*}
+and hence it is enough to observe that
+\begin{equation*} H^0 \left(X, \, \mathcal{O}_X[K_X] \right) \longtwoheadrightarrow H^0 \left(X, \, \C_\Delta \right) \iff  h^0 \left(X, \, \mathcal{O}_X[p + q] \right) = 1 \end{equation*}
+for every $p, \, q \in X$; or, equivalently,
+\begin{equation*} H^0\left(X, \, \mathcal{O}_X[K_X] \right) \not \longtwoheadrightarrow H^0 \left(X, \, \C_\Delta \right) \iff \exists \, p, \, q \in X \: : \:  h^0 \left(X, \, \mathcal{O}_X[p + q] \right) = 2\end{equation*}
+which means $X$ is hyperelliptic by definition.\end{proof}
+
+\begin{theorem}\label{yperikfks}\index{Canonical map!for hyperelliptic curve} Let $X$ be a hyperelliptic Riemann surface. The morphism $\varphi_{|K_X|} : X \to \p^{g(X) - 1}$ can be factorized as follows:
+\begin{equation*} \varphi_{|K_X|} : X \xrightarrow{ g_2^1 } \p^1(\C) \xrightarrow{ \nu_{g-1} } \p^{g(X) - 1}(\C), \end{equation*}
+where $\nu_{g-1}$ is the Veronese embedding of degree $g(X) - 1$.\end{theorem}
+
+\begin{proof}The morphism $\varphi_{|K_X|}$ sends $X$ into an algebraic curve $Y \subseteq \p^{g(X) - 1}(\C)$, but it is not $1$-$1$ as a consequence of the previous characterization. Hence $\mathrm{deg} \, \varphi_{|K_X|} \geq 2$ and, if we set $d := \mathrm{deg} \, Y$, then
+\begin{equation*}\mathrm{deg} \, K_X = 2 \, g(X) - 2 = d \cdot \mathrm{deg} \, \varphi_{|K_X|} \implies d \leq g(X) - 1. \end{equation*}
+The reader should convince herself that it suffices to prove that
+\begin{equation*} Y = \nu_{g-1} \left( \p^1(\C) \right), \end{equation*}
+that is, $Y$ is a normal rational curve\footnote{A smooth, rational curve of degree $n$ in the projective space $\p^n(\C)$.}, to conclude the proof.
+
+\paragraph{Step 1.} Let $\pi : \widetilde{Y} \to Y$ be the resolution of the singularities of $Y$ (see \hyperref[sec:blow]{Subsection \ref{sec:blow}}), and let $H \subseteq Y$ be a divisor hyperplane.
+
+The linear system $\left|\pi^\ast(H) \right|$ is the $(g(X) - 1)$-dimensional space associated to the pullback divisor $\pi^\ast(H)$, and hence
+\begin{equation*} \varphi_{|\pi^\ast(H)|} : \widetilde{Y} \longrightarrow \p^{g(X) - 1}(\C) \end{equation*}
+is a morphism such that
+\begin{equation*} \mathrm{deg} \,\left(  \varphi_{|\pi^\ast(H)|} \left(\widetilde{Y} \right) \subseteq \p^{g(X) - 1} \right) = g(X) - 1. \end{equation*}
+
+\paragraph{Step 2.} The \hyperref[RiemannRoch]{Riemann-Roch Theorem \ref{RiemannRoch}} proves that $\widetilde{Y} \cong \p^1(\C)$, and also
+\begin{equation*} H^0 \left( \widetilde{Y}, \, \mathcal{O}_{\widetilde{Y}} [ \pi^\ast \, H ] \right) = H^0 \left( \p^1(\C), \, \mathcal{O}_{\p^1(\C)} \right). \end{equation*} 
+It follows that
+\begin{equation*} \varphi_{|\pi^\ast(H)|} : \p^1(\C) \longrightarrow \p^{g(X) - 1}(\C), \qquad x \longmapsto x \longmapsto \left(x_0^\alpha \, x_1^\beta \right)_{\alpha + \beta = g(X) - 1}, \end{equation*}
+that is, $\varphi_{|\pi^\ast(H)|}$ is the Veronese embedding; consequently, we infer that
+\begin{equation*} d = g(X) - 1 \qquad \text{and} \qquad \mathrm{deg} \, \varphi_{|K_X|} = 2. \end{equation*}
+Moreover, for any $p, \, q \in X$ it turns out that
+\begin{equation*} \varphi_{|K_X|} (p) = \varphi_{|K_X|}(q) \iff h^0 \left(X, \, \mathcal{O}_X[p + q] \right) = 2 \iff |p + q| = g_2^1, \end{equation*}
+that is,
+\begin{equation*} \varphi_{|K_X|} (p) = \varphi_{|K_X|}(q) \iff g_2^1(p) = g_2^1(q), \end{equation*}
+and this proves that
+\begin{equation*}\varphi_{|K_X|} : X \xrightarrow{ g_2^1 } \p^1(\C) \xrightarrow{ \nu_{g-1} } \p^{g(X) - 1}(\C). \end{equation*} \end{proof}
+
+\section{Riemann-Roch: Geometric Form}
+\index{Riemann-Roch Theorem!Geometric Form}
+
+In this section, we denote by $X$ a nonhyperelliptic Riemann surface, by $\varphi$ the canonical map $\varphi_{|K_X|}$, and we identify $X$ with its image via $\varphi$ (which is an embedding).
+
+\paragraph{Geometric form.} Let $D = p_1 + \dots + p_d \in \Div(X)$ be a divisor of degree $d$. We may always think of $\{p_1, \, \dots, \, p_d\}$ as a set of points in $\p^{g(X) - 1}(\C)$; in particular, it makes sense to define
+\begin{equation*} \mathrm{Span}(D) := \mathrm{Span} \left(p_1, \, \dots, \, p_d \right) \subseteq\p^{g(X) - 1}(\C). \end{equation*}
+
+\begin{theorem}[Riemann Roch, Geometric Form] \label{rrth:gf} The projective dimension of $D$ is $\mathrm{deg} \, D - 1$ minus the dimension of its span, that is,
+\begin{equation} \label{rrth:gf:eq} \mathrm{dim} \, |D| = \mathrm{deg} \, D - 1 - \mathrm{dim}\,\mathrm{Span}(D) . \end{equation} \end{theorem}
+
+\begin{proof} The short exact sequence of sheaf maps
+\begin{equation*} 0 \xrightarrow{} \mathcal{O}_X[K_X - D] \xrightarrow{} \mathcal{O}_X[K_X] \xrightarrow{} \C_D \xrightarrow{} 0\end{equation*}
+induces a long exact sequence in cohomology, that is,
+\begin{equation*} 0 \xrightarrow{}  H^0 \left(X, \, \mathcal{O}_X[K_X - D] \right) \xrightarrow{} H^0 \left(X, \,\mathcal{O}_X[K_X] \right) \xrightarrow{} H^0 \left(X, \,\C_D \right).\end{equation*}
+Clearly
+\begin{equation*} \begin{aligned} H^0 \left(X, \, \mathcal{O}_X[K_X - D] \right) & = \left\{ \begin{gathered} \text{hyperplanes $H$ of $\p^{g(X) - 1}(\C)$ such that} \\[0.8em] \text{$H$ vanishes on $D$} \end{gathered} \right\} \\[1em] & =  \left\{ \begin{gathered} \text{hyperplanes $H$ of $\p^{g(X) - 1}(\C)$ such that} \\[0.8em] \text{$H$ vanishes on $\mathrm{Span}(D)$} \end{gathered} \right\},\end{aligned} \end{equation*}
+that is,
+\begin{equation} \label{rrth:gf:eq2} \mathrm{dim} \, \mathrm{Span}(D) + \mathrm{dim} \, |K_X - D| = g(X) - 2. \end{equation}
+Since $\p^{g(X) - 1}$ is canonically isomorphic to $\p \left( H^0 \left(X, \, \mathcal{O}_X[K_X] \right)^v \right)$ we infer that
+\begin{equation*} h^1\left(X, \, \mathcal{O}_X[D] \right) = h^0\left(X, \, \mathcal{O}_X[K_X - D] \right) =  \mathrm{dim} \, |K_X - D| + 1, \end{equation*}
+and, if we substitute it into the identity \eqref{rrth:gf:eq2}, we obtain
+\begin{equation*}h^1\left(X, \, \mathcal{O}_X[D] \right) = g(X) - 1 - \mathrm{dim} \, \mathrm{Span}(D). \end{equation*}
+By \hyperref[RiemannRoch]{Riemann-Roch \ref{RiemannRoch}} it follows that
+\begin{equation*}\begin{aligned} h^0\left(X, \, \mathcal{O}_X[D] \right) & = h^1\left(X, \, \mathcal{O}_X[D] \right) + \mathrm{deg} \, D + 1 - g(X) = \\[1em] & = \mathrm{deg} \, D - \mathrm{dim} \, \mathrm{Span}(D), \end{aligned} \end{equation*}
+and thus \eqref{rrth:gf:eq} is proved.
+\end{proof}
+%\section{Normal Rational Curves}
+
+%Let $X$ be a Riemann surface of genus equal to $0$, and let $P \in X$ and $D := n \cdot P$. If $X \cong \p^1$ and $P = [1 \: : \: 0]$, then $h^0(D) = n + 1$ and $\phiD : X \to \p^n$ sends $(x_0 \: : \: x_1)$ to $(x_0^n \: : \dots : \: x_1^n)$, i.e., it is the Veronese embedding.
+
+%Therefore $\phiD$ is an actual embedding and the image $\phiD(X)$ is an algebraic curve of degree $n$, with
+%\begin{equation*} \mathrm{rank} \, \begin{pmatrix} y_0 & \dots & y_{n-1} \\ y_1 & \dots & y_n \end{pmatrix} = 1. \end{equation*}
+
+\section{Clifford Theorem}
+\index{Clifford Theorem}
+
+\paragraph{Recall.} Let $D$ be a divisor on a compact connected Riemann surface $X$ of genus $g(X)$. The linear system of divisors $|D|$ is isomorphic (see \hyperref[lemma:consdodfkf]{Lemma \ref{lemma:consdodfkf}}) to
+\begin{equation*} \p \left( H^0 \left(X, \, \mathcal{O}_X[D] \right) \right), \end{equation*}
+and, in particular, it turns out that
+\begin{equation*} \mathrm{dim} \, |D| = h^0 \left(X, \, \mathcal{O}_X[D] \right) - 1. \end{equation*}
+If $\mathrm{deg} \, D \geq 2 \, g(X) - 1$, then we already know that
+\begin{equation*} h^1\left(X, \, \mathcal{O}_X[D] \right) = 0 \qquad \text{and} \qquad \mathrm{dim} \, |D| = \mathrm{deg} \, D - g(X). \end{equation*}
+In this section, we state and prove the so-called \textit{Clifford theorem}, which concerns divisors of smaller degree; precisely, it gives a bound on the dimension of $|D|$ when $\mathrm{deg} \, D \leq 2 \, g(X) - 2$.
+
+\begin{lemma}\label{lemma:charks} Let $X$ be a compact connected Riemann surface, and let $D \in \Div(X)$ be a divisor. Then
+\begin{equation*} \mathrm{dim} \, |D| \geq k \iff \forall \, \{p_1, \, \dots, \, p_k\} \subset X, \, \, \, \exists \, D^\prime \in |D| \: : \: \mathrm{spt} \left( D^\prime \right) = \{p_1, \, \dots, \, p_k\}. \end{equation*}\end{lemma}
+
+\begin{proof}We argue by induction. The base step ($k = 0$) is trivially true, hence we only focus on the inductive step $k \implies k +1$.
+
+\paragraph{Inductive step: "$\impliedby$".} Assume that for any collection of $k + 1$ points of $X$ there exists a divisor $D^\prime \in |D|$ such that
+\begin{equation*}\mathrm{spt} \left(D^\prime \right) \supseteq \{p_1, \, \dots, \, p_{k+1} \}. \end{equation*}
+By inductive assumption, this is enough to infer that - at least - the projective dimension of $|D|$ is $\geq k$. Let us pick $p_{k+1} \in \mathrm{Basis}\left( \mathrm{Span} \, |D| \right)$, and let us consider the divisor $D_1 := D - p_{k + 1}$. Clearly
+\begin{equation*}\forall \, \{p_1, \, \dots, \, p_k\} \subset X, \, \, \, \exists \, D_1^\prime \in |D_1| \: : \: \mathrm{spt} \left( D_1^\prime \right) = \{p_1, \, \dots, \, p_k\}, \end{equation*}
+thus by inductive assumption it turns out that $\mathrm{dim} \, |D_1| \geq k$. On the other hand, we chose $p_{k+1}$ in such a way that $\left| D - p_{k+1} \right| \subsetneqq |D|$; hence
+\begin{equation*}\mathrm{dim} \, |D| > \mathrm{dim} \, |D_1| \geq k \implies \mathrm{dim} \, |D| \geq k +1,\end{equation*}
+which is exactly what we wanted to prove.
+
+\paragraph{Inductive step: "$\implies$".} Assume that $\mathrm{dim} \, |D| \geq k + 1$. As remarked in the introduction of the section, it implies that $h^0 \left(X, \, \mathcal{O}_X[D] \right) \geq k + 2$. Let $p_1, \, \dots, \, p_{k+1} \in X$ be a given collection of points, and let us set
+\begin{equation*} \Delta := p_1 + \dots + p_{k + 1}. \end{equation*}
+By \hyperref[exas]{Proposition \ref{exas}} there is a short exact sequence
+\begin{equation*} 0 \xrightarrow{} \mathcal{O}_X[D - \Delta] \xrightarrow{} \mathcal{O}_X[D] \xrightarrow{} \C_\Delta \xrightarrow{} 0,\end{equation*}
+which induces a long exact sequence in cohomology
+\begin{equation*} 0 \xrightarrow{} H^0 \left( X, \, \mathcal{O}_X[D - \Delta] \right) \xrightarrow{} H^0 \left(X, \, \mathcal{O}_X[D]\right) \xrightarrow{} H^0 \left(X, \, \C_\Delta \right) \xrightarrow{} \dots\end{equation*}
+and we immediately notice that, by assumption, the middle term has dimension $\geq k + 2$, while the last has dimension equal to $k + 1$. In particular, there exists a section $s \in H^0 \left(X, \, \mathcal{O}_X[D] \right)$ which vanishes on $\Delta$, i.e.,
+\begin{equation*} s(p_i) = 0, \qquad \forall \, i = 1, \, \dots, \, k+1. \end{equation*}
+The proof is now concluded, but it is worth underlining that the right arrow does not need any inductive assumption since we have never used it in our argument.\end{proof}
+
+\begin{corollary} \label{corollary:ewe}Let $D_1, \, D_2 \in \Div(X)$. Then
+\begin{equation*} \mathrm{dim} \, |D_1| + \mathrm{dim} \, |D_2| \leq \mathrm{dim} \, \left|D_1 + D_2 \right|. \end{equation*} \end{corollary}
+
+\begin{proof}Let us set $d_i := \mathrm{dim} \, |D_i|$ for $i = 1, \, 2$. Given a collection of $d_1 + d_2$ points
+\begin{equation*} \{ p_1, \, \dots, \, p_{d_1}, \, q_1, \, \dots, \, q_{d_2} \} \subset X, \end{equation*}
+it follows from \hyperref[lemma:charks]{Lemma \ref{lemma:charks}} that there are $D_1^\prime \in |D_1|$ and $D_2^\prime \in |D_2|$ divisors such that
+\begin{equation*}\mathrm{spt} \left(D_1^\prime \right) \supseteq \{p_1, \, \dots, \, p_{d_1} \} \qquad \text{and} \qquad \mathrm{spt} \left(D_2^\prime \right) \supseteq \{q_1, \, \dots, \, q_{d_2} \}. \end{equation*}
+On the other hand, the divisor $D_1^\prime + D_2^\prime$ belongs to $|D_1 + D_2|$, and thus by \hyperref[lemma:charks]{Lemma \ref{lemma:charks}} we infer that
+\begin{equation*} \mathrm{dim} \, |D_1 + D_2| \geq d_1 + d_2 = \mathrm{dim} \, |D_1| + \mathrm{dim} \, |D_2|. \end{equation*}\end{proof}
+
+\begin{remark}Equivalently, the corollary asserts that the image of the map
+\begin{equation*}\mu : H^0 \left(X, \, \mathcal{O}_X[D_1] \right) \times H^0 \left(X, \, \mathcal{O}_X[D_2] \right) \to H^0 \left(X, \, \mathcal{O}_X[D_1 + D_2] \right) \end{equation*}
+has dimension
+\begin{equation*} \mathrm{dim} \, \mathrm{Im}(\mu) \geq h^0 \left(X, \, \mathcal{O}_X[D_1] \right) + h^0 \left(X, \, \mathcal{O}_X[D_2] \right) - 1. \end{equation*} \end{remark}
+
+\begin{theorem}[Clifford Theorem] Let $X$ be a compact connected Riemann surface of genus $g(X)$, and let $D \in \Div(X)$ be an effective divisor of degree $\mathrm{deg} \, D \leq 2 \, g(X) - 2$. Then
+\begin{equation*} \mathrm{dim} \, |D| \leq \frac{1}{2} \, \mathrm{deg} \, D, \end{equation*}
+and the equality holds if and only if either \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $D = 0$, $D = K_X$; or
+\item $X$ is hyperelliptic and $|D| = r \cdot |E|$, where $|E| = g_2^1$ and $r$ is the number of the couples formed by hyperelliptic divisors.
+\end{enumerate}\end{theorem}
+
+\begin{proof} The argument is rather involved; hence we divide the proof into four main steps.
+
+\paragraph{Step 1: Inequality.} Assume that $h^1 \left(X, \, \mathcal{O}_X[D] \right) = 0$. By \hyperref[RiemannRoch]{Riemann-Roch \ref{RiemannRoch}} it turns out that
+\begin{equation*} h^0 \left(X, \, \mathcal{O}_X[D] \right) = \mathrm{deg} \, D - g(X) + 1 \: {\color{red}\leq} \: \frac{1}{2} \, \mathrm{deg} \, D + 1, \end{equation*} 
+where the {\color{red}red} inequality follows from the assumption on the degree of $D$.
+
+If $h^1 \left(X, \, \mathcal{O}_X[D] \right) \neq 0$, then we can also reduce to the Riemann-Roch formula using a simple trick. Indeed, by duality it turns out that
+\begin{equation*} h^1 \left(X, \, \mathcal{O}_X[D] \right) \neq 0 \iff h^0 \left(X, \, \mathcal{O}_X[K_X - D] \right) \neq 0, \end{equation*}
+and hence it suffices to consider the linear systems $|D|$ and $|K_X - D|$. The \hyperref[RiemannRoch]{Riemann-Roch \ref{RiemannRoch}}, together with \hyperref[serreduality1]{Serre Duality Theorem \ref{serreduality1}}, implies that
+\begin{equation} \label{cliff1} \mathrm{dim} \, |D| - \mathrm{dim} \, |K_X - D| = \mathrm{deg} \, D - g(X) + 1, \end{equation}
+while the previous \hyperref[corollary:ewe]{Corollary \ref{corollary:ewe}} implies that
+\begin{equation} \label{cliff2} \mathrm{dim} \, |D| + \mathrm{dim} \, |K_X - D| \leq \mathrm{dim} \, |K_X| = g(X) - 1. \end{equation}
+We conclude the first part of the proof combining \eqref{cliff1} and \eqref{cliff2} to obtain the sought inequality:
+\begin{equation*} \mathrm{dim} \, |D| \leq \frac{1}{2} \, \mathrm{deg} \, D, \end{equation*}
+
+\paragraph{Step 2: Equality "$\impliedby$".} This implication is trivial since for $D = 0$ or $D = K_X$ the equality holds as a straightforward application of the \hyperref[serreduality1]{Serre Duality Theorem \ref{serreduality1}}.
+
+On the other hand, if $X$ is a hyperelliptic surface and $|D| = r \cdot g_2^1$, then by definition $\mathrm{deg} \, D = 2 \cdot r$, and hence it is enough to notice that $r = \mathrm{dim} \, |D|$. 
+
+\paragraph{Step 3: Equality "$\implies$".} Let $D \neq 0, \, K_X$ be any divisor such that
+\begin{equation*} \mathrm{deg} \, D = 2 \cdot \mathrm{dim} \, |D|. \end{equation*}
+We argue by induction on the projective dimension of $|D|$. If $\mathrm{dim} \, |D| = 1$, then the degree of $D$ is equal to $2$ and thus there is nothing to be proved.
+
+\vspace{0.4mm}
+Assume that $\mathrm{deg} \, D \geq 4$. Let us consider a divisor $E \in |K_X - D|$, and let us pick two points $p, \, q \in X$ such that $p \in \mathrm{spt}(E)$ and $q \notin \mathrm{spt}(E)$. The dimension of $|D|$ is greater or equal than $2$, hence by \hyperref[lemma:charks]{Lemma \ref{lemma:charks}} there exists $D^\prime \in |D|$ such that
+\begin{equation*} \{ p, \, q\} \subseteq \mathrm{spt} (D^\prime). \end{equation*}
+Set $\widetilde{D} := D^\prime \cap E$, where the intersection between divisors is to be intended as follows:
+\begin{equation*} \widetilde{D}(s) = \min \{ D^\prime(s), \, E(s) \}, \qquad \forall \, s \in X. \end{equation*}
+By construction $q \notin \mathrm{spt}(E)$, thus $\mathrm{deg} \, \widetilde{D} < \mathrm{deg} \, D$; similarly $p \in \mathrm{spt}(E)$ implies that
+\begin{equation*}p \in \mathrm{spt}(E) \cap \mathrm{spt}(D^\prime) \implies \deg \, \widetilde{D} > 0. \end{equation*}
+Let us consider the short exact sequence
+\begin{equation*} 0 \xrightarrow{} \mathcal{O}_X[ \widetilde{D}] \xrightarrow{\psi} \mathcal{O}_X[D] \oplus  \mathcal{O}_X[E]  \xrightarrow{\varphi}  \mathcal{O}_X[D + E - \widetilde{D}]  \xrightarrow{} 0,\end{equation*}
+where $\psi = (\imath_1, \, \imath_2)$ is given by the pair of inclusions
+\begin{equation*} \begin{aligned} & \imath_1 : \mathcal{O}_X[\widetilde{D}] \hookrightarrow \mathcal{O}_X[D], \\[1em] & \imath_2 : \mathcal{O}_X[D] \hookrightarrow \mathcal{O}_X[E], \end{aligned} \end{equation*}
+and $\varphi = r_1 - r_2$ is the difference between the maps
+\begin{equation*} \begin{aligned} & r_1 : \mathcal{O}_X[D] \longrightarrow \mathcal{O}_X\left[D + (E - \widetilde{D}) \right], \\[1em] & r_2 : \mathcal{O}_X[E] \longrightarrow \mathcal{O}_X\left[D + (E - \widetilde{D}) \right]. \end{aligned} \end{equation*}
+The long exact sequence in cohomology gives us the inequality
+\begin{equation*} \begin{aligned} h^0 \left(X, \, \mathcal{O}_X[D] \oplus \mathcal{O}_X[E] \right) & = h^0 \left(X, \, \mathcal{O}_X[D] \right) + h^0 \left(X, \, \mathcal{O}_X[E] \right) \leq \\[1em] & \leq h^0 \left(X, \, \mathcal{O}_X[\widetilde{D}] \right) + h^0 \left(X, \, \mathcal{O}_X\left[D + E - \widetilde{D} \right] \right), \end{aligned}\end{equation*}
+while the fact that $E \sim K_X - D$ implies that
+\begin{equation*} h^0 \left(X, \, \mathcal{O}_X[D] \right) + h^0 \left(X, \, \mathcal{O}_X[E] \right) \leq h^0 \left(X, \, \mathcal{O}_X [\widetilde{D}]\right) + h^0 \left(X, \, \mathcal{O}_X\left[K_X - \widetilde{D} \right] \right),\end{equation*}
+that is,
+\begin{equation*} \mathrm{dim} \, |D| + \mathrm{dim} \, |K_X - D| \leq \mathrm{dim} \, \left|\widetilde{D} \right| + \mathrm{dim} \, \left|K_X - \widetilde{D} \right|.\end{equation*}
+At this point, we observe that: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The left-hand side may be computer explicitly, i.e.,
+\begin{equation*} \mathrm{dim} \, |D| + \mathrm{dim} \, |K_X - D|  = g(X) - 1.\end{equation*}
+Indeed, from \eqref{cliff1} we infer that
+\begin{equation*}\mathrm{dim} \, |D| = \frac{1}{2} \, \mathrm{deg} \, D \implies  \mathrm{dim} \, |K_X - D|  = g(X) - 1 - \frac{1}{2} \, \mathrm{deg} \, D,\end{equation*}
+and this implies that
+\begin{equation*} \mathrm{dim} \, |D| + \mathrm{dim} \, |K_X - D|  = g(X) - 1 - \frac{1}{2} \, \mathrm{deg} \, D + \frac{1}{2} \, \mathrm{deg} \, D = g(X) - 1.\end{equation*}
+\item The right-hand side, by \hyperref[corollary:ewe]{Corollary \ref{corollary:ewe}}, satisfies the following inequality:
+\begin{equation*} \mathrm{dim} \, \left|\widetilde{D} \right| + \mathrm{dim} \, \left|K_X - \widetilde{D} \right| \leq g(X) - 1.\end{equation*}
+\end{enumerate}
+Therefore the projective dimension of the linear system associated with $\widetilde{D}$ is equal to half of the degree, and by inductive assumption, it turns out that $X$ is \textit{hyperelliptic} and 
+\begin{equation*} \left| \widetilde{D} \right| = \bar{r} \cdot g_2^1. \end{equation*}
+It remains to prove that $D$ itself is a multiple of $g_2^1$. Let $E$ be the hyperelliptic divisor of $X$, that is, the divisor such that $|E| = g_2^1$, and let us set $s := \mathrm{dim} \, |D|$; we want to prove that
+\begin{equation*}D + \left( g(X) - 1 - s \right) \cdot E = K_X.\end{equation*}
+First, we notice that
+\begin{equation*} \mathrm{dim} \, |(g(X) - 1 - s) \cdot E| = g(X) - 1 - s, \end{equation*}
+since it can be obtained by repeating $g(X) - 1 - s$ the linear system $g_2^1$; hence by \hyperref[corollary:ewe]{Corollary \ref{corollary:ewe}} it turns out that
+\begin{equation*}\begin{aligned} \mathrm{dim} & \, |D| + \mathrm{dim} \, |(g(X) - 1 - s) \cdot E| = g(X) - 1 \implies \\[1em] & \implies h^0 \left(X, \, \mathcal{O}_X\left[D + \left(g(X) - 1 - s \right) \cdot E \right] \right) \geq g(X).\end{aligned} \end{equation*}
+On the other hand, a straightforward computation proves that 
+\begin{equation*}\mathrm{deg} \, D + \mathrm{deg} \, (g(X) - 1 - s) \cdot E = \mathrm{deg} \, D + 2 \cdot \left( g(X) - 1 - \frac{1}{2} \, \mathrm{deg} \, D \right) = 2 \, g(X) - 2,  \end{equation*}
+and thus the Clifford inequality allows us to infer that
+\begin{equation*}\begin{aligned} \mathrm{dim} & \, \left| D + \left(g(X) - 1 - s\right) \cdot E \right| \leq g(X) - 1 \implies \\[1em] & \implies h^0 \left(X, \, \mathcal{O}_X\left[D + \left(g(X) - 1 - s \right) \cdot E \right] \right) \leq g(X).\end{aligned} \end{equation*}
+In conclusion, the claim is proved since $K_X$ is the unique divisor - up to the equivalence relation - satisfying the two properties
+\begin{equation*} \mathrm{deg} \, K_X = 2 \, g(X) - 2 \qquad \text{and} \qquad h^0 \left(X, \, \mathcal{O}_X[K_X] \right) = g(X). \end{equation*}
+In particular, the divisor $D$ is equal to $K_X - \left( g(X) - 1 - s \right) \cdot E$ and $X$ is hyperelliptic; hence
+\begin{equation*} K_X = \left( g(X) - 1 \right) \cdot E \implies D = s \cdot E = s \cdot g_2^1, \end{equation*}
+which is exactly what we wanted to prove. \end{proof}

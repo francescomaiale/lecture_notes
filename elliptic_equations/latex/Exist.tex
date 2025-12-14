@@ -1,0 +1,567 @@
+\chapter{Existence Results for Elliptic Problems}
+
+In this chapter we are concerned with the existence of solutions  for elliptic problems, both in variational and in nonvariational form.
+
+\section{Near Operators Theory}
+
+\begin{definition}[Nearness] Let $\mathfrak{X}$ be any set, let $\mathcal{B}$ be a Banach space and let $A, \, B : \mathfrak{X} \to \mathcal{B}$ be operators. We say that $A$ is \textit{near} to $B$ if there exist a constant $\alpha > 0$ and $k \in (0, \, 1)$ such that
+\begin{equation} \label{eq:nearness} \left\| B(x_1) - B(x_2) - \alpha \left[ A(x_1) - A(x_2) \right] \right\| \leq k \, \left\| B(x_1) - B(x_2) \right\|, \qquad \forall \, x_1, \, x_2 \in \mathfrak{X}. \end{equation}\end{definition}
+
+\begin{remark} The condition is in general \textbf{not} symmetric: if $A$ is near $B$, then it's not necessarily true that $B$ is near $A$. On the other hand, if $\mathcal{B}$ is a Hilbert space, then the condition is symmetric. %DIM.
+\end{remark}
+
+\begin{lemma}Let $\mathfrak{X}$ be any set, let $\mathcal{B}$ be a Banach space, let $A, \, B : \mathfrak{X} \to \mathcal{B}$ be operators and assume that $A$ is near to $B$. Then the following inequalities are satisfied for any $x_1, \, x_2 \in \mathfrak{X}$:
+\begin{equation} \label{ineq1} \left\| B(x_1) - B(x_2) \right\| \leq \frac{\alpha}{1 - k} \, \left\| A(x_1) - A(x_2) \right\|,\end{equation} 
+\begin{equation} \label{ineq2} \left\| A(x_1) - A(x_2) \right\| \leq \frac{k+1}{\alpha} \, \left\| B(x_1) - B(x_2) \right\|. \end{equation}\end{lemma}
+
+\begin{proof} We only prove the first inequality, and leave the second one to the reader. Since $A$ is near to $B$, we have that
+\begin{equation*} \begin{aligned} \left\| B(x_1) - B(x_2) \right\| & \leq \left\| B(x_1) - B(x_2) - \alpha \left[ A(x_1) - A(x_2) \right] \right\| + \alpha \, \left\| A(x_1) - A(x_2) \right\| \leq \\ & \leq k \, \|B(x_1) - B(x_2)\|  + \alpha \, \left\| A(x_1) - A(x_2) \right\| , \end{aligned}\end{equation*} 
+from which it follows easily that
+\begin{equation*}\left(1 - k\right) \cdot \left\| B(x_1) - B(x_2) \right\| \leq \alpha \, \left\| A(x_1) - A(x_2) \right\|.\end{equation*} \end{proof}
+
+\begin{lemma}\label{lemma:infjd}Let $\mathfrak{X}$ be any set, let $\mathcal{B}$ be a Banach space, let $A, \, B : \mathfrak{X} \to \mathcal{B}$ be operators and assume that $A$ is near to $B$. Then $A$ is injective if and only if $B$ is injective. \end{lemma}
+
+\begin{proof}This is a immediate consequence of the previous Lemma, since \eqref{ineq1} and \eqref{ineq2} easily implies that $A(x_1) = A(x_2)$ if and only if $B(x_1) = B(x_2)$. \end{proof}
+
+\begin{lemma}Let $B : \mathcal{X} \to \mathcal{B}$ be an injective operator. Then $(\mathcal{X}, \, d)$ is a metric space, where
+\begin{equation*}d(x, \, y)  = \| B(x) - B(y) \|_{\mathcal{B}}, \qquad \forall \, x, \, y \in \mathcal{X}.\end{equation*} 
+Moreover, if $B$ is also surjective, then the metric space $(\mathcal{X}, \, d)$ is complete. \end{lemma}
+
+\begin{proof} We want to prove that $d$ is a distance on $\mathcal{X}$, that is, the characterizing properties hold true. By definition it is greater or equal to zero and, since $B$ is injective, it follows that
+\begin{equation*}d(x, \, y)  = 0 \iff B(x) = B(y) \iff x = y. \end{equation*}
+The symmetric property and the triangle inequality are straightforward consequences of the definition, therefore we will not give more details.
+
+Assume that $B$ is bijective and let $(x_n)_{n \in \N} \subset \mathcal{X}$ be a Cauchy sequence. Then $\left(B(x_n) \right)_{n \in \N} \subset \mathcal{B}$ is a Cauchy sequence and, by completeness of $\mathcal{B}$, it converges to $y \in \mathcal{B}$. Since $B$ is surjective, there is $x \in \mathcal{X}$ such that $B(x) = y$; it follows that
+\begin{equation*} d(x_n, \, x) = \| B(x_n) - y \|_{\mathcal{B}} \xrightarrow{n \to + \infty} 0, \end{equation*}
+and this concludes the proof.  \end{proof}
+
+\begin{theorem}\label{bijectle}Let $\mathfrak{X}$ be any set, let $\mathcal{B}$ be a Banach space, let $A, \, B : \mathfrak{X} \to \mathcal{B}$ be operators and assume that $A$ is near to $B$. If $B$ is a bijection, then also $A$ is a bijection. \end{theorem}
+
+\begin{proof} It suffices to prove that $A$ is a \textit{surjective} operator. In fact, it is \textit{injective} as a consequence of \hyperref[lemma:infjd]{Lemma \ref{lemma:infjd}} which was proved earlier.
+
+Let $f \in \mathcal{B}$ be any element. We want to prove that there exists a (unique) $u \in \mathcal{X}$ such that $A(u) = f$ or, equivalently, that
+\begin{equation*} B(u) = B(u) - \alpha \, A(u) + \alpha \, f =:F(u). \end{equation*}
+
+For any $u \in \mathcal{X}$, $F(u)$ belongs to $\mathcal{B}$, hence there is one and only one $v \in \mathcal{X}$ such that $B(v) = F(u)$, as $B$ is a bijective operator. 
+
+Let us denote by $T : \mathcal{X} \to \mathcal{X}$ the application that sends $u$ in the unique solution $v$. If $v = T(u)$ and $w = T(z)$, it turns out that
+\begin{equation*} \begin{aligned} d(v, \, w) & = \left\| B(v) - B(w) \right\|_{\mathcal{B}} = \left\| F(u) - F(z) \right\|_{\mathcal{B}} = \\ &  = \left\| B(v) - B(w) - \alpha \left[ A(v) - A(w) \right] \right\| \leq k \, \left\| B(v) - B(w) \right\|, \end{aligned} \end{equation*}
+i.e., $T$ is a contraction (since $k$ is strictly less than one).
+
+Finally $\mathcal{X}$ is a complete metric space, thus there is one and only one fixed point $u \in \mathcal{X}$ of $T$, that is, $A$ is surjective:
+\begin{equation*} T(u) = u \implies B(u) = F(u) \implies A(u) = f. \end{equation*}\end{proof}
+
+\paragraph{Equivalence Relation.} Let us endow the set $\mathcal{X}$ with the following equivalence relation:
+\begin{equation*} u \sim v \iff B(u) = B(v). \end{equation*}
+Let us denote by $[u]_\mathcal{X}$ the equivalence class of $u$ and let $X = \faktor{\mathcal{X}}{\sim}$. We can define two operators $A^\ast, \, B^\ast : X \to \mathcal{B}$ by setting
+\begin{equation*} A^\ast( [u]_{\mathcal{X}} ) = A(u) \qquad \text{and} B^\ast( [u]_{\mathcal{X}} ) = B(u), \end{equation*}
+then, if $A$ is near $B$, also $A^\ast$ is near $B^\ast$ (with the same constants). 
+
+If we assume that $B$ is surjective, then $B^\ast$ is bijective (by definition). It follows from \hyperref[bijectle]{Theorem \ref{bijectle}} that $A^\ast$ is bijective, and this directly implies that $A$ is surjective.
+
+\begin{theorem}Let $\mathfrak{X}$ be any set, let $\mathcal{B}$ be a Banach space, let $A, \, B : \mathfrak{X} \to \mathcal{B}$ be operators and assume that $A$ is near to $B$. If $B$ is a surjective operator, then also $A$ is a surjective operator. \end{theorem}
+
+\begin{theorem}\label{th:conm} Let $\mathfrak{X}$ be any set, let $\mathcal{B}$ be a Banach space and let $\{A_t : \mathcal{X} \to \mathcal{B}\}_{t \in [0, \, 1]}$ be a family of operators such that: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item There exists $t_0 \in [0, \, 1]$ such that $A_{t_0}$ is a bijection.
+\item There exists $c > 0$ such that, for any $s, \, t \in [0, \, 1]$ and any $x, \, y \in \mathcal{X}$,
+\begin{equation*} \left\| A_t(x) - A_t(y) - \left[ A_s(x) - A_s(y) \right] \right\|_{\mathcal{B}} \leq c \, |t - s| \, \|A_t(x) - A_t(y) \|_{\mathcal{B}}. \end{equation*}
+\end{enumerate}
+Then, for any $s \in [0, \, 1]$, it turns out that $A_s$ is a bijection.\end{theorem}
+
+\begin{proof}Set $I := \left\{ t \in [0, \, 1] \: \left| \: \text{$A_t$ is a bijection} \right. \right\}$. By connectedness of $[0, \, 1]$, it suffices to prove that $I$ is nonempty, open and closed in the subspace topology.
+
+The assumption \textbf{(a)} implies that $I$ is nonempty. Let $t \in I$ and let $\delta > 0$ be such that, for any $s \in [t - \delta, \, t + \delta] \cap [0, \, 1]$, it turns out that $c \, |t - s| < 1$. Then the inequality \textbf{(b)} implies that $A_s$ near $A_t$, and thus $A_s$ is bijective (i.e. $s \in I$) by \hyperref[bijectle]{Theorem \ref{bijectle}}.
+
+Let $(s_n)_{n \in \N} \subset I$ be a converging sequence and let $s \in [0, \, 1]$ be its limit. There exists $N \in \N$ such that $c \, |s_n - s| < 1$, for any $n \geq N$, therefore $A_s$ is near $A_{s_N}$ and, again, it is bijective.\end{proof}
+
+\paragraph{Fréchet Differential} Let $\mathcal{B}_1$ and $\mathcal{B}_2$ be Banach spaces and let $F : U \subset \mathcal{B}_1 \to \mathcal{B}_2$. The function $F$ is differentiable in the sense of Fréchet at $u_0 \in U$ if there is a linear continuous application $L : \mathcal{B}_1 \to \mathcal{B}_2$ such that
+\begin{equation} \lim_{h \to 0} \frac{ \| F(u_0 + h) - F(u_0) - L \, h \|_{\mathcal{B}_2}}{\|h\|_{\mathcal{B}_1}} = 0, \end{equation}
+and we denote it by $\mathrm{d}F_{u_0}$.
+
+We say that $F$ is continuously differentiable at $u_0$ if it is differentiable in a neighborhood $W$ of $u_0$ and the mapping $W \ni u \mapsto \mathrm{d}F_u \in \mathcal{L}(\mathcal{B}_1, \, \mathcal{B}_2)$ is continuous at $u_0$.
+
+\begin{theorem} Let $(Y, \, \| \cdot \|_Y)$ and $(Z, \, \| \cdot \|_Z)$ be two Banach spaces, let $y_0 \in Y$ be any point and let $F : U \to Z$ be a function defined on a neighborhood of $y_0$. Assume that \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $F \in C^1(U)$;
+\item the Fréchet differential $\mathrm{d}F_{y_0} : Y \to Z$ is invertible.
+\end{enumerate}
+Then there exist $k \in (0, \, 1)$ and a neighborhood $W \subset U$ such that for any $y_1, \, y_2 \in W$
+\begin{equation*} \left\| \mathrm{d}F_{y_0}[y_1-y_2] - \left[F(y_1) - F(y_2)\right] \right\|_Z \leq \left\| \mathrm{d}F_{y_0}[y_1 - y_2] \right\|_Z. \end{equation*} \end{theorem}
+ 
+\section{Historical Digression on Near Operators}
+
+The idea of introducing the notion of \textit{nearness} between operators originates from the existence and uniqueness problem of nonvariational elliptic equations of the following kind:
+\begin{equation} \label{problema} \begin{cases} u \in H^2(\Omega) \cap H_0^1(\Omega) \\ \\ \displaystyle\sum_{i, \, j = 1}^n a_{i, \, j}(x) \, D^{i, \, j} \, u(x) = f(x) & \text{for $x \in \Omega$}, \end{cases} \end{equation}
+where $\Omega \subset \R^n$ is bounded and - for simplicity only - convex, $f \in L^2(\Omega)$, the coefficients $a_{i, \, j} \in L^\infty(\Omega)$ and the matrix $A = \left(a_{i, \, j} \right)_{i, \, j = 1, \, \dots, \, n}$ is uniformly elliptic and symmetric.
+
+\vspace{1.8mm}
+If $n > 2$ the problem \eqref{problema} is not well-defined under the solely assumption of uniformly ellipticity (see \hyperref[talenti]{Example \ref{talenti}}). Therefore, it is necessary to introduce more restrictive condition on the coefficients of the matrix $A$, e.g., regularity ($a_{i, \, j} \in C^0(\Omega)$) or algebraic conditions.
+
+\begin{definition}[Corder Condition] Let $A = \left(a_{i, \, j} \right)_{i, \, j = 1, \, \dots, \, n}$ be a matrix such that $\|A(x)\| \neq 0$ for almost every $x \in \Omega$. We say that $A(x)$ satisfies the \textit{Corder condition} if there exists $\epsilon > 0$ such that
+\begin{equation} \label{concord} \frac{ \left( \sum_{i = 1}^{n} a_{i, \, i}(x) \right)^2 }{\sum_{i, \, j = 1}^n a_{i, \, j}^2(x) } \geq n - 1 + \epsilon \qquad \text{for almost every $x \in \Omega$}. \end{equation} \end{definition}
+
+\begin{definition}[Campanato Condition] Let $A = \left(a_{i, \, j} \right)_{i, \, j = 1, \, \dots, \, n}$ be a matrix. We say that $A(x)$ satisfies the \textit{$A_x$ condition} if there are real constants $\sigma, \, \gamma$ strictly positive, $\delta \geq 0$ and a function $a(x) \in L^\infty(\Omega)$ such that $\gamma + \delta < 1$, $a(x) \geq \sigma > 0$ and
+\begin{equation} \label{condax} \left| \sum_{i = 1}^n \xi_{i, \, i} - a(x) \cdot \sum_{i, \, j = 1}^n a_{i, \, j}(x) \, \xi_{i, \, j} \right| \leq \gamma \cdot \left( \sum_{i, \, j = 1}^n \xi_{i, \, j}^2 \right)^{\frac{1}{2}} + \delta \cdot \left| \sum_{i = 1}^n \xi_{i, \, i} \right|, \end{equation}
+for any matrix $\xi \in M_n(\R)$ and for almost every $x \in \Omega$. \end{definition}
+
+\begin{remark}The Campanato condition implies the uniform ellipticity of $A$ (but, for $n > 2$, it is not equivalent) over $\Omega$. Indeed, let $\xi = \left( \eta_i \, \eta_j \right)_{i, \, j = 1, \, \dots, \, n}$ and substitute this in \eqref{condax}:
+\begin{equation*} \left| \sum_{i = 1}^n \eta_i^2 - a(x) \cdot \sum_{i, \, j = 1}^n a_{i, \, j}(x) \, \eta_i \, \eta_j \right| \leq \gamma \cdot \left( \sum_{i, \, j = 1}^n \eta_i^2 \, \eta_j^2 \right)^{\frac{1}{2}} + \delta \cdot \left| \sum_{i = 1}^n \eta_i^2 \right|. \end{equation*}
+It follows that
+\begin{equation*}\left[ 1 - (\gamma + \delta) \right] \cdot \sum_{i = 1}^n \eta_i^2 \leq a(x) \cdot \sum_{i, \, j = 1}^n a_{i, \, j}(x) \, \eta_i \, \eta_j,\end{equation*}
+and, if we let $\mu = \sup_{\Omega}a(x)$, it turns out that
+\begin{equation*}\frac{\left[ 1 - (\gamma + \delta) \right]}{\mu} \cdot \sum_{i = 1}^n \eta_i^2 \leq \sum_{i, \, j = 1}^n a_{i, \, j}(x) \, \eta_i \, \eta_j ,\end{equation*}
+which is the uniform ellipticity condition. \end{remark}
+
+Observe that the Corder condition and the $A_x$ condition are actually \textbf{equivalent}. The proof is rather tedious, but simple, thus it is left to the reader.
+
+\paragraph{Condition $A_x$.} In this brief paragraph, we want to motivate the Campanato condition and prove that the problem \eqref{problema} admits one and only one solution in that case.
+
+\begin{theorem}\label{th:unicasol}Assume that the matrix $A = \left(a_{i, \, j} \right)_{i, \, j = 1, \, \dots, \, n}$ satisfies the Campanato condition. Then there exists one and only one solution of \eqref{problema}. \end{theorem}
+
+\begin{proof}[Proof 1]Let us consider
+\begin{equation} \Delta u(x) = \alpha \, f(x) + \Delta w(x) - \alpha \sumij \aij(x) \, D^{i, \, j} \, w(x), \label{problemapart} \end{equation}
+and let us define the application $\mathcal{T} : H^2(\Omega) \cap H_0^1(\Omega) \to H^2(\Omega) \cap H_0^1(\Omega)$, which sends $w$ to the solution $u$ of the problem \eqref{problemapart}.
+
+We now prove that $\mathcal{T}$ is a contraction of the space $H^2(\Omega) \cap H_0^1(\Omega)$, provided that the $A_x$ condition is satisfied. In order to ease the notation, we set
+\begin{equation*} \Gamma_{i,  \, j}^{n} \, w(x) := \sumij \aij(x) \, D^{i, \, j} \, w(x). \end{equation*}
+By \hyperref[rem:normeequ]{Remark \ref{rem:normeequ}} it follows that the $H^2(\Omega) \cap H_0^1(\Omega)$-norm is equivalent to
+\begin{equation*} \| \Delta \, k(x) \|_{L^2(\Omega)} = \int_{\Omega} \left| \Delta \, k(x) \right|^2 \, \mathrm{d}x, \end{equation*}
+therefore we can easily estimate the norm of the difference between two points
+\begin{equation*} \begin{aligned} \| \mathcal{T}(w_1) - \mathcal{T}(w_2) \|_{H^{2, \, 2}(\Omega)}^2 & \leq \int_\Omega \left| \Delta u_1(x) - \Delta u_2(x) \right|^2 \, \mathrm{d}x = \\ & = \int_\Omega \left| \Delta w_1(x) - \alpha \, \Gamma_{i, \, j}^{n} \, w_1(x) - \left[ \Delta w_2(x) - \alpha \, \Gamma_{i, \, j}^{n} \, w_2(x) \right] \right|^2 \, \mathrm{d}x  = \\ & = \int_\Omega \left| \Delta \left(w_1(x) - w_2(x) \right) - \alpha \, \Gamma_{i, \, j}^n \, \left(w_1(x) - w_2(x) \right) \right|^2 \, \mathrm{d}x \stackrel{{\color{red}(\ast)}}{\leq} \\ & \stackrel{{\color{red}(\ast)}}{\leq} \int_\Omega \left\{ \gamma \cdot \left[ \Dij \left(w_1(x) - w_2(x) \right)^2 \right]^{\frac{1}{2}} + \delta \cdot \left| \Delta \left(w_1(x) - w_2(x) \right) \right| \right\}^2 \, \mathrm{d}x, \end{aligned} \end{equation*}
+where the inequality ${\color{red}(\ast)}$ follows from a straightforward application of the Campanato condition. Notice now that for any $a, \, b \in \R$, it follows that
+\begin{equation*} (\gamma \, a + \delta \, b)^2 \leq \gamma \, (\gamma + \delta) \, a^2 + \delta \, (\gamma + \delta) \, b^2, \end{equation*}
+therefore
+\begin{equation*} \begin{aligned}\dots &  \leq \int_\Omega \left[ \gamma \, (\gamma + \delta) \, D_{i, \, j} \, \left(w_1(x) - w_2(x) \right)^2 + \delta \, (\gamma + \delta) \, \left| \Delta \left(w_1(x) - w_2(x) \right) \right| \right]^2 \, \mathrm{d}x \stackrel{{\color{blue}(\ast)}}{\leq} \\ & \stackrel{{\color{blue}(\ast)}}{\leq} (\gamma + \delta)^2 \cdot \left\| \Delta \left(w_1(x) - w_2(x) \right) \right\|_{L^2(\Omega)}^2, \end{aligned} \end{equation*}
+where ${\color{blue}(\ast)}$ is the \textbf{Miranda-Talenti} inequality (see \hyperref[MtLemma]{Lemma \ref{MtLemma}}).
+
+We conclude that $\mathcal{T}$ is a contraction of the space $H^2(\Omega) \cap H^0(\Omega)$ into itself (again, by \hyperref[rem:normeequ]{Remark \ref{rem:normeequ}}), therefore it admits one and only one fixed point (i.e. the solution).
+\end{proof}
+
+\begin{lemma}[Miranda-Talenti]  \label{MtLemma} Let $\Omega$ be a convex subset of $\R^n$, and let $u \in H^2(\Omega) \cap H_0^1(\Omega)$ be a function. Then we have the following inequality:
+\begin{equation*} \left\| u \right\|_{H^2(\Omega)} \leq \left\| \Delta \, u \right\|_{L^2(\Omega)}. \end{equation*}
+\end{lemma}
+
+\begin{proof} The inequality follows easily from the identity
+\begin{equation*} \sum_{i, \, j = 1}^{n} (D_{i, \, j})^2 + \sum_{i, \, j= 1}^{n} \left[ D_{i, \, i}u \, D_{j, \, j} u - (D_{i, \, j})^2 \right] = \left(\Delta \, u \right)^2, \end{equation*}
+which can be easily derived if one knows that the average curvature of $\partial \, \Omega$ is strictly negative (by convexity). \end{proof}
+
+\begin{remark}\label{rem:normeequ} The Miranda-Talenti inequality implies that the $H^2(\Omega)$-norm and the $L^2(\Omega)$-norm of the laplacian are equivalents, but this is a more general fact holding also on non-convex subsets.
+
+Indeed, it is obvious (by definition) that for any $u \in H^2(\Omega) \cap H_0^1(\Omega)$ there exists a constant $c > 0$ such that
+\begin{equation*} \left\| \Delta \, u \right\|_{L^2(\Omega)} \leq c \cdot \left\| u \right\|_{H^2(\Omega)}. \end{equation*}
+On the other hand, the divergence theorem and the Poincarè inequality immediately imply the opposite inequality, that is,
+\begin{equation*} \begin{aligned} \int_{\Omega} \left| \nabla \, u(x) \right|^2 \, \mathrm{d}x & = \int_{\Omega} \nabla \, u(x) \cdot \nabla \, u(x) \, \mathrm{d}x \leq \\ & \leq \left( \int_{\Omega} \left| \Delta \, u (x) \right|^2 \, \mathrm{d}x \right)^{\frac{1}{2}} \cdot \left( \int_{\Omega} \left| u (x) \right|^2 \, \mathrm{d}x \right)^{\frac{1}{2}} \leq \\ & \leq c(\Omega) \cdot \left\| \Delta \, u \right\|_{L^2(\Omega)} \cdot \left\| u \right\|_{H^2(\Omega)}.\end{aligned} \end{equation*}
+\end{remark}
+
+We now give another proof of \hyperref[th:unicasol]{Theorem \ref{th:unicasol}} which relies on the near operator theory we have developed in the first section.
+
+\begin{proof}[Proof 2] Let us set
+\begin{equation*} B \, u(x) := \Delta \, u(x) \qquad \text{and} \qquad A \, u(x) := \sumij a_{i, \, j}(x) \, D^{i, \, j} \, u(x). \end{equation*}
+The idea is to prove that the operator $A$ is a bijection from $H^2(\Omega) \cap H_0^1(\Omega)$ to $L^2(\Omega)$. We first notice that the following two facts hold true: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item There is an algebraic relation between $A$ and $B$.
+\item The laplacian $\Delta$ is a bijection between $H^2(\Omega) \cap H_0^1(\Omega)$ to $L^2(\Omega)$.
+\end{enumerate}
+The proof of the first point is easy, and it is left to the reader. The second fact, on the other hand, will be proved later in the course.
+
+The Campanato condition implies that $A$ is near $B$, therefore by \hyperref[bijectle]{Theorem \ref{bijectle}} we conclude that also $A$ is a bijection, which is exactly what we wanted to prove.\end{proof}
+
+\begin{example}[Talenti] \label{talenti}We want to prove that, for $n > 2$, the problem \eqref{problema} is in general not well posed in $H^2(\Omega) \cap H_0^1(\Omega)$, provided that $f \in L^2(\Omega)$ and $a_{i, \, j} \in L^\infty(\Omega)$.
+
+\vspace{2mm}
+Let $\Omega = S(0, \, r) = \partial \, B(0, \, r)$ be the $n$-dimensional sphere, let $\lambda \in (0, \, 1)$ be a real number and consider the problem associated to the equation
+\begin{equation*} \mathcal{A}(u) := \sumij a_{i, \, j}(x) \, D^{i, \, j} \, u(x) = 0. \end{equation*}
+The coefficients of the matrix $A$ are given by
+\begin{equation*} a_{i, \, j}(x) = \delta_{i, \, j} + b \, \frac{x_i \, x_j}{\|x\|^2}, \qquad \text{where} \qquad b = - 1 + \frac{n - 1}{1 - \lambda} \end{equation*}
+for any $i, \, j = 1, \, \dots, \, n$.
+
+We first prove that the matrix $A = \left(a_{i, \, j} \right)_{i, \, j = 1, \, \dots, \, n}$ is uniformly elliptic on $\Omega$. Indeed, it turns out that
+\begin{equation*} \begin{aligned} \sumij \left( \delta_{i, \, j} + b \, \frac{x_i \, x_j}{\|x\|^2} \right) \, \xi_i \, \xi_j & = \sum_{i = 1}^n \xi_i^2 + \sumij b \, \frac{x_i \, x_j \, \xi_i \, \xi_j}{\|x\|^2} = \\ & = \|\xi\|^2 \, \left( 1 + b \, \sumij \frac{x_i \, x_j \, \xi_i \, \xi_j}{\|x\|^2 \, \|\xi\|^2} \right) \leq 1,\end{aligned} \end{equation*} 
+since $b > - 1$ and by Cauchy-Schwartz inequality also
+\begin{equation*}  \sumij \frac{x_i \, x_j \, \xi_i \, \xi_j}{\|x\|^2 \, \|\xi\|^2} = \frac{ (x, \, \xi)^4 }{\|x\|^2 \, \|\xi\|^2} \leq 1.\end{equation*}
+The function $u(x) = \|x\|^\lambda$ is a solution of \eqref{problema} and its value at the boundary is exactly equal to $r^\lambda$. Similarly, the constant function $v(x) = r^\lambda$ also solves the problem \eqref{problema}, and the value at the boundary is the same.
+
+We conclude that the problem associated to the operator $\mathcal{A}$ is \textbf{ill posed}. Moreover, it is not hard to check that the Cordes condition does not hold, coherently with the theory.
+\end{example}
+
+\paragraph{The $2$-dimensional case.} If $n = 2$, then the near operator theory allows us to prove the existence and the uniqueness of a solution of \eqref{problema}, provided that the coefficients are $L^\infty(\Omega)$ functions.
+
+More precisely, the idea is to prove that the Campanato condition is, in fact, equivalent to the uniform ellipticity of the operator $\mathcal{A}$.
+
+Suppose that $A(x)$ is uniformly elliptic and symmetric on $\Omega$. There are $\lambda_1(x), \, \lambda_2(x) \in \R$ eigenvalues such that $A(x)$ is similar to the diagonal matrix $\Gamma(x) := \mathrm{diag}\left(\lambda_1(x), \, \lambda_2(x) \right)$, and there is also a $\nu > 0$ such that $\lambda_1(x) \geq \nu$ and $\lambda_2(x) \geq \nu$ for almost every $x \in \Omega$.
+
+It suffices to prove that there exists a function $a(x) \in L^\infty \left(\Omega \right)$ such that $a(x) \geq \omega > 0$ for almost every $x \in \Omega$ and, for any matrix $\xi := \{ \xi_{i, \, j} \}_{i, \, j = 1, \, 2}$, it turns out that
+\begin{equation*} \begin{aligned} \left| \sum_{i = 1}^{2} \xi_{i, \, i} - a(x) \, \sum_{i, \, j = 1}^{2}  a_{i, \, j}(x) \, \xi_{i, \, j} \right| & = \left< \mathrm{I} - a(x) \, A(x), \, \xi \right> \leq \\ & \leq \left \| \mathrm{I} - a(x) \, A(x) \right\| \cdot \left\| \xi \right\| \leq \rho \, \|\xi\|, \end{aligned}\end{equation*}
+for some $\rho \in (0, \, 1)$. Clearly
+\begin{equation*} \left\| \mathrm{I} - a(x) \, A(x) \right\| \leq \rho \iff a^2(x) \, \left[ \lambda_1^2(x) + \lambda_2^2(x) \right] - 2 \, a(x) \, \left[ \lambda_1(x) + \lambda_2(x) \right] + 2 - \rho^2 \leq 0,\end{equation*}
+and the right-hand side admits a real solution $a(x)$ if and only if the determinant is greater or equal than $0$, which  is possible if and only if
+\begin{equation*} \frac{2 \, \lambda_1(x) \, \lambda_2(x)}{ \lambda_1^2(x) + \lambda_2^2(x) } \geq 1 - \rho^2. \end{equation*}
+If we set $M = \max_{i = 1, \, 2} \, \sup_{x \in \Omega} \lambda_i(x)$, then we deduce that
+\begin{equation*} \frac{2 \, \lambda_1(x) \, \lambda_2(x)}{ \lambda_1^2(x) + \lambda_2^2(x) } \geq \frac{\nu^2}{M^2}, \end{equation*}
+therefore it is enough to choose $\rho$ and $a(x)$ in such a way that
+\begin{equation*} \left[1 - \frac{\nu^2}{M^2} \right]^\frac{1}{2} \leq \rho < 1 \qquad \text{and} \qquad a(x) = \frac{ \lambda_1(x) + \lambda_2(x)}{ \lambda_1^2(x) + \lambda_2^2(x) }. \end{equation*}
+
+\section{Regularity Conditions} 
+
+In this section we want to prove that the problem \eqref{problema} is well-posed if we assume that the matrix $A(x) := \left\{ a_{i, \, j}(x) \right\}_{i, \, j = 1, \, \dots, \, n}$ is uniformly elliptic, and also that the coefficients $a_{i, \, j}(x)$ are $\alpha$-Hölder continuous, that is,
+\begin{equation*} a_{i, \, j}(x) \in C^{0, \, \alpha}(\Omega). \end{equation*}
+
+\begin{definition}[Sub(Super)-Solution] Let $u \in H^2(\Omega)$ be a function such that
+\begin{equation} \label{subsup} \sum_{i, \, j= 1}^{n} a_{i, \, j}(x) \, D^{i, \, j} \, u(x) \geq 0 \qquad (\text{respectively, $\leq 0$}). \end{equation}
+We say that $u$ is a \textit{sub-solution} (respectively, \textit{super-solution}) of the problem \eqref{problema} with no boundary condition.
+\end{definition}
+
+\begin{theorem}[Max. Principle] \label{th:mp} Let $u \in C^2 \left(\Omega \right) \cap C^0 \left( \overline{\Omega} \right)$ be a sub-solution of the problem \eqref{problema} with no boundary condition. If $A(x)$ is a uniformly elliptic matrix on $\Omega$, and the coefficients $a_{i, \, j}(x)$ are functions of class $C^0 \left( \overline{\Omega} \right)$, then
+\begin{equation} \label{maxprc} \max_{x \in \overline{\Omega}} u(x) =  \max_{x \in \partial \, \Omega} u(x). \end{equation}
+\end{theorem}
+
+\begin{theorem}[Min. Principle] \label{th:minp} Let $u \in C^2 \left(\Omega \right) \cap C^0 \left( \overline{\Omega} \right)$ be a super-solution of the problem \eqref{problema} with no boundary condition. If $A(x)$ is a uniformly elliptic matrix on $\Omega$, and the coefficients $a_{i, \, j}(x)$ are functions of class $C^0 \left( \overline{\Omega} \right)$, then
+\begin{equation} \label{minprc} \min_{x \in \overline{\Omega}} u(x) =  \min_{x \in \partial \, \Omega} u(x). \end{equation}
+\end{theorem}
+
+\begin{corollary}\label{ch:mp} Let $u$ be a solution of the problem
+\begin{equation*} \sum_{i, \, j= 1}^{n} a_{i, \, j}(x) \, D^{i, \, j} \, v(x) = 0, \end{equation*}
+and suppose that the same assumptions of \hyperref[th:mp]{Theorem \ref{th:mp}} are met. Then
+\begin{equation*} \max_{x \in \overline{\Omega}} u(x) =  \max_{x \in \partial \, \Omega} u(x) \quad \text{and} \quad \min_{x \in \overline{\Omega}} u(x) =  \min_{x \in \partial \, \Omega} u(x). \end{equation*} \end{corollary}
+
+\begin{corollary} \label{ch:uniqueness} If the same assumptions of \hyperref[th:mp]{Theorem \ref{th:mp}} are met, then the Dirichlet problem 
+\begin{equation} \label{problema1} \begin{cases} \displaystyle\sum_{i, \, j = 1}^n a_{i, \, j}(x) \, D^{i, \, j} \, u(x) = f(x) & \text{for $x \in \Omega$} \\ \\ u(x) = g(x) & \text{for $x \in \partial \, \Omega$}. \end{cases} \end{equation}
+admits at most one solution.\end{corollary}
+
+\begin{proof} Suppose that $u_1(x)$ and $u_2(x)$ are both solution of class $C^2 \left(\Omega \right) \cap C^0 \left( \overline{\Omega} \right)$ of the problem \eqref{problema1}. If we set
+\begin{equation*} W(x) := u_1(x) - u_2(x), \end{equation*}
+then it's straightforward to prove that $W(x)$ is a solution of the Dirichlet problem
+\begin{equation} \label{problema2} \begin{cases} \displaystyle\sum_{i, \, j = 1}^n a_{i, \, j}(x) \, D^{i, \, j} \, u(x) = 0 & \text{for $x \in \Omega$} \\ \\ u(x) = 0 & \text{for $x \in \partial \, \Omega$}. \end{cases} \end{equation}
+Finally, \hyperref[ch:uniqueness]{Corollary \ref{ch:uniqueness}} proves that $W(x) \equiv 0$ is the unique solution of \eqref{problema2}, hence $u_1(x) \equiv u_2(x)$. \end{proof}
+
+\begin{proof}[Proof of Maximum Principle] We divide the proof into two steps since the first one can be easily proved, and the second one follows from a simple approximation argument.
+
+\paragraph{Step 1.} Suppose that for any $x \in \Omega$ it turns out that
+\begin{equation} \label{st11} \sum_{i, \, j= 1}^n a_{i, \, j}(x) \, D^{i, \, j} \, u(x) > 0. \end{equation}
+We argue by contradiction. Suppose that there exists a maximal point $x_0 \in \accentset{\circ}\Omega$ for $u$; then for any vector $v \in \R^n$, it turns out that
+\begin{equation} \label{st12} \left( H_u(x_0) \, v, \, v \right)_{\R^n} \leq 0, \end{equation}
+where $H_u(x_0)$ is the Hessian matrix of $u$ computed at the point $x_0$. By assumption, the matrix $A(x_0)$ is uniformly elliptic, hence there exists a real number $\nu > 0$ such that
+\begin{equation} \label{st13} \left( A(x_0) \, v, \, v \right)_{\R^n} \geq \nu \, \|v\|_{\R^n}^2, \qquad \forall \, v \in \R^n. \end{equation}
+It remains to prove that these relations yield to a contradiction. Indeed, the condition \eqref{st11} is equivalent to requiring that
+\begin{equation*} \left( A(x), \, H(x) \right) > 0 \end{equation*}
+at any point $x \in \R^n$ and, in particular, at $x = x_0$. On the other hand, both $A(x_0)$ and $H(x_0)$ are symmetric, thus there are $U$ and $V$ unitary matrices such that
+\begin{equation*} U \, A(x_0) \, U^\ast =: \Lambda_A \quad \text{and} \quad V \, H(x_0) \, V^\ast =: \Lambda_H \end{equation*} 
+are diagonal. Therefore, if we set $Q := U^\ast \, V$, then it is simple to prove that
+\begin{equation*} \left( A(x), \, H(x) \right) = \left(\Lambda_A \, Q, \, Q \, \Lambda_H \right),\end{equation*}
+and also that the latter scalar product is less or equal than zero, as a consequence of the fact that $A(x_0)$ is defined positive \eqref{st12} and $H(x_0)$ is semi-definite negative \eqref{st13}.
+
+\paragraph{Step 2.} Suppose now that for any $x \in \Omega$ it turns out that
+\begin{equation} \label{st21} \sum_{i, \, j= 1}^n a_{i, \, j}(x) \, D^{i, \, j} \, u(x) \geq 0. \end{equation}
+We can define a small perturbation of the function $u(x)$, that is,
+\begin{equation*} u_\epsilon(x) := u(x) + \epsilon \, \|x\|^2, \end{equation*}
+so that $u_\epsilon(x)$ satisfies the condition \eqref{st11} for any $\epsilon > 0$. The first step proves that
+\begin{equation*} \max_{x \in \overline{\Omega}} u_\epsilon(x) =  \max_{x \in \partial \, \Omega} u_\epsilon(x), \end{equation*}
+hence the general case follows easily by taking the limit $\epsilon \to 0^+$.
+\end{proof}
+
+\begin{theorem}[Aleksandrov-Bakel'man-Pucci] Let
+\begin{equation*}A(x, \, D) \, u := \sum_{i, \, j=1}^{n} a_{i, \, j}(x) \, D^{i, \, j} \, u(x) + \sum_{i = 1}^{n} b_i(x) \, D^i \, u(x) + c(x) \, u(x) \end{equation*}
+be a differential operator such that the matrix $A(x)$ is uniformly elliptic on $\Omega$, and the coefficients $a_{i, \, j}(x)$, $b_i(x)$ and $c(x) \leq 0 $ are all of class $L^\infty(\Omega)$.
+
+\vspace{1.8mm}
+Let $u \in C^0 \left(\overline{\Omega}\right) \cap W_{\mathrm{loc}}^{2, \, n}(\Omega)$ be a function such that $A(x, \, D) \, u \geq f(x)$ for almost every $x \in \Omega$, and let
+\begin{equation*} D(x) := \mathrm{det}\left(A(x)\right) \quad \text{and} \quad D^\ast(x) := \left[ D(x) \right]^{\frac{1}{n}}. \end{equation*}
+Moreover, suppose that
+\begin{equation*} \frac{f(x)}{D^\ast(x)} \in L^n(\Omega) \quad \text{and} \quad \frac{b(x)}{D^\ast(x)} \in L^n(\Omega). \end{equation*}
+Then it turns out that
+\begin{equation} \label{maxprch} \sup_{x \in \Omega} u(x) =  \sup_{x \in \partial \, \Omega} u^+(x) + c \, \left\| \frac{f}{D^\ast} \right\|_{L^n(\Omega)}, \end{equation}
+where $u^+(x) := \max \{u(x), \, 0\}$ and the constant $c$ depends only on the dimension $n$ and on the following quantity: 
+\begin{equation*} \left\| \frac{b(x)}{D^\ast(x)} \right\|_{L^n(\Omega)}. \end{equation*}\end{theorem}
+
+The second step needed to prove that \eqref{problema} is well-posed, is the following a priori estimate.
+
+\begin{theorem} \label{th:apriori} Let $u(x) \in H^{2, \, 2}(\Omega) \cap H_0^{1, \, 2}(\Omega)$ be a solution of the Dirichlet problem \eqref{problema}. Assume that $\partial \, \Omega$ is a manifold of class $C^3$, $f$ and $a_{i, \, j}$ belong to $C^{0, \, \alpha} \left(\overline{\Omega}\right)$. Then $D^{i, \, j} \, u \in C^{0, \, \alpha} \left(\overline{\Omega}\right)$, and there exists a positive constant $c > 0$ such that
+\begin{equation} \label{eq:apriori} \sum_{i, \, j = 1}^n \left\| D^{i, \, j} \, u \right\|_{C^{0, \, \alpha} \left(\overline{\Omega}\right)}^2 \leq c \cdot \left( \|f\|_{C^{0, \, \alpha} \left(\overline{\Omega}\right)}^2 + \sum_{i, \, j = 1}^{n} \left\| D^{i, \, j} \, u \right\|_{\infty, \, \Omega}^2 \right). \end{equation}\end{theorem}
+
+\begin{theorem} \label{th:aprioricho} Let $\Omega \subset \R^n$ be an open bounded subset, whose boundary $\partial \, \Omega$ is of class $C^3$. If $f \in C^{0, \, \alpha} \left(\overline{\Omega}\right)$, then there exists a positive constant
+\begin{equation*} C := C \left(\Omega, \, \nu, \, \|a_{i, \, j}\|_{C^{0, \, \alpha} \left(\overline{\Omega}\right)} \right) > 0 \end{equation*}
+such that, if $u \in H^{2, \, 2}(\Omega)$ is a solution of the Dirichlet problem \eqref{problema}, then
+\begin{equation} \label{eq:aprioricho} \sum_{i, \, j = 1}^{n} \left\| D^{i, \, j} \, u \right\|_{0, \, \Omega}^2 \leq C \cdot \left( \|f\|_{C^{0, \, \alpha} \left(\overline{\Omega}\right)}^2 \right). \end{equation} \end{theorem}
+
+\begin{proof}We argue by contradiction. If \eqref{eq:aprioricho} doesn't hold, then there exist: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item A uniformly bounded (by a constant $M > 0$) sequence of coefficients $\left(a_{i, \, j}^{(k)}(x) \right)_{k \in \N} \subset C^{0, \, \alpha} \left(\overline{\Omega}\right)$ such that the matrix
+\begin{equation*} A^{(k)}(x) := \left\{ a_{i, \, j}^{(k)}(x) \right\}_{i, \, j = 1, \, \dots, \, n}\end{equation*}
+is uniformly elliptic for any $k \in \N$, with the same constant $\nu>0$.
+\item A sequence of functions $ \left( f_k(x) \right)_{k \in \N} \subset C^{0, \, \alpha} \left(\overline{\Omega}\right)$ such that
+\begin{equation*} \| f_k \|_{C^{0, \, \alpha} \left(\overline{\Omega}\right)} \xrightarrow{k \to + \infty} 0. \end{equation*}
+\item A sequence of solutions of the Dirichlet problems
+\begin{equation} \label{problemaseq} \begin{cases} \displaystyle\sum_{i, \, j = 1}^n a_{i, \, j}(x) \, D^{i, \, j} \, u_k(x) = f_k(x) & \text{for $x \in \Omega$} \\ \\ u_k(x) = 0 & \text{for $x \in \partial \, \Omega$} \end{cases} \end{equation}
+such that $\|u_k\|_{H^{2, \, 2}(\Omega)} = 1$ for all $k \in \N$.
+\end{enumerate}
+It follows from the Ascoli-Arzelà Theorem that there exists a subsequence $(k_n)_{n \in \N} \subset (k)_{k \in \N}$ such that $a_{i, \, j}^{k_n}(x)$ converges uniformly to $a_{i, \, j}(x)$ in $\overline{\Omega}$. From the a priori estimate \eqref{eq:apriori}, it turns out that for $k \in \N$ big enough
+\begin{equation*} \sum_{i, \, j = 1}^n \left\| D^{i, \, j} \, u_k \right\|_{C^{0, \, \alpha} \left(\overline{\Omega}\right)}^2 \leq c \cdot \left( \|f_k\|_{C^{0, \, \alpha} \left(\overline{\Omega}\right)}^2 + \sum_{i, \, j = 1}^{n} \left\| D^{i, \, j} \, u_k \right\|_{\infty, \, \Omega}^2 \right) \leq c_1, \end{equation*}
+since the norm of $f_k$ converges to zero, and the $H^{2, \, 2}(\Omega)$-norm of $u_k$ is constantly equal to one.
+
+The sequence $(u_k)_{k \in \N}$ is equibounded in $C^{2, \, \alpha} \left(\overline{\Omega}\right)$, hence we may always extract a subsequence uniformly converging to $u$ (by Ascoli-Arzelà), and this implies the strong convergence in $H^{2, \, 2}(\Omega)$. Taking the limit for $k \to + \infty$ of the Dirichlet problem \eqref{problemaseq}, it turns out that $u$ is a solution of the problem \eqref{problema2}, hence $u \equiv 0$ on $\Omega$, that is, a contradiction since the $H^{2, \, 2}(\Omega)$-norm of $u$ is equal to $1$ (as a consequence of the uniform convergence).
+\end{proof}
+
+\begin{corollary} \label{apriori:cho} Under the assumptions of \hyperref[th:aprioricho]{Theorem \ref{th:aprioricho}}, the solution $u$ of the Dirichlet problem \eqref{problema} satisfies the following estimate:
+\begin{equation}\label{eq:apriori:cho} \|u\|_{C^{2, \, \alpha} \left(\overline{\Omega} \right)} \leq c \, \|f\|_{C^{0, \, \alpha} \left( \overline{\Omega} \right)}. \end{equation} \end{corollary}
+
+\begin{theorem}\label{th:aprioricho2} Let $\Omega \subset \R^n$ be an open bounded subset, whose boundary $\partial \, \Omega$ is of class $C^3$. Suppose that the coefficients $a_{i, \, j}(x)$ are of class $C^{0, \, \alpha}\left(\overline{\Omega}\right)$, and suppose that the matrix $A(x)$ is uniformly elliptic on $\Omega$.
+
+Then, for any $f \in C^{0, \, \alpha} \left(\overline{\Omega}\right)$, the Dirichlet problem \eqref{problema} admits one and only one solution $u \in C^{2, \, \alpha} \left(\overline{\Omega}\right)$ satisfying the estimate \eqref{eq:apriori:cho}. \end{theorem}
+
+\begin{proof}In order to prove this theorem, we use the continuity method introduced in the previous section. More precisely, let us consider the family of operators
+\begin{equation*} A_t \, u := (1 - t) \, \nu \, \Delta \, u + t \, \sum_{i, \, j = 1}^n a_{i, \, j} \, D^{i, \, j} \, u, \qquad t \in [0, \, 1], \end{equation*}
+and we notice that the coefficients $a_{i, \, j}^{(t)}(x) := (1-t) \, \nu \, \delta_{i, \, j} + t \, a_{i, \, j}(x)$ verifies the uniform ellipticity property, that is, the matrices
+\begin{equation*} A^{(t)}(x) := \left\{ (1-t) \, \nu \, \delta_{i, \, j} + t \, a_{i, \, j}(x) \right\}_{i, \, j=1}^n\end{equation*}
+are uniformly elliptic on $\Omega$. If we set $f_t := A_t \, u$, then it follows from \hyperref[apriori:cho]{Corollary \ref{apriori:cho}} that for any $u \in C^{2, \, \alpha} \left(\overline{\Omega} \right)$
+\begin{equation*} \|u\|_{C^{2, \, \alpha} \left(\overline{\Omega} \right)}  \leq c \cdot \left\| A_t \, u \right\|_{C^{0, \, \alpha} \left(\overline{\Omega} \right)}\end{equation*}
+since we can apply it to the Dirichlet problem
+\begin{equation*} \begin{cases} \displaystyle\sum_{i, \, j = 1}^n (1-t) \, \nu \, \Delta \, u(x) + t \, \displaystyle\sum_{i, \, j = 1}^n a_{i, \, j}(x) \, D^{i, \, j} \, u(x) = f_t(x) & \text{for $x \in \Omega$} \\ \\ u(x) = 0 & \text{for $x \in \partial \, \Omega$}. \end{cases} \end{equation*}
+It remains to check if the assumption of \hyperref[th:conm]{Theorem \ref{th:conm}} are met, where $\mfX = C^{2, \, \alpha} \left( \overline{\Omega} \right)$ and $\mathcal{B} = C^{0, \, \alpha} \left( \overline{\Omega} \right)$.
+
+The first assumption holds true for $t = 0$ since the operator $\Delta$ is an isomorphism between $\mfX$ and $\mathcal{B}$; to check the second assumption, it suffices to observe that
+\begin{equation*} \begin{aligned}\left\|A_t \, u - A_s \, u \right\|_{C^{0, \, \alpha} \left( \overline{\Omega} \right)} & = |t - s| \, \left\| \nu \, \Delta u - \sum_{i, \, j = 1}^n a_{i, \, j} \, D^{i, \, j} \, u \right\|_{C^{0, \, \alpha} \left( \overline{\Omega} \right)} \leq \\ & \leq c \, |t - s| \, \|u\|_{C^{2, \, \alpha} \left( \overline{\Omega} \right)}\,  {\color{red}\leq} \\ & {\color{red}\leq} \, c_1 \, c \, |t - s| \, \|A_t \, u\|_{C^{0, \, \alpha} \left( \overline{\Omega} \right)},\end{aligned} \end{equation*}
+where the inequality ${\color{red}\leq}$ follows from \hyperref[apriori:cho]{Corollary \ref{apriori:cho}}.
+\end{proof}
+
+\section{Lax-Milgram Theorem}
+
+\begin{theorem}[Lax-Milgram]\label{lax-milgram} Let $H$ be a Hilbert space, and let $a : H \times H \to \R$ be a function satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $a(0, \, v) = 0$ for any $v \in H$.
+\item $v \longmapsto a(u, \, v)$ is linear for any $u \in H$.
+\item For any $u_1, \, u_2, \, v \in H$ it turns out that
+\begin{equation*} \left| a(u_1, \, v) - a(u_2, \, v) \right| \leq M \, \|u_1 - u_2\|_H \, \|v\|_H. \end{equation*}
+\item There exists $\nu > 0$ such that, for any $u_1, \, u_2 \in H$, the following inequality holds true:
+\begin{equation*} a(u_1, \, u_1 - u_2) - a(u_2, \, u_1 - u_2) \geq \nu \, \|u_1 - u_2 \|_H^2. \end{equation*}
+\end{enumerate}
+Then for any $F \in H^\ast$ there exists one and only one $u \in H$ such that
+\begin{equation*} a(u, \, v) = F(v), \qquad \forall \, v \in H. \end{equation*}
+Moreover, the following estimate holds true:
+\begin{equation*} c(\nu) \, \|u\|_H \leq \|F\|_{H^\ast}. \end{equation*}
+\end{theorem}
+
+\begin{proof} Let us consider the application
+\begin{equation*} \mathcal{A} : H \to H^\ast, \qquad u \longmapsto \varphi_u \: : \: \varphi_u(v) := a(u, \, v). \end{equation*}
+We want to prove that $\mathcal{A}$ is a bijection between $H$ and $H^\ast$, that is, for every $F \in H^\ast$ there is a unique $u \in H$ such that
+\begin{equation*} \mathcal{A}(u)(v) = F(v) \qquad \forall \, v \in H \iff a(u,\, v) = F(v) \qquad \forall \, v \in H. \end{equation*}
+By \hyperref[bijectle]{Theorem \ref{bijectle}} it suffices to prove that $A$ is near $\mathcal{J} : H \to H^\ast$ which is defined by
+\begin{equation*} u \longmapsto \mathcal{J}_u \: : \: \mathcal{J}_u(v) := (u, \, v)_H, \end{equation*}
+where $(\cdot, \, \cdot)_H$ is the scalar product. 
+
+\paragraph{Step 1.} The operator $\mathcal{J}$ preserves the $H$-norm, that is, for any $u \in H$ it turns out that
+\begin{equation*} \left\| \mathcal{J}(u) \right\|_{H^\ast} = \| u\|_H. \end{equation*}
+The Riesz operator $\mathcal{R} : H^\ast \to H$ is defined by sending $F$ to the unique element $w_F \in H$ representing $F$, that is,
+\begin{equation*} \mathcal{R}(F) = w_F \iff F(v) = \left(w, \, v \right)_H \qquad \forall \, v \in H. \end{equation*}
+The Riesz operator $\mathcal{R}$ is an isometry (as it was proved in Riesz theorem), hence
+\begin{equation*}\left(\mathcal{R} \left( \mathcal{A}(u) \right), \, v \right)_{H} = a(u, \, v) \qquad \text{and} \qquad \mathcal{R} = \mathcal{J}^{-1}, \end{equation*}
+that is, $\mathcal{J}$ is an invertible operator.
+
+\paragraph{Step 2.} The thesis of the theorem follows easily if we can prove that the nearness condition \eqref{eq:nearness} holds. By definition of the operators $\mathcal{A}$ and $\mathcal{J}$ it turns out that
+\begin{equation*} \begin{aligned} \left\| \mathcal{J}(u_1) - \mathcal{J}(u_2) - \alpha \, \left[ \mathcal{A}(u_1) - \mathcal{A}(u_2) \right] \right\|_{H^\ast}^2 & = \left\| u_1 - u_2 - \alpha \left[ \mathcal{R} \left(\mathcal{A}(u_1) \right) - \mathcal{R} \left(\mathcal{A}(u_2) \right) \right] \right\|_{H}^2 = \\ & = \|u_1 - u_2\|_{H}^2 + \alpha^2 \, \left\|  \mathcal{R} \left(\mathcal{A}(u_1) \right) - \mathcal{R} \left(\mathcal{A}(u_2) \right)  \right\|_{H}^2 - \dots \\ & \dots - 2 \, \alpha \, \left(  \mathcal{R} \left(\mathcal{A}(u_1) \right) - \mathcal{R} \left(\mathcal{A}(u_2) \right), \, u_1 - u_2 \right)_H = \\ & = \|u_1 - u_2\|_{H}^2 + \alpha^2 \, \left\|  \mathcal{R} \left(\mathcal{A}(u_1) \right) - \mathcal{R} \left(\mathcal{A}(u_2) \right)  \right\|_{H}^2 - \dots \\ & \dots - 2 \, \alpha \, \left[ a(u_1, \, u_1 - u_2) - a(u_2, \, u_1 - u_2) \right] \, \, {\color{red} \leq}  \\ & {\color{red} \leq} \, \, \| u_1 - u_2 \|_H^2 + \alpha^2 \, M^2 \, \|u_1 - u_2\|_H^2 - 2 \, \alpha \, \nu \, \|u_1 - u_2\|_H^2 = \\ & = \left[1 + \alpha^2 \, M^2 - 2 \, \alpha \, \nu \right] \, \|u_1 - u_2\|_H^2 = \\ & = k \, \left\| \mathcal{J}(u_1) - \mathcal{J}(u_2) \right\|_{H^\ast}^2, \end{aligned}\end{equation*}
+where the inequality ${\color{red} \leq}$ follows easily from properties \textbf{(2)} and \textbf{(3)} 
+\end{proof}
+
+\section{Garding Inequality}
+
+Let us consider a differential elliptic operator in divergence form, that is,
+\begin{equation*} A(x, \, D) \, u = \sum_{|\alpha| \leq m} \sum_{|\beta| \leq m} (-1)^{|\alpha|} \, D^\alpha \, \left(A_{\alpha, \, \beta}(x) \, D^\beta \, u \right). \end{equation*}
+We denote by $A_0(x, \, D)$ the principal part of the operator, and we denote by $\left(\cdot, \, \cdot \right)_{\C^N}$ and $\| \cdot \|_{\C^N}$ respectively the scalar product and the norm in $\C^N$.
+
+\begin{lemma} \label{lemma:gar1}  Let $A_0(D)$ be a differential operator in divergence form satisfying the weak Legendre-Hadamard condition \eqref{eq:l22}, and assume that the coefficients of $A$ are constants. Then for every $u \in H_0^m \left( \Omega; \; \R^N \right)$ it turns out that
+\begin{equation} \label{eq:gar1} \int_{\Omega} \left[\sum_{|\alpha| = m} \sum_{|\beta| = m}  \left( A_{\alpha, \, \beta} D^\alpha \, u(x), \, D^\beta \, u(x) \right)  \right] \, \mathrm{d}x \geq c(\nu) \, \|u\|_{H^m \left(\Omega; \; \R^N \right)}. \end{equation}\end{lemma}
+
+\begin{proof}We may always assume that $A_{\alpha, \, \beta} = A_{\alpha, \, \beta}^\ast$ since we can prove the thesis separately for the self-adjoint part and the anti self-adjoint part.
+
+For any $u \in C_0^\infty(\R^n, \, \R^N)$ it turns out that
+\begin{equation*} \begin{aligned}\int_{\R^n} \left[\sum_{|\alpha| = m} \sum_{|\beta| = m}  \left( A_{\alpha, \, \beta} D^\alpha \, u(x), \, D^\beta \, u(x) \right)  \right] \, \mathrm{d}x & =\sum_{|\alpha| = m} \sum_{|\beta| = m} \int_{\R^n}  \left( A_{\alpha, \, \beta} D^\alpha \, u(x), \, D^\beta \, u(x) \right)\, \mathrm{d}x  = \\ & = \int_{\R^n} \left[\sum_{|\alpha| = m} \sum_{|\beta| = m}  \left( A_{\alpha, \, \beta} \, \hat{u}(\xi), \, \overline{\hat{u}(\xi)} \right)_{\C^N}  \right] \, \xi^{\alpha + \beta} \, \mathrm{d}\xi \geq \\ & \geq \nu \, \int_{\R^n} \left( \|\mathfrak{Re}(\hat{u})(xi)\|^2 + \|\mathfrak{Im}(\hat{u})(xi)\|^2 \right) \, \|\xi\|^{2m} \, \mathrm{d}\xi = \\ & = \nu \, \int_{\R^n} \left(\hat{u}(\xi), \, \overline{\hat{u}(\xi)} \right)_{\C^N} \, \|\xi\|^{2m} \, \mathrm{d}\xi \geq \\ & \geq c(\nu) \, \int_{\R^n} \left[ \left( \hat{u}(\xi), \, \overline{\hat{u}(\xi)} \right)_{\C^N} \, \sum_{|\alpha| = m} \xi^{2 \alpha} \right] \, \mathrm{d}\xi = \\ & = c(\nu) \, \|u\|_{H^m(\R^n, \, R^N)}^2, \end{aligned} \end{equation*}
+and this concludes the proof by density of the inclusion $C_0^\infty(\Omega, \, \R^N) \subset H_0^1(\Omega, \, \R^N)$.  \end{proof}
+
+\begin{lemma} \label{lemma:gar2}  Let $A_0(D)$ be a differential operator in divergence form satisfying the weak Legendre-Hadamard condition \eqref{eq:l22}, and assume that the coefficients of $A$ are continuous on $\overline{\Omega}$. Then for every $u \in H_0^m \left( B(x_0, \, r); \; \R^N \right)$, with $x_0 \in \Omega$ and $r > 0$ small enough, it turns out that
+\begin{equation} \label{eq:gar2} \int_{B(x_0, \, r)} \left[\sum_{|\alpha| = m} \sum_{|\beta| = m}  \left( A_{\alpha, \, \beta} D^\alpha \, u(x), \, D^\beta \, u(x) \right)  \right] \, \mathrm{d}x \geq \left[c(\nu) - \omega(r) \right] \, \|u\|_{H^m \left(\Omega; \; \R^N \right)}, \end{equation}
+where $\omega(r)$ is the modulus of continuity defined by
+\begin{equation*} \omega(r) := \sup \left\{ \left\|A_{\alpha, \, \beta}(x) - A_{\alpha, \, \beta}(y) \right\| \: \left| \: x, \, y \in \overline{\Omega}, \, \, \|x-y\| \leq r, \, \, |\alpha| = |\beta| = m \right. \right\}. \end{equation*}\end{lemma}
+
+\begin{proof}Since
+\begin{equation*} \begin{gathered}  \left| \int_{B(x_0, \, r)} \left[\sum_{|\alpha| = m} \sum_{|\beta| = m}  \left( \left[A_{\alpha, \, \beta}(x) - A_{\alpha, \, \beta}(x_0) \right] \, D^\alpha \, u(x), \, D^\beta \, u(x) \right)  \right]  \, \mathrm{d}x \right| \geq \dots \\ \dots \geq \omega(r) \, \int_{B(x_0, \, r)} \sum_{|\alpha = m} \|D^\alpha \, u(x) \|^2 \, \mathrm{d}x, \end{gathered} \end{equation*}
+a simple application of \hyperref[lemma:gar1]{Lemma \ref{lemma:gar1}} gives us the estimate \eqref{eq:gar2}. \end{proof}
+
+\begin{lemma} \label{lemma:gar3}  Let $\Omega \subset \R^n$ be a subset with a boundary locally Lipschitz. Let $A_0(D)$ be a differential operator in divergence form satisfying the weak Legendre-Hadamard condition \eqref{eq:l22}, and assume that the coefficients of $A$ are continuous on $\overline{\Omega}$. Then for every $u \in H_0^m \left( \Omega; \; \R^N \right)$ it turns out that
+\begin{equation} \label{eq:gar3} \int_{\Omega} \left[\sum_{|\alpha| = m} \sum_{|\beta| = m}  \left( A_{\alpha, \, \beta} D^\alpha \, u(x), \, D^\beta \, u(x) \right)  \right] \, \mathrm{d}x \geq c(\nu) \, \left[ \|u\|_{H^m \left(\Omega; \; \R^N \right)} - \|u\|_{L^2 \left(\Omega; \; \R^N \right)} \right]. \end{equation}
+\end{lemma}
+
+\begin{proof} We divide the argument into many steps, in order to ease the notation.
+
+\paragraph{Step 1.} ... \end{proof} %PRIMA O POI
+
+\begin{lemma}\label{lemma:gar4} Let $A(x, \, D)$ be a differential operator in divergence form satisfying the weak Legendre-Hadamard condition \eqref{eq:l22}, and assume that: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The coefficients of order $m$ are continuous on $\overline{\Omega}$.
+\item The coefficients of order $<m$ are essentially bounded.
+\end{enumerate}
+Then for every $u \in H_0^m \left( \Omega; \; \R^N \right)$ it turns out that
+\begin{equation} \label{eq:gar4} \int_{\Omega} \left[\sum_{|\alpha|\leq m} \sum_{|\beta| \leq m}  \left( A_{\alpha, \, \beta} D^\alpha \, u(x), \, D^\beta \, u(x) \right)  \right] \, \mathrm{d}x \geq c(\nu) \, \left[ \|u\|_{H^m \left(\Omega; \; \R^N \right)} - \|u\|_{L^2 \left(\Omega; \; \R^N \right)} \right]. \end{equation}
+\end{lemma}
+
+\begin{proof} The estimate \eqref{eq:gar4} is a straightforward consequence of the lemmas we have proved so far. More precisely, the terms of maximal order can be estimated via \hyperref[lemma:gar3]{Lemma \ref{lemma:gar3}}, while the other terms can be easily estimated with the interpolation inequality \eqref{eq:interp4}.  \end{proof}
+
+\begin{theorem}[Lions] Let $X \subset Y \subset Z$ be Banach spaces such that the inclusion
+\begin{equation*} X \hookrightarrow Y \end{equation*}
+is continuous and compact, while the inclusion
+\begin{equation*} Y \subset Z \end{equation*}
+is continuous. For any $\epsilon > 0$ there exists a constant $c(\epsilon)>0$ such that for every $u \in X$ it turns out that
+\begin{equation} \label{eq:interp}\|u\|_Y \leq \epsilon \, \|u\|_X + c(\epsilon) \, \|u\|_z. \end{equation} \end{theorem}
+
+\begin{proof}We argue by contradiction. If \eqref{eq:interp} is not satisfied, then there exists $\epsilon > 0$ such that for any divergent sequence of real numbers $(c_n)_{n \in \N}$ there is a sequence $(u_n)_{n \in \N} \subset X$ such that
+\begin{equation} \label{eq:interpfals}\|u_n\|_Y \geq \epsilon \, \|u_n\|_X + c_n \, \|u_n\|_z. \end{equation}
+Let $v_n := u_n / \|u_n\|_X$. Then \eqref{eq:interpfals} can be written as follows
+\begin{equation} \label{eq:interpfals2}\|v_n\|_Y \geq \epsilon + c_n \, \|v_n\|_z. \end{equation}
+The $X$-norm of $v_n$ is equal to $1$ for each $n \in \N$, hence there exists a subsequence $\left(v_{n_k}\right)_{k \in \N} \subset Y$ (by compactness of the immersion) such that
+\begin{equation*} v_{n_k} \xrightarrow{k \to + \infty} v_\infty \qquad \text{strongly in $Y$}. \end{equation*}
+On the one hand, it follows from the continuity of the inclusion and \eqref{eq:interpfals2} that
+\begin{equation*} \frac{c}{c_n} = \frac{c \, \|v_n\|_X}{c_n} \geq \frac{\|v_n\|_Y}{c_n} \geq \| v_n \|_Z, \end{equation*}
+and by taking the limit as $n \to + \infty$ we infer that $\|v_n\|_{Z} \to 0$. This is absurd since by continuity of the inclusion $Y \subset Z$ it turns out that $v_\infty \equiv 0$, but \eqref{eq:interpfals2} implies also that $\|v_{n_k}\|_Y \geq \epsilon$ (in contradiction with the fact that $v_\infty$ is zero). \end{proof}
+
+\begin{corollary}For any $\epsilon > 0$ and for any $u \in H_0^m \left( \Omega; \; \R^N \right)$ it turns out that
+\begin{equation} \label{eq:interp4}\|u\|_{H^{m-1}\left( \Omega; \; \R^N \right)} \leq \epsilon \, \|u\|_{H^m\left( \Omega; \; \R^N \right)} + c(\epsilon) \, \|u\|_{L^2\left( \Omega; \; \R^N \right)}. \end{equation} \end{corollary}
+
+\begin{proof}It is a straightforward consequence of the interpolation inequality \eqref{eq:interp} since the immersion
+\begin{equation*} H^{m}\left( \Omega; \; \R^N \right) \hookrightarrow H^{m-1}\left( \Omega; \; \R^N \right) \end{equation*}
+is compact by Rellich Theorem\footnote{Let $\Omega \subseteq \R^n$ be an open, bounded Lipschitz domain, and let $1 \leq p < n$. Set
+\begin{equation*} p^\ast := \frac{np}{n - p}. \end{equation*}
+Then the Sobolev space $W^{1, \, p} \left(\Omega; \; \R \right)$ is continuously embedded in the $L^p$-space $L^{p^\ast} \left(\Omega; \; \R \right)$ and is compactly embedded in $L^q\left(\Omega; \; \R \right)$ for every $1 \leq q < p^\ast$. In symbols,
+\begin{equation*} W^{1, \, p}(\Omega) \hookrightarrow L^{p^\ast}(\Omega),\end{equation*}
+and
+\begin{equation*} W^{1, \, p}(\Omega) \subset \subset L^q(\Omega), \qquad \forall \, 1 \leq q < p^\ast. \end{equation*}}.\end{proof}
+
+\section{Dirichlet problem for linear systems}
+
+In this section, the primary goal is proving that the Dirichlet problem is well-posed in the linear systems setting.
+
+\paragraph{Sobolev Spaces.} For any real number $s > 0$ the $-s$-Sobolev space is defined by setting
+\begin{equation*} H^{-s}(\Omega) := \left( H_0^{s} (\Omega) \right)^\ast. \end{equation*}
+The space of compactly supported infinitely derivable functions $\mathcal{D}(\Omega)$ is dense in $H_0^s(\Omega)$, hence
+\begin{equation*} \mathcal{D}^\prime(\Omega) \supset H^{-s}(\Omega). \end{equation*}
+
+\begin{theorem}\label{sob:char} Let $m > 0$ be an integer positive number. Every functional $f \in H^{-m}(\Omega)$ admits a non-unique representation as follows:
+\begin{equation} \label{eq:repsob} f = \sum_{|\alpha| \leq m} D^\alpha \, f_\alpha, \qquad f_\alpha \in L^2(\Omega). \end{equation} \end{theorem}
+
+\begin{proof}Let us consider, for $|\alpha| \leq m$, the linear application
+\begin{equation*} \Psi_\alpha : H^m(\Omega) \ni u \longmapsto D^\alpha \, u \in L^2(\Omega). \end{equation*}
+Clearly $\left(\Psi_\alpha \right)_{|\alpha| \leq m}$ establish an isomorphism between $H^m(\Omega)$ and a linear submanifold $V \subset \left[L^2(\Omega) \right]^h$, where $h$ is the number of all the derivatives $D^\alpha$ with $|\alpha| \leq m$.
+
+Therefore to a linear continuous functional defined on $H^m(\Omega)$, corresponds a linear continuous functional defined on $V$. By Hahn-Banach theorem $L$ may be isometrically extended to a linear continuous functional $\tilde{L}$ defined over $\left[L^2(\Omega) \right]^h$. Moreover, it is easy to check that
+\begin{equation*}\tilde{L} : \left[L^2(\Omega) \right]^h \to \R \implies \tilde{L} = \sum_{i = 1}^h L_i, \end{equation*}
+where $L_i \in \left(L^2(\Omega) \right)^\ast$ for every index $i = 1, \, \dots, \, h$. By Riesz theorem, it turns out that
+\begin{equation*} \tilde{L}(u) = \sum_{|\alpha| \leq m} \int_{\Omega} g_\alpha \, D^\alpha \, u, \qquad g_\alpha \in L^2(\Omega). \end{equation*}
+In conclusion, since $L \in \left(H_0(\Omega) \right)^\ast$, the formula above is uniquely represented by the functional
+\begin{equation*} L(\varphi) := \left< f, \, \varphi \right> \end{equation*}
+defined on $\mathcal{D}(\Omega)$, and hence
+\begin{equation*} f = \sum_{|\alpha| \leq m} D^\alpha \, f_\alpha, \qquad \text{where} \quad f_\alpha = (-1)^{|\alpha|} \, g_\alpha. \end{equation*} \end{proof}
+
+\begin{theorem}[Global Existence, I] Let $A_0(D)$ be a differential operator in divergence form satisfying the weak Legendre-Hadamard condition \eqref{eq:l22}, and assume that the coefficients of $A$ are constants. Then for every $F \in H^{-m}(\Omega; \; \R^N)$ there exists one and only one solution in $H_0^m(\Omega; \; \R^N)$ of the system
+\begin{equation*}A_0(D) \, u = F \end{equation*}
+and the following estimate holds true:
+\begin{equation} \label{eq:estisb} \|u\|_{H_0^m\left( \Omega; \; \R^N \right)} \leq c(\nu) \, \|F\|_{H^{-m}(\Omega; \; \R^N)}. \end{equation}\end{theorem}
+
+\begin{remark}If we set
+\begin{equation} \label{eq:sobn1} \|F\|_{-m, \, \Omega}^\ast := \inf \left\{ \sum_{j = 0}^m d_{\Omega}^{m-j} \, \left[ \int_\Omega \left( \sum_{|\alpha|=j} \|f_\alpha\|^2 \right) \, \mathrm{d}x \right]^{\frac{1}{2}} \right\}, \end{equation}
+where the infimum is taken over the possible representations of $F$ of the form \eqref{eq:repsob}. One can easily show that \eqref{eq:sobn1} is a norm on $H^{-m}(\Omega)$, which is equivalent to the usual one:
+\begin{equation} \label{eq:sobn2} \|F\|_{-m, \, \Omega} = \sup \left\{ \left| \left< F, \, \varphi \right> \right| \: \left| \: \varphi \in H_0^m(\Omega; \; \R^N), \, \, \|\varphi\|_{H_0^m(\Omega; \; \R^N)} = 1 \right. \right\}. \end{equation}\end{remark}
+
+\begin{proof}Let us consider the bilinear form $a : H_0^m \left( \Omega; \; \R^N \right) \times H_0^m \left( \Omega; \; \R^N \right) \to \R$ defined by setting
+\begin{equation*} a(u, \, v) := \int_{\Omega} \left[ \sum_{|\alpha| = |\beta| = m|} \left(A_{\alpha, \, \beta}(x) \, D^\alpha\, u(x), \, D^\beta \, v(x) \right) \right] \, \mathrm{d}x. \end{equation*}
+The functional
+\begin{equation*} L(v) := F(v), \qquad v \in H_0^m \left(\Omega; \; \R^N \right) \end{equation*}
+is continuous, while $a$ is coercive on the product as a consequence of \hyperref[lemma:gar1]{Lemma \ref{lemma:gar1}}. By \hyperref[lax-milgram]{Lax-Milgram Theorem \ref{lax-milgram}} it turns out that there exists one and only one solution of the system
+\begin{equation*} \int_{\Omega} \left[ \sum_{|\alpha| = |\beta| = m|} \left(A_{\alpha, \, \beta}(x) \, D^\alpha\, u(x), \, D^\beta \, v(x) \right) \right] \, \mathrm{d}x = F(v), \qquad \forall \, v \in H_0^m\left(\Omega; \; \R^N \right) \end{equation*}
+along with the estimate \eqref{eq:estisb}. \end{proof}
+
+\begin{theorem}[Global Existence, II] Let $A(D)$ be a differential operator in divergence form satisfying the weak Legendre-Hadamard condition \eqref{eq:l22}, and assume that: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The coefficients of order $m$ are continuous on $\overline{\Omega}$.
+\item The coefficients of order $<m$ are essentially bounded.
+\end{enumerate}
+Let $\gamma > 0$ be a big enough real number. Then for every $F \in H^{-m}(\Omega; \; \R^N)$ there exists one and only one solution in $H_0^m(\Omega; \; \R^N)$ of the system
+\begin{equation*}A(x, \, D) \, u + \gamma \, u = F, \end{equation*}
+and the following estimate holds true:
+\begin{equation} \label{eq:estisb2} \|u\|_{H_0^m\left( \Omega; \; \R^N \right)} \leq c(\nu) \, \|F\|_{H^{-m}(\Omega; \; \R^N)}. \end{equation}
+The same assertion holds true for any $\gamma > 0$, provided that the diameter $d_\Omega$ of the subset $\Omega$ is small enough.\end{theorem}
+
+\begin{proof}Let us consider the bilinear form $a : H_0^m \left( \Omega; \; \R^N \right) \times H_0^m \left( \Omega; \; \R^N \right) \to \R$ defined by setting
+\begin{equation*} a(u, \, v) := \int_{\Omega} \left[ \sum_{|\alpha| = |\beta| = m|} \left(A_{\alpha, \, \beta}(x) \, D^\alpha\, u(x), \, D^\beta \, v(x) \right) + \gamma \, u(x) \right] \, \mathrm{d}x. \end{equation*}
+The functional
+\begin{equation*} L(v) := F(v), \qquad v \in H_0^m \left(\Omega; \; \R^N \right) \end{equation*}
+is continuous, hence the conclusion follows from \hyperref[lemma:gar4]{Lemma \ref{lemma:gar4}} for any $\gamma \geq c(\nu)$. Indeed, it suffices to observe that
+\begin{equation*} \begin{aligned} a(u, \, v) & \geq c(\nu) \, \left[ \|u\|_{H^m(\Omega; \; \R^N)}^2 - \|u\|_{L^2(\Omega; \; \R^N)}^2 \right] + \gamma \, \|u\|_{L^2(\Omega; \; \R^N)}^{2} = \\ & = c(\nu) \|u\|_{H^m(\Omega; \; \R^N)}^2 + \left[\gamma - c(\nu) \right] \, \|u\|_{L^2(\Omega; \; \R^N)}^2 \geq \\ & \geq c(\nu) \, \|u\|_{H^m(\Omega; \; \R^N)}^2. \end{aligned} \end{equation*}
+On the other hand, if $\gamma$ is any positive real number, it turns out that
+\begin{equation*} \begin{aligned} a(u, \, v) & \geq c(\nu) \, \left[ \|u\|_{H^m(\Omega; \; \R^N)}^2 - \|u\|_{L^2(\Omega; \; \R^N)}^2 \right] + \gamma \, \|u\|_{L^2(\Omega; \; \R^N)}^{2} = \\ & = c(\nu) \|u\|_{H^m(\Omega; \; \R^N)}^2 + \left[\gamma - c(\nu) \right] \, \|u\|_{L^2(\Omega; \; \R^N)}^2 \geq \\ & \geq \left[ c(\nu) - d_\Omega \, \left(c(\nu) - \gamma \right) \right] \, \|u\|_{H^m \left( \Omega; \; \R^N \right)}^2 \, {\color{red} \geq} \\ & \, {\color{red} \geq} \,  c(\nu, \, \gamma, \, d_\Omega) \, \|u\|_{H^m \left( \Omega; \; \R^N \right)}^2, \end{aligned} \end{equation*}
+where the {\color{red}red} inequality follows from the Poincaré inequality when $\gamma \leq c(\nu)$ and $d_\Omega$ is small enough.\end{proof}
+
+\section{Global Existence via Special Operators}
+
+Let us consider the Dirichlet problem
+\begin{equation} \label{fpr} \begin{cases} u \in H_0^m\left(\Omega, \, \R^N \right) \\ \\ A(x, \, D) \, u(x) = F(x). \end{cases} \end{equation}
+In the previous section, we have proved that for any $F \in H^{-m}\left(\Omega, \, \R^N \right)$ the problem \eqref{fpr} admits one and only one solution (i.e., it is well-posed) if the diameter of $\Omega$ is small enough. 
+
+In this section, we show, via apriori estimates, that the same result holds true even when the diameter of $\Omega$ is small enough for the Poincaré inequality to hold. Let us set
+\begin{equation*} \mathcal{P} \, u(x) = A(x, \, D) \, u(x). \end{equation*}
+
+\begin{theorem}\label{th:dksdkksd}Let $\Omega \subset \R^n$ be an open bounded subset, and assume that $\partial \, \Omega$ is a boundary of class $C^m$. Suppose that $A_0(x, \, D)$ is an elliptic operator satisfying the Legendre-Hadamard condition \eqref{eq:l22}, with coefficients of class $C^1\left(\overline{\Omega} \right)$. Then the linear application
+\begin{equation*} \mathcal{P} : H^{m+1}(\Omega, \, \R^N) \cap H_0^1(\Omega, \, \R^N) \to H^{1 - m} \left(\Omega, \, \R^N \right) \end{equation*}
+has finite-dimensional kernel and closed rank. \end{theorem}
+
+\begin{lemma}[Peetre] \label{lemma:peetre}Let $E, \, \Phi, \, G$ be three Banach spaces such that $E \subset \Phi$ is a compact immersion, and let $L$ be a continuous linear operator from $E$ to $G$. The following properties are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The rank of $C$ is closed, and the kernel of $C$ is finite-dimensional.
+\item There exists a positive constant $c > 0$ such that
+\begin{equation} \label{eq:peetr} \|u\|_E \leq c \left( \|C \, u \|_G + \|u\|_{\Phi} \right), \qquad \forall \, u \in E. \end{equation}
+\end{enumerate} \end{lemma}
+
+\begin{proof}We divide the proof into two steps: second assertion implies the first assertion, and vice versa.
+
+\paragraph{Step 1.} Let $E_0 := \mathrm{Ker}(C)$. The unitary ball in $E_0$ is compact in $\Phi$, thus, by \eqref{eq:peetr}, it is also compact in $E$. We conclude that $E_0$ is a finite-dimensional subspace of $E$\footnote{A Banach space such that every bounded subset is relatively sequentially compact, is necessarily a finite-dimensional space.}.
+
+There exists $E_1 \subset E$ such that $E = E_0 \oplus E_1$, and the restriction of the operator $C$ on $E_1$ is injective by construction. We claim now that for any $u \in E_1$ it turns out that
+\begin{equation} \label{eq:peetr1} \|u\|_E \leq c^\prime \, \|C \, u \|_G, \qquad \forall \, u \in E_1. \end{equation}
+We argue by contradiction. If \eqref{eq:peetr1} does not hold true, then there exist a sequence $c_n^\prime \nearrow + \infty$ and a sequence $(u_n)_{n \in \N} \subset E_1$ such that
+\begin{equation*} \|u_n\|_E > c_n^\prime \, \|C \, u_n \|_G. \end{equation*}
+In particular, if we set $v_n := u_n / \|u_n\|_E$, the above inequality is equivalent to
+\begin{equation} \label{eq:peetr2} \frac{1}{c_n^\prime} > \|C \, v_n \|_G. \end{equation}
+The sequence $(v_n)_{n \in \N} \subset E$ is bounded, hence there exists a converging (in $\Phi$) subsequence $(v_{n_k})_{k \in \N}$ such that
+\begin{equation*} v_{n_k} \xrightarrow{k \to + \infty}_{\Phi} v \in \Phi. \end{equation*}
+It follows from \eqref{eq:peetr} and the above inequality that $(v_{n})_{n \in \N}$ is a Cauchy sequence in $E_1$, and thus it converges necessarily to the same $v$. Passing to the limit as $n \to + \infty$ in \eqref{eq:peetr2} immediately implies $v \equiv 0$, but this is absurd since by \eqref{eq:peetr} it turns out that
+\begin{equation}1 \leq c \left( \|C \, v_n \|_G + \|v_n\|_{\Phi} \right), \qquad \forall \, n \in \N. \end{equation}
+The claim \eqref{eq:peetr1} is now proved.
+
+Let $(w_n)_{n \in \N} \subset \mathrm{Ran}(C)$ be a converging sequence, and let $w \in G$ be its limit. There exists a sequence $(u_n)_{n \in \N} \subset E$ such that $C \, u_n = w_n$ for every $n \in \N$; using the decomposition of $E$, it turns out that
+\begin{equation*} u_n = v_n + z_n \implies C(u_n) = C(z_n) = w_n, \end{equation*}
+and thus it follows from \eqref{eq:peetr1} that
+\begin{equation*} \|z_n\|_E \leq c^\prime \, \|C \, z_n \|_G = c^\prime \, \|w_n\|_G.\end{equation*}
+Consequently $(z_n)_{n \in \N} \subset E_1$ is a Cauchy sequence in $E$, hence it converges to $z \in E$. By the continuity of the operator $C$, we conclude that $C \, z = w$ (which is exactly what we wanted to prove).
+
+\paragraph{Step 2.} Let $E = E_0 \oplus E_1$ as above. The restriction $C \, \big|_{E_1}$ is a closed map, thus by the closed graph theorem it follows that
+\begin{equation}\label{eq:1111} \|v\|_E \leq c_1 \, \| C \, v \|_G, \qquad \forall \, v \in E_1. \end{equation}
+On the other hand, for any $w \in E_0$ one can prove the inequality
+\begin{equation} \label{eq:1112} \|w\|_E \leq c_2 \, \| w \|_\Phi. \end{equation}
+We argue by contradiction. If \eqref{eq:1112} does not hold true, then there exist a sequence $(d_n) \subset \R$ increasingly converging to $+ \infty$, and a sequence $(w_n)_{n \in \N} \subset E_0$ such that
+\begin{equation*} \|w_n\|_E \geq d_n \, \|w_n\|_{\Phi}. \end{equation*}
+If we set $y_n := w_n / \|w_n\|_E$, then it turns out that
+\begin{equation*} \frac{1}{d_n} \geq \|y_n\|_{\Phi}, \end{equation*}
+hence $y_n \to 0$ in $\Phi$. This is absurd since the sequence $(y_n)_{n \in \N}$ belongs to a finite-dimensional subspace, hence it admits a converging subsequence to an  element $y$ of norm $1$. In conclusion, the inequality \eqref{eq:peetr} follows immediately from \eqref{eq:1111} and \eqref{eq:1112}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{th:dksdkksd}] The thesis is an immediate corollary of \hyperref[lemma:peetre]{Peetre's Lemma \ref{lemma:peetre}}, where
+\begin{equation*} \begin{aligned} & E = H^{m+1}(\Omega, \, \R^N) \cap H_0^1(\Omega, \, \R^N) \\ & \Phi = H_0^m \left(\Omega, \, \R^N \right) \\ & G = H^{1-m} \left(\Omega, \, \R^N \right) \\ & C \, u = \mathcal{P} \, u, \end{aligned} \end{equation*}
+by noticing that \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item the immersion $H^{m+1}\left(\Omega, \, \R^N \right)$ into $H^m\left(\Omega, \, \R^N \right)$ is compact by Rellich Theorem\footnote{Let $\Omega \subseteq \R^n$ be an open, bounded Lipschitz domain, and let $1 \leq p < n$. Set
+\begin{equation*} p^\ast := \frac{np}{n - p}. \end{equation*}
+Then the Sobolev space $W^{1, \, p} \left(\Omega; \; \R \right)$ is continuously embedded in the $L^p$-space $L^{p^\ast} \left(\Omega; \; \R \right)$ and is compactly embedded in $L^q\left(\Omega; \; \R \right)$ for every $1 \leq q < p^\ast$. In symbols,
+\begin{equation*} W^{1, \, p}(\Omega) \hookrightarrow L^{p^\ast}(\Omega),\end{equation*}
+and
+\begin{equation*} W^{1, \, p}(\Omega) \subset \subset L^q(\Omega), \qquad \forall \, 1 \leq q < p^\ast. \end{equation*}};
+\item the following estimate holds true:
+\begin{equation*} \|u\|_{H^{m+1}(\Omega, \, \R^N)} \leq c \, \left( \|u\|_{H^m\left(\Omega, \, \R^N \right)} + \|F\|_{H^{1-m}\left(\Omega, \, \R^N \right)} \right). \end{equation*}
+\end{enumerate}
+\end{proof}

@@ -1,0 +1,792 @@
+\chapter{Hilbert Spaces} \thispagestyle{empty}
+
+In the first half of this chapter, we investigate the main properties of \textit{Hilbert spaces}, e.g., the projection onto a closed convex subspace, the characterization of the orthogonal projection onto a linear subspace, etc. In the second part, we introduce the notion of \textit{topological dual} of a Hilbert space, and we prove the fundamental representation theorem due to Riesz. We also present a simple characterization of Hilbert basis in terms of Fourier sums, and briefly investigate the cardinality of such bases. In the appendix, we prove the Radon-Nikodym theorem, we describe the structure of particular subgroups of Hilbert spaces entirely, and we also find an orthogonal family in $L^2 \left( [0, \, \infty), \, \mathrm{d}\mu \right)$, known as \textit{Laguerre polynomials}.
+
+\section{Pre-Hilbert Spaces}
+
+In this section, we introduce the notion of \textit{pre-Hilbert space}\index{pre-Hilbert space}, that is, a vector space $V$ endowed with a real scalar product $( \cdot, \, \cdot ) : V \times V \longrightarrow \R$ or a Hermitian product $( \cdot, \, \cdot ) : V \times V \longrightarrow \C$.
+
+\subsection{Real Scalar Product}
+
+Recall that $(V, \, +, \, \cdot)$ is a \underline{real} vector space if $V$ is a vector space whose field of scalars is $\R$.
+
+\begin{definition}[Symmetric Form]\index{symmetric form} A map $B : V \times V \longrightarrow \R$ is a \textit{symmetric form} if 
+\begin{equation*} B(x, \, y) = B(y, \, x) \quad \text{for every $x, \, y \in V$}. \end{equation*}\end{definition}
+
+\begin{definition}[Bilinear Form]\index{bilinear form} A symmetric map $B : V \times V \longrightarrow \R$ is a \textit{bilinear form} if
+\begin{equation*} B(\alpha x + \beta y, \, z) = \alpha  B(x, \, z) + \beta  B(y, \, z) \quad \text{for every $x, \, y, \, z \in V$ and $\alpha, \, \beta \in \R$}. \end{equation*} \end{definition}
+
+\begin{definition}[Positive Form]\index{positive form} A map $B : V \times V \longrightarrow \R$ is a \textit{positive form} if the associated quadratic form is positive, that is,
+\begin{equation*} Q(x) := B(x, \, x) \geq 0 \quad \text{for every $x \in V$.} \end{equation*}\end{definition}
+
+\begin{example}The space
+\begin{equation*}V = C^0\left( [0, \, 1]; \; \R \right) \end{equation*}
+is a real vector space. The reader may check as an exercise that a bilinear, symmetric and positive form defined on $V$ is given by
+\begin{equation*} B(f, \, g) := \int_{0}^{1} f(x) g(x) \, \mathrm{d}x. \end{equation*} \end{example}
+
+\begin{lemma}[Cauchy-Schwarz] \index{inequality!Cauchy-Schwarz} \label{lemma:dissch} Let $B : V \times V \to \R$ be a bilinear, symmetric and positive form defined over $V$. For every $x, \, y \in V$ it turns out that
+\begin{equation} \label{eq:schwartz1} \left| B(x, \, y) \right|^2 \leq \left| B(x, \, x) \right| \left| B(y, \, y) \right|. \end{equation} \end{lemma}
+
+\begin{proof}[First Proof] The quadratic form $Q$ associated to $B$ is positive; hence
+\begin{equation*} Q \left( B(x, \, x) \, y - B(x, \, y) \, x \right) \geq 0, \end{equation*}
+for every $x, \, y \in V$. It follows from the definition of $Q$ that
+\begin{equation*} B(x, \, x)^2 B \left(y, \, y \right) - 2 B(x, \, y)^2  B(x, \, x) + B(x, \, y)^2 B(x, \, x) \geq 0, \end{equation*}
+from which we infer that
+\begin{equation*} B(x, \, x)^2 B \left(y, \, y \right) - B(x, \, y)^2 B(x, \, x) \geq 0. \end{equation*}
+It is easy to see that there are only two possibilities we need to study separately: \mbox{}
+\begin{enumerate}[label=\arabic*)]
+\item If $B(x, \, x) = B(y, \, y) = 0$, then
+\begin{equation*}\begin{aligned} & B(x + y, \, x + y) \geq 0 \implies B(x, \, y) \geq 0,
+\\[1em] & B(x - y, \, x - y) \geq 0 \implies - B(x, \, y) \geq 0,\end{aligned} \end{equation*}
+and thus the inequality \eqref{eq:schwartz1} is trivially satisfied.
+\item If $B(x, \, x) \neq 0$, then we can divide the inequality above by $B(x, \, x)$ and obtain the Cauchy-Schwarz inequality, that is,
+\begin{equation*}B(x, \, x) B \left(y, \, y \right) - B(x, \, y)^2 \geq 0.\end{equation*}
+The opposite case ($B(y, \, y) \neq 0$) follows in the same way replacing $x$ with $y$ (and vice versa).
+\end{enumerate}\end{proof}
+
+\begin{proof}[Second Proof]Let us consider the second-order polynomial
+\begin{equation*}\R \ni t \longmapsto Q(x + t y) = B(y, \, y) t^2 + 2 B(x, \, y) t + B(x, \, x) \in \R. \end{equation*}
+The bilinear form $B$ is positive, that is, $B(x + t y, \, x + t y) \geq 0$ for every $t \in \R$. A standard argument for second-order polynomials proves that the discriminant $\Delta$ needs to be negative at every $t \in \R$, which yields to the sought inequality
+\begin{equation*}\Delta = 4 B(x, \, y)^2 - 4 B(x, \, x) B(y, \, y) \leq 0. \end{equation*}
+\end{proof}
+
+\begin{remark} Let $L : \R^2 \longrightarrow \R^n$ be a linear map, and assume that $L(e_1) = x$ and $L(e_2) = y$. Then
+\begin{equation*} A^{\intercal} A \in \mathrm{M}\left(2 \times 2, \, \R\right) \qquad \text{and} \qquad \mathrm{det}\, A^{\intercal} A = \sum_{1 \leq i < j \leq n} \left( x_i  y_j - x_j  y_i\right)^2, \end{equation*}
+i.e., it is the sum of the squared determinant of all the $2 \times 2$ minors of $A$. \end{remark}
+
+\begin{definition}[Scalar product]\index{scalar product} \label{def:ps} A map $(\cdot, \, \cdot) : V \times V \longrightarrow \R$ is a \textit{scalar product} if the following properties are satisfied:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $(\cdot, \, \cdot)$ is a bilinear, symmetric and positive form;
+\item $(\cdot, \, \cdot)$ is a positive-definite form, that is,
+\begin{equation*} \text{$(x, \, x) \geq 0$ for every $x \in V$} \quad \text{and} \quad (x, \, x) = 0 \iff x = 0. \end{equation*}
+\end{enumerate} \end{definition}
+
+\begin{lemma}[Cauchy-Schwarz]\index{inequality!Cauchy-Schwarz} \label{lemma:dissch2} Let $(\cdot, \, \cdot) : V \times V \longrightarrow \R$ be a scalar product defined over $V$. For every $x, \, y \in V$ it turns out that
+\begin{equation} \label{eq:schwartz2} \left| (x, \, y) \right|^2 \leq \left| (x, \, x) \right| \left| (y, \, y) \right|, \end{equation}
+and the equality holds if and only if there exists $\lambda \in \R$ such that $x = \lambda y$.\end{lemma}
+
+\begin{proposition}\label{prop:norma} Let $(\cdot, \, \cdot) : V \times V \longrightarrow \R$ be a scalar product defined over $V$. The map $\| \cdot \| : V \longrightarrow \R$ defined by setting
+\begin{equation} \label{eq:normaindotta} \| x \| := \sqrt{ (x, \, x) }, \qquad \forall \, x \in V, \end{equation}
+is a norm, i.e., the following properties are satisfied:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $\|x\| \geq 0$ for every $x \in V$;
+\item $\|x \| = 0$ if and only if $x = 0$;
+\item$\|\lambda x\| = |\lambda| \|x\|$ for every $x \in X$ and for every $\lambda \in \R$;
+\item for every $x, \, y \in X$ the triangle inequality\index{triangular inequality} holds true, i.e.
+\begin{equation} \label{eq:trineq} \|x + y \| \leq \|x\| + \|y\|. \end{equation}
+\end{enumerate}
+Moreover, the norm $\|\cdot\|$ induces a distance, invariant under translations, defined as follows:
+\begin{equation} \label{eq:disind}d(x, \, y) := \|x - y\|, \qquad \forall \, x, \, y \in V. \end{equation}
+\end{proposition}
+
+\begin{proposition}[Parallelogram Law]\index{parallelogram law} \label{prop:parall} Let $V$ be a real vector space.  \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $(\cdot, \, \cdot) : V \times V \longrightarrow \R$ is a scalar product over $V$, then
+\begin{equation} \label{eq:paral} \|x + y \|^2 + \|x - y\|^2 = 2  \left( \|x\|^2 + \|y\|^2 \right), \qquad \forall \, x, \, y \in V.\end{equation}
+\item If $\| \cdot \| : V \longrightarrow \R$ is a norm satisfying the parallelogram law \eqref{eq:paral} at every couple of points $x, \, y \in V$, then there exists a scalar product $(\cdot, \, \cdot) : V \times V \longrightarrow \R$ such that 
+\begin{equation*} \| \cdot \| := \sqrt{ (\cdot, \, \cdot) }. \end{equation*}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item By definition of $\| \cdot \|$ we have
+\begin{equation*} \begin{aligned} \|x + y \|^2 + \|x - y\|^2 & = (x + y, \, x + y) + (x - y, \, x - y) =
+\\[1em] & = \|x\|^2 + 2 (x, \, y) + \|y\|^2 + \|x\|^2 - 2 (x, \, y) + \|y\|^2 =
+\\[1em] & = 2 \|x\|^2 + 2 \|y\|^2, \end{aligned}\end{equation*}
+which is exactly what we wanted to prove.
+\item We define a scalar product using the polarization identity\index{polarization identity}, that is,
+\begin{equation*}(x, \, y) := \frac{1}{4} \left(\|x + y\|^2 - \|x - y\|^2 \right) \quad \text{for every $x, \, y \in V$}. \end{equation*}
+The reader may check as an exercise that $(\cdot, \, \cdot)$ is a scalar product, and also that $\| x \| = \sqrt{(\cdot, \, \cdot)}$ for any $x \in V$.
+\end{enumerate} \end{proof}
+
+\subsection{Hermitian Product}
+
+Let $V$ be a complex vector space, that is, the field of scalars of $V$ is given by $\C$.
+
+\vspace{1.2mm}
+\noindent The definitions introduced in the previous section need to be slightly modified to adapt to the different structure of $\C$.
+
+In particular, we introduce the notion of \textit{hermitian product}, and we prove that the Cauchy-Schwarz inequality still holds - as a consequence of some properties of the complex numbers.
+
+\begin{definition}[Semilinear Form]\index{semilinear form} A map $B : V \times V \longrightarrow \C$ is a \textit{right-semilinear form} if
+\begin{equation*} B(x, \, \alpha  y + \beta  z) = \overline{\alpha}  B(x, \, y) + \overline{\beta} B(x, \, z) \quad \text{for every $x, \, y, \, z \in V$ and $\alpha, \, \beta \in \C$}. \end{equation*} \end{definition}
+
+\begin{definition}[Hermitian product]\index{hermitian product} \label{def:hps} A map $(\cdot, \, \cdot) : V \times V \longrightarrow \C$ is a \textit{hermitian product} if the following properties are satisfied:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The form $(\cdot, \, \cdot)$ is sesquilinear, that is, it is linear on the left and semilinear on the right.
+\item The form $(\cdot, \, \cdot)$ is hermitian, that is,
+\begin{equation*}(y, \, x) = \overline{(x, \, y)} \quad \text{for every $x, \, y, \in V$}. \end{equation*}
+\item The form $(\cdot, \, \cdot)$ is positive-definite, that is,
+\begin{equation*} \text{$(x, \, x) \geq 0$ for every $x \in V$} \quad \text{and} \quad (x, \, x) = 0 \iff x = 0. \end{equation*}
+\end{enumerate} \end{definition}
+
+\begin{remark}If $V$ is a complex vector space and $(\cdot, \, \cdot)_{\C}$ is a Hermitian product defined over $V$, we can define a real scalar product by setting
+\begin{equation*} (\cdot, \, \cdot)_\R := \mathfrak{Re} \, (\cdot, \, \cdot)_\C \quad \text{or} \quad (\cdot, \, \cdot)_\R := \mathfrak{Im} \, (\cdot, \, \cdot)_\C. \end{equation*}
+These scalar product are, a priori, distinct. The reader may prove that both satisfy the axioms of a scalar product, and provide an example showing that they might be very different. \end{remark}
+
+\begin{lemma}[Cauchy-Schwarz]\index{inequality!Cauchy-Schwarz} \label{lemma:disschc} Let $(\cdot, \, \cdot) : V \times V \longrightarrow \C$ be a scalar product defined over $V$. For every $x, \, y \in V$ it turns out that
+\begin{equation} \label{eq:schwartz3} \left| (x, \, y) \right|^2 \leq \left| (x, \, x) \right| \left| (y, \, y) \right|, \end{equation}
+and the equality holds if and only if there exists $\lambda \in \C$ such that $x = \lambda y$.\end{lemma}
+
+\begin{proof}For every $x, \, y \in V$ it turns out that
+\begin{equation}\label{elqwleldlsdlsldp2}0 \leq \| x - \lambda y \|^2 \implies 0 \leq \|x\|^2 + \lambda \overline{\lambda} \|y\|^2 - \lambda  (y, \, x) - \overline{\lambda} (x, \, y).  \end{equation}
+Assume that both $x$ and $y$ are nonzero vectors (otherwise the inequality is trivial), and take 
+\begin{equation*} \lambda := \frac{\overline{(y, \, x)}}{\|y\|^2}.\end{equation*}
+If we plug the value of $\lambda$ into \eqref{elqwleldlsdlsldp2}, we obtain the inequality
+\begin{equation*}0 \leq \|x\|^2 - \frac{|(y, \, x)|}{\|y\|^2}, \end{equation*}
+which yields to the Cauchy-Schwarz inequality multiplying everything by $\|y\|^2$.
+\end{proof}
+
+\section{Hilbert Spaces}
+
+In this section, we introduce the notion of \textit{Hilbert space}, and we investigate the properties of the projection onto a closed convex subset.
+
+\begin{definition}[Hilbert Space]\index{Hilbert space} \label{def:hs} A real vector space $H$, endowed with a scalar product $(\cdot, \, \cdot) : V \times V \longrightarrow \R$, is a (real) Hilbert space if it is complete with respect to the metric
+\begin{equation*}d(x, \, y) :=  \|x - y\|. \end{equation*}
+In a similar fashion, a complex vector space $H$, endowed with a Hermitian product $(\cdot, \, \cdot) : V \times V \longrightarrow \R$, is a complex Hilbert space if it is complete with respect to the metric above. \end{definition}
+
+\subsection{Projection Onto a Convex Subspace}
+
+Recall that a set $C$ is convex\index{convex set} if and only if the segment between any two points $x, \, y \in C$ lies entirely in $C$, that is,
+\begin{equation*} \lambda x + (1 - \lambda)y \in C \quad \text{for every $\lambda \in [0, ,\ 1]$.} \end{equation*}
+
+\begin{theorem}[Convex Projection] \label{theorem:min} Let $H$ be a Hilbert space and assume that $C \neq \varnothing$ is a closed convex subset of $H$. Then there exists a unique point of minimal norm in $C$, that is,
+\begin{equation*} \exists_1 \, x \in C \: : \:  \|x\| = \inf_{y \in C} \|y\|. \end{equation*} \end{theorem}
+
+\begin{proof}Let $(x_n)_{n \in \N} \subset C$ be a minimizing sequence, i.e.,
+\begin{equation*} \|x_n\| \xrightarrow{n \to + \infty} \inf_{y \in C} \|y\| =: d. \end{equation*}
+
+\paragraph{Step 1.} For any $p, \, q \in \mathbb{N}$, the parallelogram law \eqref{eq:paral} gives us the identity
+\begin{equation*} \|x_p - x_q\|^2 = 2 \left( \|x_p\|^2 + \|x_q\|^2 \right) - 4 \left\|\frac{x_q + x_q}{2}\right\|^2, \end{equation*}
+and the convexity of $C$ implies that
+\begin{equation*} \frac{x_p + x_q}{2} \in C. \end{equation*}
+By definition of infimum $\left\|\frac{x_p + x_q}{2}\right\|  \geq d$; hence the inequality above yields to
+\begin{equation*} \|x_p - x_q\|^2 \leq 2 \, \left( \|x_p\|^2 + \|x_q\|^2 \right) - 4 \,d = o(1), \qquad \text{as $p, \, q \to + \infty$}, \end{equation*}
+which means that $(x_n)_{n \in \N}$ is a Cauchy sequence in the complete space $H$. Therefore $x_n$ converges to $x$ in $H$ and, since $C$ is closed, we finally infer that $x \in C$.
+
+\paragraph{Step 2.} The uniqueness of $x \in C$ follows from a standard argument. Let $(x_n)_{n \in \N} \subset C$ and $(x_n^\prime)_{n \in \N} \subset C$ be two minimizing sequences. Then
+\begin{equation*} y_k := \begin{cases} x_n & \text{if $k = 2n$}, \\ x_n^\prime & \text{if $k = 2n + 1$}, \end{cases} \end{equation*}
+is also a minimizing sequences, which converges to some element $x \in C$. Since both $(x_n)_{n \in \N} \subset C$ and $(x_n^\prime)_{n \in \N} \subset C$ are subsequences of a converging sequence, the limit points must be the same.
+\end{proof}
+
+\begin{lemma}Let $H$ be a Hilbert space, and let $C \neq \varnothing$ be a closed convex subset. The map
+\begin{equation*} P : H \longrightarrow \C, \qquad x \longmapsto P(x) = \text{point of minimal distance from $x$ in $C$} \end{equation*}
+is well-defined. In particular, the map $P$ is a metric projection\index{projection} (i.e., $P^2 = P$), and it is $1$-Lipschitz.\end{lemma}
+
+\begin{proof}The map $P$ is well-defined as a consequence of \hyperref[theorem:min]{Theorem \ref{theorem:min}}, since it sends $x \in H$ to the unique point $P(x) \in C$ satisfying
+\begin{equation*} \| x - P(x) \| = \inf_{y \in C} \|x - y\|. \end{equation*}
+Moreover, the map $P$ is a metric projection because it is the identity on $C$ by definition, and its range is $C$, which means that $P(P(x)) = P(x)$ for every $x \in H$.
+
+Hence, it remains to prove that $P$ is Lipschitz-continuous of Lipschitz constant $1$. We claim that given a point $x \in H$, the scalar product of the projection satisfies the inequality
+\begin{equation} \label{claim100} (x - P(x), \, y - P(x)) \leq 0 \quad \text{for every $y \in C$}. \end{equation}
+If \eqref{claim100} holds, then given any two points $x, \, y \in H$, we have
+\begin{equation*}\begin{aligned} & \left(x - P(x), \, z - P(x)\right) \leq 0 \qquad \forall \, z \in C, \\[1em] & \left(y - P(y), \, w - P(y)\right) \leq 0 \qquad \forall \, w \in C. \end{aligned}\end{equation*}
+If we set $z = P(y)$ and $w = P(x)$, then the sum of the above inequalities yields to
+\begin{equation*}\|P(x) - P(y)\|^2 \leq \left(x - y, \, P(x) - P(y) \right),\end{equation*}
+and hence we conclude using the Cauchy-Schwarz inequality \eqref{eq:schwartz1}. To prove the claim \eqref{claim100}, we simply notice that by convexity
+\begin{equation*} \lambda y + (1 - \lambda) P(x) \in C, \end{equation*}
+which means that
+\begin{equation*}\begin{aligned} \|x - P(x) \|^2 & \leq \| x - \left[ \lambda y + (1 - \lambda) P(x) \right] \|^2 =
+\\[1em] & = \| x - P(x) + \lambda \left[ y - P(x) \right] \|^2 =
+\\[1em] & = \| x - P(x) \|^2 + \lambda^2 \|y - P(x) \|^2 - 2 \lambda (x - P(x), \, y - P(x)).\end{aligned}\end{equation*} 
+Therefore
+\begin{equation*} \lambda \|y - P(x) \|^2 \geq 2 (x - P(x), \, y - P(x)),\end{equation*} 
+and this yields to the desired result by taking the limit for $\lambda \to 0$. The reader may prove that, actually, the claim \eqref{claim100} characterizes entirely the projection onto a convex set.
+\end{proof}
+
+\begin{proposition}Let $E \subset \R^n$ be a subset satisfying the following property:
+\begin{equation*}\text{"$\forall \, x \in \R^n$ there exists a unique point $P(x) \in E \: : \: \|x - P(x)\| = \inf_{y \in E} \|x - y\|$."} \end{equation*}
+Then $E$ is a nonempty convex and closed set.\end{proposition}
+
+%\begin{proof}[Optional Proof] First, we observe that the subset $E$ cannot be empty. Otherwise, the mapping $P : \R^n \longrightarrow E$ would not be well-defined.
+
+%\paragraph{Step 1.} We prove now that $P$ is a continuous application, that is
+%\begin{equation*} \forall \, (x_n)_{n \in \mathbb{N}} \subset \R^n \: : \: x_n \xrightarrow{n \to + \infty} x \in \R^n \implies P(x_n) \xrightarrow{n \to + \infty} P(x). \end{equation*}
+%Let us set $d_n := \|P(x_n)\|$. It is straightforward to prove that $(P(x_n))_{n \in \N}$ is a bounded sequence. In fact, for every $n \in \mathbb{N}$ the triangular inequality proves that
+%\begin{equation*}d_n \leq \|x\| + \|x_n - x\| + \| P(x_n) - x_n \| < + \infty.\end{equation*}
+%Assume, by contradiction, that $P(x_n) \not \longrightarrow P(x)$. The subset $\{P(x_1), \, P(x_2), \, \dots \}$ is bounded in $\R^n$; hence there exists a converging subsequence 
+%\begin{equation*} P(x_{n_k}) \xrightarrow{k \to +\infty} y \neq P(x). \end{equation*}
+%On the other hand, the distance $d(x, \, P(x))$ is the one realizing the infimum, thus
+%\begin{equation*}d(x, \, P(x)) = d(x, \, E) = \lim_{k \to + \infty} d(x_{n_k}, \, E) = d(x, \, y), \end{equation*}
+%which yields to a contradiction since $P(x)$ is unique by assumption.
+
+%\paragraph{Step 2.} The goal is proving that $E$ is closed. Let $(x_n)_{n \in \mathbb{N}} \subset E$ be a converging sequence and let $x \in X$ be its limit. Since $P$ is continuous and equal to the identity on $E$, it follows that
+%\begin{equation*}P(x_n) = x_n \xrightarrow{n \to + \infty} P(x) = x \implies x \in E. \end{equation*}
+
+%\paragraph{Step 3.} The last step is proving the convexity, that is,
+%\begin{equation*} x, \, y \in E \implies \lambda x + (1 - \lambda)  y \in E, \qquad \forall \,\lambda \in (0, \, 1). \end{equation*}
+%We may equivalently prove that for any $x, \, y \in E$ and $\lambda \in (0, \, 1)$ it turns out that
+%\begin{equation*}z := \lambda x + (1 - \lambda)  z = P(z), \qquad z \in E. \end{equation*}
+%Let $\theta \in \R$ be any real number. Then
+%\begin{equation*} (1 + \theta)  z - \theta P(z) = z + \theta (z - P(z)), \end{equation*}
+%from which it follows that
+%\begin{equation*} d \left( z + \theta (z - P(z)), \, P(z) \right) \leq d \left( z + \theta  (z - P(z)), \, x \right). \end{equation*}
+%If we denote by $P(z)_i$ the $i$th component of $P(z)$, then the inequality above is equivalent to
+%\begin{equation*} (1 + \theta)^2  \sum_{i = 1}^n \left(z_i - (P(z))_i\right)^2 \leq \sum_{i = 1}^{n} \left(z_i - x_i + \theta  (z_i - (P(z))_i) \right)^2. \end{equation*}
+%If we expand the square, it turns out that
+%\begin{equation*} (1 +2 \, \theta) \sum_{i = 1}^n \left(z_i - (P(z))_i\right)^2 \leq \sum_{i = 1}^{n} \left(z_i - x_i \right)^2 + 2 \theta \sum_{i=1}^{n} \left(z_i - x_i \right) \left(z_i - (P(z))_i \right). \end{equation*}
+%Divide both members for $\theta$, and let $\theta \to + \infty$. It follows that
+%\begin{equation*} \|z - P(z)\|^2 \leq (z-x) (z - P(z)) \end{equation*}
+%and, in a similar fashion, one can also prove that
+%\begin{equation*} \|z - P(z)\|^2 \leq (z-y) (z - P(z)). \end{equation*}
+%Multiply the first inequality by $\lambda$, the second inequality by $(1 - \lambda)$ and add them up; it turns out that
+%\begin{equation*} \|z - P(z)\|^2 \leq \left(z - (\lambda  x + (1 - \lambda) y) \right) (z - P(z)) = 0,\end{equation*}
+%thus $z = P(z)$ and $z \in E$.\end{proof}
+
+\begin{lemma}\label{lemma:minimalradius}Let $H$ be a Hilbert space, and let $E \subset H$ be a nonempty bounded subset. If
+\begin{equation*}r_E := \inf \left\{ R > 0 \: \left| \: \exists \, x \in H \, : \, E \subset \overline{B_R(x)} \right. \right\}, \end{equation*}
+then there exists a unique $x_E \in H$ such that $E \subset \overline{B_{r_E}(x_E)}$. \end{lemma}
+
+\begin{remark} Let $x, \, y \in H$ be any two points of $H$, and let $r > 0$ be any real number. Then there is an obvious inclusion of balls
+\begin{equation} \label{ball:incl} \overline{B \left(x, \, r\right)} \cap \overline{B \left(y, \, r\right)} \subseteq \overline{B \left( \frac{x+y}{2}, \, \sqrt{r^2 - \left\| \frac{x - y}{2} \right\|^2} \right)}. \end{equation}
+\textit{Hint.} This inclusion is clearly translation-invariant. In particular, one may assume that $x = - y$, apply the parallelogram law \eqref{eq:paral} and conclude as follows:
+\begin{equation*} \|z - x\| \leq r, \, \, \|z + x \| \leq r \implies \|z\|^2 \leq r^2 - \|x\|^2.\end{equation*} \end{remark}
+
+\begin{proof} Let $\left(r_n, \, x_n\right)_{n \in \N}$ be a minimizing sequence, that is
+\begin{equation*} r_n \xrightarrow{n \to + \infty} r_E, \end{equation*}
+and notice that, for every $n \in \mathbb{N}$, we have $E \subset \overline{B_{r_n}(x_n)}$. 
+
+\paragraph{Step 1.} First, we want to prove that the sequence $(x_n)_{n \in \N}$ admits a limit $x_E \in H$, that is, $(x_n)_{n \in \N}$ is a Cauchy sequence. However this is a simple consequence of the inclusion \eqref{ball:incl} mentioned above, since for every $p, \, q \in \mathbb{N}$ it turns out that
+\begin{equation*} E \subseteq \overline{B \left(x_p, \, \max\{r_p, \, r_q\} \right)}, \quad E \subseteq \overline{B \left(x_q, \, \max\{r_p, \, r_q\} \right)}, \end{equation*}
+and thus
+\begin{equation*}\begin{aligned} E& \subseteq \overline{B \left(x_p, \, \max\{r_p, \, r_q\} \right)} \cap \overline{B \left(x_q, \, \max\{r_p, \, r_q\} \right)} \subseteq \\[1em] & \subseteq  \overline{B \left(\frac{x_p+x_q}{2}, \, \sqrt{\max\{r_p^2, \, r_q^2\} - \left\| \frac{x_p - x_q}{2} \right\|^2} \right)}. \end{aligned}\end{equation*}
+Consequently,
+\begin{equation*}\max\{r_p^2, \, r_q^2\} - \left\| \frac{x_p - x_q}{2} \right\|^2 \geq r_E^2 \implies \max\{r_p^2, \, r_q^2\} - r_E^2 \geq \left\| \frac{x_p - x_q}{2} \right\|^2, \end{equation*}
+which means that $(x_n)_{n \in \N}$ is a Cauchy sequence, i.e., there exists $x_E \in H$ such that $x_n \to x_E \in H$. 
+
+\paragraph{Step 2.} For every $n \in \N$ we have the inclusion
+\begin{equation*}E \subseteq \overline{B(x_n, \, r_n)} \subseteq \overline{B\left(x_E, \, r_n + \|x - x_E\|\right)},\end{equation*}
+hence it suffices to take the limit as $n \to + \infty$ to derive the result.  \end{proof}
+
+\subsection{Projection onto a Closed Linear Subspace}
+
+In this section, we prove that any closed linear subspace $F$ of a Hilbert space $H$ admits a projection map $P : H \longrightarrow F$ that may be characterized via the notion of \textit{orthogonality}.
+
+\begin{definition}[Orthogonal] \index{orthogonal space} The orthogonal of a subspace $F \subset H$ of a Hilbert space, denoted by $F^\perp$, is defined via the scalar product as
+\begin{equation*} F^\perp := \left\{ x \in H \: \left| \text{$(x, \, v) = 0$ for every $v \in F$} \right. \right\}.\end{equation*} \end{definition}
+
+\begin{theorem}\index{Hilbert space!projection onto!closed linear subspace}\label{theorem:proiettore}Let $H$ be a Hilbert space and let $F \subseteq H$ be a linear and closed subspace. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item For any $x \in H$ there exists a unique point $P(x) \in F$ such that
+\begin{equation*} \|x - P(x)\| = \inf_{y \in F} \|x - y\|. \end{equation*}
+\item The map $P$ is uniquely determined by the scalar product, that is,
+\begin{equation*}P(x) = y \iff (x - y, \, z) = 0 \qquad \forall z \in F. \end{equation*}
+Namely, the point $P(x) \in F$ is the projection of $x \in H$ if and only if $P(x) - x$ belongs to the orthogonal space $F^\perp$.
+\item The map $P : H \longrightarrow F$ is a linear continuous projection (i.e., $P$ = $P^2$).\index{projection}
+\item The kernel of $P$ is the orthogonal space $F^\perp$, and the rank/image\index{rank} of $P$ is the space $F$ itself. Moreover, the Hilbert space $H$ may be decomposed as the topological direct sum\footnote{A topological direct sum is a direct sum $H = B \oplus C$, with the additional requirement that the map $(x, \, y) \in B \times C \mapsto x + y \in H$ is linear, bijective and an homeomorphism.}\index{topological direct sum} of $F$ and $F^\perp$. 
+\item The orthogonal of the orthogonal is the space itself, that is,
+\begin{equation*} \left( F^\perp \right)^\perp = F. \end{equation*}
+\end{enumerate} \end{theorem}
+
+\begin{proof}The first assertion is an immediate consequence of \hyperref[theorem:min]{Theorem \ref{theorem:min}}. Indeed, for any $x \in H$ the projection $P(x)$ is the point of minimal norm in the affine, linear and closed subspace $F + x$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}, start = 2]
+\item It suffices to prove that
+\begin{equation*} P(x) = y \iff x - y \in F^\perp. \end{equation*}
+
+\paragraph{"$\implies$" :} Let $y = P(x)$. By \textbf{(a)} it follows that $\|x - y \| = \inf_{u \in F} \| x - u\|$; hence, for every $t > 0$ and for every $v \in F$, we have the inequality
+\begin{equation*} \|x-y\|^2 \leq \| (x - y) - t v \|^2. \end{equation*}
+We expand the right-hand side, and also divide both sides by $t$ (which is positive); it is easy to see that
+\begin{equation*} 2 (x - y, \, v) \leq t \|v\|^2. \end{equation*}
+Sending $t$ to $0^+$ (i.e., to $0$ from right) yields to
+\begin{equation} \label{1000011}  (x - y, \, v) \leq 0, \qquad \forall \, v \in F. \end{equation}
+Finally, since $F$ is a linear subspace, we may always replace $v$ with $-v$ in the inequality \eqref{1000011}; thus, we can, at last, infer that
+\begin{equation*}  (x - y, \, v) = 0, \qquad \forall \, v \in F, \end{equation*}
+that is, $x - y \in F^\perp$.
+
+\paragraph{"$\impliedby$" :} Conversely, assume that $x - y \in F^\perp$ and $y \in F$. For every $u \in F$, the vector $y - u$ still belongs to $F$ (linear subspace); hence the orthogonality condition implies that
+\begin{equation*}  \|x - u\|^2 = \|(x-y) + (y - u)\|^2 = \|x - y\|^2 + \|y - u\|^2 \geq \|x - y\|^2, \end{equation*}
+which is exactly what we wanted to prove.
+\item The map $P$ is obviously a projection since $P^2 = P$. The linearity follows easily from $\textbf{(b)}$; indeed, it is enough to prove that
+\begin{equation*} \left(\alpha x + \beta y \right) - \left( \alpha P(x) + \beta P(y) \right) \in F^\perp. \end{equation*}
+For any $v \in F$ it turns out that
+\begin{equation*} \left( \alpha \left(x - P(x)\right) + \beta \left(y - P(y) \right), \, v \right) = \alpha \left(x - P(x), \, v \right) + \beta \left(y - P(y), \, v\right) = 0 \end{equation*}
+since both $x - P(x)$ and $y - P(y)$ belongs to $F^\perp$. In conclusion, we prove that $P$ is a $1$-Lipschitz map\index{Lipschitz map}, that is,
+\begin{equation*}\left\| Px - Py \right\| \leq \|x - y\|. \end{equation*}
+The characterization \textbf{(b)} proves that for any $x \in H$ it turns out that $x - Px \in F^\perp$ and $Px \in F$. Consequently, the scalar product $(x - Px, \, Px)$ is equal to $0$, and thus
+\begin{equation*}\|x\|^2 = \|Px + (x - Px)\|^2 = \|Px\|^2 + \|(\mathrm{id}_H - P)x\|^2 \geq \|Px\|^2. \end{equation*}
+In particular, for any $x \in H$ we have the inequality $\|x\| \geq \|Px\|$, and this is - by linearity of $P$ - enough to infer that $P$ is a $1$-Lipschitz map:
+\begin{equation*}Px - Py = P(x - y) \implies \|Px - Py\| \leq \|x - y\|. \end{equation*}
+\item The assertion \textbf{(b)} proves that $Px = 0$ if and only if $x \in F^\perp$, and hence the kernel is $F^\perp$. In a similar fashion, one can check that the range of $P$ is $F$. 
+
+\paragraph{General Fact.} Let $X$ be a topological vector space, and let $P : X \longrightarrow X$ be a linear and continuous projection. One may always decompose $X$ as the direct sum of $\mathrm{Ker} \, P$ and $\rank \, P$ in such a way that the restriction of the map
+\begin{alignat*}{2}
+\mathrm{Ker} \, P \times \rank \, P & \longrightarrow & X  \quad \\[1ex]
+ (v, \, w) \qquad &\longmapsto& \qquad v + w
+\end{alignat*}
+is a homeomorphism\index{homeomorphism}. The converse assertion is also true: If there is a topological decomposition $X = V \oplus W$, then there exists a linear and continuous projection $P : X \longrightarrow V$.
+
+\item Here the assumption $F$ closed comes into play: the orthogonal of a subspace $A$ is always closed, and hence it is needed for the equality to hold.
+
+The inclusion $F \subseteq \left(F^\perp\right)^\perp$ is always true, and it is an immediate consequence of the definition of $^\perp$. On the other hand, if $x \in \left(F^\perp\right)^\perp$, then $(x, \, x - Px) = 0$ and
+\begin{equation*}\|x - Px\|^2 = 0 \implies x = Px \implies x \in F. \end{equation*}
+\end{enumerate} \end{proof}
+
+\section{Dual Space of a Hilbert Space}
+
+In this section, we investigate the basic properties of the \textit{topological dual} of a Hilbert space, and we prove the fundamental representation result known as \textit{Riesz theorem}.
+
+\begin{definition}[Topological Dual]\index{topological dual}\index{Hilbert space!topological dual} Let $(E, \, \|\cdot\|_E)$ be a normed space over a field $\mathbb{K}$. The \textit{topological dua}l of $E$, denoted by $E^\ast$, is the space of all the continuous linear forms, i.e.,
+\begin{equation*} E^\ast := \left\{ \varphi : E \longrightarrow \mathbb{K} \: \left| \: \text{$\varphi$ linear and continuous}  \right.\right\}. \end{equation*}
+The norm $\| \cdot \|_E$ induces a norm on the dual $E^\ast$, which is given by
+\begin{equation} \label{eq:normaduale} \|\varphi\|_{E^\ast} := \sup_{\|x\|_E \leq 1} \left| \varphi(x) \right| = \sup_{x \neq 0} \frac{\left| \varphi(x) \right|}{ \|x\|_E}. \end{equation}
+One can easily check that \eqref{eq:normaduale} is the uniform norm restricted to the ball $B_E(0, \, 1)$, that is,
+\begin{equation*}\| \varphi(x)\|_{E^\ast} = \left\| \phi \, \big|_{B_E(0, \, 1)} \right\|_{\infty}.\end{equation*} \end{definition}
+
+\begin{proposition} Let $(E, \, \|\cdot\|)$ be a normed space over a field $\mathbb{K}$. A linear form $\varphi : E \longrightarrow \mathbb{K}$ is continuous if and only if it is bounded. \end{proposition}
+
+\begin{proof}This equivalence holds in a far more general setting: it is enough to require both $X$ and $Y$ are topological vector spaces (see \hyperref[sec:tvs]{Section \ref{sec:tvs}} for more details.)
+
+\paragraph{"$\impliedby$" :} Assume that $\varphi : E \longrightarrow \mathbb{K}$ is a bounded functional\index{linear functional!bounded}, that is, there exists a positive constant $C > 0$ such that
+\begin{equation*} \left|\varphi(x) \right| \leq C \|x\|, \qquad \forall \, x \in E. \end{equation*}
+By linearity, it turns out that $\varphi$ is a $C$-Lipschitz function, i.e.
+\begin{equation*} | \varphi(x) - \varphi(y) | = | \varphi(x - y) | \leq C \| x - y \|, \end{equation*}
+and this implies also that $\varphi$ is continuous (as Lipschitz-continuity is stronger than continuity).
+
+\paragraph{"$\implies$" :} Assume that $\varphi : E \longrightarrow K$ is continuous at $x = 0$. The $\epsilon$-$\delta$ definition, which works only for metric spaces, implies that for every $\epsilon > 0$ there exists $\delta > 0$ such that
+\begin{equation*} \|x\| \leq \delta \implies \left| \varphi(x) - \varphi(0) \right| \leq \epsilon, \end{equation*}
+and thus, by linearity, it follows that
+\begin{equation*} \|x\| \leq \delta \implies \left| \varphi(x) \right| \leq \epsilon. \end{equation*}
+In conclusion, we observe that for every $x \in E$ we have
+\begin{equation*}\varphi(x) = \frac{\|x\|}{\delta} \varphi \left( \delta \frac{x}{\|x\|} \right), \end{equation*}
+from which it follows that
+\begin{equation*}\left| \varphi(x) \right| \leq \frac{\epsilon}{\delta} \|x\|. \end{equation*} \end{proof} 
+
+\begin{lemma}Let $\left(E, \, \| \cdot \|_E \right)$ be a $\mathbb{K}$-normed space. Then the topological dual $E^\ast$ is a Banach space (=complete), provided that $\mathbb{K}$ is complete. \end{lemma}
+
+\begin{proof}The topological dual is the space of linear continuous forms; hence
+\begin{equation*} E^\ast = \mathcal{L} \left(E, \, \mathbb{K} \right). \end{equation*}
+By \hyperref[BanachSecondo]{Theorem \ref{BanachSecondo}} the dual $E^\ast$ is complete since the codomain $\mathbb{K}$ is complete by assumption. In particular, the dual of a real (or complex) normed space is always a Banach space.\end{proof}
+
+\begin{theorem}[Riesz-Fréchet] \index{Riesz-Fréchet Theorem} \label{theorem:riesz} Let $H$ be a Hilbert space, and let $\varphi \in H^\ast$ be a given continuous linear functional. Then there exists a unique element $x_\varphi \in H$ such that
+\begin{equation*} \left< \varphi, \, u \right> = (x_\varphi, \, u) \quad \text{for every $u \in H$}, \end{equation*}
+where $\left<\cdot, \, \cdot \right>$ is the duality product $\left<H^\ast, \, H \right>$, and $(\cdot, \, \cdot)$ is the scalar product in $H$. Moreover, the isomorphism
+\begin{equation*}H^\ast \ni \varphi \longmapsto x_\varphi \in H \end{equation*}
+is also an isometry, that is,
+\begin{equation*}\|x_\varphi\|_H = \|\varphi\|_{H^\ast}. \end{equation*} \end{theorem}
+
+\begin{proof}The idea is to define a map that associated a continuous linear functional to any element $x \in H$, and then prove that it is an invertible isometry. 
+
+\paragraph{Step 1.} More precisely, for any $x \in H$ we define the linear continuous functional $\varphi_x : H \longrightarrow \mathbb{K}$ as follows:
+\begin{equation*} \varphi_x(v) := (v, \, x). \end{equation*}
+Notice that $\varphi_x$ is also linear in a complex Hilbert space, since the Hermitian product is left-linear and right-semilinear, and $v$ is on the left on purpose. By the Cauchy-Schwarz inequality \eqref{eq:schwartz1} it turns out that
+\begin{equation*} \left| \varphi_x(v) \right| \leq \|x\| \|v\| \implies \| \varphi_x \|_{H^\ast} \leq \|x\|, \end{equation*}
+and, actually, the dual norm $\|\varphi_x\|_{H^\ast}$ is exactly equal to $\|x\|$, as the reader may check by herself computing the functional at $v := x$. The mapping
+\begin{equation*} \Phi : H \longrightarrow H^\ast, \qquad \Phi(x) := \varphi_x \end{equation*}
+is a linear (or anti-linear, in the complex case) isometric inclusion, thus we are only left to prove that $\Phi$ is surjective.
+
+\paragraph{Step 2.} Let $\psi : H \longrightarrow \R$ be any linear and continuous nonzero functional. The kernel $\kers \, \psi$ is not the whole space $H$, and thus the orthogonal is nonempty:
+\begin{equation*} \left( \kers \, \psi \right)^\perp \neq \varnothing. \end{equation*}
+Let $u \in \left( \kers \, \psi \right)^\perp$ be a nonzero element, whose norm is equal to $1$, and let us consider the vector
+\begin{equation*} v:= \left< \psi, \, x \right> u - \left< \psi, \, u \right> x \in \kers \, \psi, \end{equation*}
+as $x$ ranges in $H$. By orthogonality, it turns out that
+\begin{equation*}\left(  \left< \psi, \, x \right> u - \left< \psi, \, u \right> x, \, u \right) = 0, \end{equation*}
+from which it follows that
+\begin{equation*}  \left< \psi, \, x \right> \|u\|^2 - \left< \psi, \, u \right> \left(x, \, u\right) = 0 \implies \left< \psi, \, x \right> = \left(x, \, \overline{\left< \psi, \, u \right>} \, u \right), \end{equation*}
+which means that the mapping $\Phi$ is surjective:
+\begin{equation*} \psi = \Phi \left(  \overline{\left< \psi, \, u \right>} \, u  \right). \end{equation*} \end{proof}
+
+\section{Hilbert Sums and Orthonormal Bases}
+
+In this section, we introduce the notion of orthonormal system in a Hilbert space, and characterize maximal orthogonal systems in terms of the Perseval formula.
+
+\begin{definition}[Summable Collection] \index{summable collection} Let $X$ be a topological vector space. A collection of elements $\{ x_\lambda \}_{\lambda \in \Lambda} \subset X$ is \textit{summable}, with sum $S$, if, for every $U \subset X$ neighborhood of the origin, there exists a finite subset $A \subset \Lambda$ such that
+\begin{equation*} \forall \, B \: : \: \text{$A \subset B \subset \Lambda$ and $|B| < \infty$} \implies  S - \sum_{\lambda \in B} x_\lambda \in U. \end{equation*} \end{definition}
+
+\begin{definition}[Orthonormal System] \index{orthonormal system} Let $H$ be a Hilbert space. A collection of elements $\{ e_\lambda \}_{\lambda \in \Lambda} \subset H$ is an \textit{orthonormal system} for $H$ if, for every $\mu, \, \nu \in \Lambda$, it turns out that
+\begin{equation*}(e_\mu, \, e_\nu) = \delta_{\mu, \, \nu}.\end{equation*}\end{definition}
+
+\begin{proposition} \label{prop:base} Let $H$ be a Hilbert space and let $\{ e_\lambda \}_{\lambda \in \Lambda} \subset X$ be an orthonormal system. The following properties are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The system $\{ e_\lambda \}_{\lambda \in \Lambda}$ is maximal\index{orthonormal system!maximal}, that is, 
+\begin{equation*}(e_\lambda, \, x) = 0 \quad \forall \, \lambda \in \Lambda \implies x = 0. \end{equation*}
+\item The system $\{ e_\lambda \}_{\lambda \in \Lambda}$ is complete\index{orthonormal system!complete}, that is,
+\begin{equation*} \overline{\mathrm{Span} \, \left< e_\lambda \: : \: \lambda \in \Lambda \right>} = H.\end{equation*}
+\item Every element $x \in H$ is equal to the sum of its "Fourier coefficients", that is,
+\begin{equation*}x = \sum_{\lambda \in \Lambda} x_\lambda e_\lambda, \end{equation*}
+where $x_\lambda := (x, \, e_\lambda)$.
+\item The squared norm of $x$ is equal to the $\ell^2$-norm of its "Fourier coefficients", that is,\index{orthonormal system!Perseval formula}
+\begin{equation} \label{Persevalformullaaaa} \|x\|^2 = \sum_{\lambda \in \Lambda} |x_\lambda|^2 = \| \mathbf{x_\lambda} \|_{\ell^2(\Lambda)}. \end{equation}
+\item For every $x, \, y \in H$, the following identity holds true:\index{orthonormal system!generalized Perseval formula}
+\begin{equation*}(x, \, y) = \sum_{\lambda \in \Lambda}x_\lambda y_\lambda. \end{equation*}
+\end{enumerate} \end{proposition}
+
+\begin{proof}The argument presented here is rather simple, and there are no important ideas behind; we divide it into five steps, to ease the notation for the reader.
+
+\paragraph{Step 1.} Suppose that $\{e_\lambda\}_{\lambda \in \Lambda}$ is not a complete orthonormal system, that is, the linear span is not dense in $H$, that is
+\begin{equation*} \overline{ \mathrm{Span} \left< e_\lambda \: : \: \lambda \in \Lambda \right> } \neq H,\end{equation*}
+and let us prove that $\{e_\lambda\}_{\lambda \in \Lambda}$ cannot be a maximal system. The orthogonal is nonempty
+\begin{equation*} \left(\overline{ \mathrm{Span} \left< e_\lambda \: : \: \lambda \in \Lambda \right> }\right)^\perp \neq \varnothing\end{equation*}
+since the closure of the linear span is a closed linear subspace of $H$, and the point \textbf{(e)} of the \hyperref[theorem:proiettore]{Theorem \ref{theorem:proiettore}} asserts that
+\begin{equation*}\left(F^\perp\right)^\perp = F. \end{equation*}
+In particular, there exists $x \neq 0$ in the orthogonal of the linear span of the family $\{e_\lambda\}_{\lambda \in \Lambda}$, that is, an element of $H$ such that
+\begin{equation*} (x, \, e_\lambda) = 0, \qquad \forall \, \lambda \in \Lambda, \end{equation*}
+which means that the collection $\{e_\lambda\}_{\lambda \in \Lambda} \cup \{x / \|x\|\}$ is strictly bigger than $\{e_\lambda\}_{\lambda \in \Lambda}$, and hence $\{e_\lambda\}_{\lambda \in \Lambda}$ is not maximal.
+
+\paragraph{Step 2.} Suppose that $\{e_\lambda\}_{\lambda \in \Lambda}$ is a complete orthonormal system. For any finite subset $B \subset \Lambda$ we consider the linear span
+\begin{equation*} H_B := \mathrm{Span} \left< e_\lambda \: : \: \lambda \in B \right>, \end{equation*}
+which is a finite-dimensional subspace of $H$, linearly homeomorphic to $\C^n$ (or $\R^n$, if $H$ is a real vector space), for some $n \in \N$.
+
+In particular, the subspace $H_B$ is closed and complete with respect to the induced metric; it follows from \hyperref[theorem:proiettore]{Theorem \ref{theorem:proiettore}} that there exists a projection $P_B : H \longrightarrow H_B$, which is defined by
+\begin{equation} \label{10391230230} P_B (x) := \sum_{\lambda \in B} x_\lambda e_\lambda \in H_B. \end{equation}
+Indeed, one can easily check that this is the (unique) orthogonal projection onto a linear subspace since it satisfies the orthogonality criterion given in the theorem above. More precisely, it is enough to prove that \eqref{10391230230} satisfies the following property:
+\begin{equation*}\lambda \in B \implies (x - P_B(x), \, e_\lambda) = (x, \, e_\lambda) - x_\lambda = 0. \end{equation*}
+Consequently, for any finite subset $B \subset \Lambda$, there is a well-defined distance function
+\begin{equation*}d(x, \, H_B) := \left\| x - \sum_{\lambda \in B} x_\lambda \, e_\lambda \right\| = \| x - P_B(x) \|, \end{equation*}
+and the assumption $\{e_\lambda\}_{\lambda \in \Lambda}$ complete implies that
+\begin{equation*}\inf_{B \subset \Lambda} d(x, \, H_B) = 0 \end{equation*}
+or, equivalently, that for any $\epsilon > 0$ and any $x \in H$ there exist $B_0 \subset \Lambda$ finite such that
+\begin{equation*}\left\|x - \sum_{\lambda \in B_0} x_\lambda \, e_\lambda \right\| < \epsilon. \end{equation*}
+Moreover, for any finite subset $C$ such that $B_0 \subset C \subset \Lambda$, the inequality above is still true, that is,
+\begin{equation*}\left\|x - \sum_{\lambda \in C} x_\lambda \, e_\lambda \right\| <\epsilon \end{equation*}
+since the distance decreases as the finite subset of $\Lambda$ gets bigger (recall that the projection gives the point of minimal norm). In conclusion, from the simple identity
+\begin{equation*} d(x, \, H_B)^2 = \left\|x - \sum_{\lambda \in B} x_\lambda \, e_\lambda \right\|^2 \end{equation*}
+it follows that
+\begin{equation*} \text{$\{e_\lambda\}_{\lambda \in \Lambda}$ is complete} \iff \eqref{Persevalformullaaaa} \iff x = \sum_{\lambda \in \Lambda} x_\lambda e_\lambda. \end{equation*}
+
+\paragraph{Step 3.} Let $x, \, y \in H$. The Perseval identity \eqref{Persevalformullaaaa} implies that
+\begin{equation*} \|x + t y \|^2 = \sum_{\lambda \in \Lambda} |(x + t y, \, e_\lambda)|^2, \end{equation*}
+from which it follows that
+\begin{equation*}\overline{t} (x, \, y) + t  (y, \, x) = 2 t  \sum_{\lambda \in \Lambda} x_\lambda  y_\lambda.\end{equation*}
+In conclusion, it is enough to choose $t := (x, \, y)$ for the identity above to become the so-called generalized Parseval formula, that is,
+\begin{equation*}(x, \, y) = \sum_{\lambda \in \Lambda} x_\lambda y_\lambda.\end{equation*}
+
+\paragraph{Step 4.} We argue by contradiction. Suppose that $\{e_\lambda\}_{\lambda \in \Lambda}$ is a non-maximal orthonormal collection. In particular, there exists $x \neq 0$ such that
+\begin{equation*} (x, \, e_\lambda) = 0, \qquad \forall \, \lambda \in \Lambda.\end{equation*}
+The norm $\|x\|$ is different from zero, but from the Perseval identity \eqref{Persevalformullaaaa} we obtain
+\begin{equation*} \|x\|^2 = \sum_{\lambda \in \Lambda} |x_\lambda|^2 = 0 \implies \|x\|=0, \end{equation*}
+and this is the sought contradiction.\end{proof}
+
+\begin{proposition} Let $H$ be a Hilbert space and let $\{e_\lambda\}_{\lambda \in \Lambda}$ be an orthonormal system. Then there exists a complete orthonormal system $\{e_\lambda^\prime \}_{\lambda \in \Lambda^\prime}$, which is not necessarily unique, extending $\{e_\lambda\}_{\lambda \in \Lambda}$. \end{proposition}
+
+\begin{definition}[Hilbert Basis] \index{Hilbert space!Hilbert basis} An orthonormal system $\{e_\lambda\}_{\lambda \in \Lambda}$ in a Hilbert space $H$ is a \textit{Hilbert basis} if it is maximal. \end{definition}
+
+\begin{theorem} \index{Hilbert dimension} \label{th:hbbb}Let $H$ be a Hilbert space, and let $\{e_\lambda\}_{\lambda \in \Lambda}$ and $\{f_\mu\}_{\mu \in \Delta}$ be two Hilbert bases. The cardinality is the same, that is,
+\begin{equation*} \left| \Lambda \right| = \left| \Delta \right|,\end{equation*}
+and it is usually called Hilbert dimension of $H$ in the literature.\end{theorem}
+
+\begin{proof} \mbox{}
+
+\paragraph{First Case.} If $\{e_\lambda\}_{\lambda \in \Lambda}$ is a finite-cardinality basis, then the thesis is trivially true since $H$ is either isomorphic to $\R^n$ or $\C^n$ for some $n \geq 0$.
+
+\paragraph{Second Case.} Suppose that $\{e_\lambda\}_{\lambda \in \Lambda}$ is an infinite basis of $H$, that is, we have $\left| \Lambda \right| \geq \aleph_0$. We consider the rational linear span
+\begin{equation*}D := \mathrm{Span}_{\mathbb{Q}} \left< e_\lambda \: : \: \lambda \in \Lambda \right>, \end{equation*}
+and it is immediate to see that by definition $D$ is dense in $H$ and has the same cardinality, i.e.
+\begin{equation*} \left| \Lambda \right| = \left| D\right|. \end{equation*}
+The family of open balls
+\begin{equation*} \left\{ B(f_\mu, \, 1/2) \right\}_{\mu \in \Delta} \end{equation*}
+is necessarily disjoint, and hence, by density, one can find at least one element of $D$ in any such ball. It follows that $\left| \Lambda \right| \geq \left| \Delta \right|$ and this gives us the thesis since the argument is symmetric with respect to $\Lambda$ and $\Delta$. \end{proof}
+
+\begin{remark} Let $\left(\mathscr{X}, \, \mathcal{A}, \, \mu\right)$ be a measure space, with $\mu$ a positive $\sigma$-additive measure. We define the usual $p$-summable functions space as
+\begin{equation*}L^p \left(\mathscr{X}, \, \mathcal{A}, \, \mu\right) := \left\{ f : \mathscr{X} \longrightarrow \C \: \left| \: \text{$f$ measurable and $\int_{\mathscr{X}}|f|^p \, \mathrm{d}\mu < \infty$} \right. \right\}. \end{equation*}
+It is easy to prove that this is a Banach space for any $p \in [1, \, + \infty]$, and also that it is a Hilbert space if and only if $p = 2$. In that case the scalar product is given by
+\begin{equation*} (f, \, g) := \int_{\mathscr{X}} f(x) \overline{g}(x) \, \mathrm{d} \mu(x). \end{equation*}
+If $\Lambda$ is a set, we can consider the discrete measure (cardinality) and let $\mathcal{A} = P(\Lambda)$. In this special case $L^p(\Lambda) := \ell_p(\Lambda)$, which is the set of all the $p$-summable sequences, that is,
+\begin{equation*}\ell_p \left(\Lambda\right) := \left\{ \mathbf{x} : \Lambda \longrightarrow \C \: \left| \: \sum_{\lambda \in \Lambda} |\mathbf{x}(\lambda)|^p < \infty \right. \right\}. \end{equation*}
+\end{remark}
+
+\begin{corollary}Let $H$ be a Hilbert space. There exists a set $\Lambda$ of cardinality equal to the Hilbert dimension $\mathrm{dim}_{\mathcal{H}} \, H$ such that the map
+\begin{equation*}  \ell_2(\Lambda) \ni \mathbf{x} \longmapsto \sum_{\lambda \in \Lambda} \mathbf{x}(\lambda) e_\lambda \in H \end{equation*}
+is an isomorphism. \end{corollary}
+
+In particular, any infinite-dimensional Hilbert space $H$ is separable\index{separable} if and only if $H \cong \ell^2(\mathbb{N})$; thus there exists, up to isomorphism, only one separable Hilbert space.
+
+\section{Appendix}
+
+In this section, we briefly introduce some additional notions that are either interesting exercises or useful in different courses (e.g., probability and geometric measure theory).
+
+\subsection{Radon-Nikodym Theorem}
+
+\begin{definition}[Absolute Continuity] A measure $\nu$ is \textit{absolutely continuous} with respect to a measure $\mu$, and we denote it by $\nu \ll \mu$, if and only if every
+\begin{equation*} \mu(A) = 0 \implies \nu(A) = 0. \end{equation*}  \end{definition}
+
+\begin{theorem}[Radon-Nikodym] \label{th:rnnn}\index{Radon-Nikodym Theorem} Let $\mu$ and $\nu$ be bounded and positive measures defined on a $\sigma$-algebra $\mathcal{F}$ of a set $\mathscr{X}$, and assume that $\nu \ll \mu$. Then there exists a unique\footnote{Here the reader needs to be careful. The space $L^1(\mu)$ is used in these notes either as $L^1(\mu)$ or $\faktor{L^1(\mu)}{\sim}$, where $f \sim g$ if and only if $f(x) = g(x)$ almost everywhere. In this case, the uniqueness is intended as equivalence class.} summable positive function $f \in L^1(\mathscr{X}, \, \mu)^+$ such that $f u \in L^1(\mathscr{X}, \, \mu)$ and
+\begin{equation*}\int_\mathscr{X} u(x) \, \mathrm{d}\nu(x) = \int_{\mathscr{X}} f(x) u(x) \, \mathrm{d}\mu(x), \qquad \forall \, u \in L^1(\nu). \end{equation*}
+Moreover, the same statement holds true if we replace $L^1(\mathscr{X}, \, \mu)$ with $L^2(\mathscr{X}, \, \mu)$, and the function $f$ is unique, provided that it is $\mu$-almost everywhere $0$ in any $\nu$-null set. \end{theorem}
+
+\begin{proof}The measure $\mu + \nu$ is finite since $\mu$ and $\nu$ are both finite measures. It follows that there is a chain of inclusions
+\begin{equation*}L^2(\mu + \nu) \hookrightarrow L^1(\mu + \nu) \hookrightarrow L^1(\nu), \end{equation*}
+where the last one is due to the fact that $\nu \ll \mu$. Indeed, if we consider $v \in L^1(\mu + \nu)$, then
+\begin{equation*}\int_{\mathscr{X}} v(x) \, \mathrm{d}\nu(x) < + \infty  \end{equation*}
+since $\mu(A) = 0$ implies $\nu(A) = 0$, and thus $(\mu + \nu)(A) = 0$, which means that $\mu + \nu \ll \mu$. In a similar fashion, there is another chain of maps
+\begin{equation*}L^2(\mu + \nu) \hookrightarrow L^1(\mu + \nu) \xrightarrow{\varphi} L^1(\mu) \xrightarrow{f \mapsto \int_{\mathscr{X}}f \, \mathrm{d}\mu} \R, \end{equation*}
+but, in general, $\varphi$ is \textbf{not} an inclusion. In particular, the functional
+\begin{equation*} L^2(\mu + \nu) \ni f \mapsto \int_{\mathscr{X}} f(x) \, \mathrm{d}\mu(x) \in \R \end{equation*}
+is bounded and linear, and thus by \hyperref[theorem:riesz]{Riesz Theorem \ref{theorem:riesz}} there exists a unique element $g \in L^2(\mu + \nu)$ such that
+\begin{equation*} \int_{\mathscr{X}} u(x) \, \mathrm{d}\mu(x) = \int_{\mathscr{X}} u(x) g(x) \, \mathrm{d}(\mu + \nu)(x), \end{equation*}
+or, equivalently, such that
+\begin{equation*} \int_{\mathscr{X}} \left[1 - g(x)\right] u(x) \, \mathrm{d}\mu(x) = \int_{\mathscr{X}} u(x) g(x) \, \mathrm{d}\nu(x). \end{equation*}
+Let $u(x) := \chi_{g \leq 0}(x)$ be the characteristic function of the set $\left\{x \in X \: \left| \: g(x) \leq 0 \right. \right\}$. Then
+\begin{equation*} \begin{aligned} & \int_{\mathscr{X}} \left[1 - g(x)\right] u(x)\, \mathrm{d}\mu(x) \geq \int_\mathscr{X} u(x) \, \mathrm{d}\mu(x) \geq 0, \\[1em] & \int_{\mathscr{X}} u(x)  g(x) \, \mathrm{d}\nu(x) \leq 0, \end{aligned}\end{equation*}
+and therefore $\left\{x \in X \: \left| \: g(x) \leq 0 \right. \right\}$ is a $\mu$-null set and, in particular, a $\nu$-null set. Equivalently, if we let $u_\epsilon(x) := \chi_{g \geq 1 + \epsilon}(x)$, then
+\begin{equation*}\begin{aligned}& \int_{\mathscr{X}} \left[1 - g(x)\right] u_\epsilon(x)\, \mathrm{d}\mu(x) \leq 0, \\[1em]
+&\int_{\mathscr{X}} u(x) g(x) \, \mathrm{d}\nu(x) \geq \int_\mathscr{X} u(x) \, \mathrm{d}\nu(x) \geq 0, \end{aligned}\end{equation*}
+implies that $\{g \geq 1 + \epsilon\}$ is a $\mu$-null set for any $\epsilon > 0$. In particular, $\left\{ x \in X \: \left| \: g(x) > 1 \right. \right\}$ is a $\mu$-null set, and thus a $\nu$-null set, that is,
+\begin{equation*} 0 < g(x) \leq 1, \qquad \text{for $\nu$-almost every $x \in X$}. \end{equation*}
+For any $n \in \mathbb{N}$ and for any $u \in L^1(\nu)^+$, the function
+\begin{equation*} \left( \frac{u(x)}{g(x)} \wedge n \right), \end{equation*}
+where $\wedge$ denotes the minimum, belongs to $L^\infty$; thus
+\begin{equation*} \int_{\mathscr{X}} \left[1 - g(x)\right] \left( \frac{u(x)}{g(x)} \wedge n \right)\, \mathrm{d}\mu(x) = \int_{\mathscr{X}}  \left( \frac{u(x)}{g(x)} \wedge n \right) g(x) \, \mathrm{d}\nu(x), \end{equation*}
+and applying the Beppo-Levi property we obtain
+\begin{equation*} \int_{\mathscr{X}} f(x) u(x) \, \mathrm{d}\mu(x) = \int_{\mathscr{X}} u(x) , \mathrm{d}\nu(x), \end{equation*}
+where
+\begin{equation*}f(x) := \frac{g(x)}{1 - g(x)}. \end{equation*}
+In conclusion, let $u \in L^1(\nu)$ and decompose it as the sum of the positive part and the negative part, i.e. $u = u^+ - u^-$, and apply the argument above to both addendum.
+\end{proof} 
+
+\subsection{Subgroups of a Hilbert Spaces}
+
+Let $V \subseteq \R^n$ be an additive, closed and connected subgroup of $\R^n$. The first goal of this section is to prove that $V$ is a linear subspace of $\R^n$.
+
+\begin{definition}[Discrete] \index{discrete group} An additive subgroup $\G$ of $\R^n$ is \textit{discrete} if it is generated by $m \leq n$ linearly independent vectors. \end{definition}
+
+It follows that every additive subgroup $V \subseteq \R^n$ that is not the linear span of $m$ linearly independent vectors is dense and, since it is also closed, equal to $\R^n$. Therefore, the only nontrivial $V$ are the following ones: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $V$ is a point, i.e., $V = \{ (0, \, \dots, \, 0) \}$.
+\item $V$ is a line, i.e., $V = \mathrm{Span} \left<e_1 \right>$;
+\item $V$ is a plane, i.e., $V = \mathrm{Span} \left< e_1, \, e_2 \right>$;
+\item $V$ is a $k$-hyperplane, i.e., $V = \mathrm{Span} \left< e_1, \, \dots, \, e_k \right>$
+\item $V$ is a hyperplane, i.e., $V = \mathrm{Span} \left< e_1, \, \dots, \, e_{n-1} \right>$;
+\item $V = \R^n$. \end{enumerate}
+It is straightforward to prove that these are all linear subspaces of $\R^n$ and, as an immediate consequence of the criterion mentioned above, they are the only ones additive, closed and connected.
+
+\paragraph{Hilbert Spaces.} The primary goal is to prove an analogous result that characterizes, in a certain sense, the additive closed connected subgroups $\G$ of a Hilbert space $H$.
+
+\begin{lemma}[Generalized Parallelogram Identity] \label{exercise:pgen} Let $H$ be a Hilbert space, and let $x_1, \, \dots, \, x_n$ be elements of $H$. Then
+\begin{equation} \label{eq:pg} \sum_{\epsilon \in \{0, \, 1\}^n} \left\| \sum_{j = 1}^n \epsilon_j x_j \right\|^2 = 2^n  \sum_{j=1}^n \|x_j\|^2. \end{equation}\end{lemma}
+ 
+\begin{lemma} \label{lemma:reticolo} Let $\G \subseteq H$ an additive subgroup of a Hilbert space $H$. Suppose that $\G$ is a lattice generated by a finite number of elements with norms $\|g_i\| \leq 1$ for $i = 1, \, \dots, \, n$. Then $\G$ is a $\sqrt{n}$-net in his linear span, that is, 
+\begin{equation*} \text{$\G$ is a $\sqrt{n}$-net in $\mathrm{Span}_\R \left< g_1, \, \dots, \, g_n \right>$}. \end{equation*} \end{lemma}
+
+\begin{proof} \mbox{}
+
+\paragraph{Step 1.} We claim that all the elements of the rescaling $2^{-1} \cdot \G$ are distant, at most, $\sqrt{n}/2$ from any other element of $\G$. In fact, given $x \in 2^{-1} \cdot \G$ we may always assume - up to translations - that it is given by a reduced sum
+\begin{equation} \label{claim10000} x = \frac{1}{2}  \sum_{i=1}^{k} g_i \quad \text{for some $k \leq n$}. \end{equation}
+More precisely, the point $x$ is the center of the fundamental parallelogram associated to the generators of the lattice with nonzero coefficients in \eqref{claim10000}. Hence (by the parallelogram identity) the distance between $x$ and any vertexes $y \in \G$ is less than or equal to $\sqrt{k}/2$, which can be estimated by $\sqrt{n}/2$.
+
+\paragraph{Step 2.} The idea is to iterate this process and conclude with a density argument. For every $m \in \mathbb{N}$, the subgroup $2^{-m-1} \cdot \G$ is distant at most $\frac{\sqrt{n}}{2^{m+1}}$ from $2^{-m} \cdot \G$. Thus, any element of the union
+\begin{equation} \label{eq:dosaoi3edls} \bigcup_{m \in \mathbb{N}} 2^{-m} \cdot \G \end{equation}
+is, at most, distant $\sqrt{n}$ from any element of $\G$ since
+\begin{equation*}\sum_{m = 1}^{+\infty} 2^{- m} = 1. \end{equation*}
+The proof is now complete since the union \eqref{eq:dosaoi3edls} is a dense set in $H$, as the reader may check as an easy exercise.  \end{proof}
+
+We are finally ready to state the main result of this section. Namely, a sufficient condition for an additive closed connected subgroup $\G \subset H$ of a Hilbert space to be linear, is that $\G$ is arc-wise connected by $\alpha$-Hölder arcs for $\alpha > 1/2$. The reader should notice that it is \underline{not} a necessary condition by any means.
+
+\begin{theorem} Let $\G \subseteq H = \ell^2(\mathbb{N}; \; \R)$ be an additive, closed and connected subgroup of $H$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item There exists a nonlinear subspace $\G$ that is arc-wise connected by $1/2$-Hölder arcs.
+\item If $\G$ is arc-wise connected by $\alpha$-Hölder arcs, and $\alpha > 1/2$, then $\G$ is a linear subspace.
+\end{enumerate}\end{theorem}
+
+\begin{proof} \mbox{}
+
+%Consider the subspace of $2$-summable sequences with values in $\mathbb{Z}$. Any $(a_n)_n \in \ell^2(\mathbb{N}; \; \mathbb{Z})$ is path-connected to the origin through a $1/2$-hölder arc. In fact, we can define the convex path $(\phi(t))_n := t \, a_n$ and notice that
+%\begin{equation*} \| \phi(t) - \phi(s) \|_2 \leq \sum_{n} |t - s|^{\frac{1}{2}} \, \| a_n \|_2 . \end{equation*}
+%It's straightforward to prove that $V$ is additive (since $\mathbb{Z}$ is), closed and nonlinear (it is not the span of any family of linearly independent vectors and its discrete).
+
+%\vspace{2.5mm}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let $H := L^2\left([0, \, 1]\right)$ and let $\G := L^2\left([0, \, 1]; \; \mathbb{Z}\right)$. It is an easy exercise to show that $\G$ is an additive, closed subgroup of $H$. Given $f \in \G$, the arc defined by
+\begin{equation*} \gamma(t) := f \chi_{[0, \, t]} = \begin{cases} f(x) & x \in [0, \, t] \\[0.8em] 0 & x \in [t, \, 1] \end{cases} \end{equation*}
+takes values in $\G$, and its extremal points are $\gamma(0) \equiv 0$ and $\gamma(1) \equiv f$. Then
+\begin{equation*} \| \gamma(t) - \gamma(s) \|_{L^2([0, \, 1])}^2 \leq \int_{s}^{t} |f(x)|^2 \, \mathrm{d}x, \end{equation*}
+but we cannot conclude that $\gamma$ is $1/2$-Hölder because $f$ is not - a priori - in $L^4([0, \, 1])$. We consider a reparametrization
+\begin{equation*} \sigma : [0, \, 1] \longrightarrow [0, \, 1+ \|f\|_{L^2([0, \, 1])}^2] \end{equation*}
+defined explicitly by setting
+\begin{equation*}\sigma(t) := t + \int_{0}^t |f(x)|^2 \, \mathrm{d}x. \end{equation*}
+It is easy to prove that $\sigma$ is continuous, increasing (strictly) and bijective; thus
+\begin{equation*} \| \gamma(t) - \gamma(s) \|_2 \leq \left| \sigma(t) - \sigma(s) \right|^{1/2}, \end{equation*}
+which means that the composition $\gamma \circ \sigma^{-1}$ is a $1/2$-Hölder path, and yet $\G$ is nonlinear.
+
+\item Suppose that $\G$ is arc-wise connected by $\alpha$-Hölder arcs for some $\alpha > 1/2$. It follows from \hyperref[lemma:reticolo]{Lemma \ref{lemma:reticolo}} that the lattice generated by $n$ vectors $g_1, \, \dots, \, g_n \in H$, with norms $\|g_k\| \leq r$, is a $r \sqrt{n}$-net in their linear span. Therefore, if $\gamma : [0, \, 1] \longrightarrow G$ is an $\alpha$-Hölder path, for any $n \in \mathbb{N}$, the $n$ elements
+\begin{equation*} g_{k, \, n} := \gamma \left( \frac{k+1}{n} \right) - \gamma \left( \frac{k}{n} \right) \in \G, \quad k = 0, \, \dots, \, n - 1, \end{equation*}
+form a $C n^{1/2 - \alpha}$-net in their linear span. Since $\G$ is closed this implies that it is a cone, and hence a linear subspace. \end{enumerate}
+\end{proof}
+
+\subsection{Laguerre Polynomials}
+
+Let $\mathcal{A}$ be an alphabet. Given a finite word formed by $(n_1, \, a_1), \, \dots, \, (n_k, \, a_k) \in \N \times \mathcal{A}$, a natural question would be how many anagrams of this word can we find, and how many\footnote{We denote by $F(n_1, \, \dots, \, n_k)$ the number of anagrams with no fixed points.} of them have no fixed points? Recall that, if $n := n_1 + \dots + n_k$, the number of anagrams is given by
+\begin{equation*} G(n_1, \, \dots, \, n_k) := \frac{n!}{n_1 ! \, n_2 ! \, \dots \, n_k !}, \end{equation*}
+and thus we can immediately infer that $F(n_1, \, \dots, \, n_k) \leq G(n_1, \, \dots, \, n_k)$.
+
+\paragraph{$2$-words.} The first nontrivial case is given by an alphabet made up of two letters. Clearly, if $n_1 < n_2$ or $n_2 < n_1$ every permutation (=anagram) of the word has at least a fixed point, therefore we can assume that $n_1 = n_2$. In this case, the problem admits one and only one solution (replace each $a_1$ with $a_2$, and vice versa). In particular, we have a orthonormal basis, that is,
+\begin{equation*} F(n, \, m) = \delta_{n, \, m}. \end{equation*}
+
+\paragraph{General Case.} If $k$ is arbitrary, the question becomes much harder, and there are two possible approaches; here we give an idea of the first method, and we investigate the second one entirely.
+
+\paragraph{First Approach.} Let $k \geq 1$, $\alpha = (\alpha_1, \, \dots, \, \alpha_k) \in \mathbb{N}^k$ and let $D(\alpha) := F(\alpha_1, \, \dots, \, \alpha_k)$. Then
+\begin{equation*}\sum_{\alpha \in \mathbb{N}^k} D(\alpha)  x^\alpha = \frac{1}{1 - \sum_{S} (|S| - 1) \, \prod_{i \in S} x_i}, \end{equation*}
+where $S$ ranges over all nonempty subsets of $\{1, \, \dots, \, k\}$, and $x^\alpha := x_1^{\alpha_1} \dots x_k^{\alpha_k}$.
+
+\paragraph{Second Approach.} Let $\Lambda$ denote an arbitrary alphabet, and suppose that the words have length $n$. Consider a set of indices $I = \{1, \, 2, \, \dots, \, n\}$, and let $A$ be the set of all the permutations, whose cardinality is thus given by
+\begin{equation*} \left|A\right| = \frac{n!}{n_1 ! \, n_2 ! \, \dots \, n_k !}, \quad \text{where $n_1 + \dots + n_k = n$}. \end{equation*}
+For any $J \subseteq I$, consider the set of all permutations fixing $J$
+\begin{equation*} A_J := \left\{ \sigma \in \mathfrak{S}_n \: \left| \: J \subseteq \mathrm{Fix}(\sigma) \right. \right\}, \end{equation*}
+and notice that the cardinality is given by
+\begin{equation*} \left| A_J \right| = \frac{ |I \setminus J| ! }{\prod_{\lambda \in \Lambda} \left| I_\lambda \setminus J_\lambda \right|!}, \end{equation*}
+where $I_\lambda = \sigma^{-1}(\lambda)$ and $J_\lambda = \sigma^{-1}(\lambda) \cap J$. Since
+\begin{equation*} A_J \cap A_K = A_{J \cup K}, \end{equation*}
+the inclusion-exclusion principle gives us a formula for $A_\varnothing$ (the set of permutations with no fixed points), i.e.
+\begin{equation*}\left| A_\varnothing \right| = \left| A \right| - \sum_{i \in I} \left| A_i \right| + \sum_{i < j} \left| A_i \cap A_j \right| - \dots = \sum_{J \subseteq I} (-1)^{|J|} \, \left|A_J\right|.  \end{equation*}
+Using the explicit formula for the cardinality of $A_J$ and the obvious equivalence
+\begin{equation*} \mathcal{P}(I) \longleftrightarrow \prod_{\lambda \in \Lambda} \mathcal{P}(I_\lambda),\end{equation*}
+we find that, if we set $K_\lambda := I_\lambda \setminus J_\lambda$, then
+\begin{equation*} \begin{aligned} |A_\varnothing| &= \sum_{J \in \prod_\lambda \mathcal{P}(I_\lambda)} (-1)^{\sum_{\lambda} |J_\lambda|} \, \frac{ \left( \sum_{\lambda} \left|I_\lambda \setminus J_\lambda \right| \right)!}{ \prod_\lambda \left( \left|I_\lambda \setminus J_\lambda \right| ! \right)} = \\[1em] & = \sum_{K \in \prod_\lambda \mathcal{P}(I_\lambda)} (-1)^{\sum_{\lambda} \left( |I_\lambda|- |K_\lambda|\right)} \, \frac{\left( \sum_{\lambda} |K_\lambda| \right)!}{\prod_\lambda \left( |K_\lambda|! \right)}. \end{aligned} \end{equation*}
+At this point, we want to find a way to "implement" the following identity:
+\begin{equation*}\prod_{\lambda \in \Lambda} \, \sum_{j \in X_\lambda} c(\lambda, \, j) = \sum_{\Phi \in \prod_\lambda X_\lambda} \prod_{\lambda \in \Lambda} c(\lambda, \, \Phi(j)), \end{equation*}
+where $c( \cdot, \, -)$ is any function defined on $\Lambda \times \left( \prod_{\lambda \in \Lambda} X_\lambda \right)$. By Euler formula, it turns out that
+\begin{equation*} m! = \int_{0}^{+ \infty} x^m \mathrm{e}^{-x} \, \mathrm{d}x, \end{equation*}
+and hence
+\begin{equation*} \begin{aligned} |A_\varnothing|  & = \sum_{K \in \prod_\lambda \mathcal{P}(I_\lambda)} \left[ \prod_{\lambda \in \Lambda} \frac{(-1)^{|I_\lambda| - |K_\lambda|}}{|K_\lambda|!} \right] \, \int_{0}^{\infty} x^{\sum_\lambda |K_\lambda|} \, \mathrm{e}^{-x} \, \mathrm{d}x= \\[1em] & = \int_{0}^{\infty} \left[ \sum_{K \in \mathcal{P}(I_\lambda)} \prod_{\lambda} \frac{(-1)^{|I_\lambda| - |K_\lambda|}}{|K_\lambda|!} \, x^{\sum_\lambda |K_\lambda|} \right] \, \mathrm{e}^{-x} \, \mathrm{d}x. \end{aligned}\end{equation*}
+If we set $\mathrm{d}\mu := e^{-x} \, \mathrm{d}x$, then
+\begin{equation*}\begin{aligned} |A_\varnothing| & =  \int_{0}^{\infty} \left[  \prod_{\lambda} \sum_{K \in \mathcal{P}(I_\lambda)} \frac{(-1)^{|I_\lambda| - |K_\lambda|}}{|K_\lambda|!} \, x^{\sum_\lambda |K_\lambda|} \right] \, \mathrm{d}\mu(x) =  \\[1em] & = \int_{0}^{\infty} \left[ \prod_\lambda P_{n_\lambda}(x) \right] \, \mathrm{d} \mu(x) \: {\color{red}=}, \end{aligned} \end{equation*}
+where $P_m$ is the polynomial defined by
+\begin{equation*}P_m(x) := \sum_{k = 0}^{m} (-1)^{m - k} \binom{m}{k} \frac{x^k}{k!}. \end{equation*}
+Since $F(m, \, n) = \delta_{m, \, n}$, then
+\begin{equation*}\dots \: {\color{red}=} \: \int_{0}^{\infty} P_n(x) \cdot P_m(x) \, \mathrm{d} \mu(x) = 0, \qquad \forall \, n \neq m, \end{equation*}
+thus $\{P_n\}_{n \in \mathbb{N}}$ is an orthogonal family in $L^2\left([0, \, \infty), \, \mathrm{d}\mu\right)$ and they are called \textbf{Laguerre polynomials}.
+
+\section{Exercises}
+
+\begin{exercise}The locus of the zeros of a quadratic form $Q(x) = B(x, \, x)$, which is usually denoted by $\mathcal{Z}(B)$, is a linear subspace of $V$. \end{exercise}
+
+%\begin{proof}[\textbf{Solution}] We only prove that it is closed under the restriction of the sum and scalar product operations. Let $x, \, y \in \mathcal{Z}(B)$, then $Q(x) = Q(y) = 0$ and
+%\begin{equation*}Q(x + y) = Q(x) + Q(y) + 2 \, B(x, \, y) = 2 \, B(x, \, y) = 0, \end{equation*}
+%as a consequence of the inequality \eqref{eq:schwartz1}. Let $\lambda \in \R$ and let $x \in \mathcal{Z}(B)$, then
+%\begin{equation*}Q(\lambda \, x) = \lambda^2 \, Q(x) = 0. \end{equation*}
+%\end{proof}
+
+\begin{exercise}For any $x, \, y \in \R^n$ the Cauchy-Schwarz inequality holds, i.e.
+\begin{equation*} \left( \sum_{i = 1}^n x_i^2 \right) \,  \left( \sum_{i = 1}^n y_i^2 \right) - \left( \sum_{i = 1}^n x_i \, y_i \right)^2 \geq 0. \end{equation*}
+Moreover, the following equality is satisfied
+\begin{equation*} \left( \sum_{i = 1}^n x_i^2 \right) \,  \left( \sum_{i = 1}^n y_i^2 \right) - \left( \sum_{i = 1}^n x_i \, y_i \right)^2 = \sum_{1 \leq i < j \leq n} \left[ x_i \, y_j - x_j \, y_i\right]^2, \end{equation*}
+\end{exercise}
+
+%\begin{proof}[\textbf{Solution}]  Let us consider the second-order polynomial
+%\begin{equation*}t \in \R \mapsto p(t) := \sum_{i = 1}^n \left( x_i + y_i \, t\right)^2. \end{equation*}
+%Clearly $p(t)$ has no real roots, unless there exists $\lambda \in \R$ such that $x = \lambda \, y$ (in this case the inequality is trivial). Therefore
+%\begin{equation*}p(t) = \left( \sum_{i = 1}^n y_i^2 \right)  \, t^2 + 2 \, \left( \sum_{i = 1}^n x_i \, y_i \right)^2  \, t + \left( \sum_{i = 1}^n x_i^2 \right) \geq 0, \end{equation*}
+%and, since the discriminant needs to be negative, we can infer that
+%\begin{equation*} \left( \sum_{i = 1}^n x_i^2 \right) \,  \left( \sum_{i = 1}^n y_i^2 \right) - \left( \sum_{i = 1}^n x_i \, y_i \right)^2 \geq 0. \end{equation*}
+%\end{proof}
+
+\begin{exercise}[Open Problem\footnote{This problem is likely still open in some sense, but I am not certain about this.}] Let $H$ be a Hilbert space, and let $C \subset H$ a subset together with a projection $P: H \longrightarrow C$ such that $P$ is continuous and $\|P(x) - x\| = \inf_{y \in C} \|x - y\|$. Then $C$ is convex.\end{exercise}
+
+%\begin{exercise} Find a formula for $e_n$ as a function of $v_0, \, \dots, \, v_n$ (i.e. a non recursive formula). \end{exercise}
+
+%\begin{proof}[\textbf{Solution}] The first step is defining the Gram determinant. Set $D_0 := 1$ and for any $j \geq 1$ set
+%\begin{equation*} D_j := \mathrm{det} \left(H_j \right), \end{equation*}
+%where $H_j$ is a matrix $j\times j$ defined as follows
+%\begin{equation*} \left(H_j\right)_{n, \, m = 1, \, \dots, \, j} := \langle v_m, \, v_n \rangle_H. \end{equation*}
+%The non-recursive formula for the orthonormal system is now easy to find. In fact
+%\begin{equation*}e_j = \frac{1}{\sqrt{D_{j-1} \cdot D_j}} \, \mathrm{det} \begin{pmatrix}\langle v_1, \, v_1 \rangle & \langle v_2, \, v_1 \rangle & \dots & \langle v_j, \, v_1 \rangle \\ \langle v_1, \, v_2 \rangle & \langle v_2, \, v_2 \rangle & \dots & \langle v_j, \, v_2 \rangle \\ \vdots & \vdots & \ddots & \vdots \\ \langle v_1, \, v_{j-1} \rangle & \langle v_2, \, v_{j-1} \rangle & \dots & \langle v_j, \, v_{j-1} \rangle \\ v_1 & v_2 & \dots & v_j\end{pmatrix} \end{equation*}
+%and this formula can be "easily" proved by strong induction (i.e. assume that it holds true for \textbf{any} $j \leq N$ and use the recursive formula to prove it for $e_{N+1}$).
+% \end{proof} 
+
+\begin{exercise} Let $\mu$ be a measure over $I \subseteq \R$ (e.g. $\R$, $\R^+$, a bounded interval, etc..). When the polynomial in $\C[x]$ are dense in $L^2(I, \, \mu)$?
+
+In affirmative cases, prove that the Gram-Schmidt algorithm produces a orthonormal basis of polynomial such that $P_n$ has degree $n$.  \end{exercise}
+
+%\begin{proof}[\textbf{Solution}] Let $\lambda$ the Lebesgue measure and let $I$ be a \textbf{bounded} interval of $\R$, then the polynomial are dense in $L^2(I, \, \lambda)$ as a consequence of the Stone-Weierstrass theorem. On the other hand, the polynomial are not dense in $L^2(\R, \, \lambda$ since they don't even are square-summable on the real line:
+%\begin{equation*} \lim_{M \to + \infty} \int_{- M}^M |a_{2n} \, x^{2n} + \dots + a_0|^2 \, \mathrm{d}x = \lim_{M \to + \infty} \frac{2 \, a_{2n}}{n+1} \,M^{n+1} = + \infty. \end{equation*}
+%The situation changes drastically if we take a measure $\mu$ different from the Lebesgue one $\lambda$. Let $\mathcal{M}(\R)$ be the set of positive borel measures, with moments of all order and unbounded support.
+
+%Let $\mu \in \mathcal{M}(\R)$ and let $\mathcal{B}(\R)$ be the Borel algebra. The set of algebraic polynomials is dense in $L^2(\R, \, \mu)$ if and only if
+%\begin{equation*} \mu(A) = \int_{A} w(x)^2 \, \mathrm{d}\nu(x), \qquad \forall \, A \in \mathcal{B}(\R), \end{equation*}
+%where $\nu$ is a finite, positive, borel measure, $w : \R \longrightarrow [0, \, 1]$ is a upper semi-continuous function such that $\|x^n \, w \|_{C^0(\R)} < \infty$ for any $n \in \mathbb{N}$ and the set of algebraic polynomials is dense in $C_{w}^0$.
+ %\end{proof} 
+ 
+%\begin{exercise}[Projection over a segment] Let $H$ be an Hilbert space and let
+%\begin{equation*}I_u := \left\{ t \cdot u \: : \: t \in [0, \, 1] \right\} \end{equation*}
+%for some $u \in H$ such that $\|u\| = 1$. The distance of $x \in H$ from the line $\R\cdot u$ is given by the function
+%\begin{equation*}t \in [0, \, 1] \mapsto \| x - t \cdot u \| \in \R^+, \end{equation*}
+%and it's easy to prove that it is convex and the limit for $t \to \pm \infty$ is $+ \infty$. The minimum of this distance is realized by the orthogonal projection, that is $Px := (u, \, x) \, u$ (as it is easily proved by $(Px - x, \, u) = 0$).
+
+%\vspace{2.5mm}
+%If $(u, \, x) \, u \in I_u$ (or, equivalently, if $(u, \, x) \in [0, \, 1]$) then $Px$ is the point of the segment $I_u$ whose distance from $x$ is minimal. If not, by convexity, the point of minimal distance is given by an extremal, that is
+%\begin{equation*} P_{I_u}(x) = \min \left[ \max \left( 0, \, \frac{Px}{u} \right), \, 1 \right] \, u = \phi(x) \, u \end{equation*}
+%and it's easy to prove that $\phi(x)$ is $1$-Lipschitz.
+%\end{exercise}
+
+%\begin{exercise}Let $H$ be a Hilbert space and let $C$ be a nonempty convex and closed subset of $H$. The projection $P_C$ is well defined and, actually, it is $1$-Lipschitz. If
+%\begin{equation*}I := \left\{ t \cdot Px + (1 - t) \cdot Py \: : \: t \in [0, \, 1] \right\}, \end{equation*}
+%then, by convexity, the segment $I$ is a subset of $C$. Thus $Px$ and $Py$ are the points of minimal distance from $x$ and $y$ for $I$ as well; the previous exercise allows us to infer that $P_C$ is $1$-Lipschitz.
+%\end{exercise}
+
+\begin{exercise} Let $H$ be a Hilbert space and assume that $E \subset H$ is bounded and nonempty. In the setting of \hyperref[lemma:minimalradius]{Lemma \ref{lemma:minimalradius}}, the following properties holds true:\mbox{}
+\begin{enumerate}
+\item[(a)] If $E$ is also convex, then $x_E$ belongs to $E$.
+\item[(b)] Both $x_E$ and $r_E$ depend continuously (actually, $1$-Lipschitz) on the sets (with respect to the distance $\mathcal{H}$), that is
+\begin{equation*} \|x_E - x_{E^\prime}\| \leq d_\mathcal{H}(E, \, E^\prime), \qquad |r_E - r_{E^\prime}|  \leq d_\mathcal{H}(E, \, E^\prime). \end{equation*} \end{enumerate}
+ \end{exercise}
+
+%\begin{proof}[\textbf{Solution}]Recall that, in the proof of \hyperref[lemma:minimalradius]{Lemma \ref{lemma:minimalradius}}, we used the ball-inclusion
+%\begin{equation*} \overline{B \left(x, \, r\right)} \cap \overline{B \left(y, \, r\right)} \subseteq \overline{B \left( \frac{x+y}{2}, \, \sqrt{r^2 - \left\| \frac{x - y}{2} \right\|^2} \right)}, \end{equation*}
+%thus, if $x$ and $y$ belong to $E$, then by convexity also the new center belongs to $E$. In particular, we can assume that the minimizing sequence $(x_n)_{n \in \N}$ is contained in $E$ and, consequently, its limit is a point $x_E \in \bar{E}$.
+
+%If $E$ is closed, then the thesis follows easily from the above argument. If $E$ is not closed, suppose that $x_E \in \bar{E} \setminus E$: we shall derive a contradiction. In fact, since $r_E$ is the infimum, for any $\epsilon > 0$ there exists $N \in \N$ such that $r_N < r_E + \epsilon$ and $\|x_N - x_E\| \leq 2 \, \epsilon$. Then $E \subseteq \overline{B(x_N, \, r_N)}$, and thus the inclusion property above implies that
+%\begin{equation*} E \subseteq \overline{B \left( \frac{x_N + x_E}{2}, \, \tilde{r} \right)}. \end{equation*}
+%Clearly the new center belongs to $E$, thus it's enough to prove that $\tilde{r}$ is less or equal than $r_E$. In fact
+%\begin{equation*} \tilde{r}^2 < r_E^2 + \epsilon \implies \tilde{r} \leq r_E, \qquad \epsilon \to 0^+ \end{equation*}
+%and thus we found another point at which the radius attains its minimum; we had already proved that the limit is unique, thus we obtained the absurd.
+
+%\vspace{2.5mm}
+%Let $E$ and $E^\prime$ be nonempty bounded closed subsets of $X$. By the converse triangular inequality, for any $x \in H$, it turns out that
+%\begin{equation*}d(x_E, \, x_{E^\prime}) \geq \left| d(x, \, x_E) - d(x, \, x_{E^\prime}) \right|, \end{equation*}
+%\end{proof}
+
+\begin{exercise} Let $H$ be a Hilbert space, and assume that $E \subset H$ is bounded, closed and nonempty. The Hausdorff distance is given by
+\begin{equation*} d_\mathcal{H}(E, \, E^\prime) = \| d_E - d_{E^\prime} \|_{\infty}, \end{equation*}
+where $d_E$ is the usual distance. In a Banach space, since we cannot assume that the distance is a bounded function, we can define the Hausdorff distance as
+\begin{equation*} d_\mathcal{H}(E, \, E^\prime) = \| (d_E - \|x\|) - (d_{E^\prime} - \|x\|) \|_{\infty}. \end{equation*}
+In particular, we defined a map
+\begin{equation*} E \in B(H) := \left\{ E \subseteq H \: : \: E \neq \varnothing, \, \, E \, \, \text{bounded and closed} \right\} \mapsto d_E - \|x\| \in C_b(H; \;\R) \end{equation*}
+and $B(H)$ is a complete metric space with the Hausdorff distance. Prove that
+\begin{equation*} d_\mathcal{H}(E, \, E^\prime)  \leq r \iff \begin{cases} E \subseteq r \cdot B(0, \, 1) + E^\prime \\ E^\prime \subseteq r \cdot B(0, \, 1) + E. \end{cases} \end{equation*}
+ \end{exercise}
+
+%\begin{proof}[\textbf{Solution}] Let $x \in E$ be any point and suppose that
+%\begin{equation*} d_\mathcal{H}(E, \, E^\prime) \leq r,\end{equation*}
+%then it's easy to see that
+%\begin{equation*} \left| d(x, \, E) - d(x, \, E^\prime) \right| \leq r \implies d(x, \, E^\prime) \leq r\end{equation*}
+%and this is exactly the inclusion we wanted to prove; the other one is symmetrical.
+
+%\noindent Vice versa, suppose that
+%\begin{equation*}  \begin{cases} E \subseteq r \cdot B(0, \, 1) + E^\prime \\ E^\prime \subseteq r \cdot B(0, \, 1) + E, \end{cases} \end{equation*}
+%then, for any $y \in H$, it turns out that
+%\begin{equation*} \left| d(y, \, x) - d(y, \, x^\prime) \right| \leq d(x, \, x^\prime), \qquad \forall \, x \in E, \, \, x^\prime \in E^\prime.\end{equation*}
+%We conclude by noticing that $d(x, \, x^\prime) \leq r$ by assumption, since $E$ is contained in $E^\prime$ up to a scaled ball (and vice versa).
+%\end{proof}
+ 
+\begin{exercise}Let $H := L^2\left([0, \, 1]\right)$. Find the projection over the following convex subspaces: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $C = \overline{B(0, \, 1)}$;
+\item $C = \left\{f \in H \: : \: f \geq 0 \, \, \text{a.e.} \right\}$;
+\item $C = \overline{B\left( (0, \, 1); \; L^\infty \right)}$.
+%\item[{ \color{red}\textbf{(d)}}] $C = \mathrm{Lip}_1 \left( [0, \, 1] \right)$.
+\end{enumerate}
+ \end{exercise}
+
+%\begin{proof}[\textbf{Solution}] Let $H = L^2\left([0, \, 1]\right)$, then
+%\begin{equation*} \|f\|_2 \stackrel{\mathrm{def}}{=} \int_{0}^{1} |f(x)|^2 \, \mathrm{d}x\end{equation*}
+%is a norm on $H$ and make it a Hilbert space. \mbox{}
+%\begin{enumerate}[label=\textbf{(\alph*)}]
+%\item The projection on the unitary closed ball is fairly simple and can be defined directly:
+%\begin{equation*}Pf \stackrel{\mathrm{def}}{=} \begin{cases} f & \text{if} \, \, \, f \in \bar{B}(0, \, 1) \\ \frac{f}{\|f\|_2} & \text{if} \, \, \, \|f\|_2 > 1. \end{cases}\end{equation*}
+%The mapping $P$ is clearly a continuous projection, thus we only need to prove that $Pf$ is the point of the ball whose distance from $f$ is minimal. A simple computation yields to
+%\begin{equation*}\| Pf - f\|_2^2 = (\|f\|_2 - 1)^2,\end{equation*}
+%while an application of the Cauchy-Schwarz inequality yields to
+%\begin{equation*}\| g - f\|_2^2 \geq (\|f\|_2 - \|g\|_2)^2.\end{equation*}
+%Since $\|g\|_2 \leq 1$, it turns out that
+%\begin{equation*}\|g - f\|_2^2 \geq (\|f\|_2 - \|g\|_2)^2 \geq (\|f\|_2 - 1)^2 = \| Pf - f\|_2^2,\end{equation*}
+%with equality if and only if $g = Pf$.
+%\item The projection on the positive line is fairly simple and can be defined directly:
+%\begin{equation*}Pf \, (x) \stackrel{\mathrm{def}}{=} \max \left\{ f^+(x), \,0 \right\}.\end{equation*}
+%The mapping $P$ is clearly a continuous projection, thus we only need to prove that $Pf$ is the point of the ball whose distance from $f$ is minimal. Clearly
+%\begin{equation*}\| Pf - f\|_2^2 = \int_{\{f < 0\}} |f(x)|^2 \, \mathrm{d}x,\end{equation*}
+%while, for any $g$ almost everywhere positive, it turns out that
+%\begin{equation*}\begin{aligned} \| g - f\|_2^2 &= \int_{0}^{1} \left|g(x) - \left[ f^+(x) - f^-(x) \right] \right|^2 \, \mathrm{d}x  = \\ & = \|g - f^+ \|_2^2 + \|f^{-} \|_2^2 - 2 \, \int_{0}^{1} g(x) \, f(x) \, \mathrm{d}x \geq \\ & \geq \|f^{-}\|_2^2, \end{aligned}\end{equation*}
+%with equality if and only if $g(x) = f^+(x)$.
+%\item Recall that we can isometrically embed $L^2([0, \, 1])$ in $L^\infty([0, \, 1])$, thus the construction given in $(a)$ can be implicitly extended to $L^\infty$ through the isometry.
+%\end{enumerate}
+%\end{proof}

@@ -1,0 +1,329 @@
+\chapter{Fredholm Operators} \thispagestyle{empty}
+
+In this brief chapter, we introduce the class of \textit{Fredholm operators} and the notion of \textit{Fredholm index}, and we investigate their relation with compact operators.
+
+\section{Definitions and Main Properties}
+
+\begin{definition}[Fredholm Operator] \index{Fredholm operator} A linear continuous operator $T \in \La(X, \, Y)$ between two Banach spaces is a \textit{Fredholm operator} if and only if the following properties hold: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item The dimension of the kernel $\kers \, T$ is finite.
+\item The codimension of the rank $\rank \, T$ is also finite.
+\end{enumerate}\end{definition}
+
+\begin{remark} If $T \in \La(X, \, Y)$ is a Fredholm operator, then $\rank \, T$ is closed as a subspace of $Y$. \end{remark}
+
+\begin{proof} Let $F \subset Y$ be a finite-dimensional direct algebraic addendum of the range of $T$ in $Y$, that is,
+\begin{equation*} Y = F \oplus \rank \, T, \qquad \text{$\oplus \: : \:$ algebraic direct sum}. \end{equation*}
+Let $\widetilde{T} : X \times F \longrightarrow Y$ be the operator defined by sending
+\begin{equation*}X \times F \ni (x, \, f) \longmapsto Tx + f \in Y .\end{equation*}
+By construction $\widetilde{T}$ is a surjective operator; hence the \hyperref[opt]{Open Mapping Theorem \ref{opt}} implies that $\widetilde{T}$ is an open map and also that it can be identified to a quotient map
+\begin{equation*} \begin{tikzcd} X \times F \arrow[rr, twoheadrightarrow, "\widetilde{T}"] \arrow[d, "\pi"] & & Y \\ \faktor{X \times F}{\kers \, \widetilde{T}} \arrow[rru, bend right, "\alpha"] && \end{tikzcd} \end{equation*}
+where $\alpha$ is a linear isomorphism. Moreover, the kernel of the operator is given by
+\begin{equation*} \kers \, \widetilde{T} = \kers \, T \times \{0\} \subset X \times \{0\}, \end{equation*}
+and it is thus closed in $X \times F$. On the other hand, we have that 
+\begin{equation*} \rank \, T = \widetilde{T} \left(X \times \{0\} \right) = \alpha \circ \pi(X \times\{0\}) \end{equation*}
+as a consequence of the decomposition above, and this is enough to infer that $\rank \, T$ is a closed subspace of $Y$ since $\alpha$ is a linear isomorphism and \hyperref[lemma:frehdolm1]{Lemma \ref{lemma:frehdolm1}} applies here.
+\end{proof}
+
+\begin{lemma} \label{lemma:frehdolm1} Let $X$ be a Banach space, and let $N$ be a closed subspace of $X$. For every $V \supset N$ closed subspace, the image of $V$ via the projection
+\begin{equation*} p_N : X \longtwoheadrightarrow \faktor{X}{N}, \end{equation*}
+denoted by $p_N(V)$, is a closed subspace of the quotient $\faktor{X}{N}$. \end{lemma}
+
+\begin{definition}[Semi-Fredholm Operator] \index{Fredholm operator!semi} A linear continuous operator $T \in \La(X, \, Y)$ between Banach spaces is a \textit{semi-Fredholm operator} if and only if the following properties hold:\mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item The rank $\rank \, T$ is closed.
+\item Either the dimension of $\kers \, T$ or the codimension of $\rank \, T$ is finite.
+\end{enumerate}\end{definition}
+
+\begin{definition}[Fredholm Index] \index{Fredholm operator!index} Let $T \in \La(X, \, Y)$ be a (semi-)Fredholm operator. The Fredholm index of $T$ is the integer number (eventually infinite) defined by the formula
+\begin{equation} \label{fredind} i(T) := \mathrm{dim} \, \kers \, T - \mathrm{codim} \, \rank \, T \in \Z \cup \{ \pm \infty \}. \end{equation}\end{definition}
+
+\begin{example} \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item If $X = Y$ is a Banach space and $K \in \La_c(X)$ is a compact operator, then $T := \mathrm{id}_X - K$ is a Fredholm operator with Fredholm index equal to $0$.
+\item Let $X = Y = \ell_2$. We denote by $S$ the injective shift operator
+\begin{equation*} S : \ell_2 \to \ell_2, \qquad (x_0, \, x_1, \, \dots ) \longmapsto (0, \, x_0, \, x_1, \, \dots), \end{equation*}
+and we denote by $S^\ast$ the surjective shift operator
+\begin{equation*} S^\ast : \ell_2 \to \ell_2, \qquad (x_0, \, x_1, \, \dots ) \longmapsto (x_1, \, x_2, \, x_3, \, \dots). \end{equation*}
+The reader may check by herself that $S^\ast$ is the adjoint of $S$ (i.e., the notation is coherent), and also that the Fredholm indexes are respectively equal to
+\begin{equation*} i(S) = - 1 \qquad \text{and} \qquad i \left(S^\ast \right) = + 1. \end{equation*}
+Moreover, the operator $S$ is the essential inverse (see \hyperref[th:atks]{Theorem \ref{th:atks}}) of $S^\ast$ (and vice versa) since
+\begin{equation*} S^\ast \circ S = \mathrm{id}_{\ell_2} \qquad \text{and} \qquad S \circ S^\ast = \mathrm{id}_{\ell_2} - \pi_{\langle e_1 \rangle}, \end{equation*}
+where $\pi$ is the projection onto the $1$-dimensional subspace $\langle e_1 \rangle$ of $\ell_2$. Notice also that the Fredholm index seems to satisfy an additive property because
+\begin{equation*}i\left( \mathrm{id}_{\ell_2} \right) = 0 = i(S) + i \left(S^\ast \right). \end{equation*}
+\end{enumerate}\end{example}
+
+\begin{remark} Let $T : X \longrightarrow Y$ be a linear continuous operator between Banach spaces. Then $T$ is a Fredholm operator if and only if there are finite dimensional spaces $E$ and $F$ such that
+\begin{equation*} 0 \xrightarrow{} E \xrightarrow{} X \xrightarrow{T} Y \xrightarrow{} F \xrightarrow{} 0  \end{equation*}
+is a short exact sequence. \end{remark}
+
+\begin{theorem}[Atkinson] \index{Atkinson Theorem} \label{th:atks} Let $T \in \La(X, \, Y)$ be a linear continuous operator between Banach spaces. Then $T$ is a Fredholm operator if and only if $T$ is essentially invertible\index{essential inverse}, that is, there exists $S  \in \La(Y, \, X)$ such that
+\begin{equation*} T \circ S = \mathrm{id}_Y + K_1 \qquad \text{and} \qquad S \circ T = \mathrm{id}_X + K_2, \end{equation*}
+where $K_1 \in \La_c(Y)$ and $K_2 \in \La_c(Y)$ are compact operators. \end{theorem}
+
+\begin{proof}To ease the notation, we divide the argument into two paragraphs.
+
+\paragraph{$\mathbf{"\implies"}$:} Suppose that $T$ is a Fredholm operator. By definition, the subspace $E_0 := \kers \, T$ is closed and finite-dimensional; hence it follows from \hyperref[ex:osdos]{Exercise \ref{ex:osdos}} that $E_0$ is a direct algebraic addendum of $X$, that is,
+\begin{equation*} X = E_0 \oplus E_1. \end{equation*}
+Similarly, the subspace $F_1 := \rank(T)$ is closed and finite-codimensional; hence it is an algebraic direct addendum of $Y$, that is,
+\begin{equation*} Y = F_0 \oplus F_1. \end{equation*}
+Let $P_i : X \longtwoheadrightarrow E_i$ and $Q_i : Y \longtwoheadrightarrow F_i$ be the projections associated to the decompositions above, and let us consider the invertible operator
+\begin{equation*} T_1 : E_1 \longrightarrow F_1, \qquad T_1 := Q_1 \circ T \circ P_1. \end{equation*}
+If we set $S := T_1^{-1} \circ Q_1 \in \La(Y, \, X)$, then it turns out that
+\begin{equation*} \begin{aligned}& S \circ T = T_1^{-1} \circ Q_1 \circ T = P_1 = \mathrm{id}_X - P_0, \\[1em] & T \circ S = T \circ T_1^{-1} \circ Q_1 = Q_1 = \mathrm{id}_Y - Q_0, \end{aligned} \end{equation*}
+and this proves the thesis (since the projections are compact operators).
+
+In other words, the argument of this arrow can be equivalently stated by seeing the operator $T$ as a $2 \times 2$ matrix defined on the decompositions of $X$ and $Y$ as follows:
+\begin{equation*} T : E_0 \oplus E_1 \longrightarrow F_0 \oplus F_1, \qquad T = \begin{pmatrix} Q_0 \circ T \circ P_0 & Q_1 \circ T \circ P_0 \\ \\ Q_0 \circ T \circ P_1 & Q_1 \circ T \circ P_1 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ \\ 0 & T_1 \end{pmatrix}. \end{equation*}
+
+\paragraph{$\mathbf{"\impliedby"}$} Suppose that $T$ is essentially invertible, and let $S$ be its essential inverse. It is immediate to verify that the following inclusions hold:
+\begin{equation*} \begin{aligned} & \kers \, T \subset \kers \, S \circ T = \kers \left( \mathrm{id}_X + K_2 \right), \\[1em] &\rank \, T \supset \rank \, T \circ S = \rank \left( \mathrm{id}_Y + K_1 \right). \end{aligned} \end{equation*}
+It follows from \hyperref[fa]{Theorem \ref{fa}} that the right-hand side of the first (resp. second) inclusion has finite dimension (resp. codimension), and therefore the same is true for the left-hand side.
+\end{proof}
+
+\begin{remark} \label{rmk:atks} If $S_s$ and $S_d$ are respectively the left essential inverse and the right essential inverse of a Fredholm operator $T$, then $S_d - S_s \in \La_c(X, \, Y)$. Indeed, it turns out that
+\begin{equation*} \begin{cases} T S_d = \mathrm{id}_Y + K_1 \\[0.5em] S_s T = \mathrm{id}_X + K_2 \end{cases} \leadsto \begin{cases} S_s T S_d = S_s + S_s \circ K_1 \\[0.5em] S_s T S_d = S_d + K_2 \circ S_d , \end{cases} \end{equation*}
+and this proves the claim. In particular, both $S_s$ and $S_d$ are essential inverses of $T$. \end{remark}
+
+Let $X$ and $Y$ be Banach spaces. From now on, we denote by $\Fh(X, \, Y)$ the set of all the Fredholm operators between $X$ and $Y$.
+
+\begin{proposition}\label{prop:frdhsopn}The set of all Fredholm operators $\Fh(X, \, Y)$ is an open subset of $\La(X, \, Y)$. \end{proposition}
+
+\begin{proof} Let $T \in \Fh(X, \, Y)$ be a Fredholm operator, let $S \in \Fh(Y, \, X)$ be an essential inverse and set 
+\begin{equation*} r := \|S\|^{-1}. \end{equation*}
+We claim that
+\begin{equation*} T + H \in \Fh(X, \, Y) \qquad \forall \, H \in \La(X, \, Y) \: : \: \|H \|< r. \end{equation*}
+Indeed, consider the operator $S (\mathrm{id}_Y + HS)^{-1}$, and notice that it is well-defined. Furthermore, a simple computation shows that
+\begin{equation*} \begin{aligned} \left(T + H \right) \left[ S (\mathrm{id}_Y + HS)^{-1} \right] & =\left(TS + HS \right)  \left( \mathrm{id}_Y + HS \right)^{-1} = \\[1em] & = \left( \mathrm{id}_Y + HS \right) \left( \mathrm{id}_Y + HS \right)^{-1} + K^\prime = \\[1em] & = \mathrm{id}_Y + K^\prime,\end{aligned} \end{equation*}
+where $K^\prime := K_1 \left( \mathrm{id}_Y + HS \right)^{-1} \in \La_c(Y)$. In a similar fashion one can prove that
+\begin{equation*} \left[ \left(\mathrm{id}_X + SH \right)^{-1} S \right] \left(T + H \right) = \mathrm{id}_X + K^{\prime\prime},\end{equation*}
+and this is enough to infer that $T + H \in \Fh(X, \, Y)$, as a consequence of \hyperref[rmk:atks]{Remark \ref{rmk:atks}}.
+\end{proof}
+
+\begin{lemma} \label{lemma:fred2} Let $T \in \Fh(X, \, Y)$ be a Fredholm operator of index $i(T) = 0$. There exist $U : X \longrightarrow Y$ invertible operator and $L : X \longrightarrow Y$ finite-rank operator such that
+\begin{equation*} T=  U + L. \end{equation*}
+\end{lemma}
+
+\begin{proof} Let $E_i$, $F_i$, $P_i$, $Q_i$ and $T_i$ be the objects defined in the proof of \hyperref[th:atks]{Theorem \ref{th:atks}}. Since $E_0$ and $F_0$ are finite-dimensional vector spaces (with the same dimension), there exists a linear isomorphism $L_0 : E_0 \longrightarrow F_0$; hence we can define
+\begin{equation*} L := L_0 \circ P_0 \qquad \text{and} \qquad U := T - L. \end{equation*}
+The operator $U$ is invertible because both of the diagonal blocks are invertible, that is,
+\begin{equation*} T - L : E_0 \oplus E_1 \longrightarrow F_0 \oplus F_1, \qquad T - L = \begin{pmatrix} - L_0 & 0 \\ \\ 0 & T_1 \end{pmatrix}. \end{equation*}
+\end{proof}
+
+\begin{proposition}\label{prop:loccost}The Fredholm index
+\begin{equation*} i : \Fh(X, \, Y) \longrightarrow \Z \end{equation*}
+is a continuous map (and thus locally constant.) \end{proposition}
+
+\begin{proof}We divide the argument into two steps.
+
+\paragraph{Step 1.} Suppose that the Fredholm index of $T \in \Fh(X, \, Y)$ is $0$. By \hyperref[lemma:fred2]{Lemma \ref{lemma:fred2}} there exist $U \in \La(X, \, Y)$ invertible and $L \in \La_f(X, \, Y)$ such that
+\begin{equation*} T = U + L. \end{equation*}
+Let $S \in \Fh(Y, \, X)$ be an essential inverse of $T$, and let $H \in \La(X, \, Y)$ be an operator such that $\|H\| < r$, where $r := \|S\|^{-1}$. Clearly
+\begin{equation*} \text{$U + H$ is invertible because $U \left( \mathrm{id}_x + U^{-1}H \right)$ is invertible}, \end{equation*}
+and hence the reader may easily check that
+\begin{equation*} T + H = \left( \mathrm{id}_Y + L^\prime \right) \circ U^\prime, \end{equation*}
+where $U^\prime := U + H$ is invertible and $L^\prime := L \circ \left(U + H \right)^{-1}$ is a finite-rank operator. The operator $U^\prime$ is invertible, and therefore
+\begin{equation*}i \left( \mathrm{id}_Y + L^\prime \right) = 0 \implies i (T + H) = 0 \end{equation*}
+which is exactly what we wanted to prove.
+
+\paragraph{Step 2.} In the general case ($i(T) = k$), one may always consider the operator
+\begin{equation*} \widetilde{T} : X \oplus E \longrightarrow Y \oplus F, \qquad (x, \, e) \longmapsto (T x, \, 0), \end{equation*}
+where $E$ and $F$ are finite-dimensional spaces such that
+\begin{equation*} - k = \mathrm{dim} \, E - \mathrm{dim} \, F. \end{equation*}
+By definition, the operator $\widetilde{T}$ has Fredholm index equal to zero. Thus what we have proved in the first step immediately implies that
+\begin{equation*} i \left( \widetilde{T} + (H \oplus 0_{E \to F}) \right) = 0 \qquad \forall \, H \in \La(X, \, Y) \: : \: \|H\| < r, \end{equation*}
+from which we easily infer that $i(T + H) = k$.
+\end{proof}
+
+\begin{proposition}[Invariance Properties] Let $X$ and $Y$ be Banach spaces. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The sum of a Fredholm operator and a compact operator is still a Fredholm operator, that is,
+\begin{equation*}\Fh(X, \, Y) + \La_c(X, \, Y) \subseteq \Fh(X, \, Y). \end{equation*}
+\item The index is invariant under compact perturbations, that is,
+\begin{equation*}i(T + K) = i(T), \qquad \forall \, T \in \Fh(X, \, Y) \, \, \forall \, K \in \La_c(X, \, Y). \end{equation*}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let $K$ be a compact operator, let $T \in \Fh(X, \, Y)$ be a Fredholm operator and let $S$ an the essential inverse, given by \hyperref[th:atks]{Theorem \ref{th:atks}}. Then $S$ is also an essential inverse of the operator $T + K$ since one can easily check that
+\begin{equation*} \begin{aligned} & S(T + K) = ST + SK = \mathrm{id}_X + K_2 + SK \in \mathrm{id}_X + \La_c(X) \\ \\ & (T + K)S = TS + KS = \mathrm{id}_Y + K_1 + KS \in \mathrm{id}_Y + \La_c(Y) \end{aligned} \end{equation*}
+since the operators $SK$ and $KS$ are both compact as a result of \hyperref[lemma:cmoascprorps]{Lemma \ref{lemma:cmoascprorps}}.
+\item Let $t \in [0, \, 1]$ be a real number, and let us consider the operator
+\begin{equation*} L_t := T + t \cdot K. \end{equation*}
+The operator $t \cdot K$ is compact; hence \textbf{(a)} implies that $L_t \in \Fh(X, \, Y)$ for every $t \in [0, \, 1]$. In conclusion, it suffices to notice that by \hyperref[prop:loccost]{Proposition \ref{prop:loccost}} the map
+\begin{equation*} (0, \, 1) \ni t \longmapsto i(T + t \cdot K) \in \Z \end{equation*}
+is continuous and with values in a discrete set, that is, it is constant.
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}Let $\mathrm{GL}(X, \, Y) \subset \La(X, \, Y)$ be the subset of all the invertible operators from $X$ o $Y$. Then the Fredholm operator of index $0$ are given by
+\begin{equation*} \Fh_0(X, \, Y) = \mathrm{GL}(X, \, Y) + \La_c(X, \, Y) = \mathrm{GL}(X, \, Y) + L_f(X, \, Y). \end{equation*}  \end{corollary}
+
+\begin{remark} \label{rmk:cc} The set of all Fredholm operators $\Fh(X, \, Y)$ is open (\hyperref[prop:frdhsopn]{Proposition \ref{prop:frdhsopn}}). Moreover, it is equal to the countable union of open subsets
+\begin{equation*}\Fh(X, \, Y) = \bigcup_{k \in \N} \Fh_k(X, \, Y) \end{equation*}
+where $\Fh_k(X, \, Y)$ is the subset of all the operators whose index is equal to $k$. 
+
+Notice that, a priori, the $\Fh_k(X, \, Y)$'s are not the connected components of $\Fh(X, \, Y)$ (they may be disconnected), but, if $X = Y$ is an infinite-dimensional separable Hilbert space, then they are.\end{remark}
+
+\begin{proposition} Let $X, \, Y, \, Z$ be Banach spaces, and let $T \in \Fh(X, \, Y)$ and $S \in \Fh(Y, \, Z)$. Then the composition $ST$ belongs to $\Fh(X, \, Z)$ and the Fredholm index is multiplicative, that is,
+\begin{equation*} i(ST) = i(S) + i(T). \end{equation*} \end{proposition}
+
+\begin{proof}[Proof 1] We split the argument into two steps.
+
+\paragraph{Step 1.} The reader may prove as an exercise that there is an exact sequence
+\begin{equation*} 0 \xrightarrow{} \kers \, T \xrightarrow{} \kers \, S \circ T \xrightarrow{T} \kers \, S \xrightarrow{}0, \end{equation*}
+hence the dimension of $\kers \, S \circ T$ is finite since the dimensions of $\kers \, T$ and $\kers \, S$ are finite.
+
+In a similar fashion, one could prove that the codimension of $\rank \, S \circ T$ is finite, and thus that $ST \in \Fh(X, \, Z)$ is a Fredholm operator. 
+
+\paragraph{Step 2.} The argument presented here works only if $X = Y = Z$. We consider the path of Fredholm operators $(L_{\theta})_{\theta \in [0, \, \pi/2]}$ defined by
+\begin{equation*} L_\theta := \begin{pmatrix} \mathrm{id}_X & 0 \\ 0 & S \end{pmatrix} \begin{pmatrix} \cos \theta & - \sin \theta \\ \sin \theta & \cos \theta \end{pmatrix} \begin{pmatrix} T & 0 \\ 0 & \mathrm{id}_X \end{pmatrix} \begin{pmatrix} \cos \theta & \sin \theta \\ - \sin \theta & \cos \theta \end{pmatrix}.\end{equation*}
+A simple computation proves that
+\begin{equation*} L_0 = \begin{pmatrix} T & 0 \\ 0 &S \end{pmatrix} \qquad \text{and} \qquad L_{\frac{\pi}{2}} = \begin{pmatrix} \mathrm{id}_X & 0 \\ 0 &ST \end{pmatrix},\end{equation*}
+are Fredholm operators linked via a continuous path. In particular, it turns out that
+\begin{equation*} i \left(L_0 \right) = i \left( L_{\frac{\pi}{2}} \right) \implies i(T) + i(S) = \underbrace{i(\mathrm{id}_X)}_{= 0} + i(ST), \end{equation*}
+which is exactly what we wanted to prove.
+\end{proof}
+
+\begin{proof}[Proof 2] The key idea is to decompose $X, \, Y$ and $Z$ in $3$, $4$ and $3$ closed spaces respectively in such a way that $T$ and $S$ induce, on corresponding spaces, either the null map or an invertible map.
+
+\paragraph{Decomposition of $X$.} Let $X_0 := \kers \, T$ be a finite-dimensional closed subspace of $X$. Since the kernel of $T$ is included in the kernel of $ST$, it turns out that there exists a finite-dimensional subspace $X_1 \subset X$ such that
+\begin{equation*} X_0 \oplus X_1 = \kers \, S \circ T. \end{equation*}
+Finally, let $X_2 \subset X$ be the complement of $\kers \, S \circ T \subset X$ so that
+\begin{equation*} X_0 \oplus X_1 \oplus X_2 = X. \end{equation*}
+Moreover, observe that the operator $T$, restricted to $X_0$, is the null map. In a similar fashion, one can prove that $T \, \big|_{X_i}$ is injective for $i = 1, \, 2$.
+
+\paragraph{Decomposition of $Y$.} Let $Y_1 := T(X_1)$ and notice that
+\begin{equation*} \begin{aligned} T(X_1) & = T(X_0 + X_1) = T \left( \kers \, S \circ T \right) = \\[0.8em] & = \rank \, T \cap \kers \, S \end{aligned} \end{equation*}
+Let $Y_2 := T(X_2)$. Since $T(X_1 + X_2) = T(X_0 + X_1 + X_2) = \rank \, T$ it follows that $Y_1$ and $Y_2$ are closed, disjoint and that their direct sum is equal to the image of $T$. Moreover, there exists a finite-dimensional closed subset $Y_0 \subset Y$ such that
+\begin{equation*} Y_0 \oplus Y_1 = \kers(S), \end{equation*}
+and there exists a finite-dimensional closed subset $Y_3 \subset Y$ such that
+\begin{equation*} Y_0 \oplus Y_1 \oplus Y_2 \oplus Y_3 = Y. \end{equation*}
+In particular, observe that $T$ restricted to $Y_0 \oplus Y_1$ is the null map (by definition), and also that the restriction $S \, \big|_{Y_2 \oplus Y_3}$ is an injective operator.
+
+\paragraph{Decomposition of $Z$.} In a similar fashion, let us set $Z_2 := S(Y_2)$ and $Z_3 := S(Y_3)$. These subspaces are closed, and they do not intersect, as follows from an argument similar to the one used to decompose $Y$. Thus it turns out that
+\begin{equation*} Z_2 \oplus Z_3 = \rank \, S. \end{equation*}
+Finally, let $Z_1 \subset Z$ be the closed finite-dimensional subspace of $Z$ such that
+\begin{equation*} Z = Z_1 \oplus Z_2 \oplus Z_3. \end{equation*}
+
+\paragraph{Computation of the indices.} The operators $T$ and $S$ assume a particularly simple form as matrices $4\times 3$ and $3 \times 4$ respectively, as a consequence of the decompositions. More precisely, it turns out that
+\begin{equation*} T = \begin{pmatrix} 
+0 & 0 & 0 \\
+0 & T \, \big|_{X_1} & 0 \\
+0  & 0 & T \, \big|_{X_2} \\
+0 & 0 & 0
+\end{pmatrix} \implies i(T) = \mathrm{dim}(X_0) - \left( \mathrm{dim}(Y_0) + \mathrm{dim}(Y_3) \right),\end{equation*}
+and also that
+\begin{equation*} S = \begin{pmatrix} 
+0 & 0 & 0 & 0 \\
+0 & 0 & S \, \big|_{Y_2} & 0 \\
+0 & 0 & 0 & S \, \big|_{Y_3}
+\end{pmatrix} \implies i(S) = \mathrm{dim}(Y_0) + \mathrm{dim}(Y_1) - \mathrm{dim}(Z_1).\end{equation*}
+The composition is given by
+\begin{equation*} ST = \begin{pmatrix} 
+0 & 0 & 0 \\
+0 & 0 & S \, \big|_{Y_2} \, T \, \big|_{X_2} \\
+0 & 0 & 0 
+\end{pmatrix} \implies i(ST) = \mathrm{dim}(X_0) + \mathrm{dim}(X_1) - \mathrm{dim}(Z_1) - \mathrm{dim}(Z_3),\end{equation*}
+and this is exactly what we wanted to prove since
+\begin{equation*} \begin{aligned} i(T) + i(S) & = \mathrm{dim}(X_0) + \mathrm{dim}(Y_1) - \mathrm{dim}(Y_3) - \mathrm{dim}(Z_1) = \\[1em] & = \mathrm{dim}(X_0) + \mathrm{dim}(X_1) - \mathrm{dim}(Z_3) - \mathrm{dim}(Z_1) = \\[1em] & = i(ST). \end{aligned}\end{equation*} 
+\end{proof}
+
+\section{Calkin Algebra}
+\label{sec:cals} \index{Calkin algebra}
+
+Let $X$ be a Banach space. In the previous chapters we proved that $\La(X)$ is an algebra, and $\La_c(X)$ is a closed bilateral ideal (see \hyperref[lemma:cmoascprorps]{Lemma \ref{lemma:cmoascprorps}}).
+
+The quotient space is a Banach algebra (since it is a Banach space and also an algebra satisfying the inequality \eqref{ineqsdsd}). It is called \textit{Calkin algebra}, and it is denoted by $C(X)$, i.e.,
+\begin{equation*} C(X) := \faktor{\La(X)}{\La_c(X)}. \end{equation*}
+The set of all the invertible Calkin operator, denoted by $\mathcal{G}\left(C(X) \right)$, is an open subset and also a subgroup of $C(X)$. Therefore, there is a commutative diagram
+\begin{equation*} \begin{tikzcd} \La(X) \ar[r, "\pi"] & C(X) \\
+\pi^{-1} \left( \mathcal{G} \left(C(X) \right) \right) \ar[r, "\pi"] \ar[u, hookrightarrow]& \mathcal{G} \left(C(X) \right)\ar[u, hookrightarrow]
+\end{tikzcd} \end{equation*}
+and it is clear that
+\begin{equation*}\pi^{-1} \left( \mathcal{G} \left(C(X) \right) \right) = \Fh(X), \end{equation*}
+that is, it is equal to the set of all the Fredholm operators. The reader may prove the following result as an exercise:
+
+\begin{lemma}Let $\Fh_0(X)$ be the set of all the Fredholm operators of index $0$. Then $\pi \left( \Fh_0(X) \right)$ is a normal subgroup and an open subset of $\mathcal{G} \left(C(X) \right)$. Moreover, the quotient
+\begin{equation*} \faktor{\mathcal{G} \left(C(X) \right)}{\pi \left( \Fh_0(X) \right)} \end{equation*}
+is a discrete group.\end{lemma}
+
+\begin{remark} If $X$ is a separable Hilbert space, then the composition
+\begin{equation*} \Fh(X) \xrightarrow{\pi}\mathcal{G} \left(C(X) \right) \xrightarrow{} \faktor{ \mathcal{G} \left(C(X) \right)}{<0>} \cong \Z \end{equation*}
+is equal to the Fredholm index, where $<0>$ denotes the connected component containing the neutral element of the group. \end{remark}
+
+\paragraph{Essential Spectrum.} There is a notion of spectrum in every Banach algebra, and it is always a compact subset of $\C$ (as a result of a more general theory).
+
+In particular, there is a notion of spectrum associated with the Banach algebra $C(X)$, called \textit{essential spectrum}, defined by
+\begin{equation*}\sigma_{\mathrm{ess}}(T) = \left\{ \lambda \in \C \: \left| \: \lambda \, \mathrm{id}_X - T \notin \Fh(X) \right. \right\} = \sigma \left( \pi(T) \right), \end{equation*}
+where $\sigma(\cdot)$ is the spectrum associated to the Banach algebra $\La(X)$.
+
+\section{Exercises}
+
+\paragraph{Finite Dimension.} Let $X$ be a Banach space, and let $N$ be a finite-dimensional (or finite-codimensional) closed subset of $X$. 
+
+\begin{exercise} \label{ex:osdos} Prove that there exists a linear projection or, equivalently, that $N$ is an algebraic direct addendum of $X$. \end{exercise}
+
+\begin{proof}[Solution] Let $\{e_1, \, \dots, \, e_n\}$ be a basis of $N$, that is,
+\begin{equation*} N = \mathrm{Span} \langle e_1, \, \dots, \, e_n \rangle. \end{equation*}
+Every $x \in N$ can be written, uniquely, as a sum
+\begin{equation*} x = \alpha_1 e_1 + \dots + \alpha_n e_n, \end{equation*}
+and therefore we can always consider the linear continuous functionals $\alpha_1, \, \dots, \, \alpha_n \in N^\ast$ such that
+\begin{equation*} x = \alpha_1(x) e_1 + \dots + \alpha_n(x) e_n \quad \text{for all $x \in N$}. \end{equation*}
+By the \hyperref[th:hb]{Hahn-Banach Theorem} we can find linear continuous extensions of $\alpha_1, \, \dots, \, \alpha_n \in X^\ast$, and therefore we can define a projection
+\begin{equation*} P : X \longrightarrow N, \qquad  x \longmapsto \alpha_1(x) e_1 + \dots + \alpha_n(x) e_n. \end{equation*}
+Let $M := \mathrm{Ker} P$. Then one can easily prove that
+\begin{equation*} X = M \oplus N \end{equation*}
+since every $x \in X$ can be written as
+\begin{equation*} x = (x - P(x)) + P(x) \in M + N. \end{equation*}\end{proof}
+
+\begin{exercise}\label{ex:82} Prove that there is no linear projection associated to the inclusion
+\begin{equation*} c_0 \subset \ell_\infty. \end{equation*}
+Explain why, in this case, the statement of \hyperref[ex:osdos]{Exercise \ref{ex:osdos}} does not hold. \end{exercise}
+
+\begin{proof} The reader may consult \href{https://math.stackexchange.com/questions/132520/complement-of-c-0-in-ell-infty}{this} thread for a collection of references and proofs of this assertion.\end{proof}
+
+\begin{exercise} \label{ex:83} Let $X$ be a Banach space. The inclusion
+\begin{equation*} X^\ast \hookrightarrow X^{\ast \ast \ast} \end{equation*}
+always admits a direct addendum. \end{exercise}
+
+\begin{proof}[\textbf{Hint}] The reader may try to consider the following maps:
+\begin{equation*} \begin{aligned}& \imath_X : X \hookrightarrow X^{\ast \ast} \leadsto \left( \imath_X \right)^{\ast} : X^{\ast \ast \ast} \to X^\ast, \\ \\ & \imath_{X^\ast} : X^\ast \hookrightarrow X^{\ast \ast \ast}. \end{aligned}\end{equation*}  \end{proof}
+
+As a corollary of \hyperref[ex:82]{Exercise \ref{ex:82}} and \hyperref[ex:83]{Exercise \ref{ex:83}} we find again that $c_0$ is not the dual of a Banach space (see \hyperref[sub:sdialsd]{Subsection \ref{sub:sdialsd}}).
+
+\paragraph{Inverse Operators.} Let $X$ and $Y$ be Banach spaces. An operator $L \in \La(X, \, Y)$ admits a right (left) inverse if there exists $S \in \La(Y, \, X)$ such that $ST = \mathrm{id}_X$ ($TS = \mathrm{id}_Y$).
+
+\begin{exercise} Let $T \in \La(X, \, Y)$ be a right-invertible operator, and let $S \in \La(Y, \, X)$ be the right inverse.  Prove that: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The operator $TS$ is a projection.
+\item The kernel of $TS$ coincides with the kernel of $S$, that is, $\kers(TS) = \kers(S)$.
+\item The range of $TS$ coincides with the range of $T$, that is, $\rank(TS) = \rank(T)$.
+\end{enumerate} \end{exercise}
+
+\begin{proof}[Solution] \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item To prove that $TS$ is a projection, we simply employ the associative property of the composition:
+\begin{equation*}(TS)^2 = TSTS = T(ST)S = TS. \end{equation*}
+\item The kernel of the operator $S$ is alway contained in the kernel of the operator $TS$, and hence we only need to prove the opposite inclusion. 
+
+Let $y \in \kers(TS)$. It follows that $TS(y) = 0$, and therefore
+\begin{equation*}0 = TS(y) \implies 0 = S(0) = \underbrace{ST}_{=\mathrm{id}_X} S(y) \implies S(y) = 0, \end{equation*}
+which means that $y \in \kers(S)$.
+\item In a similar way, the range of the operator $TS$ is always contained in the range of the operator $T$, and hence we only need to prove the opposite inclusion.
+
+Let $y \in \rank(T)$. It follows that $y = T(x)$, and therefore
+\begin{equation*}S(y) = ST(x) = x \implies y = TS(x), \end{equation*}
+which means that $y \in \rank(TS)$.
+\end{enumerate}\end{proof}
+
+\paragraph{Essential Spectrum.} Let $X$ be a Banach space, and let $C(X)$ be the Calkin algebra.
+
+\begin{exercise} Let $S$ be the injective shift operator
+\begin{equation*} S : \ell_2(\N) \to \ell_2(\N), \qquad (x_0, \, x_1, \, \dots ) \longmapsto (0, \, x_0, \, x_1, \, \dots). \end{equation*}  \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Prove that the spectrum of $S$ is given by the closed ball of radius $1$ in $\C$, i.e. $\sigma(S) = \overline{B_C(0, \, 1)}$.
+\item Prove that the eigenvalue spectrum of $S$ is given by the empty set. Namely, the shift operator $S$ does not admit any eigenvalue.
+\item Find an explicit description of the essential spectrum of $S$.
+\end{enumerate} \end{exercise}

@@ -1,0 +1,517 @@
+\chapter{Divisors} \thispagestyle{empty}
+
+\section{Divisors on Riemann Surfaces}
+
+\begin{definition}[Divisor]\index{Divisor} Let $X$ be a Riemann surface. A \textit{divisor} $D$ on $X$ is a discretely supported function $D : X \to \Z$, that is, a formal sum
+\begin{equation*}D = \sum_{p \in X} D(p) \cdot p, \end{equation*}
+where $D(p) \in \Z$ is equal to the multiplicity of $D$ at $p$, and $D(p) \neq 0$ for only finitely many $p \in X$. \end{definition}
+
+\paragraph{Divisors Group.}\index{Divisor!group} Given $D_1$ and $D_2$ divisors on $X$, there is a sum operation which is defined by setting
+\begin{equation*} D_1 + D_2 = \sum_{p \in X} \left[ D_1(p) + D_2(p) \right] \cdot p, \end{equation*}
+and it is easy to prove that $D_1 + D_2$ is still a divisor on $X$. In particular, if we denote the divisors on $X$ by $\Div(X)$, it turns out that $\left( \Div(X), \, + \right)$ is a \textit{commutative group}.
+
+\begin{definition}[Degree]\index{Divisor!degree} Let $X$ be a Riemann surface. The \textit{degree} is the mapping
+\begin{equation*}\mathrm{deg} : \Div(X) \to \Z, \qquad D = \sum_{p \in X} D(p) \cdot p \longmapsto \sum_{p \in X} D(p). \end{equation*} \end{definition}
+
+\paragraph{Principal Divisors.}\index{Divisor!principal} Let $X$ be a compact Riemann surface and let $f : X \to \C \cup \{ \infty \}$ be a meromorphic function. There is a mapping $\mathrm{div} : \mathcal{M}\left(X; \; \C \cup \{\infty\} \right) \to \Div(X)$ defined by setting
+\begin{equation*} \mathrm{div}(f) := \sum_{p \in X} \mathrm{ord}_p(f) \cdot p. \end{equation*}
+The divisor associated to a function is called \textit{principal} and, by the \hyperref[residui]{Residues Theorem \ref{residui}}, it turns out that the degree is always equal to $0$, that is,
+\begin{equation*} \mathrm{deg} \left( \mathrm{div}(f) \right) = \sum_{p \in X} \mathrm{ord}_p(f) = 0. \end{equation*}
+
+\begin{example} Let $X = \p^1(\C)$ and let $f(z_0, \, z_1) = z_0 \, (z_0 - z_1) \, z_1^{-2}$. The principal divisor associated to $f$ is given by
+\begin{equation*} \mathrm{div}(f) = 1 \cdot [0 : 1] + 1 \cdot [1 : 1] - 2 \cdot [1 : 0], \end{equation*}
+coherently with the properties already discussed above. \end{example}
+
+\begin{definition}[Poles/Zeros divisor of $f$]\index{Divisor!poles/zeros} Let $X$ be a compact Riemann surface and let $f : X \to \C \cup \{\infty\}$ be a meromorphic function. The divisor of the zeros is defined as
+\begin{equation*}\mathrm{div}_0(f) := \sum_{p \: : \: \mathrm{ord}_p(f) \geq 0} \mathrm{ord}_p(f) \cdot p, \end{equation*}
+while the divisor of the poles is defined as
+\begin{equation*}\mathrm{div}_\infty(f) := \sum_{p \: : \: \mathrm{ord}_p(f) \leq 0} \left( - \mathrm{ord}_p(f) \right) \cdot P. \end{equation*} \end{definition}
+
+\begin{definition}[Effective Divisor]\index{Divisor!effective} Let $X$ be a compact Riemann surface. A divisor $D \in \Div(X)$ is \textit{effective} if $D(p) \geq 0$ for every $p \in X$.\end{definition}
+
+Consequently, any divisor $D \in \Div(X)$ may be written as a difference between two effective divisors, that is,
+\begin{equation*} D = D_0 - D_\infty. \end{equation*}
+Finally, there is a partial order on the set of all divisors which is defined by
+\begin{equation*} D_1 \geq D_2 \iff  D_1 - D_2 \geq 0 \iff D_1(p) - D_2(p) \geq 0 \quad \forall \, p \in X. \end{equation*}
+
+\section{Invertible Sheaf of $\mathcal{O}_X$-modules associated to a divisor $D$}
+\index{Divisor!invertible sheaf}
+
+Let $X$ be a compact Riemann surface. The sheaf of $\mathcal{O}_X$-modules associated to a divisor $D \in \Div(X)$ is denoted by $\mathcal{O}_X[D]$, and it is defined by setting
+\begin{equation*} X \supseteq U \longmapsto \mathcal{O}_X[D](U) := \left\{ f : U \to \C \: \left| \: \text{$f$ is meromorphic and $\mathrm{div}(f) \geq - D$} \right. \right\}. \end{equation*}
+
+\begin{proposition}Let $X$ be a compact Riemann surface and let $D \in \Div(X)$. Then $\mathcal{O}_X[D]$ is an invertible sheaf. \end{proposition}
+
+\begin{proof} Let $\mathrm{spt}\left(D \right) = \{p_1, \, \dots, \, p_n\}$. If we set $U_0 := X \setminus \{p_1, \, \dots, \, p_n\}$, then $\mathcal{O}_X\left[D\right]\left(U_0 \right)$ consists of meromorphic functions with no poles, that is, it is isomorphic to the group of holomorphic function defined on $U_0$:
+\begin{equation*} \mathcal{O}_X\left[D\right]\left(U_0 \right) \cong \mathcal{O}_X(U_0). \end{equation*}
+For any $i = 1, \, \dots, \, n$ we may choose a neighborhood $U_i \ni p_i$ such that $U_i \cap U_j = \emptyset$ whenever $i \neq j$. If the multiplicity of $p_i$ is equal to $n_i$, then we may locally (in $U_i$) choose $\varphi_i = z^{n_i}$ in such a way that $D \, \big|_{U_i} = \mathrm{div}(\varphi_i)$ for any $i = 1, \, \dots, \, n$. Thus there is an isomorphism
+\begin{equation*} \mathcal{O}_X(U_i) \xrightarrow{\sim} \mathcal{O}_X[D](U_i), \qquad f \longmapsto \frac{1}{\varphi_i} \cdot f. \end{equation*}
+More precisely, there is an equivalence
+\begin{equation*} \mathcal{O}_X[D](U_i) = \left\{ f : U_i \to \C \: \left| \: \text{$f$ is meromorphic and $\mathrm{ord}_{p_i}(f) \geq - n_i$} \right. \right\} \xrightarrow{\sim} \left\{ f = \frac{g}{\varphi_i} \right\}, \end{equation*}
+where $g : U_i \to \C$ is holomorphic. Indeed, in a more general setting than $X$ Riemann surface, it turns out that the transition maps are given by
+\begin{equation*}f_{i, \, j} = \frac{\varphi_j}{\varphi_i}. \end{equation*} \end{proof}
+
+\begin{definition}Let $X$ be a compact Riemann surface and let $D \in \Div(X)$. The $0$th cohomology group is the vector space of the global sections of $\mathcal{O}_X[D]$, and it is denoted by $L(D)$. \end{definition}
+
+\noindent More precisely, it turns out that
+\begin{equation*} L(D) := H^0 \left( X, \, \mathcal{O}_X[D] \right) = \left\{ f : X \to \C \: \left| \: \text{$f$ meromorphic and $\mathrm{div}(f) \geq - D$} \right. \right\}. \end{equation*}
+
+\begin{example} Let $X = \p^1(\C)$, $p = [1, \, 0]$ and $D = 1 \cdot p$. If we denote by $z = z_1/z_0$ the local coordinate in $U_0 = \left\{ [1 \: : \: z_1] \right\} \cong \C$, then $p = 0$ in $U_0$. By definition
+\begin{equation*} \mathcal{O}_{\p^1}[D] \left(U_0 \right) = \left\{ f : U_0 \to \C \: \left| \: \text{$f$ meromorphic and $\mathrm{ord}_0(f) \geq - 1$} \right. \right\}, \end{equation*}
+hence the following equality also holds true:
+\begin{equation*} \mathcal{O}_{\p^1}[D] \left(U_0 \right) = \left\{ \frac{g(z)}{z} \: \left| \: \text{$g : U_0 \to \C$ holomorphic in $U_0$} \right. \right\}. \end{equation*}
+Assume that $w$ is the local coordinate of $U_1 = \left\{ [z_0 \: : \: 1] \right\} \cong \C$; it remains to study how the functions behaves in the intersection  $U_0 \cap U_1$. If we use the Laurent develop, it turns out that
+\begin{equation*} f(z) = \sum_{i \geq -1} a_i \, z^i \qquad \text{and} \qquad f(w) = \sum_{i \geq -1} a_i \, w^{i} = \sum_{i \geq -1} a_i \, z^{-i}, \end{equation*}
+hence $f(z) = f(w)$ in the intersection if and only if
+\begin{equation*} f(z) = \frac{a_{-1}}{z} + a_0\qquad \text{and} \qquad f(w) = a_{0} + a_{-1} \, w. \end{equation*}
+Therefore we can easily conclude that
+\begin{equation*} \mathcal{O}_{\p^1}[D] \left(U_0 \right) = \left\{ \frac{a_{-1}}{z} + a_0 \right\} \qquad \text{and} \qquad \mathcal{O}_{\p^1}[D] \left(U_1 \right) = \left\{ a_{-1} \, w + a_0 \right\} , \end{equation*}
+that is, there is an isomorphism (see \hyperref[ex:p23psadapdppewpw]{Example \ref{ex:p23psadapdppewpw}})
+\begin{equation*} \mathcal{O}_{\p^1}[D] \cong \mathcal{O}_{\p^1}[1]. \end{equation*}
+\end{example}
+
+We conclude this section with a brief discussion of $L(D)$, as $D$ ranges in the divisor group of a Riemann surface $X$. First notice that if $D_1 \leq D_2$, then there is a natural inclusion $L(D_1) \subseteq L(D_2)$.
+
+\paragraph{Empty $L(D)$.} Recall that a meromorphic function $f$ is holomorphic if and only if $\mathrm{div}(f) \geq 0$; therefore
+\begin{equation*} L(0) = \mathcal{O}(X) :=  \left\{ f : X \to \C \: \left| \: \text{$f$ holomorphic on $X$} \right. \right\}. \end{equation*}
+In particular, if $X$ is compact the only holomorphic functions on the whole $X$ are the constants; thus $L(0) = \mathcal{O}(X) \cong \C$.
+
+\begin{lemma} Let $X$ be a compact Riemann surface. If $D$ is a divisor on $X$ with degree strictly less than zero, then $L(D) = \{0\}$. \end{lemma}
+
+\begin{proof}Let $f \in L(D)$ be a nonzero function. The divisor
+\begin{equation*} E := D + \mathrm{div}(f) \end{equation*}
+is positive ($E \geq 0$), by definition of $L(D)$. Therefore $\mathrm{deg}(E) \geq 0$ and we conclude that there is a contradiction by taking the degree of the defining formula of $E$:
+\begin{equation*} \mathrm{deg}(E) > 0 > \mathrm{deg}(D) = \mathrm{deg}(E). \end{equation*} \end{proof}
+
+\begin{proposition}Let $X = \p^1(\C)$ be the complex projective space and let $D \in \Div(X)$ be a positive divisor such that $\mathrm{deg}(D) = d$. Then
+\begin{equation*} L(D) = H^0 \left( \p^1, \, \mathcal{O}_{\p^1}[D] \right) \cong \left\{ \text{homogeneous polynomials in $z_0$, $z_1$ of degree $d$} \right\}. \end{equation*} \end{proposition}
+
+\begin{proof}[Proof \cite{miranda}]Let us write the divisor as
+\begin{equation*} D = \sum_{i = 1}^{n} e_i \cdot \lambda_i + e_\infty \cdot \infty \end{equation*}
+with $\lambda_i \in \C$ distinct, such that $e_1 + \dots + e_n + e_\infty = d \geq 0$, and let us consider the function
+\begin{equation*} f_D(z) = \prod_{i = 1}^{n} (z - \lambda_i)^{-e_i}. \end{equation*}
+With the above notation, it turns out that the thesis is equivalent to proving that
+\begin{equation*}L(D) = \left\{ f_D(z) \cdot g(z) \: \left| \: \text{$g(z)$ is a polynomial of degree at most $\mathrm{deg}(D)$} \right. \right\}. \end{equation*} 
+
+\paragraph{Step 1.} Fix a polynomial $g(z)$ of degree $e$ and notice that $\infty$ is a pole of $g$, whose degree is equal to $e$. The divisor of $f_D(z)$ is exactly
+\begin{equation*} \sum_{i = 1}^{n} - e_i \cdot \lambda_i + \left( \sum_{i = 1}^{n} - e_i \right) \cdot \infty, \end{equation*}
+therefore
+\begin{equation*}\begin{aligned}\mathrm{div} \left( f_D(z) \cdot g(z) \right) + D & = \mathrm{div}(g) + \mathrm{div}(f_D) + D \geq \\[1em] & \geq \left( \sum_i e_i + e_\infty - e \right) \cdot \infty = \left( \mathrm{deg}(D) - e \right) \cdot \infty, \end{aligned} \end{equation*}
+which proves that $e \leq \mathrm{deg}(D)$. This proves that the given space is a subspace of $L(D)$.
+
+\paragraph{Step 2.} Vice versa, let us take any nonzero $h(z) \in L(D)$ and let us set $g := \frac{h}{f_D}$. We have
+\begin{equation*}\begin{aligned}\mathrm{div} \left( g \right) & = \mathrm{div}(h) - \mathrm{div}(f_D) \geq - D - \mathrm{div}(f_D) \geq \\ & \geq \left( - \sum_i e_i - e_\infty \right) \cdot \infty = - \mathrm{deg}(D) \cdot \infty, \end{aligned} \end{equation*}
+which shows that $g$ can have no poles in the finite part $\C$, and can have a pole of order at most $\mathrm{deg}(D)$ at $\infty$. This forces $g$ to be a polynomial of degree at most $\mathrm{deg}(D)$. \end{proof}
+
+\section{Linear Systems of Divisors}
+
+\paragraph{Linear Equivalence.} In this paragraph, we introduce the notion of equivalence between divisors (on a compact Riemann surface) and prove that it is an equivalence relation in the space $\Div(X)$.
+
+\begin{definition}[Linear Equivalence]\index{Divisor!linear equivalence} Let $X$ be a (compact) Riemann surface and let $D_1, \, D_2 \in \Div(X)$. The divisors are said to be \textit{linearly equivalent} if there exists a meromorphic function $f : X \to \C$ such that
+\begin{equation*} \mathrm{div}(f) = D_1 - D_2. \end{equation*} \end{definition}
+
+\begin{notation} If $D_1$ and $D_2$ are equivalent divisors, we shall write $D_1 \sim D_2$ (or $D_1 \equiv D_2$). \end{notation}
+
+\begin{proposition} Let $X$ be a compact Riemann surface. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $\sim$ is an equivalence relation in $\Div(X)$.
+\item $D \sim 0$ if and only if there exists a meromorphic function $f : X \to \C$ such that $D = \mathrm{div}(f)$.
+\item If $D_1 \sim D_2$, then $\mathrm{deg}(D_1) = \mathrm{deg}(D_2)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}If $X = \p^1(\C)$, then
+\begin{equation*} \mathcal{O}_{\p^1}[D] = \mathcal{O}_{\p^1}\left[ \mathrm{deg}(D) \right] \end{equation*}
+immediately implies that $D_1 \sim D_2$ if and only if $\mathrm{deg}(D_1) = \mathrm{deg}(D_2)$.
+\end{remark}
+
+\paragraph{Linear Systems.} We are finally ready to introduce the notion of linear system associated with a divisor $D \in \Div(X)$.
+
+\begin{definition}[Complete Linear System]\index{Divisor!linear system}Let $X$ be a Riemann surface and let $D \in \Div(X)$ be any divisor. The \textit{complete linear system of $D$}, denoted by $|D|$, is the set of all nonnegative divisors $E \geq 0$ which are equivalent to $D$, i.e.
+\begin{equation*} \left| D \right| = \left\{ E \in \Div(X) \: \left| \: \text{$E \sim D$ and $E \geq 0$} \right. \right\}. \end{equation*} \end{definition}
+
+There is a geometric/algebraic structure to a complete linear system $|D|$ which is related to the vector space $L(D)$. Let $\p (L(D))$ be the projective space associated to the vector space $L(D)$; we may define a function
+\begin{equation*} S :  \p \left( L(D) \right) \to |D| \end{equation*}
+by sending the span of a function $f \in L(D)$ to the divisor $\mathrm{div}(f) + D$. Note that this map is well defined, since the divisor of a multiple $\lambda \cdot f$ is equal to the divisor of $f$.
+
+\begin{lemma}\label{lemma:consdodfkf} If $X$ is a compact Riemann surface, the map $S$ defined above is a $1$-$1$ correspondence. \end{lemma}
+
+\begin{proof} Suppose that there are functions $f, \, g : X \to \C$ such that $S(f) = S(g)$. If we cancel the $D$'s, it turns out that $\mathrm{div}(f) = \mathrm{div}(g)$ or, equivalently, that
+\begin{equation*} \mathrm{div} \left( \frac{f}{g} \right) = 0. \end{equation*}
+The function $f/g$ has no zeros or poles on $X$, thus (by compactness of $X$) it must be a identically equal to a nonzero constant $\lambda \in \C$, i.e., they are the same element in the domain of $S$.
+
+Let $E \in |D|$ be any divisor. By definition $E \sim D$ and $E \geq 0$, therefore there exists $f \in L(D)$ such that
+\begin{equation*} E = \mathrm{div}(f) + D, \end{equation*}
+which is equivalent to $S(f) = E$, i.e., $S$ is surjective. \end{proof}
+
+Thus for a compact Riemann surface, complete linear systems have a natural projective space structure.
+
+\begin{example} Let $X = \p^1(\C)$, let $p = [0: 1] \in X$ and set $D := 1 \cdot p$. We have already proved that
+\begin{equation*} H^0 \left( \p^1, \, \mathcal{O}_{\p^1}[D] \right) \cong \left\{ \frac{a \, z + b}{z} \right\} \end{equation*}
+in $U_0 = \{z_0 \neq 0\}$ with local coordinate $z = z_1/z_0$. The linear system $|D|$ is given by the set of positive divisors $E$, such that
+\begin{equation*} E - D = \mathrm{div}(f). \end{equation*}
+The meromorphic function $f$ has a unique zero of order $1$, and hence
+\begin{equation*} \mathrm{div}(f) = q - p \qquad q \in \p^1(\C), \end{equation*}
+implies that
+\begin{equation*} |D| = \left\{ E = 1 \cdot q \: \left| \: q \in \p^1(\C) \right. \right\}. \end{equation*}
+\end{example}
+
+\begin{proposition} Let $X$ be a compact Riemann surface and let $D \in \Div(X)$. Then
+\begin{equation*} \mathrm{deg}(D) < 0 \iff H^0\left(X, \, \mathcal{O}_X[D] \right) = 0 \iff |D| = \emptyset. \end{equation*}\end{proposition}
+
+\begin{proof}The former equivalence is easy and it has already been proved above. For any $E \in |D|$, it turns out that
+\begin{equation*} \begin{cases} E \geq 0 \\ E = D + \mathrm{div}(f) \end{cases} \implies \begin{cases} E \geq 0 \\ \mathrm{deg}(E) = \mathrm{deg}(D) + 0 < 0\end{cases} \implies \text{absurd, $E$ is positive}. \end{equation*}\end{proof}
+
+%A \textit{general} linear system is a subset of a complete linear system $|D|$, which corresponds (via the map $S$) to a \textit{linear subspace} of $\p(L(D))$. The dimension of a linear system is the dimension of the linear subspace of $|D|$, considered as a projective space.
+
+%\paragraph{Isomorphisms between $L(D)$'s under Linear Equivalence} If two divisors are linearly equivalent, then the associated spaces of meromorphic functions are naturally isomorphic.
+
+%\begin{proposition}Suppose that $D_1$ and $D_2$ are linearly equivalent divisors on a Riemann surface $X$. Let $h$ be a meromorphic function such that $D_1 - D_2 = \mathrm{div}(h)$. Then there is an isomorphism of complex vector space, given by
+%\begin{equation*} \mu_h : L(D_1) \xrightarrow{\simeq} L(D_2), \qquad f \longmapsto f \cdot h. \end{equation*}
+%In particular, if $D_1 \equiv D_2$, then $\mathrm{dim} \, L(D_1) = \mathrm{dim} \, L(D_2)$. \end{proposition}
+
+%\begin{proof}It's a straightforward consequence of the fact that $\mu_{1/h}$ is the inverse map of $\mu_h$, and both are well defined. \end{proof}
+
+%The same construction used above in defining the space of functions with poles bounded by a divisor can be used to defined spaces of meromorphic $1$-forms.
+
+%\begin{definition} The space of \textit{meromorphic} $1$-forms with poles bounded by a divisor $D$, denoted by $L^{(1)}(D)$, is the set of meromorphic $1$-forms
+%\begin{equation*}L^{(1)}(D) := \left\{ \omega \in \mathcal{M}^{(1)}(X) \: \left| \: \text{$\mathrm{div}(\omega) \geq - D$} \right. \right\}. \end{equation*} \end{definition}
+
+%\paragraph{Computation of $L(D)$ on the Riemann Sphere.} Suppose that $D$ is a divisor on the Riemann Sphere with $\mathrm{deg}(D) \geq 0$. 
+
+%\begin{corollary} Let $D$ be a divisor on the Riemann Sphere. Then 
+%\begin{equation*} \mathrm{dim} \, L(D) = \begin{cases} 0 & \text{if $\mathrm{deg}(D) < 0$, and} \\ 1 + \mathrm{deg}(D) & \text{otherwise}. \end{cases} \end{equation*}\end{corollary}
+
+%\paragraph{Computation of $L(D)$ for a Complex Torus.} Let $X = \faktor{\C}{\Lambda}$ be a complex torus.
+
+%\begin{proposition} Let $D \in \Div(X)$. \mbox{}
+%egin{enumerate}[label=\textbf{(\alph*)}]
+%item If $\mathrm{deg}(D) < 0$, then $L(D) = \{0\}$.
+%\item If $\mathrm{deg}(D) = 0$ and $D \sim 0$, then $\mathrm{dim} \, L(D) = 1$.
+%item If $\mathrm{deg}(D) = 0$ and $D \not \sim 0$, then $L(D) = \{0\}$.
+%\item If $\mathrm{deg}(D) > 0$, then $\mathrm{dim} \,L(D) = \mathrm{deg}(D)$.
+%\end{enumerate}\end{proposition}
+ 
+% \begin{proof} \mbox{} %FARE
+%\begin{enumerate}[label=\textbf{(\alph*)}]
+%\item 
+%\item 
+%\item 
+%\item If $\mathrm{deg}(D) = 1$, then $D$ is linearly equivalent to a positive divisor, so we may assume that $D = p$ for some point $p \in X$.
+
+%Clearly the constant functions belong to $L(D)$, thus its dimension is at least one. On the other hand, suppose that $L(D)$ contains a nonconstant meromorphic function $f$. This function $f$ must have a pole, bounded by $p$, hence $f$ has a single pole at $p$ and no other pole. Therefore the associated map $F: X \to \C_\infty$ has degree one (i.e. an isomorphism), but this is absurd.
+
+%To finish the proof we may proceed by induction on $D$; assume then that $\mathrm{deg}(D) = d > 1$. Let $D = D_1 + p$ for some divisor $D_1$ of degree $d-1$ and some point $p \in X$. By induction, we know that $\mathrm{dim} \, L(D_1) = d -1 $.
+
+%Find a positive divisor $E \sim D$, which does not have $p$ in its support; this is always possible. Let $f$ be a meromorphic function on $X$ with $\mathrm{div}(f) = E - D$; notice that $f \in L(D)$. Also we have that $\mathrm{div}(f) + D_1 = E - p$ which is not nonnegative; hence $f \notin L(D)$. This proves that $L(D_1) \neq L(D)$, and so $\mathrm{dim} \,L(D) > d - 1$ since $L(D_1) \subset L(D)$.
+
+%To see that the dimension of $L(D)$ is exactly $d$, choose a local coordinate $z$ centered at $p$, and suppose that $D(p) = n$. Then every $f \in L(D)$ has a Laurent series in $z$ whose lowest possible term is $z^{-n}$. Consider the linear map $\tau : L(D) \to \C$ sending $f$ to the coefficient of $z^{-n}$. The kernel of $\tau$ is exactly $L(D - p) = L(D_1)$, hence $L(D)$ has dimension at most one more than the dimension of $L(D)$.
+%\end{enumerate}\end{proof}
+
+%\paragraph{A Bound on the Dimension of $L(D)$.} We are now ready to conclude this section with a bound on the dimension of $L(D)$ for a compact Riemann surfaces, proving that these spaces are finite-dimensional.
+
+%\begin{lemma} Let $X$ be a Riemann surface, let $D$ be a divisor of $X$, and let $p$ be a point of $X$. Then either $L(D - p) = L(D)$ or $L(D - p)$ has co-dimension one in $L(D)$. \end{lemma}
+
+%\begin{proposition} Let $X$ be a compact Riemann surface, and let $D$ be a divisor on $X$. Then the space of functions $L(D)$ is a finite-dimensional complex vector space. Indeed, if we write $D = P - N$, with $P$ and $N$ nonnegative divisors with disjoint support, then
+%\begin{equation*} \mathrm{dim} \, L(D) \leq 1 + \mathrm{deg}(P). \end{equation*}
+%In particular, if $D$ is a nonnegative divisor, then $\mathrm{dim} \, L(D) \leq 1 + \mathrm{deg}(D)$. \end{proposition}
+
+\section{Divisors and Maps to Projective Space}
+
+In this section, we shall be concerned with the possibility to embed a Riemann surface into a projective space holomorphically.
+
+\paragraph{Holomorphic Maps to Projective Space.}\index{Holomorphic!map to projective space} The first step is to understand what is the meaning of a "holomorphic map to the complex projective space $\p^n$".
+
+\begin{definition}[Holomorphic Map] Let $X$ be a Riemann surface. A map $\varphi : X \to \p^n$ is \textit{holomorphic} at the point $p \in X$ if there are a neighborhood $U_p$ of $p$ and holomorphic functions $\sigma_0, \, \dots, \, \sigma_n : U_p \to \C$, not all zero at $p$, such that - locally - $\varphi$ has the form
+\begin{equation*} \varphi(x) = \left[ \sigma_0(x) : \: \dots \: : \sigma_n(x) \right]. \end{equation*}\end{definition}
+
+Observe that, if one of the $\sigma_i$'s is nonzero at $p$, then it will be nonzero in a neighborhood of $p$; thus the map given by the $\sigma_i$'s is be well defined - at least locally.
+
+\paragraph{Maps to Projective Space as Meromorphic Functions.} On a compact Riemann surface, the holomorphic maps are constant, and thus one cannot expect to use the same holomorphic function $\sigma_i$ at all points $p \in X$ to define a holomorphic map.
+
+Let $X$ be a Riemann surface. Choose $n + 1$ meromorphic functions $\sigma = (\sigma_0, \, \dots, \, \sigma_n)$ on $X$, not all identically to zero. Define $\varphi_\sigma : X \to \p^n$ by setting
+\begin{equation} \varphi_\sigma(p) = \left[ \sigma_0(p) : \: \dots \: : \sigma_n(p) \right]. \label{eq:mapproj} \end{equation}
+A priori $\varphi_\sigma$ is defined at $p$ if \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $p$ is not a pole of any $\sigma_i$, and
+\item $p$ is not a zero of every $\sigma_i$.
+\end{enumerate}
+The reader may check by herself that $\varphi_\sigma$ is holomorphic at all points $p$ satisfying both condition \textbf{(1)} and \textbf{(2)} (i.e., it is holomorphic at every definition point).
+
+On the other hand, the function may also be defined on points which violate the first condition, as a consequence of the next result.
+
+\begin{lemma} \label{lemms:fasfls} If the meromorphic functions $\sigma_0, \, \dots, \, \sigma_n$ are not all identically zero at $p$, then the map \eqref{eq:mapproj} given above can be extended to a holomorphic map defined at $p$. \end{lemma}
+
+\begin{proof} Set
+\begin{equation*} m := \min_{i = 0, \, \dots, \, n} \mathrm{ord}_p \, \sigma_i.\end{equation*}
+By definition there is a neighborhood $U_p$ of $p$ such that
+\begin{equation*} \sigma_i \, \big|_{U_p} \end{equation*}
+has not other pole inside $U$, that is, using the local coordinate $z$ it turns out that
+\begin{equation*} g_i(z) = z^{-m} \, \sigma_i(z) \end{equation*}
+is a holomorphic map at all point of $U_p$, for each $i = 0, \, \dots, \, n$. Therefore, it suffices to define the function $\varphi_\sigma$ at the point $p$ as follows:
+\begin{equation*} \varphi_\sigma(p) := \left[g_0(p) : \: \dots\: : g_n(p) \right] = z^{-m} \left[ \sigma_0(p) :  \: \dots \: : \sigma_n(p) \right]. \end{equation*}  \end{proof}
+
+\begin{example}Let $X = \p^1(\C)$, $p = [1 : 0] \in X$, and let $D = 2 \cdot p \in \Div(X)$. In the previous section we have proved that the $0$-th cohomology group may be identified as follows:
+\begin{equation*} H^0 \left( \p^1, \, \mathcal{O}_{\p^1}[D] \right) = \left\{\left. \frac{1}{z^2} \, P(z) \: \right| \: \mathrm{deg}(P) \leq 2 \right\}. \end{equation*}
+It is easy to prove that in homogeneous coordinates we have the identity
+\begin{equation*} H^0 \left( \p^1, \, \mathcal{O}_{\p^1}[D] \right) = \left\{ \frac{c_0 \, z_0^2 + c_1 \, z_0 \, z_1 + c_2 \, z_1^2}{z_1^2} \right\}, \end{equation*}
+and hence a basis of the $0$-th cohomology group is given by
+\begin{equation*} \sigma_0 = \left( \frac{z_0}{z_1} \right)^2, \qquad \sigma_1 = \frac{z_0 \, z_1}{z_1^2} \quad \text{and} \quad \sigma_2 = \left( \frac{z_1}{z_1} \right)^2. \end{equation*}
+As a consequence, \hyperref[lemms:fasfls]{Lemma \ref{lemms:fasfls}} allows us to write the $\varphi_\sigma : \p^1 \to \p^2$ as
+\begin{equation*} [z_0 : z_1] \longmapsto \left[ z_0^2 : z_0 \, z_1 : z_1^2 \right], \end{equation*}
+which is the so-called \textit{Veronese embedding} (see \hyperref[fig:ve]{Figure \ref{fig:ve}}). Clearly the image of this map inside $\p^2$ is given by
+\begin{equation*} \left\{ [y_0 \: : \: y_1 \: : \: y_2] \in \p^2(\C) \: \left| \: y_1^2 = y_0 \, y_2 \right. \right\}, \end{equation*}
+and hence
+\begin{equation*}|D| = \left\{E \in \Div(X) \: \left| \: \begin{gathered} \text{$E = \mathrm{div}(f) + D$, $E \geq 0$ such that} \\ \text{$f$ has a pole of order $2$ in $p$ and} \\ \text{$f$ has two zeros of order $1$ ($q_1$ and $q_2$)} \end{gathered} \right. \right\}. \end{equation*}
+More precisely, in $\p^2$ the divisor $E = q_1 + q_2$ corresponds to the intersection of the line $\ell$ with the image of the map $\varphi_\sigma$.
+\end{example}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width = 12cm, height = 6cm]{images/GCp.png}
+\label{fig:ve}
+\caption{Veronese Embedding}
+\end{figure} 
+
+Formally, it turns out that, if $\varphi : X \to \p^n$ is holomorphic and $H$ is a hyperplane of $\p^n$, then the intersection $H \cap \varphi(X)$ may be regarded as a divisor of $X$.
+
+\begin{definition}[Hyperplane Divisor]\index{Divisor!hyperplane} Let
+\begin{equation*} H = \left\{h := \sum_{i=0}^n a_i \, y_i = 0 \right\} \subset \p^n(\C) \end{equation*}
+be a hyperplane. If $q$ is a point of $\varphi(X) \cap H$, and $h_0 = \sum_{i = 0}^n b_i \, y_i$ defines a hyperplane such that $h_0(q) \neq 0$, then we define the \textit{pull-back of $H$} as
+\begin{equation*} \varphi^\ast(H) = \sum_{q \in H \cap \varphi(X)} \left[ \sum_{p \in \varphi^{-1}(q)} \mathrm{ord}_p \left( \frac{h}{h_0} \circ \varphi \right) \cdot p \right]. \end{equation*}\end{definition}
+
+\begin{remark}In the previous definition, we divide $h$ by $h_0$ since $h$ is a holomorphic map and, as we have already proved earlier, it would be constant on any compact Riemann surface. \end{remark}
+
+%\begin{proposition}\label{prop:propr}Let $\varphi : X \to \p^n$ be a holomorphic map. Then there is a $(n + 1)$-tuple of meromorphic functions $f = (f_0, \, \dots, \, f_n)$ on $X$ such that $\varphi = \varphi_f$. Moreover if two $(n+1)$-tuples $f$ and $g$ induce the same map, so that $\varphi_f = \varphi_g$ as holomorphic maps to $\p^n$, then there is a meromorphic function $\lambda$ on $X$ such that $g_i = \lambda \cdot f_i$ for every $i$. \end{proposition}
+
+%In particular, there is a $1$-$1$ correspondence between the set of holomorphic maps from $X$ to $\p^n$ and the projective space $\p_{\mathcal{M}(X)}^n$ (which is the set of $1$-dimensional subspaces of the vector space $\mathcal{M}(X)^{n + 1}$ defined over the field $\mathcal{M}(X)$).
+
+%PARAGRAFO NON SVOLTO
+%\paragraph{The Linear Systems of a Holomorphic Map.} Let $\varphi : X \to \p^n$ be a holomorphic map to a projective space. We can always write it as
+%\begin{equation*} \varphi(x) = \left[ f_0(x) \: :  \: \dots \: : \: f_n(x) \right], \end{equation*}
+%where each $f_i$ is a meromorphic function on $X$. Let $D = - \min_{i = 0, \, \dots, \, n} \{ \mathrm{div}(f_i) \}$ be the inverse of the minimum divisor of the divisors of the functions. Thus, for $p \in X$, we have that $-D(p) \leq \mathrm{ord}_p(f_i)$ for each $i$.
+
+%Therefore $-D \leq \mathrm{div}(f_i)$ for each $i$, and we have that $f_i \in L(D)$ for every $i$. More precisely, if we let $V_f$ to be the $\C$-linear span of the functions $\{f_i\}$, that is, the set of all linear combinations $\sum_i a_i \, f_i$ with $a_i \in \C$, we have that $V_f$ is a linear subspace of $L(D)$.
+
+%Therefore the set of divisors $|\varphi| = \left\{ \mathrm{div}(g) + D \: \left| \: g \in V_f \right. \right\}$ forms a linear system on $X$, a subsystem of the complete linear system $|D|$ of all positive divisors linearly equivalent to $D$.
+
+%Clearly the construction of $D$ depends on the choice of the meromorphic functions used to define $\varphi$, but the linear system depends only on $\varphi$.
+
+%\begin{lemma}The linear system $|\varphi|$ defined above is independent of the choice of the functions $\{f_i\}$ used to define $\varphi$.\end{lemma}
+
+%\begin{proof}Suppose that $\varphi$ is also defined by
+%\begin{equation*} \varphi(x) = \left[ g_0(x) \: :  \: \dots \: : \: g_n(x) \right]. \end{equation*}
+%By Proposition \ref{prop:propr} there is a meromorphic function $\lambda: X \to \C$ such that $g_i = \lambda \, f_i$ for each $i$. Since $\mathrm{div}(g_i) = \mathrm{div}(\lambda) + \mathrm{div}(f_i)$, the minimum of the divisors of the $g_i$'s will differ from the minimum of the divisors of the $f_i$'s by the divisor of $\lambda$. Hence
+%\begin{equation*} D_f - D_g = \mathrm{div}(\lambda) \implies D_f \sim D_g \implies |D_f| = |D_g|. \end{equation*}
+%Finally, we notice that a typical member of $|\varphi_g|$ is also an element of $|\varphi_f|$ and vice versa:
+%\begin{equation*} \begin{aligned} \mathrm{div} \left( \sum_i a_i \, g_i \right) + D_g & = \left( \sum_i a_i \, \lambda \, f_i \right) = \\ & = \left( \sum_i a_i \, f_i \right) + \mathrm{div}(\lambda) + D_g = \\ & = \left( \sum_i a_i \, f_i \right) + D. \end{aligned}\end{equation*}
+%Hence the two linear system are the same and the definition of $|\varphi|$ doesn't depend on the representation.\end{proof}
+
+%\begin{definition} Let $\varphi : X \to \p^n$ be an holomorphic map with non degenerate image. The linear system defined above is called the \textit{linear system of the map $\varphi$}. \end{definition}
+
+%Note that in general the degree of the map $\varphi$, as it was defined previously in the course, is generally different from the degree of the divisor in the associated linear system $|\varphi|$.
+
+%A linear system of dimension $n$ whose divisors have degree $d$ is often called a $g_d^n$.
+
+%\begin{lemma} Let $\varphi : X \to \p^n$ be a holomorphic map. Then for every $p \in X$ there is a divisor $E \in |\varphi|$ which does not have $p$ in its support. In other words, there is no point of $X$ which is contained in every divisor of the linear system $|\varphi|$. \end{lemma}
+
+\paragraph{Correspondence Linear Subsystems-Subspaces.} In this paragraph, we want to prove that the only restriction for $\varphi_{|D|}$ not being holomorphic, is that there exists a point $p \in X$ such that $p \in \mathrm{spt} \, E$ for every divisor $E \in |D|$.
+
+\begin{definition}[Base Point Free]\index{b.p.f.} Let $V \subset |D|$ be a linear system on a Riemann surface $X$. A point $p \in X$ is a \textit{base point} of $V$ if and only if every divisor $E \in V$ contains $p$, that is,
+\begin{equation*} E \geq p. \end{equation*}
+A linear system is \textit{base point free} - b.p.f. from now on - if there are no base points. \end{definition}
+
+\begin{remark} A point $p \in X$ is a base point for a linear system $V \subseteq \left|D\right|$ if and only if
+\begin{equation*}f(p) = 0, \qquad \forall \, f \in \overline{V} \subseteq H^0 \left(X, \, \mathcal{O}_X[D]\right).\end{equation*}
+Equivalently, if $\sigma_0, \, \dots, \, \sigma_n$ is a basis for $\overline{V}$, then $p$ is a base point if and only if
+\begin{equation*} \sigma_i(p) = 0, \qquad \forall \, i = 0, \, \dots, \, n. \end{equation*}\end{remark}
+
+Let $\overline{V} \subset H^0 \left(X, \, \mathcal{O}_X[D]\right)$ be a linear subsystem. Suppose that $V$ is b.p.f, and suppose also that $\overline{V}$ is a projective space of dimension $n + 1$. It induces a morphism
+\begin{equation*} \varphi : X \to \p^n(\C) = \p(V^v) \qquad x \longmapsto \left(\sigma_0(x), \, \dots, \, \sigma_n(x) \right), \end{equation*}
+where $V^v$ is the geometric dual of $V$ (i.e. the vector space of the hyperplanes of $V$), and the $\sigma_i$ are meromorphic functions not identically equal to zero.
+
+%We have proved above that holomorphic maps to $\p^n$ with non degenerate image have an associated linear system $|\varphi|$ base-point-free.
+
+%Suppose that $Q \subset |D|$ is a linear system, a subsystem of a complete linear system $|D|$, and let $V \subset L(D)$ be the vector space corresponding to $Q$. For every $f \in L(D)$ and every point $p \in X$, we have that $D(p) + \mathrm{ord}_p(f) \geq 0$. So $p$ is a base point of $Q$ if and only if for every $f \in V$, we have $D(p) + \mathrm{ord}_p(f) \geq 1$. Since $f \in L(D)$ already, this is equivalent to saying that $f \in L(D - p)$.
+
+%\begin{lemma} A point $p \in X$ is a base point of $Q \subseteq |D|$ if and only if $V \subseteq L(D - p)$. In particular $p$ is a base point of $|D|$ if and only if $L(D - p) = L(D)$. \end{lemma}
+
+%\begin{proposition} Let $D$ be a divisor on a compact Riemann surface $X$. Then a point $p \in X$ is a base point of $|D|$ if and only if $\mathrm{dim} \, L(D) = \mathrm{dim} \, L(D - p)$. Hence $|D|$ is base-point-free if and only if for every point $p \in X$, the dimension of $L(D - p)$ is equal to the dimension of $L(D)$ minus one. \end{proposition}
+
+%\paragraph{Holomorphic Map via a Linear System.} In this paragraph we shall prove that the base-point-free property of the linear system of a holomorphic map in fact characterizes such systems.
+
+%\begin{proposition} Let $Q \subset |D|$ be a base-point-free linear system of dimension $n$ (projective) on a compact Riemann surface $X$. Then there is a holomorphic map $\varphi : X \to \p^n$ such that $Q = |\varphi|$. Moreover $\varphi$ is unique up to the choice of coordinates in $\p^n$. \end{proposition}
+
+%\begin{proof} \end{proof} %
+
+\begin{theorem}There is a $1$-$1$ correspondence
+\begin{equation*} \left\{ \begin{gathered} \text{b.p.f. linear systems $\overline{V} \subseteq H^0\left(X, \, \mathcal{O}_X[D]\right)$} \\ \text{of projective dimension $n + 1$, and $D$ a $d$-divisor} \end{gathered} \right\} \leftrightarrow \left\{ \begin{gathered} \text{holomorphic maps $\varphi : X \to \p^n(\C)$} \\ \text{with non degenerate image,} \\ \text{such that $\varphi^\ast(H)$ is a $d$-divisor} \end{gathered} \right\}. \end{equation*} \end{theorem}
+
+The holomorphic map needs to have a \textit{non-degenerate} image, and this assumption cannot be relaxed. Indeed, if the image $\varphi(X)$ is contained in a hyperplane of $\p^n(\C)$, then the correspondence fails to be $1$-$1$.
+
+The reader may prove this fact by herself; e.g., consider a map $X \to \p^2$ and look at it as immersed in a higher-dimension space $X \to \p^2(\C) \hookrightarrow \p^3(\C)$.
+
+\begin{proof}Let $V$ be a b.p.f system as in the assumptions. The associated holomorphic map is the one we have already constructed above, i.e.,
+\begin{equation*} \varphi : X \to \p^n(\C) = \p(V^v) \qquad x \longmapsto \left(\sigma_0(x), \, \dots, \, \sigma_n(x) \right). \end{equation*}
+Suppose that $y_0, \, \dots, \, y_n$ are the coordinates of $\p^n$, and let $p \in \varphi(X) \cap H$ be any point,
+\begin{equation*} H := \left\{ h := \sum_{i = 0}^n a_i \, y_i = 0 \right\} \quad \text{and} \quad H_0 := \left\{ h_0 := \sum_{i = 0}^n b_i \, y_i = 0 \right\} \end{equation*}
+be hyperplanes such that $p \notin H_0$. By definition it turns out that
+\begin{equation*} \varphi^\ast \left(H \right) = \sum_{p \in X} \mathrm{ord}_p \left( \frac{h}{h_0} \circ \varphi \right) \cdot p, \end{equation*}
+and this divisor has clearly degree equal to $d$.
+
+The opposite arrow is a direct consequence of \hyperref[lemma:prox]{Lemma \ref{lemma:prox}} which is stated and proved right below.
+\end{proof}
+
+\begin{lemma} \label{lemma:prox} Let $\varphi : X \to \p^n(\C)$ be a holomorphic map and assume that it is b.p.f., i.e., for any $p \in X$ there exists $i$ such that $\sigma_i(p) \neq 0$. Let
+\begin{equation*} D := - \sum_{p \in X} \min_{i} \left( \mathrm{ord}_p(\sigma_i) \right) \cdot p \end{equation*}
+and let $H := \left\{ h := \sum_{i = 0}^n a_i \, y_i = 0 \right\}$ be a hyperplane. Then
+\begin{equation*} \mathrm{div} \left( \sum_{i = 0}^{n} a_i \, \sigma_i \right) + D = \varphi^\ast(H). \end{equation*} \end{lemma}
+
+\begin{proof}Let $p \in X$, let $j$ be the index such that $\mathrm{ord}_p(D) = - \mathrm{ord}_p(\sigma_j)$, and let $h_0 := y_j$. It easily follows that
+\begin{equation*} \frac{h}{h_0} \circ \varphi = \sum_{i = 0}^{n} a_i \, \frac{\sigma_i}{\sigma_j} \implies \mathrm{ord}_p \left( \varphi^\ast (H) \right) = \mathrm{ord}_p \left(\sum_{i = 0}^{n} a_i \, \sigma_i \right) \underbracket{- \mathrm{ord}_p(\sigma_j)}_{= \mathrm{ord}_p(D)}, \end{equation*}
+therefore
+\begin{equation*} \left\{ \varphi^\ast(H) \: \left| \: \text{$H$ projective hyperplane} \right. \right\} = \left\{ \mathrm{div}(f) + D \: \left| \: f \in \left< \sigma_0, \, \dots, \, \sigma_n \right> \right. \right\} . \end{equation*} \end{proof}
+
+\begin{example}Let $\varphi : \p^1 \to \p^2$ be the Veronese embedding, i.e.,
+\begin{equation*} (z_0, \, z_1) \longmapsto \left( \frac{z_0^2}{z_1^2}, \, \frac{z_0}{z_1}, \, 1 \right), \end{equation*}
+locally in the chart $U_0$. The divisor is given by
+\begin{equation*} - D = - 2 \cdot [1, \, 0] \implies D = 2\cdot p, \qquad p := [1, \, 0], \end{equation*}
+and notice that $\varphi(p) = p_\infty \in \varphi(\p^1) \subset \p^2$.
+
+Let $H$ be the hyperplane defined by the equation $h := a_0 \, y_0 + a_1 \, y_1 + a_2 \, y_2 = 0$ and let $H_0$ be the hyperplane defined by the equation $h_0 := y_0 = 0$. Then the pullback is given by
+\begin{equation*} \varphi^\ast(H) = \mathrm{div} \left(a_0 \, z_0^2 + a_1 \, z_0 \, z_1 + a_2 \, z_2^2 \right) - \mathrm{div} \left(z_0^2 \right) + 2 \cdot p =  \mathrm{div} \left(a_0 \, z_0^2 + a_1 \, z_0 \, z_1 + a_2 \, z_2^2 \right), \end{equation*}
+coherently with the fact that the Veronese embedding is globally given by
+\begin{equation*} (z_0, \, z_1) \longmapsto \left( z_0^2, \, z_0 \, z_1, \, z_1^2 \right). \end{equation*} \end{example}
+
+\section{Inverse Image of Divisors}
+
+Let $X$ and $Y$ be compact Riemann surfaces and let $F : X \to Y$ be a holomorphic function. The \textit{pullback} via $F$ of $q \in Y$ is defined by
+\begin{equation*}F^\ast(q) = \sum_{p \in F^{-1}(q)} \mathrm{molt}_p (F) \cdot p. \end{equation*}
+
+\begin{definition}[Divisor Pullback]\index{Divisor!pullback} Let $D$ be a divisor on $Y$ of the form
+\begin{equation*} D = \sum_{q \in Y} n(q) \cdot q. \end{equation*}
+The \textit{pullback} of $D$ via $F$ is a divisor on $X$, defined by the formula
+\begin{equation*} F^\ast(D) := \sum_{q \in Y} n(q) \cdot F^\ast(q). \end{equation*}
+\end{definition}
+
+\begin{proposition}Let $X$ and $Y$ be compact Riemann surfaces and let $F : X \to Y$ be a holomorphic function. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The pull-back $F^\ast : \Div(Y) \to \Div(X)$ is a group homomorphism.
+\item If $g : Y \to \C$ is a meromorphic function, then
+\begin{equation*}F^\ast \left( \mathrm{div}(g) \right) = \mathrm{div} \left(F^\ast \, g \right) = \mathrm{div} \left(g \circ F\right). \end{equation*}
+\item The degree is multiplicative, i.e.,
+\begin{equation*}\mathrm{deg} \left( F^\ast(D) \right) = \mathrm{deg}(F) \cdot \mathrm{deg}(D).\end{equation*}
+\item The pull-back commutes with the holomorphic function sheaf associated to a divisor, that is,
+\begin{equation*} F^\ast \left( \mathcal{O}_Y[D] \right) = \mathcal{O}_X \left[F^\ast (D) \right]. \end{equation*}
+\end{enumerate}
+\end{proposition}
+
+\begin{theorem}Let $X$ be a compact Riemann surface, and let $\varphi : X \to \p^n(\C)$ be a holomorphic map. Assume that $Y = \varphi(X) \subseteq \p^n$ is a smooth algebraic curve of degree $e := \mathrm{deg}(Y)$. Then
+\begin{equation*} \mathrm{deg} \left( \varphi^\ast(H) \right) = \mathrm{deg}(Y) \cdot \mathrm{deg}\left( \varphi :X \to Y \right). \end{equation*}
+\end{theorem}
+
+\begin{remark}In general, the image $Y = \varphi(X)$ is an algebraic curve (not necessarily smooth) - and a Riemann surface -, whose degree is defined by the formula
+\begin{equation*} \mathrm{deg}(Y) = \mathrm{deg}(Y \cap H) = \sum_{q \in Y \cap H} \mathrm{ord}_q(H). \end{equation*}
+\end{remark}
+
+\begin{proof} Let us consider a point $p \in X$, and let us consider the hyperplanes
+\begin{equation*} H := \left\{ h := \sum_{i = 0}^n a_i \, y_i = 0 \right\} \quad \text{and} \quad H_0 := \left\{ h_0 := \sum_{i = 0}^n b_i \, y_i = 0 \right\} \end{equation*}
+such that $\varphi(p) \in H \cap Y$ and $\varphi(p) \notin H_0$. By definition, it turns out that
+\begin{equation*} \mathrm{ord}_p \left( \varphi^\ast(H) \right) = \mathrm{ord}_p \left( \frac{h}{h_0} \circ \varphi \right) = \mathrm{molt}_p(\varphi) \cdot \mathrm{ord}_{\varphi(p)} \left( \frac{h}{h_0} \right), \end{equation*}
+therefore
+\begin{equation*} \begin{aligned} \mathrm{deg} \left( \varphi^\ast(H) \right) & = \sum_{p \in X}  \mathrm{molt}_p(\varphi) \cdot \mathrm{ord}_{\varphi(p)} \left( \frac{h}{h_0} \right) = \\ & = \sum_{q \in Y} \left[ \sum_{p \in \varphi^{-1}(q)}  \mathrm{molt}_p(\varphi) \cdot \mathrm{ord}_{q} \left(H \right) \right] = \\ & = \mathrm{deg}\left( \varphi :X \to Y \right) \cdot \underbrace{\sum_{q \in Y} \mathrm{ord}_q(H)}_{= e}. \end{aligned} \end{equation*} \end{proof}
+
+\section{Canonical Divisor}
+
+The sheaf $\Omega_X^1$ consists of all the holomorphic $1$-forms defined on $X$. Recall that, locally, a $1$-form can be identified to a holomorphic function, i.e.,
+\begin{equation*} \Omega_X^1 \ni \omega \longmapsto \omega = f(z) \, \mathrm{d}z. \end{equation*}
+In particular, the reader may check by herself that $\Omega_X^1$ is an invertible sheaf. Let $\U = \{U_i\}_{i \in I}$ be a covering of $X$, and let $\varphi_i : U_i \xrightarrow{\sim} V_i \subset \C$ be a collection of charts such that
+\begin{equation*} U_i \xrightarrow{\sim} V_i \cong \Delta, \qquad \omega \, \big|_{U_i} \longmapsto f_i(z) \, \mathrm{d}z. \end{equation*}
+The transition maps are denoted, as usual, by $\varphi_{i, \, j} := \varphi_i \circ \varphi_j^{-1}$. It follows that, if the intersection $U_i \cap U_j$ is nonempty, the $1$-forms can be glued together by
+\begin{equation} \label{int} \omega_j = \left( \omega_i \circ \varphi_{i, \, j} \right) \cdot \varphi_{i, \, j}^{\prime}.\end{equation}
+
+\begin{proposition} \label{dasodosl}Let $\omega_1, \, \omega_2 \in \Omega_X^1$. There exists a unique meromorphic function $g : X \to \C$ such that $\omega_2 = g \, \omega_1$. In particular, locally
+\begin{equation*} \omega_2 = f_2(z) \, \mathrm{d}z = g(z) \, f_1(z) \, \mathrm{d}z, \end{equation*}
+where $\omega_i = f_i(z) \, \mathrm{d}z$. \end{proposition}
+
+\begin{proof}Let $\U = \{U_i\}_{i \in I}$ be a (connected) covering of $X$. For each $i$ it turns out that
+\begin{equation*} \omega_1 = f_i^{(1)}(z) \, \mathrm{d}z \quad \text{and} \quad \omega_2 = f_i^{(2)}(z) \, \mathrm{d}z \qquad \text{in $U_i \xrightarrow{\sim} V_i$}. \end{equation*}
+Since $f_i^{(1)}(z)$ and $ f_i^{(2)}(z)$ are both holomorphic at every point of the open set $V_i$, the function
+\begin{equation*} h_i(z) := \frac{ f_i^{(2)}(z)}{ f_i^{(1)}(z)} \end{equation*}
+is meromorphic at every point of $V_i$. In the intersection $U_i \cap U_j$, it follows from \eqref{int} that
+\begin{equation*}h_i(z) = \frac{ \left( f_i^{(2)} \circ \varphi_{i, \, j} \right) \cdot \varphi_{i, \, j}^{\prime} (z)}{ \left( f_i^{(1)} \circ \varphi_{i, \, j}\right) \cdot \varphi_{i, \, j}^{\prime} (z)} = \frac{f_i^{(2)}}{f_i^{(1)}} \circ \varphi_{i, \, j}(z), \end{equation*}
+that is, the function
+\begin{equation*} g(z) = h_i \circ \varphi_i(z) \qquad \text{for $x \in V_i$ and $x = \varphi(z)$},\end{equation*}
+is a well-defined meromorphic function on the whole surface $X$.
+\end{proof}
+
+\begin{definition}[$1$-Forms Divisor]\index{Divisor!$1$-form} Let $X$ be a Riemann surface and let $\U = \{U_i\}_{i \in I}$ be a covering of $X$. The \textit{canonical divisor} associated to the holomorphic $1$-form $\omega \in \Omega_X^1$, denoted by $\mathrm{div}(\omega)$, is locally defined by
+\begin{equation*} \mathrm{div}(\omega) \, \big|_{U_i} = \sum_{p \in U_i} \mathrm{ord}_p(f) \cdot p, \end{equation*}
+where $f$ is the function such that $\omega = f(z) \, \mathrm{d}z$ in $U_i$. \end{definition}
+
+\begin{proposition}Let $X$ be a Riemann surface and let $\omega_1, \, \omega_2 \in \Omega_X^1$ be holomorphic $1$-forms. There exists a meromorphic function $g$ such that
+\begin{equation*} \mathrm{div}(\omega_1) = \mathrm{div}(\omega_1) + \mathrm{div}(g),\end{equation*}
+that is, $\omega_1 \sim \omega_2$. \end{proposition}
+
+\begin{proof}A simple corollary of \hyperref[dasodosl]{Proposition \ref{dasodosl}}.\end{proof}
+
+\begin{definition}[Canonical Divisor]\index{Divisor!canonical} A divisor $K_X \in \Div(X)$ is a \textit{canonical divisor} if it is the divisor of a holomorphic $1$-form, that is,
+\begin{equation*} \exists \, \omega \in \Omega_X^1 \: : \: K_X = \mathrm{div}(\omega). \end{equation*}\end{definition}
+
+\begin{remark} The canonical divisor is \textbf{not} unique, but, for any $K_X^\prime = \mathrm{div}(\omega^\prime)$ and any $K_X^{\prime\prime} = \mathrm{div}(\omega^{\prime\prime})$, it turns out that $K_X^\prime \sim K_X^{\prime\prime}$. \end{remark}
+
+\begin{remark}There is an isomorphism $\mathcal{O}_X[K_X] \cong \Omega_X^1$ as invertible sheaves, since the co-cycles are the same. \end{remark}
+
+\begin{example} Let us consider the sheaf $\Omega_{\p^1}^1$, and suppose that $z$ is the local coordinate of $U_0$ and $w$ is the local coordinate of $U_1$. It turns out that
+\begin{equation*} w = \frac{1}{z} \implies \mathrm{d}w = - \frac{1}{z^2} \, \mathrm{d}z \qquad \text{in $U_0 \cap U_1$}, \end{equation*}
+therefore
+\begin{equation*} f_0(z)\, \mathrm{d}z = f_1(w) \, \mathrm{d}w \iff f_0(z) = - \frac{1}{z^2} \, f_1 \left( \frac{1}{z} \right) \, \mathrm{d}z. \end{equation*}
+In particular, the co-cycle is given by
+\begin{equation*} f_{0, \, 1}(z) = - \frac{1}{z^2} = - \left( \frac{z_1}{z_0} \right)^{-2},\end{equation*}
+and this immediately implies that $\Omega_{\p^1}^1 \cong \mathcal{O}_{\p^1}(-2)$.
+\end{example}
+
+\begin{example}Let $X = \faktor{\C}{\Lambda}$ be a Riemann surface of genus $1$. Then $\omega = 1 \cdot \mathrm{d}z$ is a holomorphic $1$-form, but it is zero at the quotient. In particular, $K_X = 0$ and thus $\Omega_X^1 \cong \mathcal{O}_X[K_X] = \mathcal{O}_X$. \end{example}
+
+\section{Riemann-Hurwitz Theorem}
+
+In this final section, we want to state and prove the \textit{Riemann-Hurwitz theorem}, which links the canonical divisor of two compact connected Riemann surfaces via a morphism.
+
+\begin{theorem}[Riemann-Hurwitz]\index{Riemann-Hurwitz Theorem}\label{th:rh} Let $X$ and $Y$ be compact connected Riemann surfaces, and let $\pi : X \to Y$ be a morphism. Then
+\begin{equation*} K_X \sim \pi^\ast(K_Y) + R, \end{equation*}
+where $R$ is the ramification divisor, and it is defined as
+\begin{equation*} R = \sum_{p \in X} \left(\mathrm{ord}_p(\pi) - 1 \right) \cdot p. \end{equation*}
+ \end{theorem}
+
+\begin{proof} Recall that there is an isomorphism between invertible sheaves $\Omega_Y^1 \cong \mathcal{O}_Y[K_Y]$ since the co-cycles coincide.
+
+\paragraph{Step 1.} Let $p \in X$, and let $q \in Y$ be a point in the image (i.e. $\pi(p) = q$). Let $W_q$ be a neighborhood of $q$ in $Y$ such that
+\begin{equation*} \omega_Y = f(w) \, \mathrm{d}w, \end{equation*}
+where $K_Y = \mathrm{div}(\omega_Y)$. By \hyperref[nf]{Proposition \ref{nf}}, there exists a neighborhood $U_p$ of $p$ in $X$ such that
+\begin{equation*} \pi \, \big|_{U_p} : U_p \longrightarrow W_q \subseteq Y, \qquad z \longmapsto w = z^m, \end{equation*}
+where $p \longleftrightarrow 0$ and $q \longleftrightarrow 0$.
+
+\paragraph{Step 2.} By definition, we have that
+\begin{equation*} \pi^\ast \left(f(w) \, \mathrm{d} w\right) = f(z^m) \cdot \left(m \, z^{m-1} \right) \, \mathrm{d}z, \end{equation*}
+where, intuitively, the first term corresponds to the differential $\omega_X$, and the second term corresponds to the ramification at $p$.
+
+Therefore, by taking the divisors of both left-hand side and right-hand side, we have that
+\begin{equation*} \mathrm{div} \left( \omega_X \, \big|_{U_p} \right) = \mathrm{div} \left( f(z^m) \right) = \pi^\ast \left( \mathrm{div}(f(w)) \right) + \mathrm{div} \left(z^{m-1} \right),\end{equation*}
+and this concludes the proof, since
+\begin{equation*} K_X = \mathrm{div} \left( \omega_X \right) =\pi^\ast \left( \mathrm{div}(\omega_Y) \right) + \sum_{p \in X} \left( \mathrm{ord}_p(\pi) - 1 \right) \cdot p.\end{equation*}
+\end{proof}
+
+\begin{corollary} \label{cor:dincan}Let $X$ be a connected Riemann surface of genus $g$, and let $K_X$ be a canonical divisor of $X$. Then $\mathrm{deg}(K_X) = 2g - 2 = - \chi_{top}(X)$. \end{corollary}
+
+\begin{proof} Let $\pi : X \to \p^1$ be a morphism of degree $d$. Such a map always exists, but the result is highly nontrivial\footnote{In \hyperref[sec:merglo]{Section \ref{sec:merglo}} we have proved that there is a meromorphic function $f : X \longrightarrow \C$, and we know that this can be identified with a holomorphic map $F : X \longrightarrow \p^1(\C)$.}. It follows from the \hyperref[th:rh]{Riemann-Hurwitz Theorem \ref{th:rh}} that
+\begin{equation} \label{prima} K_X = \pi^\ast(K_{\p^1}) + R \implies \mathrm{deg}(K_X) = \underbrace{d \cdot \mathrm{deg}(K_{\p^1})}_{= - 2d} + \sum_{p \in X} \left( \mathrm{ord}_p(\pi) - 1 \right). \end{equation}
+On the other hand, the \hyperref[th:hf]{Hurwitz Theorem \ref{th:hf}} gives us the identity
+\begin{equation} \label{seconda} \chi_{top}(X) = d \cdot \chi_{top}(\p^1) - \sum_{p \in X} \left( \mathrm{ord}_p(\pi) - 1 \right), \end{equation}
+hence, if we combine \eqref{prima} and \eqref{seconda} together, then we can conclude that
+\begin{equation*}\mathrm{deg}(K_X) = 2g - 2 = - \chi_{top}(X). \end{equation*}
+\end{proof}
+
+\begin{remark}As a consequence of the previous result, it turns out that there are three big families of algebraic curves, i.e., 
+\begin{equation*} g = 0 \qquad \mathrm{deg}(K_X) < 0 \end{equation*}
+\begin{equation*} g = 1 \qquad \mathrm{deg}(K_X) = 0 \end{equation*}
+\begin{equation*} g \geq 2 \qquad \mathrm{deg}(K_X) > 0. \end{equation*}\end{remark}

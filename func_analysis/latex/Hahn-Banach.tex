@@ -1,0 +1,610 @@
+\chapter{The Hahn-Banach Theorems} \thispagestyle{empty}
+
+In this chapter, we are concerned with the various statements of the Hahn-Banach theorem. In the first half, we prove the analytic form: \textit{Every functional defined on a linear subspace of a vector space may be extended (not uniquely, in general) to a linear functional, provided that there exists a particular function $p$.}
+
+In the second half of the chapter, we prove the geometric weak (strong) form: \textit{Two subsets $A, \, B \subset X$, satisfying certain assumptions, of a (locally convex) topological vector space $X$ may be (strictly) separated via a closed hyperplane}.
+
+\section{The Analytic Form of the Hahn-Banach Theorem}
+
+\begin{theorem}[Hahn-Banach, analytic form] \index{Hahn-Banach Theorem!analytic form}\index{Hahn-Banach Theorem}\label{theorem:hb}Let $X$ be a real vector space and let $p : X \longrightarrow \R$ be a sublinear function, that is, a function satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item $p(\lambda x) = \lambda p(x)$ for every $x \in X$ and every positive $\lambda \in \R$.
+\item $p(x + y) \leq p(x) + p(y)$ for every $x, \, y \in X$.
+\end{enumerate}
+Let $G \subset X$ be a linear subspace of $X$, and let $g : G \longrightarrow \R$ be a linear functional such that
+\begin{equation*} g(x) \leq p(x), \qquad \forall \, x \in G. \end{equation*}
+Then there exists a linear functional $f : X \longrightarrow \R$, which extends $g$, satisfying the following property:
+\begin{equation*} f(x) \leq p(x) \qquad \forall \, x \in X. \end{equation*} \end{theorem}
+
+\begin{proof} Let us consider the family
+\begin{equation*} \mathcal{F} := \left\{ h : Y \longrightarrow \R \: \left| \: \begin{gathered} \text{$Y$ is a linear subspace of $X$}, \\ \text{$h$ is linear, $G \subseteq Y$, $h$ extends $g$,} \\ \text{and $h(x) \leq p(x)$ for every $x \in Y$} \end{gathered} \right. \right\}. \end{equation*} 
+A standard argument proves that
+\begin{equation*} h_1 \leq h_2 \iff \text{$Y_1 \subset Y_2$ and $h_2$ extends $h_1$} \end{equation*}
+is a partial order relation on $\mathcal{F}$. The reader may easily check that the family $\mathcal{F}$ is nonempty (since $(g, \, Y) \in \mathcal{F}$) and that it is \textit{inductive}. Indeed, let $\{h_i\}_{i \in I} \subset P$ be a totally ordered chain. If we set
+\begin{equation*} Y = \bigcup_{i \in I} Y_i, \qquad h(x) = h_i(x) \quad \text{if $x \in Y_i$ for some $i$}, \end{equation*}
+then it is easy to prove that $(h, \, Y)$ is an upper bound for the chain. By Zorn's lemma, there is a maximal element $(f, \, Y) \in \mathcal{F}$: If we can prove that $Y$ is equal to $X$, then the functional $f : X \longrightarrow \R$ will be the sought one.
+
+We argue by contradiction. Suppose that there exists an element $x_0 \in X \setminus Y$, and let us consider the linear space $Z := Y \oplus \R x_0$. For every $(x, \, t) \in Y \times \R$, we also define
+\begin{equation*} h(x + t x_0) = f(x) + t \alpha, \end{equation*}
+where the constant $\alpha \in \R$ (=$h(0, \, x_0)$) needs to be chosen in such a way that $(h, \, Z) \in \mathcal{F}$. It suffices to take any $\alpha \in \R$ among the real numbers satisfying the inequality
+\begin{equation} \label{eq.120950430} \sup_{y \in Y} \left[ f(y) - p(y - x_0) \right] \leq \alpha \leq \inf_{x \in Y} \left[ p(x + x_0) - f(x) \right]. \end{equation}
+It is easy to prove that such an $\alpha$ must exist. Indeed, the subadditivity of $p$ yields to
+\begin{equation*}f(u + v) = f(u) + f(v) \leq p(u + v + x_0 - x_0) \leq p(u - x_0) + p(v + x_0) \quad \text{for all $u, \, v \in Y$}, \end{equation*}
+which, in turn, implies
+\begin{equation*}f(u) - p(u - x_0) \leq -f(v) + p(v + x_0) \quad \text{for every $u, \, v \in Y$}. \end{equation*}
+It follows from the completeness of $\R$ that the set defined by the left-hand side and the set defined by the right-hand side are necessarily separated by an element, and hence such an $\alpha$ exists. It follows from \eqref{eq.120950430} that for every $x \in Y$ we have
+\begin{equation*}\begin{cases}f(x) + \alpha \leq p(x + x_0) \\[1em] f(x) - \alpha \leq p(x - x_0), \end{cases} \end{equation*}
+and, multiplying both by $t > 0$, if we set $y = t x$, then we obtain
+\begin{equation*}\begin{cases}f(y) + t \alpha \leq p(y + t  x_0) \\[1em] f(y) - t  \alpha \leq p(y - t x_0). \end{cases} \end{equation*}
+The second inequality, for $t < 0$, can be easily rewritten as
+\begin{equation*}f(y) - (-t)  \alpha \leq p(y - (-t) x_0) \iff f(y) + t \alpha \leq p(y + t x_0) \quad \text{for $t < 0$}, \end{equation*}
+which yields to
+\begin{equation*}f(x) + t \alpha \leq p(x + t x_0) \quad \text{for all $t \in \R$}. \end{equation*}
+In particular, the map $h$ extends $f$ and it satisfies the inequality $h \leq p$; hence $(h, \, Z) \in \mathcal{F}$, which is in contradiction with the maximality of $f$.
+\end{proof}
+
+\begin{notation}Let $f \in X^\ast$ and $x \in X$ be given. From now on, we denote by $\langle f, \, x \rangle$ the value of $f$ at $x$, i.e. $f(x)$. In the literature, the mapping $\langle \cdot, \, \cdot \rangle$ is called the \textit{duality $(X^\ast, \, X)$ scalar product}. \end{notation}
+
+\begin{corollary}Let $G \subset X$ be a linear subspace, and let $D := \overline{B_X(0, \, 1)}$. If $g : G \longrightarrow \R$ is a continuous linear functional, then there exists $f \in X^\ast$ that extends $g$ and such that
+\begin{equation*} \|f\|_{X^\ast} = \sup_{x \in G \cap D} |g(x)| = \|g\|_{G^\ast}. \end{equation*} \end{corollary}
+
+\begin{proof}Let us consider the function $p(x) = \|g\|_{G^\ast} \|x\|$. The reader may check by herself that $p$ is positively homogeneous and subadditive, that is, for every $x, \, y \in X$ and $\lambda \in \R^+$ it turns out that
+\begin{equation*}\begin{aligned} & p(\lambda x) = \lambda p(x) = \lambda p(x), \\[0.7em] & p(x + y) = \|g\|_{G^\ast}  \|x + y \|_X \leq \|g\|_{G^\ast} (\|x\| +\|y\|).\end{aligned}\end{equation*}
+By definition, for every $x \in G$ the inequality $g(x) \leq p(x)$ holds; thus by the \hyperref[theorem:hb]{Hahn-Banach Theorem \ref{theorem:hb}} there exists a functional $f : X \longrightarrow \R$ extending $g$. To prove that the norm is preserved, it suffices to notice that
+\begin{equation*}\|g\|_{G^\ast} \leq \|f\|_{X^\ast} \leq \|p\|_{X^\ast} = \|g\|_{G^\ast}.\end{equation*}
+\end{proof}
+
+\begin{remark}[Complex] Let $X$ be a complex normed space, and let $f : G \subset X \longrightarrow \C$ be a continuous linear functional, defined on a linear subspace $G$. Then
+\begin{equation*} \mathfrak{Re} \, f : G \longrightarrow \R \end{equation*}
+is a continuous $\R$-linear functional, which is still defined on $G$ since $X$ is a real normed space as well. By the \hyperref[theorem:hb]{Hahn-Banach Theorem \ref{theorem:hb}} there exists a functional $g : X \longrightarrow \R$, extending $\mathfrak{Re} \, f$, such that
+\begin{equation*}\langle g, \, x \rangle \leq \|f\|_{G^\ast} \|x\|.\end{equation*}
+The functional $\widetilde{f} : X \longrightarrow \C$ defined by setting
+\begin{equation*}\left\langle \widetilde{f}, \, x \right\rangle := \langle g, \, x \rangle - \imath \, \langle g, \, \imath x \rangle\end{equation*}
+is $\C$-linear, and, clearly, it is an extension of $f$. Moreover, one can check that
+\begin{equation*}\begin{aligned} \left\langle \mathfrak{Re} \, \widetilde{f}, \, x \right\rangle & = \langle g, \, x \rangle \leq \|f\|_{G^\ast} \|x\| \implies \\[1em] & \implies \mathfrak{Re} \left( \theta \left\langle \widetilde{f}, \, x \right\rangle \right) \leq \|f\|_{G^\ast} \, \|x\|, \end{aligned}\end{equation*}
+for any $\theta \in \C$ of unitary norm; hence we can finally infer that
+\begin{equation*}\left\langle \widetilde{f}, \, x \right\rangle \leq \|f\|_{G^\ast} \|x\|, \qquad \forall \, x \in X.\end{equation*} \end{remark}
+
+\begin{example}[Extension: norm-preserving]\label{ex:12}Let $(X, \, \|\cdot\|)$ be a normed space, and let $x_0 \in X$ be a point. If we let $G = \R x_0$, then the linear continuous functional $g : G \longrightarrow \R$ defined by setting
+\begin{equation*} g(x_0) = \|x_0\|^2,\end{equation*}
+may be extended, via \hyperref[theorem:hb]{Hahn-Banach}, to a continuous linear functional $f \in X^\ast$ with the additional properties
+\begin{equation*} \|f\|_{X^\ast} = \|x_0\|, \qquad \langle f, \, x_0 \rangle = \|x_0\|^2. \end{equation*}
+\end{example}
+
+\begin{example}[Extension: unitary]\label{ex:13}Let $(X, \, \|\cdot\|)$ be a normed space and let $x_0 \in X$ be a point. If we let $G = \R x_0$, then the linear continuous functional $g : G \longrightarrow \R$ defined by setting
+\begin{equation*}g(x_0) := \|x_0\|, \end{equation*}
+may be extended, via \hyperref[theorem:hb]{Hahn-Banach}, to a continuous linear functional $x_0^\ast \in X^\ast$ with the additional properties
+\begin{equation*} \|x_0^\ast\|_{X^\ast} = 1, \qquad \langle x_0^\ast, \, x_0 \rangle = \|x_0\|. \end{equation*} \end{example}
+
+\begin{corollary}Let $(X, \, \|\cdot\|)$ be a normed space, and let $x_0 \in X$ be a point. Then
+\begin{equation*} \| x_0 \|_{X} := \sup_{\|f\|_{X^\ast} \leq 1} \left| \langle f, \, x_0 \rangle \right| = \max_{\|f\|_{X^\ast} \leq 1} \left| \langle f, \, x_0 \rangle \right| . \end{equation*}
+\end{corollary}
+
+\begin{proof}One inequality is trivial since
+\begin{equation*} \sup_{\|f \|_{X^\ast} \leq 1} \left| \langle f, \, x \rangle \right| \leq \|x\| \quad \text{for all $x \in X$}. \end{equation*}
+On the other hand, in \hyperref[ex:13]{Example \ref{ex:13}} we have proved the existence of a linear functional $x_0^\ast \in X^\ast$ with unitary operator norm ($\|x_0^\ast\|_{X^\ast} = 1$) and satisfying $\langle x_0^\ast, \, x_0 \rangle = \|x_0\|$; thus the equality follows immediately by choosing $f = x_0^\ast$.\end{proof}
+
+
+\section{The Geometric Forms of the Hahn-Banach Theorem}
+
+In this section, we set the ground for the statements of the geometric forms of the Hahn-Banach theorem; namely, we briefly introduce the notion of (locally convex) topological vector space, which is approached more in-depth in \hyperref[sec:tvs]{Section \ref{sec:tvs}}, and we investigate the separation properties.
+
+\begin{definition}[Minkowski Functional] \index{Minkowski functional} \index{gauge functional} Let $X$ be a vector space, and let $C \subset X$ be a subset containing the origin. The \textit{Minkowski functional} is defined as follows:
+\begin{equation*} p_C(x) := \inf \left\{ t \in \R^+ \: \left| \: x \in t \cdot C\right. \right\} \in [0, \, + \infty] .\end{equation*}\end{definition}
+
+\begin{lemma} \label{lemma:gage} Let $C \subset X$ be a subset of a real vector space $X$ containing the origin, and let $p_C$ be the associated Minkowski functional. Then the following properties hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The image of $X$ via $p_C$ is bounded (i.e., $p(x) < + \infty$ for every $x \in X$) if and only if $C$ is absorbing\index{absorbing set}\footnote{\textbf{Definition.} Let $C \subset X$ be a subset of a vector space $X$. We say that $C$ is absorbing if for every $x \in X$ there exists $t \in \R^+$ such that $x \in t \cdot C$. }.
+\item If $C$ is convex and absorbing, then the functional $p_C$ is positively homogeneous and subadditive.
+\item If $C$ is convex absorbing and balanced, the functional $p_C$ is a seminorm.
+\item If $C$ is convex and absorbing, then following inclusions hold:
+\begin{equation*} \{ p_C < 1 \} \subseteq C \subseteq \{ p_C \leq 1 \}. \end{equation*}
+
+\end{enumerate}
+\end{lemma} 
+
+\begin{proof} We refer the reader to \hyperref[sec:tvs]{Section \ref{sec:tvs}} for a better overview of topological vector spaces, included the importance of seminorms via Minkowsi functionals. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $C$ is absorbing, then for any $x \in X$ there is a positive constant $r_x > 0$ such that
+\begin{equation*} x \in r_x \cdot C, \end{equation*}
+and this implies that $p_C(x) \leq r_x < \infty$. The vice versa is obvious.
+\item First, we want to prove that for all $\lambda \in \R^+$
+\begin{equation*}p_C(\lambda x) = \lambda p_C(x). \end{equation*}
+There are two possible way to show this equality. The first one follows from taking the limit as $\epsilon \to 0^+$ of the trivial chain of inequalities below:
+\begin{equation*} \frac{p_C( \lambda x ) + \epsilon}{\lambda} \geq p_C(x) \geq \frac{p_C( \lambda x ) - \epsilon}{\lambda}. \end{equation*}
+Alternatively, notice that
+\begin{equation*} \begin{aligned} p_C(\lambda x) & = \inf\{t > 0 \: : \: \lambda x \in t \cdot C\} =
+\\[1em] & = \inf\{t > 0 \: : \: x \in \frac{t}{\lambda} \cdot C\} =
+\\[1em] & = \lambda \inf \{ \frac{t}{\lambda} > 0 \: : \: x \in \frac{t}{\lambda} \cdot C\} =
+\\[1em] & = \lambda p_C(x). \end{aligned} \end{equation*}
+We now prove the subadditivity of $p_C$. For every $\epsilon > 0$ and every $\lambda \in (0, \, 1)$, it turns out that
+\begin{equation*} \lambda \frac{x}{p_C(x) + \epsilon} + (1 - \lambda) \frac{y}{p_C(y) + \epsilon} \in C, \end{equation*}
+since $C$ is convex. If we choose
+\begin{equation*} \lambda := \frac{p_C(x) + \epsilon}{p_C(x) + p_C(y) + 2 \epsilon} \implies 1 - \lambda = \frac{p_C(y) + \epsilon}{p_C(x) + p_C(y) + 2 \epsilon}, \end{equation*}
+then it turns out that
+\begin{equation*}\frac{x + y}{p_C(x) + p_C(y) + 2 \epsilon} \in C. \end{equation*}
+In particular, by definition we have the inequality
+\begin{equation*}p_C(x) + p_C(y) + 2 \epsilon \geq p_C(x + y), \end{equation*}
+and hence, if we take the limit as $\epsilon \to 0^+$, we can infer that $p_C$ is subadditive.
+\item Recall that, if $C$ is a balanced set, then $C = - C$. In particular, it turns out that for all $\lambda < 0$ we have
+\begin{equation*}\begin{aligned} p_{C}(\lambda x) & = \inf\{t > 0 \: : \: \lambda x \in t \cdot (C)\} =
+\\[1em] & = \inf\{t > 0 \: : \: (- \lambda)x \in t \cdot (-C) \} =
+\\[1em] & = p_{-C}(-\lambda x) = - \lambda p_{-C}(x) = |\lambda| p_C(x), \end{aligned} \end{equation*}
+which means that $p_C$ is homogeneous (and not only positively homogeneous).
+\item One of the inclusions is trivial, i.e.,
+\begin{equation*} \left\{x \in X \: \left| \: p_C(x) < 1 \right. \right\} \subseteq C.\end{equation*}
+On the other hand, notice that for a convex absorbing set $C$, the family $\{t \: \left| \: x/t \in C \right.\}$ is either given by
+\begin{equation*}[p_C(x), \, + \infty) \quad \text{or} \quad (p_C(x), \, + \infty). \end{equation*}
+Therefore, if $p_C(x) > 1$, both intervals do not contain the value $t = 1$, which means that $x$ cannot belong to $C$.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Geometric Hahn-Banach]  \index{Hahn-Banach Theorem!first geometric form}\index{Hahn-Banach Theorem}\label{theorem:hbg1} Let $X$ be a topological vector space, and let $A \subset X$ and $B \subset X$ be two nonempty convex subsets such that $A \cap B = \varnothing$. Assume that $A$ is open. Then there exist $f \in X^\ast$ and $\gamma \in \R$ such that
+\begin{equation*} f(a) < \gamma \leq f(b) \quad \text{for all $a \in A$ and $b \in B$}. \end{equation*}
+More precisely, there exists a closed hyperplane $H$ that separates $A$ and $B$. \end{theorem}
+
+\begin{proof}The difference\footnote{The difference $X - Y$ is the collection of all the elements of the form $x - y$ for some $x \in X$ and $y \in Y$.} $A - B$ is open since it is arbitrary union of open sets
+\begin{equation*} A - B = \bigcup_{b \in B} A - \{b\}, \end{equation*}
+and it is also convex as a consequence of the identity
+\begin{equation*} t (A - B) + (1-t) (A - B) = (t A + (1-t) A) + (t B + (1-t) B). \end{equation*}
+By assumption $A$ and $B$ do not intersect. Thus, the origin is not an element of the difference $A - B$, and, in particular, given any $x_0 \in A - B$, the translation $C := A - B - x_0$ is a convex neighborhood of $0$ endowed with a Minkowski functional $p_C$.
+
+By \hyperref[lemma:gage]{Lemma \ref{lemma:gage}}, it follows that $p_C(-x_0) \geq 1$ (since $-x_0 \notin C$) and, by \hyperref[theorem:hb]{Hahn-Banach Theorem \ref{theorem:hb}} there exists a linear functional $f : X \longrightarrow \R$ such that
+\begin{equation*} \langle f, \, - x_0 \rangle = 1 \quad \text{and} \quad f(x) \leq p_C(x) \quad \text{for all$x \in X$}. \end{equation*}
+For every $a \in A$ and every $b \in B$, the difference $a - b - x_0$ belongs to $C$, and thus
+\begin{equation*}f(a) - f(b) - f(x_0) \leq p_C(a - b - x_0) \leq 1 \implies f(a) - f(b) \leq 0. \end{equation*}
+In particular, there exists $\gamma \in \R$ such that
+\begin{equation*}f(a) \leq \gamma \leq f(b) \quad \text{for all $a \in A$ and all $b \in B$}. \end{equation*}
+We now claim that $f$ is an open mapping. If the claim holds true, then the image of $A$ via $f$ is an open subset of $\R$, and therefore $f$ does not admit a maximum on $f(A)$, that is,
+\begin{equation*}f(a) < \gamma \leq f(b) \quad \text{for all $a \in A$ and all $b \in B$}. \end{equation*}
+In conclusion, notice that the functional $f$ is continuous because it is linear and bounded on a neighborhood of $0$ (see \hyperref[lemma:lipequ]{Lemma \ref{lemma:lipequ}}), and thus the hyperplane is closed. More precisely, if we consider the neighborhood of the origin $U := C \cap (-C)$, then for all $x \in U$, it turns out that
+\begin{equation*} f(x) \leq 1 \quad \text{and} \quad f(-x) \leq 1. \end{equation*}
+
+\paragraph{Claim.} We prove here that any nonconstant linear function $f : X \longrightarrow\R$ is an open mapping, that is, the image of all open sets $V \subset X$ is open in $\R$.
+
+\paragraph{Proof.} Let $x^\ast \in X$ be a point such that $f(x^\ast) = 1$, and let $V \subseteq X$ be an open set. Fix a point $y \in f(V)$ and a point $x \in V$ such that $f(x) =y$. The continuity of the scalar product proves that
+\begin{equation*} \exists \, \delta > 0 \: : \: \forall \, |r| < \delta \implies x + rx^\ast \in V, \end{equation*}
+which means that
+\begin{equation*}f(x + rx^\ast) = y + r \in f(V). \end{equation*}
+In particular, the one-dimensional open ball of center $y$ and radius $\delta$ is contained in the image $f(V) \subset \R$, and this is enough to infer that $f(V)$ is open. \end{proof}
+ 
+\begin{lemma} Let $X$ be a topological vector space, and let $f : X \longrightarrow \R$ be a nonzero linear functional. The following properties are equivalent:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The functional $f$ is continuous.
+\item The kernel $\mathrm{Ker} \, f$ is closed as a subset of $X$.
+\item The kernel $\mathrm{Ker} \, f$ is not dense in $X$.
+\item The functional $f$ is bounded in a neighborhood of the origin.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}\mbox{} 
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Assume that $f$ is continuous. The singlet $\{0\} \in \R$ is closed in $\R$; thus the preimage $f^{-1}(0) = \mathrm{Ker} \, f$ is closed in $X$.
+\item Assume that $\mathrm{Ker} \, f$ is closed. By assumption $f$ is not identically null; hence $\mathrm{Ker} \, f \neq X$, which means that it cannot be dense.
+\item Assume that $\mathrm{Ker} \, f$ is not dense in $X$, that is, its complement has nonempty interior. By definition, there exist a point $x \in X$ and a neighborhood $V$ of the origin such that
+\begin{equation*} (x + V) \cap \mathrm{Ker} \, f = \varnothing. \end{equation*}
+In particular, the linearity of $f$ is enough to infer that
+\begin{equation*}0 \notin f(x + V) \implies f(y) \neq - f(x), \qquad \forall y \in V. \end{equation*}
+In \hyperref[lemma:svtpro]{Lemma \ref{lemma:svtpro}} we prove that one can always find a $V^\prime \subset V$ balanced neighborhood of the origin; hence we may assume without loss of generality that $V$ is balanced. The reader may prove as an exercise that the image $f(V)$ is also balanced.
+
+A balanced set in $\R$ is either bounded, in which case we are done, or equal to the whole real line $\R$, which clearly contradicts the requirements above.
+\item Assume that $f(V)$ is bounded for some $V$ neighborhood of the origin, that is, there exists $M > 0$ constant such that $|f(x)| \leq M$ for any $x \in V$.
+
+Let $\epsilon > 0$ and set $W := \left( \frac{\epsilon}{M} \right) \cdot V$. Then for all $y \in W$ it turns out that
+\begin{equation*} |f(y)| \leq \frac{\epsilon}{M} \, \sup_{x \in V} |f(x)| \leq \epsilon, \end{equation*}
+which proves that $f$ is continuous at zero (and hence everywhere).
+\end{enumerate}\end{proof}
+
+\begin{lemma} \index{topological vector space!separation} \label{lemma:sep}Let $X$ be a topological vector space. Suppose that $C \subset X$ is a closed set and $K \subset X$ is a compact set such that $K \cap C = \varnothing$. Then there exists a neighborhood $V$ of $0$ such that
+\begin{equation*} (K + V) \cap (C + V) = \varnothing. \end{equation*} \end{lemma}
+
+\begin{proof}For any $x \in K$ there is an open neighborhood $W_x$ of $0$ such that
+\begin{equation*} \left(x + W_x\right) \cap C = \varnothing. \end{equation*} 
+By continuity of the vector sum it follows that, for any $x \in K$, there exists an open neighborhood $V_x$ of $0$ such that $V_x = - V_x$ and $V_x + V_x + V_x \subseteq W_x$. In particular,
+\begin{equation*}\left(x + V_x + V_x + V_x\right) \cap C = \varnothing \implies \left(x + V_x + V_x\right)\cap \left(C+ V_x\right) = \varnothing,\end{equation*}
+and $\{x + V_x\}_{x \in K}$ is an open cover of $K$; thus there exists a finite subcover $\{x_i + V_{i} \}_{i = 1, \, \dots, \, k}$ of $K$. If we define
+\begin{equation*} V := \bigcap_{i = 1}^{k} V_i, \end{equation*}
+then it is easy to prove that $V$ is an open neighborhood of $0$, $V = - V$ and $V + V + V \subseteq W_{x_i}$. Finally, we notice that there is an inclusion
+\begin{equation*} \left(K + V \right) \subset \bigcup_{i=1}^{k} \left(x_i + V_{i} + V \right) \subset \bigcup_{i=1}^k \left(x_i + V_i + V_i \right), \end{equation*} 
+and no term in the last union intersects $C + V$ since we chose $V_i$ to ensure this property; thus we infer that
+\begin{equation*} \left(K + V \right) \cap \left(C + V\right) = \varnothing,\end{equation*} 
+which is exactly what we wanted to prove.
+\end{proof}
+
+\begin{theorem}[Hahn-Banach, second geometric form]\index{Hahn-Banach Theorem!second geometric form}\index{Hahn-Banach Theorem} \label{theorem:hbg2}Let $X$ be a locally convex topological vector space, and let $K \subset X$ and $C \subset X$ be two nonempty convex subsets such that $K \cap C = \varnothing$. Assume that $K$ is compact and $C$ is closed. Then there exist $f \in X^\ast$ and $\alpha < \beta \in \R$ such that
+\begin{equation*} f(x) \leq \alpha < \beta \leq f(y) \quad \text{for all $x \in K$ and all $y \in C$}. \end{equation*}
+More precisely, there exists a closed hyperplane $H$ that strictly separates $K$ and $C$. \end{theorem}
+
+\begin{proof} By \hyperref[lemma:sep]{Lemma \ref{lemma:sep}} we can always find an open and convex neighborhood $V$ of the origin, separating $K$ and $C$, that is,
+\begin{equation*} (K + V - V) \cap C = \varnothing. \end{equation*}
+The subset $A := K + V$ is open and convex; thus by the \hyperref[theorem:hbg1]{Hahn-Banach Theorem \ref{theorem:hbg1}} it follows that there are $f \in X^\ast$ and $\beta \in\R$ such that
+\begin{equation*}f(x) < \beta \leq f(y) \quad \text{for all $x \in A$ and all $y \in C$}, \end{equation*}
+or, equivalently,
+\begin{equation*}f(x) < \beta \leq f(y) \quad \text{for all $x \in K$ and all $y \in C$}. \end{equation*}
+The functional $f$ is continuous and the set $K$ is compact; hence $f$ has a maximum on $K$. If we denote it by $\alpha$, then the thesis follows easily:
+\begin{equation*}f(x) \leq \alpha < \beta \leq f(y) \qquad \forall \, x \in K, \, \forall \, y \in C. \end{equation*}
+\end{proof}
+
+\section{Appendix}
+
+In this appendix, we first introduce the notions of \textit{bidual} space and \textit{adjoint operator}, and then we characterize the dual of subspaces and quotients of Banach spaces via adjoint immersion/quotient.
+
+In the second half, we investigate two possible completions of a metric space $X$. More precisely, we prove that there exists a complete metric space $\widetilde{X}$ and an isometric embedding $j : X \hookrightarrow \widetilde{X}$ with dense image.
+
+In the final part, we fully exploit the tools previously introduced to find the dual spaces of $c_0(\N; \; \C)$, $\ell_1(\N; \; \C)$ and $\ell_\infty(\N; \; \C)$, and we show the relation between them. Moreover, we use the characterization of the dual space of a quotient to prove that $c_0$ is \textbf{not} the dual of a Banach space.
+
+\subsection{The Bidual Space $X^{\ast\ast}$ and the Adjoint Operator}
+\label{sec:bs}
+
+Let $\left(X, \, \|\cdot\|_X \right)$ be a complex Banach space. The topological bidual space\index{bidual space}, denoted by $X^{\ast\ast}$, is the set of all the linear and continuous functionals from $X^\ast$ to $\C$, i.e.
+\begin{equation*} X^{\ast\ast} := \left\{ \varphi : X^\ast \longrightarrow \C \: \left| \: \text{$\varphi$ linear and continuous}  \right.\right\}. \end{equation*}
+The norm $\| \cdot \|_{X^\ast}$ induces a norm on the dual $X^{\ast\ast}$, which is given by
+\begin{equation} \label{eq:normabiduale} \|\varphi\|_{X^{\ast\ast}} := \sup_{\|f\|_{X^\ast} \leq 1} \left| \varphi(f) \right| = \sup_{f \neq 0} \frac{\left| \varphi(f) \right|}{ \|f\|_{X^\ast}}. \end{equation}
+There is a linear inclusion from $X$ to its bidual $X^{\ast\ast}$, which is given by
+\begin{equation*} \left(X, \, \|\cdot\|_X \right) \ni x \longmapsto j_x \in \left(X^{\ast\ast}, \, \|\cdot\|_{X^{\ast\ast}} \right), \end{equation*}
+where $j_x : X^\ast \longrightarrow \C$ is the valuation at the point $x$, that is,
+\begin{equation*} \langle j_x, \, f \rangle := \langle f, \, x \rangle.\end{equation*}
+This inclusion is also an \textbf{isometry} since \eqref{eq:normabiduale} implies that
+\begin{equation*} \| j_x \|_{X^{\ast\ast}} = \sup_{\|f\|_{X^\ast} \leq 1} \left| \langle j_x, \, f \rangle \right| = \sup_{\|f\|_{X^\ast} \leq 1} \left| \langle f, \, x \rangle \right| = \|x\|_X.\end{equation*}
+
+\begin{remark} If $X$ is not a Banach space (i.e., if $X$ is a topological vector space), then we can still find an isometric linear inclusion.
+
+In particular, since the dual space is always complete, the map $x \longmapsto j_x$ defined above gives us a way to include isometrically a non-complete metric space into a complete metric space (see \hyperref[app3]{Subsection \ref{app3}} for more details). \end{remark}
+
+\begin{definition}[Dual Operator] \index{dual operator} Let $T \in \mathcal{L}(X, \, Y)$ be a linear continuous operator between two Banach spaces. The \textit{dual operator} is the element $T^\ast \in \La(Y^\ast, \, X^\ast)$ defined by
+\begin{equation*} T(f) := f \circ T. \end{equation*} \end{definition}
+
+\begin{remark}For any $x \in X$ and any $f \in Y^\ast$, it turns out that
+\begin{equation*} \langle T^\ast f, \, x \rangle = \langle f, \, T x \rangle,\end{equation*} 
+where the left-hand side is the duality scalar product $(X^\ast, \, X)$, and the right-hand side is the duality scalar product $(Y^\ast, \, Y)$. From the \hyperref[theorem:hb]{Hahn-Banach Theorem \ref{theorem:hb}} it follows that
+\begin{equation*} \begin{aligned} \|T^\ast\|_{\mathcal{L}(Y^\ast, \, X^\ast)} &= \sup_{\|f\|_{Y^\ast} \leq 1} \left| T^\ast f \right| = \\[1em] & = \sup_{\|f\|_{Y^\ast} \leq 1} \sup_{\|x\| \leq 1} \left| \langle T^\ast f, \, x \rangle \right| = \\[1em] & = \sup_{\|x\| \leq 1} \left| \langle T, \, x \rangle \right| = \|T\|_{\mathcal{L}(X, \, Y)}. \end{aligned} \end{equation*}  \end{remark}
+
+\paragraph{Dual of Subspaces and Quotients.} \index{dual space!of a subspace} \index{dual space!of a quotient} Let $(X, \, \|\cdot\|_X)$ be a Banach space and let $\imath_Y : Y \hookrightarrow X$ be the natural inclusion of a closed linear subspace (endowed with the induced norm).
+
+\begin{theorem} In this setting, there exists an isometry between the dual of $Y$ and a suitable quotient of the dual of $X$, that is,
+\begin{equation*} Y^\ast \xrightarrow{\sim} \faktor{X^\ast}{Y^\perp}, \qquad \text{where} \quad Y^\perp := \left\{ f \in X^\ast \: \left| \: f \, \big|_Y \equiv 0 \right. \right\} \subset X^\ast. \end{equation*} \end{theorem}
+
+\begin{proof}First, we observe that the dual operator $\imath_Y^\ast : X^\ast \longrightarrow Y^\ast$ is nothing more than the restriction map, that is,
+\begin{equation*} \imath_Y^\ast(f) = f \, \big|_{Y}. \end{equation*}
+In particular, the orthogonal space of $Y$ is also equal to the kernel of the dual inclusion, that is,
+\begin{equation*} Y^\perp = \mathrm{Ker} \, \imath_{Y}^\ast. \end{equation*} 
+The operator $\imath_Y^\ast$ is clearly linear, and it passes to the quotient. Indeed, if $f \in Y^\perp$ is any element of the orthogonal, then
+\begin{equation*} \imath_Y^\ast(f) = f \, \big|_{Y} \equiv 0,\end{equation*}
+and thus there exists a well-defined operator $\imath_Y^\ast : \faktor{X^\ast}{Y^\perp} \longrightarrow Y^\ast$.
+
+The operator $\imath_Y^\ast$ is injective by definition; hence we only need to prove that it is surjective, that is, for any $g \in Y^\ast$ there exists $f \in X^\ast$ such that $f \, \big|_{Y} \equiv g$.
+
+But, given $g \in Y^\ast$, the extension $f \in X^\ast$ exists as a straightforward application of the \hyperref[theorem:hb]{Hahn-Banach Theorem \ref{theorem:hb}}. Finally, it is also an isometry since
+\begin{equation*} \| f + Y^\perp \|_{X^\ast} = \inf_{h \in Y^\perp} \|f + h \|_{X^\ast} = \|f\|_{Y^\ast}. \end{equation*} \end{proof}
+
+\begin{remark} The subspace $Y$ has the property of "unique extension preserving the norm" if and only if $Y^\perp$ has a unique point of minimal distance.\end{remark}
+
+Let $(X, \, \|\cdot\|_X)$ be a Banach space and let $\imath_Y : Y \hookrightarrow X$ be the natural inclusion of a closed linear subspace (endowed with the induced norm).
+
+\begin{theorem} In this setting, there exists an isometry between the dual of the quotient $\faktor{X}{Y}$ and the orthogonal of $Y$, that is,
+\begin{equation*} \left(\faktor{X}{Y}\right)^\ast \cong Y^\perp. \end{equation*} \end{theorem}
+
+\begin{proof} Let $\pi_Y : X \longtwoheadrightarrow \faktor{X}{Y}$ be the projection map. The dual map is given by
+\begin{equation*} \pi_Y^\ast : \left(\faktor{X}{Y}\right)^\ast \longrightarrow X^\ast, \qquad f \longmapsto f \circ \pi, \end{equation*}
+and clearly its image is equal to $Y^\perp$ since
+\begin{equation*} f \circ \pi_Y ( y ) = f(0) = 0, \qquad \forall \, y \in Y. \end{equation*}
+Therefore $\pi_Y^\ast$ is a map onto $Y^\perp$ and it is also injective, that is,
+\begin{equation*} f \circ \pi \equiv 0 \implies f \equiv 0 \end{equation*}
+as a consequence of the \hyperref[theorem:hb]{Hahn-Banach Theorem \ref{theorem:hb}}. In conclusion, the reader may prove that it is an isometry as a consequence of the fact that the projection $\pi$ preserves the balls:
+\begin{equation*} \pi \left( B_X(0, \, 1) \right) = B_{\faktor{X}{Y}}(0, \, 1). \end{equation*} \end{proof}
+
+\begin{example}Let $C^1([a, \, b])$ be the space of continuously differentiable functions, equipped with the norm $\|\cdot\|_\infty + \| \partial_x  \, \cdot \|_\infty$, then there exists an inclusion
+\begin{equation*} C^1([a, \, b]) \hookrightarrow C^0([a, \, b])  \times C^0([a, \, b]). \end{equation*}
+The norm in the product space is given by $\|(\cdot, \, \ast)\| := \|\cdot\|_\infty + \|\ast\|_\infty$, and $C^1([a, \, b])$ is actually a closed subspace (Borel).
+
+In particular, the dual of $C^1([a, \, b])$ may be represented through the dual of $C^0([a, \, b])$. The reader may jump to \hyperref[es:dualsi]{Exercise \ref{es:dualsi}} for a more detailed explanation of what happens. \end{example}
+
+\subsection{Completion of Metric Spaces}
+\label{app3}
+
+The main result of this subsection is that every metric space can be densely embedded in a complete metric space. Here we sketch the construction of two completion: the Cauchy sequence one, and the Fréchet-Kuratowski one.
+
+\begin{theorem} \index{metric space!completion} Let $(X, \, d)$ be a metric space. There exists a complete metric space $\left(\widetilde{X}, \, \widetilde{d} \right)$ and an isometric embedding $j : X \hookrightarrow \widetilde{X}$ with dense image. \end{theorem}
+
+\paragraph{Cauchy Sequences Method.} Let us consider the set of all the Cauchy sequences of $X$, i.e.,
+\begin{equation*}\mathcal{C} := \left\{ (x_n)_{n \in \mathbb{N}} \subset X \: \left| \: (x_n)_n \, \,  \text{is a Cauchy sequence} \right. \right\} . \end{equation*}
+We can always equip the set $\mathcal{C}$ with a semi-distance, which is defined by setting
+\begin{equation*}\delta \left( (x_n)_{n \in \N}, \, (y_n)_{n \in \N} \right) := \lim_{n \to+ \infty} d(x_n, \, y_n). \end{equation*}
+The map $\delta$ is well-defined (namely, the limit exists and is finite). Indeed, for any $\epsilon > 0$ there exists a natural number $N \in \N$ such that
+\begin{equation*} \|x_n - x_N\| \leq \epsilon \qquad \text{and} \qquad \|y_n - y_N\| \leq \epsilon. \end{equation*}
+It follows that
+\begin{equation*} d(x_n, \, y_n) \leq d(x_n, \, x_N) + d(x_N, \, y_N) + d(y_N, \, y_n) \leq 2 \, \epsilon + d(x_N, \, y_N), \end{equation*}
+that is, $\left( d(x_n, \, y_n) - d(x_N, \, y_N) \right)_{n \in \N}$ is a Cauchy sequence in the complete space $\R$, and thus it converges to a finite limit. We define the completion as follows:
+\begin{equation*}\widetilde{X} = \faktor{\mathcal{C}}{\sim}, \qquad \widetilde{d} = \delta \, \big|_{\faktor{\mathcal{C}}{\sim}},\end{equation*}
+where $(x_n)_{n \in \N} \sim (y_n)_{n \in \N}$ if and only if their semi-distance is equal to $0$. The inclusion is clearly given by sending $x \in X$ to the constant sequence, i.e.,
+\begin{equation*}j : X \ni x \longmapsto (x)_{n \in \mathbb{N}} \in \widetilde{X}.\end{equation*}
+We now prove that the image of $j$ is dense in $\widetilde{X}$. Indeed, for any $(x_n)_{n \in \N} \in \widetilde{X}$ and for any $\epsilon > 0$, there exists $N \in \N$ such that $d(x_n, \, x_m) \leq \epsilon$ for any $n, \, m \geq N$. In particular, we can find a constant sequence arbitrarily near to $(x_n)_{n \in \N}$, which is given by $x_{N + k}$ for some $k \in \N$. 
+
+\begin{lemma}\label{lemma:caucdenso} Let $(X, \, d)$ be a metric space and $D \subset X$ a dense subset. If every Cauchy sequence in $D$ converges in $X$, then $X$ is complete. \end{lemma}
+
+We do not discuss this result, but we give it for granted to show that $\widetilde{X}$ is a complete metric space. In particular, it is enough to prove that every Cauchy sequence in $j(X)$ converges in $\widetilde{X}$.
+
+Let $\left(\widetilde{y_n} \right)_{n \in \N}$ be a Cauchy sequence in $j(X)$, and assume that $\widetilde{y_n}$ is represented by the constant (Cauchy) sequence $(y_n, \, y_n, \, \dots)$ for every $n \in \N$. Since $j$ is an isometry, it turns out that
+\begin{equation*}d(y_n, \, y_m) = \widetilde{d} \left(\widetilde{y_n}, \, \widetilde{y_m} \right), \qquad \forall \, m, \, n \in \N.\end{equation*}
+Thus $(y_1, \, y_2, \, \dots)$ is a Cauchy sequence in $X$ and, if we let $\widetilde{y} = \left[(y_1, \, y_2, \, \dots)\right]$ be its equivalence class, then we can prove that $\widetilde{y_n} \to \widetilde{y}$. Indeed, for any $\epsilon > 0$ there is a natural number $N \in \N$ such that
+\begin{equation*}d(y_n, \, y_m) < \frac{\epsilon}{2}, \qquad \forall \, m, \, n \geq N.\end{equation*}
+Hence, for every $k \geq N$, it turns out that
+\begin{equation*}\widetilde{d}\left(\widetilde{y_k}, \, \widetilde{y} \right) = \lim_{n \to + \infty} d(y_k, \, y_n) \leq  \frac{\epsilon}{2},\end{equation*}
+and this concludes the proof of the completeness of $\widetilde{X}$.
+
+\paragraph{Fréchet-Kuratowski Method.} Let $x_0 \in X$ be a point, and let us consider the map
+\begin{equation*}X \ni x \longmapsto \Phi_x, \qquad \Phi_x(y) := d(y, \, x) - d(y, \, x_0). \end{equation*}
+The functional $\Phi_x : X \longrightarrow \R$ is bounded
+\begin{equation*}\left| \Phi_x(y) \right| \leq \left| d(y, \, x) - d(y, \, x_0) \right| \leq d(x, \, x_0), \end{equation*}
+and thus the operator norm of $\Phi_x$ satisfies the following inequality:
+\begin{equation*}\| \Phi_x \| \leq d(x, \, x_0). \end{equation*}
+In particular, the mapping above $x \longmapsto \Phi_x$ send points of $X$ to bounded maps from $X$ to $\R$, that is,
+\begin{equation*}j : X \ni x \longmapsto \Phi_x \in \mathcal{B} \left(X; \; \R \right) \end{equation*}
+and the latter is a complete space, as we have already proved in the \hyperref[ex:bf]{Example \ref{ex:bf}}.
+
+In conclusion, the reader may try to prove that the embedding is isometric and also densely defined as an exercise using the lemmas provided below.
+
+\begin{lemma}In the setting above, it turns out that
+\begin{equation*} \|\Phi_x - \Phi_{x^\prime} \|_\infty = d(x, \, x^\prime), \qquad \forall \, x, \, x^\prime \in X. \end{equation*}\end{lemma}
+
+\begin{proof}The first inequality is rather obvious:
+\begin{equation*} \sup_{y \in X} \left| \Phi_x(y) - \Phi_{x^\prime}(y) \right| = \sup_{y}\left| d(x, \, y) - d(x^\prime, \,y) \right| \leq d(x, \, x^\prime). \end{equation*}
+On the other hand, if we choose $y = x$, then we obtain the opposite one; hence we infer that
+\begin{equation*}\left| \Phi_x(x) - \Phi_{x^\prime}(x) \right| = d(x^\prime, \, x). \end{equation*}
+\end{proof}
+
+\begin{lemma} If $(X, \, d_X)$ is a metric space and $(Y, \, d_Y)$ is a complete metric space, then every uniformly continuous mapping
+\begin{equation*}f: D \subseteq X \longrightarrow Y \end{equation*}
+defined on a dense subset $D \subset X$, can be extended to a uniformly continuous mapping $F : X \longrightarrow Y$ that preserves the continuity module of $f$. \end{lemma}
+
+\begin{proof}[Sketch of the Proof] In order to prove this Lemma, we need to use some basic results: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $F : X \to Y$ is a uniformly continuous map between two metric spaces and $(x_n)_{n \in \N}$ is a Cauchy sequence in $X$, then $(f(x_n))_{n \in \N}$ is a Cauchy sequence in Y.
+\item Let $X$ and $Y$ be metric spaces, $S \subseteq X$ and $f : S \to Y$ be uniformly continuous. If two sequences $(x_n)_{n \in \N}$ and $(y_n)_{n \in \N}$ in $S$ converge to the same limit in $X$ and if the sequence $(f(x_n))_{n \in \N}$ converges in $Y$, then $\lim_n f(x_n) = \lim_n f(y_n)$.
+\end{enumerate}
+Back to the theorem, we can define the extension as follows
+\begin{equation*}F(x) = \lim_{k \to + \infty} f(d_k), \end{equation*}
+where $(d_k)_{k \in \mathbb{N}}$ is any sequence such that $(d_k)_k \subset D$ and $d_k \to x$ as $k$ approaches $+ \infty$. The reader can easily prove that $F$ is well-defined, uniform continuous, and unique.
+
+%\paragraph{Step 1.} We need to prove that $F$ is well defined. The limit does exist and, moreover, from \textbf{(b)} it follows immediately that the value of $F(x)$ does not depend on the sequence used to compute it.
+
+%\paragraph{Step 2.} Clearly $F$ is an extension of $f$. To establish the uniform continuity of $F$, let $x, \, y \in X$ be any points.
+
+%If $(x_n)_{n \in \N}$ is a sequence in $D$ converging to $x$, then $f(x_n) \to F(x)$. This implies that both $d(x_j, \, x)$ and $d(f(x_j), \, F(x))$ can be made as small as we please by choosing $j$ sufficiently large. A similar remark holds for a sequence $(y_n)_{n \in \N}$ in $D$ which converges to $y$. From this show that $x_j$ is arbitrarily close to $y_k$ (for large $j$ and $k$) provided we assume that $x$ is sufficiently close to $y$. Then $F(x)$ is arbitrarily close to $F(y)$, provided that $x$ and $y$ are.
+
+%\paragraph{Step 3.} The uniqueness is left to the reader as an exercise.
+\end{proof}
+
+\begin{corollary} The completion of a normed space $(X, \, \| \cdot \|)$ is a Banach space (i.e., it is complete).\end{corollary}
+
+\subsection{Dual and Bidual of $c_0$}
+\label{sub:sdialsd}
+
+In this brief section, we study the dual and the bidual of $c_0\left(\N; \; \C\right)$, and we answer to a natural question: is $c_0$ the dual of a Banach space $B$?
+
+\begin{theorem}\label{th:c0duale} \index{dual space! of $c_0$}\index{dual space!of $\ell_1$} \index{dual space!of $\ell_\infty$} Let $c_0\left(\N; \; \C \right) := \left\{ x : \N \longrightarrow \C \: \left| \: x(n) \xrightarrow{n \to + \infty} 0  \right.\right\}$ be the space of infinitesimal sequences equipped with the uniform norm. \mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item The dual is the space of all the summable sequences, that is,
+\begin{equation*} c_0^\ast(\N; \; \C) = \ell_1(\N; \; \C). \end{equation*}
+\item The bidual is the space of all the essentially bounded sequences, that is,
+\begin{equation*}(\ell_1(\N; \; \C))^\ast = \ell_\infty(\N; \; \C). \end{equation*}
+\item The dual of $\ell_\infty(\N; \; \C))^\ast$ is the space of all the additive finite measures on $\N$, that is,
+\begin{equation*} \mathrm{ba} (\N) := \left\{ \mu \in \mathcal{M}(\N; \; \R) \: \left| \: \text{$\mu$ additive, finite and eventually negative} \right. \right\}. \end{equation*}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}  \mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item We want to prove that the dual of $c_0$ is isometric to $\ell_1$. Let
+\begin{equation*} \Phi : \ell_1 \longrightarrow c_0^\ast, \qquad y \longmapsto \Phi_y  \: : \: \Phi_y(x) = \sum_{k \in \N} x_k y_k. \end{equation*}
+It is straightforward to prove that $\Phi$ is a well-defined map, that is,
+\begin{equation*} \sum_{k \in \N} \left| x_k y_k \right| \leq \|x\|_\infty \|y\|_1 < + \infty. \end{equation*}
+In particular, for any $y \in Y$, the image $\Phi_y$ is a linear and bounded (thus continuous) functional, and we can easily estimate the norm by
+\begin{equation*} \|\Phi_y\|_{c_0^\ast} \leq \|y\|_1. \end{equation*}
+We want to prove that $\Psi$ is an isometry, i.e. $\| \Phi_y \|_{c_0^\ast} = \|y\|_1$; hence we only need to prove that the equality holds true at one point. Let
+\begin{equation*} u_n = \sum_{k = 0}^{n} \mathrm{sgn}(y_k) e_k \in c_0. \end{equation*}
+It follows from the definition that
+\begin{equation*} \|\Phi_y\|_{c_0^\ast} = \sup_{\|x\| \leq 1} \left| \langle \Phi_y, \, x \rangle \right| \geq \langle \Phi_y, \, u_n \rangle = \sum_{k= 0}^{n} |y_n| \end{equation*}
+for any $n \in \N$; hence, by passing to the limit, we can infer that
+\begin{equation*} \|\Phi_y\|_{c_0^\ast} \geq \|y\|_1 \implies  \|\Phi_y\|_{c_0^\ast} = \|y\|_1. \end{equation*}
+It remains to prove that $\Phi$ is \textbf{surjective}. Let $f \in c_0^\ast$ be any linear and continuous functional and define $y_k := \langle f, \, e_k \rangle$ for any $k \in \N$. We can easily prove that $y = (y_k)_{k \in \N}$ belongs to $\ell_1$ since
+\begin{equation*}\sum_{k = 0}^{n} |y_k| = \sum_{k=0}^{n} \left| \langle f, \, e_k \rangle \right| = \left\langle f, \, u_n \right\rangle \leq \|f\|_{c_0^\ast} < + \infty. \end{equation*}
+Finally, notice that $\langle \Phi_y, \, e_k \rangle = \langle f, \, e_k \rangle$ for any $k \in \N$, that is, $f$ and $\Phi_y$ coincide on a dense subset with respect to the norm $\|\cdot\|_{c_0}$ (the span of $\{e_k\}_{k \in \N}$) and, by continuity, they coincide in the whole space.
+\item We want to prove that the dual of $\ell_1$ is isometric to $\ell_\infty$. Let
+\begin{equation*} \Psi : \ell_\infty \longrightarrow \ell_1^\ast, \qquad y \longmapsto \Psi_y \: : \: \Psi_y(x) = \sum_{k \in \N} x_k y_k. \end{equation*}
+It is straightforward to prove that it is well-defined, that is,
+\begin{equation*} \sum_{k \in \N} \left| x_k y_k \right| \leq \|y\|_\infty \, \|x\|_1 < + \infty. \end{equation*}
+In particular, for any $y \in Y$, the image $\Psi_y$ is a linear and bounded (thus continuous) functional, and the dual norm can be easily estimated by
+\begin{equation*} \|\Psi_y\|_{\ell_1^\ast} \leq \|y\|_\infty. \end{equation*}
+We want to prove that $\Psi$ is an \textbf{isometry}, i.e. $\| \Psi_y \|_{\ell_1^\ast} = \|y\|_\infty$; hence we only need to prove that the equality holds true in one point. It follows from the definition that
+\begin{equation*} \|\Psi_y\|_{\ell_1^\ast} = \sup_{\|x\| \leq 1} \left| \langle \Psi_y, \, x \rangle \right| \geq \left| \langle \Psi_y, \, e_k \rangle \right| = |y_k| \end{equation*}
+for any $k \in \N$, and thus
+\begin{equation*} \|\Psi_y\|_{\ell_1^\ast} \geq \|y\|_\infty \implies  \|\Phi_y\|_{\ell_1^\ast} = \|y\|_\infty. \end{equation*}
+It remains to prove that $\Psi$ is \textbf{surjective}. Let $f \in \ell_1^\ast$ be any linear and continuous functional and define $y_k := \langle f, \, e_k \rangle$ for any $k \in \N$. We can easily prove that $y = (y_k)_{k \in \N}$ belongs to $\ell_\infty$ since
+\begin{equation*}|y_k| \leq \| f\|_{\ell_1^\ast} \implies \|y\|_{\infty} \leq \| f\|_{\ell_1^\ast} < + \infty. \end{equation*}
+Finally, notice that $\langle \Psi_y, \, e_k \rangle = \langle f, \, e_k \rangle$ for any $k \in \N$, that is, $f$ and $\Psi_y$ coincide on a dense subset with respect to the norm $\|\cdot\|_{\ell_1}$ (the span of $\{e_k\}_{k \in \N}$) and by continuity they coincide in the whole space.
+
+\paragraph{Extra.} The inclusion $c_0 \hookrightarrow c_0^{\ast\ast}$ is exactly the set inclusion, and the following diagram is commutative
+\begin{equation*}\begin{tikzcd}
+c_0 \arrow[hookrightarrow]{r}{} \arrow[leftrightarrow, swap]{dd}{\mathrm{id}} & c_0^{\ast\ast} \arrow{dr}{\Phi^\ast}  \arrow[leftrightarrow, swap]{dd}{} & \\
+ & & \ell_1^\ast  \\
+ c_0 \arrow[hookrightarrow]{r}{} & \ell_\infty \arrow{ur}{\Psi}& 
+\end{tikzcd} \end{equation*}
+
+\item We want to prove that the dual of $\ell_\infty$ is the space of the measures $\mu : \mathcal{P}(\N) \to \R$ additive and finite, i.e.,
+\begin{equation*} \mathrm{ba} (\N) := \left\{ \mu \in \mathcal{M}(\N; \; \R) \: \left| \: \text{$\mu$ additive, finite and eventually negative} \right. \right\}. \end{equation*}
+Clearly $\mathrm{ba}(\N)$ is a Banach space with the total variation norm, that is,
+\begin{equation*}\| \mu \|_{\mathrm{ba}} := \sup_{A \subset \N} \left[ \mu(A) - \mu(\N \setminus A) \right]. \end{equation*}
+Let $\mu \in \mathrm{ba}(\N)$ and let $f \in \ell_\infty$ be a function of finite rank (i.e. a simple function), e.g.,
+\begin{equation*} f(x) = \sum_{k=1}^{r} c_k  \chi_{E_k}(x), \end{equation*}
+where $c_k \in \mathbb{R}$ (or $\C$) and $E_k \subseteq \N$. If we set
+\begin{equation*}\int_{\N} f(x) \, \mathrm{d}\mu(x) := \sum_{k=1}^r c_k \, \mu(E_k),\end{equation*}
+then it is easy to prove that the integral is well-defined, that is, it does not depend on the particular representation of $f$. The linear subspace
+\begin{equation*} F := \left\{ f \in \ell_\infty(\N; \; \C) \: \left| \: f(\N) \, \,  \text{is finite} \right. \right\} \end{equation*}
+is \textit{dense} with respect to the $\ell_\infty$ norm; thus the map
+\begin{equation*}\mu \longmapsto \int_{\N} f(x) \, \mathrm{d}\mu(x)\end{equation*}
+may be extended to the whole space because it is continuous. Indeed, it is easy to prove that the map is bounded on $F$ since
+\begin{equation*} \left| \int_{\N} f(x) \, \mathrm{d}\mu(x) \right| \leq \|f\|_\infty \, \|\mu\|_{\mathrm{ba}},\end{equation*}
+and thus there is a linear and continuous extension
+\begin{equation*}I : \mathrm{ba}(\N) \longrightarrow \ell_\infty^\ast(\N; \; \C), \qquad \mu \longmapsto I_\mu \: : \: I_\mu(f) := \int_{\N} f(x) \, \mathrm{d}\mu(x).\end{equation*}
+It is straightforward to prove that $I$ is an \textbf{isometry}. Indeed, the inequality above holds true also when passing to the limit, and thus
+\begin{equation*} \| I_\mu \|_{\ell_\infty^\ast} \leq \|\mu\|_{\mathrm{ba}}.\end{equation*}
+On the other hand
+\begin{equation*} \|\mu\|_{\mathrm{ba}} = \sup_{A \subset \N} \left[ \mu(A) - \mu(\N \setminus A) \right] = \sup_{A \subset \N} \int_\N \left(\chi_A - \chi_{\N \setminus A} \right) \, \mathrm{d}\mu(x) \leq \| I_\mu \|_{\ell_\infty^\ast}, \end{equation*}
+and hence it is an isometry. Finally, to prove that it is \textbf{surjective} notice that given $\alpha \in \ell_\infty^\ast$, we can define a measure $\mu_\alpha$ by setting
+\begin{equation} \label{smdaskdosdoslds} \mu_\alpha(A) = \langle \alpha, \, \chi_A \rangle. \end{equation}
+Clearly \eqref{smdaskdosdoslds} is a finite measure (since $\alpha$ is finite in the $\ell_\infty$ measure) and it is additive (by the linearity of $\alpha$).
+
+In conclusion, notice that the equality $\alpha = I(\mu_\alpha)$ holds on the dense subset $F$; thus they coincide on the whole space and the thesis is proved. Observe that the immersion
+\begin{equation*} \ell_1 \hookrightarrow \ell_1^{\ast\ast} \cong \mathrm{ba} \, (\N) \end{equation*}
+gives us the identification $\ell_1 \leftrightsquigarrow \mathrm{ba}_\sigma$, that is, the subset of the $\sigma$-additive finite measure on $\N$.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem} \label{th:dsodsos}The space $c_0$ is not the dual of any Banach space $X$, that is, $c_0 \neq X^\ast$ for any $X$ Banach. \end{theorem}
+
+We are quite not ready to prove this result. We need to state and give a proof of a technical lemma which will allow us to derive a contradiction when we assume that a Banach space $X$ such that $X^\ast = c_0$ exists.
+
+\begin{lemma} \label{lemma:dsodsos} Any infinite-dimensional closed subspace $X$ of $\ell_1$ contains a subspace $Y$ linearly homeomorphic to $\ell_1$. \end{lemma}
+
+\begin{proof} We divide the proof into three steps.
+
+\paragraph{Step 0.} Let $f \in \ell_1^\ast$ be any linear continuous functional. Since $X$ is an infinite-dimensional closed subspace, the intersection $\mathrm{Ker} \, f \cap X$ is also infinite-dimensional and closed.
+
+We can find, inductively, a sequence $\mathbf{u}^n \in X$ with the first $n$ components zero ($u_0 = u_1 = \dots = u_n = 0$) and unitary norm ($\|u\|=1$). Furthermore, given a unitary sequence $\mathbf{u} \in X$, we can find a natural number $N \in \N$ such that
+\begin{equation*} \sum_{k > N} |u_k| < \frac{1}{4}. \end{equation*}
+
+\paragraph{Step 1.} The preliminary remark allows us to find a sequence of sequences $(\mathbf{u}^n)_{n \in \N} \subset X$ and an increasing sequence of natural numbers $(k_n) \subset \N$ satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The norm of each elements is unitary, that is, $\| \mathbf{u}^n \|_{\ell_1} = 1$ for all $n \in \N$.
+\item The mass of the sequence $\mathbf{u}^n$ is focused on the first $k_n$ components, that is,
+\begin{equation*} \| \mathbf{u}^n \, \big|_{[0, \, k_n]} \|_{\ell_1} \geq 3/4 \quad \text{for all $n \in \N$}. \end{equation*}
+\item The $(n+1)$th elements is zero on the interval where the mass of the previous one is focused, that is,
+\begin{equation*} \mathbf{u}^{n+1} \, \big|_{[0, \, k_n]}\equiv 0 \quad \text{for any $n \in \N$}. \end{equation*}
+\end{enumerate}
+Let us consider the operator $L : \ell_1 \longrightarrow X$ defined by setting
+\begin{equation*} L(\lambda) := \sum_{n \in \N} \lambda_n \mathbf{u}_n,\end{equation*}
+which is well-defined as a consequence of the assumption $X$ closed.
+
+\paragraph{Step 2.} First, notice that
+\begin{equation*} \| L(\mathbf{\lambda}) \|_{\ell_1} \leq \| \mathbf{\lambda} \|_{\ell_1}, \end{equation*}
+and thus $L$ is a linear and bounded (=continuous) operator. If we set $I_n := (k_{n-1}, \, k_n]$, then it follows immediately that
+\begin{equation*} \begin{aligned} \| L(\mathbf{\lambda}) \|_{\ell_1} & =  \left\| \sum_{n \in \N} \lambda_n  \mathbf{u}_n  \chi_{I_n} + \sum_{n  \in \N} \lambda_n \mathbf{u}_n \chi_{X \setminus I_n}  \right\|_{\ell_1} \geq \\[1em] & \geq \left\| \sum_{n \in \N} \lambda_n \mathbf{u}_n \chi_{I_n} \right\|_{\ell_1} - \sum_{n \in \N} \lambda_n \| \mathbf{u}_n \chi_{I_n^c} \|_{\ell_1}. \end{aligned} \end{equation*}
+On the other hand, the family of intervals $I_n$ is disjoint. Therefore the above inequality yields to
+\begin{equation*} \| L(\mathbf{\lambda}) \|_{\ell_1}  \geq \sum_{n \in \N} \left\| \lambda_n \mathbf{u}_n \chi_{I_n} \right\|_{\ell_1} - \frac{1}{4} \| \mathbf{\lambda} \|_{\ell_1} \geq \frac{1}{2} \| L \|_{\ell_1}, \end{equation*}
+which means that, for every $\mathbf{\lambda} \in \ell_1$, the inequality
+\begin{equation*} \frac{1}{2} \| \mathbf{\lambda} \|_{\ell_1} \leq \| L(\mathbf{\lambda}) \|_{\ell_1} \leq \| \mathbf{\lambda} \|_{\ell_1}, \end{equation*}
+holds, and
+\begin{equation*} L : \ell_1 \longrightarrow L(\ell_1) \subset X \end{equation*}
+induces an invertible operator. In conclusion, it suffices to set $Y := L(\ell_1)$ and take the homeomorphism $L : \ell_1 \longrightarrow Y$. \end{proof}
+
+\begin{proof}[Proof of Theorem \ref{th:dsodsos}] We argue by contradiction. Suppose that there exists a Banach space $X$ such that $X^\ast = c_0$. Then (see \hyperref[th:c0duale]{Theorem \ref{th:c0duale}}), it turns out that
+\begin{equation*} X \hookrightarrow X^{\ast\ast} \cong \ell_1 \implies X \subseteq \ell_1, \end{equation*}
+and therefore we can apply \hyperref[lemma:dsodsos]{Lemma \ref{lemma:dsodsos}}. In particular, there exists $Y \subset X$ such that $Y \cong \ell_1$. On the other hand, in \hyperref[sec:bs]{Section \ref{sec:bs}} we were able to find a way to express the dual of a linear closed subspace, and therefore
+\begin{equation*} \ell_\infty \cong Y^\ast = \faktor{X^\ast}{Y^\perp} = \faktor{c_0}{Y^\perp}, \end{equation*}
+which implies that $\ell_\infty$ is a quotient of $c_0$. This is the sought contradiction: the space $c_0$ is separable, but $\ell_\infty$ is not separable, and thus it cannot be a quotient of $c_0$. \end{proof}
+
+\begin{remark}Let $X$ be a reflexive Banach space. Then the bidual inclusion is surjective (i.e. $X \cong X^{\ast\ast}$), and this gives us a small chain of duals:
+\begin{equation*}X \longrightarrow X^\ast \longrightarrow X \longmapsto X^\ast \longrightarrow \dots \end{equation*}
+On the other hand, there is a theorem asserting that $X^\ast$ reflexive implies $X$ reflexive. The implications of this statement are fascinating. Indeed, it is always possible to start from a non-reflexive Banach space and obtain a infinite chain of non-surjective inclusions $X \subset X^\ast \subset \dots$.\end{remark}
+
+\section{Exercises}
+
+\begin{exercise} Prove the completeness of the following spaces: \mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item $\mathcal{L}^p(X, \, \mathrm{d}\mu)$, for any $1 \leq p \leq \infty$.
+\item $\left(C_b^0(X), \, \|\cdot\|_\infty\right)$, i.e. the bounded function on a topological space $X$ with the uniform norm.
+\item Let $X$ be a Banach space and let $N$ be a closed linear(vector) subspace. Then $\faktor{X}{N}$ is complete with the quotient norm, that is
+\begin{equation*} \| x + N \| \stackrel{\mathrm{def}}{=} \inf_{y \in N} \|x + y\|.\end{equation*}
+\item Let $X$ be an Hilbert space and let $N$ be a closed linear(vector) subspace. Then the quotient is the orthogonal $N^\perp$, the quotient norm is equal to the orthogonal norm and $\pi : X \to \faktor{X}{N}$ is an open map. 
+\end{enumerate}\end{exercise}
+
+\begin{proof}[\textbf{Solution}]\mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item The reader may refer to \hyperref[ex:cptS]{Example \ref{ex:cptS}} for the proof in the case $1 \leq p < + \infty$. 
+
+Let $(f_n)_{n \in \N}$ be a Cauchy sequence in $L^\infty$. Given an integer $k \geq 1$ there is an integer $N_k$ such that
+\begin{equation*}\|f_n - f_m\|_{L^\infty} \leq \frac{1}{k}, \end{equation*}
+for any $m, \, n \geq N_k$. Hence there is a null set $E_k$ such that
+\begin{equation*}\left|f_n(x) - f_m(x)\right| \leq \frac{1}{k}, \qquad \forall \, x \in X \setminus E_k, \, \, \forall \, m, \, n \geq N_k.\end{equation*}
+Then we let $E := \cup_{k \in \N} E_k$, so that $E$ is a null set, and we see that for any $x \in X \setminus E$ it turns out that the sequence $f_n(x)$ is Cauchy in $\R$. By completeness
+\begin{equation*}f_n(x) \xrightarrow{n \to + \infty} f(x), \qquad \forall \, x \in X \setminus E.\end{equation*}
+In particular, taking the limit $m \to + \infty$ on the inequality above, yields to
+\begin{equation*}\left|f_n(x) - f(x)\right| \leq \frac{1}{k}, \qquad \forall \, x \in X \setminus E_k, \, \, \forall \, n \geq N_k.\end{equation*}
+We conclude that $f \in L^\infty(X)$ and $\|f - f_n\|_{L^\infty} \leq \frac{1}{k}$ for all $n \geq N_k$, thus $f_n$ converges to $f$ also (strongly) in $L^\infty(X)$. Note that this implies that, up to a subsequence, the convergence is also \textit{point-wise}.
+\item The reader may refer to \hyperref[ex:bf]{Example \ref{ex:bf}} for a more general situation concerning bounded functions.
+\item For each $x \in X$ let us denote $\hat{x} := x + N \in \faktor{X}{N}$. Let $(\hat{x}_n)_{n \in \N}$ be any sequence converging uniformly (i.e. $\sum_n \| \hat{x}_n \|$ converges). From the definition of $\| \cdot \|$, it follows that, for each $n \in \N$, there exists $x_n \in \hat{x}_n$ such that $\|x_n\|_X \leq 2 \, \|\hat{x}_n\|$. Therefore
+\begin{equation*} \sum_{n = 1}^{+\infty} \| x_n \|_X \leq 2 \, \sum_{n = 1}^{+ \infty} \| \hat{x}_n\| < \infty, \end{equation*}
+then $(x_n)_{n \in \N}$ converges uniformly as well. Since $X$ is Banach, by \hyperref[theorem:comp]{Theorem \ref{theorem:comp}} the sum converges to some vector $x \in X$. Then, from the definition of the norm in $\faktor{X}{N}$, it follows that $\sum_n \hat{x}_n$ converges to $\hat{x}$ in $\faktor{X}{N}$ and, applying again \hyperref[theorem:comp]{Theorem \ref{theorem:comp}}, we infer that the quotient space is complete.
+\item We define the projection
+\begin{equation*} p : \faktor{X}{N} \to N^\perp, \qquad x + N \mapsto p(x + N) = \pi(x), \end{equation*}
+where $\pi$ is the projection over $N^\perp$. The mapping is well defined since
+\begin{equation*} x + n_1 = x + n_2 \implies p(x + n_1) = \pi(x + n_1) = \pi(x) + \pi(n_1) = \pi(x) + \pi(n_2) = p(x + n_2), \end{equation*}
+i.e. it is independent from the particular representative of the coset. 
+
+The projection is \textbf{injective}. If $p([x]) = 0$, then $[x] = x + N \subset \mathrm{Ker}(\pi)$ which is equal to $N$ (see \hyperref[theorem:proiettore]{Theorem \ref{theorem:proiettore}}), and thus $[x] = 0$ (since $x \in N$). 
+
+The projection is \textbf{surjective}. If $y \in N^\perp$, then $[y] = y + N$ has image via $p$ exactly equal to $y$.
+
+Finally, we prove that the spaces are isometric, that is
+\begin{equation*}\|x + N\| = \inf_{y \in N} \|x + y\| = \| \pi \, x \| = \| \pi(x + N) \|. \end{equation*}
+
+\end{enumerate}
+\end{proof} 
+
+\begin{exercise}Let $(X, \, p)$ be a seminormed space and let $N$ be a closed linear(vector) subspace. Then $\faktor{X}{N}$ is normed with $\|\cdot\| := p \, \big|_{X \, \big/ \, N}$. \label{ex:closedquo}\end{exercise}
+
+\begin{proof}[\textbf{Solution}]Suppose that $N$ is closed, and that $\|x + N\| = 0$. Then, by definition of the norm, it turns out that
+\begin{equation*}\inf_{y \in N} \|x - y\| = 0. \end{equation*}
+Hence there exist a minimizing sequence $(y_n)_{n \in N}$ such that $\|x - y_n\| \to n$ as $n \to + \infty$. But $N$ is closed, thus $x$ belongs to $N$. Finally, we have that
+\begin{equation*} x + N = N = 0 + N \implies [x] = 0 \end{equation*}
+as a class of equivalence in $\faktor{X}{N}$.\end{proof}
+
+\begin{exercise} Let $(X, \, p)$ be a semi-normed space. Then $\faktor{X}{\bar{\{0\}}}$ is normed with norm $p$.   \end{exercise}
+
+\begin{proof}[\textbf{Solution}]Corollary of \hyperref[ex:closedquo]{Exercise \ref{ex:closedquo}}.\end{proof}
+
+\begin{exercise} \label{es:dualsi} Let $X_1, \, \dots, \, X_n$ be normed spaces. Represent the dual of $X_1 \times \cdot \times X_n$, in terms of $X_i^\ast$ as $i$ ranges in $\{1, \, \dots, \, n\}$.
+\end{exercise}
+
+\begin{proof}[\textbf{Solution}] Let $\|\cdot \|_{X_i}$ be the norm on $X_i$ for each $i$. On the product space define the norm
+\begin{equation*} \left\|(x_1, \, \dots, \, x_n) \right\|_X = \sum_{i=1}^{n} \|x_i\|_{X_i}, \end{equation*}
+and consider the following mapping
+\begin{equation*} F : \prod_{i=1}^{n} X_i^\ast \to \left( \prod_{i=1}^{n} X_i \right)^\ast, \qquad (f_1, \, \dots, \, f_n) \longmapsto f := (f_1, \, \dots, \, f_n).\end{equation*}
+This map is clearly bijective (since it admits an inverse) and linear, thus it is an isomorphism.
+\end{proof}
+
+\begin{exercise} Let $0 < p < 1$. Prove that $L^p \left([0, \, 1] \right)$ is a topological vector space, metric and complete. Prove also that the only open convex subset is the whole space itself, i.e. the only linear continuous form is $f \equiv 0$. \end{exercise}
+
+%\begin{proof}[\textbf{Solution}]We argue by contradiction. Assume there is $\varphi \in \left(L^p[0, \, 1]\right)^\ast$ with $\varphi \neq 0$, then $\varphi$ has image $\R$ (since it is a nonzero map to a one-dimensional space), so there is some $f \in L^p[0, \, 1]$ such that $\left| \varphi(f) \right| \geq 1$. Using this choice of $f$, map $[0, \, 1]$ to $\R$ by
+%\begin{equation*} s \longmapsto \int_{0}^{s} \left|f(x)\right|^p \, \mathrm{d}x. \end{equation*}
+%This is continuous, so there is some $s$ between $0$ and $1$ such that
+%\begin{equation*} \int_{0}^{s} \left| f(x) \right|^p \, \mathrm{d}x = \frac{1}{2} \, \int_{0}^{1} \left|f(x)\right|^p \, \mathrm{d}x > 0. \end{equation*}
+%Let $g_1 = f \cdot \chi_{[0, \, s]}$ and let $g_2 = f \cdot \chi_{(s, \, 1]}$, so $f = g_1 + g_2$ and $|f|^p = |g_1|^p + |g_2|^p$. So
+%\begin{equation*} \int_{0}^{1} \left| g_1(x) \right|^p \, \mathrm{d}x =  \int_{0}^{s} \left| f(x) \right|^p \, \mathrm{d}x = \frac{1}{2} \, \int_{0}^{1} \left|f(x)\right|^p \, \mathrm{d}x, \end{equation*}
+%hence also
+%\begin{equation*} \int_{0}^{1} \left| g_2(x) \right|^p \, \mathrm{d}x = \frac{1}{2} \, \int_{0}^{1} \left|f(x)\right|^p \, \mathrm{d}x. \end{equation*}
+%Therefore $|\varphi(g_i)| \geq 1/2$ for some $i$. Let $f_1 = 2 \, g_i$, so $|\varphi(f_1)| \geq 1$ and
+%\begin{equation*} \int_{0}^{1} \left| f_1(x) \right|^p \, \mathrm{d}x = 2^{p-1} \, \int_{0}^{1} \left|f(x)\right|^p \, \mathrm{d}x, \end{equation*}
+%and note that $2^{p-1} < 1$. Iterate to get a sequence $(f_n)_{n \in \N} \subset L^p[0, \, 1]$ such that $\left| \varphi(f_n) \right| \geq 1$ and
+%\begin{equation*}d(f_n, \, 0) \xrightarrow{n \to + \infty} 0,\end{equation*}
+%a contradiction with the continuity of $\varphi$.\end{proof}
+
+\begin{exercise} Let $(f_n)_{n \in \N} \subset \ell_1$ be a sequence. Then it converges weakly to $f$ if and only if it converges to $f$ in norm. \end{exercise}
+
+%\begin{proof}[\textbf{Solution}] The strong (norm) convergence implies the weak convergence of any sequence, therefore we only need to prove the opposite implication.
+
+%Suppose that $(x_n)_{n \in \N} \subset \ell_1$ is a weakly convergent sequence, but not norm convergent. By translation and rescaling we may always assume that $x_n \rightharpoonup 0$ and $\|x_n\|_1 \geq 1$ for any $n \in \N$.
+
+%Since evaluation at any coordinate is a bounded functional in $\ell_1$, we have that $x_n \to 0$ coordinate-wise. Let $N_1 \in \N$ such that
+%\begin{equation*} \sum_{i = N_1 + 1}^{+ \infty} \left|x_1(i)\right| < \frac{1}{5}. \end{equation*}
+%Then the finite sum $\sum_{i = 0}^{N_1} \left| x_n(i) \right| \to 0$ as $n \to + \infty$, so we may find $n_2$ such that $\sum_{i = 0}^{N_1} \left| x_{n_2}(i) \right| < 1/5$. We can choose $N_2 \in \N$ such that
+%\begin{equation*} \sum_{i = N_2 + 1}^{+ \infty} \left|x_{n_2}(i)\right| < \frac{1}{5}, \end{equation*}
+%so that we get a subsequence $(x_{n_k})_{k \in \N}$ and an increasing sequence of integers $(N_k)_{k \in \N}$ such that for any $k \in \N$
+%\begin{equation*} \sum_{i = 0}^{N_{k-1}} \left|x_{n_k}(i)\right| < \frac{1}{5} \qquad \text{and} \qquad  \sum_{i = N_k + 1}^{+ \infty} \left|x_{n_k}(i)\right| < \frac{1}{5}. \end{equation*}
+%Let us define
+%\begin{equation*} y_k := \begin{cases} \frac{ \left| x_{n_j}(k) \right|}{ x_{n_j}(k) } & \text{if $x_{n_j}(k) \neq 0$ and $N_{j-1} < k \leq N_{j}$} \\ 1 & \text{otherwise}. \end{cases} \end{equation*}
+%Then $y := (y_k)_{k \in \N} \in \ell^\infty$ since each element has modulus equal to $1$ and also
+%\begin{equation*} \begin{aligned} \left| \sum_{k \in \N} x_{n_j}(k) \, y_k \right| & \geq \left| \sum_{k=N_{j-1} + 1} ^{N_j} x_{n_j}(k) \, y_k \right| - \left| \sum_{k = 0}^{N_{j-1}} x_{n_j}(k) \, y_k \right| - \left| \sum_{k = N_j + 1}^{+ \infty} x_{n_j}(k) \, y_k \right| \geq \\ & \geq \sum_{k=N_{j-1} + 1} ^{N_j} \left|x_{n_j}(k) \right| - \sum_{k = 0}^{N_{j-1}} \left|  x_{n_j}(k) \right| - \sum_{k = N_j + 1}^{+ \infty} \left|  x_{n_j}(k)  \right| = \\ & = \sum_{k=0}^{+ \infty} \left|x_{n_j}(k) \right| - 2 \, \sum_{k = 0}^{N_{j-1}} \left|  x_{n_j}(k) \right| - 2 \, \sum_{k = N_j + 1}^{+ \infty} \left|  x_{n_j}(k)  \right| > \\ & > \|x_{n_j}\|_1 - \frac{4}{5} \geq \frac{1}{5}.\end{aligned} \end{equation*}
+%Therefore $\langle x_n, \, y \rangle \not \to 0$ as $n \to + \infty$, which is a contradiction since $\langle \cdot, \, y \rangle$ is a bounded linear functional on $\ell_1$.
+ %\end{proof}

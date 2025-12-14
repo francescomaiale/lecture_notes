@@ -1,0 +1,263 @@
+\chapter{Functions and Maps} \thispagestyle{empty}
+
+\section{Functions on Riemann Surfaces}
+
+\begin{definition}[Holomorphic function]\index{Holomorphic!function} Let $X$ be a Riemann surface. A function $f : X \to \C$ is \textit{holomorphic} at $p \in X$ if there exists a chart around $p$
+\begin{equation*} \varphi : U_p \xrightarrow{\quad \sim \quad} \Delta \subseteq \C\end{equation*}
+such that the composition $f \circ \varphi^{-1} : \Delta \longrightarrow \C$ is holomorphic at $\varphi(p)$ (or, equivalently, if it is holomorphic in an appropriate open subset of $\Delta$ containing $\varphi(p)$).\end{definition}
+
+\begin{example} Let $X = \C_\infty$ be the Riemann sphere and let $p_\infty$ be the point at infinity. The reader may  easily prove as an exercise that
+\begin{equation*} \text{$f(z)$ is holomorphic at $p_\infty$} \iff \text{$f \left(\frac{1}{z} \right)$ is holomorphic at $0$}. \end{equation*}
+Hence, if $f(z) = p(z)/q(z)$ is a holomorphic function and a quotient of polynomials, then the degree of $p$ needs to be less or equal than the degree of $q$. Notice that this is not a sufficient condition. \end{example}
+
+\begin{example} Let $X \subseteq \p^2(\C)$ be a smooth algebraic curve and let $p = [z_1 : z_2 : z_0] \in X$ such that $z_0 \neq 0$. Then $z_1/z_0$ and $z_2/z_0$ are locally holomorphic functions in $\p^2(\C)$, that is,
+\begin{equation*}\frac{z_1}{z_0} \, \big|_{X} \quad \text{and} \quad \frac{z_2}{z_0} \, \big|_{X} \end{equation*}
+are holomorphic functions at $p$.\end{example}
+
+\begin{notation} Let $X$ be a Riemann surface and let $U \subseteq X$ be an open subset. We denote the set of all the holomorphic functions from $U$ to $\C$ by
+\begin{equation*} \mathcal{O}_X(U) := \left\{ f:U\to \C \: \left| \: f \, \, \text{holomorphic} \right. \right\}. \end{equation*} \end{notation}
+
+\begin{definition}[Singularities Type]\index{Holomorphic!singularity types} Let $f : U \setminus \{p\} \to \C$ be a holomorphic function and let $\varphi : U_p \longrightarrow \Delta$ be a chart around $p$. We say that the singularity at $p$ is \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item \textit{removable} if $\varphi(p)$ is a removable singularity for $f \circ \varphi^{-1} : \Delta^\ast \subset \C \to \C$;
+\item a \textit{pole} if $\varphi(p)$ is a pole for $f \circ \varphi^{-1} : \Delta^\ast \subset \C \to \C$;
+\item \textit{essential} if $\varphi(p)$ is an essential singularity for $f \circ \varphi^{-1} : \Delta^\ast \subset \C \to \C$.
+\end{enumerate} \end{definition}
+
+\begin{definition}[Meromorphic function]\index{Meromorphic!function} Let $X$ be a Riemann surface. The function $f : X \to \C$ is \textit{meromorphic} at $p \in X$ if \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item there exists an open neighborhood $U \subseteq X$ of $p$ such that $f$ is holomorphic in $U \setminus \{p\}$;
+\item $p$ is either a removable singularity, or a pole.
+\end{enumerate} \end{definition}
+
+\begin{proposition}[Characterization] Let $X$ be a Riemann surface, and let $f : X \to \C$ be a meromorphic function. Then $f$ locally is the sum of a Laurent series
+\begin{equation*} f(z) = \sum_{n \geq k} c_n \, z^n, \end{equation*}
+and vice versa. \end{proposition}
+
+\begin{definition}[Order]\index{Meromorphic!order} Let $f : X \to \C$ be a meromorphic function. The \textit{order} of $f$ at $p \in X$ is the minimum integer $k$ in the Laurent series expansion with nonzero coefficient, that is,
+\begin{equation*} \mathrm{ord}_p(f) = \min \left\{k \: : \: c_k \neq 0 \right\}.  \end{equation*} \end{definition}
+
+\begin{remark} Any holomorphic function is also a harmonic function (by Riemann-Cauchy); hence holomorphic functions satisfy the maximum principle. \end{remark}
+
+\begin{theorem}[Maximum Modulus] Let $f : U \subseteq X \to \C$ be a holomorphic function defined on any open connected subset $U$ of $X$. If there exists $p \in U$ such that
+\begin{equation*} |f(x)| \leq |f(p)|, \qquad \forall \,  x \in U,\end{equation*}
+then $f$ is constant. \end{theorem}
+
+An important consequence of this theorem is that introducing only the holomorphic functions on compact Riemann surfaces would be a great restriction.
+
+\begin{corollary} \label{Liov}Let $f : X \to \C$ be a holomorphic function and let $X$ be a compact Riemann surface. Then the function $f$ is constant. \end{corollary}
+
+\begin{theorem} Let $f : \p^1(\C) \to \C$ be a meromorphic function. Then $f$ is a rational function, that is there exist $p, \, q$ homogeneous polynomial of the same degree such that
+\begin{equation*} f(z) = \frac{p(z)}{q(z)}. \end{equation*} \end{theorem}
+
+\begin{proof}Let us set $U_0 := \{ z_0 \neq 0\} \subseteq \p^1(\C)$, and recall that $U_0 \cong \C$ with coordinate $z = z_1/z_0$. Consider the dehomogenization
+\begin{equation*} \widetilde{f}(z) := f(z, \, 1), \end{equation*}
+and let
+\begin{equation*} \{\lambda_j\}_{j \in J} := \left\{ \text{zeros and poles of $\widetilde{f}$ in $U_0$} \right\}\qquad \text{and} \qquad e_j := \mathrm{ord}_{\widetilde{f}}(\lambda_j). \end{equation*}
+The function
+\begin{equation*} \widetilde{R}(z) := \prod_{j \in J} \left(z - \lambda_j\right)^{e_j} \end{equation*}
+comes with the same poles and zeros of $\widetilde{f}$ in $U_0$, so we may extend it to a function $R$ defined on the whole projective space $\p^1(\C)$ as follows:
+\begin{equation*} R(z) := z_0^n \, \prod_{j \in J} \left(b_j \, z_1 - a_j \, z_0 \right)^{e_j}, \end{equation*}
+where $\lambda_j = [a_j : b_j]$ and $n = - \sum_{j} e_j$. In conclusion, we notice that the function
+\begin{equation*} g(z) := \frac{f(z)}{R(z)} \end{equation*}
+has no zeros or poles in $U_0$, hence we only need to check the infinity point $p_\infty = [1 : 0]$.
+
+\paragraph{Useful Trick.} If $p_\infty$ is not a pole for $g$, then $g$ has no poles, and it is hence constant. If on the other hand, $g$ has a pole in $p_\infty$, the reciprocal $1/g$ is holomorphic and consequently constant.\end{proof}
+
+\section{Holomorphic Maps Between Riemann Surfaces}
+
+In this section, $X$ and $Y$ will denote Riemann surfaces unless stated otherwise.
+
+\begin{definition}[Holomorphic Map]\index{Holomorphic!map} A mapping $F : X \longrightarrow Y$ is \textit{holomorphic} at $p \in X$ if and only if there exist charts $\varphi : U_p \to \Delta_1$ on $X$ and $\psi : V_{F(p)} \to \Delta_2$ on $Y$ such that the composition $\psi \circ F \circ \varphi^{-1}$ is holomorphic at $\varphi(p)$. \end{definition}
+
+It is particularly useful to visualize the definition above through the following commutative diagram:
+\begin{equation*}\begin{tikzcd}
+U_p \arrow{r}{F} \arrow{d}{\varphi} & V_{F(p)} \arrow{d}{\psi} \\
+\Delta_1 \subseteq \C \arrow{r}{f} & \Delta_2 \subseteq \C
+\end{tikzcd}  \end{equation*}
+
+\begin{definition}A mapping $F : X \to Y$ is \textit{holomorphic} if and only if it is holomorphic at each point $p \in X$. \end{definition}
+
+\begin{lemma} Let $F : X \to Y$ be a map between Riemann surfaces. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The identity $\mathrm{id}_X : X \to X$ is holomorphic.
+\item The composition between a holomorphic map and a holomorphic function is a holomorphic function.
+
+More precisely, if $F : X \to Y$ and $g : W \subseteq Y \to \C$ are holomorphic and $W$ is an open subset of $Y$, the composition $g \circ F$ is a holomorphic function on $F^{-1}(W)$.
+\item The composition between holomorphic maps is still a holomorphic map.
+
+More precisely, if $F : X \to Y$ and $G : W \subseteq Y \to Z$ are holomorphic maps and $W$ is an open subset of $Y$, the composition $G \circ F$ is a holomorphic map from $F^{-1}(W)$ to $Z$.
+\item The composition between a holomorphic map and a meromorphic function is a meromorphic function.
+
+More precisely, let $F : X \to Y$ be a holomorphic map, let $g : W \subseteq Y \to \C$ be a meromorphic function and let $W \subseteq Y$ be an open subset. If $F(X)$ is not contained in the set of poles of $g$, then $g \circ F$ is a meromorphic function on $F^{-1}(W)$.
+\item The composition between a holomorphic map and a meromorphic map is a meromorphic map.
+
+More precisely, let $F : X \to Y$ be a holomorphic map, let $G : W \subseteq Y \to \C$ be a meromorphic map and let $W \subseteq Y$ be an open subset. If $F(X)$ is not contained in the set of poles of $G$, then $G \circ F$ is a meromorphic function from $F^{-1}(W)$ to $Z$.
+\end{enumerate}\end{lemma}
+
+\begin{proof}These are all trivial facts, thus the proof is left to the reader as a simple exercise. \end{proof}
+
+Let $F : X \to Y$ be a nonconstant holomorphic map between Riemann surfaces. For every subset $W \subseteq Y$, $F$ induces a $\C$-algebra homomorphism
+\begin{equation*} F^\ast : \mathcal{O}_Y (W)  \xrightarrow{g \mapsto g \circ F} \mathcal{O}_X \left( F^{-1}(W) \right). \end{equation*}
+Similarly, $F$ induces a $\C$-algebra homomorphism between meromorphic functions on $W$ and meromorphic function on $F^{-1}(W)$ via composition:
+\begin{equation*} F^\ast : \mathcal{M}_Y (W)  \xrightarrow{g \mapsto g \circ F} \mathcal{M}_X \left( F^{-1}(W) \right). \end{equation*}
+If $F: X \to Y$ and $G : Y \to Z$ are holomorphic maps, then it is trivial to prove that the operator $^\ast$ reverses the composition order, i.e.,
+\begin{equation*}\left(G \circ F \right)^\ast = F^\ast \circ G^\ast. \end{equation*}
+
+\begin{corollary}\index{Morphism}Riemann surfaces equipped with holomorphic mappings form a \textbf{category}. \end{corollary}
+
+\begin{proposition}[Open Mapping Theorem] \label{prop:omt} Let $F : X \to Y$ be a nonconstant holomorphic map between Riemann surfaces. Then $F$ is open. \end{proposition}
+
+\begin{corollary} Let $F : X \to Y$ be a nonconstant holomorphic map. Assume that \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $X$ is a connected and compact Riemann surface;
+\item $Y$ is a connected Riemann surface. 
+\end{enumerate}
+Then the map $F$ is surjective, and $Y$ is compact. \end{corollary}
+
+\begin{proof}From the \hyperref[prop:omt]{Open Mapping Theorem \ref{prop:omt}} it follows that $F$ is an open map. Consequently the image of $X$, $F(X)$, is open in $Y$.
+
+On the other hand, $X$ is compact and hence $F(X)$ is a compact subset of a Hausdorff space $Y$, which means that $F(X)$ is closed. Finally, since $Y$ is connected and $F$ is nonconstant, we infer that $F(X) = Y$.\end{proof}
+
+\section{Global Properties of Holomorphic Maps}
+
+Let $f$ be a holomorphic function defined on a Riemann surface $X$. The complex plane $\C =: Y$ is a Riemann surface; hence we may always identify $f$ with the holomorphic map $f : X \to Y$.
+
+\paragraph{Meromorphic Map Identification.} Let $f$ be a meromorphic function defined on $X$. By definition, $f$ is holomorphic away from its poles, and thus it assumes as values complex numbers. Therefore, it is natural to define a map $F : X \to \C_\infty$ by setting
+\begin{equation} \label{Fgrande} F(x) := \begin{cases} f(x) & \text{if $x$ is not a pole of $f$,} \\ \infty & \text{if $x$ is a pole of $f$}. \end{cases} \end{equation}
+
+\begin{theorem}\label{correspondencemeromorm}There exists a $1-1$ correspondence between
+\begin{equation*} \left\{ \begin{gathered} \text{Meromorphic functions $f$} \\ \text{defined on $X$} \end{gathered} \right\} \longleftrightarrow \left\{ \begin{gathered} \text{Holomorphic maps} \\ F : X \to \C_\infty \\ \text{which are not identically $\infty$} \end{gathered} \right\} \end{equation*} \end{theorem}
+
+\begin{proof}[Sketch of the Proof] First, we observe that the function defined by \eqref{Fgrande} is holomorphic at every point of $X$. The proof of this simple fact is left to the reader as an exercise.
+
+Observe also that, since $\C_\infty \cong \p^1(\C)$, holomorphic maps $F : X \to \C_\infty$ are in correspondence with holomorphic maps $F : X \to \p^1(\C)$, hence it suffices to prove that there is a $1$-$1$ correspondence
+\begin{equation*} \left\{ \begin{gathered} \text{Meromorphic functions $f$} \\ \text{defined on $X$} \end{gathered} \right\} \longleftrightarrow \left\{ \begin{gathered} \text{Holomorphic maps} \\ F : X \to \p^1(\C) \\ \text{which are not identically $\infty$} \end{gathered} \right\}. \end{equation*} 
+Let $p \in X$ be any point. Locally - in a neighborhood $U_p \ni p$ - the function $f$ is the ratio of two holomorphic functions, i.e.
+\begin{equation*} f(x) = \frac{g(x)}{h(x)} \qquad \forall \, x \in U_p \subset X. \end{equation*}
+The corresponding map to $\p^1(\C)$, in this neighborhood of $p$, is given by
+\begin{equation*} U_p \ni x \mapsto [g(x) : h(x)] \in \p^1(\C). \end{equation*}
+A meromorphic function is not globally the ratio of holomorphic functions; thus this representation is possible only locally, in a neighborhood of each point.
+\end{proof}
+
+\paragraph{Normal Form \cite{miranda}.}\index{Holomorphic!normal form} In this paragraph, we want to briefly introduce the so-called \textit{normal form} of a holomorphic map between Riemann surfaces.
+
+\begin{proposition}\label{nf} Let $F: X \to Y$ be a nonconstant holomorphic map, and let $p \in X$ be a point of the domain. There exists a unique integer $m \geq 1$ which satisfies the following property: for every chart $\psi : U_{F(p)} \subset Y \to \Delta^\prime$ centered\footnote{A chart $\varphi$ is centered at a point $q \in X$ if $\varphi(q) = 0$.} at $F(p)$, there exists a chart $\varphi : U_p \subset X \to \Delta$ centered at $p$ such that
+\begin{equation*} \psi \circ F \circ \varphi^{-1}(z) = z^m. \end{equation*}
+\end{proposition}
+
+\begin{definition}[Multiplicity]\index{Holomorphic!normal form, multiplicity} The \textit{multiplicity} of $F$ at $p$, denoted by $\mathrm{mult}_p \, F$, is the unique integer $m$ such that there are local coordinates near $p$ and $F(p)$ with $F$ having the form $z \mapsto z^m$. \end{definition}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=15cm, height=6cm]{Images/GAC40.png}
+\label{fig:multiplicity}
+\caption{Idea of Normal Form and Multiplicity}
+\end{figure} 
+
+There is an easy way to compute the multiplicity that does not require finding charts realizing the normal form. Take any local coordinates $z$ near $p$ and $w$ near $F(p)$, and let
+\begin{equation*} z_0 \longleftrightarrow p \qquad \text{and} \qquad w_0 \longleftrightarrow F(p). \end{equation*}
+There exists a holomorphic function $h$ such that $w = h(z)$ in such a way that $w_0 = h(z_0)$; hence the multiplicity $\mathrm{mult}_p \, F$ of $F$ at $p$ is one more than the order of vanishing of the derivative $h^\prime(z_0)$ of $h$ at $z_0$, that is,
+\begin{equation*} \mathrm{mult}_p \, F = 1 + \mathrm{ord}_{z_0} \left( \frac{\mathrm{d} \, h}{\mathrm{d} \, z} \right). \end{equation*}
+In particular, the multiplicity is the exponent of the lowest strictly positive term of the power series for $h$. Namely, we have that
+\begin{equation*} h(z) = h(z_0) + \sum_{i = m}^{\infty} c_i \, (z - z_0)^i \implies \mathrm{mult_p} \, F = \min \left\{ i \in \mathbb{Z} \: \left| \: c_i \neq 0 \right. \right\} . \end{equation*}
+
+\section{The Degree of a Holomorphic Map}
+
+In this section, we introduce the notion of degree of a holomorphic map, and we set the ground for the main result of this chapter: \textit{the Hurwitz formula}.
+
+\begin{theorem}Let $F : X \to Y$ be a nonconstant holomorphic map between connected and compact Riemann surfaces. For each $y \in Y$, the quantity
+\begin{equation*} d_y(F) := \sum_{p \in F^{-1}(y)} \mathrm{mult}_p \, F \end{equation*}
+is constant, independent of $y \in Y$. \end{theorem}
+
+\begin{proof} The idea of the proof is to show that the map $y \mapsto d_y(F)$ is a locally constant function from $Y$ to $\mathbb{Z}$. Since $Y$ is connected, a locally constant function must be constant.
+
+\paragraph{Step 1.} Let $y \in Y$ and let $F^{-1}(y) = \{ x_1, \, \dots, \, x_n\}$ be the fiber. Set $\mathrm{molt}_{x_j}(F) := m_j$ to be the multiplicity at $x_j$, for each $j = 1, \, \dots, \, n$.
+
+By \hyperref[nf]{Proposition \ref{nf}} (normal form) there are neighborhoods $U_i$ of $x_i$ such that $U_i \cap U_j = \emptyset$ for $i \neq j$, and $F \, \big|_{U_i}$ sends $z_i$ to $w_i = z_i^{m_i}$.
+
+\paragraph{Step 2.} The thesis is equivalent to the existence of a neighborhood $U$ of $y$ with the additional property that, for any $y^\prime \in U$,
+\begin{equation*} F^{-1}(y^\prime) \subset \bigcup_{j = 1}^{n} U_j. \end{equation*}
+We argue by contradiction. Suppose that there exists a sequence of points $(p_k)_{k \in \mathbb{N}} \subset X$ such that
+\begin{equation*}p_k \notin \bigcup_{j = 1}^n U_j,\end{equation*}
+but $F(p_k)$ converges to $y$. Since $X$ is compact and $F$ is continuous, there exists a subsequence $(p_{k_h})_{h \in \mathbb{N}}$ such that $p_{k_h} \xrightarrow{h \to + \infty} \bar{x}$ and $F(\bar{x}) = y$.
+
+Hence $\bar{x}$ must be equal to $x_j$ for some $j \in \{1, \, \dots, \, n\}$, but this is absurd since no point of the sequence $(p_k)_{k \in \N}$ lies in the neighborhoods $U_i$ of the $x_i$'s.
+ \end{proof}
+ 
+\begin{definition}[Degree]\index{Holomorphic!degree} Let $F : X \to Y$ be a nonconstant holomorphic map between connected and compact Riemann surfaces. The \textit{degree} of $F$, denoted by $\mathrm{deg} \, F$, is the quantity $d_y(F)$ computed at any possible $y \in Y$. \end{definition}
+ 
+\begin{corollary} Let $F : X \to Y$ be a holomorphic map of connected compact Riemann surfaces. The map $F$ is locally biholomorphic to $\psi \circ F \circ \varphi^{-1}$ (sending $z$ to $z$) and $\mathrm{deg} \, F = 1$ if and only if $X \cong Y$. \end{corollary}
+
+\begin{notation}Let $ F :X \to Y$ be a mapping of Riemann surfaces. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item A point $p \in X$ is called a \textit{ramification point}\index{Ramification point} if $\mathrm{molt}_p(F) \geq 2$.
+\item A point $q \in Y$ is called a \textit{branch point}\index{Branch point} if it is the image of a ramification point.
+\item The \textit{ramification index} in $p \in X$ is defined as $\mathrm{molt}_p(F) - 1$.
+\end{enumerate}\end{notation}
+
+\section{Hurwitz's Formula}
+
+\paragraph{Introduction.} Let $X$ be a compact connected Riemann surface of genus $g$. The \index{Euler-Poincaré characteristic!topological} Euler-Poincaré topological characteristic is defined as
+\begin{equation*} \chi_{\mathrm{top}} := b_0 - b_1 + b_2, \end{equation*}
+where $b_i := \mathrm{dim}\left(H_i(X, \, \R) \right) = \mathrm{rank}\left(H_i(X, \, \mathbb{Z}) \right)$ is the $i$-th \index{Betti's number}Betti's number. In a similar fashion, if $X$ is a manifold, then
+\begin{equation*} \mathrm{dim}_\R (X) = n \implies \chi_{\mathrm{top}} = \sum_{j = 0}^{n} (-1)^j \cdot b_j(X). \end{equation*}
+
+\begin{lemma} Let $X$ be a compact connected Riemann surface of genus $g(X)$. Then
+\begin{equation*} b_0 = b_2 = \symbol{35} \, \text{connected components} = 1, \end{equation*}
+while $H_1\left(X, \, \mathbb{Z} \right) = \mathrm{Ab} \left(\pi_1(X) \right)$. In particular, the following identity holds:
+\begin{equation} \label{genusidentity} \chi_{\mathrm{top}} = 2 - 2 \, g(X).\end{equation}
+\end{lemma}
+ 
+\begin{proposition}The Euler-Poincaré characteristic does not depend on the triangulation of $X$, that is,
+\begin{equation*}\chi_{\mathrm{top}} = v - e + f, \end{equation*}
+where $v$ is the number of vertexes, $e$ is the number of edges and $f$ is the number of faces. \end{proposition}
+
+\begin{proof} A sketch of the argument may be found in \cite[Page 51]{miranda}.  \end{proof}
+
+\begin{theorem}[Hurwitz's Formula]\index{Hurwitz's Formula} \label{th:hf}Let $F  :X \to Y$ be a nonconstant holomorphic map between compact Riemann surfaces of genus $g(X)$ and $g(Y)$ respectively. Then
+\begin{equation} \label{eq:hur} 2 \, \left(g(X) - 1 \right) = 2\, \mathrm{deg} \, F \cdot \left( g(Y) - 1 \right) + \sum_{p \in X} \left[ \mathrm{mult}_p \, F - 1 \right] \end{equation} \end{theorem}
+
+\begin{proof} The Riemann surface $X$ is compact, thus the set of ramification point is finite and the sum on the right-hand side is finite.
+
+\paragraph{Step 1.} Let us take any triangulation $\tau$ of $Y$, such that each branch point of $F$ is a vertex. Denote by $v$ the number of vertexes, $e$ the number of edges and $t$ the number of triangles (faces). 
+
+Assume that, if $q \in Y$ is a branch point and $T \ni q$ a triangle, then $T$ is contained in a neighborhood $U_q$ of $q$ such that 
+\begin{equation*}F : \bigsqcup_{j = 1}^{m_q} U_j \to U_q \end{equation*}
+is in normal form. Lift this triangulation to $X$ via the map $F$, i.e. $\tau^\prime = F^{-1}(\tau)$, and notice that any ramification point is a vertex of a triangle.
+
+\paragraph{Step 2.} Since there are no ramification point over the general point of any triangle, each one lifts to $\mathrm{deg}(F)$ triangles in $X$. Let $q \in Y$ be any point; then
+\begin{equation*} \left| F^{-1}(q) \right| = \sum_{p \in F^{-1}(q)} 1 = \mathrm{deg} \, F + \sum_{p \in F^{-1}(q)} \left[1 - \mathrm{mult}_p \, F \right]. \end{equation*}
+The number of edges of $\tau^\prime$ is $e^\prime = \mathrm{deg} \, F \cdot e$, the number of triangles is $t^\prime = \mathrm{deg} \, F \cdot t$ and the number of vertexes is
+\begin{equation*}\begin{aligned} v^\prime &  = \sum_{q \in v(Y)} \left[ \mathrm{deg} \, F + \sum_{p \in F^{-1}(q)} \left(1 - \mathrm{mult}_p \, F \right) \right] = \\[1em] &= \mathrm{deg}\, F \cdot v - \sum_{q \in v(Y)} \, \sum_{p \in F^{-1}(q)} \left[ \mathrm{mult}_p \, F - 1 \right]=  \\[1em] & = \mathrm{deg}\, F \cdot v - \sum_{p \in v(X)} \left[ \mathrm{mult}_p \, F - 1 \right]. \end{aligned}\end{equation*}
+Therefore we have that
+\begin{equation*} \begin{aligned} 2 \, g(X) - 2 & = - v^\prime + e^\prime - t^\prime = \\[1em] & = - \mathrm{deg}\, F \cdot v + \sum_{p \in v(X)} [\mathrm{mult}_p \, F - 1] + \mathrm{deg}\, F  \cdot e - \mathrm{deg} \, F \cdot t = \\[1em] & = 2\, \mathrm{deg} \, F \cdot \left( g(Y) - 1 \right) + \sum_{p \in X} \left[ \mathrm{mult}_p \, F - 1 \right], \end{aligned} \end{equation*}
+since every ramification point in $X$ is, actually, contained in the set $v(X)$ of vertexes of $X$ by construction.
+\end{proof}
+
+\begin{remark} Let $X$ be a compact Riemann surface. Then there are only finitely many points $p \in X$ with multiplicity greater or equal than $2$. \end{remark}
+
+\begin{remark}The Hurwitz's formula \eqref{eq:hur} gives us more information than the value of the genus. In fact, if we divide it by $2$, it turns out that
+\begin{equation*} g(X) = \mathrm{deg}\, F \cdot \left( g(Y) - 1 \right) + \frac{1}{2} \, \sum_{p \in X} \left[ \mathrm{mult}_p\, F - 1 \right] + 1, \end{equation*}
+and thus\mbox{} 
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $g(X) \geq g(Y)$;
+\item the sum $\sum_{p \in X} \left(\mathrm{mult}_p \, F - 1\right)$ is even.
+\end{enumerate}  \end{remark}
+
+\begin{example}Let $F : \p^1(\C) \to \p^1(\C)$ be a function \textit{induced} by a homogeneous polynomial $p$ of degree $d$. More precisely, if $z = z_1/z_0$ is the coordinate associated to the chart $U_0 := \left\{ z_0 \neq 0 \right\} \cong \C$, then the restriction of $F$ to $U_0$ is given by
+\begin{equation*} \widetilde{F} : U_0 \cong \C \longrightarrow \C, \qquad z \longmapsto p(z). \end{equation*}
+We are interested in finding the ramification points and computing the multiplicities (to check the validity of the Hurwitz's formula).
+
+\paragraph{Step 1.} The ramification points, away from infinity, are the discrete set given by
+\begin{equation*} \left\{ \text{ramification points of $F$} \right\} \cap U_0 = \left\{ z \in \C \: \left| \: p^\prime(z) = 0 \right. \right\}, \end{equation*}
+and hence there are $d - 1$ (not necessarily distinct) ramification points.
+
+\paragraph{Step 2.} On the other hand, at the infinity point $p_\infty$, we simply pass to the second chart $U_1 := \left\{ z_1 \neq 0 \right\} \cong \C$, with coordinate $w = z_0/z_1$, and we notice that
+\begin{equation*} F(w) = w^d. \end{equation*}
+Therefore, we can infer that
+\begin{equation*}  \mathrm{mult}_\infty(F) = d - 1, \end{equation*}
+and, recalling that $g(\p^1(\C)) = 0$, the Hurwitz's formula \eqref{eq:hur} yields to
+\begin{equation*} - 2 = d \cdot (-2) + R \iff R = 2 \, (d - 1),\end{equation*}
+which is coherent with the computation above.
+\end{example}

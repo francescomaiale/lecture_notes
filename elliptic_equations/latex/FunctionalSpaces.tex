@@ -1,0 +1,278 @@
+\chapter{Functional Spaces}
+
+In this chapter, we introduce some important functional spaces that will allow us to study the regularity of elliptic problems via integral estimates.
+
+More precisely, in the first section, we recall the notion of $\alpha$-Hölder continuity, and we state some facts which will be useful in the next chapter.
+
+Next, we introduce the so-called Morrey-Campanato spaces and prove that, under some assumptions, they are equivalent to $L^p$ spaces, but they are characterized by an integral norm, which is more useful for elliptic problems.
+
+\section{Hölder Spaces}
+
+Let $\Omega \subset \R^n$ be a bounded open set. A function $u$ is $\gamma$-Hölder continuous, with $\gamma \in (0, \, 1)$, on $\Omega$ if
+\begin{equation*} [u]_{\gamma, \, \Omega} := \sup_{ \substack{x, \, y \in \Omega \\[0.2em] x \neq y} } \frac{|u(x) - u(y)|}{|x - y|^\gamma} < + \infty, \end{equation*}
+and it is Lipschitz if the same holds with $\gamma = 1$. The space
+\begin{equation*} C^{0, \, \gamma}(\Omega) := \left\{ u : \Omega \to \C \: \left| \: [u]_{\gamma, \, \Omega} < + \infty \right. \right\} \end{equation*}
+is Banach endowed with the norm
+\begin{equation*} \|u\|_{\gamma, \, \Omega} := \|u\|_{\infty, \, \Omega} + [u]_{\gamma, \, \Omega}. \end{equation*}
+The inclusions
+\begin{equation*}C^{0, \, \beta}(\Omega) \subseteq C^{0, \, \alpha}(\Omega) \subseteq C^0(\Omega) \end{equation*}
+are easy to verify when $\Omega$ is bounded and $0 < \alpha \leq \beta \leq 1$, but the first one is false if $\Omega$ is unbounded since, e.g.,
+\begin{equation*}\|x\|^{\beta} \in C^{0, \, \beta}(\Omega) \setminus C^{0, \, \alpha}(\Omega) \end{equation*}
+for every $\alpha > \beta$. The function
+\begin{equation*} v(t) := \begin{cases} \frac{1}{\log(t)} & t \neq 0 \\[0.5em] 0 & t = 0 \end{cases} \end{equation*}
+is continuous in $\overline{\Omega}$, but it is not $\gamma$-Hölder for any $\gamma \in (0, \, 1]$. Moreover, the inclusion
+\begin{equation*}C^{1}\left(\overline{\Omega} \right) \subseteq C^{0, \, 1}(\Omega) \end{equation*}
+is false, even if $\Omega$ is bounded, since
+\begin{equation*} w(x, \, y) := \begin{cases} \frac{x^2}{\sqrt{x^2 + y^2}} \cdot \arctan \frac{x + |x|}{2y} & y \neq 0 \\[0.5em] 0 & y = 0 \, \, x < 0 \end{cases} \end{equation*}
+is differentiable, but not Lipschitz on $\Omega$.
+
+\paragraph{$(k, \, \gamma)$-Hölder spaces.} The space
+\begin{equation*} C^{k, \, \gamma}(\Omega) := \left\{ u \in C^k(\Omega) \: \left| \: \sum_{|\alpha| = k} \left[D^\alpha u \right]_{\gamma, \, \Omega} < + \infty \right. \right\} \end{equation*}
+is Banach endowed with the norm
+\begin{equation*} \|u\|_{k, \, \gamma, \, \Omega} := \sum_{|\alpha| < k} \left\|D^\alpha u \right\|_{\infty, \, \Omega} + \sum_{|\alpha| = k} \left[D^\alpha u \right]_{\gamma, \, \Omega}. \end{equation*}
+
+\begin{theorem}\mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The immersion
+\begin{equation*}C^{k, \, \gamma}\left(\overline{\Omega} \right) \subseteq C^{k}\left(\overline{\Omega} \right) \end{equation*}
+is continuous and compact for any $\gamma \in (0, \, 1]$.
+\item The immersion
+\begin{equation*}C^{k, \, \gamma}\left(\overline{\Omega} \right) \subseteq C^{k, \, \beta}\left(\overline{\Omega} \right) \end{equation*}
+is continuous and compact for any $0 < \beta \leq \gamma \leq 1$.
+\end{enumerate}\end{theorem}
+
+\begin{theorem}[Ciesielski, \cite{siad}] There is an isomorphism
+\begin{equation*} C^{k, \, \gamma}\left( \overline{\Omega} \right) \cong \ell_\infty. \end{equation*}
+In particular, the space $C^{k, \, \gamma}\left( \overline{\Omega} \right)$ is not separable for any $k \in \N$ and $\gamma \in (0, \, 1]$. \end{theorem}
+
+\section{Morrey Spaces}
+
+Let $\Omega \subset \R^n$ be a bounded open set of diameter $\delta > 0$, and let us set
+\begin{equation*} \Omega(x, \, \rho) := B(x, \, \rho) \cap \Omega. \end{equation*}
+
+\begin{definition} The set $\Omega$ is of the type \textbf{A} if there exists a positive constant $A > 0$ such that for any $x \in \overline{\Omega}$ and any $\rho \in (0, \, \delta)$ it turns out that
+\begin{equation*} \left| \Omega(x, \, \rho) \right| \geq A \cdot \rho^n. \end{equation*} \end{definition} 
+
+\begin{example} The set defined by
+\begin{equation*} \Omega := \left\{ (x, \, y) \in \R^2 \: \left| \: \text{$0 < x < 1$ and $0 < y < x^2$} \right. \right\} \end{equation*}
+is not of type A (see \hyperref[Count1]{Figure \ref{Count1}}). \end{example}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 10cm, height = 8cm]{Images/EEEE1.png}
+\caption{A set which is not of type A.}
+\label{Count1}
+\end{figure} 
+
+\paragraph{N.B.} From now on, we shall assume $\Omega$ set of type A.
+
+\paragraph{Morrey Spaces.} Let $u \in L^p(\Omega)$. The limit
+\begin{equation*} \lim_{\rho \to 0^+} \int_{\Omega(x, \, \rho)} |u(x)|^p \, \mathrm{d}x \end{equation*}
+is equal to zero since the integral is an absolutely continuous operator. For any $\lambda \geq 0$ and $p \in [1, \, + \infty)$, the space
+\begin{equation*}L^{p, \, \lambda}(\Omega) := \left\{ u \in L^p(\Omega) \: \left| \: \left\| u \right\|_{p, \, \lambda, \, \Omega} < + \infty \right. \right\}, \end{equation*}
+where
+\begin{equation} \label{normamorrey}\left\| u \right\|_{p, \, \lambda, \, \Omega}^p := \sup_{\substack{x \in \Omega \\[0.2em] \rho \leq \delta}} \: \frac{1}{\rho^\lambda} \, \int_{\Omega(x, \, \rho)} |u(t)|^p \, \mathrm{d}t. \end{equation}
+
+\begin{proposition}The Morrey space $L^{p, \, \lambda}(\Omega)$ is Banach endowed with the norm \eqref{normamorrey}. \end{proposition}
+
+\begin{proof}Let $(u_n)_{n \in \N} \subset L^{p, \, \lambda}(\Omega)$ be a Cauchy sequence. Then the sequence is uniformly bounded, i.e., there exists $M > 0$ such that
+\begin{equation} \label{morreyboun} \| u_n \|_{p, \, \lambda, \, \Omega} \leq M, \end{equation}
+and we notice that
+\begin{equation*} \| u_n - u_m \|_{0, \, p, \, \Omega} \leq \delta^\lambda \cdot \| u_n - u_m \|_{p, \, \lambda, \, \Omega}. \end{equation*}
+In particular, the sequence $(u_n)_{n \in \N}$ is also Cauchy in $L^p$, and hence there exists $u \in L^p(\Omega)$ such that
+\begin{equation*} u_n \xrightarrow{L^p(\Omega)} u, \qquad u_{n_k} \xrightarrow{\text{pointwise}} u \end{equation*}
+and hence it suffices to prove that $u$ belongs to the Morrey space, and also that the convergence is in $L^{p, \, \lambda}(\Omega)$.
+
+The pointwise convergence is enough to prove the first assertion since one can pass to the limit in \eqref{morreyboun} using the Lebesgue dominated convergence theorem, i.e.,
+\begin{equation*}  \| u \|_{p, \, \lambda, \, \Omega} \leq M. \end{equation*}
+By assumption for any $\epsilon > 0$ there exists $N_\epsilon$ such that for every $n, \, m > N_\epsilon$ it turns out that
+\begin{equation*} \frac{1}{\rho^\lambda} \, \int_{\Omega(x, \, \rho)} \left| u_n(t) - u_m(t) \right|^p \, \mathrm{d}t \leq \| u_n - u_m \|_{p, \, \lambda, \, \Omega} < \epsilon \end{equation*}
+for any $\rho > 0$ and for any $x \in \Omega$; on the other hand, if we take the limit as $n \to + \infty$, we infer that
+\begin{equation*} \frac{1}{\rho^\lambda} \, \int_{\Omega(x, \, \rho)} \left| u(t) - u_m(t) \right|^p \, \mathrm{d}t < \epsilon \qquad \forall \, \rho > 0, \, \, \forall \, x \in \Omega, \end{equation*}
+which implies the convergence in $L^{p, \, \lambda}(\Omega)$.
+\end{proof}
+
+\begin{theorem} \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item $L^{p, \, 0}(\Omega) \cong L^p(\Omega)$.
+\item $L^{p, \, n}(\Omega) \cong L^\infty(\Omega)$.
+\item If $\lambda > n$ strictly, then $L^{p, \, \lambda}(\Omega) = \{ 0\}$.
+\item If $1 \leq p < q < + \infty$ and
+\begin{equation*} \frac{\lambda - n}{p} \leq \frac{\mu - n}{q}, \end{equation*}
+then $L^{q, \, \mu}(\Omega) \subseteq L^{p, \, \lambda}(\Omega)$.
+\end{enumerate} \end{theorem}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item This property follows straightforwardly from the definition.
+\item To prove this point, we need to recall a known property of integration theory. If $u$ is a measurable function, we can consider the set
+\begin{equation*} S(u, \, \sigma) := \left\{ x \in \Omega \: \left| \: |u(x)| > \sigma \right. \right\}\end{equation*}
+as $\sigma$ ranges in $[0, \, + \infty)$. Clearly $S(u, \, \sigma)$ is also measurable and, if $u \in L^p(\Omega)$ for any $p \in [1, \, + \infty)$, then the function
+\begin{equation*} \sigma \longmapsto \sigma^{p-1} \cdot | S(u, \, \sigma) | \end{equation*}
+is summable on the interval $[0, \, + \infty)$ and it turns out that
+\begin{equation} \label{recall:mt} \int_{\Omega} |u(x)|^p \, \mathrm{d}x = p \cdot \sigma^{p-1} \, \int_{0}^{+\infty} | S(u, \, \sigma) | \, \mathrm{d}\sigma. \end{equation}
+
+The inclusion $L^{p, \, n}(\Omega) \supseteq L^\infty(\Omega)$ is rather obvious since
+\begin{equation*} \begin{aligned} \frac{1}{\rho^n} \, \int_{\Omega(x, \, \rho)} |u(t)|^p \, \mathrm{d}t & \leq \sup_{t \in \Omega} |u(t)|^p \cdot \frac{| \Omega(x, \, p) |}{\rho^n} \leq \\[1em] & \leq \frac{\omega_n \cdot \rho^n}{\rho^n} \, \|u\|_{L^\infty(\Omega)} \leq \\[1em] & \leq c \cdot \|u \|_{L^\infty(\Omega)}. \end{aligned} \end{equation*}
+
+To prove the opposite inclusion, we argue by contradiction assuming that $L^{p, \, n}(\Omega) \supset L^\infty(\Omega)$ is a strict inclusion. The estimate
+\begin{equation*}|u(x)|^p = \lim_{\rho \to 0^+} \frac{1}{\rho^n} \, \int_{\Omega(x, \, \rho)} |u(t)|^p \, \mathrm{d}t \leq \sup_{0 < \rho \leq \delta} \frac{1}{\rho^n} |u(t)|^p \, \mathrm{d}t\end{equation*}
+holds for every point $x \in \mathcal{L}(u, \, \Omega)$, i.e., for every Lebesgue point of $u$ in $\Omega$. Let $u$ be an element of $L^{p, \, n}(\Omega) \setminus L^\infty(\Omega)$, i.e.,
+\begin{equation*} \|u\|_{\infty, \, \Omega} = + \infty. \end{equation*}
+It is equivalent to saying that for any $t > 1$ the measure of the set $S(u, \, t)$ is positive (strictly), and hence that for any $x \in \mathcal{L}(u, \, \Omega) \cap S(u, \, t)$ it turns out that $|u(x)|^p > t$.
+
+Therefore, for any $t > 1$ there exists a $x \in \Omega$ such that
+\begin{equation*} t < \sup_{0 < \rho \leq \delta} \frac{1}{\rho^n} \int_{\Omega(x, \, \rho)} |u(t)|^p \, \mathrm{d}t \implies u \notin L^{p, \, n}(\Omega). \end{equation*}
+\item This assertion follows trivially from \textbf{2)}. Indeed, for any $x \in \Omega$ we have
+\begin{equation*} \sup_{x \in \Omega} \: \frac{1}{\rho^n} \int_{\Omega(x, \, \rho)} |u(t)|^p \, \mathrm{d}t \leq \| u \|_{p, \, \lambda, \, \Omega} \cdot \rho^{\lambda - n}, \end{equation*}
+and hence
+\begin{equation*} \sup_{\substack{x \in \Omega \\[0.1em] \rho \in (0, \, \rho_1] }} \: \frac{1}{\rho^n} \int_{\Omega(x, \, \rho)} |u(t)|^p \, \mathrm{d}t \leq \| u \|_{p, \, \lambda, \, \Omega} \cdot \rho_1^{\lambda - n}. \end{equation*}
+By taking the limit as $\rho_1 \to 0^+$, we infer that the left-hand side converges to $|u(x)|^p$, while the right-hand side converges to $0$, i.e., $u(x) \equiv 0$.
+\item For any $x \in \Omega$ and $\rho \in (0, \, \delta]$ it turns out that
+\begin{equation*} \begin{aligned} \int_{\Omega(x, \, \rho)} |u(t)|^p \, \mathrm{d}t & = \int_{\Omega(x, \, \rho)} \left( |u(t)|^q \right)^{\frac{p}{q}} \cdot 1^{1 - \frac{p}{q}} \, \mathrm{d}t \leq \\[1em] & \leq \left[ \int_{\Omega(x, \, \rho)} |u(t)|^q \, \mathrm{d}t \right]^{\frac{p}{q}} \cdot \left| \Omega(x, \, \rho) \right|^{1 - \frac{p}{q}} \: {\color{red}\leq} \\[1em] & \: {\color{red}\leq} \: \left[ \int_{\Omega(x, \, \rho)} |u(t)|^q \, \mathrm{d}t \right]^{\frac{p}{q}} \cdot \left[ \omega_n \, \rho^n \right]^{1 - \frac{p}{q}} = \\[1em] & = c(n, \, p, \, q)  \cdot \rho^{ n \left( 1 - \frac{p}{q} \right) + \mu \, \frac{p}{q}} \cdot \left[\frac{1}{\rho^\mu} \, \int_{\Omega(x, \, \rho)} |u(t)|^q \, \mathrm{d}t \right]^{\frac{p}{q}},
+\end{aligned} \end{equation*}
+where the {\color{red}red} inequality follows from the inclusion $\Omega(x, \, \rho) \subset B(x, \, \rho)$. If we divide both sides by $\rho^\lambda$, it turns out that
+\begin{equation*}\frac{1}{\rho^\lambda} \, \int_{\Omega(x, \, \rho)} |u(t)|^p \, \mathrm{d}t \leq c(n, \, p, \, q)  \cdot \rho^{ n \left( 1 - \frac{p}{q} \right) + \mu \, \frac{p}{q} - \lambda} \cdot \left[\frac{1}{\rho^\mu} \, \int_{\Omega(x, \, \rho)} |u(t)|^q \, \mathrm{d}t \right]^{\frac{p}{q}}, \end{equation*}
+and the right-hand side is finite if and only if the exponent of $\rho$ is positive, that is,
+\begin{equation*} n \left( 1 - \frac{p}{q} \right) + \mu \, \frac{p}{q} - \lambda \geq 0 \iff \frac{\mu - n}{q} \geq \frac{\lambda - n}{p}, \end{equation*}
+which is exactly what we wanted to prove.
+\end{enumerate} \end{proof}
+
+\section{Campanato Spaces}
+
+In this section, we shall denote by
+\begin{equation*} u_{x, \, \rho} := \frac{1}{\left| \Omega(x, \, \rho) \right|} \, \int_{\Omega(x, \, \rho)} u(t) \, \mathrm{d}t \end{equation*}
+the average of $u$ on the set $\Omega(x, \,\rho)$. The Campanato $(p, \, \lambda)$ space is defined by
+\begin{equation*}\mathscr{L}^{p, \, \lambda}(\Omega) := \left\{ u \in L^p(\Omega) \: \left| \: [ u ]_{\mathscr{L}^{p, \, \lambda}(\Omega)} < + \infty \right. \right\}, \end{equation*}
+where
+\begin{equation} \label{seminormacampanato}\left[ u \right]_{\mathscr{L}^{p, \, \lambda}(\Omega)}^p := \sup_{\substack{x \in \Omega \\[0.2em] \rho \leq \delta}} \: \frac{1}{\rho^\lambda} \, \int_{\Omega(x, \, \rho)} |u(t) - u_{x, \, \rho}|^p \, \mathrm{d}t \end{equation}
+is a seminorm on $\mathscr{L}^{p, \, \lambda}(\Omega)$.
+
+\begin{remark}The Campanato space $\mathscr{L}^{p, \, \lambda}(\Omega)$ is Banach endowed with the norm
+\begin{equation} \label{normacampanato}\left\| u \right\|_{\mathscr{L}^{p, \, \lambda}(\Omega)} = \| u \|_{L^p(\Omega)} + \left[ u \right]_{\mathscr{L}^{p, \, \lambda}(\Omega)}.\end{equation} \end{remark}
+
+\begin{proposition}[Characterization] \label{campachar} A function $u : \Omega \to \C$ belongs to $\mathscr{L}^{p, \, \lambda}(\Omega)$ if and only if $u \in L^p(\Omega)$ and the seminorm
+\begin{equation} \label{thirdcampanato} \vertiii{u}_{\mathscr{L}^{p, \, \lambda}(\Omega)}^p := \sup_{\substack{x \in \Omega \\[0.2em] \rho \leq \delta}} \: \frac{1}{\rho^\lambda} \, \inf_{c \in \R} \, \int_{\Omega(x, \, \rho)} |u(t) - c|^p \, \mathrm{d}t \end{equation}
+is finite. \end{proposition}
+
+\begin{proof}If $u \in \mathscr{L}^{p, \, \lambda}(\Omega)$, then it is a trivial consequence of the fact that
+\begin{equation*} \vertiii{u}_{\mathscr{L}^{p, \, \lambda}(\Omega)}^p \leq \left[ u \right]_{\mathscr{L}^{p, \, \lambda}(\Omega)}^p <+ \infty. \end{equation*}
+Vice versa, suppose that $u \in L^p(\Omega)$ and $\vertiii{u}_{\mathscr{L}^{p, \, \lambda}(\Omega)} < + \infty$. For every $x \in \Omega$ and $\rho \in (0, \, \delta]$ it turns out that\footnote{We shall freely use the inequality $(a + b)^p \leq 2^{p-1} \cdot (a^p + b^p)$ valid for every $p \geq 1$.}
+\begin{equation*} \begin{aligned} \int_{\Omega(x, \, \rho)} |u(t) - u_{x, \, \rho}|^p \, \mathrm{d}t & \leq 2^{p-1} \, \left[  \int_{\Omega(x, \, \rho)} |u(t) - c|^p \, \mathrm{d}t +  \int_{\Omega(x, \, \rho)} |c - u_{x, \, \rho}|^p \, \mathrm{d}t \right] = \\[1em] & = 2^{p-1} \, \left[  \int_{\Omega(x, \, \rho)} |u(t) - c|^p \, \mathrm{d}t + \left| \Omega(x, \, \rho) \right|^{1 - p} \, \left| \int_{\Omega(x, \, \rho)} [u(t) - c]^p \, \mathrm{d}t \right|^p \right] \leq \\[1em] & \leq 2^{p} \int_{\Omega(x, \, \rho)} |u(y) - c|^p \, \mathrm{d}y\end{aligned} \end{equation*}
+from which it follows that
+\begin{equation*}\left[ u \right]_{\mathscr{L}^{p, \, \lambda}(\Omega)}^p \leq 2 \cdot \vertiii{u}_{\mathscr{L}^{p, \, \lambda}(\Omega)}^p. \end{equation*}
+\end{proof}
+
+\begin{corollary}The norms
+\begin{equation*} \left\| u \right\|_{\mathscr{L}^{p, \, \lambda}(\Omega)} := \| u \|_{L^p(\Omega)} + \left[ u \right]_{\mathscr{L}^{p, \, \lambda}(\Omega)}\end{equation*}
+and
+\begin{equation*}\vertiiii{u}_{\mathscr{L}^{p, \, \lambda}(\Omega)} := \| u \|_{L^p(\Omega)} + \vertiii{u}_{\mathscr{L}^{p, \, \lambda}(\Omega)}\end{equation*}
+are equivalent.
+\end{corollary}
+
+\begin{theorem}\label{campanatotheorem} \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item If $0 \leq \lambda < n$, then $\mathscr{L}^{p, \, 0}(\Omega) \cong L^{p, \, \lambda}(\Omega)$.
+\item If $n < \lambda \leq n + p$, then $\mathscr{L}^{p, \, 0}(\Omega) \cong C^{0, \, \gamma}(\Omega)$ with
+\begin{equation*} \gamma = \frac{\lambda - n}{p}. \end{equation*}
+\item If $\lambda > n + p$ strictly, then $u \in \mathscr{L}^{p, \, 0}(\Omega)$ is locally constant.
+\item If $1 \leq p < q < + \infty$ and
+\begin{equation*} \frac{\lambda - n}{p} \leq \frac{\mu - n}{q}, \end{equation*}
+then $\mathscr{L}^{q, \, \mu}(\Omega) \subseteq \mathscr{L}^{p, \, \lambda}(\Omega)$.
+\end{enumerate} \end{theorem}
+
+We will only deal with \textbf{1)} since it follows from an algebraic lemma which will be used consistently in the next chapters. The reader may check out the other properties in this book: \cite{mglm}.
+
+\begin{lemma} \label{algebraiclemma} Let $\varphi$ and $\Phi$ be two nonnegative functions defined on $(0, \, d]$, and assume that $\Phi$ is nondecreasing. Assume that there exist positive constants $A, \, \alpha, \, \beta > 0$ such that $\alpha > \beta$ and, for any $t \in (0, \, 1)$ and $\sigma \in (0, \, d]$, 
+\begin{equation}\label{eq:cond1} \varphi(t \sigma) \leq A \, t^\alpha \, \varphi(\sigma) + \sigma^\beta \, \Phi(\sigma). \end{equation}
+Then, for any $\epsilon \in (0, \, \alpha - \beta]$, $t \in (0,\,1)$ and $\sigma \in (0, \, d]$, it turns out that
+\begin{equation}\label{eq:result1} \varphi(t \sigma) \leq A \, t^{\alpha-\epsilon} \, \varphi(\sigma) + K(A) \, \left(t \sigma\right)^\beta \, \Phi(\sigma), \end{equation}
+where
+\begin{equation*} K(\xi) := \frac{(1 + \xi)^{\frac{2 \, \alpha}{\xi}}}{(1 + \xi)^{ \frac{\alpha - \beta}{\epsilon}} - \xi}. \end{equation*}\end{lemma}
+
+\begin{proof}[Proof of Theorem \ref{campanatotheorem}] The inclusion $L^{p, \, \lambda}(\Omega) \subseteq \mathscr{L}^{p, \, \lambda}(\Omega)$ follows trivially by \hyperref[campachar]{Proposition \ref{campachar}}, since the infimum is taken over all $c \in \R$, included $c = 0$.
+
+The opposite inclusion, on the other hand, is not trivial at all and it requires an application of the algebraic lemma stated above. For every $t \in (0, \, 1)$ and $\sigma \in (0, \, \delta]$ we have the following estimate:
+\begin{equation*} \begin{aligned} \int_{\Omega(x, \, t \sigma)} |u(y)|^p \, \mathrm{d}y & \leq 2^{p-1} \, \left[  \int_{\Omega(x, \, \sigma)} |u(y) - u_{x, \, \sigma}|^p \, \mathrm{d}y +  \int_{\Omega(x, \, \sigma)} |u_{x, \, \sigma}|^p \, \mathrm{d}y \right] = \\[1em] & = 2^{p-1} \, \left[  \int_{\Omega(x, \, \sigma)} |u(y) - u_{x, \, \sigma}|^p \, \mathrm{d}y + \left| \Omega(x, \, \sigma) \right| \, \left| \frac{1}{|\Omega(x, \, \sigma)|^p} \, \int_{\Omega(x, \, \sigma)} u(y) \, \mathrm{d}t \right|^p \right] \: {\color{blue}\leq} \\[1em] & \: {\color{blue}\leq} \: 2^{p-1} \, \left[  \int_{\Omega(x, \, \sigma)} |u(y) - u_{x, \, \sigma}|^p \, \mathrm{d}y + \frac{\left| \Omega(x, \, \sigma) \right|}{\left| \Omega(x, \, \sigma) \right|} \, \int_{\Omega(x, \, \sigma)} |u(y)|^p \, \mathrm{d}t \right] \leq \\[1em] & \leq 2^{p-1} \, \left[  \int_{\Omega(x, \, \sigma)} |u(y) - u_{x, \, \sigma}|^p \, \mathrm{d}y + \frac{\omega_n \, (t \sigma)^n}{\left| \Omega(x, \, \sigma) \right|} \, \int_{\Omega(x, \, \sigma)} |u(y)|^p \, \mathrm{d}t \right] \leq \\[1em] & \leq 2^{p-1} \, \left[  \sigma^\lambda \, \left[ u \right]_{\mathscr{L}^{p, \, \lambda}(\Omega)}^p + \frac{\omega_n \, (t \sigma)^n}{\left| \Omega(x, \, \sigma) \right|} \, \int_{\Omega(x, \, \sigma)} |u(y)|^p \, \mathrm{d}t \right]  \: {\color{red}\leq}  \\[1em] & \: {\color{red}\leq}  \: C(p, \, n, \, \sigma) \cdot \left[\left[ u \right]_{\mathscr{L}^{p, \, \lambda}(\Omega)}^p + t^n \, \|u\|_{L^p(\Omega(x, \, \sigma))}^p \right] \: {\color{orange}\leq}  \\[1em] & \: {\color{orange}\leq} \: C^\prime(p, \, n, \, \sigma) \cdot \left[ (t \sigma)^{\lambda} \cdot \left[ u \right]_{\mathscr{L}^{p, \, \lambda}(\Omega)}^p + t^{n - \epsilon} \, \|u\|_{L^p(\Omega(x, \, \sigma))}^p \right] \: {\color{green}\leq}  \\[1em] & \: {\color{green}\leq} \: C^\prime(p, \, n, \, \sigma) \cdot \left(t \sigma\right)^{\lambda} \cdot \left[ \left[ u \right]_{\mathscr{L}^{p, \, \lambda}(\Omega)}^p + \frac{1}{\sigma^\lambda} \|u\|_{L^p(\Omega(x, \, \sigma))}^p \right], \end{aligned} \end{equation*}
+and we conclude dividing both sides by $\left(t \sigma\right)^{\lambda}$. The marked inequalities need to be explained a little more in depth: \mbox{}
+\begin{enumerate}
+\item The {\color{blue}blue} inequality follows from a straightforward application of the Hölder inequality with $u$ and $1$.
+\item The {\color{red}red} inequality follows from the fact that $\Omega$ is a set of the type A; more precisely, we have the estimates
+\begin{equation*} \begin{aligned} &x \in \partial \, \Omega \implies \left| \Omega(x, \, \rho) \right| \geq A \cdot \sigma^n \implies \frac{1}{ \left| \Omega(x, \, \rho) \right|} \leq \frac{1}{A \cdot \sigma^n}, \\[1em] &x \in \Omega \implies \left| \Omega(x, \, \rho) \right| = \left|B(x, \, \rho)\right| \implies \left| \Omega(x, \, \rho) \right| = \omega_n \, \rho^n.  \end{aligned} \end{equation*}
+\item The {\color{orange}orange} inequality follows from \hyperref[algebraiclemma]{Lemma \ref{algebraiclemma}} by setting
+\begin{equation*} \begin{aligned} & \varphi(\sigma) = \int_{\Omega(x, \, \sigma)} |u(y)|^p \, \mathrm{d}y, \\[1em] & \Phi(\sigma) = \left[ u \right]_{\mathscr{L}^{p, \, \lambda}(\Omega)}^p \end{aligned} \end{equation*}
+\item The {\color{green}green} inequality follows from the fact that we can chose $\epsilon = n - \lambda$.
+\end{enumerate}
+\end{proof}
+
+\paragraph{Generalized Poincaré inequality.} In this brief paragraph, we want to state and prove a generalization of the Poincaré inequality which will be useful to show a regularity results in Morrey-Campanato spaces.
+
+\begin{theorem}Let $\Omega \subset \R^n$ be an open bounded connected subset of $\R^n$ with Lipschitz boundary. There exists a positive constant $c(p, \, n, \, \Omega)$ such that for any $u \in H^{1, \, p}(\Omega)$, $1 \leq p < + \infty$, it turns out that
+\begin{equation} \label{poincargen} \int_\Omega \left| u(x) - u_\Omega \right|^p \, \mathrm{d}x \leq c(p, \, n, \, \Omega) \cdot |u|_{1, \, p, \, \Omega}^p\end{equation} 
+where $u_\Omega$ is the average on $\Omega$, i.e.,
+\begin{equation*} u_\Omega = \dashint_\Omega u(x) \, \mathrm{d}x. \end{equation*}
+\end{theorem}
+
+\begin{proof}We may always assume, without loss of generality, that the average of $u$ on $\Omega$ is equal to zero.
+
+We argue by contradiction. If \eqref{poincargen} does not hold, then there exists a sequence $(u_k)_{k \in \N} \subset H^{1, \, p}(\Omega)$ satisfying the following properties:
+\begin{equation*} \begin{cases} \dashint_\Omega u_k(x) \, \mathrm{d}x = 0, \\[0.5em] \|u_k\|_{L^p(\Omega)} = 1, \\[0.5em] |u_k|_{1, \, p, \, \Omega} \leq \frac{1}{k}.\end{cases} \end{equation*}
+Since $\{u_k\}_{k \in \N}$ is a bounded subset of $H^{1, \, p}(\Omega)$, by Rellich theorem there is a subsequence $(u_{k_h})_{h \in \N}$ converging to a function $u$ strongly in $L^p(\Omega$; in particular,
+\begin{equation*} \| u \|_{L^p(\Omega)} = 1. \end{equation*}
+On the other hand, $|u_k|_{1, \, p, \, \Omega} \to 0$ and hence from
+\begin{equation*} \int_\Omega u_k(x) \, D^i \, \varphi(x) \, \mathrm{d}x \xrightarrow{m \to + \infty} \int_\Omega u(x) \, D^i \, \varphi(x) \, \mathrm{d}x, \qquad \forall \, \varphi \in C_c^\infty(\Omega) \end{equation*}
+it follows that $D^i u = 0$ on $\Omega$ for each $i = 1, \, \dots, \, n$.
+
+In particular, $u$ is locally constant on a connected set, i.e., $u$ is constant on $\Omega$ and hence it is equal to zero (since it is a function with average zero). This is the sought contradiction since $u$ has $L^p(\Omega)$ norm equal to one.\end{proof}
+
+The next result gives an explicit expression for the dependence of the constant $c$ on $\Omega$ when $\Omega$ is a ball.
+
+\begin{theorem}Let $x_0 \in \R^n$. There exists a positive constant $c(p, \, n)$ such that for any $u \in H^{1, \, p}(B(x_0, \, r))$, $1 \leq p < + \infty$, it turns out that
+\begin{equation} \label{poincargen2} \int_{B(x_0, \, r)} \left| u(x) - u_{x_0, \, r} \right|^p \, \mathrm{d}x \leq c(p, \, n) \, r^p \cdot |u|_{1, \, p, \, B(x_0, \, r)}^p.\end{equation} 
+\end{theorem}
+
+\begin{proof}We may always assume, without loss of generality, that the point $x_0$ is the origin.
+
+Let us consider the homothety $\alpha_r : x \mapsto r \cdot x$, and let us consider the function $v(y) := u \circ \alpha_r(y)$, which is of class $H^{1, \, p}(B(0, \, 1))$. The inequality \eqref{poincargen} holds for $\Omega = B(0, \, 1)$, hence there exists a constant $c^\prime(n, \, p) > 0$ (the constant does not depend on $\Omega$ since the unitary ball is entirely determined by the dimension $n$) such that
+\begin{equation*} \int_{B(0, \, 1)} \left| u(x) - v_{B(0, \, 1)} \right|^p \, \mathrm{d}x \leq c^\prime(p, \, n) \cdot |u|_{1, \, p, \, B(0, \, 1)}^p.\end{equation*} 
+A straightforward computation proves that
+\begin{equation*}v_{B(0, \, 1)} = U_{B(0, \, r)} \qquad \text{and} \qquad \int_{B(0, \,1)} \left|D^i \, v(y) \right|^p \, \mathrm{d}y = r^{p - n} \, \int_{B(0, \, r)} \left|D^i \, u(y) \right|^p \, \mathrm{d}y, \end{equation*}
+from which it follows that
+\begin{equation*} \int_{B(0, \, 1)} \left| u(x) - v_{B(0, \, 1)} \right|^p \, \mathrm{d}x = \frac{1}{r^n} \, \int_{B(0, \, r)} \left| u(x) - v_{B(0, \, 1)} \right|^p \, \mathrm{d}x \leq c^\prime(p, \, n) \, r^n \cdot |u|_{1, \, p, \, B(0, \, 1)}^p.\end{equation*} 
+\end{proof}
+
+We are now ready to state and prove the last theorem which establishes a link between Morrey-Campanato spaces and Sobolev spaces (which is, somehow, a regularity result).
+
+\begin{theorem}Let $\Omega \subset \R^n$ be an open bounded connected subset of $\R^n$ with Lipschitz boundary. If $u \in H^{1, \, p}(\Omega)$ and $D^i \, u \in L^{p, \, \lambda}(\Omega)$, $0 \leq \lambda < n$, for each $i = 1, \, \dots, \, n$, then $u \in \mathscr{L}^{p, \, \lambda + p}(\Omega)$ and
+\begin{equation} \label{eq:laeifeoewqe} [u]_{\mathscr{L}^{p, \, \lambda + p}(\Omega)} \leq c(n, \, p, \, A) \cdot \sum_{i = 1}^n \| D^i u \|_{L^{p, \, \lambda}(\Omega)}. \end{equation}
+In particular, if $\lambda + p < n$, then
+\begin{equation} \label{eq:laeifeoewqe1} [u]_{\mathscr{L}^{p, \, \lambda + p}(\Omega)} \leq c(n, \, p, \, A, \, \lambda) \cdot \left[ \sum_{i = 1}^n \| D^i u \|_{L^{p, \, \lambda}(\Omega)} + \|u\|_{L^p(\Omega)} \right], \end{equation}
+and, if $\lambda + p > n$ and $\gamma = 1 - (n-\lambda)/p$, then
+\begin{equation} \label{eq:laeifeoewqe1} [u]_{0, \, \gamma, \, \Omega} \leq c(n, \, p, \, A) \cdot \sum_{i = 1}^n \| D^i u \|_{L^{p, \, \lambda}(\Omega)}. \end{equation}
+\end{theorem}
+
+\begin{proof}Fix $x_0 \in \Omega$ and $0 < \sigma \leq \delta$. The Poincaré inequality \eqref{poincargen2} it turns out that
+\begin{equation*} \begin{aligned} \int_{\Omega(x_0, \, \sigma)} \left| u(x) - u_{x_0, \, \sigma} \right|^p \, \mathrm{d}x & \leq c(n, \, p, \, A) \, \sigma^p \cdot |u|_{1, \, p, \, \Omega(x_0, \, \sigma)}^p \leq \\[1em] & \leq c(n, \, p, \, A) \, \sigma^{p + \lambda} \cdot \sum_{i = 1}^n \left\|D^i u\right\|_{L^{p, \, \lambda}(\Omega)}. \end{aligned}\end{equation*} \end{proof}
+
+\section{Bounded Mean Oscillation Spaces}
+
+Let $Q_0$ be a $n$-dimensional cube in $\R^n$. A function $u \in L^1(Q_0)$ is a function of \textit{bounded mean oscillation}, and we shall denote it by $u \in \mathrm{BMO}(Q_0)$, if
+\begin{equation} \label{bmosemi} [u]_{\mathrm{BMO}(Q_0)} = \sup_{Q \subset Q_0} \: \frac{1}{|Q|} \, \int_Q \left| u(x) - u_Q \right| \, \mathrm{d}x \end{equation}
+is finite, where the supremum is taken over all the $n$-dimensional cubes $Q \subset Q_0$ with parallel edges.
+
+\begin{remark}The space $\mathrm{BMO}(Q_0)$ coincides with the Campanato space $\mathscr{L}^{1, \, n}(Q_0)$ since one may always consider
+\begin{equation*} \Omega(x, \, \rho) = \Omega \cap Q(x, \, \rho) \end{equation*}
+instead of
+\begin{equation*} \Omega(x, \, \rho) = \Omega \cap B(x, \, \rho), \end{equation*}
+and obtain an equivalent Banach space.\end{remark}
+
+Let $u \in L^1(Q_0)$ be given. For every $\sigma > 0$ and for every $n$-dimensional cube $Q \subset Q_0$, with parallel edges, we set
+\begin{equation*} S(\sigma, \, Q) := \left\{ x \in Q \: \left| \: |u(x) - u_Q| > \sigma \right. \right\}. \end{equation*}
+
+\begin{definition}[John-Nirenberg] A function $u : Q_0 \to \C$ belongs to $\mathcal{E}_0(Q_0)$ if there are positive constants $H, \, \beta > 0$ such that. for every $\sigma > 0$ and every $n$-dimensional cube $Q \subset Q_0$, it turns out that
+\begin{equation} \label{qwoeoqw} \left|S(\sigma, \, Q)\right| \leq H \cdot \mathrm{e}^{- \beta \sigma} \cdot |Q|. \end{equation}\end{definition}
+
+\begin{theorem}A function $u : Q_0 \to \C$ belongs to $\mathcal{E}_0(Q_0)$ if and only if $u$ belongs to the Campanato space $\mathscr{L}^{p, \, n}(Q_0)$, for any $p \geq 1$. \end{theorem}
+
+\begin{theorem}The Campanato spaces $\mathscr{L}^{p, \, n}(Q_0)$, $p \geq 1$, are all equivalent between them. For any couple of real numbers $1 \leq p \leq q$ it turns out that
+\begin{equation} \label{qwoeoqw1} \frac{\alpha}{H^{1/q} \cdot \left[ \Gamma(q + 1) \right]^{1/q}} \cdot [u]_{ \mathscr{L}^{q, \, n}(Q_0)} \leq [u]_{ \mathscr{L}^{p, \, n}(Q_0)} \leq [u]_{ \mathscr{L}^{q, \, n}(Q_0)}.\end{equation} \end{theorem}

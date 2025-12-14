@@ -1,0 +1,321 @@
+
+\documentclass[a4paper,10 pt, twoside]{report}
+
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsfonts}
+\usepackage[labelfont=bf]{caption}
+\usepackage[pass]{geometry}
+\usepackage{amsthm}
+\usepackage{amsmath, amssymb}
+\usepackage{setspace}
+\usepackage[english]{babel}
+\usepackage{tikz-cd}
+\usepackage{makeidx}         % permette di generare l'indice
+\usepackage{fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{accents}
+\usepackage{faktor}
+\usepackage{mathrsfs}  
+\usepackage{pifont}
+\usepackage{mwe}
+\usepackage{young}
+\usepackage[vcentermath]{youngtab}
+\usepackage{hyperref}
+\usepackage{scalerel}[2014/03/10]
+\usepackage[usestackEOL]{stackengine}
+
+\usepackage{bbm}
+\usepackage{PTSansNarrow}
+\usepackage[T1]{fontenc}
+
+\usepackage{ragged2e}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{marginnote}
+\usepackage{xparse}
+\usepackage{pgfplots}
+\usepackage{tikzpagenodes}
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{datavisualization}
+\usetikzlibrary{datavisualization.formats.functions}
+\pgfplotsset{soldot/.style={color=blue,only marks,mark=*}} \pgfplotsset{holdot/.style={color=blue,fill=white,only marks,mark=*}}
+\pgfplotsset{compat=1.6}
+
+%%CAUTION
+\newcounter{mycaution}
+\newcommand\pointeranchor{}
+\newcommand\boxanchor{}
+\newlength\boxvshift
+\newlength\uppertrianglecorner
+
+\newcommand\tikzmark[1]{%
+  \tikz[remember picture,overlay]\node[inner xsep=0pt,outer sep=0pt] (#1) {};}
+
+\NewDocumentCommand{\caution}{O{c}O{BrickRed}O{Caution!}m}{%
+\stepcounter{mycaution}%
+\tikzmark{\themycaution}%
+\if#1b\relax
+\renewcommand\pointeranchor{mybox\themycaution.south east}%
+\renewcommand\boxanchor{south east}%
+\setlength\boxvshift{-10pt}%
+\setlength\uppertrianglecorner{13pt}%
+\else
+\if#1t\relax
+\renewcommand\pointeranchor{mybox\themycaution.north east}%
+\renewcommand\boxanchor{north east}%
+\setlength\boxvshift{10pt}%
+\setlength\uppertrianglecorner{-7pt}%
+\else
+\if#1c\relax
+\renewcommand\pointeranchor{mybox\themycaution.east}%
+\renewcommand\boxanchor{east}%
+\setlength\boxvshift{0pt}%
+\setlength\uppertrianglecorner{3pt}%
+\fi\fi\fi%
+\begin{tikzpicture}[remember picture,overlay]
+\node[draw=#2,anchor=\boxanchor,xshift=-\marginparsep,yshift=\boxvshift]   
+  (mybox\themycaution)
+  at ([yshift=3pt]current page text area.west|-\themycaution) 
+  {\parbox{\marginparwidth}{\vskip10pt\RaggedRight\small#4}};
+\node[fill=white,font=\color{#2}\sffamily,anchor=west,xshift=7pt]
+  at (mybox\themycaution.north west) {\ #3\ };
+\fill[#2]
+  ([yshift=\uppertrianglecorner]\pointeranchor) --
+  ([yshift=\uppertrianglecorner-3pt,xshift=3pt]\pointeranchor) --
+  ([yshift=\uppertrianglecorner-6pt]\pointeranchor) -- cycle;
+\end{tikzpicture}%
+}
+
+%%
+
+\makeindex %DDD
+
+\definecolor{coral}{rgb}{1.0, 0.5, 0.31}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=magenta,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\definecolor{amaranth}{rgb}{0.9, 0.17, 0.31}
+
+\DeclareRobustCommand\longtwoheadrightarrow
+     {\relbar\joinrel\twoheadrightarrow}
+
+\newcommand{\notimplies}{%
+  \mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
+
+\pagestyle{plain}
+\setlength{\topmargin}{0.0in}
+\setlength{\headheight}{0.2in}
+\setlength{\headsep}{0.2in}
+\setlength{\footskip}{0.5in}
+\setlength{\footnotesep}{0.15in}
+\setlength{\textheight}{8.3in}
+\setlength{\textwidth}{5.5in} % 6
+\setlength{\oddsidemargin}{0.5in}
+\setlength{\evensidemargin}{0.5in}
+\setlength{\parindent}{0.2 in}
+\setlength{\parskip}{0.1 in}
+\setlength{\marginparwidth}{1.2 in}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+\newtheorem{exercise}{Exercise}[chapter]
+
+\newcommand{\smallO}[1]{\scriptstyle\mathcal{O}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand*\conj[1]{\overline{#1}}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\T}{\mathbb T}
+\newcommand{\N}{\mathbb N}
+\newcommand{\F}{\mathcal F}
+\newcommand{\G}{\mathcal G}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\p}{\mathbb P}
+\newcommand{\sumij}{\sum_{i, \, j=1}^n}
+\newcommand{\aij}{a_{i, \, j}}
+\newcommand{\Dij}{D^{i, \, j}}
+\newcommand{\mfX}{\mathfrak X}
+\newcommand{\vertiii}[1]{{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1 
+    \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}}
+    
+    \newcommand{\vertiiii}[1]{{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1 
+    \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}}
+
+%SPACES
+\newcommand{\Sc}{\mathscr{S}}
+\newcommand{\Scp}{\mathscr{S}^\prime}
+\newcommand{\distr}{\mathcal{D}^\prime(\Omega)}
+\newcommand{\ccs}{\mathcal{D}(\Omega)}
+
+\newcommand{\spt}{\mathrm{spt}}
+\newcommand{\D}{\mathcal D}
+\newcommand{\s}{\mathcal S}
+
+\newcommand{\weak}{\stackrel{\ast}{\rightharpoonup}}
+
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widecheck}{0}{mathx}{"71}
+\DeclareMathAccent{\wideparen}{0}{mathx}{"75}
+
+\def\cs#1{\texttt{\char`\\#1}}
+
+\newcommand{\can}{\symbol{35}}
+\newcommand*{\double}[2][.1ex]{%
+  \mathrel{\vcenter{\offinterlineskip%
+  \hbox{$#2$}\vskip#1\hbox{$#2$}}}}
+\newcommand*{\doublerightarrow}{\double{\longrightarrow}}
+
+\newcommand{\restr}{%
+  \,\raisebox{-.127ex}{\reflectbox{\rotatebox[origin=br]{-90}{$\lnot$}}}\,%
+}
+
+\newcommand\subgroup{\leqslant}
+\newcommand\normsubgroup{\leq}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+
+\newcommand{\bsquare}{\item[\color{magenta}\ding{110}]} 
+\newcommand{\barrow}{\item[\color{blue}\ding{228}]}
+\newcommand{\bwarrow}{\item[\color{gray}\ding{227}]}
+
+\def\dashint{\,\ThisStyle{\ensurestackMath{%
+  \stackinset{c}{.2\LMpt}{c}{.5\LMpt}{\SavedStyle-}{\SavedStyle\phantom{\int}}}%
+  \setbox0=\hbox{$\SavedStyle\int\,$}\kern-\wd0}\int}
+\def\ddashint{\,\ThisStyle{\ensurestackMath{%
+  \stackinset{c}{.2\LMpt}{c}{.5\LMpt+.2\LMex}{\SavedStyle-}{%
+    \stackinset{c}{.2\LMpt}{c}{.5\LMpt-.2\LMex}{\SavedStyle-}{%
+      \SavedStyle\phantom{\int}}}}\setbox0=\hbox{$\SavedStyle\int\,$}\kern-\wd0}\int}
+      
+      
+\fancyhf{}
+% Put the page number at the right edge of odd pages, and left edge of even pages.
+\fancyhead[LO,RE]{\textbf \thepage}
+% Custom text at the left edge of odd pages, and right edge of odd pages.
+\fancyhead[RO]{ \rightmark}
+\fancyhead[LE]{ \leftmark}
+
+% Repeat for \fancyfoot if needed, e.g.
+% Some decorative symbol at the centre of both odd and even pages
+\fancyfoot[C]{ }
+
+% Set this length to 0pt if you don't want any lines!
+\renewcommand{\headrulewidth}{1pt}
+
+% Apply the fancy header style
+\pagestyle{fancy}
+
+
+\begin{document}
+\newpage \thispagestyle{empty}
+
+\begin{center}
+
+\begin{spacing}{1.5}
+{\huge  \sf Lecture Notes}\\
+\vspace*{\fill}
+\end{spacing}
+\begin{spacing}{2.5}
+\textbf{\huge Elliptic Equations}\\[0.5cm]
+\vspace*{\fill}
+\begin{minipage}{5cm}
+\centering {\textit{Course held by}}
+\end{minipage}
+\hspace*{\fill}
+\begin{minipage}{5cm}
+\centering {\textit{Notes written by}} \\
+\end{minipage}
+\end{spacing}
+
+\begin{spacing}{1.3}
+
+\begin{minipage}{5cm}
+\centering {\textbf{\large Prof. Antonio Tarsia}}
+\end{minipage}
+\hspace*{\fill}
+\begin{minipage}{5cm}
+\centering {\textbf{\large Francesco Paolo Maiale}}
+\end{minipage}
+
+\vspace*{\fill}
+
+\textnormal{\large Department of Mathematics \\[0.4em] Pisa University \\[0.4em] \today}
+
+\end{spacing}
+\end{center}
+
+\newpage \thispagestyle{empty}
+\begin{center}
+\vspace*{1cm}
+\begin{spacing}{2.5}
+ {
+\textbf{\huge Disclaimer}
+}
+\end{spacing} \end{center}
+
+\begin{spacing}{1.2}
+These \textbf{incomplete} notes came out of the \textit{Elliptic Equations} course, held by Professor Antonio Tarsia in the second semester of the academic year 2016/2017.
+
+I have used them to study for the exam; hence they have been reviewed thoroughly. Unfortunately, there may still be many mistakes and oversights; to report them, send me an email at \textbf{francescopaolo (dot) maiale (at) gmail (dot) com}.
+\end{spacing}
+
+
+{ \setlength{\parskip}{0.05 in}
+
+\clearpage                       % Otherwise \pagestyle affects the previous page.
+{                                % Enclosed in braces so that re-definition is temporary.
+  \pagestyle{empty}              % Removes numbers from middle pages.
+  \fancypagestyle{plain}         % Re-definition removes numbers from first page.
+  {
+    \fancyhf{}%                       % Clear all header and footer fields.
+    \renewcommand{\headrulewidth}{0pt}% Clear rules (remove these two lines if not desired).
+    \renewcommand{\footrulewidth}{0pt}%
+  }
+  \tableofcontents
+  \thispagestyle{empty}          % Removes numbers from last page.
+}}
+
+
+\include{Introduction}
+\include{Exist}
+\include{Sobolev}
+\include{FunctionalSpaces}
+\include{MoCaReg}
+
+\bibliography{Bibliografia}{} % BIBLIOGRAFIA
+\bibliographystyle{plain}
+\end{document}
