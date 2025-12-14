@@ -1,0 +1,422 @@
+\chapter{Lusternik-Schnirelman Theory} \thispagestyle{empty}
+
+In this chapter we aim to discuss the elegant theory of Lusternik and Schnirelman that connects critical points of functionals on manifolds to topological properties of the latter.
+
+\section{Lusternik-Schnirelman category}
+
+Throughout this chapter, $\M$ will always denote a Hilbert space or a $C^1$-submanifold modelled on a Hilbert space. 
+
+\bd[Contractible] \index{contractible set}
+Let $X$ be a topological space. A set $A \subset X$ is {\em contractible} in $X$ if the inclusion $\iota : A \hookrightarrow X$ is homotopic to a constant map. Namely, there exists
+\[
+H \in C \big([0, \, 1] \times A, \, X\big)
+\]
+such that $H(0, \, u) = u$ and $H(1,\, u) = p$ for all $u \in A$.
+\ed
+
+\bd[Category] \index{Lusternik-Schnirelman category}
+Let $X$ be a topological space and $A \subset X$. The {\em (L-S) category} of $A$ with respect to $X$, denoted by $\mathrm{cat}(A, \, X)$, is the least integer $k\in \N$ such that
+\[
+A \subseteq \bigcup_{i = 1}^k A_i,
+\]
+where each $A_i$ is closed and contractible in $X$. If such an integer does not exist, we set $\mathrm{cat}(A, \, X) = \infty$ and if $A$ is empty we set $\mathrm{cat}(\varnothing, \, X) = 0$.
+\ed
+
+\brmk
+The category of $A$ coincide with the category of its closure. Moreover
+\[
+\mathrm{cat}(A, \, X) \geq \mathrm{cat}(A, \, Y)
+\]
+provided that $A \subset X\subset Y$.
+\ermk
+
+\bex \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item The sphere $S^{m-1}$ is contractible in $\R^m$ so $\mathrm{cat}(S^{m-1}, \, \R^m) = 1$. However, it is not contractible in itself but can be covered by two closed hemispheres so $\mathrm{cat}(S^{m-1}) = 2$.
+\item The sphere in a infinite-dimensional Hilbert space is always contractible so
+\[
+\mathrm{cat}(S_H, \, H) = 1.
+\]
+The reader interested in this property might refer to \cite{90}.
+\item The category torus $T^2 = S^1 \times S^1 \subset \R^3$ in itself is equal to $3$. It is easy to verify that $\mathrm{cat}(T^2) \leq 3$ using $A_1, \, A_2, \, A_3$ as defined in Figure [REF].
+
+The opposite inequality, however, is quite hard to obtain and we will only explain at the end of the section how to use a general result to prove it.
+\end{enumerate}
+\eex
+
+%%DISEGNI IPAD
+
+
+
+\bl
+Let $A, \, B \subset \M$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $A \subset B$, then $\mathrm{cat}(A, \, \M) \leq \mathrm{cat}(B, \, \M)$.
+\item $\mathrm{cat}(A \cup B, \, \M) \leq  \mathrm{cat}(A, \, \M) + \mathrm{cat}(B, \, \M)$.
+\item If $A$ is closed and $\eta \in C(A, \, \M)$ is a deformation, then
+\begin{equation} \label{def.111}
+ \mathrm{cat}(A, \, \M) \leq  \mathrm{cat}\Big( \overline{\eta(A)}, \, \M\Big).
+\end{equation}
+\end{enumerate}
+\el
+
+\begin{proof}The only nontrivial assertion is $\mathbf{(c)}$. Let $k := \mathrm{cat}\Big( \overline{\eta(A)}, \, \M\Big)$ an assume that it is finite (otherwise there is nothing to prove). Then
+\[
+\eta(A) \subset \bigcup_{i = 1}^k C_i,
+\]
+where $C_i$ is closed and contractible in $\M$. Set
+\[
+A_i := \eta^{-1}(C_i)
+\]
+and observe that these are all closed because $\eta$ is continuous. Moreover, each $A_i$ is contractible because the composition of a contraction with $\eta$ gives another contraction. Since
+\[
+A \subset \bigcup_{i = 1}^k A_i,
+\]
+we easily deduce that \eqref{def.111} holds.\end{proof}
+
+The strict inequality in \eqref{def.111} is possible to achieve. Indeed, let $\M = S^1$ and $A = S_+^1$ the hemisphere
+\[
+S_+^1 = \{ \e^{\imath \theta} \: : \: \theta \in [0, \, 2 \pi] \}.
+\]
+Let $\eta(\e^{\imath \theta}) := H(1, \, \theta)$, where
+\[
+H(t, \, \theta) = \e^{\imath(t + 1) \theta}
+\]
+is defined for all $t \in [0, \, 1]$. Then it is trivial to verify that $\mathrm{cat}(A, \, \M) <  \mathrm{cat}\Big( \overline{\eta(A)}, \, \M\Big)$.
+
+\bl \label{lemma.z.z1}
+Let $A \subset \M$ be compact. Then the following properties hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item $\mathrm{cat}(A, \, \M) < \infty$.
+\item There exists a neighbourhood $U_A$ of $A$ such that
+\[
+\mathrm{cat}(A, \, \M) = \mathrm{cat}\Big(\overline{U_A}, \, \M\Big).
+\]
+\end{enumerate}
+\el
+
+\begin{proof}
+Suppose first that $\mathrm{cat}(A, \, \M) = 1$ and let $H : [0, \, 1] \times A \to \M$ be the contraction to the constant map $p$. We would like to extend $H$ to
+\[
+S := (\{0\}\times \M) \cup ([0, \, 1] \times A) \cup (\{1\} \times \M),
+\]
+and this is easily achieved by setting
+\[
+H(t, \,u) := \begin{cases}
+u & \text{if $(t, \, u) \in \{0\} \times \M$},
+\\[.6em] H(t, \,u) & \text{if $(t, \, u) \in [0, \, 1] \times A$},
+\\[.6em] p & \text{if $(t, \, u) \in \{1\} \times \M$}.
+\end{cases}
+\]
+Since $S$ is closed in $ Y := [0, \, 1] \times \M$ and $H$ is continuous from $S$ to $\M$, we can use the extension property to find a neighbourhood $N$ of $S$ in $Y$ and a function $\tilde{H} \in C(N, \, \M)$ such that
+\[
+\tilde{H} \, \big|_S \equiv H.
+\]
+Since $[0, \, 1] \times A$ is compact and the distance with $Y \setminus N$ is strictly positive, we can easily find a neighbourhood $U_A$ of $A$ in $\M$ such that
+\[
+[0,\,1] \times \overline{U_a} \subseteq N.
+\]
+It is easy to verify that $\overline{U_A}$ is contractible in $\M$ using the contraction $\tilde{H}$ appropriately restricted to a subset of its domain. In particular,
+\[
+\mathrm{cat}(A, \, \M) = 1 \implies \mathrm{cat}\Big(\overline{U_A}, \, \M\Big) = 1.
+\]
+
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item Let $q \in A$ Then above we proved that there exists a contractible neighbourhood $U_q$ of category equal to one. Since we can always cover $A$ with finitely many $U_q$'s, we infer that the category of $A$ is finite.
+\item Let $k = \mathrm{cat}(A,\, \M)$ and let $A_1,\, \cdots,\, A_k$ be the closed and contractible sets such that
+\[
+A \subseteq \bigcup_{i = 1}^k A_i.
+\]
+Observe that if we replace $A_i$ with $A \cap A_i$, we can assume without loss of generality that $A_i$'s are also compact. Since $\mathrm{cat}(A_i,\, \M) = 1$ we can find an open neighbourhood $U_i$ of $A_i$ such that
+\[
+\mathrm{cat}\Big(\overline{U_i},\, \M \Big) = 1
+\]
+for each $i = 1,\, \cdots, \, k$. Let $U_A := \bigcup_{i=1}^k U_i$ and notice that $U_A$ is an open neighbourhood of $A$ such that
+\[
+\mathrm{cat}\Big(\overline{U_A}, \, \M\Big) \geq k.
+\]
+Since $\overline{U_A} \subset \bigcup_{i = 1}^k \overline{U_i}$, we also get the opposite inequality and hence the equality holds.
+\end{enumerate}
+\end{proof}
+
+%%FIG IPAD
+
+\brmk
+It can be proved that the category satisfies the inequality
+\[
+\mathrm{cat}(\M) \geq \mathrm{cup-length}(\M) + 1,
+\]
+where the {\em cup-length}\index{cup-length} of $\M$ is defined by
+\[
+\mathrm{cup-length}(\M) = \sup \left\{ k \in \N \: : \: \text{$\exists \, \alpha_1, \, \cdots,\, \alpha_k \in \M^\ast$ s.t. $\alpha_1 \cup \cdots \cup \alpha_k \neq 0$} \right\}.
+\]
+If $\M$ is a smooth manifold, then by De Ram's cohomology $\alpha_1 \cup \cdots \cup \alpha_k$ corresponds to the $\wedge$-product of differential forms. In particular
+\[
+\mathrm{d}x^1 \wedge \mathrm{d}x^2 \neq 0
+\]
+on the torus $\mathbb{T}^2$, so we obtain the bound $\mathrm{cat}(\mathbb{T}^2) \geq 3$.
+\ermk
+
+\section{Lusternik-Schnirelman theorems}
+
+Let $\M$ be a Hilbert space or a $C^1$-submanifold modelled on a Hilbert space. Define
+\[
+\mathrm{cat}_K(\M) := \sup \left\{ \mathrm{cat}(A,\, \M) \: : \: \text{$A \subseteq M$ is compact} \right\}
+\]
+and introduce the corresponding class of sets that is preserved when we use deformations; namely, let
+\[
+C_m := \left\{ A \subseteq \M \: : \: \text{$A$ is compact and $\mathrm{cat}(A,\,\M) \geq m$} \right\}
+\]
+for $m \leq \mathrm{cat}_K(\M)$. Let $J \in C^1(\M,\,\R)$ and define
+\[
+c_m := \inf_{A \in C_m} \max_{u \in A} J(u).
+\]
+The following properties follows from the definition immediately: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The first level, $c_1$, coincide with $\inf_{u \in \M} J(u)$. 
+\item The sequence of levels is increasing, that is,
+\[
+c_1 \leq c_2 \leq \cdots \leq c_k \leq \cdots
+\]
+\item For all $m \leq \mathrm{cat}_K(\M)$ there results $c_m < \infty$.
+\item If $J$ is bounded from below on $\M$, then all $c_m$'s are finite.
+\end{enumerate}
+
+\bthm \label{thm.8..8}
+Let $J \in C^1(\M,\, \R)$ be a functional bounded from below on $\M$ and satisfying the Palais-Smale condition at all $c \in \R$. Then $J$ has at least $\mathrm{cat}_K(\M)$ critical points and the following holds: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item For all $m \leq \mathrm{cat}_K(\M)$, $c_m$ is a critical value for $J$.
+\item If there are integers $q, \, m \geq 1$ such that
+\[
+c := c_m = c_{m+1} = \cdots = c_{m + q},
+\]
+then $\mathrm{cat}(\mathcal{Z}_c,\, \M) \geq q + 1$.
+\end{enumerate}
+\ethm
+
+\brmk
+The category of a finite set of points $\{p_1,\, \dots, \, p_N\}$ in $\M$ is always equal to one (if $\M$ is connected). Consequently, $\mathbf{(2)}$ gives us an even more precise information than merely saying that there are infinite critical points at the level $c$.
+\ermk
+
+\bl[Deformation] \index{deformation lemma!critical points} \label{deformationlemma:secondo}
+Let $J \in C^1(\M,\, \R)$ be a functional bounded from below on $\M$ and satisfying the Palais-Smale condition at all $c \in \R$. Then for each $U$ neighbourhood of $\mathcal{Z}_c$ there are $\delta = \delta(U) > 0$ and a deformation $\eta$ such that
+\[
+\eta(\M^{c+\delta} \setminus U) \subseteq \M^{c-\delta}.
+\]
+\el
+
+\begin{proof}
+We claim that for each $U$ neighbourhood of $\mathcal{Z}_c$ there exists $\bar{\delta} > 0$ such that
+\[
+\text{$u \notin U$ and $|J(u) - c | \leq \bar{\delta}$} \implies \| \nabla J(\alpha(t,\,u)) \| \geq 2 \bar{\delta} \quad \text{for all $t \in [0,\,1]$}.
+\]
+We argue by contradiction. Assume that there are sequences $t_k \in [0,\,1]$ and $u_k \notin U$ such that
+\[
+|J(u_k) - c| \leq \frac{1}{k} \quad \text{and} \quad \| \nabla J(\alpha(t_k,\,u)) \| \xrightarrow{k\to \infty} 0.
+\]
+Let $\bar{t} \in [0,\,1]$ be the limit (up to subsequences) of $t_k$ and set $\nu_k := \alpha(t_k, \, u_k)$. Then
+\[
+J(\nu_k) \leq J(u_k) \leq c + \frac{1}{k}
+\]
+and, since $J$ is bounded from below and satisfies the Palais-Smale condition, we find that $J(\nu_k)$ converges to $c$. Passing to the limit the inequality above shows that
+\[
+c = \lim_{k \to \infty} J(\nu_k) \leq  \lim_{k \to \infty} J(u_k) \leq c = \lim_{k \to \infty} (c + \frac{1}{k}),
+\]
+which means that $J(u_k)$ also converges to $c$, and hence it is enough to prove that $u_k$ converges to some $z$. We know that $\nu_k \to z$ and the flow $\alpha(t,\, z) = z$ for all $t \in [0,\,1]$. We can go backwards and obtain
+\[
+u_k = \alpha(-t_k, \, \nu_k),
+\]
+so by Cauchy's theorem we infer that $u_k \to z$. Since $z \in \mathcal{Z}_c$ we find a contradiction because $u_k$ does not belong to $U$ for all $k$ and $\mathcal{Z}_c$ is contained in $U$. The rest of the proof follows as in \hyperref[lemma.f.2]{Lemma \ref{lemma.f.2}}.
+\end{proof}
+
+%%DISEGNo
+
+\begin{proof}[Proof of Theorem \ref{thm.8..8}]
+The assertion $\mathbf{(1)}$ follows from the deformation lemma in the same fashion it did in the MPT. To prove $\mathbf{(2)}$ we argue by contradiction, i.e., we assume that
+\[
+\mathrm{cat}(\mathcal{Z}_c, \, \M) \leq q.
+\]
+Since $J$ satisfies the Palais-Smale condition, the critical set $\mathcal{Z}_c$ is compact and hence there exists an open neighbourhood $U$ of $\mathcal{Z}_c$ such that
+\[
+\mathrm{cat}\Big(\overline{U}, \, \M\Big) \leq q.
+\]
+By the second deformation \hyperref[deformationlemma:secondo]{Lemma \ref{deformationlemma:secondo}}, there are $\delta > 0$ and a deformation $\eta$ such that
+\[
+\eta \left( \M^{c+ \delta} \setminus U \right) \subseteq \M^{c-\delta}.
+\]
+Since $c = c_{m+q}$ we can find an element $A \in C_{m+q}$ such that
+\[
+\sup_{u \in A} J(u) \leq c + \delta \implies A \subseteq \M^{c+\delta}.
+\]
+Set $A^\prime := \overline{A \setminus U}$. Then
+\[
+\mathrm{cat} \left( A^\prime, \, \M \right) \geq \mathrm{cat}\left(A, \, \M\right)- \mathrm{cat}\left(\overline{U}, \, \M\right)\geq m + q - q = m,
+\]
+which means that $A^\prime \in C_m$. Therefore, the image of $A^\prime$ via $\eta$ is contained in $\M^{c-\delta}$ and, using the properties of the category, we also have that
+\[
+\mathrm{cat}\left( \eta(A^\prime),\, \M \right) \geq m.
+\]
+In particular, we have $A^\prime \in C_m$ and
+\[
+\sup_{A^\prime} J(u) \leq c - \delta,
+\]
+but this is a contradiction with the very definition of $c_m$.
+\end{proof}
+
+\bthm
+Let $\M$ be a Hilbert space or a $C^{1,\, 1}$-manifold and let $J \in C^{1,\,1}(\M,\, \R)$ be bounded from below. Suppose that there exists $a \in \R$ such that the Palais-Smale condition holds at all levels $c \leq a$. Then
+\[
+\mathrm{cat}(\M^a) < \infty.
+\]
+\ethm
+
+\begin{proof}
+Let $Z = \{ \nabla J = 0 \}$ and set $Z^a := \M^a \cap Z$. The Palais-Smale condition implies that $Z^a$ is compact and by \hyperref[lemma.z.z1]{Lemma \ref{lemma.z.z1}} we can find an open neighbourhood $U^a$ of $Z^a$ such that
+\[
+\mathrm{cat}(\bar{U}^a,\,M^a) = \mathrm{cat}(Z^a,\,M^a) < \infty.
+\]
+We can assume without loss of generality that $\| \nabla J (u) \| \leq 1$ for all $u \in U_a$. Then there exists $V^a \subset U^a$, neighbourhood of $Z^a$, such that
+\[
+d := d(\bar{V}^a,\, \partial U^a) > 0.
+\]
+If a gradient flow of $J$ exits $V^a$ and enters the complement of $U^a$, then this has to happen in a time bigger than or equal to $d$. Observe that by $\mathrm{(PS_c)}$ there is $\delta > 0$ such that
+\[
+\| \nabla J(u) \| \geq \delta
+\]
+for all $u \in \M^a \setminus V^a$. Let $a' := a - \inf_{u \in \M} J(u)$ and $T > \frac{a'}{\delta^2}$. Recall that
+\[
+- \frac{\mathrm{d}}{\mathrm{d}t} J(\alpha(t,\,u)) = - \| \nabla J(\alpha(t,\,u)) \|^2,
+\]
+and thus if $\alpha(t,\,u)$ never enters $V^a$, we would have
+\[
+J(\alpha(t,\,u)) < J(u) - T \delta^2 < a - a' = \inf_{u \in \M} J(u),
+\]
+which is impossible. Now let $t_0 = 0 < t_1 < \dots < t_{n-1} < t_n = T$ be such that
+\[
+|t_i - t_{i-1}| \leq \frac{d}{2}.\]
+Given $p \in \M^a$, there must be $\bar{t} \in [0,\,T]$ such that $\alpha(\bar{t},\, p) \in V^a$ and an index $i$ for which $|\bar{t}- t_i| \leq \frac{d}{2}$. Clearly
+\[
+\alpha(t_i,\, u) \in U^a,
+\]
+so we can consider the sets
+\[
+A_i = \{ p \in \M^a \: : \: \alpha(t_i,\,p) \in U^a\}.
+\]
+By what we proved above, $\M^a \subseteq \bigcup_{i = 0}^n A_i$ and therefore
+\[
+\mathrm{cat}(\M^a) \leq \sum_{i=0}^n \mathrm{cat}(A_i,\,\M^a).
+\]
+Since $A_i$ can be deformed in $U^a$ via $\eta_i := \alpha(t_i,\, \cdot)$, we use the properties of the category to infer that
+\[
+\mathrm{cat}(\M^a) \leq \sum_{i=0}^n \mathrm{cat}(\eta_i(A_i),\,\M^a) \leq (n+1) \mathrm{cat}(U^a,\, \M^a) < \infty.
+\]
+\end{proof}
+
+\bcor
+If $J$ is also bounded from above on $\M$, then $\mathrm{cat}(\M)$ is finite.
+\ecor
+
+\bcor
+Let $J$ be bounded from below on $\M$. Suppose that $\mathrm{cat}(\M) = \infty$ and that $\mathrm{(PS)_a}$ holds for all $a < \sup_{u \in \M} J(u)$. Then
+\[
+c_m \xrightarrow{m \to \infty} \sup_{u \in \M} J(u),
+\]
+and hence $J$ has infinitely many critical points.
+\ecor
+
+\brmk[Relative category]\index{relative category}
+Suppose that $A, \, Y \subseteq \M$ are closed. We define the relative category $\mathrm{cat}_{\M,Y}(A)$ as the least integer $k$ such that
+\[
+A \subseteq \bigcup_{i = 0}^k A_i,
+\]
+where $A_i$ is closed and contractible for all $i = 1,\, \dots, \, k$ in $\M$ and there exists a homotopy $h \in C([0,\,1]\times A_0,\, \M)$ satisfying
+\[
+h(0,\, \cdot) = \mathrm{id}_{A_0}, \qquad h(1,\, \cdot) \in Y \quad \text{and} \quad h(t, \, \cdot) \, \big|_Y \in Y.
+\]
+If $Y$ is empty, then the definition coincides with the one of category of $A$ in $\M$.
+
+\bthm
+If $J$ satisfies the Palais-Smale condition for all $c \in [a,\,b]$ then there are at least $\mathrm{cat}_{\M^b,\, \M^a}(\M^b)$ critical points in the energy strip $\overline{\M^b \setminus\M^a}$.
+\ethm
+\ermk
+
+\section{Application to PDEs theory}
+
+Let $\Omega$ be a bounded smooth subset of $\R^n$ and consider the Dirichlet-boundary problem
+\[
+\begin{cases} - \Delta u = \lambda u + f(u) & \text{if $x \in \Omega$},
+\\[.6em] u = 0 & \text{if $x \in \partial \Omega$}, \end{cases}
+\]
+where $\lambda \in (\lambda_k,\, \lambda_{k+1})$ for some $k \geq 2$. Assume that $f$ is continuous and satisfies the following properties: \mbox{}
+\begin{enumerate}[label={\color{magenta}(\arabic*)}]
+\item $f$ is subcritical at $t = 0$, which means that $f(t) = \mathcal{O}(|t|^\alpha)$ for some $\alpha > 1$.
+\item If $F(u) := \int_0^u f(s) \, \dr s$, then
+\[
+\lim_{|t|\to \infty} \frac{F(t)}{t^2} = - \infty.
+\]
+\item The function $t \mapsto f(t)$ is nonincreasing (thus $F(t) \leq 0$ for all $ \in \R$) and $F(t) = 0$ if and only if $t = 0$.
+\end{enumerate}
+
+\bthm
+Under these assumptions, the Dirichlet-boundary problem admits at least two solutions.
+\ethm
+
+\begin{proof}Let $\X := H_0^1(\Omega)$ and let us consider the associated functional
+\[
+J(u) := \frac{1}{2} \int_\Omega |\nabla u|^2 \, \dr x - \frac{\lambda}{2} \int_\Omega |u|^2 \, \dr x - \int_\Omega F(u) \, \dr x.
+\]
+The assumption {\color{magenta}$(2)$} tells us that $- F(u) \geq Mu^2$ for all $M \in \R$ when $u$ is sufficiently big, while in the complement (which is compact) we can always find a constant $C_M > 0$ such that $F(u) \leq C_M$. It follows that
+\[
+-F(u) \geq M u^2 - C_M \quad \text{for all $u \in \R$}.
+\]
+We plug this inequality into $J$ and find that
+\[
+J(u_n) \geq \frac{1}{2} \int_\Omega |\nabla u_n|^2 \, \dr x + \left( M - \frac{\lambda}{2} \right) \int_\Omega |u_n|^2 \, \dr x - C_M |\Omega|
+\]
+and this goes to $\infty$ as $\|u_n\|_\X \to \infty$ since we can always pick $M > \frac{\lambda}{2}$. In particular, the functional $J$ is coercive on $\X$ and hence it satisfies the Palais-Smale condition at all levels\footnote{This assertion is not trivial, but one can show that coercivity gives the bounedness of Palais-Smale sequences and the subcriticality of $f$ allows one to write $\nabla J = \mathrm{Id} + \nabla \Phi$, where $\nabla \Phi$ is a compact operator.}.
+
+\brmk
+The $\Psi$-gradient decreases the value of $J$, so it is not restrictive to apply the min-max theory to a suitable sublevel $\X^a$. We introduce this apparent complication because we can collect more topological information as if we were in $\R^n$.
+\ermk
+
+We now substitute $\X$ with the sublevel $\X^{<0} := \{ u \in \X \: : \: J(u) < 0\}$, which is easy to see that it is nonempty using {\color{magenta}$(1)$}:
+\[
+J(t \varphi_1) \simeq_{t \to 0^+} \frac{1}{2} \underbrace{\left( \lambda_1 - \lambda \right)}_{< 0} t^2 + \mathcal{O}(|t|^{\alpha + 1}),
+\]
+where $\varphi_1$ is an eigenfunction of the first eigenvalue $\lambda_1$. Now notice that $C_1$ is nonempty and hence $c_1 < 0$ (since we are working in $\X^{<0}$) is a critical level and
+\[
+\mathcal{Z}_{c_1} \neq \varnothing.
+\]
+We claim that $C_2$ is nonempty. Let $V := \mathrm{Span}\langle \varphi_1,\, \dots, \, \varphi_k\rangle$ and, for $r$ small enough, notice that
+\[
+\sup_{S_r \cap V} J(u) < 0.
+\]
+If we can prove that the category of $S_r \cap V$ in $\X^{<0}$ is bigger than or equal to $2$, we will be able to conclude that $C_2 \neq \varnothing$. Let $\pi_V : \X \to V$ be the projection and let
+\[
+\pi_r(u) := r \frac{\pi_V(u)}{\| \pi_V(u) \|_\X}
+\]
+be the normalized projection which is the identity on $S_r \cap V$. Suppose that $\mathrm{cat}(S_r \cap V, \, \X^{<0}) = 1$ and let $A \supseteq S_r \cap V$ be the closed contractible set such that
+\[
+H(0,\, \cdot) \, \big|_A \equiv \mathrm{Id}_A \quad \text{and} \quad H(1,\, \cdot) \equiv p \in \X^{<0}
+\]
+for some contraction $H$. The assumption {\color{magenta}$(3)$} gives us that $\pi_V(u) = 0$ if $J(u) \geq 0$, which means that $\pi_V(u) \neq 0$ for all $u \in \X^{<0}$ and the restriction
+\[
+\pi_r(u) \, \big|_{S_r \cap V}
+\]
+is well-defined. We can consider the composition
+\[
+\pi_r \circ H : [0,\,1] \times A \to S_r \cap V,
+\]
+which, restricted to $[0,\,1] \times S_r \cap V$, gives a retraction of a $(k-1)$-dimensional sphere to a point in itself, and this is a contradiction as the sphere is non-contractible in itself.
+\end{proof}
+
+\brmk
+If $c_1 = c_2 < 0$, then there are infinitely many critical points at level $c$ since the category of $\mathcal{Z}_c$ is at least two.
+\ermk
+
+\brmk
+If $\lambda \in (\lambda_1,\, \lambda_2)$, then $V = \varphi_1 \R$ and the same argument leads to $S_r \cap V \cong S^0 = \{ \pm q \}$. The sublevels become disconnected, but it is still true that
+\[
+\mathrm{cat}(\{ \pm q\},\, \X^{<0}) = 2.
+\]
+\ermk

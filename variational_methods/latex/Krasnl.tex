@@ -1,0 +1,514 @@
+\chapter{The Krasnoselski Genus} \thispagestyle{empty}
+
+\section{Introduction}
+
+Let $E$ be a infinite-dimensional Hilbert space. We say that a subset $\Omega \subset E$ is {\em symmetric}\index{symmetric set} if it is symmetric with respect to the origin of $E$, that is,
+\[
+u \in \Omega \implies - u \in \Omega.
+\]
+Let $\Gamma$ be the class of all the symmetric subsets $A \subseteq E \setminus \{0\}$ which are {\bf closed} in $E \setminus \{0\}$.
+
+\bd[Genus]\index{Krasnoselski genus}
+Let $A \in \Gamma$. The {\em genus} of $A$, denoted by $\gamma(A)$, is the least integer number $k \in \N$ such that there exists a continuous odd map $\Phi : A \to \R^k$ satisfying
+\[
+\Phi(x) \neq 0 \quad \text{for all $x \in A$}.
+\]
+If such a number does not exist, then we define $\gamma(A) := \infty$. Similarly, if $A$ is an empty set, then we can set $\gamma(A) := 0$. 
+\ed
+
+\brmk
+The genus of $A$ can be equivalently defined as the least integer number $k \in \N$ such that there exists a continuous odd map
+\[
+\Phi : A \to \R^k \setminus\{0\}.
+\]
+The reason is that we can always extend such a map to a continuous one taking values in $\R^k$ using {\em Dugundij's theorem} (selecting the odd part only).
+\ermk
+
+\brmk \label{rmk:genussphere}
+The definition of genus does not change if we require $\Phi$ to be a function with values in the sphere $\mathbb{S}^{k-1}$ instead of $\R^k \setminus \{0\}$ since we can compose with the projection
+\[
+\pi(x) := \frac{x}{|x|}.
+\]
+\ermk
+
+\bl \index{genus!of a sphere}
+Let $E = L^2(\R^d)$ and let $A = S_E(0, \, 1)$ be the unit sphere in $L^2$. Then
+\[
+\gamma(A) = + \infty. 
+\]
+\el
+
+\begin{proof}
+Let $k \in \N$ be any positive integer and suppose that
+\[
+\Phi : S_E(0, \, 1) \to \R^k 
+\]
+is a continuous odd map. The infinite-dimensional sphere contains the $n$-dimensional sphere $\mathbb{S}^n(0, \, 1) \subset \R^{n + 1}$ for all $n \in \N$. By {\em Borsuk-Ulam theorem} it follows that, for $n > k$,
+\[
+0 \in \Phi \left(\mathbb{S}^n(0, \, 1) \right) \implies 0 \in \Phi\left(S_E(0, \, 1) \right).
+\]
+Since $S_E(0, \, 1)$ contains every finite-dimensional sphere, for every $k \in \N$ we can take $n = k + 1$ and obtain that $0$ is in the image. This shows that the genus is $+ \infty$.
+\end{proof}
+
+\brmk
+In a similar fashion, one proves that $\gamma(\partial \Omega) = n$, where $\Omega \subset \R^n$ is an open bounded even subset such that $0 \in \Omega$. In particular,
+\[
+\gamma(\mathbb{S}^{n-1}) = n.
+\]
+\ermk
+
+\begin{proof}
+It is easy to verify that $\gamma \left( \partial \Omega \right) \leq n$. On the other hand, if
+\[
+\Phi : \partial \Omega \subseteq \R^n \longrightarrow \R^k
+\]
+is a continuous odd map, then {\em Borsuk-Ulam theorem} implies that $0 \in \Phi \left( \partial \Omega \right)$ for every $k < n$. It follows that
+\begin{equation*}\gamma \left( \partial \Omega \right) \geq N \implies \gamma \left( \partial \Omega \right) = N. \end{equation*}
+\end{proof}
+
+\bl
+The following properties hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $A \in \Gamma$ is finite and nonempty, then $\gamma(A) = 1$.
+\item If $A \subseteq \R^n$ and $0 \notin A$, then $\gamma(A) \leq n$.
+\item If $0 \in A$, then $\gamma(A) = + \infty$.
+\end{enumerate}
+\el
+
+\bpr\label{propgenus} Let $A$ and $B$ be elements of the class $\Gamma$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The set $A$ is empty if and only if the genus $\gamma(A)$ is equal to $0$.
+\item If $\Phi : A \to B$ is a continuous odd map, then $\gamma(A) \leq \gamma(B)$. In particular,
+\[
+A \subseteq B \implies \gamma(A) \leq \gamma(B).
+\]
+\item The genus is subadditive, that is,
+\begin{equation} \label{genussub} \gamma (A \cup B) \leq \gamma(A) + \gamma(B). \end{equation}
+\item There is an open neighborhood $U \supset A$ satisfying the following properties:
+\mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The set is symmetric, that is, if $u \in U$, then $- u \in U$.
+\item The origin is not contained in the closure of the set, that is, $0 \notin \bar{U}$.
+\item The genus coincides with the one of the set $A$, that is,
+\[
+\gamma \left( \bar{U} \right) = \gamma(A).
+\]
+\end{enumerate}
+\end{enumerate}
+\epr
+
+\begin{proof} The first property is obvious. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\setcounter{enumi}{1}
+\item If $\Psi : B \to \R^k \setminus \{0\}$ is a continuous odd map, then the composition
+\[
+\Psi \circ \Phi : A \to \R^k \setminus \{0\}
+\]
+is still continuous and odd. It follows that $\gamma(A) \leq \gamma(B)$.
+\item Let $k, \, h \in \N$ be the least positive integers such that there are continuous odd maps $\Phi_1 : A \longrightarrow \R^k \setminus \{0\}$ and $\Phi_2 : B \longrightarrow \R^h \setminus \{0\}$ respectively. Let
+\[
+\widetilde{\Phi_i} : A \cup B \to \R^k
+\]
+be the continuous odd extensions of $\Phi_1$ and $\Phi_2$ respectively to $A \cup B$. Then
+\[
+\Psi(u) := \left(\widetilde{\Phi_1}(u), \, \widetilde{\Phi_2}(u) \right) : A \cup B \to \R^k \times \R^h \setminus \{(0,\,0)\}
+\]
+is a continuous odd map. Moreover, every point $u \in A \cup B$ belongs to either $A$ or $B$ so its image cannot be equal to $(0,\,0)$.
+\item Let $k = \gamma(A)$. By \hyperref[rmk:genussphere]{Remark \ref{rmk:genussphere}} there exists a continuous odd map
+\[
+\Phi : A \to S^{k-1}.
+\]
+The set $A$ is closed in $E$ and hence there exists a continuous odd function $\widetilde{\Phi} : E \to \R^k$, which extends $\Phi$, but, a priori, $0$ may be in its image. Thus
+\[
+U_A := \left\{ u \in E \: \left| \: \left| \widetilde{\Phi}(u) \right| > \frac{1}{2} \right. \right\}
+\]
+is the desired neighborhood of $A$.
+\end{enumerate} \end{proof}
+
+\section{Genus in calculus of variations}
+
+Suppose that $\X \subset E$, $\X$ Hilbert or $C^1$-submanifold, belongs to $\Gamma$. In this section, unless otherwise stated, every functional $J : \X \to \R$ is even and of class $C^1(\X, \, \R)$.
+
+\bpr
+Let $a < b$ be real numbers. Assume that $f : \X \to \R$ satisfies $\left( \mathrm{PS} \right)_c$ at every level $c \in [a, \, b]$. If there is a strict inequality
+\[
+\gamma \left(\X^a \right) < \gamma\left(\X^b \right),
+\]
+then there exists a critical value $c \in [a, \, b]$ for $f$.
+\epr
+
+\begin{proof}We argue by contradiction. If there are no critical values in $[a, \, b]$, then there is an odd retraction
+$r: \X^{b} \to \X^{a}$, and we conclude using \hyperref[propgenus]{Proposition \ref{propgenus}}.
+\end{proof}
+
+\begin{notation}Let $k \in \N$ be a positive integer number such that $1 \leq k \leq \gamma(\X)$. We denote by $\gamma_k$ the infimum of all the sublevels such that the genus is at least $k$, that is,
+\[
+\gamma_k := \inf \left\{ c \in \R \: \left| \: \gamma \left( \X^c \right) \geq k \right. \right\}.
+\]
+It is possible that $\gamma \left( \X^c \right) \geq k$ is not satisfied for any real number $c \in \R$. In this case, the supremum of $J$ is $\infty$ and we set $\gamma_k = \infty$.
+\end{notation}
+
+\bl
+\label{gen:fl}Let $1 \leq k \leq \gamma(\X)$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The sequence is increasing, that is,
+\[
+\inf_{u \in \X} J(u) = \gamma_1 \leq \gamma_2 \leq \dots \leq \gamma_k \leq \sup_{u \in \X} J(u).
+\]
+\item If $\gamma_k \in \R$ and $J$ satisfies $\left( \mathrm{PS} \right)_{\gamma_k}$, then $\gamma_k$ is a critical value for the functional $J$. In particular,
+\[
+\gamma_1 \in \R \implies \gamma_1 = \min_{u \in \X} J(u).
+\]
+\item If $\gamma_k = \gamma_{k+1} = \dots = \gamma_{k + h}$ for some $h \geq 1$ and $f$ satisfies $\left( \mathrm{PS} \right)_{\gamma_k}$, then
+\[
+\gamma \left( \mathcal{Z}_{\gamma_k} \right) \geq h + 1,
+\]
+where $\mathcal{Z}_{\gamma_k}$ is the set of all singular points of $J$ at the level $\gamma_k$. In particular, if $0 \in \mathcal{Z}_{\gamma_k}$, then it is an infinite set.
+\end{enumerate}
+\el
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The first identity follows from the fact that
+\[
+\gamma_1 := \inf \left\{ c \in \R \: \left| \: \gamma \left( \X^c \right) \geq 1 \right. \right\} = \inf \left\{ c \in \R \: \left| \: \X^c \neq \varnothing \right. \right\} = \inf_{u \in \X} J(u).
+\]
+Now notice that
+\[
+\left\{ c \in \R \: \left| \: \gamma \left(\X^c \right) \geq k \right. \right\} \supseteq \left\{ c \in \R \: \left| \: \gamma \left( \X^c \right) \geq k+1 \right. \right\},
+\]
+from which it follows that $\gamma_k \leq \gamma_{k+1}$ by taking the infimum of both sides.
+\item If $\gamma_k$ is not a critical level for $J$, then there are $\delta > 0$ and
+\[
+r : \X^{\gamma_k + \delta} \to \X^{\gamma_k - \delta}
+\]
+odd retraction. By \hyperref[propgenus]{Proposition \ref{propgenus}} we have
+\[
+\gamma\left( \X^{\gamma_k + \delta} \right) \leq \gamma \left( \X^{\gamma_k - \delta} \right),
+\]
+but this is impossible since
+\[
+\gamma\left( \X^{\gamma_k - \delta} \right) \leq k -1 < k \leq \gamma \left( \X^{\gamma_k + \delta} \right).
+\]
+\item First, notice that $\mathcal{Z}_c$ is always a compact element of $\Gamma$. Thus by \hyperref[propgenus]{Proposition \ref{propgenus}} there exists a symmetric open neighborhood $U$ of $\mathcal{Z}_{\gamma_k}$ such that
+\[
+\bar{U} \in \Gamma \quad \text{and} \quad \gamma\left( \bar{U} \right) = \gamma \left( \mathcal{Z}_{\gamma_k} \right). 
+\]
+Then there are $\epsilon > 0$ and an odd retraction $r : \X^{\gamma_k + \epsilon} \setminus U \to \X^{\gamma_k - \epsilon}$, where the domain is closed, belongs to $\Gamma$ and it satisfies the inclusion
+\begin{equation} \label{123123} \X^{\gamma_k + \epsilon} \subseteq \left(\X^{\gamma_k + \epsilon} \setminus U \right) \cup \bar{U}. \end{equation}
+By assumption $k + h \leq \gamma \left( \X^{\gamma_k + \epsilon} \right)$, and by the subadditivity of the genus, it follows from \eqref{123123} that
+\[
+\begin{aligned}k + h & \leq \gamma \left( \X^{\gamma_k + \epsilon} \right) \leq
+\\[1em] & \leq \gamma \left( \X^{\gamma_k + \epsilon} \setminus U \right) + \gamma \left( \bar{U} \right) \leq
+\\[1em] & \leq \gamma \left( \X^{\gamma_k - \epsilon} \right) + \gamma \left( \bar{U} \right) \leq
+\\[1em] & \leq k - 1 + \gamma\left( \mathcal{Z}_{\gamma_k} \right),
+\end{aligned}\]
+and this leads to the desired result.
+\end{enumerate} \end{proof}
+
+\bthm[Lusternik-Schnirelman]\index{Lusternik-Schnirelman theorem} \label{lussch}Let $J : \mathbb{S}^{n-1} \to \R$ be an even functional of class $C^1$. There are (at least) $n$ pairs of critical points for $J$ of the form
+\[
+(-u_i, \, u_i) \in \mathbb{S}^{n-1} \times \mathbb{S}^{n-1}.
+\]
+\ethm
+
+\section{Application to nonlinear eigenvalues}
+
+Let $\X$ be an infinite-dimensional Hilbert space and let $J\in C^1(\X)$ be an even functional satisfying the following assumptions: \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item $J(0) = 0$, $J(u) < 0$ for all $u \neq 0$ and $\sup_{u \in \X}J(u) = 0$.
+\item $J$ is weakly continuous and $\nabla J$ is compact.
+\item $\nabla J(u) \neq 0$ for all $u \in \X$.
+\end{enumerate}
+
+\bthm
+Under these assumptions, the problem
+\[
+\nabla J(u) = \lambda u
+\]
+has infinitely many solutions $(\mu_k,\, z_k)$ with $z_k \in S := \{ u \in \X \: : \: \|u\|_2 = 1\}$ and $\mu_k \to 0$.
+\ethm
+
+\begin{proof}
+To apply the general results with $S$, we need to prove that $J \, \big|_S$ is bounded below and $J$ satisfies the Palais-Smale condition at all $c < 0$.
+
+\paragraph{Step 1.} This follows from the weak continuity of $J$. The reader might try to work out the details by herself as an exercise.
+
+\paragraph{Step 2.} Let $u_n$ be a Palais-Smale sequence at the level $c < 0$. The weak continuity of $J$ implies (up to subsequences, which we ignore here) that
+\[
+u_n \rightharpoonup u \quad \text{and} \quad J(u) = c \implies u \neq 0.
+\]
+Now notice that $\nabla_\M J(u_k) = \nabla J(u_k) - \langle \nabla J(u_k),\,u_k \rangle u_k$ and
+\[
+\langle \nabla J(u_k),\, \nabla_\M J(u_k) \rangle = \| \nabla J(u_k) \|^2 - \left[ \langle \nabla J(u_k),\,u_k \rangle \right]^2,
+\]
+and by compactness of the gradient we have $\nabla J(u_k) \to \nabla J(u)$ strongly. Then
+\[
+0 = \| \nabla J(u) \|^2 - \left[ \langle \nabla J(u_k),\,u_k \rangle \right]^2 \implies \langle \nabla J(u),\, u \rangle \neq 0,
+\]
+and since $\langle \nabla J(u_k),\,u_k \rangle \to \langle \nabla J(u),\,u \rangle$, we can find $k$ sufficiently large such that
+\[
+u_k = \frac{1}{\langle \nabla J(u_k),\,u_k \rangle} \left[ \nabla J(u_k) - \nabla_\M J(u_k) \right]
+\]
+is well-defined. This shows that $u_k \to u$ strongly and concludes the proof.
+
+\paragraph{Step 3.} Finally, $\gamma(S) = \infty$ implies that there are $z_k \in S$ critical points such that
+\[
+J(z_k) \to \sup_{u\in S} J(u) = 0.
+\]
+Since $z_k$ is a constrained critical point, we can always find $\mu_k$ such that $\nabla J(z_k) = \mu_k z_k$, and clearly it is given explicitly by
+\[
+\mu_k = \langle \nabla J(z_k),\,z_k\rangle.
+\]
+Finally $\nabla J(z_k)$ converges strongly to zero and $z_k$ weakly to zero, so $\mu_k \to 0$ and this concludes the proof.
+\end{proof}
+
+\bthm
+Let $f$ be a Carathéodory function which is odd with respect to the second variable and that satisfies the $p$-growth
+\[
+|f(x,\,s)| \leq a + b |s|^p,
+\]
+where $1 < p < \frac{n+2}{n-2}$. Then the problem
+\[
+\begin{cases} - \lambda \Delta u = f(x,\,u) & \text{if $x \in \Omega$}, \\[.6em] u = 0 & \text{if $x \in \partial \Omega$}, \end{cases}
+\]
+has infinitely many solutions $(\mu_k,\, z_k)$ with $z_k \in S := \{ u \in \X \: : \: \|u\|_2 = 1\}$ and $\mu_k \searrow 0$.
+\ethm
+
+\section{Multiple critical points of even unbounded functionals}
+
+Let $E$ be a Hilbert space, $J \in C^1(E,\,\R)$ a functional and define
+\[
+E_+ := \{ u \in E \: : \: J(u) \geq 0 \}.
+\]
+We now introduce two assumptions on $J$ that allows us, in some sense, to bypass the unboundedness both from above and below. These are similar to the ones necessary for the MPT, but the second one is ``stronger'': \mbox{}
+\begin{enumerate}[label={\color{darkjunglegreen}(\roman*)}]
+\item There are positive constants $r,\, \rho > 0$ such that $J(u) > 0$ for all $u \in B_r \setminus \{0\}$ and $J(u) \geq \rho$ for all $u \in S_r$. Furthermore, $J(0) = 0$.
+\item For any $m$-dimensional subspace $E^m \subset E$, $E^m \cap E_+$ is bounded.
+\end{enumerate}
+
+Let $E^\ast$ be the class of maps $h \in C(E,\, E)$ which are odd homeomorphisms such that $h(\bar{B}_1) \subset E_+$. Notice that
+\[
+h_r(u) := ru \implies h_r \in E^\ast,
+\]
+where $r$ is given by ({\romannumeral 1}), so the class we introduced is never empty. Define
+\[ \begin{aligned}
+& \mathcal{A} := \left\{ A \subseteq E \setminus \{0\} \: : \: \text{$A$ is closed and even} \right\},
+\\[1em] & \Gamma_m := \left\{ A \in \mathcal{A} \: : \: \text{$A$ is compact and $\gamma(A \cap h(S)) \geq n$ for all $h \in E^\ast$}\right\}.
+\end{aligned} \]
+
+\bl \label{kemmas.2s}
+Let $J \in C^1(E,\,\R)$ be an even functional that satisfies ({\romannumeral 1}) and ({\romannumeral 2}). Then the following properties hold: \mbox{}
+\begin{enumerate}[label=(\arabic*)]
+\item $\Gamma_m \neq \varnothing$ for all $m$;
+\item $\Gamma_{m+1} \subset \Gamma_m$;
+\item if $A \in \Gamma_m$ and $U \in \mathcal{A}$, with $\gamma(U) \leq q < m$, then $\overline{A \setminus U} \in \Gamma_{m-q}$;
+\item if $\eta$ is an odd homeomorphism in $E$ such that $\eta^{-1}(E_+) \subset E_+$, then $\eta(A) \in \Gamma_m$ whenever $A \in \Gamma_m$.
+\end{enumerate}
+\el
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=(\arabic*)]
+\item By ({\romannumeral 2}) there exists $R > 0$ such that
+\[
+E^m \cap E_p \subset \bar{B}_R \cap E^m =: B_R^m.
+\]
+We claim that $B_R^m \in \Gamma_m$. Let $h \in E^\ast$ and notice that $h(B_1) \subset E_+$ implies
+\[
+E^m \cap h(B_1) \subset B_R^m.
+\]
+It follows that $E^m \cap h(S) \subset S_R^m \cap h(S)$ and, since one has the inclusion $B_R^m \cap h(S) \subset E^m \cap h(S)$, we infer that
+\[
+B_R^m \cap h(S) = E^m \cap h(S).
+\]
+Since $h$ is an odd homeomorphism, then $E^m \cap h(B_1)$ is a symmetric neighbourhood $\Omega$ of the origin. It is also easy to check that
+\[
+\partial \Omega = \partial(E^m \cap h(B_1))
+\]
+is contained in $E^m \cap h(S)$. Then
+\[
+\gamma(B_R^m \cap h(S)) = \gamma(E^m \cap h(S)) \geq \gamma(\partial \Omega) = m,
+\]
+which means that $B_R^m \in \Gamma_m$.
+\item This follows immediately from the monotonicity property of the genus.
+\item The set $\overline{A \setminus U} \in \mathcal{A}$ is compact and satisfies the identity
+\[
+\overline{A \setminus U} \cap h(S) = \overline{A \cap h(S) \setminus U}.
+\]
+Using the properties of the genus we infer that
+\[ \begin{aligned}
+\gamma \left(\overline{A \setminus U} \cap h(S) \right) & = \gamma \left( \overline{A \cap h(S) \setminus U} \right)
+\\[1em] & \geq \gamma(A \cap h(S)) - \gamma(U) \geq m - q,
+\end{aligned} \]
+and this concludes the proof.
+\item Let $A \in \Gamma_m$ and notice that $A' := \eta(A)$ is also compact. Our goal is to prove that for all $h \in E^\ast$ it turns out that
+\[
+\gamma(A' \cap h(S)) \geq m.
+\]
+It is easy to verify that $A' \cap h(S) = \eta \left[ A \cap \eta^{-1}(h(S)) \right]$. Since $\eta^{-1}(E_+) \subset E_+$, we infer that $\eta^{-1} \circ h$ belongs to $E^\ast$ and hence
+\[ \begin{aligned}
+\gamma \left(A' \cap h(S) \right) & = \gamma \left(\eta \left[ A \cap \eta^{-1}(h(S)) \right] \right)
+\\[1em] & \geq \gamma \left( A \cap \eta^{-1}( h(S)) \right) \geq m.
+\end{aligned} \]
+\end{enumerate}
+\end{proof}
+
+\brmk
+The condition $\eta(E_+) \subset E_+$ is natural if one thinks that deformations $\eta$ are usually induced by the $\Psi$-gradient flow.
+\ermk
+
+\bthm
+Let $\Gamma_m$ be as above and set $b_m := \inf_{A \in \Gamma_m} \max_{u \in A} J(u)$. Suppose that $J \in C^1(E)$ satisfies ({\romannumeral 1}) and ({\romannumeral 2}). \mbox{}
+\begin{enumerate}[label=(\arabic*)]
+\item For all $m \in \N$ it turns out that $b_{m+1} \geq b_m \geq \rho > 0$.
+\item If the Palais-Smale condition holds at the level $b_m$, then $b_m$ is critical.
+\item If the Palais-Smale condition holds at all levels $c > 0$ and $b = b_m = \cdots = b_{m+q}$ for some $q \geq 1$, then
+\[
+\gamma \left( \mathcal{Z}_b \right) \geq q.
+\]
+\end{enumerate}
+\ethm
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=(\arabic*)]
+\item Let $r$ be given by ({\romannumeral 1}) and let $h_r \in E^\ast$ be the map defined above. If $A \in \Gamma_m$, then
+\[
+\gamma(A \cap h(S)) \geq m \quad \text{for all $h \in E^\ast$}
+\]
+and, since $h_r \in E^\ast$, we must have $A \cap S_r \neq \varnothing$ which means that $b_m \geq \rho$ for all $m \in \M$.
+\item This assertion is proved in the usual way.
+\item By the properties of the genus, we know that there exists an open neighbourhood $U$ of $\mathcal{Z}_b$ such that $\gamma(U) = \gamma(\mathcal{Z}_b)$. Recall that we can always find an odd deformation $\eta$ such that $\eta^{-1}(E^+) \subset E^+$ and a positive $\delta$ such that
+\[
+J(\eta(u)) \leq b - \delta \quad \text{for all $u \in J^{b+\delta} \setminus U$}.
+\]
+By definition of $b_{m+q}$, there is $A \in \Gamma_{m+q}$ with $\sup_A J(u) < b + \delta$. We proved above that $\overline{A \setminus U}$ also belongs to $\Gamma_{m+q}$ and thus
+\[
+A' := \eta \left(\overline{A \setminus U} \right) \in \Gamma_{m+q - q} = \Gamma_m.
+\]
+This leads to a contradiction because $\eta(A') \subset J^{b-\delta}$ and the genus of $J^{b-\delta}$ is necessarily strictly less than $m$.
+\end{enumerate}
+\end{proof}
+
+\subsection{Application to nonlinear problems}
+
+Let $\Omega \subset \R^n$ be a bounded set and consider the problem
+\[ \begin{cases}
+- \Delta u = f(x,\,u) & \text{if $x \in \Omega$},
+\\[.6em] u = 0 & \text{if $x \in \partial \Omega$}.
+\end{cases} \]
+Suppose that $f$ is a function of with respect to the second variable which satisfies the Carathéodory condition and the $p$-growth condition
+\[
+|f(x,\,u)| \leq a + b|u|^p,
+\]
+where $1 < p < \frac{n+2}{n-2}$. Suppose also that there are $\lambda < \lambda_1(\Omega)$ such that
+\[
+f(x,\,u) = \lambda u + \mathcal{O}(|u|^{1+\alpha})
+\]
+for some $\alpha > 1$ and $\theta \in (0,\,\frac{1}{2})$ for which
+\[
+F(x,\,u) \leq \theta u f(x,\,u) \quad \text{for $|u| \geq r$}.
+\]
+
+\brmk
+The latter condition implies that
+\[
+F(x,\,u) \geq c |u|^{\frac{1}{\theta}} + c',
+\]
+where $\frac{1}{\theta}$ is always strictly bigger than $2$.
+\ermk
+
+\begin{proof}[Proof of ({\romannumeral 2})]
+Consider the functional
+\[
+J(u) = \frac{1}{2} \int_\Omega |\nabla u|^2 \, \dr x - \int_\Omega F(x,\,u) \, \dr x,
+\]
+let $H^m$ be a $m$-dimensional subspace and notice that $H^m \cap S$ is compact in $H_0^1(\Omega)$. We claim that there exists a positive $\delta := \delta(H^m)$ such that
+\[
+\left|\{ x \in \Omega \: : \: |u(x)| \geq \delta \right| \geq \delta \quad \text{for all $u \in H^m \cap S$}.
+\]
+If this were not true, then we could find a sequence $\delta_n \to 0$ and a sequence $u_n \in H^m \cap S$ such that
+\[
+\left|\{ x \in \Omega \: : \: |u_n(x)| \geq \delta_n \right| \leq \delta_n \quad \text{for all $u \in H^m \cap S$}.
+\]
+But then $u_n$ would converge to $0 \in S$ in $H_0^1(\Omega)$ and this is absurd because $u_n$ has norm equal to one. Now notice that, if we set $\Omega_u := \{ |u| \geq \delta\}$, then
+\[
+J(tu) = \frac{t^2}{2} - \int_{\Omega_u}  F(x,\,u) \, \mathrm{d} x - \int_{\Omega \setminus \Omega_u} F(x,\,u) \, \mathrm{d} x  \leq \frac{t^2}{2} - |\Omega_u| (c |t \delta|^{\frac{1}{\theta}} + c') + c'' |\Omega|.
+\]
+Since the right-hand side goes to $- \infty$ as $t \to \infty$ (as $\frac{1}{\theta} > 2$) uniformly with respect to $u$, we immediately infer that ({\romannumeral 2}) holds.
+\end{proof}
+
+We can exploit the same argument in combination with linking-type results to infer the existence of infinitely many critical points for linking geometry of even functionals.
+
+\paragraph{Setting.} Let $H = V \oplus W$ be a Hilbert space with $\dim V < \infty$ and $W = V^\perp$. Let $J \in C^1(H,\,\R)$ be an even functional that satisfies ({\romannumeral 2}) and the linking conditions \mbox{}
+\begin{enumerate}[label={\color{magenta}(\alph*)}]
+\item $J(0)= 0$;
+\item there are $r,\, \rho > 0$ such that
+\[
+J(u) > 0 \quad \text{for all $u \in (B_r(0) \setminus \{0\}) \cap W$},
+\]
+and
+\[
+J(u) \geq \rho \quad \text{for all $u \in S_r \cap W$}.
+\]
+\end{enumerate}
+Let $\cH := \{h \in C(H,\,H) \: : \: \text{$h$ odd homeomorphism s.t. $h(B_1)\subseteq H_+ \cup \bar{B}_r$}\}$ and let
+\[
+\widetilde{\Gamma}_m := \left\{ A \in \cA \: : \: \text{$A$ is compact and $\gamma(A \cap h(S)) \geq m$ for all $h \in \cH$} \right\},
+\]
+where $\cA$ is the class of closed even sets disjoint from $\{0\}$.
+
+\bl
+Under these assumptions, the following assertions hold: \mbox{}
+\begin{enumerate}[label=(\alph*)]
+\item $\widetilde{\Gamma}_m \neq \varnothing$ for all $m$.
+\item $\widetilde{\Gamma}_{m+1} \subset \widetilde{\Gamma}_m$ for all $m$.
+\item If $A \in \widetilde{\Gamma}_m$ and $U\subset A$ satisfies $\gamma(U) \leq q < m$, then $\overline{A \setminus U} \in \widetilde{\Gamma}_{m-q}$.
+\item If $\eta$ is a odd homeomorphism such that $\eta \, \big|_{\{J \leq 0\}}$ is the identity and $\eta(H_+) \subseteq H_+$, then
+\[
+\eta(\widetilde{\Gamma}_m) \subseteq \widetilde{\Gamma}_m.
+\]
+\end{enumerate}
+\el
+
+\begin{proof}
+The linking conditions {\color{magenta}(a)} and {\color{magenta}(b)} implies that, given $H^m$ finite-dimensional vector space, there exists $R > 0$ such that
+\[
+H_+ \cap H^m \subseteq \overline{B_R} \cap H^m =: B_R^m.
+\]
+Taking $R$ large enough, we can also require that $(H_+ \cup \overline{B_r}) \cap H^m \subseteq B_R^n$. By definition, we have the inclusion
+\[
+B_R^n \supseteq h(B_1) \cap H^m
+\]
+for all $h \in \cH$, which gives us a set that contains (in the interior) the origin in $H^m$ and whose boundary has genus greater than or equal to $m$. This shows $(a)$, while $(b)$ and $(c)$ are similar to \hyperref[kemmas.2s]{Lemma \ref{kemmas.2s}}. For $(d)$ we need to check that
+\[
+\eta^{-1}\left( h(B_1) \right) \subseteq H_+ \cap \overline{B_r}.
+\]
+Let $u \in B_1$, $\nu = \eta^{-1} \circ h(u)$ and $h \in \cH$. Then $\eta(\nu) = h(u) \in H_+ \cup \overline{B_r}$ and there are two possibility to consider. If
+\[
+\eta(\nu) \in H_+,
+\]
+then $\nu \in H_+$. If, on the other hand, $\eta(\nu) \notin H_+$, then $\eta(\nu) = \nu \notin H_+$ using the property that $\eta$ is the identity where $J$ is nonpositive. In both cases
+\[
+\nu = \eta^{-1} \circ h(u) \in H_+ \cup \overline{B_r},
+\]
+and, since $\eta^{-1} \circ h$ is an odd homeomorphism, $\eta^{-1} \circ h \in \cH$ provided that $h \in \cH$.
+\end{proof}
+
+\bthm
+Let $\Gamma_m$ be as above and set $\tilde{b}_m := \inf_{A \in \widetilde{\Gamma}_m} \max_{u \in A} J(u)$. Suppose that $J \in C^1(E)$ satisfies {\color{magenta}(a)}, {\color{magenta}(b)} and ({\romannumeral 2}). \mbox{}
+\begin{enumerate}[label=(\arabic*)]
+\item For all $m \in \N$ it turns out that $\tilde{b}_{m+1} \geq \tilde{b}_m \geq \rho > 0$.
+\item If the Palais-Smale condition holds at the level $\tilde{b}_m$, then $\tilde{b}_m$ is critical.
+\item If the Palais-Smale condition holds at all levels $c > 0$ and $\tilde{b} = \tilde{b}_m = \cdots = \tilde{b}_{m+q}$ for some $q \geq 1$, then
+\[
+\gamma \left( \mathcal{Z}_{\tilde{b}} \right) \geq q.
+\]
+\end{enumerate}
+\ethm
+
+We can use this theorem to prove that the problem
+\[ \begin{cases}
+- \Delta u = \lambda u + |u|^{p-1} u & \text{if $x \in \Omega$},
+\\[.6em] u = 0 & \text{if $x \in \partial \Omega$},
+\end{cases} \]
+admits infinitely many solutions $u_j$ with $J(u_j) \to \infty$ for all $\lambda \in \R$.

@@ -1,0 +1,109 @@
+\chapter{Geodesics on Riemannian Manifolds} \thispagestyle{empty}
+
+\section{Introduction}
+
+Let $(M^n, g)$ be a compact Riemannian manifold. We first start by defining closed curves $\gamma : S^1 \to M$ that belong to the Sobolev class $H^1(S^1,\, M)$. Recall that
+\[
+C^\infty(S^1,\,M) \subset H^1(S^1,\, M) \subset C(S^1,\,M),
+\]
+and closed curves in the smaller space are well-defined. We say\index{closed curve!Sobolev regularity} that $\gamma \in H^1(S^1,\,M)$ if $\gamma$ is {\em absolutely continuous} and
+\[
+\int g(\dot{c}, \dot{c}) < \infty.
+\]
+It is easy to verify that $H^1(S^1,\,M)$ is a Hilbert manifold\index{Hilbert manifold} (i.e., a separable topological manifold modeled on a Hilbert space rather than a Euclidean space). The manifold structure is induced by charts of the form
+\[
+\bar{c} \in C^\infty(S^1,\,M) \leadsto \bar{c}^\star ( TM ),
+\]
+where $TM$ is the tangent bundle of $M$ and $\bar{c}^\star$ is the pullback via $\bar{c}$. Given $c \in H^1(S^1,\,M)$, we can always find $\bar{c}\in C^\infty(S^1,\,M)$ and $X \in H^1(S^1,\,TM)$ such that
+\[
+c(t) = \exp_{\bar{c}(t)} X(t)
+\]
+since Sobolev-regular curves can always be approximated in $L^\infty$ via smooth ones. Furthermore, if $\varphi_{\bar{c}}$ is the above chart and $\bar{d}$ is a smooth curve close to $c$ (in $L^\infty$), then
+\[
+\varphi_{\bar{d}} \circ \varphi_{\bar{c}}^{-1}
+\]
+is a diffeomorphism between Hilbert spaces, which gives the differential structure of the manifold.
+
+\bthm
+The inclusion $H^1(S^1,\,M) \hookrightarrow C(S^1,\,M)$ is a homotopy equivalence.
+\ethm
+
+\paragraph{Tangent vectors.} Let $c(t) = \exp_{\bar{c}(t)} X(t)$ be a curve, $X$ section of class $H^1$, and consider
+\[
+c_\epsilon(t) = \exp_{\bar{c}(t)} \left( X(t) + \epsilon Y(t) \right).
+\]
+Then
+\[
+\frac{\mathrm{d}}{\mathrm{d}\epsilon} \, \Big|_{\epsilon = 0} c_\epsilon(t)
+\]
+is a tangent vector to $c(t)$, which means that $Y$ is a vector field along the curve $c$. We can thus define $T_c H^1(S^1,\,M)$ as the set of all vector fields $Y$ along $c$ such that
+\[
+\int g_{c(t)}(Y, Y) < \infty \quad \text{and} \quad \int g_{c(t)}(\nabla_{\dot{c}}Y, \nabla_{\dot{c}}Y) < \infty
+\]
+
+\bd
+Let $c \in \Lambda(M)$ be a curve. The {\em energy}\index{energy of curves} is defined by
+\[
+E(c) := \frac{1}{2} \int_{S^1} g_{c(t)}(\dot{c}(t),\dot{c}(t)) \, \mathrm{d}t.
+\]
+\ed
+
+\bthm
+The functional $E$ is $C^1$ over $\Lambda(M)$ and it satisfies the Palais-Smale condition at all levels. Furthermore,
+\[
+\mathrm{d}E(c)[Y] = \int_{S^1} g_{c(t)}( \dot{c}(t), \nabla_{\dot{c}(t)} Y(t)) \, \mathrm{d}t
+\]
+and, if $c$ and $Y$ are smooth, then integrating by parts
+\[
+\mathrm{d}E(c)[Y] = - \int_{S^1} g_{c(t)}(\nabla_{\dot{c}(t)} \dot{c}(t), Y(t)) \, \mathrm{d}t.
+\]
+\ethm
+
+\brmk
+By regularity theory, critical points are smooth geodesics.
+\ermk
+
+\section{Critical points}
+
+\bpr
+There exists $\epsilon(M,g) := \epsilon > 0$ such that the only critical points $c$ of $E$ with energy $E(c) \leq \epsilon$ are constant curves. Moreover
+\[
+\{ E \leq 0 \}
+\]
+is a deformation of $\{ E \leq \epsilon \}$.
+\epr
+
+\begin{proof}[Hint]
+For $\epsilon$ small, the length of the curve is $\sqrt{\epsilon}$ and thus small. The thesis is a consequence of Gauss lemma.
+\end{proof}
+
+To study critical points, we need to distinguish two cases since the fundamental group of $M$, $\pi_1(M)$, plays a critical role here. \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item If $\pi_1(M) \neq 0$, then $\Lambda(M)$ has a nontrivial component $\Theta$. We claim that
+\[
+c_\Theta := \inf_{c \in \Theta} E(c) > 0.
+\]
+This is a consequence of the result above because $\Theta$ is nontrivial and if $c_\Theta$ was equal to zero then the curve could be deformed to a trivial one (contradiction).
+
+Since $E$ satisfies the Palais-Smale condition, we easily obtain a nontrivial geodesic at the level $c_\Theta$.
+\item If $M$ is simply connected, we start by recalling a few facts in differential geometry.
+
+\bthm
+If $\pi_1(M) = 0$, then $\pi_k(\Lambda(M)) \cong \pi_k(M) \oplus \pi_{k+1}(M)$ for all $k \in \N$.
+\ethm
+
+\bpr
+If $\pi_1(M) = 0$, then $\pi_k(M) \cong H_k(M)$ where $k$ is the least integer such that $\pi_k(M) \neq 0$.
+\epr
+
+As a consequence of these two facts, we can always find $k \in \N$ such that $\pi_k(\Lambda(M)) \neq 0$. Let $\Xi \subseteq \pi_k(\Lambda(M))$ and let $f \in \Xi$ be a nontrivial curve. Consider
+\[
+\cH = \{ h : S^k \to \Lambda(M) \: : \: \text{$h$ is homotopic to $f$} \}
+\]
+and
+\[
+c_f := \inf_{h \in \cH} \sup_{x \in S^k} E(h(x)) > 0,
+\]
+once again by contradiction. The Palais-Smale condition gives a nontrivial geodesic at the level $c_f$.
+
+\end{enumerate}

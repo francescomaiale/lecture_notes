@@ -1,0 +1,511 @@
+ \chapter{Global Inversion Theorems} \thispagestyle{empty}
+
+[{\color{red}Da scrivere...}]
+
+\section{The global inversion theorem}
+
+The goal of this section is to investigate minimal conditions under which a map $F$ between metric spaces, $M$ and $N$, is a global homeomorphism.
+
+\bd[Proper] \index{proper map}
+A continuous map $F : M \to N$ between metric spaces is {\em proper} if the preimage
+\[
+F^{-1}(K) = \left\{u \in M \: : \: F(u) \in K \right\}
+\]
+is compact in $M$ whenever $K$ is compact in $N$.
+\ed
+
+\paragraph{N.B.} From now on, when we say that $F : M \to N$ is proper, we will also assume that $F$ is continuous with respect to the metric topologies $(M, \, d_M)$ and $(N, \, d_N)$.
+
+\bl
+Let $F : X \to Y$ be a proper map between topological spaces and suppose that $Y$ is locally compact and Hausdorff. Then $F$ is a closed map.
+\el
+
+\begin{proof}
+Let $C$ be a closed subset of $X$. Take any $y \in Y \setminus F(C)$ and any neighbourhood $V \ni y$ with compact closure. It follows that
+\[
+\text{$F$ proper $\implies F^{-1}(\bar{V})$ compact in X}.
+\]
+Let $E := C \cap F^{-1}(\bar{V})$. Then $E$ is compact and, by continuity, so is $F(E)$. Since $Y$ is Hausdorff, $F(E)$ is also closed. Now consider
+\[
+U := V \setminus F(E).
+\]
+It is easy to verify that $U$ is an open neighbourhood of $y$ which is disjoint from $F(C)$, and this proves that $F(C)$ is closed as its complement is open.
+\end{proof}
+
+\bthm \index{cardinality map}
+Let $F : M \to N$ be a proper locally invertible map. Then
+\[
+N \ni v \longmapsto [v] := \can F^{-1}(\{v\})
+\]
+is finite and locally constant.
+\ethm
+
+\begin{proof}
+Using the fact that $F$ is proper and locally invertible we easily conclude that
+\[
+\text{$F^{-1}(\{v\}) \subset M$ is discrete and compact}, 
+\]
+which is possible if and only if it is finite. To show that the map is locally constant, fix $v \in N$ and let
+\[
+\{u_1, \dots, u_n\} = F^{-1}(v).
+\]
+By the local invertibility theorem we can find open neighbourhoods $U_i \ni u_i$ in $M$ and $V$ neighbourhood of $v$ in $N$ such that
+\[
+F \in \homs(U_i, V) \quad \text{for all $i = 1,  \dots, n$}.
+\]
+It follows that
+\[
+[w] \geq n \quad \text{for all $w \in V$}.
+\]
+We now claim that there exists an open neighbourhood $W \subset V$ of $v$ such that $[w]$ is identically equal to $n$ at all $w \in W$. If such $W$ does not exist, then we can find
+\[
+\{v_j\}_{j \in \N} \subset N \quad \text{and} \quad v_j \xrightarrow{j \to + \infty} v
+\]
+and a corresponding sequence of points $p_j \in M$ such that
+\[
+p_j \notin \bigcup_{i = 1}^n U_i \quad \text{and} \quad F(p_j) = v_j.
+\]
+Since $F$ is proper, we can find a subsequence $j_k$ such that $p_{j_k}$ converges to some $p$ that does not belong to $\bigcup_{i = 1}^n U_i$. However, by continuity of $F$ we have
+\[
+F(p_{j_k}) \xrightarrow{k \to + \infty} F(p) = v,
+\]
+which is the sought contradiction.
+\end{proof}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 14cm, height = 6cm]{images/mvar1.pdf}
+\caption{Counterexamples to $[v]$ finite and locally constant.}
+\label{fig:c1}
+\end{figure}
+
+\bcor
+Let $F : M \to N$ be a proper locally invertible map. If $N$ is connected, then $[v]$ is globally constant.
+\ecor
+
+\bd[Singular] \index{singular point} \index{regular point}
+A point $u \in M$ is said to be {\em singular} for $F$ if $F$ is not locally invertible at $u$ and {\em regular} if it is not singular.
+\ed
+
+Denote by $\Sigma$ the set of all singular points in $M$ and $\Sigma_0$ the preimage $F^{-1}(F(\Sigma))$. We want to work with regular points only, so we define $M_0 := M \setminus \Sigma_0$ and $N_0 := N \setminus F(\Sigma)$.
+
+\brmk
+The set $\Sigma$ is closed, so both $M_0$ and $N_0$ are open in $M$ and $N$ respectively.
+\ermk
+
+An obvious consequence of the definitions of singular points and $(M_0, \, N_0)$ is the following theorem, which asserts that $[v]$ is constant on connected components of $N_0$.
+
+\bthm
+Let $F : M \to N$ be a proper map. Then $[v]$ is constant on every connected component of $N_0$.
+\ethm
+
+We are now ready to state the main result of this section. The proof is simple but it requires some preliminary work to introduce a technical topological tool.
+
+\bthm\label{git}
+Let $F : M \to N$ be a proper map. Suppose that $N_0$ is simply connected and $M_0$ is arc-wise connected. Then $F$ is a global homeomorphism between $M_0$ and $N_0$.
+\ethm
+
+\bcor
+Let $F : M \to N$ be a proper locally invertible map. Suppose that $N$ is simply connected and $M_0$ is arc-wise connected. Then $F \in \homs(M, N)$.
+\ecor
+
+The first step is to introduce and prove both existence and uniqueness of "paths that invert $F$ along another path".
+
+\bd\index{inverting path}
+Let $M$, $N$ be as above and let $\sigma : [a, \, b] \to N$ be a continuous path. We say that a path $\theta : [a, \, b] \to M$ \textit{inverts $F$ along $\sigma$} if the following diagram commutes:
+\[ \begin{tikzcd}
+  M \arrow[rr, "F"] &
+    & N \\
+  & {[a, \, b]} \arrow[ru, "\sigma"]\arrow[lu, "\theta"]
+& \end{tikzcd}\]
+\ed
+
+\brmk\label{rmk.2.1.wde.}
+Let $u \in M$ and $v \in N$ be such that $F(u) = v$ and $F \, \big|_{U} \in \homs(U, V)$, where $U$ and $V$ are respectively neighbourhoods of $u$ and $v$. Given a path
+\[
+\sigma : [a, b] \to N, \quad \sigma(a) = v \quad \text{and} \quad \sigma\left([a, b]\right) \subset V,
+\]
+it is easy to see that the equation $F(\theta(t)) = \sigma(t)$ defines the {\bf unique} path $\theta$ that inverts $F$ along $\sigma$ satisfying the initial condition $\theta(a) = u$.
+\ermk
+
+\brmk\label{gluing}
+Let $\sigma : [a, \, b] \to N$ be a continuous path and suppose that there exists $c \in (a, b)$ such that $\theta_1$ inverts F along $\sigma \, \big|_{[a, c]}$ and $\theta_2$ along $\sigma \, \big|_{[c, b]}$ with $\theta_1(c) = \theta_2(c)$. Then
+\[
+\theta(t) := \begin{cases} \theta_1(t) & \text{if $t \in [a, c)$},
+\\ \theta_2(t) & \text{if $t \in [c, b]$},\end{cases}
+\]
+is a well-defined (continuous) path that inverts $F$ along $\sigma$.
+\ermk
+
+\bl \label{lemmahomotopiesoneidim}
+Let $u^\ast \in M_0$ and $v^\ast = F(u^\ast) \in N_0$. Then for any given path $\sigma : [0, 1] \to N$ with $\sigma(0) = v^\ast$ there exists a unique
+\[
+\theta : [0, 1] \to M_0
+\]
+that inverts $F$ along $\sigma$ satisfying the initial condition $\theta(0) = u^\ast$.
+\el
+
+\begin{proof} We first prove uniqueness, which is relatively easy, and then we exploit it to obtain the existence.
+
+\paragraph{Uniqueness.} We argue by contradiction. Let $\theta_1$ and $\theta_2$ be two such paths and let
+\[
+\xi := \sup\left\{ s \in [0, 1] \: : \: \theta_1 \, \big|_{[0, s]} \equiv \theta_2 \, \big|_{[0, s]} \right\}.
+\]
+According to \hyperref[rmk.2.1.wde.]{Remark \ref{rmk.2.1.wde.}}, $\xi$ is well-defined and, since $u^\ast \in M_0$, it is also strictly bigger than zero. Moreover, by continuity one has that
+\[
+\theta_1(\xi) = \theta_2(\xi)
+\]
+so it is enough to prove that $\xi = 1$. Suppose that $\xi < 1$ and set
+\[
+u = \theta_1(\xi) = \theta_2(\xi) \quad \text{and} \quad v = F(u).
+\]
+Since $F$ is locally invertible in $M_0$, we can find neighbourhoods $U \ni u$ and $V \ni v$ such that $F \, \big|_{U} \in \homs(U, V)$. Now both paths are continuous so
+\[
+\theta_1\left( [\xi, \xi + \alpha] \right) \subset U \quad \text{and} \quad  \theta_2\left( [\xi, \xi + \alpha] \right) \subset U
+\]
+for some $\alpha > 0$ small enough. Consequently, we have
+\[
+\theta_1 \, \big|_{[0, \xi + \alpha]} \equiv \theta_2 \, \big|_{[0, \xi + \alpha]},
+\]
+and this is a contradiction with the definition of $\xi$ as the supremum.
+
+\paragraph{Existence.} Let $\Xi$ be the set of all $s \in [0, 1]$ such that $F$ is invertible along $\sigma \, \big|_{[0, s]}$ with inverse given by
+\[
+\text{$\theta_s : [0, s] \longrightarrow M_0$ such that $\theta_s(0) = u^\ast$, $F(u^\ast) = \sigma(0)$}.
+\]
+It is enough to show that $\Xi$ is both closed and open in $[0, \, 1]$ since it is nonempty. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let $\xi := \sup \Xi$. As before $\xi > 0$ and, by uniqueness, the resulting paths $\theta_s$ must coincide in the intersections of the intervals of definition. Therefore
+\[
+\theta(s) := \theta_s(s) \quad \text{for all $s \in [0, \, \xi)$}
+\]
+is a well-defined function. Let $s_n \nearrow \xi$ be a sequence such that $\sigma(s_n) \to v$. Since $\theta(s_n) = F^{-1}(\sigma(s_n))$ and $F$ is proper, we find that we have
+\[
+\theta(s_n) \to u \quad \text{and} \quad F(u) = v.
+\]
+Now let $U \ni u$ and $V \ni V$ be neighbourhoods such that $F \, \big|_U\in \homs(U, V)$. If $m \in \N$ is chosen in such a way that
+\[
+\theta(s_m) \in U  \quad \text{and} \quad \sigma\left([s_m, \xi] \right) \subset V,
+\]
+then $F$ can be inverted along $\sigma$ restricted to $[s_m, \xi]$ by a path $\theta_1$ which coincides with $\theta$ evaluated at $s_m$. Finally, the trick illustrated in \hyperref[gluing]{Remark \ref{gluing}} allows us to conclude that $\Xi$ is closed.
+\item The idea is more or less the same. The reader might try to fill in the missing details as an exercise.
+\end{enumerate}
+\end{proof}
+
+We can prove the same replacing paths with $2$-paths, namely continuous functions defined on $Q := [a, \, b]^2$ and taking values in $M$ or $N$.
+
+\bd \index{inverting $2$-path}
+Let $M$ and $N$ be as above and let $\sigma : Q \to N$ be a $2$-path. We say that the $2$-path $\theta : Q \to M$ \textit{inverts $F$ along $\sigma$} if the following diagram commutes:
+\begin{equation*}\begin{tikzcd}
+  M \arrow[rr, "F"] &
+    & N \\
+  & Q \arrow[ru, "\sigma"]\arrow[lu, "\theta"]
+& \end{tikzcd} \end{equation*}
+\ed
+
+\bl \label{lemmadiomotopia}
+Let $u^\ast \in M_0$ and $v^\ast = F(u^\ast) \in N_0$. Then given any $2$-path $\sigma : Q \to N$ such that $\sigma(0, 0) = v^\ast$, there exists a unique $2$-path
+\[
+\theta : Q \to M_0
+\]
+that inverts $F$ along $\sigma$ satisfying the initial condition $\theta(0, 0) = u^\ast$.
+\el
+
+\begin{proof} We divide into two steps as before, starting from uniqueness (where we exploit the result for paths!) which is once again needed to prove existence.
+
+\paragraph{Uniqueness.} Let $\theta_1$ and $\theta_2$ be two such $2$-paths and let $(s, t) \in Q$. Define $\phi_1, \, \phi_2 : [0, 1] \to M_0$ and $\psi : [0, 1] \to N_0$ as follows:
+\[ \begin{aligned}
+& \phi_1(\lambda) = \theta_1(\lambda s, \lambda t),
+\\ & \phi_2(\lambda) = \theta_2(\lambda s, \lambda t),
+\\ & \psi(\lambda) = \sigma(\lambda s, \lambda t).
+\end{aligned}\]
+Then $\phi_1$ and $\phi_2$ are paths that invert $F$ along $\psi$ so they must coincide. Letting $\lambda = 1$ gives
+\[
+\theta_1(s, t) = \theta_2(s, t),
+\]
+which is enough to conclude as $(s, t) \in Q$ was chosen arbitrary.
+
+\paragraph{Existence.} Consider the rectangle
+\[
+R_s = [0, s] \times [0, 1] \subset Q,
+\]
+and let $\Xi$ be the set of all $s \in (0, 1]$ for which there exists $\theta_s:R_s \to M_0$ that inverts $F$ along the restriction $\sigma \, \big|_{R_s}$ and $\theta_s(0, 0) = u^\ast$. Since $F$ is invertible along
+\[
+t \longmapsto \sigma(0,t)
+\]
+by \hyperref[lemmahomotopiesoneidim]{Lemma \ref{lemmahomotopiesoneidim}}, we have $0 \in \Xi$. Let $\xi := \sup \Xi$. As before $\xi > 0$ and, by uniqueness, the resulting $2$-paths $\theta_s$ must coincide in the intersections of the intervals so
+\[
+\theta(z, t) := \theta_s(z, t) \quad \text{for all $(z, t) \in R_s$}
+\]
+is a well-defined function. Fix $t \in [0, 1]$. Since $F$ is invertible along the path $s \mapsto \sigma(s, t)$ with inverse $s \mapsto \phi(s)$ satisfying the initial condition $\phi(0) = \theta(0, t)$, by uniqueness we have
+\[
+\phi(z) = \theta(z, t) \quad \text{for all $0 \leq z < \xi$}.
+\]
+If we set $\phi(\xi) =: u$ and $\sigma(\xi, t) =: v$, then we can find neighbourhoods $U \ni u$ and $V \ni v$ such that $F \, \big|_U \in \homs(U, V)$. Then we can find a rectangle $R^\prime$ centered at $(\xi, \, t)$ and
+\[
+\theta^\prime : R^\prime \cap Q \longrightarrow M_0
+\]
+such that $\theta^\prime$ inverts $F$ along $\sigma \, \big|_{R^\prime \cap Q}$ with $\theta^\prime(\xi, t) = u$. Since $\theta$ and $\theta^\prime$ coincide in $(0, \, \xi)$, we can extend $\theta$ to $R^\prime \cap Q$ and consequently (by continuity) to $R_\xi$ in such a way that
+\[
+F \circ \theta = \sigma
+\]
+holds at all points of $R_\xi$. It is now easy to check that $\xi = 1$ because we can always cover the segment $\{(\xi, t) \: : \: t \in [0, 1]\}$ with a family of rectangles $R^\prime$ and extend $\theta$ to $R_{\xi + \alpha}$ for some positive $\alpha$ which is absurd.
+\end{proof}
+
+\begin{proof}[Proof of \autoref{git}]
+The map $v \mapsto [v]$ is constant on $N_0$ and by local invertibility $F$ is surjective ($[v]\geq1$) so we only need to show that 
+\[ 
+[v] = 1 \quad \text{at all $v \in N_0$.}
+\]
+Suppose that there are $u_0 \neq u_1 \in M_0$ such that $F(u_0) = F(u_1) = v$. Since $M_0$ is arcwise connected, we can always find a continuous path $\theta$ such that
+\[
+\theta(0) = u_0 \quad \text{and} \quad \theta(1) = u_1. 
+\]
+The corresponding path $\sigma := F \circ \theta$ is closed in the simply connected space $N_0$, and therefore homotopic to a constant one. Let $h \in C^0(Q, N_0)$ be the homotopy and assume that
+\[
+h(0, t) = h(1, t) = v \quad \text{for all $t \in [0, 1]$}.
+\]
+There exists a unique $2$-path $\Theta \in C(Q, \, M_0)$ that inverts $F$ along $h$ (see \hyperref[lemmadiomotopia]{Lemma \ref{lemmadiomotopia}}), which means that for all $(s,t) \in Q$ we have
+\[
+F(\Theta(s,  t)) = h(s, t).
+\]
+If we evaluate this at $t = 0$, from the identity $F(\Theta(s,0)) = h(s, 0) = \sigma(s)$ we easily deduce that $\Theta(s, 0) = \theta(s)$. It follows immediately that
+\[
+\Theta(1, 0) = \theta(1) = u_1.
+\]
+On the other hand, the assumption $h(0, t) = h(1, t) = v$ gives
+\[
+F(\Theta(0,t)) = F(\Theta(s, 1)) = F(\Theta(1, t)) = v.
+\]
+In particular, the restriction of $\Theta$ to the set
+\[
+\Gamma = \left(\{0\} \times [0, \, 1] \right) \cup \left([0, \, 1] \times \{1\} \right) \cup \left( \{1\} \times [0,\, 1] \right)
+\]
+is constant and, in particular, we obtain
+\[
+u_1 = \Theta(1, 0) = \Theta(0, 0) = u_0,
+\]
+and this concludes the proof.
+\end{proof}
+
+\subsection{Applications of global invertibility}
+
+Let $\Om \subset \R^n$ be an open bounded set with smooth boundary and consider the Dirichlet problem
+\begin{equation} \label{dirh} \begin{cases}
+- \Delta u(x) = p(u(x)) + h(x) & \text{if $x \in \Om$},
+\\ u(x) = 0 & \text{if $x \in \partial \Om$}.
+\end{cases} \end{equation}
+Let $(\lambda_k)_{k \in \N}$ denote the sequence of eigenvalues of the laplacian $-\Delta$ subject to Dirichlet boundary conditions and enumerate them in such a way that $0<\lambda_1 \leq \lambda_2 \leq \dots$ and
+\[
+\lim_{k \to \infty} \lambda_k = \infty.
+\]
+
+\bthm
+Let $p \in C^1(\R)$ be a function of the form
+\[
+p(s) = as + b(s),
+\]
+where $|b(s)| \leq M$. Suppose that one of the following assumptions hold: \mbox{}
+\begin{enumerate}[label={\textbf{(\alph*)}}, leftmargin=2.5\parindent]
+\item For all $s \in \R$ there results $p^\prime(s) = a + b^\prime(s) < \lambda_1$.
+\item There exists $k \in \N$ such that for all $s \in \R$ there results $\lambda_k < p^\prime(s) = a + b^\prime(s) < \lambda_{k+1}$.
+\end{enumerate}
+Then for any $h \in C^\alpha(\bar{\Om})$, $\alpha \in (0,1)$, there exists a unique $u \in C^{2, \alpha}(\bar{\Om})$ solution of \eqref{dirh}.
+\ethm
+
+\begin{proof}
+Let $\X := \{ u \in C^{2, \alpha}(\bar{\Om}) \: : \: u \, \big|_{\partial \Om} \equiv 0\}$ and $\Y := C^{0,\alpha}(\bar{\Om})$. In view of \autoref{git}, it is sufficient to show that the map
+\[
+F(u) := - \Delta u - p(u) 
+\]
+is proper and locally invertible at all $u \in \X$.
+
+\paragraph{Step 1.} A simple computation shows that
+\[
+\dr F(u)[v] := - \Delta v - p^\prime(u) v,
+\]
+and therefore $F$ is locally invertible at $u \in \X$ if and only if
+\[
+- \Delta v - p^\prime(u) v = 0 \iff v = 0.
+\]
+We now consider the bilinear form defined by the differential of $F$ at $u$, namely
+\[
+b: \X \times \X \to \Y, \quad b(u, v) := - \Delta v - p^\prime(u) v.
+\]
+Then $b$ is continuous,
+\[
+|b(u, v)| \leq \|u\|_\X \|v\|_\X,
+\] 
+and if the assumption {\textbf{(a)}} holds, then it is also coercive and Lax-Milgram theorem (see \autoref{thm.laxmilgram2}) applies. If {\textbf{(b)}} holds, we start off by considering the following eigenvalue problems:
+\[ \begin{aligned} 
+& \begin{cases} - \Delta v - \lambda_k v = \mu v & \text{if $x \in \Om$}, \\ u = 0 & \text{if $x \in \partial \Om$}, \end{cases}
+\\[1em] & \begin{cases} - \Delta v - p^\prime(u) v = \tilde{\mu} v & \text{if $x \in \Om$}, \\ u = 0 & \text{if $x \in \partial \Om$}, \end{cases}
+\\[1em] & \begin{cases} - \Delta v - \lambda_{k+1} v = \hat{\mu} v & \text{if $x \in \Om$}, \\ u = 0 & \text{if $x \in \partial \Om$}. \end{cases}
+\end{aligned} \]
+The assumption {\textbf{(b)}} implies that
+\[
+\hat{\mu}_j < \tilde{\mu}_j < \mu_j 
+\]
+for all $j \in \N$. However, we can compute these eigenvalues explicitly as
+\[ 
+\mu_j = \lambda_j - \lambda_k \quad \text{and} \quad \hat{\mu}_{j} = \lambda_j - \lambda_{k+1},
+\]
+and hence we conclude that
+\[
+\tilde{\mu}_k < 0 \quad \text{and} \quad \tilde{\mu}_{k+1} > 0.
+\]
+This shows that $\tilde{\mu}_j \neq 0$ for all $j \in \N$ and, as an immediate consequence, that $F$ is locally invertible.
+
+\paragraph{Step 2.} To prove that $F$ is proper, suppose that $\|h_n- h\|_\Y \to 0$ and let $(u_n)_{n \in \N} \subset \X$ be a sequence of preimages, namely
+\[
+F(u_n) = h_n \quad \text{for all $n \in \N$.}
+\]
+
+\paragraph{Step 2.1} We claim that $\|u_n\|_\Y$ is bounded. If not, define $v_n := \frac{u_n}{\|u_n\|_\Y}$ and notice that it is well-defined and solves \eqref{dirh} with
+\[
+h = \frac{h_n}{\|u_n\|_\Y}.
+\]
+If we now apply the assumption $h(s) = as + b(s)$, we find that $v_n$ solves the equation
+\[
+- \Delta v_n + a v_n = U_n,
+\]
+where $U_n$ is a uniformly bounded function in $L^\infty(\Om)$ and, consequently, in every $L^p$-space for $1 \leq p < \infty$. On the other hand, the operator
+\[
+- \Delta + a \cdot \mathrm{Id}_\X
+\]
+is invertible for all admissible $a$'s, and hence $\|v_n\|_{W^{2,p}(\Om)} \leq C_p$ for all $p \in [1, \infty]$. By Sobolev embedding (see \hyperref[sobolevtheorem]{Theorem \ref{sobolevtheorem}}) the sequence $v_n$ is also bounded in $C^{0, \beta}(\Om)$ and, by Ascoli-Arzelà we also have that
+\[
+v_n \xrightarrow{n \to + \infty} v^\ast
+\]
+in $C^{0, \alpha}(\bar{\Om})$ for all $\alpha < \beta$ and $\| v^\ast \|_\Y = 1$. This is in contradiction with the fact that the sequence $U_n$ tends to zero in $\Y$ so $v^\ast$ must also satisfy
+\[ \begin{cases}
+- \Delta v^\ast + a v^\ast = 0,
+\\ \|v^\ast\|_\Y = 1,
+\end{cases} \]
+which has $v^\ast \equiv 0$ as its unique solution.
+
+\paragraph{Step 2.2.} We have proved that $u_n$ is bounded in $\Y$ so we only need to apply regularity theory to achieve boundedness in $\X$. Start by noticing that $u_n$ is a solution of
+\[ \begin{cases}
+- \Delta u_n(x) = \underbracket{p(u_n(x)) + h_n(x)}_{:= \theta_n} & \text{if $x \in \Om$},
+\\ u_n(x) = 0 & \text{if $x \in \partial \Om$}.
+\end{cases}\]
+Since both $(u_n)_{n \in \N}$ and $(h_n)_{n \in \N}$ are bounded in $\Y$, we easily deduce that the sequence $\theta_n$ is bounded in $\Y$ as well. A well-known result in regularity theory gives
+\[
+\|u_n\|_\X \leq C,
+\]
+and by Ascoli-Arzelà we can find a subsequence $(u_{n_k})_{k \in \N}$ that converges to some $u^\ast$ in the topology $C^2(\bar{\Om})$. Finally, since $\theta_{n_k}$ converges in $\Y$, the elliptic regularity theory allows us to conclude that $u_{n_k}$ converges to $u \in \X$.
+\end{proof}
+
+To conclude this section, we recall the statement of the Lax-Milgram theorem in a more general form in which we do not require $b$ to be a bilinear form.
+
+\bthm[Lax-Milgram]\index{Lax-Milgram theorem}
+Let $H$ be a Hilbert space, and let $a : H \times H \to \R$ be a function satisfying the following properties: \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item $a(0, v) = 0$ for all $v \in H$ and $v \mapsto a(u, v)$ is linear for all $u \in H$.
+\item For all $v \in H$ and all $(u_1, u_2) \in H \times H$ it turns out that
+\[
+\left| a(u_1, v) - a(u_2, v) \right| \leq M  \|u_1 - u_2\| \|v\|.
+\]
+\item There exists a constant $\nu > 0$ such that
+\[
+a(u_1, u_1 - u_2) - a(u_2, u_1 - u_2) \geq \nu  \|u_1 - u_2 \|^2 \quad \text{for all $(u_1, u_2) \in H \times H$}.
+\]
+\end{enumerate}
+Then for all $F \in H^\ast$ there exists a unique element $u \in H$ such that
+\[
+a(u, v) = F(v) \quad \text{for all $v \in H$},
+\]
+and there exists a positive constant which only depends on $\nu$ such that
+\[
+\|u\| \leq \frac{1}{c(\nu)} \|F\|_{H^\ast}.
+\]
+\ethm
+
+\brmk
+If $a : H \times H \to \R$ is a bilinear form, then the last condition is equivalent to saying that $a$ is {\em coercive}.\index{coercivity}
+\ermk
+
+\section{Global inversion with singularities}
+
+In this section, we will investigate {\em global invertibility} of maps when $\Sigma$ does not satisfy the assumptions of \autoref{git}. For this it will be convenient to deal with $C^2$-maps $F : \X \to \Y$, where $\X$ and $\Y$ are Banach spaces, and replace $\Sigma$ with a slightly larger set:
+\[
+\Sigma' := \{u \in \X \: : \: F'(u) \notin \inv(\X, \Y)\}.
+\]
+Let $F \in C^2(\X, \Y)$ and $u \in \Sigma'$. We assume that the following holds: \mbox{}
+\begin{enumerate}[label=(\Alph*)]
+\item The kernel of $F'(u)$ is one-dimensional, generated by some $\phi \in \X \setminus \{0\}$. The range is closed and has codimension one.
+\item There exists $\tilde{\phi} \in \X$ such that $F''(u)[\tilde{\phi}, \phi] \notin \mathrm{Ran}(F^\prime(u))$.
+\end{enumerate}
+We say that a subset $M$ of $\X$ is a $C^1$-manifold of codimension one in $\X$ if for all $u^\ast \in M$ there exist $\delta > 0$ and a functional $\Gamma : B_\delta(u^\ast) \to \R$ of class $C^1$ such that
+\[
+M \cap B_\delta(u^\ast) = \{u \in B_\delta(u^\ast) \: : \: \Gamma(u) = 0\},
+\]
+and $\Gamma'(u^\ast) \neq 0$.
+
+\bl
+Suppose that for all $u\in \Sigma'$ the conditions $(A)$ and $(B)$ hold. Then $\Sigma'$ is a $C^1$-manifold of codimension one in $\X$.
+\el
+
+\bd \index{singular point!ordinary}
+We say that $u \in \Sigma'$ is an {\em ordinary} singular point if $(A)$ holds and
+\[
+F''(u)[\phi, \phi] \notin \mathrm{Ran}(F'(u)),
+\]
+where $\phi$ is the element that generates the kernel (by $(A)$).
+\ed
+
+\bl
+Let $u^\ast$ be an ordinary singular point. Then there exist $\epsilon > 0$ and a map $\Psi \in C^1(B_\epsilon(u^\ast),  \Y)$ such that \mbox{}
+\begin{enumerate}[label=(\roman*), leftmargin=2.5\parindent]
+\item $\Psi'(u^\ast) \in \inv(\X, \Y)$;
+\item $\Psi(u) = F(u)$ for all $u \in \Sigma' \cap B_\epsilon(u^\ast)$.
+\end{enumerate}
+\el
+
+%\begin{proof}
+%First, notice that $\Sigma^\prime \cap B_\delta(u^\ast) = \Gamma^{-1}(0)$. Let $\Psi : B_\delta(u^\ast) \to \Y$ be the map defined by setting
+%\[
+%\Psi(u) := F(u) + \Gamma(u)z.
+%\]
+%Then $\Psi$ is $C^1$-regular, $\Psi(u)$ coincides with $F(u)$ for all $u \in \Sigma^\prime \cap B_\delta(u^\ast)$ and its differential is given by
+%\[
+%\Psi^\prime(u^\ast)u = F^\prime(u^\ast)u + \Gamma^\prime(u^\ast)(u)z.
+%\]
+%Setting $u = t \phi + w$, we find that
+%\[ \begin{aligned}
+%\Psi^\prime(u^\ast)u & = F^\prime(u^\ast)w + t \Gamma^\prime(u^\ast)(\phi)z + \Gamma^\prime(u^\ast)(w)z =
+%\\[1em] & = F^\prime(u^\ast)w + t \langle \Psi, \, F^{\prime \prime}(u^\ast)[\phi, \, \phi] \rangle z + \langle \Psi, \, F^{\prime \prime}(u^\ast)[w, \, \phi] \rangle z.
+%\end{aligned}\]
+%Finally, observe that $\Psi^\prime(u^\ast)u = v$ has a unique solution when $\langle \Psi, \, F^{\prime \prime}(u^\ast)[\phi, \, \phi] \rangle \neq 0$; thus, if $u^\ast$ is an ordinary singular point, the map $\Psi^\prime(u^\ast)$ is invertible.
+%\end{proof}
+
+\bcor
+If every $u \in \Sigma'$ is an ordinary singular point, then $F(\Sigma')$ is a $C^1$-manifold of codimension one in $\Y$.
+\ecor
+
+\bl
+Let $u^\ast$ be an ordinary singular point with $\mathrm{Ker}(F'(u^\ast)) = \langle \phi \rangle_\R$. Assume that
+\[
+\langle \Psi, F^{''}(u^\ast)[\phi, \phi] \rangle > 0,
+\]
+and set $v^\ast := F(u^\ast)$. Then there are $\epsilon, \, \sigma > 0$ such that the equation
+\[
+F(u) = v^\ast + sz \quad \text{for $u \in B_\epsilon(u^\ast)$},
+\]
+has two solutions for all $0 < s < \sigma$ and none for $- \sigma < s < 0$. 
+\el
+
+\bthm \index{global inversion theorem!singularities}
+Let $F \in C^2(\X, \Y)$ be a proper function. Assume that every $u \in \Sigma'$ is an ordinary singular point, the equation
+\[
+F(u) = v
+\]
+admits a unique solution for all $v \in F(\Sigma')$, and $\Sigma'$ is connected. Then there are two open connected subsets $\Y_0$ and $\Y_2$ of $\Y$ such that
+\[
+\Y = \Y_0 \cup \Y_2 \cup F(\Sigma'),
+\]
+and it turns out that
+\[
+[v] = \begin{cases}0 & \text{if $v\in \Y_0$}, \\ 1 & \text{if $v\in F(\Sigma')$}, \\ 2 & \text{if $v\in \Y_2$}. \end{cases}
+\]
+\ethm

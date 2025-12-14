@@ -1,0 +1,430 @@
+\chapter{Allen-Cahn Energy} \thispagestyle{empty}
+
+In 1977, Modica and Mortola considered the problem of {\em diffuse interfaces}. The {\em Allen-Cahn energy}, for example, describes metal alloys that are mixtures of two phases $\pm 1$. These alloys tend to form ``grais'' whose boundary evolves by the mean curvature flow (at least macroscopically). This means that the physical energy behaves at the main order like the area of the surface.
+
+\section{Introduction}
+
+The phases are described by a {\em double-well potential energy}\index{double-well potential energy}, namely a function $W(u)$ such that
+\[
+W(u) \simeq \frac{(1-u^2)^2}{4}.
+\]
+Minima of the functional $\int_\Om W(u) \, \dr x$ are perfectly separated phases, assuming everywhere the values $\pm 1$; more precisely,
+\[
+\min_{u} \int_\Omega W(u) \, \dr x = 0
+\]
+is attained by {\bf any} function $u$ that takes only the values $\pm 1$. However, functions of this type can be very ``wild'' and hence it makes sense to consider the slightly more regular functional:
+\[
+E_\epsilon(u) := \frac{\epsilon}{2} \int_\Omega |\nabla u|^2 \, \dr x + \frac{1}{\epsilon} \int_\Omega W(u) \, \dr x.
+\]
+The main idea (which can be proved with little effort) is that this functional $E_\epsilon$ tends to penalize oscillating functions.
+
+\bex
+Let $\Omega = \R$. Then critical points of $E_\epsilon(\cdot)$ satisfy the differential equation
+\[
+- \epsilon u'' + \frac{1}{\epsilon} W'(u) = 0.
+\]
+It can be proved that for $\epsilon$ small enough the transition between the phase $1$ and the phase $-1$ is smooth with order $\epsilon$. Now let $v \in H^1(\R)$ be a function satisfying the boundary conditions $v(a) = - 1$ and $v(b) = 1$ for some $a < b$. Then
+\[
+2xy \leq x^2 + y^2 \implies \frac{\epsilon}{2}(v')^2 + \frac{1}{\epsilon}W(v) \geq \sqrt{2 W(v)} v',
+\]
+which immediately leads to the energy estimate
+\[
+E_\epsilon(v) \geq 2 \int_{-1}^1 \sqrt{2 W(s)} \, \dr s =: C_W.
+\]
+The quantity $C_W$ is called {\em minimal transition energy}\index{minimal transition energy} and the equality holds if and only if
+\[
+v' = \sqrt{2 W(v)},
+\]
+but this is impossible (check!) if $a$ and $b$ are finite.
+\eex
+
+Before we can investigate what happens when $\Om$ is a subset of $\R^n$, $n \geq 2$, we need to recall a few definitions from geometric measure theory.
+
+\bd[Caccioppoli Perimeter] \index{Caccioppoli Perimeter}
+Let $E \subset \Om$ be a set. The perimeter of $E$ relative to $\Om$ is defined as
+\[
+\mathrm{Per}(E,\Om) := \sup_{\Phi \in C_c^\infty(\Om)} \int_E \divs \, \Phi \, \dr x.
+\]
+\ed
+
+The next result holds even assuming that the boundary of $E$ is less regular (for example, Lipschitz should be enough), but for our purposes there is no need to go any further.
+
+\bthm
+Let $E \subset \Om$ be a set with smooth boundary. Then
+\[
+\mathrm{Per}(E,\Om) = | \partial E \cap \Om|.
+\]
+\ethm
+
+\bthm[Modica-Mortola]
+Let $\Om$ be an open subset of $\R^n$ and $E \subseteq \Om$ be a set with finite relative perimeter. Let $f_n$ be a sequence of functions such that
+\[
+\|f_n - g_E\|_{L^1(\Om)} \xrightarrow{n \to \infty} 0,
+\]
+where
+\[
+g_E(x) := \begin{cases} 1 & \text{if $x\in E$}, \\ -1 & \text{if $x \in \Om \setminus E$}. \end{cases}
+\]
+Then, given $\epsilon_n \to 0$, the following $\liminf$ inequality holds:
+\[
+\liminf_{n \to \infty} E_{\epsilon_n}(f_n) \geq C_W \mathrm{Per}(E,\Om).
+\]
+Moreover, there exists a sequence $f_n$ as above such that the $\limsup$ inequality also holds, namely
+\[
+\limsup_{n \to \infty} E_{\epsilon_n}(f_n) \leq C_W \mathrm{Per}(E,\Om).
+\]
+\ethm
+
+\brmk
+The result above can also be translated in terms of $\Gamma$-convergence as follows: the sequence of functionals $E_{\epsilon_n}(\cdot)$ $\Gamma$-converges to the functional $C_W \mathrm{Per}(\cdot,\Om)$.
+\ermk
+
+\section{Variational structure of $E_\epsilon$}
+
+Let $(M,g)$ be a $n$-dimensional compact Riemannian manifold and let $u \in H^1(M)$. The Sobolev embedding
+\[
+H^1(M) \hookrightarrow L^{2^\ast}(M),
+\]
+where $2^\ast := \frac{2n}{n-2}$, implies that the integral
+\[
+\int_M W(u) \, \dr V
+\]
+is well-defined when $n \leq 4$\footnote{The case $n = 4$ is much more delicate since we lose the compactness of the embedding $H^1(M) \hookrightarrow L^{4}(M)$.}, but the same is not true when $n \geq 5$.
+
+\bl \label{lemma.app.2.1}
+Every solution of class $C^2(M)$ of the equation
+\[
+- \epsilon \Delta u = \frac{1}{\epsilon} W'(u)
+\]
+has the property $u(x) \in [-1,1]$ for all $x \in M$. Furthermore, unless $u$ is identically equal to either $1$, $-1$ or $0$, it has to change sign.
+\el
+
+\begin{proof}
+Suppose that $\max_{x \in M} u(x) > 1$ and let $x_0$ denote a point where $u$ attains its maximum value. Then $W'(u) > 0$ in a neighbourhood $U$ of $x_0$ so we can consider a non-negative test function $\varphi$ supported in $U$. Then
+\[
+\dr E_\epsilon(u)[\varphi] = \int_U \varphi\left( - \epsilon \Delta u + \frac{1}{\epsilon} W'(u) \right) \, \dr V > 0,
+\]
+contradicting the minimality of $u$. If $\max_{x \in M} u(x) = 1$, by the maximum principle we would have $u$ identically equal to one so we can assume without loss of generality that $u$ is non-negative and not identically equal to zero. Then
+\[
+\dr E_\epsilon(u)[1] = \frac{1}{\epsilon} \int_\Om W'(u) \, \dr V < 0
+\]
+since $W'$ is negative in $(0,1)$. Since a similar argument holds for $u \leq 0$ (with $W'(u)$ being positive), we easily conclude that $u$ must change sign.
+\end{proof}
+
+We now define a slightly different potential energy which is subcritical, namely a function $W^\ast$ that satisfies the following properties: \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item $W^\ast(u) = W^\ast(-u)$ and $W^\ast(u) = Au^2$ in $[4, \infty)$ for some positive constant $A$;
+\item $W^\ast \equiv W$ on $[-2,2]$ and $(W^\ast)' > 0$ in $[2,\infty)$.
+\end{enumerate}
+The energy with respect to this new potential is given by
+\[
+E_\epsilon^\ast(u) := \frac{\epsilon}{2} \int_M |\nabla u|^2 \, \dr V + \frac{1}{\epsilon} \int_M W^\ast(u) \, \dr V,
+\]
+and it is easy to see that its critical points are classical $C^2$ solutions of the equation
+\[
+- \epsilon \Delta u + \frac{1}{\epsilon} (W^\ast)'(u),
+\]
+which means that \hyperref[lemma.app.2.1]{Lemma \ref{lemma.app.2.1}} can be extended with no effort. Another advantage of using $E_\epsilon^\ast$ over $E_\epsilon$ is that the integral
+\[
+\int_M W^\ast(u) \, \dr V
+\]
+is always well-defined because outside of $(-4,4)$ the potential is quadratic.
+
+\bpr
+The functional $E_\epsilon^\ast : H^1(M) \to \R$ is coercive and belongs to $C^1$. Moreover, it satisfies the Palais-Smale condition at all levels.
+\epr
+
+\begin{proof}
+The regularity follows from the general theory of Nemitski operators. The coercivity is also easy because we can always find a positive constant $c$ such that
+\[
+W^\ast(u) \geq \frac{1}{c} u^2 - c,
+\]
+from which it follows that
+\[
+E_\epsilon^\ast(u) \geq \min \left\{ \frac{\epsilon}{2}, \frac{1}{c \epsilon} \right\} \|u\|_{H^1(M)}^2 - \frac{c}{\epsilon} \cdot \mathrm{Vol}(M).
+\]
+The right-hand side goes to infinity as soon as $|u\|_{H^1(M)} \to \infty$ so $E_\epsilon^\ast$ is coercive. This implies (by a standard argument) that Palais-Smale sequences are bounded and everything follows as usual.
+\end{proof}
+
+\section{Mountain pass solutions}
+
+Let $\Gamma = \{ \gamma : [0,1] \to H^1(M) \: : \: \gamma(0) = -1, \, \gamma(1) = 1 \}$ be the set of all admissible (continuous) curves and define the mountain-pass level
+\[
+c_\epsilon := \inf_{\gamma \in \Gamma} \sup_{t \in [0,1]} E_\epsilon^\ast(\gamma(t)).
+\]
+Since we would like to find a nontrivial solution at the limit (for $\epsilon \to 0^+$), the first step is proving that $c_\epsilon$ does not go to zero as $\epsilon$ does.
+
+\bl \label{lemma.app1.1}
+There exists $c > 0$ independent of $\epsilon$ such that $c_\epsilon \geq c$.
+\el
+
+To prove this lemma, we first need to present a technical result (of which we will only sketch the proof) due to De Giorgi.
+
+\bl
+Suppose that there are $a < b$ and $\delta > 0$ such that
+\[
+\min\left\{ |\{ u < a \}|, | \{ u < b \} | \right\} > \delta.
+\]
+Then there exists a constant $C = C(\delta,M)>0$ such that
+\[
+C(b-a) \leq \sqrt{ | \{ a \leq u \leq b \} | } \| \nabla u \|_{L^2(M)}.
+\]
+\el
+
+\begin{proof}
+Consider the {\em isoperimetrical profile}\index{isoperimetrical profile} defined by setting
+\[
+I(t) := \inf\{ \mathrm{Per}_M(\Om) \: : \: |\Om| = t, \, \Om \subseteq M\}.
+\]
+It can be proved that $I(t)$ is a continuous function which is even with respect to the point $\frac{\mathrm{Vol}(M)}{2}$ and strictly positive (except at $t=0$ and $t = \mathrm{Vol}(M)$). For $t \in (a,b)$ consider
+\[
+\Om_t := \{ u \leq t \},
+\]
+and notice that $\mathrm{Vol}(\Om_t) \in (\delta,\mathrm{Vol}(M)-\delta)$ so its isoperimetrical profile stays away from zero; namely, there exists a constant $C>0$ such that
+\[
+I(\mathrm{Vol}(\Om_t)) \geq C \quad \text{for all $t \in (a,b)$}.
+\]
+We now use the coarea formula
+\[
+\int_M f \, \dr V = \int_{\min u}^{\max u} \dr t \int_{ \{u = t \}} \frac{f}{|\nabla u|} \, \dr V
+\]
+with $f = |\nabla u|$ to infer that
+\[
+C(b-a) \leq \int_a^b \mathrm{Per}(\Om_t,M) \, \dr t = \int_{\{a \leq u \leq b\}} |\nabla u| \, \dr V.
+\]
+A simple application of H\"{o}lder inequality leads to the conclusion.
+\end{proof}
+
+\begin{proof}[Proof of Lemma \ref{lemma.app1.1}]
+Suppose $c_\epsilon \to 0$ as $\epsilon \to 0^+$ and let $h \in \Gamma$ be such that
+\[
+\max_{t \in [0,1]}E_\epsilon^\ast(h(t)) \leq c_\epsilon + \epsilon.
+\]
+Select $t$ in such a way that $\int_M h(t) \, \dr V = 0$, $a \in (0,1)$  and let $c_a$ be a constant such that 
+\[
+W(u) \geq c_a > 0 \quad \text{on $[-a,a]$}.
+\]
+Notice that
+\[
+c_a \mathrm{Vol}(\{-a \leq u \leq a\}) \leq \epsilon(c_\epsilon + \epsilon)
+\]
+so the following two estimates hold.
+\[
+\begin{cases} 0 = \int_M u \, \dr V \leq a \mathrm{Vol}(\{u\geq a\}) -  a \mathrm{Vol}(\{u\leq -a\}) + \frac{\epsilon(c_\epsilon+\epsilon)}{c_a}, \\[.6em]
+\mathrm{Vol}(M) \leq  \mathrm{Vol}(\{u\geq a\}) +  \mathrm{Vol}(\{u\leq - a\}) + \frac{\epsilon(c_\epsilon+\epsilon)}{c_a}. \end{cases}
+\]
+It follows that
+\[
+\mathrm{Vol}(\{ u \geq a\}) \geq \frac{a}{2} \mathrm{Vol}(M) - \frac{\epsilon(c_\epsilon+\epsilon)}{c_a} > \frac{a}{3} \mathrm{Vol}(M) =: \delta
+\]
+for $\epsilon$ small enough and, in a similar fashion, we can prove the same for $\mathrm{Vol}(\{ u \leq - a\})$ in place of $\mathrm{Vol}(\{ u \geq a\})$. Therefore, the exists a positive constant $c > 0$ such that
+\[
+0 < 2a c \leq \sqrt{\mathrm{Vol}(\{-a\leq u \leq a\})} \|\nabla u\|_{L^2(M)} \leq \sqrt{\frac{2}{c_a}} (c_\epsilon + \epsilon),
+\]
+which gives
+\[
+c_\epsilon + \epsilon \geq \frac{2ac}{\sqrt{2c_a^{-1}}} \implies c_\epsilon \geq \frac{2ac}{\sqrt{2c_a^{-1}}} ,
+\]
+a contradiction with $c_\epsilon \to 0$ as $\epsilon \to 0^+$.
+\end{proof}
+
+For the upper bound, we need to introduce a few definitions.
+
+\bd
+A {\em Morse function}\index{Morse function} is a function $f : M \to \R$ of class $C^2$ with finitely many non-degenerate critical points.
+\ed
+
+\brmk
+Morse functions are dense in $C^2(M,\R)$.
+\ermk
+
+\bd
+An {\em isotopy}\index{isotopy} on $M$ is a diffeomorphism which is homotopic to the identity map $\mathrm{id}_M$ via a family of diffeomorphisms.
+\ed
+
+\paragraph{Sweepoints.}\index{Sweepoints} Let $f : M \to [0,1]$ be a Morse function and define
+\[
+\Lambda := \left\{ \{ \Sigma_t = \Psi_t( f^{-1}(t),1) \}_{t \in [0,1]} \: : \: \Psi_t \in C^\infty([0,1], \mathrm{Isot}(M))\right\}.
+\]
+For $\{\Sigma_t\}_t \in \Lambda$, set
+\[
+F(\{\Sigma_t\}_t) := \max_{t \in [0,1]} |\Sigma_t|.
+\]
+
+\bd
+The {\em width}\index{width} of $\Lambda$ is given by
+\[
+m_0(\Lambda) := \int_{\{\Sigma_t\}_t \in \Lambda} F(\{\Sigma_t\}_t).
+\]
+\ed
+
+\bpr
+The min-max level $c_\epsilon$ is bounded from above. More precisely, it turns out that
+\[
+\limsup_{\epsilon \to 0^+} c_\epsilon \leq C_W \cdot m_0(\Lambda).
+\]
+\epr
+
+\begin{proof}
+Let $d_{\Sigma_i}$ be the signed distance from $\Sigma_t$ and choose the sign in such a way that $d_{\Sigma_0} \geq 0$ and $d_{\Sigma_1} \leq 0$. Notice that
+\[
+|d_{\Sigma_t}| = 1 \quad \text{almost everywhere},
+\]
+$d_{\Sigma_t}$ is Lipschitz and $[0,1] \ni t \mapsto d_{\Sigma_t} \in H^1(M)$ is continuous. Let $v_0$ be the one-dimensional optimal profile solving the differential equation
+\[
+- v_0'' + W'(v_0) = 0.
+\]
+For $\epsilon, \delta > 0$ define
+\[
+v_{\epsilon,\delta}(x) := \begin{cases} v_0( \frac{d_\Sigma(x)}{\epsilon}) & \text{if $|d_\Sigma(x)| \leq \delta$},\\[.6em]  v_0\left( \frac{\delta}{\epsilon}  \frac{d_\Sigma(x)}{|d_\Sigma(x)|} \right) & \text{if $|d_\Sigma(x)| > \delta$}, \end{cases}
+\]
+where $d_{\Sigma} := d_{\Sigma_t}$ for some $t \in [0,1]$ so that $v_{\epsilon,\delta}$ also depends on $t$. The map $t \mapsto v_{\epsilon,\delta}$ is continuous from $[0,1]$ to $H^1(M)$ and, if $t = 0$ and $t = 1$, we have respectively $v_{\epsilon,\delta} \simeq 1$  and $v_{\epsilon,\delta} \simeq -1$. We would like these values to be constant so we need to adjust them; notice that\footnote{The argument for $\Sigma_1$ is the same modulo a few adjustments.} $\Sigma_0$ is a finite union of points and
+\[
+v_0 \geq 0
+\]
+by construction. Let $f_s^j := (1-s) + s v_j$ for $s \in [0,1]$ and notice that
+\[
+f_s^1 \ast v_t \ast f_s^0 =: h(t)
+\]
+is an admissible function for the minimum. We now claim that
+\[
+\max_{t\in[0,1]} E_\epsilon(h(t)) = \max_{t \in [0,1]} E_\epsilon(v_0(t)).
+\]
+We will now show that $\max_{s \in [0,1]} E_\epsilon(f_s) = E_\epsilon(v_0)$ implies the claim. Notice that $|\nabla f_s| \leq |\nabla v_0|$ and that
+\[
+v_0 = v_{\epsilon,\delta}(P,x).
+\]
+Since the distance $d_P$ does not change sign, we have $v_{\epsilon,\delta}(P,\cdot) \in [0,1)$, where $W$ is strictly decreasing. Then $W(f_s(x)) \leq W(v_{\epsilon,\delta}(P,x))$ and this implies that
+\[
+E_\epsilon(f_s) \leq E_\epsilon(v_{\epsilon,\delta}(\Sigma)) \leq E_\epsilon(v_0).
+\]
+Since the opposite inequality is trivially true by taking $s = 1$, we can now conclude the proof of the upper bound. We start by noticing that
+\[
+E_\epsilon(v_{\epsilon,\delta}(\Sigma)) = \frac{\epsilon}{2} \int |\nabla v_{\epsilon,\delta}(\Sigma,\cdot)|^2 + \frac{1}{\epsilon} \int W(v_{\epsilon,\delta}(\Sigma,\cdot)).
+\]
+At this point it makes sense to divide the integral interval using $|d_\Sigma| > \delta$ and $|d_\Sigma| < \delta$ since by definition we have
+\[
+\nabla v_{\epsilon,\delta}(\Sigma,x) = \frac{1}{\epsilon} v_0' \left( \frac{d_\Sigma(x)}{\epsilon} \right) \nabla d_\Sigma(x)
+\]
+if $|d_\Sigma| < \delta$ and zero otherwise. It follows that
+\begin{equation} \label{eq....}
+\int_{|d_\Sigma|>\delta} \dots \leq \frac{2}{\epsilon} \mathrm{Vol}_g(M) W\left( v_0 (\frac{\delta}{\epsilon}) \right).
+\end{equation}
+To compute the integral in the complement, taking into account that $|\nabla d_\Sigma|=1$, we use the coarea formula as follows:
+\[ \begin{aligned}
+\int_{|d_\Sigma|\leq \delta} \dots & = \int_{-\delta}^\delta \frac{1}{\epsilon} \left[ \frac{v_0'(s/\epsilon)^2}{2} + W(v_0(s/\epsilon)) \right] \cH^{n-1}\left( \{ d_\Sigma= s\}\right) \, \dr s
+\\[1em] & = \int_{-\frac{\delta}{\epsilon}}^{\frac{\delta}{\epsilon}} \left[ \frac{v_0'(s)^2}{2} + W(v_0(s)) \right] \cH^{n-1}\left( \{ d_\Sigma= \epsilon s\}\right) \, \dr s.
+\end{aligned} \]
+It can be shown that for all $\eta > 0$ there exists $\delta_0 > 0$ such that
+\[
+\cH^{n-1} \left( \{ d_{\Sigma_t} =s\} \right) \leq (1+\eta) \cH^{n-1}(\Sigma_t) \quad \text{for all $|s|\leq \delta_0$ and all $t \in [0,1]$.}
+\]
+Therefore, we obtain that
+\[
+\int_{|d_\Sigma|\leq \delta} \dots \leq C_W(1+\eta) \cH^{n-1}(\Sigma)
+\]
+with $\eta \to 0$ as $\delta \to 0$. Since the convergence of $v_0$ to $\pm 1$ is exponential we have that $s W(v_0(s)) \to 0$ as $s \to \pm \infty$. Therefore the right-hand side in \eqref{eq....} tends to zero as $\epsilon \to 0$. So for all $\eta > 0$ there exists $\epsilon_0 > 0$ such that for all $\epsilon \in (0,\epsilon_0)$ we have
+\[
+c_\epsilon \leq 2 \sigma(1+\eta) \cF( \{\Sigma_t\}_t),
+\]
+which immediately implies
+\[
+\limsup_{\epsilon \to 0} c_\epsilon \leq C_W \cF( \{\Sigma_t\}_t).
+\]
+\end{proof}
+
+\bd
+Let $F : H \to \R$ be a map of class $C^2$, where $H$ is either a Hilbert space or a Hilbert manifold. Let $x_0 \in H$ be a critical point for $F$ such that the matrix
+\[
+\dr F^2 (x_0)
+\]
+is symmetric. The {\em Morse index}\index{Morse index} of $F$ at $x_0$ is the maximum dimension among all vector spaces $V \subseteq T_p M$ such that $\dr F^2 (x_0) \, \big|_V$ is negative definite.
+\ed
+
+\brmk
+In most cases, for elliptic PDEs, the operator $\dr F^2 (x_0)$ is Fredholm (=compact perturbation of the identity) and hence its Morse index must be finite.
+\ermk
+
+\bthm
+Suppose that the Palais-Smale condition holds and let $c_\epsilon$ be a min-max value of mountain pass type. Then there exists $x_0 \in \mathcal{Z}_{c_\epsilon}$ such that
+\[
+m(F,x_0) \leq 1.
+\]
+\ethm
+
+\section{Convergence of interfaces}
+
+Let $\epsilon_k \to 0$ and $u_k := u_{\epsilon_k}$ solution of the $\epsilon_k$-AC equation.
+
+\bd
+Let $U \subseteq M$ be an open set. We say that {\em $u_k$ is stable in $U$} if
+\[
+E_k'(u_k)[\varphi,\varphi] \geq 0 \quad \text{for all $\varphi \in C^1(U)$}.
+\]
+We also say that $u_k$ is {\em stable} if it is stable in $U = M$.
+\ed
+
+\bd
+Let $U \subseteq M$ be an open set. A {\em varifold} is a finite Radon measure on the $(n-1)$-Grassmannian of unoriented planes $\mathcal{G}(U)$.
+\ed
+
+\brmk
+The mass of a varifold is $\|v\|$, where
+\[
+\int_U \varphi(x) \, \dr \|v\|(x) = \int_{\mathcal{G}(U)} \varphi(x) \, \dr V(x,\pi).
+\]
+\ermk
+
+\bex
+If $\Sigma$ is a $(n-1)$-rectifiable set and $\theta : \Sigma \to Z$ a multiplicity map, then
+\[
+V_{\theta \Sigma}(\varphi) = \int \varphi(x,T_x \Sigma) \theta(x) \, \cH^{n-1}
+\]
+for all $\varphi \in C_c(\mathcal{G}(U))$.
+\eex
+
+Let $X$ be a smooth vector field on $U$ and denote by $\Psi_t$ the corresponding flow. Define the first variation of a varifold as
+\[
+[\delta V](x) := \frac{\dr}{\dr t} \, \big|_{t=0} \| (\Psi_t)_\ast V \|(U),
+\]
+and $V$ is {\em stationary} if $\delta V(x) = 0$ for all $x$.
+
+\brmk
+In this setting, let $\varphi(t) := \int_0^t \sqrt{2 W(s)} \, \dr s$ and let
+\[
+V_k(U) = \frac{2}{C_W} \int_\R V_{ \{ W_k = t \} }(U) \, \dr t,
+\]
+where $W_k := \varphi \circ u_k$.
+\ermk
+
+\bd
+Let $V = V_{\theta \Sigma}$ be integer-rectifiable and stationary. Then $V$ has {\em optimal regularity} if $V = V_\Sigma$ and $\Sigma$ smooth embedded when $2 \leq n \leq 7$ or the same holds up to a set $S$ with $\cH^{n-8+\gamma}(S) = 0$ for all positive $\gamma$ when $n \geq 8$.
+\ed
+
+\bthm
+Let $n \geq 2$. If $u_k$ are stable with $E_k(u_k) \leq c$, then $V_k \to V$ with $V$ stable stationary and with optimal regularity.
+\ethm
+
+\bthm
+The same conclusion holds if $n \geq 3$ and $E_k(u_k) = \leq C$ and $m(E_k,u_k) \leq M$ (in place of stability).
+\ethm
+
+\bpr
+If $m(E_k,u_k)\leq m$ and if $U_i$ are disjoint open sets for $i = 1,\dots,m+1$, then $u_k$ is stable in at least one of the $U_i$.
+\epr
+
+\brmk
+For $n = 2$, the limit objects are geodesics with at most one self-intersection (so they might not be embedded).
+\ermk
+
+\brmk
+Since $E_k(u) = E_k(-u)$, one can use genus theory to investigate multiplicity. For any $p \in \N$, there exists a min-max level $c_\epsilon$ (using sets of genus $\geq p$).
+\ermk
+
+\bthm
+There exists $\tau(n)$ dimensional constant such that as $\epsilon \to 0$ it turns out that
+\[
+c_\epsilon(p) \to \ell_p(n),
+\]
+where $\ell_p(n) = \tau(n) \mathrm{Vol}_g(M)^{\frac{n}{n+1}} p^{\frac{1}{n+1}}$.
+\ethm

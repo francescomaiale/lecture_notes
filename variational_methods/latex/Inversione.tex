@@ -1,0 +1,550 @@
+\chapter{Local Inversion Theorems} \thispagestyle{empty}
+
+%In this chapter, we continue with our research toward the extension of differential calculus to the abstract framework of Banach spaces. Recall that, for a function
+%\[
+%F : \R^n \to \R^n,
+%\]
+%being continuously differentiable with total derivative invertible at a point $p$ (i.e., the Jacobian determinant of $F$ at $p$ is nonzero) is enough to infer that $F$ is {\em locally invertible}\index{locally invertible}. The first part of this chapter is devoted to proving the same statement replacing $\R^n$ with Banach spaces $\X$ and $\Y$. More precisely, we have:
+
+%\begin{customthm}{A}
+%Let $F \in C^1(\X, \, \Y)$ with $F^\prime(u^\ast) \in \mathrm{Inv}(\X, \, \Y)$. Then $F$ is locally invertible at $u^\ast$ with $C^1$ inverse. Namely, there are neighbourhoods $U$ of $u^\ast$ and $V$ of $F(u^\ast)$ such that \mbox{}
+%\begin{enumerate}[label=\textbf{(\roman*)}, leftmargin=2.5\parindent]
+%\item The restriction $F \, \big|_{U} : U \longrightarrow V$ is a homomorphism.
+%\item The inverse $F^{-1}$ belongs to $C^1(V, \, \X)$ and for all $v \in V$ there results
+%\[
+%\dr F^{-1}(v) := (F^\prime(u))^{-1},
+%\]
+%where $u = F^{-1}(v)$.
+%\item If $F$ belongs to $C^k(\X, \, \Y)$, $k > 1$, then $F^{-1} \in C^k(\X, \, \Y)$.
+%\end{enumerate}
+%\end{customthm}
+
+%In the second half of the chapter, we generalise a well-known result in Euclidean calculus: the {\em implicit function theorem}. The following statement holds:
+
+%\begin{customthm}{B}
+%Let $F \in C^k(\Lambda \times U, \, \Y)$, $k \geq 1$. Suppose that
+%\[
+%\text{$F(\lambda^\ast, \, u^\ast) = 0$ and that $F_u(\lambda^\ast, \, u^\ast)$ is invertible.}
+%\]
+%Then there are neighbourhoods $\Theta$ of $\lambda^\ast$ and $U^\ast$ of $u^\ast$ and a map $g \in C^k(\Theta, \, \X)$ such that: \mbox{}
+%\begin{enumerate}[label=\textbf{(\roman*)}, leftmargin=2.5\parindent]
+%\item For all $\lambda \in \Theta$ there results $F(\lambda, \, g(\lambda)) = 0$.
+%\item If $(\lambda, \, u) \in \Theta \times U^\ast$ is such that $F(\lambda, \, u)= 0$, then $u = g(\lambda)$.
+%\item If $\lambda \in \Theta$ and $p = (\lambda, \, g(\lambda))$, then
+%\[
+%g^\prime(\lambda) = - [F_u(p)]^{-1} \circ F_\lambda(p).
+%\]
+%\end{enumerate}
+%\end{customthm}
+
+[{\color{red}Da scrivere}].
+
+\section{Local inversion theorem}
+
+Although we will consider continuous maps from a Banach space $\X$ to another Banach space $\Y$, with few changes we can adapt everything to the case in which $F$ is defined on $U \subset \X$.
+
+\bd[Inverse] \index{inverse linear operator}
+Let $A \in \cL(\X, \Y)$ be a continuous linear operator. We say that $A$ is {\em invertible} if there exists $B \in \cL(\Y,  \X)$ such that
+\[
+B \circ A = \mathrm{Id}_\X \quad \text{and} \quad A \circ B = \mathrm{Id}_\Y.
+\]
+The map $B$ is unique and we will denote it, from now on, by $A^{-1}$. The set of all invertible continuous linear maps is denoted by
+\[
+\inv(\X, \Y) := \left\{ A \in \cL(\X, \Y) \: : \: \text{$A$ is invertible} \right\}.
+\]
+\ed
+
+\bthm[Closed Graph] \index{closed graph theorem}
+A linear operator $T$ between two Banach spaces\footnote{It is enough to require $\X$ and $\Y$ to be Fréchet spaces!} is continuous if and only if its graph $\cG(T)$ is closed, where
+\[
+\cG(T) = \{(x, y) \: : \: x \in \X,  y= T(x) \}.
+\]
+\ethm
+
+\bcor
+If $A$ is injective and has {\em range}\index{operator!range} equal to $\Y$, then $A \in \inv(\X, \Y)$.
+\ecor
+
+\bpr
+Let $\X$ and $\Y$ be Banach spaces. Then the following hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item Let $A \in \inv(\X, \Y)$. Then all operators $T \in \cL(\X, \Y)$ satisfying
+\begin{equation} \label{eq.2.1.1}
+\| T - A \|_{\cL(\X, \Y)} < \frac{1}{\| A^{-1} \|_{\cL(\X, \Y)}}
+\end{equation}
+are invertible. In particular, the set $\inv(\X, \, \Y)$ is open.
+\item The map $J : \inv(\X, \Y) \to \cL(\Y, \X)$, $A \mapsto A^{-1}$, is smooth.
+\end{enumerate}
+\end{proposition}
+
+\brmk
+The continuity of $J^\prime$ is easy to deduce. Indeed, we know that $J$ is differentiable and its differential is given by
+\[
+\mathrm{d}J(A)[B] = - A^{-1} \circ B \circ A^{-1},
+\]
+and the right-hand side is a composition of continuous maps.
+\ermk
+
+\bd[Homomorphism]\index{homomorphism}
+Let $U$ and $V$ be open subsets of $\X$ and $\Y$. A continuous map $F : U \to V$ is a {\em homeomorphism} if there exists $G : V \to U$ such that
+\[
+G \circ F(u) = u \quad \text{and} \quad F \circ G(v) = v
+\]
+for all $u \in U$ and all $v \in V$.  We denote by $\homs(U, V)$ the set of all homeomorphisms between $U$ and $V$.
+\ed
+
+\bd \index{locally invertible}
+A continuous map $F \in C(\X, \Y)$ is {\em locally invertible} at $u^\ast \in \X$ if there are neighbourhoods $U$ of $u^\ast$ and $V$ of $F(u^\ast)$ such that 
+\[
+F \, \big|_U \in \mathrm{Hom}(U, V).
+\]
+The map $G : V \to U$ is called {\em local inverse} of $F$ and it is usually denoted by $F^{-1}$.
+\ed
+
+\bpr
+\begin{enumerate}[label=(\alph*)]
+\item If $F_1 \in C(\X, \Y)$ is locally invertible at $u$ and $F_2 \in C(\Y, \mathfrak{Z})$ is locally invertible at $F_1(u)$, then $F_2 \circ F_1$ is locally invertible at $u$.
+\item If $F$ is locally invertible at $u$, then it is locally invertible at any point in a small neighbourhood of $u$.
+\end{enumerate}
+\epr
+
+\brmk
+Suppose that $F$ is a locally invertible map at $u^\ast$ with inverse $G$. If $F$ is differentiable at $u^\ast$ and $G$ at $v^\ast := F(u^\ast)$, then
+\[
+F \circ G = \mathrm{Id}_\Y \quad \text{and} \quad G \circ F = \mathrm{Id}_\X \implies \left( \dr F(u^\ast) \right)^{-1} = \dr G(v^\ast).
+\]
+\ermk
+
+\bthm[Local Inverse]\index{local inversion theorem} \label{thm.2.2.1}
+Let $F \in C^1(\X, \Y)$. Suppose that $F^\prime(u^\ast) \in \inv(\X, \Y)$. Then $F$ is locally invertible at $u^\ast$ with a $C^1$ inverse. Namely, there are neighbourhoods $U$ of $u^\ast$ and $V$ of $F(u^\ast) =: v^\ast$ satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item The restriction $F \, \big|_{U} : U \to V$ is a homeomorphism.
+\item The inverse $F^{-1}$ belongs to $C^1(V, \X)$ and for all $v \in V$ there results
+\[
+\dr F^{-1}(v) := (F^\prime(u))^{-1},
+\]
+where $u = F^{-1}(v)$.
+\item If, in addition, $F$ belongs to $C^k(\X, \Y)$, $k > 1$, then $F^{-1} \in C^k(\X, \Y)$.
+\end{enumerate}
+\ethm
+
+\begin{proof}
+We can always assume (using translations) that $u^\ast = F(u^\ast) = 0$. According to the transitivity property, we can ultimately discuss the local invertibility of the function
+\[
+A \circ F,
+\]
+where $A$ is a linear continuous invertible map. We can choose $A := [F^\prime(0)]^{-1}$ so that it will be enough to prove the theorem for functions of the form
+\[
+F = \mathrm{Id}_\X + \Psi,
+\]
+where $\Psi \in C^1(\X, \X)$ and $\Psi^\prime(0) = 0$.
+
+\paragraph{Step 1.} Since $\Psi^\prime$ is continuous, we can choose $r > 0$ such that
+\[
+\| p \|_\X < r \implies \| \Psi^\prime(p) \|_\X < \frac{1}{2}.
+\]
+It follows from \eqref{eq.2.4} that
+\[ \begin{aligned}
+\|\Psi(p) - \Psi(q) \|_\X & \leq \sup \{ \| \Psi^\prime(w) \| \: : \: w \in [p, q] \} \|p-q\|_\X \leq
+\\ & \leq \frac{1}{2} \|p-q\|_\X,
+\end{aligned} \end{equation*}
+which means that $\Psi$ is a contraction and $\| \Psi(p) \|_\X \leq \frac{1}{2} \|p\|_\X$ for all $p \in B_\X(0, r)$.
+
+\paragraph{Step 2.} Fix $v \in \X$ and define the function
+\[
+\Phi_v(u) := v - \Psi(u).
+\]
+We can verify that $\Phi_v$ is a contraction of $B_\X(0, r)$ for any fixed $v \in B_\X(0, \frac{r}{2})$. Indeed, a simple computation shows that
+\[
+\|\Phi_v(u) \|_\X \leq \|v\|_\X + \|\Psi(u)\|_\X \leq r.
+\]
+Applying the fixed-point theorem we can find a unique $u \in B_\X(0,r)$ that satisfies the equation
+\[
+u = v - \Psi(u).
+\]
+We can easily define a local inverse
+\[
+F^{-1} : B_\X\left(0, \frac{r}{2} \right) \longrightarrow B_\X(0, r)
+\]
+by setting $F^{-1}(v) = u$. To prove that $F^{-1}$ is continuous, let $u = F^{-1}(v)$ and $w = F^{-1}(z)$, and notice that these are given by
+\[
+\begin{cases} u + \Psi(u) = v, \\[.6em] w + \Psi(w) = z. \end{cases}
+\]
+It follows that
+\[
+\| u - w \|_\X \leq \|v - z\|_\X + \frac{1}{2} \| u - w \|_\X \implies \| F^{-1}(v) - F^{-1}(z) \|_\X \leq 2 \|v - z\|_\X, 
+\]
+which means that $F^{-1}$ is Lipschitz-continuous. In particular, letting $V$ be the ball of radius $\frac{r}{2}$ and $U = B_\X(0, r) \cap F^{-1}(V)$, we infer
+\[
+F \, \big|_U \in \homs(U, V). 
+\]
+
+\paragraph{Step 3.} Since $u = F^{-1}(v)$, where $u + \Psi(u) = v$, we have the identity
+\[
+F^{-1}(v) = v - \Psi(F^{-1}(v)).
+\]
+But $\Psi(u) = o(\|u\|_\X)$ and $F^{-1}$ is Lipschitz-continuous, so it must be that
+\[
+\Psi(F^{-1}(v))= o(\|v\|_\X).
+\]
+This shows that $F^{-1}$ is differentiable at $v = 0$ and
+\[
+\mathrm{d}F^{-1}(0) = \mathrm{Id}_\X.
+\]
+The formula for the differential at any other point follows easily because we can always compose with a translation, which is a linear map.
+
+\paragraph{Step 4.} The continuity (and thus $F^{-1} \in C^1(V,U)$) is immediate as it is a composition of continuous maps. If $F \in C^k(\X,\Y)$ we simply iterate the same argument to higher-order differentials.
+\end{proof}
+
+\brmk
+The assumption $F \in C^1(\X, \Y)$ cannot be removed, but we can drop the injectivity if both $\X$ and $\Y$ are finite-dimensional spaces.
+\ermk
+
+\bex
+Consider the nondecreasing function $\varphi: \R \to \R$ defined by
+\[
+\varphi(s) = \begin{cases} \frac{1}{n}, & s \in \left[ \frac{1}{n} - \frac{1}{4n^2}, \, \frac{1}{n} + \frac{1}{4n^2} \right],
+\\[1em] s + \mathcal{O}(s^2) & \text{as $s \to 0$}. \end{cases}
+\]
+This is a differentiable function with derivative at zero equal to $1$, but it is not injective in any neighbourhood of the origin.
+\eex
+
+On the other hand, in the infinite-dimensional setting we can easily construct an example of $F \notin C^1(\X, \Y)$ for which the local surjectivity fails.
+
+\bex
+Let $\varphi$ be as above. Let $\X = \Y = C^0([-1, 1])$, and consider the map
+\[
+F : \X \ni u \longmapsto \varphi \circ u \in \Y.
+\]
+Let $v_n \in \Y$ be the sequence defined by
+\[
+v_n(t) := \frac{1}{n} + \frac{t}{n^2}.
+\]
+It is easy to verify that $\|v_n\|_\infty \to 0$ and $v_n \notin F(\X)$. Indeed, if we could find a sequence $u_n \in \X$ such that $F(u_n) = v_n$, then one would find
+\[
+\varphi(u_n(t)) = \frac{1}{n} + \frac{t}{n^2}.
+\]
+However, it is easy to notice that
+\[ \begin{cases}
+\varphi(u_n(t)) > \frac{1}{n} & \text{if $t > 0$},
+\\[.6em] \varphi(u_n(t)) < \frac{1}{n} & \text{if $t < 0$},
+\end{cases} \]
+and, using the monotonicity of $\varphi$, this would imply that
+\[ 
+u_n(t) \geq \frac{1}{n} + \frac{1}{4n^2}
+\]
+for $t > 0$, and
+\[
+u_n(t) \leq \frac{1}{n} - \frac{1}{4n^2}
+\]
+for $t < 0$. But $v_n$ is the image of a function $u_n$ that is not continuous $t = 0$ and this gives the sought contradiction.
+\eex
+
+\brmk
+Notice that the $F$ in the previous example is differentiable at $u = 0$ with $F^\prime(0) = \mathrm{Id}_\X$, but it is not of class $C^1(\X, \Y)$.
+\ermk
+
+\subsection{Application to perturbed ODEs}
+
+We will now show how the local invertibility theorem can be applied to obtain a solution of certain ODEs/PDEs with small norm.
+
+\bex
+Let $g \in C^1(\R\times\R,\R)$ and $h \in C^0(\R,\R)$. We are interested in $T$-periodic solution of the following ODE:
+\[
+\ddot{x}(t) + g(x, \, \dot{x}) = \epsilon h(t),
+\]
+where $\epsilon$ is a parameter which controls the contribution of the perturbation $h$. To apply the local invertibility theorem we consider the following Banach spaces
+\[ \begin{aligned}
+& \X := \left\{ x \in C^2(\R, \R) \: : \: \text{$x(t + T) = x(t)$ for all $t \in \R$}\right\},
+\\ & \Y := \left\{ h \in C^0(\R, \R) \: : \: \text{$h(t + T) = h(t)$ for all $t \in \R$}\right\},
+\end{aligned}\]
+and the map $F : \X \to \Y$ defined by setting
+\[
+F(x(t)) := \ddot{x}(t) + g(x(t), \dot{x}(t)).
+\]
+We assume that $g(0, 0) = 0$ in such a way that for $\epsilon = 0$ the ODE admits the function identically zero as a solution. To apply \hyperref[thm.2.2.1]{Theorem \ref{thm.2.2.1}} with $u^\ast = 0$ we first notice that
+\[
+\dr F(x(t))[y(t)] =  \ddot{y}(t) + \left[g_{\dot{x}}(x(t), \dot{x}(t)) \dot{y}(t) + g_x(x(t), \dot{x}(t)) y(t) \right],
+\]
+which at $x(t) \equiv 0$ is equal to
+\[
+\dr F(0)[y(t)] = \ddot{y}(t) + \left[g_{\dot{x}}(0,0) \dot{y}(t)+g_x(0, 0) y(t) \right].
+\]
+By {\em Fredholm theory}, the differential $\dr F(0)$ is invertible if and only if the equation
+\[
+\ddot{y}(t) + g_{\dot{x}}(0,0) \dot{y}(t) + g_x(0, 0) y(t) = 0
+\]
+has $y(t) \equiv 0$ as the unique solution. In this case, we can find $\epsilon^\ast > 0$ and $\delta > 0$ such that for all $\epsilon < \epsilon^\ast$ the initial ODE has a unique solution $x(t)$ satisfying $\|x\|_\infty<\delta$.
+\eex
+
+\bex
+Let $\Om \subset \R^n$ be a bounded odd set with smooth boundary and consider the associated boundary-value problem
+\[ \begin{cases}
+\Delta u - \lambda u + u^3 = h(x) & \text{if $x \in \Om$},
+\\ u(x) = 0 & \text{if $x \in \partial \Om$}.
+\end{cases} \]
+We want to investigate the existence of a $C^{2,\alpha}$-solution under the assumption that $h$ is H\"{o}lder-continuous. Therefore, we consider the Banach spaces
+\[
+\X := \left\{ u \in C^{2, \alpha}(\bar{\Om}) \: : \: u \, \big|_{\partial \Omega} \equiv 0 \right\}, \quad \Y := C^{0, \alpha}(\bar{\Om}),
+\]
+and the map $F : \X \to \Y$ given by
+\[
+F(u) = \Delta u - \lambda u + u^3.
+\]
+A simple computation shows that the differential is
+\[
+\dr F(u)[v] = \Delta v - \lambda v + 3 u^2 v,
+\]
+which evaluated at the origin gives
+\[
+\dr F(0)[v] = \Delta v - \lambda v.
+\]
+If $\lambda \neq - \lambda_k(\Om)$ for all $k \in \N$, where $\{\lambda_k(\Om)\}_{k \in \N}$ are the eigenvalues of the Laplacian operator $-\Delta$ on $\Om$, then
+\[
+\dr F(0) \in \inv(\X,\Y).
+\]
+Consequently, we can apply the local invertibility theorem and conclude that for any $h \in \Y$ with $\|h\|_\Y < \delta$, there exists a unique solution $u \in \X$ with $\|u\|_\X < C(\delta)$.
+\eex
+
+\brmk
+It can be proved that any solution $u$ of
+\[ \begin{cases}
+\Delta u - \lambda u = h(x) & \text{if $x \in \Om$},
+\\ u(x) = 0 & \text{if $x \in \partial \Om$},
+\end{cases} \]
+where $h \in C^{0, \alpha}(\Om)$, satisfies an estimate of the type
+\[
+\|u\|_{2, \alpha} \leq C(n, \Om) ( \|h\|_{0, \alpha} + \|u\|_\infty).
+\]
+Removing the second term in the right-hand side is, morally, what happens when we apply the local invertibility theorem in the previous example.
+\ermk
+
+\bex
+Let $\Om \subset \R^2$ be a smooth bounded connected set. Let $\gamma$ be a smooth function defined on $\partial \Om$ and taking values in $\R$. A smooth solution of
+\[ \begin{cases}
+\M(u) := (1+u_y^2) u_{xx} + (1 + u_x^2) u_{yy} - 2 u_x u_y u_{xy} = 0
+\\ u \, \big|_{\partial\Om} \equiv \gamma
+\end{cases}\]
+is called minimal surface with boundary $\gamma$. To apply the local invertibility theorem we consider the Banach spaces
+\[
+\X := C^{2, \alpha}(\bar{\Om}), \quad \Y := C(\bar{\Om}) \times C^{2, \alpha}(\partial \Om),
+\]
+and the map $F:\X \to \Y$ defined by setting
+\[
+F(u) := \left(\M(u), u \, \big|_{\partial \Om}\right).
+\]
+It is easy to see that $F$ is $C^1$ with differential equal to
+\[
+\dr F(u)[v] = A v_{xx} + B v_{yy} - u(\dots),
+\]
+where $A = (1+u_y^2)$ and $B=(1+u_x^2)$. It turns out that
+\[
+\dr F(0)[v] = \left(\Delta v,  v \, \big|_{\partial \Om}\right),
+\]
+and by elliptic regularity theory the Dirichlet problem
+\[ \begin{cases}
+\Delta v = h(x) & \text{if $x \in \Om$}
+\\ v(x) = \varphi(x) & \text{if $x \in \partial \Om$}
+\end{cases} \]
+admits a unique solution $v$, depending continuously on the initial data, provided that $(h, \varphi) \in \Y$. Now a simple application of \hyperref[thm.2.2.1]{Theorem \ref{thm.2.2.1}} shows that there are neighbourhoods $U$ and $V$ in $\X$ and $C^{2,\alpha}(\partial \Om)$ respectively such that
+\[
+\gamma \in V \implies \text{the system has a unique solution $u_\gamma \in U$,}
+\]
+and the correspondence $\gamma \mapsto u_\gamma$ is $C^1$.
+\eex
+
+\section{The implicit function theorem}
+
+We will now show that we can extend the ``range of applicability'' of the local inversion theorem by adding an extra parameter. Namely, consider a map
+\[
+F : \Lambda \times U \longrightarrow \Y,
+\]
+where $U \subset \X$ and $\Lambda$, the set of parameters, is a subset of a Banach space $\mathfrak{T}$.
+
+\bl \index{local inversion lemma}
+Let $(\lambda^\ast, u^\ast) \in \Lambda \times U$. Suppose that the following properties hold: \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item The function $F$ and its partial derivative $F_u$ are continuous in $\Lambda \times U$.
+\item The linear operator $F_u(\lambda^\ast, u^\ast)$ is invertible.
+\end{enumerate}
+Then the map $\Psi : \Lambda \times U \to \mathfrak{T} \times \Y$ given by
+\begin{equation} \label{eq.13.1}
+\Psi(\lambda, u) := \left(\lambda, F(\lambda, u)\right)
+\end{equation}
+is locally invertible at $(\lambda^\ast, u^\ast)$ and its inverse $\Phi$ is continuous.
+\el
+
+\brmk
+The local inverse $\Phi$ belongs to $C^1$ if $F \in C^1$.
+\ermk
+
+\begin{proof}
+Assume that $F \in C^1(\Lambda \times U, \Y)$ and introduce the symbols
+\[
+A:= F_\lambda(\lambda^\ast, u^\ast) \quad \text{and} \quad B:= F_u(\lambda^\ast, u^\ast).
+\]
+The map $\Psi$ belongs to $C^1$ (check!) and its differential is
+\[
+\dr\Psi(\lambda^\ast, u^\ast)[\xi, v] = (\xi, A\xi + B v).
+\]
+It is easy to verify that
+\[
+\dr \Psi(\lambda^\ast, u^\ast)[\xi, v] = (\eta, v) 
+\]
+yields $\eta = \xi$ and, since $B$ is invertible by assumption, there is a unique $v$ given by
+\[
+v = B^{-1}(v - A \eta).
+\]
+It follows that $\dr \Psi(\lambda^\ast, u^\ast)$ is invertible so the conclusion follows from a straightforward application of \hyperref[thm.2.2.1]{Theorem \ref{thm.2.2.1}} (which also gives $\Phi \in C^1)$.
+\end{proof}
+
+\brmk
+The function $\Psi$ has a local inverse $\Phi$ defined in a neighbourhood $\Theta \times V$ of $(\lambda^\ast, F(\lambda^\ast, u^\ast))$ of the form
+\begin{equation} \label{eq.13.2}
+\Phi(\lambda, v) = (\lambda, \varphi(\lambda, v)).
+\end{equation}
+The function $\varphi : \Theta \times V \to \X$ is uniquely determined by
+\begin{equation} \label{eq.13.3}
+F(\lambda, \varphi(\lambda, v)) = v \quad \text{for all $\lambda \in \Theta$},
+\end{equation}
+and hence $\varphi \in C^1$ has partial derivatives given by
+\[ \begin{aligned}
+& F_\lambda + F_u \circ \varphi_\lambda = 0,
+\\ & F_u \circ \varphi_v = \mathrm{Id},
+\end{aligned} \quad \implies \quad
+\begin{aligned} &\varphi_\lambda = - [F_u]^{-1} \circ F_\lambda,
+\\ &\varphi_v = [F_u]^{-1}.
+\end{aligned}\]
+\ermk
+
+\brmk
+The existence of a local inverse $\Phi$ of $\Psi$ can be obtained in a more general setting, requiring e.g. $\mathfrak{T}$ topological space.
+\ermk
+
+\bthm[Implicit Function]\index{implicit function theorem} \label{thm.2.3.2}
+Let $F \in C^k(\Lambda \times U, \Y)$, $k \geq 1$. Suppose that
+\[
+F(\lambda^\ast, u^\ast) = 0
+\]
+and $F_u(\lambda^\ast, u^\ast)$ invertible. Then there is a neighbourhood $\Theta \times U^\ast$ of $(\lambda^\ast,u^\ast)$ and $g \in C^k(\Theta, \X)$ satisfying the following properties: \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item For all $\lambda \in \Theta$ there results $F(\lambda, g(\lambda)) = 0$.
+\item If $(\lambda, u) \in \Theta \times U^\ast$ is such that $F(\lambda, u)= 0$, then $u = g(\lambda)$.
+\item If $\lambda \in \Theta$ and $p = (\lambda, g(\lambda))$, then
+\[
+g^\prime(\lambda) = - [F_u(p)]^{-1} \circ F_\lambda(p).
+\]
+\end{enumerate}
+\ethm
+
+\begin{proof}
+Let $\Psi$ be the function defined by \eqref{eq.13.1}. Then $\Psi$ is locally invertible at $(\lambda^\ast, u^\ast)$ and it satisfies
+\[
+\Psi(\lambda^\ast, u^\ast) = (\lambda^\ast, F(\lambda^\ast, u^\ast)) = (\lambda^\ast, 0).
+\]
+The local inverse $\Phi$ satisfies \eqref{eq.13.2} and it is rather easy to verify that $\varphi$ is of class $C^k$, provided that $F$ is $C^k$. Now set
+\[
+g(\lambda) := \varphi(\lambda, 0)
+\]
+and use \eqref{eq.13.3} to infer that
+\[
+F(\lambda, g(\lambda)) = F(\lambda, \varphi(\lambda, 0)) = 0 \quad \text{for all $\lambda \in \Theta$}.
+\]
+This concludes the proof of ({\romannumeral 1}). The assertion ({\romannumeral 2}) follows from the fact that $\Phi$ is one-to-one and ({\romannumeral 3}) has been proved already in the previous remark.
+\end{proof}
+
+\subsection{Application to perturbed differential systems}
+
+Let $f \in C^1(\R \times \R \times \R^n, \R^n)$ be a periodic function. Namely, there exists a positive time $T$ such that the following holds:
+\[
+f(\epsilon, t + T, x) = f(\epsilon, t, x).
+\]
+Our goal is to investigate periodic solutions of the $\epsilon$-perturbed differential system
+\begin{equation} \label{eq.a.1} \tag{$P_\epsilon$}
+\dot{x}(t) = f(\epsilon, t, x(t)).
+\end{equation}
+We shall always assume that for $\epsilon = 0$ there exists a $T$-periodic solution, which will be denoted by $y(t)$. Consider the Cauchy problem
+\[ \begin{cases}
+\dot{\alpha}(t) = f(\epsilon, t, \alpha(t)),
+\\ \alpha(0) = \xi.
+\end{cases}\]
+We assumed $f$ to be differentiable so by Cauchy-Lipschitz we know we can always find a unique solution $\alpha$ which is defined in a small neighbourhood of the initial value, that is,
+\[
+|\xi - \xi^\ast| < \delta \quad \text{where $\xi^\ast = y(0)$}.
+\]
+Moreover, we know that
+\[
+A(\epsilon, t, \xi) := \partial_\xi \alpha
+\]
+is the $n\times n$ matrix solving the Cauchy problem
+\[ \begin{cases}
+\dot{A} = f_x(\epsilon, t, \alpha)A,
+\\ A(\epsilon, 0, \xi) = \mathrm{Id}_{\R^n}.
+\end{cases} \]
+In what follows, we shall always denote by $A_0(t)$ the matrix $A(0, t, y(0))$.
+
+\bthm
+Under these assumptions, if $\lambda = 1$ is not in the spectrum of $A_0(t)$, then there are $\delta > 0$ and $\xi \in C^1( (-\delta, \, \delta))$, $\xi(0) = \xi^\ast$ such that
+\[
+|\epsilon| < \delta \implies \text{there exists a unique $T$-periodic solution of \eqref{eq.a.1}}.
+\]
+\ethm
+
+\begin{proof}
+The Cauchy problem \eqref{eq.a.1} has a $T$-periodic solution if and only if there exists $\xi \in \R^n$ such that $
+\alpha(\epsilon, \, T, \, \xi) = \xi$. Thus, introducing the map $F:\R \times \R^n \to \R^n$ defined by
+\[
+F(\epsilon, \xi) := \alpha(\epsilon, T, \xi) - \xi,
+\]
+we are interested in solving the equation $F(\epsilon,\xi) = 0$. The function $F$ is $C^1$ and, since $\alpha(0, t, \xi^\ast) = y(t)$ and $y$ is $T$-periodic, it turns out that
+\[
+F(0, \xi^\ast) = \alpha(0, T, \xi^\ast) - \xi^\ast = y(T) - \xi^\ast = 0.
+\]
+We conclude applying \hyperref[thm.2.3.2]{Theorem \ref{thm.2.3.2}} since
+\[
+F_\xi(0, \xi^\ast) = \alpha_\xi(0, T, \xi^\ast) - \mathrm{Id} =A_0(t) - \mathrm{Id},
+\]
+and the right-hand side is invertible because $1$ is not in the spectrum of $A_0(t)$ by assumption.
+\end{proof}
+
+The autonomous case - $f$ does not depend on $t$ directly - is more delicate and requires additional efforts. Consider the system
+\begin{equation} \label{eq.b.1}
+\dot{x}(t) = f(\epsilon, x(t)),
+\end{equation}
+and notice that the period of a solution of \eqref{eq.b.1} is, a priori, unknown. Let $f(x) := f(0, x)$ and assume that $f \in C^1(\R^n, \R^n)$ satisfies the following property:
+\[
+\epsilon = 0 \implies \text{\eqref{eq.b.1} has a nonconstant $T$-periodic solution $y = y(t)$.}
+\]
+Without loss of generality we can assume $y(0) = 0$.
+
+\brmk
+It is important to notice that the previous theorem does not apply here because $1$ always belongs to the spectrum of $A_0(T)$. Indeed, $A_0$ satisfies
+\[ \begin{cases}
+\dot{A_0} = f^\prime(y(t))A_0,
+\\ A_0(0) = \mathrm{Id}_{\R^n}.
+\end{cases} \]
+To see this, we differentiate the relation $y' = f(y)$ and find that
+\[
+y''(t) = f'(y(t)) y'(t),
+\]
+which can be rewritten via $v := y'$ as
+\[
+v' = f'(y) v.
+\]
+Let $v^\ast = v(0)$ and $w(t) = A_0(t) v^\ast$. It follows that
+\[ \begin{cases}
+w' = \dot{A_0}v^\ast = f'(y(t))A_0(t) v^\ast = f'(y) w,
+\\ w(0) = v^\ast.
+\end{cases}\]
+By the uniqueness of the Cauchy problem, the only possibility is that $v \equiv w$. In particular, there results $w(T) = w(0)$ and consequently
+\[
+A_0(T) v^\ast = w(0) = v^\ast \implies 1 \in \sigma(A_0(T)). 
+\]
+\ermk
+
+\bthm
+Under these assumptions, if $\lambda = 1$ is a simple eigenvalue for $A_0(T)$, then there are continuous maps $h=h(\epsilon)$ and $\tau = \tau(\epsilon)$ such that
+\[
+h(0) = y(0), \quad \tau(0) = T,
+\]
+and \eqref{eq.b.1} has a $\tau(\epsilon)$-periodic solution $y_\epsilon$ satisfying $y_\epsilon(0) = h(\epsilon)$. \ethm

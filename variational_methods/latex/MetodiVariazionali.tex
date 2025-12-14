@@ -1,0 +1,358 @@
+\title{Variational Methods  - Lecture Notes}
+\author{Francesco Paolo Maiale
+        }
+        
+\documentclass[a4paper,10 pt]{report}
+
+%Graphics/Geometry Packages
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[labelfont=bf]{caption}
+\usepackage[pass]{geometry}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+
+%AMS Packages
+\usepackage{amsthm, amsmath, amssymb, amsfonts}
+
+%Language Packages
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{etoolbox} 
+
+\patchcmd{\part}{plain}{empty}{}{}
+
+%Mathematics Packages
+\usepackage{setspace}
+%\usepackage{mathabx}
+\usepackage{faktor}
+\usepackage{mathrsfs}  
+\usepackage{enumitem}
+\usepackage{mathtools}
+%\usepackage{accents}
+%\usepackage{pifont}
+%\usepackage{mwe}
+%\usepackage{bbm}
+\usepackage{PTSansNarrow}
+\usepackage[T1]{fontenc}
+%\usepackage{epigraph}
+
+%Misc Packages
+\usepackage{scalerel}[2014/03/10]
+\usepackage[usestackEOL]{stackengine}
+\usepackage{ragged2e}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{marginnote}
+\usepackage{xparse}
+\usepackage{hyperref}
+\usepackage{comment}
+
+%TIKZ Packages
+\usepackage{tikz-cd}
+\usepackage{tikzpagenodes}
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\usetikzlibrary{plotmarks}
+
+\usepackage{refcheck}
+
+\usepackage{makeidx}
+
+\usepackage[Sonny]{fncychap}
+
+\makeindex %DDD
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+
+\DeclareRobustCommand\longtwoheadrightarrow
+     {\relbar\joinrel\twoheadrightarrow}
+
+\newcommand{\notimplies}{%
+  \mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
+  
+\pagestyle{plain}
+\setlength{\topmargin}{0.0in}
+\setlength{\headheight}{0.2in}
+\setlength{\headsep}{0.2in}
+\setlength{\footskip}{0.5in}
+\setlength{\footnotesep}{0.15in}
+\setlength{\textheight}{8.3in}
+\setlength{\textwidth}{5.5in} % 6
+\setlength{\oddsidemargin}{0.5in}
+\setlength{\evensidemargin}{0.5in}
+\setlength{\parindent}{0.2 in}
+\setlength{\parskip}{0.1 in}
+\setlength{\marginparwidth}{1.2 in}
+\linespread{1.1} 
+
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+\newtheorem{exercise}{Exercise}[chapter]
+
+\newtheorem{innercustomthm}{Theorem}
+\newenvironment{customthm}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+
+\newcommand{\smallO}[1]{\scriptstyle\mathcal{O}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand*\conj[1]{\overline{#1}}
+\newcommand{\R}{\mathbb R}
+
+\definecolor{darkjunglegreen}{rgb}{0.1, 0.14, 0.13}
+\newcommand{\C}{\mathbb C}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cN}{\mathcal N}
+\newcommand{\scC}{\mathscr C}
+\newcommand{\scH}{\mathscr H}
+\newcommand{\N}{\mathbb N}
+\newcommand{\G}{\mathcal G}
+\newcommand{\Om}{\Omega}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\con}{\mathcal{C}\left(x, \, V, \, \alpha \right)}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\D}{\mathcal D}
+\newcommand{\B}{\mathcal B}
+\newcommand{\M}{\mathcal M}
+\newcommand{\p}{\mathcal P}
+\newcommand{\X}{\mathfrak X}
+\newcommand{\cH}{\mathcal H}
+\newcommand{\cA}{\mathcal A}
+\newcommand{\e}{\rm e}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\cG}{\mathcal G}
+\newcommand{\cL}{\mathcal L}
+\newcommand{\dr}{\mathrm d}
+\newcommand{\scM}{\mathscr M}
+\newcommand{\inv}{\mathrm {Inv}}
+\newcommand{\homs}{\mathrm {Hom}}
+\newcommand{\T}{\mathbb T}
+\newcommand{\Y}{\mathfrak Y}
+\newcommand{\Le}{\mathcal{L}}
+\newcommand{\divs}{\mathrm{div}}
+\newcommand{\can}{\symbol{35}}
+\newcommand*{\double}[2][.1ex]{%
+  \mathrel{\vcenter{\offinterlineskip%
+  \hbox{$#2$}\vskip#1\hbox{$#2$}}}}
+\newcommand*{\doublerightarrow}{\double{\longrightarrow}}
+
+\newcommand{\restr}{%
+  \,\raisebox{-.127ex}{\reflectbox{\rotatebox[origin=br]{-90}{$\lnot$}}}\,%
+}
+
+\newcommand{\bd}{\begin{definition}}
+\newcommand{\ed}{\end{definition}}
+\newcommand{\bl}{\begin{lemma}}
+\newcommand{\el}{\end{lemma}}
+\newcommand{\bthm}{\begin{theorem}}
+\newcommand{\ethm}{\end{theorem}}
+\newcommand{\bpr}{\begin{proposition}}
+\newcommand{\epr}{\end{proposition}}
+\newcommand{\brmk}{\begin{remark}}
+\newcommand{\ermk}{\end{remark}}
+\newcommand{\bcor}{\begin{corollary}}
+\newcommand{\ecor}{\end{corollary}}
+\newcommand{\bex}{\begin{example}}
+\newcommand{\eex}{\end{example}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% Caution Form Code START
+
+\newcounter{mycaution}
+\newcommand\pointeranchor{}
+\newcommand\boxanchor{}
+\newlength\boxvshift
+\newlength\uppertrianglecorner
+
+\newcommand\tikzmark[1]{%
+  \tikz[remember picture,overlay]\node[inner xsep=0pt,outer sep=0pt] (#1) {};}
+
+\NewDocumentCommand{\caution}{O{c}O{BrickRed}O{Caution!}m}{%
+\stepcounter{mycaution}%
+\tikzmark{\themycaution}%
+\if#1b\relax
+\renewcommand\pointeranchor{mybox\themycaution.south east}%
+\renewcommand\boxanchor{south east}%
+\setlength\boxvshift{-10pt}%
+\setlength\uppertrianglecorner{13pt}%
+\else
+\if#1t\relax
+\renewcommand\pointeranchor{mybox\themycaution.north east}%
+\renewcommand\boxanchor{north east}%
+\setlength\boxvshift{10pt}%
+\setlength\uppertrianglecorner{-7pt}%
+\else
+\if#1c\relax
+\renewcommand\pointeranchor{mybox\themycaution.east}%
+\renewcommand\boxanchor{east}%
+\setlength\boxvshift{0pt}%
+\setlength\uppertrianglecorner{3pt}%
+\fi\fi\fi%
+\begin{tikzpicture}[remember picture,overlay]
+\node[draw=#2,anchor=\boxanchor,xshift=-\marginparsep,yshift=\boxvshift]   
+  (mybox\themycaution)
+  at ([yshift=3pt]current page text area.west|-\themycaution) 
+  {\parbox{\marginparwidth}{\vskip10pt\RaggedRight\small#4}};
+\node[fill=white,font=\color{#2}\sffamily,anchor=west,xshift=7pt]
+  at (mybox\themycaution.north west) {\ #3\ };
+\fill[#2]
+  ([yshift=\uppertrianglecorner]\pointeranchor) --
+  ([yshift=\uppertrianglecorner-3pt,xshift=3pt]\pointeranchor) --
+  ([yshift=\uppertrianglecorner-6pt]\pointeranchor) -- cycle;
+\end{tikzpicture}%
+}
+
+%% Caution Form Code END
+
+\definecolor{deepjunglegreen}{rgb}{0.0, 0.29, 0.29}
+
+\newcommand{\bsquare}{\item[\color{magenta}\ding{110}]} 
+\newcommand{\barrow}{\item[\color{blue}\ding{228}]}
+\newcommand{\bwarrow}{\item[\color{gray}\ding{227}]}
+
+\def\dashint{\,\ThisStyle{\ensurestackMath{%
+  \stackinset{c}{.2\LMpt}{c}{.5\LMpt}{\SavedStyle-}{\SavedStyle\phantom{\int}}}%
+  \setbox0=\hbox{$\SavedStyle\int\,$}\kern-\wd0}\int}
+\def\ddashint{\,\ThisStyle{\ensurestackMath{%
+  \stackinset{c}{.2\LMpt}{c}{.5\LMpt+.2\LMex}{\SavedStyle-}{%
+    \stackinset{c}{.2\LMpt}{c}{.5\LMpt-.2\LMex}{\SavedStyle-}{%
+      \SavedStyle\phantom{\int}}}}\setbox0=\hbox{$\SavedStyle\int\,$}\kern-\wd0}\int}
+
+
+\fancyhf{}
+% Put the page number at the right edge of odd pages, and left edge of even pages.
+\fancyhead[LO,RE]{\textbf \thepage}
+% Custom text at the left edge of odd pages, and right edge of odd pages.
+\fancyhead[RO]{ \slshape\nouppercase{\rightmark}}
+\fancyhead[LE]{ \slshape\nouppercase{\leftmark}}
+
+% Repeat for \fancyfoot if needed, e.g.
+% Some decorative symbol at the centre of both odd and even pages
+\fancyfoot[C]{ }
+
+% Set this length to 0pt if you don't want any lines!
+\renewcommand{\headrulewidth}{1pt}
+
+
+% Apply the fancy header style
+\pagestyle{fancy}
+
+\begin{document}
+\newpage \thispagestyle{empty}
+
+\begin{center}
+
+\begin{spacing}{1.5}
+{\huge  \sf Lecture Notes}\\
+\vspace*{\fill}
+\end{spacing}
+\begin{spacing}{2.5}
+\textbf{\huge Variational Methods}\\[0.5cm]
+\vspace*{\fill}
+\begin{minipage}{5cm}
+\centering {\textit{Course held by}}
+\end{minipage}
+\hspace*{\fill}
+\begin{minipage}{5cm}
+\centering {\textit{Notes written by}} \\
+\end{minipage}
+\end{spacing}
+
+\begin{spacing}{1.3}
+
+\begin{minipage}{5cm}
+\centering {\textbf{\large Prof. Andrea Malchiodi}}
+\end{minipage}
+\hspace*{\fill}
+\begin{minipage}{5cm}
+\centering {\textbf{\large Francesco Paolo Maiale}}
+\end{minipage}
+
+\vspace*{\fill}
+
+\textnormal{\large Scuola Normale, Pisa \\[0.4em] \today}
+
+\end{spacing}
+\end{center}
+
+\newpage \thispagestyle{empty}
+\begin{center}
+\vspace*{1cm}
+\begin{spacing}{2.5}
+ {
+\textbf{\huge Disclaimer}
+}
+\end{spacing} \end{center}
+
+\begin{spacing}{1.2}
+I wrote these notes to summarise the content of the course on Variational Methods, held by Professor Andrea Malchiodi at SNS.
+
+I tried to include all the topics that were discussed in class and combine it with some additional information from several other courses to produce a self-contained document.
+
+I will try to review them periodically, but I am sure that at the end there will be a large number of mistakes and oversights. To report them, feel free to send me an email at \textbf{francesco (dot) maiale (at) sns (dot) it}.
+\end{spacing}
+
+
+{ \setlength{\parskip}{0.05 in}
+
+\clearpage                       % Otherwise \pagestyle affects the previous page.
+{                                % Enclosed in braces so that re-definition is temporary.
+  \pagestyle{empty}              % Removes numbers from middle pages.
+  \fancypagestyle{plain}         % Re-definition removes numbers from first page.
+  {
+    \fancyhf{}%                       % Clear all header and footer fields.
+    \renewcommand{\headrulewidth}{0pt}% Clear rules (remove these two lines if not desired).
+    \renewcommand{\footrulewidth}{0pt}%
+  }
+  \tableofcontents
+  \thispagestyle{empty}          % Removes numbers from last page.
+}}
+
+\part{Nonlinear Analysis}
+
+\include{Introduction}
+\include{Inversione}
+\include{InversioneGlobale}
+
+\part{Variational Methods}
+
+\include{CriticalPoints}
+\include{PalaisSmale}
+\include{MountainPassTheorem}
+\include{LS-Cat}
+\include{Krasnl}
+
+\part{Applications to Differential Geometry}
+
+\include{Geod}
+\include{Geod2}
+
+\printindex
+
+\bibliographystyle{siam}
+\addcontentsline{toc}{chapter}{Bibliography} \markboth{Bibl}{}
+\bibliography{bibs}{} % BIBLIOGRAFIA
+\end{document}

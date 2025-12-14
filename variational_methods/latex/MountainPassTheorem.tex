@@ -1,0 +1,582 @@
+ \chapter{Min-max Methods} \thispagestyle{empty}
+
+In this chapter, we will discuss the existence of stationary point of a function $J$, defined on a Hilbert space $\X$, which can be found via different min-max procedures.
+
+\section{The mountain pass theorem}
+
+We proved that \eqref{eq.m.1} admits a positive solution, provided that $f$ satisfies certain assumptions including a growth condition
+\[ h(su) \leq s^\alpha h(u), \]
+that holds at all point $u \in \X$. A natural question is whether or not we can prove a similar result when the behaviour of $f$ is only known at the origin and at infinity. To deal with this problem, we consider the corresponding functional
+\[ J(u) = \frac{1}{2} \|u\|^2 - \int_\Omega F(u) \, \mathrm{d}x, \]
+with $\| \cdot \| = \| \cdot \|_\X$ and $\X = H_0^1(\Omega)$. It is easy to verify that $u = 0$ is a proper local minimum for $J$ since, assuming that $f^\prime(0) = 0$, we have
+\[ f^\prime(0) = 0 \implies \langle J^{\prime \prime}(0) v, \, v)_\X = \|v\|^2. \]
+On the other hand, if we assume that $F(u) \sim |u|^{p+1}$, $1 < p < \frac{n+2}{n-2}$, then for any $u \in \X$ that is different from zero we find that
+\[ \lim_{t \to + \infty} J(tu) = \lim_{t \to + \infty} \left[ \frac{t^2}{2} \|u\|^2 - \int_\Omega F(tu) \, \mathrm{d}x \right] = - \infty. \]
+In particular, the functional $J$ is not bounded from below on $\X$. We also notice that
+\[ \sup_\X J = + \infty \]
+since we can always consider a sequence of function $\|u_i\| \to + \infty$ with $\int_\Omega F(u_i) \, \mathrm{d}x$ uniformly bounded. Now to fix the ideas, consider the model nonlinearity so that
+\[ J(tu) = \frac{1}{2} t^2 \|u\|^2 - \frac{1}{p+1} |t|^{p+1} \int_\Omega |u|^{p+1} \, \mathrm{d}x. \]
+The real valued map $t \mapsto J(tu)$ achieves its maximum at a unique point $t =t_u > 0$ and, as expected, it is determined by the fact that
+\[ tu \in \mathcal{M} := \{ u \in \X \setminus \{0\} \: : \: \langle J^\prime(u), \, u \rangle = 0 \}, \]
+where $\mathcal{M}$ is the natural constraint introduced many times before. If $z$ is a critical point for $J$, we know that $J(z)$ is equal to the minimum value of $J$ achieved on $\mathcal{M}$, and thus
+\[ J(z) = \min_{u \in \X \setminus \{0\} } \max_{t \in \R} J(tu). \]
+The main goal of this section is to generalise this argument and to find optimal assumptions that allow one to find critical points of a functional $J$ via a max-min procedure.
+
+In the sequel, to fix the notation, we will assume that $J$ has a local minimum at $u = 0$, but it is important to understand that this is a totally arbitrary choice. \mbox{}
+\begin{enumerate}[label={\color{blue}$\mathbf{(\mathrm{MP}-\arabic*)}$},leftmargin=5\parindent]
+\item The functional $J$ belongs to $C^1(\X,\, \R)$, $J(0) = 0$ and there are $r, \, \rho > 0$ such that $J(u) \geq \rho$ for all $u \in S_r$.
+\item There exists $e\in \X$ with $\|e\| > r$ such that $J(e) \leq 0$.
+\end{enumerate}
+We will show that these assumptions on the geometry of $J$ are almost enough for the existence of a saddle point. Let
+\[ \Gamma := \{ \gamma \in C([0, \, 1], \, \X) \: : \: \gamma(0) = 0, \, \gamma(1) = e \} \]
+be the set of all continuous curves connecting $0$ and $e$ and notice that it is nonempty since
+\[ t \longmapsto te \]
+trivially belongs to $\Gamma$. We define the \textit{MP level} as
+\begin{equation} \label{eq.n.1} c := \inf_{\gamma \in \Gamma} \max_{t \in [0, \, 1]} J(\gamma(t)). \end{equation}
+If $J$ is a functional that has the \textit{MP geometry}, which means that it satisfies the two assumptions above, then it is easy to see that
+\[ \gamma \in \Gamma \implies \gamma([0, \, 1]) \cap S_r \neq \varnothing \implies c \geq \min_{u \in S_r} J(u) \geq \rho > 0, \]
+so if we were to find a critical point $u$ at the level $c$, we could immediately conclude that it is not trivial ($u \neq 0$). The following result is due to Ambrosetti and Rabinowitz in 1973.
+
+\begin{theorem}[Mountain Pass] \label{thm.n.1}Let $J$ be a functional satisfying {\color{blue}$\mathbf{(\mathrm{MP}-1)}$} and {\color{blue}$\mathbf{(\mathrm{MP}-2)}$}. Suppose that the Palais-Smale condition at the level $c$ given by \eqref{eq.n.1} holds. Then
+\[ \exists z \in \X \: : \: J(z) = c, \, \nabla J(z) = 0\]
+and $z$ is nontrivial, that is, $z \neq 0$. \end{theorem}
+
+To prove this result, we first need a technical lemma which gives us the existence of a particular deformation of the sublevels of $J$ that keeps a good portion of them fixed.
+
+\begin{lemma} \label{lemma.n.1} Let $J \in C^1(\X, \, \R)$ and let $c \in \R$ be any noncritical value for $J$. Suppose that the Palais-Smale condition at the level $c$ holds for $J$. Then there are $\delta > 0$ with $c - 2 \delta > 0$ and $\eta$ deformation in $\X$ such that: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $\eta(J^{c+\delta}) \subseteq J^{c-\delta}$;
+\item $\eta$ restricted to $J^{c-2\delta}$ coincides with the identity map.
+\end{enumerate} \end{lemma}
+
+\begin{proof}Recall that $J$ always admits a $\Psi$-gradient flow $V$ for $J$, that is defined at all points $u \in \X$ such that $\nabla J(u) \neq 0$, with the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item $ \|V(u) \| \leq 2 \| \nabla J(u) \|$;
+\item $ \langle V(u), \, \nabla J(u) \rangle_\X \geq \| \nabla J(u) \|^2$.
+\end{enumerate}
+Let $b \in C^{0, \, 1}(\R^+, \, \R^+)$ be the Lipschitz function defined by setting
+\[ b(s) := \begin{cases} 1 & \text{if $s \in (0, \, 1]$},
+\\[.8em] \frac{1}{s} & \text{if $s \geq 1$}. \end{cases}\]
+Let $A := \{ u \in \X \: : \: J(u) \in [c-\delta, \, c + \delta]$, $B := \{u \in \X \: : \: J(u) \in (c-2 \delta, \, c + 2 \delta)^c \}$ and define the Lipschitz function from $\X$ to $\R$ given by
+\[ g(u) := \frac{ d_\X(u, \, B) }{d_\X(u, \, A) + d_\X(u, \, B)} \in [0, \, 1].\]
+Notice that $g$ is equal to zero if and only if $u \in B$ and equal to one if and only if $u \in A$. We can consider a slightly modified vector field as flow
+\[ \widetilde{V}(u) := - g(u) b( \| \nabla J(u) \|) V(u). \]
+There are several vantages in replacing $V$ with $\widetilde{V}(u)$. First, it is well-defined everywhere (even where the differential of $J$ vanishes), the boundedness of $b$ gives the global existence of $\eta$ and it is locally Lipschitz. Consider the solution of
+\[ \begin{cases} \alpha^\prime(t) = \widetilde{V}(\alpha(t)), \\[0.6em] \alpha(0) = u, \end{cases} \]
+and notice that the following properties are satisfied: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item If $u \in B$, the $\widetilde{V}(u) = 0$ and thus $\alpha(t, \, u) = u$ at all times $t \in \R^+$.
+\item The solution $\alpha$ is globally defined and $\| \widetilde{V}(u) \| \leq 2$.
+\item The function $t \mapsto J(\alpha(t, \, u))$ is non-increasing since
+\[ \begin{aligned} \frac{\mathrm{d}}{\mathrm{d}t} J(\alpha(t, \, u)) & = - g(\alpha) b( \| \nabla J(\alpha) \|) \langle \nabla J(\alpha), \, V(\alpha)\rangle_\X \leq
+\\[1em] & \leq - g(\alpha) b(\| \nabla J(\alpha) \|) \| \nabla J(\alpha) \|^2 \leq 0. \end{aligned} \]
+\end{enumerate}
+Now let $\delta > 0$ be such that
+\[ J(u) \in [c-\delta, \, c+ \delta] \implies \| \nabla J(u) \| \geq \delta, \]
+and suppose that $c - 2 \delta > 0$. Let $T = \frac{2}{\delta}$ and define the deformation by setting
+\[ \eta(u) := \alpha(T, \, u). \]
+Then \textbf{(b)} trivially holds true, so we only need to check that $\eta$ satisfies \textbf{(a)}. For this, let $u \in J^{c+\delta}$ and suppose that $\eta(u) \notin J^{c-\delta}$. It follows that
+\[ J(\alpha(t, \, u)) \in [c- \delta, \, c+\delta] \quad \text{for all $t \in [0, \, T]$}, \]
+and hence $\alpha(t, \, u)$ belongs to $A$ for $t$ in the same interval. Using the definition of $g$ we infer that
+\[ g(\alpha(t,\, u)) = 1 \quad \text{for all $t \in [0, \, T]$}, \]
+so
+\[ \begin{aligned} J(\eta(u)) - J(u) & = - \int_0^T b( \| \nabla J(\alpha(t, \, u)) \|) \langle \nabla J(\alpha(t, \, u)), \, V(\alpha(t,\, u)) \rangle_\X \, \mathrm{d}t \leq
+\\[1em] & \leq - \int_0^T b( \| \nabla J(\alpha(t, \, u)) \|) \|\nabla J(\alpha(t, \, u)) \|^2 \, \mathrm{d}t \leq
+\\[1em] & \leq - \int_0^T \delta^2 \, \mathrm{d}t = - 2 \delta, \end{aligned} \]
+and this gives a contradiction since
+\[ J(\eta(u)) \leq J(u) - 2\delta \leq c + \delta - 2\delta = c -\delta \implies \eta(u) \in J^{c-\delta}.\]\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm.n.1}] We argue by contradiction. Suppose that the MP level $c$ is not critical and let $\eta$ be the deformation given by \hyperref[lemma.n.1]{Lemma \ref{lemma.n.1}}. Now notice that
+\[ 0, \, e \in J^0 \implies 0, \, e \in J^{c - 2 \delta} \implies \left( \gamma \in \Gamma \implies \eta \circ \gamma \in \Gamma \right), \]
+so $\eta$ associates a curve in $\Gamma$ to any curve in $\Gamma$. Recall that
+\[ c = \inf_{\gamma \in \Gamma} \max_{t \in [0, \, 1]} J(\gamma(t)), \]
+so for any $\delta > 0$ we can find $\gamma \in \Gamma$ such that
+\[ \max_{t \in [0, \, 1]} J(\gamma(t)) \leq c + \delta. \]
+The deformation $\eta$ maps $\gamma([0, \, 1])$ into $J^{c-\delta}$ so
+\[ \max_{t \in [0, \, 1]} J(\eta \circ \gamma(t)) \leq c - \delta, \]
+and this is a contradiction since $c$ is the infimum value and yet $\eta \circ \gamma \in \Gamma$.
+\end{proof}
+
+\begin{remark}We cannot remove the assumption that $J$ satisfies the Palais-Smale condition at the MP level $c$. Indeed, it is easy to find a counterexample in $\R^2$ for which $J$ has the MP geometry but there are not critical points except for $(0, \, 0)$. Namely, let
+\[ J(x, \, y) = x^2 + (1-x)^3 y^2, \]
+and notice that {\color{blue}$\mathbf{(\mathrm{MP}-1)}$} is satisfied with $r = \frac{1}{2}$ and $\rho = \frac{1}{32}$, while {\color{blue}$\mathbf{(\mathrm{MP}-2)}$} is satisfied with $e = (2, \, 2)$.\end{remark}
+
+\section{Application to the Dirichlet problem}
+
+In this section, we will exploit the theoretical results presented above to prove existence of a positive solution to a class of Dirichlet boundary-value problems:
+\begin{equation} \mathbf{\tag{D}} \label{eq.n.2} \begin{cases} - \Delta u(x) = f(u(x)) & \text{if $x\in \Omega$}, \\[0.8em] u(x) = 0 & \text{if $x \in \partial \Omega$}. \end{cases} \end{equation}
+We assume $\Omega$ to be a smooth bounded domain in $\R^n$ and $f$ a function satisfying the following assumptions:
+\begin{enumerate}[label=\textbf{\color{orange}($f_{\arabic*}$)},leftmargin=3\parindent]
+\item $f$ is Carathéodory;
+\item $|f(x, \, u)| \leq a + b |u|^p$ for some $1 < p < \frac{n+2}{n-2}$;
+\item $ \lim_{|u|\to0^+} \frac{f(x, \, u)}{|u|} = \lambda \in \R$ uniformly with respect to $x \in \Omega$;
+\item there exists $r > 0$ and $\theta \in (0, \, \frac{1}{2})$ such that
+\begin{equation} \label{eq.n.3} 0 < F(x, \, u) \leq \theta u f(x, \, u) \end{equation}
+for all $u$ with norm $\|u\| \geq R$.
+\end{enumerate}
+
+\begin{lemma} If $f$ satisfies the property \textbf{\color{orange}($f_{4}$)}, then
+\begin{equation} \label{eq.n.4} F(u) \geq \frac{1}{c} u^{\frac{1}{\theta}} - c \quad \text{for all $u \geq R$}. \end{equation}  \end{lemma}
+
+\begin{lemma} If $\lambda < \lambda_1(\Omega)$, then {\color{blue}$\mathbf{(\mathrm{MP}-1)}$} holds.\end{lemma}
+
+\begin{proof}Fix $\epsilon := \frac{1}{2}(\lambda_1 - \lambda) > 0$. The assumptions on $f$ allows us to find a constant $A \in \R$ such that
+\[ F(x, \, u) \leq \frac{1}{2}(\lambda + \epsilon) u^2 + A |u|^{p+1}.\]
+Now integrate and use Sobolev embedding to infer that
+\[ \begin{aligned} \left| \int_\Omega F(x, \, u) \, \mathrm{d}x \right| & \leq \frac{1}{2}(\lambda + \epsilon) \|u\|_{L^2(\Omega)}^2 + A \|u\|_{L^{p+1}(\Omega)}^{p+1} \leq
+\\[1em] & \leq  \frac{1}{2}(\lambda + \epsilon) \|u\|_{L^2(\Omega)}^2 + A^\prime \|u\|^{p+1}\end{aligned}\]
+so that the functional can be estimated by
+\[ J(u) \geq \frac{1}{2} \|u\|^2 - A^\prime \|u\|^{p+1} -  \frac{1}{2}(\lambda + \epsilon) \|u\|_{L^2(\Omega)}^2. \]
+We now recall that
+\[  \|u\|_{L^2(\Omega)}^2 \geq \frac{1}{\lambda_1} \|u\|^2 \]
+so
+\[ J(u) \geq \frac{1}{2}\left( \frac{\lambda_1-\lambda-\epsilon}{\lambda_1}\right) \|u\|^2 - A^\prime \|u\|^{p+1}, \]
+and the first term is multiplies a positive constant.\end{proof}
+
+\begin{lemma}Under no extra assumpions {\color{blue}$\mathbf{(\mathrm{MP}-2)}$} holds.\end{lemma}
+
+\begin{proof} Let $e \in \X$ smooth and positive on $\Omega$. Then for $t \in \R$ we have
+\[ \begin{aligned} J(te) & = \frac{1}{2} t^2 \|e\|^2 - \int_\Omega F(x, \, te) \, \mathrm{d}x \geq
+\\[1em] & \geq  \frac{1}{2} t^2 \|e\|^2 - \left( \frac{t^{\frac{1}{\theta}}}{c} \|e\|_{L^\theta(\Omega)} - c^\prime \right) |\Omega| \geq
+\\[1em] & \geq  \frac{1}{2} t^2 \|e\|^2 - C_\Omega t^{\frac{1}{\theta}} \|e\|_{L^\theta(\Omega)} + C_\Omega \xrightarrow{t \to + \infty} - \infty. \end{aligned} \] 
+Therefore, we can find $\tau \in \R^+$ such that $\tau e$ satisfies $J(\tau e) \leq 0$.\end{proof}
+
+To apply the MP theorem, we only need to prove that $J$ satisfies the Palais-Smale condition at the level $c$. A standard argument shows that
+\[ \text{$(u_n)_{n \in \N} \in (\mathrm{PS})_c$ for $J$ $\implies$ $u_n$ bounded}, \]
+but the reader may try to prove this themselves as an exercise to get acquainted with the notion of Palais-Smale.
+
+\begin{lemma}Under no extra assumpions, the functional $J$ satisfies the Palais-Smale condition at the level $c > 0$. \end{lemma}
+
+\begin{proof}First, we evaluate $\Phi$ at $u_n$ and decompose the integral in such a way that we can use \textbf{\color{orange}($f_{4}$)}. Namely,
+\[ \begin{aligned} \Phi(u_n) & = \int_{ u_n \leq R} F(x, \, u_n) \, \mathrm{d}x + \int_{ u_n \geq R} F(x, \, u_n) \, \mathrm{d}x \leq
+\\[1em] & \leq C_{\Omega, \, R, \, f} + \theta \int_{u_n \geq R} u_n f(x, \, u_n) \, \mathrm{d}x \leq
+\\[1em] & \leq C_{\Omega, \, R, \, f}^\prime + \theta \int_{\Omega} u_n f(x, \, u_n) \, \mathrm{d}x \leq
+\\[1em] & \leq C_{\Omega, \, R, \, f}^\prime + \theta \left[ \int_{\Omega}|\nabla u_n|^2 \, \mathrm{d}x + o(\| u_n \|) \right], \end{aligned} \]
+where the last inequality follows from the definition of differentiable:
+\[ o(\|u_n\|) = \nabla J(u_n) [u_n] = \int_\Omega |\nabla u_n|^2 \, \mathrm{d}x - \int_\Omega u_n f(x, \, u_n). \]
+Since $u_n$ is a Palais-Smale sequence, $|J(u_n)| \leq c$ and hence
+\[ \int_\Omega|\nabla u|^2 \, \mathrm{d}x \leq C + 2 \Phi(u_n) \leq C^{\prime \prime} 2 \theta \left[ \int_\Omega |\nabla u|^2 \, \mathrm{d}x + o(\|u_n\|) \right]. \]
+Recalling that $2 \theta < 1$, this implies that
+\[ \int_\Omega |\nabla u_n|^2 \, \mathrm{d}x \leq \tilde{C} + o(\|u_n\|). \]
+Now notice that $p < \frac{n+2}{n-2}$, so $\Phi$ is weakly continuous and its differential is a compact operator. From
+\[ \nabla J(u_n)[v] = \langle u_n, \, v \rangle - \langle \nabla \Phi(u_n), \, v \rangle, \]
+we conclude that
+\[ \nabla J(u_n) = u_n - \nabla \Phi(u_n). \]
+Since $u_n$ is Palais-Smale, $u_n$ is bounded and hence we can find a subsequence $u_{n_k}$ converging weakly to some $\bar{u}$. Furthermore,
+\[ u_{n_k} = \nabla J(u_{n_k}) + \nabla \Phi(u_{n_k}), \]
+and the first term $\nabla J(u_{n_k})$ converges strongly to zero, so by compactness $\nabla \Phi(u_{n_k})$ must converge strongly to $\nabla \Phi(\bar{u})$.\end{proof} 
+
+This proves that $J$ satisfies the Palais-Smale condition at the level $c$. We can finally apply \autoref{thm.n.1} and conclude that \eqref{eq.n.2} admits a positive solution.
+
+\section{Linking theorems}
+
+Let $\scC$ be a nonempty class of subsets $A \subseteq \X$. Suppose that
+\[ c:= \inf_{A \in \scC} \sup_{u \in A} J(u) > - \infty. \]
+The idea is that, if $\scC$ is stable under deformations, we can do a sort of MP theorem for which $c$ is a candidate min-max level.
+
+\begin{definition}[Link] \index{linking} Let $\cN$ be a compact manifold with nonempty boundary and let $C \subseteq \X$ be a subset. Consider the class of homotopies
+\[ \scH := \left\{ h \in C(\cN, \, \X) \: : \: h \, \big|_{\partial \cN} \equiv \mathrm{id}_{\partial \cN} \right\}. \]
+We say that $\partial \cN$ and $C$ \textit{link} if
+\[ h(\cN) \cap C \neq \varnothing \quad \text{for all $h \in \scH$}. \] \end{definition}
+
+%% PICTURE IPAD
+
+\begin{example}The MP theorem is a linking-type theorem with $C = S_R$ and
+\[ \cN := \{ te \: : \: t \in [0, \, 1] \}. \]
+It is easy to verify that $C$ and $\partial \cN$ link using Bolzano's theorem. \end{example}
+
+We will now investigate the linking property between slightly more complicated sets. From now on, we will make use of \textbf{degree theory} and, in particular, of the homotopy property. The reader that is not acquainted with it can find the formal construction and the main properties in \cite{nasep}.
+
+\begin{proposition} Let $\X$ be a normed vector space and assume that $\X := V \oplus W$ with $V, \, W$ closed subspaces and $\mathrm{dim}(V) = k < \infty$. Then
+\[ C := W \quad \text{and} \quad \cN := \{ v \in V \: : \: \|v\| \leq r \} \]
+link. \end{proposition}
+
+\begin{proof}Let $h \in \scH$ and let $p : \X \to V$ be the projection associated to the direct sum. Then
+\[ \widetilde{h} := p \circ h : \cN \longrightarrow V \]
+coincides with the identity on $\partial \cN$. It follows from degree theory that $\widetilde{h}$ vanishes at some $z \in \cN$ that does not belong to the boundary, and hence
+\[ \widetilde{h}(z) = 0 \implies h(z) \in V^c = W = C. \] \end{proof}
+
+\begin{proposition} Let $\X$ be a normed vector space and assume that $\X := V \oplus W$ with $V, \, W$ closed subspaces and $\mathrm{dim}(V) = k < \infty$. Given $e \in W$ and $R > 0$ define
+\[ C := \{ w \in W \: : \: \|w\| \leq r, \]
+and
+\[ \cN := \{ u = v + se \: : \: v \in V, \, \, \|v\| \leq R, \, \, s \in [0, \, 1] \}. \]
+Then $C$ and $\partial \cN$ link, provided that $\|e\| > r$. \end{proposition}
+
+\begin{proof}Let $h \in \scH$ and let $p : \X \to V$ be the projection associated to the direct sum. Identify the manifold $\cN$ with
+\[ \cN \cong \bar{B}_V(0, \, R) \times \{ se \: : \: s \in [0,\,1]\} \]
+and define
+\[ \widetilde{h}(u) := \left( p \circ h(u), \, \| h(u) - p \circ h(u) \| - r \right). \]
+We now evaluate it at the boundary $\partial \cN$:
+\[ \widetilde{h}(v, \, s) = (v, \, \|e\| - r) \neq (0, \, 0). \]
+It follows that we can apply once again degree theory to find $(v, \, s) \in \cN$ such that $\widetilde{h}(v, \, s)$ vanishes. In particular,
+\[ \begin{cases} p \circ h(v + se) \\[.6em] \| h(v + se) - p \circ h(v + se) \| = r \end{cases} \implies h(v+se) \in W \quad \text{and} \quad \| h(v + se) \| = r, \]
+which means that $h(v + se) \in C$, and this concludes the proof. \end{proof}
+
+We are now ready to generalise the MPT. Let $\X$ be a Hilbert space, $J \in C^1(\X, \, \R)$ and $\partial \cN, \, C \subset \X$ such that $\cN_\partial$ and $C$ link. Assume that \mbox{}
+\begin{enumerate}[label={\color{blue}$\mathbf{(J\arabic*)}$}, leftmargin=2.5\parindent]
+\item $J$ is bounded from below on $C$, that is, $\rho := \inf_{u \in C} J(u) > - \infty$;
+\item $\rho > \beta := \sup_{u \in \partial \cN} J(u)$.
+\end{enumerate}
+
+\bd \index{linking level}
+The number
+\[
+c := \inf_{h \in \scH} \sup_{u \in \cN} J \circ h(u)
+\]
+is called {\em linking level} associated to the function $J$.
+\ed
+
+\bl
+Suppose that $\cN_\partial$ and $C$ link. If {\color{blue}$\mathbf{(J1)}$} holds, then $c \geq \rho$.
+\el
+
+\begin{proof}
+By definition, for each $h \in \scH$ the intersection $h(\cN) \cap C$ is nonempty. Thus
+\[
+\sup_{u \in \cN} J(h(u)) \geq \inf_{u \in C} J(u) = \rho.
+\]
+\end{proof}
+
+\bthm
+Suppose that the following assumptions hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $\cN_\partial$ and $C$ link.
+\item {\color{blue}$\mathbf{(J1)}$} and {\color{blue}$\mathbf{(J2)}$} hold.
+\item The functional satisfies the Palais-Smale condition at the linking level $c$.
+\end{enumerate}
+Then $c$ is a critical value, that is, there exists $u \in \X$ such that $J(u) = c$ and $\nabla J(u) = 0$.
+\ethm
+
+\begin{proof}
+Notice that $c \geq \rho > \beta$. Suppose that $c$ is not a critical value and use the {\em deformation lemma} to find a continuous deformation $\eta$ which satisfies
+\begin{itemize}
+\item $\eta(J^{c+\delta}) \subseteq J^{c-\delta}$ for $\delta$ such that $\beta < c - \delta$;
+\item $\eta(u) = u$ for all $u \in J^\beta$.
+\end{itemize}
+Now let $h \in \scH$. It is easy to verify that $\eta \circ h \in \scH$ since it is composition of continuous mappings and also
+\[
+\text{$\eta(u) = u$ for all $u \in J^\beta$} \implies \eta \circ h \, \big|_{\partial \cN} =  \eta \, \big|_{\partial \cN} = \mathrm{id}_{\partial \cN}
+\]
+since $\cN \subset J^\beta$. Now let $\tilde{h} \in \scH$ be such that
+\[
+\sup_{u \in \cN} J(\tilde{h}(u)) < c + \delta.
+\]
+Then
+\[
+\sup_{u \in \cN} J(\eta \circ \tilde{h}(u)) < c - \delta,
+\]
+and this gives a contradiction since $c$ is the infimum. This concludes the proof.
+\end{proof}
+
+We now present three easy consequences of the theory developed in this section, which are incredibly interesting by themselves.
+
+\bthm
+Let $C$ be a manifold of codimension one in $\X$ and suppose that $u_0, \, u_1$ are points of $\X \setminus C$ belonging to two distinct connected components of $\X \setminus C$. Let $J \in C^1(\X, \, \R)$ satisfy the following assumptions: \mbox{}
+\begin{enumerate}[label=\textbf{(L-\alph*)}, leftmargin=2.5\parindent]
+\item $\inf_C J(u) > \max \{ J(u_0), \, J(u_1) \}$;
+\item $J$ satisfies the Palais-Smale condition at the linking level $c$.
+\end{enumerate}
+Then $J$ has a critical point $\bar{u}$ at level $c$ and $\bar{u} \neq u_0, \, u_1$.
+\ethm
+
+\bthm \label{thm.t.1}
+Let $\X = V \oplus W$, where $V$ and $W$ are closed subspaces and $\mathrm{dim}(V) < \infty$. Suppose $J \in C^1(\X, \, \R)$ satisfies: \mbox{}
+\begin{enumerate}[label=\textbf{(L-\alph*)}, leftmargin=2.5\parindent]
+\item There exist $r, \, \rho > 0$ such that
+\[
+J(w) \geq \rho \quad \text{for all $w \in W$ with $\|w\|=r$}.
+\]
+\item There exist  $R>0$ and $e \in W$, with $\|e\| > r$ such that, letting
+\[
+\cN = \{ u = v + te \: : \: v \in V, \,  \|v\| \leq R, \, t \in [0, \, 1] \},
+\]
+one has that
+\[
+J(u) < 0 \quad \text{for all $u \in \partial \cN$}.
+\]
+\end{enumerate}
+If, in addition, $J$ satisfies the Palais-Smale condition at the linking level $c$, then $J$ has a critical point $\bar{u}$ at level $c > 0$. In particular, $\bar{u} \neq 0$.
+\ethm
+
+\bthm
+Let $\X = V \oplus W$, where $V$ and $W$ are closed subspaces and $\mathrm{dim}(V) < \infty$. Suppose $J \in C^1(\X, \, \R)$ satisfies: \mbox{}
+\begin{enumerate}[label=\textbf{(L-\alph*)}, leftmargin=2.5\parindent]
+\item There exist $\rho > 0$ such that
+\[
+J(w) \geq \rho \quad \text{for all $w \in W$}.
+\]
+\item There exist  $r > 0$, $\beta < \rho$ such that
+\[
+J(u) \leq \beta \quad \text{for all $u \in V$ with $\|v\|=r$}.
+\]
+\end{enumerate}
+If, in addition, $J$ satisfies the Palais-Smale condition at the linking level $c$, then $J$ has a critical point $\bar{u}$ at level $c > 0$.
+\ethm
+
+\subsection{Application of the saddle point theorem}
+
+Let $\Omega$ be an open bounded subset of $\R^n$ with smooth boundary. Consider the Dirichlet problem
+\begin{equation} \label{eq.t.1} \begin{cases}
+- \Delta u - \lambda u = f(x, \, u) & \text{if $x \in \Omega$},
+\\[.6em] u = 0 & \text{if $x \in \partial \Omega$}.
+\end{cases} \end{equation}
+
+\bthm \label{thm.t.2}
+Suppose that \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item $\lambda$ is not an eigenvalue of $-\Delta$;
+\item $f$ satisfies the Carathéodory condition;
+\item $f$ is sublinear, that is, there is $\alpha < 1$ such that
+\[
+|f(x, \, s)| \leq a + b |s|^\alpha.
+\]
+\end{enumerate}
+Then \textbf{(L-1)} and \textbf{(L-2)} hold. Furthermore, the functional associated to the problem,
+\[
+J(u) = \int_\Omega ( |\nabla u|^2 - \lambda |u|^2) \, \mathrm{d}x - \int_\Omega F(x, \, u) \, \mathrm{d}x,
+\]
+satisfies the Palais-Smale condition at any level. In particular, the linking level is critical.
+\ethm
+
+\begin{proof}
+By assumption, there exists $k \in \N$ such that $\lambda \in (\lambda_k, \, \lambda_{k+1})$. If $\varphi_j$ denotes the $j$th eigenfunction, then we can take
+\[
+V := \mathrm{Span} \langle \varphi_1, \, \dots, \, \varphi_k \rangle.
+\]
+In this case, $W$ is the complementary subspace in $\X := H_0^1(\Omega)$. Notice that the quadratic form
+\[
+Q(u) = |\nabla u|^2 - \lambda |u|^2
+\]
+is definite negative on $V$ and definite negative on $W$, and also that the sublinearity of $f$ together with the Sobolev embedding implies that
+\[
+\left| \int_\Omega F(x, \, u) \, \mathrm{d}x \right| \leq A + B \|u\|^{\alpha + 1}.
+\]
+It follows that there exists $\gamma > 0$ such that
+\[
+u \in V \implies J(u) \leq - \gamma \|u\|^2 + A + B \|u\|^{\alpha + 1} \xrightarrow{\|u\| \to \infty} - \infty,
+\]
+which means that we can select $R$ big enough in \autoref{thm.t.1} for which \textbf{(L-2)} holds. In a similar fashion, notice that
+\[
+u \in W \implies J(u) \geq \gamma \|u\|^2 - A - B \|u\|^{\alpha + 1},
+\]
+which means that $\rho := \inf_W J(u) > - \infty$. Since $R$ is arbitrarily big, we can also require that $\beta < \rho$ and thus \textbf{(L-1)} holds as well.
+
+\paragraph{Palais-Smale condition.} Write $u = u_V + u_W$. Then
+\[
+\nabla J(u)[u_V] = \nabla Q(u)[u_V] - \int_\Omega f(x, \, u) u_V \, \mathrm{d}x = 2 Q(u_V) -  \int_\Omega f(x, \, u) u_V \, \mathrm{d}x.
+\]
+Let $(u_n)_{n \in \N}$ be a Palais-Smale sequence. Then
+\[
+\nabla J(u_n)[(u_n)_V] = o(\|u_n\|)
+\]
+because $\nabla J(u_n)[(u_n)_V]$ converges to zero; on the other hand, the identity above suggests that
+\[
+\nabla J(u_n)[(u_n)_V] = 2 Q((u_n)_V) + \mathcal{O}(1 + \|u\|^{\alpha + 1}).
+\]
+Since $Q < 0$ on $V$, we can easily infer that
+\[
+\gamma \|(u_n)_V\|^2 \leq o(\|u_n\|) + \mathcal{O}(1 + \|u_n\|^{1 + \alpha}).
+\]
+In a similar fashion, we make the same computation on $W$ and find that
+\[
+\gamma \|(u_n)_W\|^2 \leq o(\|u_n\|) + \mathcal{O}(1 + \|u_n\|^{1 + \alpha}).
+\]
+Therefore, any Palais-Smale sequence for the functional $J$ is bounded in the $\| \cdot \|_\X$-norm. For the compactness, notice that $u_n$ bounded implies
+\[
+u_{n_k} \rightharpoonup \bar{u}
+\]
+and, using the fact that $V$ is finite-dimensional, we also have that
+\[
+(u_{n_k})_V \xrightarrow{k \to \infty} \bar{u}_V.
+\]
+Moreover, we have
+\[
+\nabla J(u_n)[v] = \int_\Omega (\nabla u_n \cdot \nabla v - \lambda u_n v ) \, \mathrm{d}x - \int_\Omega f(x, \, u_n) v \, \mathrm{d}x,
+\]
+which gives
+\[
+\int_\Omega \nabla u_n \cdot \nabla v \, \mathrm{d}x = \nabla J(u_n)[v] + \int_\Omega \lambda u_n v \, \mathrm{d}x + \int_\Omega f(x, \, u_n) v \, \mathrm{d}x.
+\]
+We conclude that the convergence is strong (up to subsequences) because the first addendum converges to zero, while the other two are compact linear operators by Sobolev embedding and sublinearity of $f$.
+\end{proof}
+
+\brmk
+If $\lambda = \lambda_k$, then the existence of the solution is not guaranteed. Indeed, if we consider the problem
+\[ \begin{cases}
+- \Delta u - \lambda u = \varphi_k & \text{if $x \in \Omega$},
+\\[.6em] u = 0 & \text{if $x \in \partial \Omega$},
+\end{cases} \]
+then it is easy to verify that it does not admit any solution since $u$ should be in the orthogonal of the linear space generated by $\varphi_k$.
+\ermk
+
+To conclude this section, we want to point out why any Palais-Smale sequence is bounded is enough to infer that the functional $J$ satisfies $(\mathrm{PS})_c$.
+
+Let $\Omega \subset \R^n$ be a bounded set and let $f$ be a function that satisfies the Carathéodory condition and the growth condition
+\[
+|f(x, \, s)| \leq A + B |s|^p \quad \text{for $p < \frac{n+2}{n-2}$ if $n \geq 3$}.
+\]
+Let $F(x, \, u) := \int_0^u f(x, \, s) \, \mathrm{d}s$ and $\Phi(u) = \int_\Omega F(x, \, u) \, \mathrm{d}x$. We claim that $\nabla \Phi$ is compact as an operator from $\X := H_0^1(\Omega)$ to $\X$.
+
+\begin{proof}
+Let $u_n$ be a bounded sequence in $\X$ weakly converging to some $\bar{u}$. Then $u_{n_k}$ converges strongly to $\bar{u}$ in $L^{p+1}(\Omega)$ and by Nemitski theorem
+\[
+f(x, \, u_{n_k}) \to f(x, \, \bar{u}) \quad \text{strongly in $L^{\frac{p+1}{p}}(\Omega)$}.
+\]
+This implies that $\| \nabla \Phi(u_{n_k}) - \nabla \Phi (u) \| \to 0$ which is enough to infer that $\nabla \Phi$ is compact.
+\end{proof}
+
+\bcor
+Consider the Dirichlet problem
+\[ \begin{cases}
+- \Delta u = f(x, \, u) \quad \text{if $x \in \Omega$},
+\\[.6em] u = 0 & \text{if $x \in \partial \Omega$},
+\end{cases} \]
+and the associated function $J(u) = \frac{1}{2} \int_\Omega |\nabla u|^2 \, \mathrm{d}x - \Phi (u)$. Then the following properties hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $u_n$ converges weakly to $\bar{u}$ and $\nabla J(u_n) \to 0$, then $u_{n_k}$ converges strongly to $\bar{u}$.
+\item If Palais-Smale sequences at the level $c$ for $J$ are bounded, then $J$ satisfies the $(\mathrm{PS})_c$ condition.
+\end{enumerate}
+\ecor
+
+\subsection{Application of linking-type theorems}
+
+
+\bthm
+Let $\Omega$ be a bounded subset of $\R^n$. Let $f \in \mathbb{F}_p$ with $1 < p < \frac{n+2}{n-2}$ for $n \geq 3$, and suppose that
+\[
+\lim_{s \to 0^+} \frac{f(x, \, s)}{s} = \lambda \quad \text{for a.e. $x \in \Omega$},
+\]
+for any $\lambda \in \R$, and
+\[
+\exists \, r > , \, \theta \in (0, \, \frac{1}{2}) \: : \: 0 < F(x, \, u) \leq \theta u f(x, \, u) \quad \text{for all $x \in \Omega$ and all $u \geq r$}.
+\]
+Then the Dirichlet problem \eqref{eq.t.1} admits a nontrivial solution.
+\ethm
+
+\begin{proof}We prove the result for the model problem
+\begin{equation} \label{eq.t.3} \begin{cases}
+- \Delta u = \lambda u + |u|^{p-1} u & \text{if $x \in \Omega$},
+\\[.6em] u = 0 & \text{if $x \in \partial \Omega$}.
+\end{cases} \end{equation}
+Let $\X = H_0^1(\Omega)$ and consider the associated functional
+\[
+J(u) = \frac{1}{2} \|u\|^2 - \frac{1}{2} \lambda \|u\|_{L^2(\Omega)}^2  \frac{1}{p+1} \| u \|_{L^{p+1}(\Omega)}^{p+1}.
+\]
+If $\lambda < \lambda_1$, then we have proved already (see [REF]) that the MPT is enough to infer the existence of a nontrivial solution. So we can assume without loss of generality that
+\[
+\lambda_k \leq \lambda < \lambda_{k+1}
+\]
+for some $k \geq 1$; the idea is to apply \autoref{thm.t.1} with $V = \mathrm{Span}\langle \varphi_1, \, \cdots, \, \varphi_k\rangle$ and $W = V^\perp$, the $L^2$ complement of $V$. Indeed, if $w \in W$ we can always write
+\[
+w = \sum_{i = k+1}^\infty a_i \varphi_i.
+\]
+If $\|w\| \to 0$, then
+\[
+J(w) = \frac{1}{2} \sum_{i = k+1}^\infty a_i^2 \left( 1 - \frac{\lambda}{\lambda_i} \right) + o(\|w\|^2) \geq \frac{1}{2} \left(1 - \frac{\lambda}{\lambda_{k+1}} \right) \|w\|^2 + o(\|w\|^2),
+\]
+and the latter is always strictly positive since $\lambda < \lambda_{k+1}$ by assumption. In particular, the assumption $\mathbf{(L-a)}$ of \autoref{thm.t.1} holds with $r$ small enough. Now let $\tilde{V}$ be a finite-dimensional subspace of $\X$ and $\tilde{v} \in \tilde{V}$ be an element with unitary norm; it turns out that
+\[
+J(t \tilde{v}) = \frac{1}{2} t^2 - \frac{1}{2} \lambda^2 t^2 \| \tilde{v} \|_{L^2(\Omega)}^2 - \frac{1}{p+1}t^{p+1} \| \tilde{v} \|_{L^{p+1}(\Omega)}^{p+1}.
+\]
+Since $p > 1$ and $\tilde{V}$ finite-dimensional, it follows that we can always find $t > 0$ big enough such that the quantity above is strictly negative. In particular, we can find $R > r$ and $e \in W$, $\|e\| = R$, such that
+\[
+\|v + te \| \geq R \implies J(v + te) < 0.
+\]
+Then on the three sides of $\partial \cN$ given by $\{ u = v + te \: : \: \|v\| = R \} \cup \{ u = v + Re \}$ the functional $J$ is strictly negative. It remains to see what happens on the fourth side of $\partial \cN$, namely
+\[
+\{ v \in V \: : \: \|v\| \leq R \}.
+\]
+However, it is easy to verify that $v = \sum_{i = 1}^k a_i \varphi_i$ gives $\|v\|_{L^2(\Omega)}^2 = \sum_{i = 1}^k \lambda_i^{-1} a_i^2$; this implies that
+\[
+\|v\|_{L^2(\Omega)}^2 \geq \lambda_k^{-1} \|v\|^2,
+\]
+and hence
+\[
+J(v) \leq \frac{1}{2} \left( 1 - \frac{\lambda}{\lambda_k} \right) \|v\|^2 \leq 0.
+\]
+This shows that $\mathbf{(L-b)}$ holds as well. The Palais-Smale condition is obtained in the same way as \autoref{thm.t.2} so we can apply \autoref{thm.t.1} to conclude.
+\end{proof}
+
+\brmk
+Notice that $J \, \big|_{C} > 0$ strictly, so a solution corresponding to a critical point at the level $c$ is necessarily nontrivial.
+\ermk
+
+\section{The Pohozaev identity}
+
+Let $\Omega$ be an open bounded subset of $\R^n$ with smooth boundary. Consider the Dirichlet boundary value problem with nonlinearity independent of $x$, that is,
+\begin{equation} \label{eq.t.3} \begin{cases}
+- \Delta u = f(u) & \text{if $x \in \Omega$},
+\\[.6em] u = 0 & \text{if $x \in \partial \Omega$},
+\end{cases} \end{equation}
+and let $F(u) = \int_0^u f(s) \, \mathrm{d}s$.
+
+\bthm[Pohozaev] \index{Pohozaev identity}
+Let $\nu$ denote the unit outer normal at $\partial \Omega$. If $u$ is any classical solution of \eqref{eq.t.3}, then the following identity holds:
+\begin{equation}\label{eq.pohozaev}
+n \int_\Omega F(u) \, \mathrm{d}s = \frac{1}{2} \int_{\partial \Omega} u_\nu^2(x \cdot \nu) \, \mathrm{d}\sigma + \frac{n-2}{2} \int_\Omega u f(u) \, \mathrm{d}x.
+\end{equation}
+\ethm
+
+%%Ci sono dei remark da aggiungee sul file di testo
+
+\begin{proof}
+Set $\Theta(x) := (x \cdot \nabla u(x)) \nabla u(x)$. Then
+\[ \begin{aligned}
+\mathrm{div} \, \Theta & = \Delta u(x \cdot \nabla u) + \sum_k \frac{\partial u}{\partial x_k} \frac{\partial}{\partial x_k} \left( \sum_i x_i \frac{\partial u}{\partial x_i} \right) =
+\\[1em] & = \Delta u(x \cdot \nabla u) + \sum_k \left( \frac{\partial u}{\partial x_k} \right)^2 + \sum_{i, \, k} \frac{\partial u}{\partial x_k} x_i \frac{\partial^2 u}{\partial x_i \partial x_k} = 
+\\[1em] & = \Delta u(x \cdot \nabla u) + |\nabla u|^2 + \frac{1}{2} \sum_i x_i \frac{\partial}{\partial x_i} |\nabla u|^2.
+\end{aligned} \]
+Then an application of the divergence theorem shows that
+\[
+\int_\Omega \left[\Delta u(x \cdot \nabla u) + |\nabla u|^2 + \frac{1}{2} \sum_i x_i \frac{\partial}{\partial x_i} |\nabla u|^2 \right] \, \dr x = \int_{\partial \Omega} (x \cdot \nabla u)(\nabla u \cdot \nu) \, \dr \sigma.
+\]
+As for the boundary term, since $u = 0$ on $\partial \Omega$ one has that $\nabla u(x) = u_\nu \nu$ and thus the above equation becomes
+\[
+\int_\Omega \left[\Delta u(x \cdot \nabla u) + |\nabla u|^2 + \frac{1}{2} \sum_i x_i \frac{\partial}{\partial x_i} |\nabla u|^2 \right] \, \dr x = \int_{\partial \Omega} (x \cdot \nu) u_\nu^2 \, \dr \sigma.
+\]
+Now set $\Theta_1(x) := \frac{1}{2} |\nabla u|^2 x$. Since its divergence is
+\[
+\mathrm{div} \, \Theta_1 = \frac{n}{2} |\nabla u|^2 + \frac{1}{2} \sum_i x_i \frac{\partial}{\partial x_i} |\nabla u|^2,
+\]
+another application of the divergence theorem shows that
+\[
+\int_\Omega \left[ \frac{n}{2} |\nabla u|^2 + \frac{1}{2} \sum_i x_i \frac{\partial}{\partial x_i} |\nabla u|^2 \right] \, \dr x = \frac{1}{2} \int_{\partial \Omega} (x \cdot \nu) u_\nu^2 \, \dr \sigma.
+\]
+If we plug this into the previous identity we find that
+\begin{equation} \label{eq.t.4}
+\int_\Omega \Delta u(x \cdot \nabla u) \, \dr x + (1 - \frac{n}{2}) \int_\Omega |\nabla u|^2 \, \dr x = \frac{1}{2} \int_{\partial \Omega} (x \cdot \nu) u_\nu^2 \, \dr \sigma.
+\end{equation}
+The first integral can easily be rewritten using the equation \eqref{eq.t.3} of which $u$ is a solution; namely, we have
+\[
+- \int_\Omega \Delta u(x \cdot \nabla u) \, \dr x = \int_\Omega f(u)(x \cdot \nabla u) \, \dr x = \int_\Omega \sum_i x_i \frac{\partial F(u)}{\partial x_i} \, \dr x.
+\]
+Integrating by parts we obtain
+\[
+\int_\Omega \sum_i x_i \frac{\partial F(u)}{\partial x_i} \, \dr x = - n \int_\Omega F(u) \, \dr x,
+\]
+which implies that
+\[
+\int_\Omega \Delta u(x \cdot \nabla u) \, \dr x =n \int_\Omega F(u) \, \dr x.
+\]
+Once again, using \eqref{eq.t.3} we conclude that
+\[
+\int_\Omega |\nabla u|^2 \, \dr x = \int_\Omega u f(u) \, \dr x,
+\]
+which plugged into the identity \eqref{eq.t.4} leads to the Pohozaev identity.
+\end{proof}
+
+An immediate consequence is that the growth of the nonlinearity $f$ with exponent $p < \frac{n+2}{n-2}$ cannot be eliminated if we want to find nontrivial solutions of \eqref{eq.t.4}. There is a more precise statement which follows from the Pohozaev identity:
+
+\bcor
+If $\Omega$ is a star-shaped (w.r.t. the origin) domain in $\R^n$, then any smooth solution of \eqref{eq.t.4} satisfies
+\[
+n \int_\Omega F(u) \, \dr x - \frac{n-2}{2} \int_\Omega u f(u) \, \dr x > 0.
+\]
+In particular, if $f(u) = |u|^{p-1}u$, then we find
+\[
+\left( \frac{n}{p+1} - \frac{n-2}{2} \right) \int_\Omega |u|^{p+1} \, \dr x > 0,
+\]
+and hence $u \neq 0$ implies $p < \frac{n+2}{n-2}$.
+\ecor
+
+%%REMARK DA AGGIUNGERE

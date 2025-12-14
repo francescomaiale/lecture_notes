@@ -1,0 +1,382 @@
+ \chapter{Critical Points and Natural Constraint} \thispagestyle{empty}
+
+[{\color{red}Da scrivere}]
+
+\section{Existence of extrema}
+
+Let $\X$ be a Banach space and let $J$ be a functional, that is, a continuous mapping $J : \X \to \R$.
+
+\bd
+We say that $z \in \X$ is a {\em local minimizer}\index{local minimum} (resp. {\em local maximizer}) of $J$ if there exists a neighbourhood $U \ni z$ such that
+\[
+\text{$J(z) \leq J(u)$ (resp. $J(z) \geq J(u)$)} \quad \text{for all $u \in U$}.
+\]
+If the above inequality is strict (except at $z$), then we say that $u$ is a {\em strict local minimum} (resp. {\em strict local maximum}) of $J$.
+\ed
+
+\bd
+We say that $z \in \X$ is a {\em global minimum}\index{global minimum} (resp. {\em global maximum}) of $J$ if
+\[
+J(z) \leq J(u) \quad \text{for all $u \in \X$ (resp. $J(z) \geq J(u)$)}.
+\]
+\ed
+
+\bpr
+Let $z$ be a local minimum and assume that $J$ is differentiable at $z$. Then $z$ is a stationary point, that is,
+\[
+\dr J(z) = 0.
+\]
+\epr
+
+Our first goal is to investigate the connection between properties such as semicontinuity and coerciveness and existence of extrema, but we first need to recall a few definitions.
+
+\bd\index{coercive}
+We say that a functional $J : \X \to \R$ is {\em coercive} if
+\[
+\lim_{\|u\|\to \infty} J(u) =  \infty.
+\]
+\ed
+
+\bd \index{lower semicontinuous}
+We say that a functional $J : \X \to \R$ is {\em lower semicontinuous} if for every sequence $u_n \in \X$ such that $u_n \rightharpoonup u$, it turns out that
+\[
+J(u) \leq \liminf_{n \to \infty} J(u_n). 
+\]
+\ed
+
+\bl
+Let $\X$ be a reflexive Banach space and let $J$ be a coercive weakly lower semicontinuous functional. Then there exists $\alpha \in \R$ such that
+\[
+J(u) \geq \alpha \quad \text{for all $u \in \X$}.
+\]
+\el
+
+\bthm\label{thm.d.1}
+Let $\X$ be a reflexive Banach space and let $J$ be a coercive weakly lower semi-continuous functional. Then $J$ has a global minimum, that is,
+\[
+\exists z \in \X \: : \: J(z) \leq J(u) \quad \text{for all $u \in \X$}.
+\]
+\ethm
+
+\begin{proof}
+The previous lemma asserts that $m := \inf_{u \in \X} J(u)$ is finite. Let $u_n \in \X$ be a minimizing sequence sequence, that is,
+\[
+J(u_n) \xrightarrow{n \to + \infty} m.
+\]
+Since $J$ is coercive the sequence must be equibounded (i.e., $\|u_n\| \leq R^\prime$), and hence it admits a subsequence weakly converging to some $z \in \X$. However, we have
+\[
+J(z) \leq \lim_{k \to \infty} J(u_{n_k}) = m \implies J(z) = m
+\]
+by lower semicontinuity, and this concludes the proof.
+\end{proof}
+
+\subsection{Application to PDEs analysis}
+
+We now show how to apply \autoref{thm.d.1} to find a solution to the following Dirac boundary problem under some assumptions on the nonlinearity:
+\begin{equation} \mathbf{\tag{D}} \label{eq.pde.1}
+\begin{cases} - \Delta u(x) = f(x, u) & \text{if $x \in \Om$}, \\
+u(x) = 0& \text{if $x \in \partial \Om$}. \end{cases}
+\end{equation}
+Suppose that $\X$ is a Hilbert space and consider the functional
+\[
+J(u) = \frac{1}{2} \|u\|^2 - \Phi(u),
+\]
+where $\Phi(u) := \int_\Om F(x, u) \, \dr x$ and $F(x, u) = \int_0^u f(x, s) \, \dr s$.
+
+\bthm
+Assume that $\Phi \in C^1(\X, \R)$ is weakly continuous and satisfies the estimate
+\[
+|\Phi(u)| \leq a_1 + a_2 \|u\|^\alpha 
+\]
+for positive constants $a_1, a_2 > 0$ and $\alpha < 2$. Then $J$ achieves a global minimum at some $z \in \X$ and it turns out that
+\[
+\Phi'(z) = z.
+\]
+\ethm
+
+\begin{proof}
+The estimate on $\Phi$ readily gives
+\[
+J(u) \geq \frac{1}{2}\|u\|^2 - a_1 - a_2 \|u\|^\alpha,
+\]
+and it is easy to check that for $\alpha < 2$ the functional $J$ is always coercive. The function $\| \cdot \|^2$ is weakly lower semicontinuous and $\Phi$ is weakly continuous, so \hyperref[thm.d.1]{Theorem \ref{thm.d.1}} gives the existence of a critical point. Finally $J \in C^1(\X,\R)$ yields
+\[
+0 = J'(z) = z - \Phi'(z) \implies \Phi'(z) = z.
+\]
+\end{proof}
+
+We would like to find assumptions on the nonlinearity rather than $\Phi$ itself so we start off by requiring that there are $a_1 \in L^2(\Om)$, $a_2 > 0$ and $0 < q < 1$ such that
+\begin{equation} \label{eq.d.2} |f(x, u)| \leq a_1(x) + a_2 |u|^q. \end{equation}
+Set $\X := H_0^1(\Om)$ and endow it with its homogeneous norm. Since $\X$ is compactly embedded in $L^2(\Om)$, we immediately conclude that
+\[
+\Phi(u) := \int_\Om F(x, u) \, \dr x
+\]
+is $C^1(\X,\R)$ and weakly continuous.
+
+\bthm
+Let $f$ be locally Hölder-continuous and suppose that \eqref{eq.d.2} holds. Then $J$ has a critical point, which is a weak solution of \eqref{eq.pde.1}. \ethm
+
+\begin{proof}
+Integrating the estimate \eqref{eq.d.2} leads to
+\[
+|\Phi(u)| \leq a_5 \|u\| + a_6 \|u\|^{q+1},
+\]
+and since $q + 1 < 2$ we can apply the result above to infer the existence of a critical point $z$ for $J$ such that
+\[
+J'(z) = z - \Phi'(z) = 0 \implies \Phi'(z) = z.
+\]
+\end{proof}
+
+\brmk
+One can prove that \eqref{eq.d.2} can be replaced with the assumption
+\[
+\lim_{|s|\to\infty} \frac{f(x, s)}{s} = 0
+\]
+uniformly with respect to $x$.
+\ermk
+
+\bex
+Consider the boundary value problem
+\begin{equation} \mathbf{\tag{$D$}} \label{eq.pde.2}
+\begin{cases} - \Delta u = \lambda u - f(u) & \text{if $x \in \Om$},
+\\ u = 0& \text{if $x \in \partial \Om$}, \end{cases}
+\end{equation}
+where $\lambda$ is a given parameter and $f : [0, \infty) \to \R$ is locally Hölder and satisfies
+\[
+\lim_{u \to 0^+} \frac{f(u)}{u} = 0, \quad \lim_{u \to + \infty} \frac{f(u)}{u} = + \infty.
+\]
+We claim that \eqref{eq.pde.2} has a positive solution for any $\lambda > \lambda_1$, the first (smallest) eigenvalue of the laplacian operator with DBC. Let $\xi := \xi_\lambda > 0$ be such that
+\[
+\lambda \xi = f(\xi) \quad \text{and} \quad \lambda u - f(u) > 0 
+\]
+for all $u \in (0,  \xi)$ and let $g_\lambda : \R \to \R$ be given by
+\[
+g_\lambda(x) := \begin{cases}  0 & \text{if $u < 0$ or $u > \xi$,}
+\\ \lambda u - f(u) & \text{if $0 \leq u \leq \xi$.} \end{cases} 
+\]
+Consider the auxiliary boundary value problem
+\begin{equation} \mathbf{\tag{$D_\lambda$}} \label{eq.pde.3}
+\begin{cases} - \Delta u = g_\lambda(u) & \text{if $x \in \Om$},
+\\ u = 0& \text{if $x \in \partial \Om$}. \end{cases}
+\end{equation}
+By the maximum principle any nontrivial solution $u$ of \eqref{eq.pde.3} must be positive and
+\[
+0 < u(x)< \xi_\lambda \quad \text{for all $x \in \Om$}
+\]
+so that $u$ is also a positive solution of \eqref{eq.pde.2}. Since $g_\lambda$ is locally Hölder-continuous and bounded, the theorem above applies to the functional
+\[
+J_\lambda(u) := \frac{1}{2} \|u\|^2 - \lambda \int_\Om G_\lambda(u) \, \dr x.
+\]
+We now claim that $\inf_{u \in \X} J_\lambda(u)$ is strictly less than zero. To prove this, let $\varphi_1 \in \X$ be the first (positive and unitary) eigenfunction of $-\Delta$, that is,
+\[
+- \Delta \varphi_1 = \lambda_1 \varphi_1, \quad \| \varphi_1 \|_{L^2(\Om)} = 1.
+\]
+For $t > 0$ small, one has $g_\lambda(t \varphi_1) = \lambda t \varphi_1 - f(t \varphi_1)$. Since $f(u) \in o(\|u\|)$, we immediately find that
+\[
+J_\lambda(t \varphi_1) = \frac{1}{2}( \lambda_1 - \lambda ) t^2 + o(t^2),
+\]
+which is strictly negative if we choose $t$ to be small enough.
+\eex
+
+\section{Constrained critical points}
+
+Let $J : \X \to \R$ be a differentiable functional and let $\M$ be either a smooth Hilbert submanifold or a Hilbert space.
+
+\bd
+A \textit{constrained critical point}\index{constrained critical point} of $J$ on $\M$ is a point $z \in \M$ such that
+\[
+\dr J \, \big|_\M(z) = 0,
+\]
+which is equivalent to
+\[
+\dr J(z)[v] = 0 \quad \text{for all $v \in T_z \M$},
+\]
+where $T_z \M$ is the tangent space at $z$ to $\M$.
+\ed
+
+\brmk
+Similarly, using the $\nabla_\M$ gradient, $z \in \M$ is a constrained critical point if
+\[
+\langle \nabla_\M J(z), v \rangle \quad \text{for all $v \in T_z \M$},
+\]
+which is as to say that $J'(z)$ is orthogonal to $T_z \M$.
+\ermk
+
+\brmk
+Let $\gamma : [0, 1] \to \M$ be a smooth curve with $\gamma(0) = z$. Consider the real-valued function $\phi(t) := J \circ \gamma(t)$ and notice that
+\[
+\phi'(0) = J'(z)[\gamma'(0)].
+\]
+If $z$ is a critical point of $J$ constrained on $\M$, then $t = 0$ is a critical point of $\phi$. Vice versa, $z$ is a constrained critical point if
+\[
+\frac{\dr}{\dr t} \, \big|_{t = 0} J(\gamma(t)) = 0
+\]
+for all differentiable curves $\gamma$ satisfying $\gamma(0) = z$.
+\ermk
+
+Suppose that $\M$ has codimension one, that is, there exists $G: \X \to \R$ of class $C^1$ such that $\M = G^{-1}(0)$. We can always write
+\[
+\X = T_z \M \oplus \mathrm{Span}(\nabla G(z)),
+\]
+and using the Lagrange multiplier rule leads to
+\[
+\nabla J(z) = \lambda \nabla G(z) \implies \lambda = \frac{ \langle \nabla J(z), \nabla G(z) \rangle }{ \| \nabla G(z) \|^2}.
+\]
+
+\paragraph{Application to nonlinear eigenvalues}
+
+Let $\Om \subset \R^n$ be a smooth bounded set and suppose that $f$ satisfies \eqref{eq.3.1}. Let $\X := H_0^1(\Om)$ and
+\[
+\Phi(u) := \int_\Om F(x, u) \, \dr x. 
+\]
+Consider the $C^1$-manifold given by
+\[
+\M = \{u \in \X \: : \: \|u\|^2 = 1 \} = G^{-1}(0),
+\]
+where $G(u) := \|u\|^2 - 1$. It is easy to verify this since $G \in C^1(\X,\R)$ and $\dr G(u) \equiv 2$. If $u$ is a constrained critical point of $\Phi$ on $\M$, then
+\[
+\nabla \Phi(u) = \lambda u \implies \lambda \int_\Om \nabla u \cdot \nabla v \, \dr x = \int_\Om f(x, u) v \, \dr x.
+\]
+It follows that $u$ is a weak solution of the boundary-value problem
+\[
+\begin{cases} - \lambda\Delta u(x) = f(x, u) & \text{if $x \in \Om$},
+\\ u(x) = 0& \text{if $x \in \partial \Om$}. \end{cases}
+\]
+Notice that if $f$ is homogeneous, then one can consider the scaling $\lambda^{\frac{1}{p-1}} u$ that solves the same boundary-value problem with $\lambda = 1$.
+
+\section{Natural constraint and Nehari manifolds}
+
+Let $\X$ be a Hilbert space and let $J \in C^1(\X, \R)$.
+
+\bd
+A $C^1$-submanifold $\M$ is called a \textit{natural constraint}\index{natural constraint} for $J$ if there exists another functional $\tilde{J} \in C^1(\X, \R)$ such that
+\[
+\nabla_\M \tilde{J}(u) = 0 \iff J^\prime(u) = 0.
+\]
+\ed
+
+\brmk
+An example of a natural constraint is the so-called Nehari manifold\index{Nehari manifold} given by
+\[
+\M := \{u \in \X \setminus \{0\} \: : \: \langle J'(u), u \rangle = 0\}.
+\]
+\ermk
+
+\bpr \label{prop.e.1}
+Let $J \in C^2(\X, \R)$ and suppose that the corresponding Nehari manifold $\M$ is nonempty. Assume that the following conditions hold: \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item There exists $r > 0$ such that $\M \cap B_r(0) = \varnothing$.
+\item For all $u \in \M$ it turns out that $\dr^2 J(u)[u, u] \neq 0$.
+\end{enumerate}
+Then $\M$ is a natural constraint for $J$ with $\tilde{J} = J$.
+\epr
+
+\begin{proof}
+Let $G(u) := \langle J'(u), u \rangle$ so that $\M = G^{-1}(0)$ and notice that $G$ belongs to $C^1$. Since
+\[
+G'(u)[u] = \dr^2J(u)[u, u] + \underbracket{\dr J(u)[u]}_{= 0} = \dr^2J(u)[u, u] \neq 0,
+\]
+we immediately conclude that $\M$ is a $C^1$-submanifold. If $\nabla J\, \big|_\M (u) = 0$, then
+\[
+\nabla J(u) = \lambda \nabla G(u) \implies \langle \nabla J(u), u \rangle = \lambda \langle \nabla G(u), u \rangle.
+\]
+However, for any $u \in \M$ the left-hand side is zero and the right-hand side is nonzero so $\lambda$ must be equal to $0$ and $\M$ is a natural constraint for $J$.
+\end{proof}
+
+\subsection{Applications to PDEs}
+\label{subsec:daosd}
+
+Let $\Om \subset \R^n$ be an open bounded smooth set and consider the problem
+\begin{equation} \label{e.1}
+\begin{cases} - \Delta u = |u|^{p-1} u, & \text{if $x \in \Om$},
+\\ u \, \big|_{\partial \Om} \equiv 0. \end{cases}
+\end{equation}
+We will need the compactness of the embedding
+\[
+L^{p+1}(\Om) \hookrightarrow H_0^1(\Om)
+\]
+so we must assume that $1 < p < \frac{n + 2}{n-2}$. Let $\X := H_0^1(\Om)$ equipped with the norm
+\[
+\|u\|_\X := \int_\Om |\nabla u|^2 \, \dr x.
+\]
+The variational formulation of \eqref{e.1} consists of finding critical points of the functional
+\begin{equation*} J(u) = \frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x - \frac{1}{p+1} \int_\Om |u|^{p+1} \, \dr x. \end{equation*}
+It is easy to see that $J \in C^2(\X,\R)$ and that $J$ is unbounded on $\X$. Indeed, letting $\varphi_1$ be an eigenfunction of $\lambda_1(\Om)$, leads to
+\[
+\lim_{t \to + \infty} J(t \varphi_1) = - \infty. 
+\]
+In a similar fashion, one can prove that
+\[
+\sup_{u \in \X} J(u) = \infty,
+\]
+for example by taking the sequence $u_n(x) := \sin(nx) \chi(x)$, where $\chi$ is a cutoff function with support in $\Om$.
+
+\bpr
+The Nehari manifold
+\begin{equation*} \M := \left\{ u \in \X \setminus \{0\} \: : \: \int_\Om |\nabla u|^2 \, \mathrm{d}x = \int_\Om |u|^{p+1} \, \mathrm{d}x \right\} \end{equation*}
+is a natural constraint for $J$.
+\epr
+
+\begin{proof}
+First, notice that
+\[ 
+\dr J(u)[v] = \int_\Om \nabla u \cdot \nabla v \, \dr x - \int_\Om |u|^{p-1} uv \, \dr x,
+\]
+so that $G(u) = \langle \nabla J(u), u\rangle$ is actually given by $\|u\|_\X^2 - \|u\|_{L^{p+1}(\Om)}^{p+1}$, which means that a nonzero $u \in \X$ belongs to $\M$ if and only if
+\[
+\|u\|_\X^2 = \int_\Om |u|^{p+1} \, \dr x.
+\]
+Using Sobolev embedding we can find a constant $C_{p, \Om} > 0$ such that
+\[
+\|u\|_{p+1} \leq C_{p, \Om} \|u\|_\X,
+\]
+and therefore for any $u \in \M$ it turns out that
+\[
+\|u\|_\X^2 = \|u\|_{p+1}^{p+1} \leq C_{p, \Om} \|u\|_\X^{p+1} \stackrel{p>1}{\implies} \|u\|_\X^{p-1} \geq \frac{1}{C_{p, \Om}} > 0.
+\]
+This proves ({\romannumeral 1}) of \hyperref[prop.e.1]{Proposition \ref{prop.e.1}} with $r$ equal to a negative power of $C_{p, \Om}$. A simple computation shows that the second differential is given by
+\[
+\dr^2J(u)[v, w] = \int_\Om \nabla w \cdot \nabla v \, \dr x - p \int_\Om |u|^{p-1} wv \, \dr x,
+\]
+which computed at $v=w=u$ gives
+\[
+\dr^2J(u)[u, u] = \|u\|_\X^2 - p \|u\|_{p+1}^{p+1}.
+\]
+However, taking into account that $p > 1$, for $u \in \M$ we have
+\[
+\dr^2J(u)[u, u] =(1 - p) \|u\|_\X^2 \neq 0,
+\]
+which shows that $\M$ is a natural constraint for $J$.
+\end{proof}
+
+\brmk
+The functional is bounded from below on $\M$ since
+\[
+J \, \big|_{\M} (u) = \left( \frac{1}{2} - \frac{1}{p+1} \right) \|u\|_\X^2 \geq \left( \frac{1}{2} - \frac{1}{p+1} \right) r > 0.
+\]
+\ermk
+
+We proved that $\M$ is a natural constraint for $J$ so it only remains to prove that $J$ attains a minimum point on $\M$, provided\footnote{We will not prove it here, but the assertion is false when $p$ is equal to the critical exponent.} that $1<p < \frac{n+2}{n-2}$. Let $u_n \rightharpoonup \bar{u} \in \X$ be a minimizing sequence. From the compactness of the Sobolev embedding it follows that
+\[
+\int_\Om |u_n|^{p+1} \, \dr x \xrightarrow{n \to + \infty}  \int_\Om |\bar{u}|^{p+1} \, \dr x.
+\]
+Notice that $u_n \in \M$ for all $n \in \N$, and hence we have
+\[
+ \int_\Om |\bar{u}|^{p+1} \, \dr x = \lim_{n \to + \infty} \int_\Om |u_n|^{p+1} \, \dr x \geq r^2 \implies \bar{u} \not \equiv 0.
+ \]
+There are now two possibilities that we need to discuss separately: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $\|u_n\|_\X \to \|\bar{u}\|_\X$, then $\bar{u} \in \M$ and
+\[
+J \, \big|_\M (u) = \left( \frac{1}{2} - \frac{1}{p+1} \right) \|u\|_\X^2
+\]
+is lower semicontinuous. Therefore $\bar{u}$ is a minimizer for $J$ on $\M$.
+\item If $\lim_{n \to \infty} \|u_n\|_\X > \|\bar{u}\|_\X$, then
+\[
+\|\bar{u}\|_\X^2 = \mu \lim_{n \to \infty} \|u_n\|_\X^2,
+\]
+for some $\mu \in (0, \, 1)$. However, we have
+\[
+\|\bar{u}\|_\X^2 = \mu \lim_{n \to \infty} \int_\Om |u_n|^{p+1} \, \mathrm{d}x = \mu \|\bar{u}\|_{L^{p+1}(\Om)}^{p+1}
+\]
+and if we take $\nu \in (0, 1)$ such that $\nu^{p-1} = \mu$, then $\nu \bar{u} \in \M$. This is a contradiction since $\bar{u}$ is the limit of a minimizing sequence.\end{enumerate}

@@ -1,0 +1,750 @@
+ \chapter{Differential Calculus in Banach Spaces} \thispagestyle{empty}
+
+In this chapter, we generalize differential calculus on $\R^n$ to general Banach spaces $\X$ and $\Y$ and prove fundamental theorems such as the global inversion theorem. We will follow the first section of the book \cite{ambrosetti} closely.
+
+%%%%%%%%%%%%%%%%%%%%%% da rivedere
+\section{Introduction to the course}
+
+The main goal of this course is to introduce tools from analysis and topology to deal with the existence, uniqueness and regularity of solutions to nonlinear problems such as
+\begin{equation} \label{eq.1.1} \begin{cases}
+- \Delta u = f(x, \, u) & \text{if $x \in \Om$}, \\[.6em] u(x) = 0 & \text{if $x \in \partial \Om$}.
+\end{cases} \end{equation}
+A possible approach to look for solutions $u$ of \eqref{eq.1.1} with some regularity (for example, H\"{o}lder $C^{k, \, \alpha}(\Om)$ or Sobolev $W_0^{k, \, p}(\Om)$), would be to rewrite it as
+\[
+u - T(u) = 0,
+\]
+where $T$ is the operator defined by taking the inverse of the Laplace operator; namely,
+\[
+T(v)(x) = (-\Delta)^{-1} f(x, \, v).
+\]
+At this point, one can try to prove an appropriate fixed-point theorem that works under some assumptions on the nonlinearity $f$ and find a solution.
+
+In this course, however, we are mainly interested in exploiting the variational structure of \eqref{eq.1.1}. Setting aside for the moment all regularity concerns, notice that
+\[
+\int_\Om (-\Delta u)v \, \dr x = \int_\Om \nabla u \cdot \nabla v \, \dr x - \oint_{\partial \Om} v \frac{\partial u}{\partial \nu} \, \dr\sigma
+\]
+holds for all $v \in H_0^1(\Om)$. Since $u \, \big|_{\partial \Om} \equiv 0$, we infer that
+\[
+\int_\Om (-\Delta u)v \, \dr x = \int_\Om \nabla u \cdot \nabla v \, \dr x.
+\]
+Therefore, if $u$ is a solution of the nonlinear problem \eqref{eq.1.1}, then $u$ satisfies
+\begin{equation} \label{eq.1.4}
+\int_\Om \nabla u \cdot \nabla v \, \dr x = \int_\Om f(x, \, u)v \, \dr x \quad \text{for all $v \in H_0^1(\Om)$}.
+\end{equation}
+It remains to prove that we can always recover the identity \eqref{eq.1.4} starting from the variational framework. Let $\X := H_0^1(\Om)$, endow it with the homogeneous norm
+\[
+\|u \|_\X^2 := \int_\Om |\nabla u|^2 \, \dr x,
+\]
+and define
+\[ \cF (u) := \int_\Om F(x, \, u) \, \dr x, \quad \text{where $F(x, \, u) = \int_0^u f(x, \, s) \, \dr s$}.
+\]
+Finally, introduce the functional
+\[
+\cG(u) := \frac{1}{2} \|u\|_\X^2 - \cF(u),
+\]
+and notice that its directional derivative $D_v$ is given by
+\[
+D_v \cG(u) = \int_\Om \nabla u \cdot \nabla v \, \dr x - \int_\Om \partial_u F(x, \, u) v \, \dr x.
+\]
+Since $\partial_u F(x, \, u) = f(x, \, u)$ by definition, we just "proved" that \eqref{eq.1.4} is equivalent to the fact that the first variation of $\cG(u)$ is zero for all $v \in H_0^1(\Om)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Fréchet and Gâteaux derivative}
+
+Throughout this section, the symbols $\X$ and $\Y$ will always denote two Banach spaces and, unless otherwise stated, $U$ will always be an open subset of $\X$.
+
+\begin{definition}[$F$-differentiable] \index{Fréchet differentiability}
+A map $F : U \to \Y$ is said to be {\em (Fréchet) differentiable} at $u \in U$ if there exists a linear map $A \in \cL(\X, \, \Y)$ such that
+\begin{equation} \label{eq.2.1}
+F(u + h) = F(u) + Ah + o(\|h\|_\X)
+\end{equation}
+for all $h$ in a neighbourhood of $u$. The map $A$ is usually referred to as the {\em (Fréchet) differential} of $F$ at $u$ and denoted by either $\dr F(u)$ or $F^\prime(u)$.
+\end{definition}
+
+\begin{proposition} Let $F : U \to \Y$ be Fréchet differentiable at some $u \in U$. The following properties hold true:
+\begin{enumerate}[label=\textbf{(\arabic*)}, leftmargin=2.5\parindent]
+\item The differential $A$ of $F$ at $u$ is unique.
+\item The map $F$ is continuous at $u$.
+\item The notion of differentiability does not depend on the choice of {\em equivalent} norms on either $\X$ or $\Y$.
+\end{enumerate} \end{proposition}
+
+\begin{proof}Suppose that there are $A \neq B \in \cL(\X,\, \Y)$ which are both $F$-differentials at the same point $u \in U$. Using the definition \eqref{eq.2.1} gives
+\[
+\|Ah - Bh\|_\Y = o(\|h\|_\X).
+\]
+On the other hand, if $A \neq B$ then there must be a point $u_0 \in \X$ such that
+\[
+a := \|A u_0 - B u_0\|_\Y \neq 0.
+\]
+Now let $t \in \R \setminus \{0\}$ and set $u := t u_0 \in \X$. A simple computation shows that
+\[
+\frac{a}{\|u_0 \|_\X} = \frac{\|A u_0 - B x_0\|_\Y}{\| u_0 \|_\X} = \frac{ \| A u - B u \|_\Y }{\| u \|_\X},
+\]
+but the left-hand side is a constant that does not depend on $t$ so taking the limit as $t$ goes to zero leads to a contradiction. \end{proof}
+
+\begin{example}We now give a few explicit examples.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The constant map $F(u) \equiv c$ is differentiable and its differential $\dr F(u)$ is identically zero at all $u$.
+\item Let $A \in \cL(\X, \, \Y)$ be a linear map. Then
+\[
+A(u+h) - Au = Ah
+\]
+implies that $A$ is differentiable at all points $u \in \X$ and $\dr A(u) = A$. Notice that the remainder $o(\|h\|_\X)$ is, in this particular case, equal to zero.
+\item Let $B : \X \times \Y \to \mathfrak{Z}$ be a bilinear continuous map. By definition
+\[
+B(u+h,v+k) = B(u, v) + B(h, v) + B(u, k) + B(h, k),
+\]
+and, using the continuity at the origin, we easily infer that
+\[
+\| B(h, k) \|_{\mathfrak{Z}} \leq \|h\|_\X \|k\|_\Y.
+\]
+Then $B$ is differentiable at all $(u, \, v) \in \X \times \Y$ and the differential is given by
+\[
+\dr B(u, v)[h, k] := B(h, v) + B(u, k).
+\]
+\item Let $\X$ be a Hilbert space endowed with the scalar product denoted by $\langle \cdot, \, \cdot \rangle_\X$, and consider the map
+\[
+F(u) := \langle u, u \rangle_\X = \|u\|_\X^2.
+\]
+Computing $F$ at $u + h$ by means of the scalar product leads to
+\[
+F(u + h) - F(u) = 2 \langle u, h \rangle_\X + \|h\|_\X^2 = 2 \langle u,h \rangle_\X + o(\|h\|_\X),
+\]
+which means that $F$ is differentiable at all $u \in \X$ with differential given by
+\[
+\dr F(u)[h] := 2 \langle u, h \rangle_\X.
+\]
+\end{enumerate}
+\end{example}
+
+\begin{proposition} \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Let $F, \, G : U \to \Y$ be $F$-differentiable maps at some $u \in U$. Then $aF + bG$ is also $F$-differentiable at $u$ for all $a,b \in \R$ and
+\[
+\dr(aF + bG) = a  \dr F + b \dr G.
+\]
+\item Let $F : U \to \Y$ and $G : V \subset \Y \to \mathfrak{Z}$ with $F(U) \subset V$. If $F$ is $F$-differentiable at $u \in U$ and $G$ at $v := F(u) \in V$, then $G \circ F$ is also $F$-differentiable at $u$ and
+\[
+\dr(G \circ F)(u)[h] = \dr G(v)\circ \dr F(u) [h].
+\]
+\end{enumerate} \end{proposition}
+
+\begin{definition} \index{$C^1$ function}
+A map $F : U \to \Y$ belongs to $C^1(U, \Y)$ if it is differentiable in $U$ and
+\[
+U \ni u \longmapsto \dr F(u) \in \cL(\X, \Y)
+\]
+is a continuous mapping.
+\end{definition}
+
+\begin{notation}
+A map $F$ from a Banach space $\X$ to $\R$ is known as {\em functional}\index{functional}. If $F$ is differentiable, then the differential belongs to the dual space
+\[
+\dr F(u) \in \cL(\X, \, \R) = \X^\ast.
+\]
+Therefore, if $\X$ is a Hilbert space, an application of Riesz's (representation) theorem shows that there exists a {\bf unique} vector $\nabla F(u) \in \X$, called {\em gradient}\index{gradient} of $F$ at $u$, such that
+\[
+\dr F(u)[h] = \langle \nabla F(u), h \rangle_\X \quad \text{for all $h \in \X$}.
+\]
+In the general framework of Banach spaces, the gradient is defined as the unique element satisfying the identity
+\[
+\dr F(u)[h] = \langle \nabla F(u), h \rangle_{\X^\ast, \X} \quad \text{for all $h \in \X$},
+\]
+where $\langle\cdot, \cdot \rangle$ here denotes the duality coupling $(\X,\X^\ast)$ and $\nabla F(u) \in \X^\ast$.\end{notation}
+
+\begin{definition}
+Let $\X$ be a Hilbert space and $F : U \subset \X \to \X$. We say that $F$ is a \textit{variational operator}\index{variational operator} if there exists a functional $J : U \to \R$ such that
+\[
+F(u) = \nabla J(u) \quad \text{for all $u \in U$}.
+\]
+\end{definition}
+
+\begin{definition}[$G$-differentiability] \index{Gâteaux differentiability}
+A map $F : U \to \Y$ is said to be \textit{Gâteaux-differentiable} at $u \in U$ if there exists a linear map $A \in \cL(\X,  \Y)$ such that
+\begin{equation} \label{eq.2.3}
+\frac{F(u + th) - F(u)}{t} \xrightarrow{t \to 0^+} Ah.
+\end{equation}
+The (uniquely determined) map $A$ is called {\em $G$-differential} of $F$ at $u$ and it is usually indicated with the symbol $\dr_G F(u)$.
+\end{definition}
+
+\begin{remark}A Fréchet-differentiable function is also Gâteaux-differentiable, but the opposite is false. Indeed, $G$-differentiability is even weaker than continuity. \end{remark}
+
+\begin{example} Consider the function $F : \R^2 \to \R$ defined by
+\[ 
+F(s, t) := \begin{cases}  \displaystyle\left[ \frac{s^2t}{s^4 + t^2} \right]^2 & \text{if $t \neq 0$},
+\\[.8em] 0 & \text{if $t = 0$}.\end{cases}
+\]
+The reader might prove that the function $F$ is not continuous at $t = 0$ (easy!), but it is Gâteaux-differentiable at that same point.
+\end{example}
+
+\begin{theorem}\index{mean-value theorem} \label{mvt}
+Let $F : U \to \Y$ be $G$-differentiable in $U$. Then
+\begin{equation} \label{eq.2.4}
+\| F(u) - F(v) \|_\Y \leq \sup \left\{ \| \dr_G F(w) \| \: : \: w \in [u, v] \right\} \|u-v\|_\X
+\end{equation}
+where $[u, v] := \{tu + (1-t)v \: : \: t \in [0, 1] \} \subset U$.
+\end{theorem}
+
+\begin{proof}
+We can assume without loss of generality that $F(u) \neq F(v)$. Using the Hahn-Banach theorem, we can find $\psi \in \Y^\ast$, $\|\psi\| = 1$, such that
+\begin{equation} \label{eq.2.5}
+\left\langle \psi, F(u) - F(v) \right\rangle_{\Y^\ast, \Y} = \|F(u) - F(v)\|_\Y.
+\end{equation}
+Now let $\gamma(t) := tu + (1-t)v$ be a parametrization of the segment $[u, \, v]$ and consider the function (which domain is $[0, \, 1]$) defined by
+\[
+h(t) := \left\langle \psi, F(\gamma(t)) \right\rangle_{\Y^\ast, \Y}.
+\]
+Notice that for all admissible $t,\, \tau \in [0, \, 1]$ we have
+\[
+\gamma(t + \tau) = \gamma(t) + \tau(u - v),
+\]
+and therefore we can compute the increment of $h$ as follows:
+\[
+\frac{h(t + \tau) - h(t)}{\tau} = \left\langle \psi,  \frac{F(\gamma(t) + \tau(u-v)) - F(\gamma(t))}{\tau} \right\rangle_{\Y^\ast, \Y}.
+\]
+Let $\tau \to 0$. Since $F$ is $G$-differentiable we find that the derivative of $h$ is equal to
+\begin{equation} \label{eq.2.6}
+h^\prime(t) = \left\langle \psi, \dr_G F(tu + (1-t)v)(u-v) \right\rangle_{\Y^\ast, \Y}.
+\end{equation}
+However, we defined $h$ in such a way that its domain is $[0, \, 1]$. We can this apply the {\bf mean-value theorem} and find $\theta \in (0, \, 1)$ for which we have
+\[
+h^\prime(\theta) = h(1) - h(0).
+\]
+Plug into this identity both \eqref{eq.2.5} and \eqref{eq.2.6}. It turns out that
+\[ \begin{aligned}
+\|F(u) - F(v)\|_\Y & = h(1) - h(0)
+\\& = h^\prime(\theta)
+\\& =  \left\langle \psi, \dr_G F(\theta u + (1-\theta)v)(u-v) \right\rangle_{\Y^\ast, \Y} \leq
+\\& \leq \underbrace{\|\psi\|}_{= 1} \| \dr_G F(\theta u + (1-\theta)v) \| \|u - v\|_\X.
+\end{aligned} \]
+Since $\theta u + (1-\theta)v$ belongs to $[u, \, v]$, the inequality \eqref{eq.2.4} follows by taking the supremum on both sides with respect to $\theta \in [0,1]$.\end{proof}
+
+\begin{theorem}
+Let $F : U \to \Y$ be a $G$-differentiable map with $G$-differential
+\[
+\dr_G F : U \longrightarrow \cL(\X, \, \Y)
+\]
+continuous at some $u_0 \in U$. Then $F$ is $F$-differentiable at $u_0$ and there results
+\[
+\dr F(u_0) = \dr_G F(u_0).
+\]
+\end{theorem}
+
+\begin{proof}
+It suffices to prove that
+\[
+R(h) := F(u_0 + h) - F(u_0) - \dr_G F(u_0)[h]
+\]
+is $o(\|h\|_\X)$. If we choose $\epsilon>0$ small enough to guarantee the inclusion
+\[
+B_\epsilon(u_0) \subset U,
+\]
+$R$ is $G$-differential and, more precisely, we have
+\[
+\dr_G R(h)[k] = \dr_G F(u_0 + h)[k] - \dr_G F(u_0)[k].
+\]
+Applying the mean-value property \eqref{eq.2.4} with $[u, \, v] = [0, \, h]$ leads to
+\[ \begin{aligned}
+\| R(h) - \underbrace{R(0)}_{= 0}\| & \leq \sup_{t \in [0, 1]} \| \dr_G R(th) \| \|h\| 
+\\ & = \sup_{t \in [0, 1]} \| \dr_G F(u_0 + th) - \dr_G F(u_0) \| \|h\|.
+\end{aligned} \]
+This concludes the proof because $\dr_G F(u_0)$ is continuous by assumption, and hence the supremum goes to zero as $\|h\|$ becomes small:
+\[
+\sup_{t \in [0, 1]} \| \dr_G F(u_0 + th) - \dr_G F(u_0) \| \xrightarrow{ \|h\| \to 0} 0.
+\]
+\end{proof}
+
+We conclude this section with a simple remark. Let $F$ be a continuous function defined on $[a, b]$ taking values in a Banach space $\X$ and set
+\[
+\Phi(t) := \int_a^t F(\xi) \, \dr\xi.
+\]
+
+\begin{exercise}
+Show that $\Phi$ is a $F$-differentiable map whose differential coincides with $F(t_0)$ at all $t_0 \in [a, \, b]$.
+\end{exercise}
+
+This can be done, for example, using the canonical identification between $\X$ and its dual space $\X^\ast$. In any case, it follows from \hyperref[mvt]{Theorem \ref{mvt}} that
+\[
+\| \Phi(t) - \Phi(s) \| \leq \sup \{ \|F(\xi) \| \: : \: \xi \in [s, t] \} \times |t-s|,
+\]
+and therefore, if $F$ is identically zero on $[a, b]$, then $\Phi$ is constant. This means that $\Phi$ is, up to a constant, the unique primitive of $F$ as it happens in the Euclidean setting.
+
+\begin{corollary} Let $F \in C^1(U, \Y)$ and suppose that $[u, v] \subset U$. Then the map
+\[
+F \circ \gamma : [0,1] \ni t \longmapsto F(tu + (1-t)v) \in \Y
+\]
+belongs to $C^1([0, 1], \Y)$ and the following integral formula holds:
+\[
+F(v) - F(u) = \int_{0}^1 F^\prime(tu + (1-t)v)[u-v] \, \dr t.
+\]
+\end{corollary}
+
+\section{Nemitski operators}
+
+In this section, we will introduce the notion of {\em Nemitski operator} and investigate specific properties such as continuity, differentiability and its relation with the functional
+\[
+F(u) = \frac{1}{2} \|u \|_\X^2 - \Phi(u).
+\]
+
+\bd[Nemitski operator] \index{Nemitski operator}
+Let $f : \Om \times \R \to \R$ be a function. The {\em Nemitski operator} associated to $f$ is the map
+\[
+\scM(\Om, \R) \ni u \longmapsto f( \cdot, u(\cdot)).
+\]
+Here $\scM(\Om, \, \R)$ denotes the set of all real-valued measurable maps defined on $\Om$. The symbol $f$ will denote both the function and the associated operator.
+\ed
+
+\brmk
+The operator $f$ sends $\scM(\Om,\R)$ in the set of real-valued functions defined on $\Om$ but, a priori, we have no guarantee that $f( \cdot, u(\cdot))$ is measurable.
+\ermk
+
+\bd \index{Carathéodory condition}
+Let $f : \Om \times \R \to \R$ be a function. We say that $f$ satisfies the {\em Carathéodory condition} if it satisfies the following properties:
+\begin{enumerate}[label=\textbf{(\roman*)}, topsep=.05em]
+\item The map $s \mapsto f(x, \, s)$ is continuous for almost every $x \in \Om$.
+\item The map $x \mapsto f(x, \, s)$ is measurable for all $s \in \R$.
+\end{enumerate}
+\ed
+
+\bl
+If $f$ satisfies the Carathéodory condition, then the associated Nemitski operator takes values in $\scM(\Om, \R)$. In other words, the map
+\[
+x \longmapsto f(x, u(x))
+\]
+is measurable for all $u \in \scM(\Om, \R)$.
+\el
+
+\begin{proof}
+Let $u \in \scM(\Om, \R)$. There is a sequence of simple functions $(\chi_n)_{n \in \N}$ that converges to $u$ at almost every $x \in \Om$. From the Carathéodory condition it follows that
+\[
+\text{$f(\cdot, \chi_n(\cdot))$ is measurable and $f(\cdot, \chi_n(\cdot)) \xrightarrow{n \to + \infty} f(\cdot, \, u(\cdot))$ a.e. in $\Om$}.
+\]
+In particular, the function $f(\cdot, u(\cdot))$ is almost everywhere the pointwise limit of a sequence of measurable functions, which means that $f(u)$ is measurable.
+\end{proof}
+
+\subsection{Continuity of Nemitski operators}
+
+Let $p, \, q \geq 1$ and let $f$ be a function. We would like to investigate properties of the Nemitski operator under the additional growth condition:
+\begin{equation} \label{eq.3.1}
+|f(x, \, s)| \leq a + b |s|^{\frac{p}{q}},
+\end{equation}
+where $a$ and $b$ are two positive constants.
+
+\bthm \label{thm.3.1}
+Let $\Om \subset \R^n$ be an open bounded\footnote{This is not strictly necessary. If, for example, we replace $a$ with a summable function everything works.} set. Suppose that $f$ satisfies the Carathéodory condition and the growth estimate \eqref{eq.3.1}. Then
+\[
+f : L^p(\Om) \to L^q(\Om)
+\]
+is a continuous operator. 
+\ethm
+
+Before we can prove this result, we need to recall a well-known lemma which will make it possible for us to apply {\em Lebesgue's dominated convergence theorem}.
+
+\bl \label{lemma3...2}
+Let $(u_n)_{n \in \N} \subset L^p(\Om)$ be a strongly convergent sequence and let $u \in L^p(\Om)$ be its limit. Then there exists a subsequence $(n_k)_{k \in \N}$ and a function $h \in L^p(\Om)$ such that
+\begin{equation} \label{eq.3.2}
+\text{$u_{n_k} \xrightarrow{\text{a.e. in $\Om$}} u$ and $|u_{n_k}(x)| \leq h(x)$ at a.e. $x \in \Om$}.
+\end{equation}
+\el
+
+%\begin{proof} 
+%The argument is completely standard. Indeed, one defines the sequence
+%\[
+%v_j := \sum_{k = 1}^j |u_{n_k} - u_{n_{k-1}}|
+%\]
+%and proves that $v_j$ converges to some $v \in L^p(\Om)$ positive. The only nontrivial point is how to choose the function $h$, but it is not hard to verify that $h := v + |u|$ works just fine.
+%\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm.3.1}]
+First, notice that the Nemitski operator is well-defined because \eqref{eq.3.1} implies
+\[
+|f(u)|^q \lesssim_q a^q + b^q |u|^p,
+\]
+and the right-hand side belongs to $L^1(\Om)$ by assumption. Now let $u_n$ be such that
+\[
+\|u_n - u\|_{L^p(\Om)} \xrightarrow{n \to + \infty} 0.
+\]
+Using \hyperref[lemma3...2]{Lemma \ref{lemma3...2}} we can find a subsequence $(n_k)_{k \in \N}$ and a function $h \in L^p(\Om)$ satisfying \eqref{eq.3.2}. It follows from the Carathéodory condition and \eqref{eq.3.1} that
+\[
+\text{$f(u_{n_k}) \xrightarrow{ \text{a.e. in $\Om$} } f(u)$ and $|f(u_{n_k})| \leq a + b |h|^{\frac{p}{q}} \in L^q(\Om)$}.
+\]
+We can now apply Lebesgue's dominated convergence theorem and infer that
+\[
+\|f(u_{n_k}) - f(u)\|_{L^q(\Om)}^q = \int_\Om |f(u_{n_k}) - f(u)|^q \, \dr x \to 0,
+\]
+which gives the continuity of $f$.
+\end{proof}
+
+\subsection{Differentiability of Nemitski operators}
+
+Let $p > 2$ and suppose that $f$ has a partial derivative $f_s := \partial_s f$ satisfying the Carathéodory condition and the growth condition
+\begin{equation} \label{eq.3.3}
+|f_s(x, \, s)| \leq a + b |s|^{p-2}.
+\end{equation}
+The previous result shows that $f_s$ is a continuous operator from $L^p(\Om)$ to $L^r(\Om)$, where
+\[
+r = \frac{p}{p - 2}.
+\]
+As a consequence, given $v \in L^p(\Om)$, the function defined by setting
+\[
+f_s(u)v : x \longmapsto f_s(x, u(x)) v(x)
+\]
+satisfies the regularity condition $f_s(u)v \in L^{p^\prime}(\Om)$, where $p^\prime$ is the conjugate exponent of $p$ since it is easy to verify that
+\[
+\frac{1}{p} + \frac{1}{r} = \frac{p-2+1}{p} = \frac{p-1}{p} = \frac{1}{p'}.
+\]
+
+\bthm
+Let $\Om \subset \R^n$ be an open bounded set and $p > 2$. Suppose that $f$ satisfies the Carathéodory condition and the estimate
+\[
+|f(x, 0)| \leq C < \infty.
+\]
+Assume also that $f$ has partial derivative $f_s$ that satisfies the Carathéodory condition and the growth condition \eqref{eq.3.3}. Then the Nemitski operator 
+\[
+f : L^p(\Om) \to L^{p^\prime}(\Om)
+\]
+is $F$-differentiable on $L^p(\Om)$ with differential given by
+\begin{equation} \label{eq.3.4}
+\dr f(u)[v] = f_s(u)v.
+\end{equation}
+\ethm
+
+\begin{proof}
+By integrating \eqref{eq.3.3} we can find positive constants $c$ and $d$ such that
+\[
+|f(x, s)| \leq c + d |s|^{p-1},
+\]
+which immediately gives (\hyperref[thm.3.1]{Theorem \ref{thm.3.1}}) that $f$ is a continuous operator from $L^p(\Om)$ to $L^{p^\prime}(\Om)$. It suffices to prove that
+\[
+\| f(u + v) - f(u) - f_s(u) v \|_{L^{p^\prime}(\Om)} = o(\|v\|_{L^p(\Om)}).
+\]
+
+\paragraph{Step 1.} The classical mean-value theorem applied to the real-valued function $\R \ni u \mapsto f(\cdot, \, u)$ gives the representation formula
+\[
+|f(u + v) - f(u) - f_s(u) v| = |v w|,
+\]
+where
+\[
+w(x) := \int_0^1 [f_s(x, u + \xi v) - f_s(x, u)] \, \dr\xi.
+\]
+Using H\"{o}lder inequality we find that
+\[
+\| f(u + v) - f(u) - f_s(u) v \|_{L^{p^\prime}(\Om)} \leq \|v\|_{L^p(\Om)} \|w\|_{L^r(\Om)},
+\]
+which means that we only need to prove that $ \|w\|_{L^r(\Om)}$ goes to zero as $\|v\|_{L^p(\Om)} \to 0$.
+
+\paragraph{Step 2.} A simple application of Fubini-Tonelli's theorem shows that
+\[
+\begin{aligned} \| w \|_{L^r(\Om)}^r & \leq \int_\Om \dr x \int_0^1 \dr\xi |f_s(x, u + \xi v) - f_s(x, u)|^r \leq
+\\ & \leq \int_0^1 \dr\xi \int_\Om \dr x |f_s(x, u + \xi v) - f_s(x, u)|^r =
+\\ & = \int_0^1 \| f_s(\cdot, u(\cdot) + \xi v(\cdot)) - f_s(\cdot, u(\cdot)) \|_{L^r(\Om)}^r,
+\end{aligned}
+\]
+The right-hand side goes to zero because, as observed earlier, the operator $f_s$ is continuous from $L^p(\Om)$ to $L^r(\Om)$ and this concludes the proof.
+\end{proof}
+
+The limit case $p = 2$ is much more involved and, actually, $F$-differentiability is only attainable under very restrictive assumptions on the function $F$.
+
+\bpr
+Let $\Om \subset \R^n$ be an open bounded set and suppose that both $f$ and $f_s$ satisfy the Carathéodory condition and the growth condition
+\[
+|f_s(x, s)| \leq C < \infty.
+\]
+Then the Nemitski operator $f : L^2(\Om) \to L^2(\Om)$ is continuous and $G$-differentiable, with $G$-differential given by
+\[
+\dr_G f(u)[v]= f_s(u)v.
+\]
+Moreover, if $f$ is $F$-differentiable at some $u \in \Om$, then we can always find measurable functions $a, \, b \in \scM(\Om, \R)$ such that
+\[
+f(x, u(x)) = a(x) + b(x) u(x).
+\]
+\epr
+
+\subsection{Potential operators}
+
+We start off this section by recalling the Sobolev embedding theorem in its full generality. In this course, we will essentially need to know that
+\[
+H_0^1(\Om) \hookrightarrow L^p(\Om)
+\]
+is compact under certain assumptions on $p$.
+
+\bthm[Sobolev embedding] \index{Sobolev embedding theorems} \label{sobolevtheorem}
+Let $\Om \subset \R^n$ be a bounded open set with Lipschitz boundary and let $k \geq 1$ and $1 \leq p \leq \infty$. Then the following inclusions are continuous: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}, leftmargin=2.5\parindent]
+\item If $kp < n$, then $H^{k, p}(\Om) \hookrightarrow L^q(\Om)$ for all $1 \leq q \leq \frac{np}{n - kp}$.
+\item If $kp = n$, then $H^{k, p}(\Om) \hookrightarrow L^q(\Om)$ for all $q \in [1, \infty)$.
+\item If $kp > n$, then $H^{k, p}(\Om) \hookrightarrow C^{0, \, \alpha}(\bar{\Om})$, where
+\[
+\alpha = \begin{cases}
+k - \frac{n}{p} & \text{if $k - \frac{n}{p} < 1$},
+\\[.6em] [0, \, 1) & \text{if $k - \frac{n}{p} = 1$ and $p > 1$},
+\\[.6em] 1 & \text{if $k - \frac{n}{p} > 1$}.
+\end{cases} 
+\]
+\end{enumerate}
+Furthermore, the inclusions above are compact if we restrict the ranges of $p,q$ and $\alpha$:
+\begin{enumerate}[label=$\mathbf{(\alph*)^\prime}$, leftmargin=2.5\parindent]
+\item If $kp < n$, then $H^{k, p}(\Om) \hookrightarrow L^q(\Om)$ for all $1 \leq q < \frac{np}{n - kp}$.
+\item If $kp = n$, then $H^{k, p}(\Om)\hookrightarrow L^q(\Om)$ for all $q \in [1, \infty)$.
+\item If $kp > n$, then $H^{k, p}(\Om) \hookrightarrow C^0(\bar{\Om})$.
+\end{enumerate}
+\ethm
+
+\bex
+Let $\X := H_0^1(\Om)$ and let $f$ be a function satisfying the Carathéodory condition and
+\begin{equation} \label{eq.3.6}
+|f(x, \, s)| \leq a + b |s|^\sigma,
+\end{equation}
+where
+\[
+\sigma \leq \frac{n+2}{n-2} =: 2^\ast - 1
+\]
+if $n \geq 3$, and $\sigma > 0$ arbitrary if $n = 1$ or $n = 2$. We proved in \hyperref[thm.3.1]{Theorem \ref{thm.3.1}} that $f$ is a continuous operator between $L^{2^\ast}(\Om)$ and $L^q(\Om)$ for all $q$ such that
+\[
+q \geq \frac{2n}{n+2}.
+\]
+It follows that
+\[
+u \in \X \hookrightarrow L^{2^\ast}(\Om) \implies f(u) \in L^{\frac{2n}{n+2}}(\Om),
+\]
+which ultimately means that for a given $v \in \X$ we have $f(u)v \in L^1(\Om)$. We can now define $N(u)$ as the unique element satisfying
+\[
+(N(u), v)_\X = \int_\Om f(x, u(x)) v(x) \, \dr x.
+\]
+We claim that $N$ is a continuous map. Indeed, by definition we have that
+\[
+\| N(u) - N(v) \| = \sup_{\|w\|_\X \leq 1} \left\{ \int_\Om [f(x, u) - f(x, v)] w(x) \, \dr x \right\},
+\]
+and thus, using the appropriate Sobolev embedding, we can infer that
+\[
+\| N(u) - N(v) \| \lesssim \| f(x, u) - f(x, v) \|_{L^{\frac{2n}{n+2}}(\Om)}.
+\]
+Since $f$ is continuous as an operator from $L^{2^\ast}(\Om)$ to $L^{\frac{2n}{n+2}}(\Om)$, the right-hand side of the inequality above converges to zero as soon as $\|u - v \|_X \to 0$ proving the claim.
+\eex
+
+We are now ready to show that requiring the growth condition \eqref{eq.3.6} on the nonlinearity $f$ is enough for its integral to be well-defined and, actually, differentiable.
+
+\bthm
+Let $\Om \subset \R^n$ be an open bounded set and suppose that $f$ satisfies the Carathéodory condition and the growth condition \eqref{eq.3.6}. Then
+\[
+\Phi(u) := \int_\Om F(x, u) \, \dr x
+\]
+belongs to $C^1$ and its gradient is given by the potential operator $N(u)$.
+\ethm
+
+\begin{proof}
+Integrate \eqref{eq.3.6} to find positive constants $c$ and $d$ such that
+\begin{equation} \label{eq.3.7}
+|F(x, s)| \leq c + d |s|^{2^\ast},
+\end{equation}
+which immediately gives that $F(\cdot, u(\cdot)) \in L^1(\Om)$. It follows that its integral $\Phi(u)$ is well-defined, continuous and differentiable on $\X$. Furthermore, we have
+\[
+\Phi^\prime(u)[v] = \int_\Om f(x, u(x)) v(x) \, \dr x,
+\]
+and the right-hand side coincides with the element $(N(u), v)_\X$ so the uniqueness concludes.
+\end{proof}
+
+\brmk
+If $\Om$ is not bounded, then the same argument works if the growth is adjusted to be compatible with embeddings valid for unbounded domains (see \cite{DINEZZA2012521}).
+\ermk
+
+\section{Higher derivatives and partial derivatives}
+
+Let $F \in C(U, \Y)$ be a differentiable function. The differential maps $U$ into $\cL(\X, \, \Y)$, a Banach space, so it makes sense to ask whether or not it is differentiable.
+
+\bd \index{Fréchet differentiable!twice}
+A map $F : U \to \Y$ is said to be {\em twice Fréchet-differentiable} at some $u^\ast \in U$ if $\dr F$ is differentiable at $u^\ast$. The second differential of $F$ at $u^\ast$ is given by
+\[
+\dr^2 F(u^\ast) := \dr F^\prime(u^\ast).
+\]
+If $F$ is twice differentiable at all points of $U$ we say that $F$ is twice differentiable in $U$.
+\ed
+
+According to the definition above, the second differential $\dr^2 F(u^\ast)$ is a linear continuous map between $\X$ and $\cL(\X, \Y)$, that is,
+\[
+\dr^2 F(u^\ast) \in \cL(\X, \cL(\X, \Y)).
+\]
+
+\brmk
+It is often useful to regard $\dr^2 F(u^\ast)$ as a bilinear map on $\X$. This is always possible because there is a one-to-one correspondence
+\[
+\cL_2(\X, \Y) \cong \cL(\X, \cL(\X, \Y)).
+\]
+\ermk
+
+\begin{proof}
+Let $A \in \cL(\X, \cL(\X, \Y))$. We can associate to $A$, in a unique way, a bilinear operator defined on $\X$ by setting
+\[
+\Phi_A(u, v) := A(u)[v].
+\]
+Vice versa, given a bilinear map $\Phi$ and $h \in \X$, it is easy to see that
+\[
+k \longmapsto \Phi(h, k)
+\]
+is a continuous linear map from $\X$ to $\Y$. Therefore, we can associate to $\Phi$ the uniquely determined map
+\[
+A : \X \ni h \longmapsto \Phi(h, \cdot) \in \cL(\X, \Y).
+\]
+Notice that the one-to-one correspondence defined in this way is not only an isomorphism, but also an isometry with respect to the operator norms:
+\[ \begin{aligned}
+\| A \|_{\cL(\X, \cL(\X, \Y))} & = \sup_{\|h\| \leq 1} \| A(h) \|_{\cL(\X, \Y)} =
+\\ & = \sup_{\|h\| \leq 1} \sup_{\|k\| \leq 1} \| \Phi(h, k) \| = \| \Phi \|_{\cL_2(\X, \Y)}.
+\end{aligned} \]
+\end{proof}
+
+From now on, we will always identify $\dr^2 F(u^\ast)$ with the bilinear map given by the isomorphism described above. Furthermore, if $F$ is differentiable twice in $U$ and
+\[
+F^{\prime \prime}(u) := \dr^2 F(u)
+\]
+is continuous, then we say that $F$ belongs to $C^2(U, \Y)$.
+
+\bpr
+Let $F : U \to \Y$ be a function that is twice differentiable at some $u \in U$ and set
+\[
+F_h(u) := \dr F(u)[h].
+\]
+Then $F_h$ is differentiable at $u$ and
+\[
+\dr F_h(u) = \dr^2 F(u)[h].
+\]
+\epr
+
+%\begin{proof}
+%Notice that $F_h$ is given by the composition
+%\[
+%u \xrightarrow{\dr F} \dr F(u) \xrightarrow{I_h} \dr F(u)[h]. 
+%\]
+%The conclusion follows from the usual {\em chain rule} property of the derivative operator.
+%\end{proof}
+
+\bl[Schwarz] \index{Schwarz lemma} \label{schwaradas}
+Let $F : U \to \Y$ be twice-differentiable at some $u \in U$. Then
+\[
+F^{\prime \prime}(u) \in \cL_2^s(\X, \, \Y),
+\]
+which means that the second differential is a {\bf symmetric} bilinear form.
+\el
+
+\begin{proof}
+Let $h, \, k \in \X$ be small enough ($ \| h \|_\X + \|k\|_\X < \epsilon$) and set
+\[ \begin{aligned}
+& \psi(h, k) := F(u+h+k) - F(u+k) - F(u+h) + F(u),
+\\ & \gamma_h(\xi) := F(u + h + \xi) - F(u + \xi),
+\end{aligned} \]
+in such a way that $\psi(h, k) = \gamma_h(k) - \gamma_h(0)$. Fix $h$ and define
+\[
+g_h : B_\epsilon \subset \X \to \Y, \qquad g_h(k) := \psi(h, k) - \dr^2 F(u)[h, k].
+\]
+The map $k\mapsto \dr^2F(u)[h, k]$ is well-defined and linear so we can apply \hyperref[mvt]{Theorem \ref{mvt}} obtaining the estimate
+\[
+\| \psi(h, k) - \dr^2 F(u)[h, k] \|_\Y \leq \|k\|_\X \sup \left\{ \| \dr \gamma_h(tk) - \dr^2F(u)[h, \cdot] \|_{\cL(\X, \, \Y)} \: : \: t \in [0, 1] \right\}.
+\]
+Since $\dr \gamma_h(tk) = \dr F(u+h+tk) - \dr F(u+tk)$ and $F$ is differentiable twice at $u$ we have
+\[
+\dr F(u+h+tk) - \dr F(u+tk) = \dr^2F(u)[h + tk] - \dr^2 F(u)[tk] + o(tk) + o(tk + h),
+\]
+which immediately implies
+\begin{equation} \label{eq.7.1}
+\begin{aligned} \| \psi(h, k) - \dr^2 F(u)[h, k] \|_\Y & \leq \|k\|_\X \sup_{0 \leq t \leq 1}  \| o(tk) + o(tk + h) \|_\X \leq
+\\ & \leq \epsilon(\|k\|_\X + 2 \|h\|_\X) \|k\|_\X, \end{aligned}
+\end{equation}
+provided that $\epsilon$ is small enough. If we exchange the roles of $h$ and $k$, in a similar fashion we are able to obtain the estimate
+\begin{equation} \label{eq.7.2}
+\| \psi(h, k) - \dr^2 F(u)[k, h] \|_\Y \leq  \epsilon(\|h\|_\X + 2 \|k\|_\X) \|h\|_\X.
+\end{equation}
+Now notice that $\psi$ is a bilinear symmetric form by construction so combining \eqref{eq.7.1} and \eqref{eq.7.2} yields
+\[ \begin{aligned}
+\| \dr^2 F(u)[h, k] - \dr^2 F(u)[k, h] \|_\Y & \leq (2 \|k\|_\X^2 + 2 \|h\|_\X^2 + 2 \|h\|_\X \|k\|_\X)\epsilon \leq
+\\ & \leq 3 ( \|k\|_\X^2 + \|h\|_\X^2)\epsilon.
+\end{aligned} \]
+The differential $\dr^2F(u)[h, k]$ is homogeneous of degree two so the inequality holds also for all $h$ and $k$ with arbitrary norm and this concludes the proof.
+\end{proof}
+
+We can generalise all these notions and introduce the $(n+1)$th derivatives via an inductive process. Let $F : U \to \Y$ be a $n$-times differentiable function in $u \in U$ and recall that
+\[
+F^{(n)}(u) := \dr^n F(u) \in \cL_n(\X, \Y) 
+\]
+via the identification with multilinear maps. The $(n+1)$th differential at $u$ can be defined as the differential of $F^{(n)}$, namely
+\[
+\dr^{n+1} F(u) := \dr F^{(n)}(u) \in \cL_{n+1}(\X, \Y).
+\]
+
+\bl\index{Schwarz lemma!multilinear}
+Let $F : U \to \Y$ be a function that is $n$ times differentiable in $U$. Then
+\[
+(h_1, \dots, h_n) \longmapsto \dr^n F(u)[h_1, \dots, h_n]
+\]
+is a symmetric multilinear form.
+\el
+
+\subsection{Partial derivatives and Taylor's formula}
+
+Let $(u^\ast, \, v^\ast) \in \X \times \Y$ be a fixed point and consider the evaluation mappings:
+\[
+\sigma_{v^\ast}(u) := (u, v^\ast) \quad \text{and} \quad \tau_{u^\ast}(v) := (u^\ast, v).
+\]
+The derivatives of $\sigma_{v^\ast}$ and $\tau_{u^\ast}$ are easy to compute and they are given respectively by
+\[
+\sigma := \dr\sigma_{v^\ast} : h \longmapsto (h, 0) \quad \text{and} \quad \tau := \dr\tau_{u^\ast} : k \longmapsto (0, k).
+\]
+
+\bd \index{partial derivatives}
+Let $Q \subset \X \times \Y$ be an open set and $(u^\ast, \, v^\ast) \in \X \times \Y$. We say that a function $F : Q \longrightarrow \mathfrak{Z}$ is differentiable at the point $(u^\ast, \, v^\ast)$ with respect to $u$ if
+\[
+F \circ \sigma_{v^\ast}
+\]
+is differentiable at $u^\ast$. The linear map
+\[
+\dr_u F(u^\ast, \, v^\ast) := \dr ( F \circ \sigma_{v^\ast} )(u^\ast)
+\]
+is the partial derivative of $F$ with respect to $u$ and it is usually denoted by $F_u$.
+\ed
+
+\bpr
+Let $F : Q \to \mathfrak{Z}$ be a differentiable map at the point $(u^\ast, \, v^\ast) \in Q$. Then $F$ has partial derivatives with respect to $u$ and $v$ respectively given by
+\[ \begin{aligned}
+& \dr_u F(u^\ast, v^\ast)[h] = \dr F(u^\ast, v^\ast)[\sigma(h)],
+\\ & \dr_v F(u^\ast, v^\ast)[k] = \dr F(u^\ast, v^\ast)[\tau(k)].
+\end{aligned} \]
+\epr
+
+In a similar fashion one can define higher-order partial derivatives. For example, if $F$ has $u$-partial derivative at all $(u, \, v) \in Q$, we can define the map
+\[
+F_u(u, v) := \dr_u F(u, v).
+\]
+Then the partial derivative $\dr_{u, v} F(u^\ast, v^\ast)$ is the $v$-derivative of the map $F_u$, namely
+\[
+F_{u, v}(u^\ast, v^\ast) := \dr_v F_u(u^\ast, v^\ast).
+\]
+
+\bthm
+Suppose that $F : Q \to \mathfrak{Z}$ has both partial derivatives in a neighbourhood of $(u^\ast, \, v^\ast) \in Q$ which are continuous at $(u^\ast, \, v^\ast)$. Then $F$ is differentiable at $(u^\ast, \, v^\ast)$.
+\ethm
+
+\brmk
+The statement of \hyperref[schwaradas]{Lemma \ref{schwaradas}} can be easily generalised. Indeed, a straightforward computation shows that
+\[ \begin{aligned}
+\dr_{u, v} F(u^\ast, v^\ast)[h, k] & = \dr^2 F(u^\ast, v^\ast)[\sigma h, \tau k] =
+\\ & = \dr^2 F(u^\ast, v^\ast)[\tau k, \sigma h] =
+\\ &  = \dr_{u, v} F(u^\ast, v^\ast)[k, h],
+\end{aligned} \]
+which ultimately means that we can swap the order of the partial derivatives.
+\ermk
+
+\bex[Taylor's Formula]
+Let $F \in C^n(U, \, \Y)$ be a function and suppose that the interval $[u, \, v]$ is entirely contained in $U$. Let
+\[
+\Phi(t) := F(\gamma(t)),
+\]
+where $\gamma(t) := u + tv$. Then $\Phi$ is a real-valued function, whose $n$th derivative is given by
+\[
+\Phi^{(n)}(t) = \dr^{(n)} F(\gamma(t))[v, \dots, v].
+\]
+By Peano's formula we have
+\[
+\Phi(1) = \Phi(0) + \dots + \frac{1}{(n-1)!} \Phi^{(n)}(0) +  \frac{1}{(n-1)!} \int_0^1 (1-t)^{n-1} \Phi^{(n)}(t) \, \dr t
+\]
+so, if we plug the expression for $\Phi^{(n)}(t)$ into this identity, we obtain the Taylor's formula\index{Taylor's formula} in the more general contest of Fréchet-differentiable functions.
+\eex

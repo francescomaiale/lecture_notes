@@ -1,0 +1,481 @@
+ \chapter{Deformations and Palais-Smale Sequences} \thispagestyle{empty}
+
+{\color{red}[...]}
+
+\section{Introduction to deformations}
+
+Let $J : U \subset \X \to \R$ be a functional defined on a open subset $U$ of a Banach space $\X$ and let $a \in \R$. We will always denote either by $\X^a$ or $J^a$ the sublevel\index{sublevel} 
+\[
+\{ u \in \X \: : \: J(u) \leq a \}.
+\]
+
+\bd[Deformation] \index{deformation}
+A map $\eta \in C(A,\X)$ is a \textit{deformation} of $A \subset \X$ in $\X$ if it is homotopic to the identity. Namely, there exists a homotopy $H$ such that
+\[
+H(0, u) = u, \quad H(1, u) = \eta(u) \quad \text{for all $u \in \X$}.
+\]
+\ed
+
+%The idea behind deforming a set into another one is the following. Since a deformation is a continuous map homotopic to the identity, we expect that $A$ and $\eta(A)$ have the same topological properties.
+
+%More specifically, if $[a, \, b] \subset \R$ does not contain any critical point of $J$, then it can be proved that under some assumptions on $\X$ the sublevel $\X^b$ can be deformed into $\X^a$. On the other hand, the presence of an obstacle is often (but not always) a consequence of the existence in the given interval of a critical point.
+
+\bex
+Let $\M$ be a compact hypersurface in $\R^n$. Suppose that $b$ is not a critical level for $J$ on $\M$ and notice that
+\[
+J^{-1}(b) = \{ x \in M \: : \: J(x) = b \} 
+\]
+is a smooth submanifold of $\M$ and at any point the vector $- \nabla_\M J(x) \neq 0$. By compactness we have
+\[
+\min_{x \in J^{-1}(b)} |\nabla_\M J(x)| \geq C > 0, 
+\]
+and hence we can deform $J^{-1}(b)$ into $J^{-1}(b- \epsilon)$ for some $\epsilon$ small enough. Now, if there are no critical levels in $[a, \, b]$, we can repeat the same process over and over again, until we obtain $J^{-1}(a)$ as a deformation of $J^{-1}(b)$.
+\eex
+
+To better understand the change of topological properties after crossing critical levels, the following example is instructive.
+
+\bex
+Let $\M$ be the $2$-torus and let $J(x, y, z) = z$. The critical points of $J$ on $\M$ are the four points $p_i$ where the gradient of $J$ is orthogonal to $\M$. If we set
+\[
+c_i := J^{-1}(p_i),
+\]
+then it can be proved that
+\[
+M^a \cong \begin{cases}
+\T^2 & \text{if $a > c_4$},
+\\ \T^2 \setminus B_\varphi & \text{if $c_4 \geq a > c_3$},
+\\ S^1 \times [0, 1] & \text{if $c_3 \geq a > c_2$},
+\\ B_\varphi & \text{if $c_2 \geq a > c_1$},
+\\ \varnothing & \text{if $a < c_1$}. \end{cases}
+\]
+\eex
+
+\section{The steepest descent flow}\index{steepest descent flow}
+
+Let $W \in C^{0, 1}(\X, \X)$ be a Lipschitz function defined on a Hilbert space $\X$ and let $\alpha(t, u)$ denote the solution of the Cauchy problem
+\begin{equation}\label{eq.e.3}
+\begin{cases} \alpha'(t) = W(\alpha(t,u)),
+\\ \alpha(0) = u \in \X. \end{cases}
+\end{equation}
+The Lipschitz-Cauchy theorem gives the existence of a unique solution $\alpha(t, u)$, defined in a neighbourhood of $t = 0$, that depends continuously on the initial data. Let
+\[
+(t_u^-, \, t_u^+)
+\]
+denote the maximal interval of existence for a given $u \in \X$. We would like to find sufficient condition for $\alpha$ to be globally defined in $t > 0$ (i.e., $t_u^+ = + \infty$).
+
+\bl
+If $t_u^+ < + \infty$, then $\alpha(t, u)$ has no limit points as $t \nearrow t_u^+$.
+\el
+
+\begin{proof}
+We argue by contradiction. If there exists $v \in \X$ such that $\alpha(t, \, u) \nearrow v$, then let $\beta$ denote the solution of the Cauchy problem \eqref{eq.e.3} with $u = v$. Then
+\[
+\text{$\beta$ is well-defined in a neighbourhood of $t^+$, $(t^+ - \epsilon, \, t^+ + \epsilon)$},
+\]
+and therefore the function
+\[
+\begin{cases} \alpha(t, \, u) & \text{if $t \in (t^-, \, t^+)$,}
+\\ \beta(t, \, v) & \text{if $t \in [t^+, \, t^+ + \epsilon)$}, \end{cases}
+\]
+is a solution of \eqref{eq.e.3} with initial datum $u$, defined in a strictly bigger interval than the maximal one.
+\end{proof}
+
+\bl
+Let $A \subset \X$ be closed and suppose that
+\[
+\|W(u)\| \leq C \quad \text{for all $u \in A$}.
+\]
+Let $u \in A$ be such that $\alpha(t, u) \in A$ for all $t \in [0, t_u^+)$. Then $t_u^+ = + \infty$.
+\el
+
+\begin{proof}
+Suppose that $t_u^+ < \infty$. For all $t_i, t_j \in [0, \, t^+)$ we have
+\[
+\alpha(t_i, u) - \alpha(t_j, u) = \int_{t_j}^{t_i} \alpha'(s, u) \, \dr s= \int_{t_j}^{t_i} W(\alpha(s, u)) \, \dr s. 
+\]
+Since $W$ is bounded on $A$ and $\alpha(s,u) \in A$ for all $s$, it turns out that
+\[
+\| \alpha(t_i, u) - \alpha(t_j, u) \| \leq C |t_i - t_j|.
+\]
+Take the limit as $t_i \nearrow t_u^+$ and notice that the estimate implies $\alpha(t_i, u)$ Cauchy, which means that it converges to some point in $A$: a contradiction with the previous lemma.
+\end{proof}
+
+We are now ready to introduce the steepest descent flow. Assume that there exists a functional $G \in C^{1, 1}(\X, \R)$ such that
+\[
+\M = G^{-1}(0) \quad \text{and} \quad \text{$G'(u) \neq 0$ for $u \in \M$}. 
+\]
+Let $J \in C^{1, 1}(\X, \R)$ and consider the function
+\[
+W(u) = - \left[ J'(u) - \frac{ \langle J'(u), \, G'(u) \rangle }{\|G'(u)\|^2} G'(u) \right], 
+\]
+which is well-defined in a neighbourhood of $\M$, belongs to $C^{0, 1}$ as required, and coincides with $- \nabla_\M J(u)$ for all $u \in \M$.
+
+The solution $\alpha$ of \eqref{eq.e.3} with this choice of $W$ is called {\em steepest descent flow} of $\M$ and it satisfies the following property:
+\[
+\alpha(0) \in \M \iff \text{$\alpha(t) \in \M$ for all $t \in (t_u^-, \, t_u^+)$}.
+\]
+Indeed, it is easy to verify that
+\[ \begin{aligned}
+\frac{\dr}{\dr t} G(\alpha(t)) & = \langle G'(\alpha(t)),  \alpha'(t) \rangle
+\\ & = \langle G'(\alpha(t)), W(\alpha(t)) \rangle
+\\ & = -\langle G'(\alpha(t)), J'(\alpha(t)) \rangle + \frac{\langle G'(\alpha(t)), \, J'(\alpha(t)) \rangle}{\|G'(\alpha(t))\|^2} \langle G'(\alpha(t)), G'(\alpha(t)) \rangle = 0,
+\end{aligned}\]
+which means that $G$ is constant along $\alpha$, and thus
+\[
+u \in \M \iff G(u) = 0 \iff G(\alpha(t)) = 0 \iff \alpha(t, u) \in \M. 
+\]
+
+\bl \label{lemma.f.4}
+Under the assumptions above, the steepest descent flow $\alpha$ relative to $J$ satisfies the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The function $t \mapsto J(\alpha(t, u))$ is nonincreasing for $t \in [0, t_u^+)$.
+\item For $t, \tau \in [0, t_u^+)$ we have
+\begin{equation} \label{eq.e.4}
+J(\alpha(t, u)) - J(\alpha(\tau, u)) = - \int_\tau^t \| \nabla_\M J (\alpha(s, u)) \|^2 \, \dr s.
+\end{equation}
+\item If $J$ is bounded from below on $\M$, then $t_u^+ = \infty$ for all $u \in \M$.
+\end{enumerate}
+\el
+
+\begin{proof}First, notice that
+\[ \begin{aligned}
+\frac{\dr}{\dr t} J(\alpha(t,u)) & = - \langle J'(\alpha(t,u)), \nabla_\M J(\alpha(t,u)) \rangle, 
+\\ & - \| \nabla_\M J(\alpha(t,u)) \|^2
+\end{aligned} \]
+since $\nabla_\M J(\alpha)$ is the projection of $J'(\alpha)$ on $T_\alpha \M$. The first two properties follow easily from this so we only need to deal with the third. Let $u \in \M$ and suppose that
+\[
+t_u^+ < \infty.
+\]
+Apply \eqref{eq.e.4} with $\tau = 0$ to get
+\[
+J(\alpha(t,u)) - J(u) = - \int_0^t \| \nabla_\M J (\alpha(s, u)) \|^2 \, \dr s
+\]
+and, since $J$ is bounded from below on $M$, it follows that
+\[
+\int_0^t \| \nabla_\M J (\alpha(s, u)) \|^2 \, \dr s \leq a < + \infty
+\]
+for some positive constant $a$. Now let $t_i \nearrow t_u^+$ and notice that putting all together yields
+\[
+\| \alpha(t_i,u) - \alpha(t_j,u) \| \leq \int_0^t \| \nabla_\M J (\alpha(s, u)) \| \, \dr s.
+\]
+Using Hölder's inequality we get
+\[
+\| \alpha(t_i,u) - \alpha(t_j,u) \| \leq \sqrt{a} |t_i - t_j|^{\frac{1}{2}},
+\]
+which gives a contradiction with the fact that $\alpha(t_i,u)$ cannot have limit points.
+\end{proof}
+
+\brmk
+If $J$ is $C^1$ only, the steepest descent flow might not be defined. However, there is a way to generalize the gradient vector field in such a way that \hyperref[lemma.f.4]{Lemma \ref{lemma.f.4}} holds.
+\ermk
+
+\bd[Pseudo-gradient] \index{pseudo-gradient vector field}
+Let $J \in C^1(\X,\R)$. A \textit{pseudo-gradient} vector field (often referred to as $\Psi$-gradient v.f.) for $J$ on
+\[
+\X_0 := \left\{ u \in \X \: : \: \nabla J(u) \neq 0 \right\} 
+\]
+is a $C^{0, 1}(\X_0, \X)$ vector field $V$ satisfying the following properties for all $u \in \X_0$:
+\begin{equation} \label{eq.f.1} \begin{aligned}
+& \| V(u) \| \leq 2 \| \nabla J(u) \|,
+\\[1em] & \langle V(u), \nabla J(u) \rangle \geq \| \nabla J(u) \|^2.
+\end{aligned} \end{equation}
+\ed
+
+\brmk
+If a $\Psi$-gradient vector field $V$ exists, then \hyperref[lemma.f.4]{Lemma \ref{lemma.f.4}} holds replacing $\alpha$ with the solution of
+\[
+\alpha'(t,u) = - V(\alpha(t, u)).
+\]
+\ermk
+
+\bpr
+Let $J \in C^1(\X, \R)$. Then a $\Psi$-gradient vector field $V$ always exists.
+\epr
+
+\begin{proof}
+Fix $u \in \X_0$. Then there exists $w(u) := w \in \X$ such that
+\[
+\|w\|_\X = 1 \quad \text{and} \quad \langle \nabla J(u), w \rangle > \frac{2}{3} \| \nabla J(u) \|.
+\]
+Set
+\[
+\tilde{V}(u) := \frac{3}{2} \| \nabla J(u) \| w(u),
+\]
+and notice that \eqref{eq.f.1} holds since
+\[ \begin{aligned}
+& \| \tilde{V}(u) \| = \frac{3}{2} \| \nabla J(u) \| < 2 \| \nabla J(u) \|,
+\\ & \langle \tilde{V}(u), \nabla J(u) \rangle = \frac{3}{2} \| \nabla J(u) \| \langle w(u), \nabla J(u) \rangle > \| \nabla J(u) \|^2.
+\end{aligned}\]
+Since $\nabla J$ is continuous, we can find $r := r(u) > 0$ such that
+\[ \begin{aligned}
+& \| \tilde{V}(u) \|  < 2 \| \nabla J(z) \|,
+\\ & \langle \tilde{V}(u), \nabla J(z) \rangle > \| \nabla J(z) \|^2
+\end{aligned} \]
+hold for all $z \in B(u, r)$. We can cover $\X_0$ with balls, that is,
+\[
+\X_0 = \bigcup_{u\in\X_0} B(u, r(u))
+\]
+and we extract a locally finite covering $U_i := B(u_i, r(u_i))$. Now define
+\[
+d_i(u) := \mathrm{dist}(u, \X \setminus U_i) 
+\]
+and, to ease the notation, denote $\tilde{V}(u_i)$ by $\widetilde{V_i}$. The reader can check that
+\[
+V(u) := \sum_i \frac{ d_i(u) }{ \sum_j d_j(u)} \widetilde{V_i}
+\]
+is a well-defined locally Lipschitz $\Psi$-gradient vector field.
+\end{proof}
+
+\section{Deformation and compactness}
+
+In this section, we will denote by $M$ either a Hilbert space or a $C^1$-submanifold of codimension one.
+
+\begin{lemma} \label{lemma.f.2} Let $J \in C^1(M, \, \R)$ and suppose that there exist $c \in \R$ and $\delta > 0$ such that
+\begin{equation*} \| \nabla_M J(u) \| \geq \delta \quad \text{for all $u$ such that $J(u) \in [c-\delta, \, c+\delta]$}. \end{equation*}
+Then there exists $\eta$ deformation in $M$ such that
+\begin{equation*} \eta(M^{c+\delta}) \subset M^{c-\delta}. \end{equation*} \end{lemma}
+
+\begin{proof} Suppose first that $J$ is bounded from below. By \hyperref[lemma.f.4]{Lemma \ref{lemma.f.4}} the evolution above is globally defined. Let $T := \frac{2}{\delta}$ and set
+\begin{equation*} \eta(u) := \alpha(T, \, u).\end{equation*}
+It is easy to see that $\eta$ is a deformation since $(s, \, u) \mapsto \alpha(sT, \, u)$ is a homotopy between $\eta$ and the identity mapping. We now argue by contradiction so let $u \in M^{c + \delta}$ such that
+\begin{equation*} J(\alpha(T, \, u)) > c - \delta. \end{equation*}
+Since $J(\alpha(\cdot, \, u))$ is decreasing, we easily infer that
+\begin{equation*} J(\alpha(t, \, u)) \in [c- \delta, \, c+ \delta] \end{equation*}
+for all $t \in [0, \, T]$. We now apply the assumption to conclude that
+\begin{equation*}  \| \nabla_M J( \alpha(t, \, u) ) \| \geq \delta \quad \text{for all $t \in [0, \, T]$}. \end{equation*}
+We now use \hyperref[lemma.f.4]{Lemma \ref{lemma.f.4}} again and obtain
+\begin{equation*}J(\alpha(T, \, u)) - \underbracket{J(\alpha(0, \, u))}_{= J(u)} = - \int_0^T \| \nabla_M J(\alpha(s, \, u)) \| \, \mathrm{d}x \geq \delta^2 T = 2 \delta, \end{equation*} 
+from which we finally infer that
+\begin{equation*} c - \delta < J(\alpha(T, \, u)) <  c + \delta - 2\delta = c - \delta \implies \text{absurd.} \end{equation*}
+Now remove the assumption that $J$ is bounded from below. Define
+\begin{equation*} \hat{J}(u) := h \circ J(u), \end{equation*}
+where $h\in C^\infty(\R, \, \R)$ is given, for example, by
+\begin{equation*} h(s) = \begin{cases}s & \text{if $s \geq c - \delta$},
+\\[0.6em] \text{bounded below} & \text{at all $s \in \R$}. \end{cases} \end{equation*}
+We conclude the proof using the argument above since $\hat{J}$ is bounded from below by construction and also
+\begin{equation*} \{ \hat{J} \leq a \} = \{ J \leq a \} \end{equation*}
+for all $a \geq c - \delta$ by construction.\end{proof}
+
+\begin{remark}If $M$ is compact and $c$ is not a critical level for $J$, then we can always find a $\delta > 0$ satisfying the assumption of \hyperref[lemma.f.2]{Lemma \ref{lemma.f.2}}. \end{remark}
+
+\begin{proof}[Hint] Argue by contradiction. \end{proof}
+
+\begin{remark}Some kind of compactness is necessary even in finite-dimensional spaces. We can easily find a counterexample with $M = \R$; see \hyperref[fig.f.1]{Figure \ref{fig.f.1}}. \end{remark}
+
+%%IMMAGINE!
+
+\section{Palais-Smale sequences}
+
+In this section, we introduce a notion of compactness which is weaker than the usual one but is rather useful when dealing with variational problems.
+
+\begin{definition}\index{Palais-Smale!sequence} Let $c \in \R$ be a real number. We say that a sequence $(u_n)_{n \in \N} \subset M$ is Palais-Smale at the level $c$, denoted by $(u_n)_{n \in \N} \in (\mathrm{PS})_c$, if
+ \begin{equation*} \begin{cases} f(u_n) \xrightarrow{n \to + \infty} c, \\[1em] \mathrm{grad} \, f(u_n) \xrightarrow{n \to + \infty} 0. \end{cases} \end{equation*}.\end{definition}
+
+\begin{definition}\index{Palais-Smale!functional} A functional $J \in C^1(M, \, \R)$ is Palais-Smale at the level $c$ if
+\begin{equation*} \forall (u_n)_{n \in \N} \in (\mathrm{PS})_c, \, \exists (n_k)_{k \in \N} \: : \: \text{$u_{n_k}$ converges}. \end{equation*}\end{definition}
+
+\begin{remark} Let $J \in C^1(M, \,\R)$. \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item If $J$ satisfies the Palais-Smale condition at the level $c$, then any $(\mathrm{PS})_c$-sequence converges (up to subsequences) to some $u^\ast \in M$ such that
+\begin{equation*} J(u^\ast) = c \quad \text{and} \quad \nabla_M J(u^\ast) = 0, \end{equation*}
+which means that $u^\ast$ is a critical point (and thus $c$ a critical level).
+\item The set
+\begin{equation*} \{ z \in M \: : \: J(z) = c, \, \nabla J(z) = 0\} \end{equation*}
+is compact.
+\item If $J \in C^1(\R^n, \, \R)$ is bounded from below and coercive, then the Palais-Smale condition at the level $c$ holds for all $c$. This is false in the infinite-dimensional setting!
+\end{enumerate} \end{remark}
+
+\begin{lemma}\label{rmk:cris} Let $J \in C^1(M, \, \R)$ be a functional satisfying the $\left( \mathrm{PS} \right)_c$-condition at all $c \in [a, \, b]$ and assume that there are no critical levels in the interval. Then there exists $\delta > 0$ such that
+\begin{equation*}\sigma := \inf_{ u \in J^{-1} \left( I_\epsilon \right) } \left\| \nabla J(u) \right\| > 0, \end{equation*}
+where $I_\delta = \left[ a - \delta, \, b + \delta \right]$. \end{lemma}
+
+\begin{proof}We argue by contradiction. There is a decreasing sequence $(\delta_n)_{n \in \N}$ that converges to $0$, and a sequence $(u_n)_{n \in \N} \subset M$ such that
+\begin{equation*} \left\| \nabla J(u_n) \right\| \leq \delta_n \quad \text{and} \quad J(u_n) \in \left[ a- \delta_n, \, b + \delta_n \right]. \end{equation*}
+Now, up to subsequences, $J(u_n) \to c$ and $ \nabla J(u) \to 0$ and by the Palais-Smale condition we know that $(u_n)_{n \in \N}$ is precompact. Thus $u_{n_k}$ converges to some $u^\ast$ which is a critical point with $J(u) \in [a, \, b]$, and this is the sought contradiction.
+\end{proof}
+
+\begin{lemma}Let $J \in C^1(M, \, \R)$ be a functional satisfying the $\left( \mathrm{PS} \right)_c$-condition at some noncritical level $c \in \R$. Then there exist $\delta > 0$ and a deformation $\eta$ such that
+\begin{equation*} \eta(M^{c+\delta}) \subseteq M^{c-\delta}. \end{equation*} \end{lemma}
+
+\begin{lemma}Let $J \in C^1(M, \, \R)$ be a functional satisfying the $\left( \mathrm{PS} \right)_c$-condition at all $c \in [a, \, b]$ and assume that there are no critical levels in the interval. Then there exists a deformation $\eta$ such that
+\begin{equation*} \eta(M^{b}) \subseteq M^{a}. \end{equation*} \end{lemma}
+
+\begin{proof}Simply apply the previous result a finite number of times since $[a, \, b]$, by compactness, can be covered by a finite number of intervals of length $\delta$. \end{proof}
+
+\begin{theorem}\label{thm.o.1}Let $J \in C^1(M, \, \R)$, where $M$ is a $C^1$-submanifold of codimension one. Suppose that $J \, \big|_M$ is bounded from below and suppose that it satisfies the Palais-Smale condition at
+\begin{equation*} m := \inf_{u \in M} J(u) > - \infty. \end{equation*}
+Then $\inf_{u \in M} J(u)$ is achieved.\end{theorem}
+
+\begin{proof}We argue by contradiction. If $m$ is not a critical value, then there exists $\epsilon > 0$ such that the following holds:
+\begin{equation*} \text{$J^{(\alpha - \epsilon)}$ is a deformation retract of $J^{(\alpha + \epsilon)}$}. \end{equation*}
+But this is impossible since the first set is empty, while the second one is not. \end{proof}
+
+\section{Application to a superlinear Dirichlet problem}
+
+In this section, we will exploit the theoretical results presented above to prove existence of a positive solution to a class of superlinear Dirichlet boundary-value problems:
+\begin{equation} \mathbf{\tag{DSL}} \label{eq.m.1} \begin{cases} - \Delta u(x) = f(u(x)) & \text{if $x\in \Omega$}, \\[0.8em] u(x) = 0 & \text{if $x \in \partial \Omega$}. \end{cases} \end{equation}
+We assume $\Omega$ to be a bounded domain in $\R^n$ and $f \in C^2(\R, \, \R)$ satisfies the following assumptions: there exist $a_1, \, a_2 > 0$ and $p \in (1, \, 2^\ast - 1)$ such that
+\begin{equation} \label{eq.m.f} \begin{aligned} & |f(u)| \leq a_1 + a_2 |u|^p,
+\\[0.8em] & |u f^\prime(u)| \leq a_1 + a_2|u|^p,
+\\[0.8em] & |u^2 f^{\prime \prime}(u)| \leq a_1 + a_2|u|^p. \end{aligned} \end{equation}
+Assume also that $f(u) = u h(u)$, where $h$ is a function satisfying the following assumptions:
+\begin{enumerate}[label=\textbf{\color{orange}($h_{\arabic*}$)}]
+\item $h(su) \leq s^\alpha h(u)$ for some $\alpha > 0$;
+\item $u h^\prime(u) > 0$ for all $u \neq 0$;
+\item $h(0) = 0$;
+\item $\lim_{u \to + \infty} h(u) = + \infty$.
+\end{enumerate}
+
+\begin{example}The function $h(u) = |u|^{p-1}$ satisfies these properties and, indeed, we were able to obtain existence in \hyperref[subsec:daosd]{Section \ref{subsec:daosd}} looking for the minimum of
+\begin{equation*} \int_\Omega |u|^{p+1} \, \mathrm{d}x \end{equation*}
+on the manifold $ \{u \in H_0^1(\Omega) \: : \: \|u\|_{L^2(\Omega)} = 1 \}$.
+\end{example}
+
+\begin{theorem}\label{thm.m.1} Under these assumptions, the problem \eqref{eq.m.1} has a positive solution. \end{theorem}
+
+The proof of this theorem will be attained through a sequence of technical lemmas, mostly relying on the theoretical aspects presented in this chapter. However, before we get to it, we need to introduce some notation. Namely, let $\X := H_0^1(\Omega)$ and denote by
+\begin{equation*} \langle u, \, v \rangle := \int_\Omega \nabla u \cdot \nabla v \, \mathrm{d}x \end{equation*}
+the standard scalar product and by $\| \cdot \|$ the norm on $\X$. Set
+\begin{equation*} \begin{aligned} & F(u) := \int_0^u f(s) \, \mathrm{d}s = \int_0^1 f(su)u \, \mathrm{d}s,
+\\[0.8em] & \Phi(u) = \int_\Omega F(u) \, \mathrm{d}x = \int_0^1 \mathrm{d}s \int_\Omega u f(su) \, \mathrm{d}x,
+\\[0.8em] & \Psi(u) = \langle \Phi^\prime(u), \, u \rangle = \int_\Omega u f(u) \, \mathrm{d}x. \end{aligned} \end{equation*}
+Now notice that
+\begin{enumerate}[label=\textbf{\color{magenta}(\roman*)}]
+\item The functional $\Phi$ and $\Psi$ respectively belong to $C^2(\X, \, \R)$ and $C^3(\X, \, \R)$. {\color{blue}This follows immediately from the regularity of $f$ and the definitions above.}
+\item The functionals $\Phi$ and $\Psi$ are both weakly continuous.
+\item The gradients $\nabla \Phi$ and $\nabla \Psi$ are compact operators. {\color{blue}This follows from the compactness of the Sobolev embedding (since $p < 2^\ast$) and it implies the previous point.}
+\end{enumerate}
+
+The solutions of \eqref{eq.m.1} are critical points of the following functional: 
+\begin{equation*} J(u) := \frac{1}{2} \|u\|^2 - \Phi(u). \end{equation*}
+The idea is to use Nehari manifolds together with the results on critical points obtained in this chapter. We thus introduce the natural functional
+\begin{equation*} G(u) := \langle J^\prime(u), \, u \rangle = \|u\|^2 - \Psi(u), \end{equation*}
+and the $C^2$-submanifold where $G$ vanishes, that is,
+\begin{equation*} \mathcal{M} := \left\{ u \in \X \setminus \{0\} \: : \: G(u) = 0 \right\}. \end{equation*}
+Our goal is to show that $\mathcal{M}$ is a natural constraint for $J$. In other words, we are looking for a functional of class $C^2$, $\widetilde{J}$, such that
+\begin{equation*}\text{$\nabla_\mathcal{M} \widetilde{J}(u) = 0$ and $u \in M$} \iff J^\prime(u) = 0. \end{equation*}
+We will then verify that $\widetilde{J}$ achieves a minimum on $\mathcal{M}$, which ends up giving a solution to the problem \eqref{eq.m.1}.
+
+\begin{lemma} The functional $G$ belongs to $C^2(E, \, \R)$. Furthermore: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item The set $\mathcal{M}$ is nonempty.
+\item There exists $\rho > 0$ such that $\|u\| \geq \rho$ for all $u \in \mathcal{M}$.
+\item The scalar product $\langle G^\prime(u), \, u \rangle$ is negative for all $u \in \mathcal{M}$.
+\end{enumerate} \end{lemma}
+
+\begin{proof}The regularity of $G$ is an easy consequence of the regularity of $\Psi$. \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item Take $u \in E$, $u > 0$, with $\|u \|=1$. Then
+\begin{equation*}G(tu) = t^2 - t^2 \int_\Omega u^2 h(tu) \, \mathrm{d}x. \end{equation*}
+Using $\mathbf{\color{orange}(h_3)}$ we find that
+\begin{equation*} \lim_{t \to 0} \frac{G(tu)}{t^2} = 1, \end{equation*}
+while, employing the property $\mathbf{\color{orange}(h_4)}$, we obtain
+\begin{equation*}  \lim_{t \to + \infty} \frac{G(tu)}{t^2} = - \infty. \end{equation*} 
+Putting these two together, we infer that there must be $\tilde{t} \in (0, \, \infty)$ such that $\tilde{t}u \in \mathcal{M}$.
+\item This property, despite its simplicity, requires a lot of work because having $\|u\|$ small does not mean that the $L^\infty$-norm is also small (the embedding fails!).
+
+Let $\|u\|$ be sufficiently small. Our goal is to prove that $G(u) > 0$ so that $u$ cannot belong to $\mathcal{M}$. First, take $\delta > 0$ and define
+\begin{equation*} A_1^\delta := \{ x \in \Omega \: : \: |u(x)| \leq \delta \} \quad \text{and} \quad A_2^\delta = \Omega \setminus A_1^\delta. \end{equation*}
+We claim that the volume of $A_2^\delta$ cannot be "too big". Recall that by Poincaré's inequality we can always find a positive constant $C_\Omega$ such that
+\begin{equation*} \| u \|_{L^1(\Omega)} \leq C_\Omega \|u\|. \end{equation*}
+It follows that
+\begin{equation*} |A_2| \delta \leq \| u \|_{L^1(A_2)} \leq \| u \|_{L^1(\Omega)} \leq C_\Omega \|u\|, \end{equation*}
+which means that the volume of $A_2$ is bounded by
+\begin{equation*} |A_2| \leq \frac{C_\Omega}{\delta} \|u\|. \end{equation*}
+We now employ Hölder's inequality to estimate the negative contribute to $G(u)$ on $A_2^\delta$. Namely, we have
+\begin{equation*} \int_{A_2^\delta} u f(u) \, \mathrm{d}x \leq \|u\|_{p_1} \|f(u)\|_{p_2} |A_2^\delta|^{\frac{1}{p_3}} \end{equation*}
+where
+\[\frac{1}{p_1} + \frac{1}{p_2} + \frac{1}{p_3} = 1. \]
+We want $p_3 > 1$, so the idea is to take the maximum $p_1$ and $p_2$ possible. However, we still need Sobolev embedding to estimate these terms with $\|u\|$. Let
+\begin{equation*} p_1 := 2^\ast \quad \text{and} \quad p_2 := \frac{2^\ast}{p}. \end{equation*}
+It is easy to see that
+\begin{equation*}\frac{1}{p_1} + \frac{1}{p_2} = \frac{p + 1}{2^\ast} < 1, \end{equation*}
+so $p_3 > 1$ as desired. We also use \eqref{eq.m.f} and $\mathbf{\color{orange}(h_4)}$ to conclude that $f(u)$ must satisfy a slightly different estimate
+\begin{equation*} |f(u)| \lesssim |u| + |u|^p \end{equation*}
+for $|u|$ small enough. Then
+\begin{equation*}\begin{aligned} \|f(u)\|_{p_2} & \lesssim \left[ \int_\Omega \left( |u|^{p_2} + |u|^{p p_2} \right) \, \mathrm{d}x \right]^{\frac{1}{p_2}} \lesssim
+\\[1em] & \lesssim \|u\| + \|u\|^p. \end{aligned} \end{equation*}
+The right-hand side goes as $\|u\|$ when $\|u\|$ is sufficiently small (since $p > 1$) and therefore we conclude that
+\begin{equation*} \left| \int_{A_2^\delta} u f(u) \, \mathrm{d}x \right| \lesssim \delta^{-\frac{1}{p_3}} \|u\|^{2 + \frac{1}{p_3}}. \end{equation*}
+The estimate on $A_1^\delta$ is even easier since
+\begin{equation*} \left| \int_{A_1^\delta} u f(u) \, \mathrm{d}x \right| = \left| \int_{A_1^\delta} u^2 h(u) \, \mathrm{d}x \right| \leq C_\Omega \|u\|^2 \sup_{|u| \in (0, \, \delta)} h(u).\end{equation*}
+Fix $\delta > 0$ sufficiently small in such a way that $C_\Omega  \sup_{|u| \in (0, \, \delta)} h(u)$ is less than $\frac{1}{2}$. It follows that
+\begin{equation*}G(u) \geq \|u\|^2 - \frac{1}{2} \|u\|^2 - \delta^{-\frac{1}{p_3}} \|u\|^{2 + \frac{1}{p_3}}, \end{equation*}
+and the right-hand side is positive when we take the limit as $\|u\| \to 0$ since $2 + \frac{1}{p_3} > 2$. In particular, there exists $\rho>0$ such that for all $u \in B_\rho(0) \setminus \{0\}$ we have $G(u) > 0$.
+\item First, notice that for $u \in \mathcal{M}$ we have
+\begin{equation*}\begin{aligned} \langle G^\prime(u), \, u \rangle & = 2 \|u\|^2 - \langle \Psi^\prime(u), \, u \rangle =
+\\[1em] & = 2 \Psi(u) - \langle \Psi^\prime(u), \, u \rangle. \end{aligned} \end{equation*}
+One also has that
+\begin{equation*} \begin{aligned} 2 \Psi(u) - \langle \Psi^\prime(u), \, u \rangle & = 2 \int_\Omega u f(u) \, \mathrm{d}x - \left[ \int_\Omega u f(u) \, \mathrm{d}x + \int_\Omega u^2 f^\prime(u) \, \mathrm{d}x \right] =
+\\[1em] & = \int_\Omega u^2 h(u)\, \mathrm{d}x - \int_\Omega u^2(h(u) + u h^\prime(u)) \, \mathrm{d}x =
+\\[1em] & = - \int_\Omega u^3 h^\prime(u) \, \mathrm{d}x. \end{aligned} \end{equation*}
+Since $0 \notin \mathcal{M}$, using $\mathbf{\color{orange}(h_2)}$ that holds for all $u \neq 0$ we conclude that the scalar product must be negative.
+\end{enumerate} \end{proof}
+
+It follows from $\mathbf{(iii)}$ that $\mathcal{M}$ is a submanifold of class $C^2$ of codimension one in $E$. Now let $\widetilde{J} \in C^2(E, \, \R)$ be defined as
+\begin{equation*} \widetilde{J}(u) = \frac{1}{2} \Psi(u) - \Phi(u). \end{equation*}
+Notice that this functional coincides with $J$ on $\mathcal{M}$, but it is more convenient to deal with it since it is weakly continuous and its derivative is compact.
+
+\begin{lemma}The submanifold $\mathcal{M}$ is a natural constraint for $J$ using $\widetilde{J}$, that is,
+\begin{equation*} z \in \M, \, \, \nabla_\mathcal{M} \widetilde{J}(z) = 0 \implies J^\prime(z) = 0. \end{equation*}\end{lemma}
+
+\begin{proof}If $z$ is such a point, then there exists $\lambda \in \R$ such that
+\begin{equation*} \nabla \widetilde{J}(z) = \lambda \nabla G(z) \implies \langle\widetilde{J}(z), \, z \rangle = \lambda \langle \nabla G(z), \, z \rangle. \end{equation*}
+On the other hand, we know that
+\begin{equation*}\begin{aligned} \langle\widetilde{J}(z), \, z \rangle & = \frac{1}{2} \langle \Psi(z), \, z) - \langle \Phi(z), \, z \rangle =
+\\[1em] & = \frac{1}{2} \langle \nabla \Psi(z), \, z \rangle - \Psi(z) =
+\\[1em] & = - \frac{1}{2} \langle \nabla G(z), \, z \rangle\end{aligned} \end{equation*}
+so $\lambda$ must be equal to $- \frac{1}{2}$. Then
+\begin{equation*} \begin{aligned}
+& \nabla G(z) = - \nabla \Psi(z) + 2z,
+\\[0.8em] & \nabla \widetilde{J}(z) = \frac{1}{2} \Psi(z) - \nabla \Phi(z),
+\end{aligned} \end{equation*}
+and this immediately implies that $\nabla \Phi(z) = z$, which is completely equivalent to
+\[\nabla J(z) = 0.\]\end{proof}
+
+\begin{lemma}There exists $C_\alpha > 0$ such that $\widetilde{J}(u) \geq C_\alpha \|u\|^2$ for all $u \in \mathcal{M}$. \end{lemma}
+
+\begin{proof} We use the definition of $\Psi$ and $\mathbf{\color{orange}(h_1)}$ to infer that
+\begin{equation*} \begin{aligned}
+\widetilde{J}(u) = \frac{1}{2} \int_\Omega u f(u) \, \mathrm{d}x - \int_0^1 \mathrm{d}s \int_\Omega u f(su) \, \mathrm{d}x & = \int_0^1 \mathrm{d}s \int_\Omega \left[su f(u) - u f(su) \right] \, \mathrm{d}x =
+\\[1em] & = \int_0^1 \mathrm{d}s \int_\Omega \left[ su^2 \left( h(u) - h(su) \right) \right] \, \mathrm{d}x \geq
+\\[1em] & \geq \int_0^1 s(1 - s^\alpha) \, \mathrm{d}s \int_\Omega u^2 h(u) \, \mathrm{d}x \geq
+\\[1em] & \geq C_\alpha \underbracket{\int_\Omega u^2 h(u) \, \mathrm{d}x}_{= \Psi(u)} = C_\alpha \|u\|^2, \end{aligned} \end{equation*}
+where the last equality follows from the fact that $u \in \mathcal{M}$ implies $\Psi(u) = \|u\|^2$.\end{proof}
+
+\begin{lemma} Let $(u_i)_{i \in \N}$ be a Palais-Smale sequence at level $c > 0$ for $\widetilde{J}$ on $\mathcal{M}$. Then \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item $\|u_i\|$ is bounded and there exists $\bar{u} \neq 0$ such that $u_{i_\ell} \rightharpoonup \bar{u}$;
+\item there exists $k > 0$ such that $\|\nabla \widetilde{J}(u_i) \| \geq k$.
+\end{enumerate} \end{lemma}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item By definition
+\begin{equation*} \widetilde{J}(u_i) \xrightarrow{i \to + \infty} c, \end{equation*}
+and using the previous result we also know that
+\begin{equation*} \widetilde{J}(u_i) \geq c_\alpha \|u_i\|^2 \end{equation*}
+so $\|u_i\|$ is bounded and $(u_i)_{i \in \N}$ converges weakly to some $\bar{u}$ up to subsequences. To prove that $\bar{u} \neq 0$, we notice that
+\begin{equation*} u_i \in \mathcal{M} \implies \|u_i\| \geq \rho \implies \Psi(u_i) = \|u_i\|^2 \geq \rho^2. \end{equation*}
+But $\Psi$ is weakly continuous so
+\begin{equation*} \Psi(\bar{u}) \geq \rho^2 \implies \bar{u} \neq 0. \end{equation*}
+\item We argue by contradiction. Suppose that $\nabla \widetilde{J}(u_i) \to 0$. The operator $\nabla \widetilde{J}$ is compact, so we can conclude that
+\begin{equation*} \nabla \widetilde{J}(\bar{u}) = 0 \implies 0 = \frac{1}{2} \langle \nabla \Psi(\bar{u}), \, \bar{u} \rangle - \Psi(\bar{u}) = \frac{1}{2} \int_\Omega \bar{u}^3 h^\prime(\bar{u}) \, \mathrm{d}x. \end{equation*}
+We know already that the right-hand side is strictly positive, so we obtained our contradiction.
+\end{enumerate} \end{proof}
+
+\begin{lemma} The function $\widetilde{J}$, restricted to $\mathcal{M}$, satisfies the Palais-Smale condition at all levels $c > 0$.\end{lemma}
+
+\begin{proof}Let $(u_i)_{i \in \N}$ be a Palais-Smale sequence at level $c$ and let $\bar{u}$ be the weak limit of a subsequence $(u_{i_k})_{k \in \N}$. We have
+\begin{equation*} \nabla_\mathcal{M} \widetilde{J}(u_i) = \nabla \widetilde{J}(u_i) - \alpha_i \nabla G(u_i), \end{equation*}
+where
+\begin{equation*} \alpha_i = \frac{ \langle \nabla \widetilde{J}(u_i), \, \nabla G(u_i) \rangle}{\| \nabla G(u_i)\|^2}.  \end{equation*}
+We proved already that $\| \nabla \widetilde{J}(u_i) \| \geq k$ and it is easy to see that $\| \nabla G(u_i) \| \leq c$, so taking into account that
+\begin{equation*} \underbracket{\nabla_\mathcal{M} \widetilde{J}(u_i)}_{\to 0} = \underbracket{\nabla \widetilde{J}(u_i)}_{\not \to 0} - \alpha_i \underbracket{\nabla G(u_i)}_{\mathrm{bounded}}, \end{equation*}
+we must have $|\alpha_i| \geq c > 0$. It follows that
+\begin{equation*} \nabla G(u_i) = \frac{1}{\alpha_i} \left[ \nabla \widetilde{J}(u_i)-\nabla_\mathcal{M} \widetilde{J}(u_i) \right], \end{equation*}
+which easily translates to
+\begin{equation*} 2 u_i = \underbracket{\nabla \Psi(u_i)}_{\mathrm{compact}} + \frac{1}{\alpha_i} \left[ \underbracket{\nabla \widetilde{J}(u_i)}_{\mathrm{compact}}- \underbracket{\nabla_\mathcal{M} \widetilde{J}(u_i)}_{\to 0} \right] \end{equation*}
+and thus $u_{i_k}$ converges strongly to $\bar{u}$, concluding the proof. \end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm.m.1}] Simply apply \hyperref[thm.o.1]{Theorem \ref{thm.o.1}} replacing $f$ with its positive part $f^+$. \end{proof}
