@@ -8,7 +8,8 @@ A collection of LaTeX lecture notes on computational fluid dynamics, numerical m
 |--------|--------|-----|
 | [Group Theory](./group_theory/) | Group theory in Physics | [PDF](./group-theory/main.pdf) |
 | [Advanced Analysis](./aa/) | Advanced analysis, Fourier transform, etc. | [PDF](./aa/pdf/main.pdf) |
-| [Analysis of Sublaplacian operators](./aa/) | Sublaplacian on Lie groups | [PDF](./analysis_sublaplacian/pdf/main.pdf) |
+| [Analysis of Sublaplacian operators](./analysis_sublaplacian/) | Sublaplacian on Lie groups | [PDF](./analysis_sublaplacian/pdf/main.pdf) |
+| [Calculus of variations](./calculus_variations/) | Calculus of variations, direct and indirect methods | [PDF](./calculus_variations/pdf/main.pdf) |
 
 <!-- Add more courses as needed -->
 
