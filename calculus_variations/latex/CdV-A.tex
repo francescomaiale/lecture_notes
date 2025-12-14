@@ -1,0 +1,178 @@
+\documentclass[reqno,12pt]{amsbook} %12pt
+\usepackage{latexsym,times,paralist}
+\usepackage{amssymb,amsmath,amsfonts,esint}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{centernot}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+
+\makeindex %DDD
+
+\setlength{\textheight}{8.2in}%{8.05in}%{8.6in}%
+\setlength{\topmargin}{0.08in}%{0.255in}
+\setlength{\oddsidemargin}{.15in}
+\setlength{\evensidemargin}{.15in}%{0.013in}
+\setlength{\textwidth}{6in}%{6.4in}
+
+
+\include{defs}
+
+\def\l{\lambda}
+\def\d{\delta}
+\def\a{\alpha}
+\def\b{\beta}
+\def\th{\theta}
+\def\o{\omega}
+\def\vp{\varphi}
+\def\Ps{\Psi}
+\def\O{\Omega}
+\def\de{\partial}
+\def\R{\Bbb R}
+\def\Q{\Bbb Q}
+\def\N{\Bbb N}
+\def\Z{\Bbb Z}
+\def\P{\Bbb P}
+\def\e{\mathrm e}
+\def\X{\mathfrak X}
+\def\Y{\mathfrak Y}
+\def\dr{\mathrm d}
+\def\Om{\Omega}
+
+\makeatletter
+\newcommand{\proofstep}[1]{%
+  \par% ensure starting on a new paragraph
+  \addvspace{\medskipamount}% some vertical space
+  \textbf{#1\@addpunct{.}}\enspace\ignorespaces
+}
+\makeatother
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem*{thma}{Theorem }
+%\newtheorem{thHK}[theorem]{Theorem HK}
+%\newtheorem{thCM}[theorem]{Theorem CM}
+%\newtheorem{theorC}[theorem]{Theorem C}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{corCH}[theorem]{Corollary CH}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}{EXAMPLE}
+\newtheorem{xca}[theorem]{Exercise}
+\newtheorem{remark}{Remark}
+\newtheorem{step}{Step}
+\newtheorem{oq}{Open question}
+%\theoremstyle{remark}
+%\newtheorem{remark}[theorem]{Remark}
+\def\subjclassname{{\rm 2000} {\it Mathematics Subject Classification}}
+\numberwithin{equation}{chapter}
+
+\fancyhf{}
+% Put the page number at the right edge of odd pages, and left edge of even pages.
+\fancyhead[LO,RE]{\textbf \thepage}
+% Custom text at the left edge of odd pages, and right edge of odd pages.
+\fancyhead[RO]{ \slshape\nouppercase{\rightmark}}
+\fancyhead[LE]{ \slshape\nouppercase{\leftmark}}
+
+% Repeat for \fancyfoot if needed, e.g.
+% Some decorative symbol at the centre of both odd and even pages
+\fancyfoot[C]{ }
+
+% Set this length to 0pt if you don't want any lines!
+\renewcommand{\headrulewidth}{1pt}
+
+% Apply the fancy header style
+\pagestyle{fancy}
+
+\begin{document}
+
+\newpage \thispagestyle{empty}
+
+\begin{center}
+
+\begin{spacing}{1.5}
+{\huge  \sf Lecture Notes}\\
+\vspace*{\fill}
+\end{spacing}
+\begin{spacing}{2.5}
+\textbf{\huge Calculus of Variations A}\\[0.5cm]
+\vspace*{\fill}
+\begin{minipage}{5cm}
+\centering {\textit{Course held by}}
+\end{minipage}
+\hspace*{\fill}
+\begin{minipage}{5cm}
+\centering {\textit{Notes written by}} \\
+\end{minipage}
+\end{spacing}
+
+\begin{spacing}{1.3}
+
+\begin{minipage}{5cm}
+\centering {\textbf{\large Prof. Giovanni Alberti}}
+\end{minipage}
+\hspace*{\fill}
+\begin{minipage}{5cm}
+\centering {\textbf{\large Francesco Paolo Maiale}}
+\end{minipage}
+
+\vspace*{\fill}
+
+\textnormal{\large Dipartimento di Matematica, Università di Pisa \\[0.4em] {\small\underline{Last Update}: \today}}
+
+\end{spacing}
+\end{center}
+
+\newpage \thispagestyle{empty}
+\begin{center}
+\vspace*{1cm}
+\begin{spacing}{2.5}
+ {
+\textbf{\huge Disclaimer}
+}
+\end{spacing} \end{center}
+
+\begin{spacing}{1.2}
+I wrote these notes to summarise the content of the course {\em Calculus of Variations A}, held by Professor Giovanni Alberti at the University of Pisa in 2018/2019.
+
+I tried to include all the topics that were discussed in class and combine it with some additional information from several other courses to produce a self-contained document.
+
+I will try to review them periodically, but I am sure that at the end there will be a large number of mistakes and oversights. To report them, feel free to send me an email at \textbf{francesco (dot) maiale (at) sns (dot) it}.
+\end{spacing}
+
+
+{ \setlength{\parskip}{0.05 in}
+
+\clearpage                       % Otherwise \pagestyle affects the previous page.
+{                                % Enclosed in braces so that re-definition is temporary.
+  \pagestyle{empty}              % Removes numbers from middle pages.
+  \fancypagestyle{plain}         % Re-definition removes numbers from first page.
+  {
+    \fancyhf{}%                       % Clear all header and footer fields.
+    \renewcommand{\headrulewidth}{0pt}% Clear rules (remove these two lines if not desired).
+    \renewcommand{\footrulewidth}{0pt}%
+  }
+  \tableofcontents
+  \thispagestyle{empty}          % Removes numbers from last page.
+}}
+
+
+\include{Chapter1}
+\include{Chapter2}
+\include{Chapter3}
+\include{Chapter4}
+\include{Chapter5}
+\include{Chapter6}
+\include{Chapter7}
+\include{Chapter8}
+
+\printindex
+
+\bibliography{document}{}
+\bibliographystyle{plain}
+
+\end{document}

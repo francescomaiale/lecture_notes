@@ -1,0 +1,747 @@
+\chapter{Relaxation}
+\label{chapter:4}
+
+{\color{red}I will write the introduction after the chapter is complete!}
+
+\section{Introduction}
+
+Let $\X$ be a topological space and let $F : \X \to [-\infty,\infty]$ be a functional which is {\bf not} necessarily lower semicontinuous.
+
+\bd\index{relaxation}
+The {\em relaxation} of $F$ on $\X$, denoted by $\bar{F}$, is the lower semicontinuous envelope of $F$, that is,
+\[
+\bar{F}(u) := \liminf_{v \to u} F(v) = \inf \left\{ \liminf_{n \to \infty} F(v_n) \: \left| \: \text{$v_n \to_\X u$} \right. \right\}
+\]
+\ed
+
+\br
+Notice that $\bar{F}$ is the largest lower semicontinuous functional on $\X$ (by definition) which is $\leq F$ (using the constant sequence $u_n \equiv u$).
+\er
+
+\bpr
+Let $F$ be a coercive functional on $\X$. Then $\bar{F}$ is coercive.
+\epr
+
+\begin{proof}
+Recall that $F$ coercive is equivalent to saying that the sublevel $\{ u \in \X \: : \: F(u) \leq M \}$ is relatively compact in $\X$ for all $M \in \R$. Since
+\[
+\{ u \in \X \: : \: \bar{F}(u) \leq M \} \subset \overline{\{ u \in \X \: : \: F(u) \leq M \}},
+\]
+it is easy to conclude that the sublevels of $\bar{F}$ are relatively compact in $\X$, and hence $\bar{F}$ is coercive.
+\end{proof}
+
+\br
+The relaxation $\bar{F}$ is lower semicontinuous by definition. Therefore, if $F$ is coercive, then $\bar{F}$ admits a minimizer. Namely, if $u_n$ is a minimizing sequence for $F$,
+\[
+F(u_n) \xrightarrow{n \to \infty} \inf_{v\in\X} F(v),
+\]
+then one can show that $u_n$ converges (up to subsequences) to some $u \in \X$ and
+\[
+\bar{F}(u) = \min_{v \in \X} \bar{F}(v) = \inf_{v \in \X}F(v).
+\]
+\er
+
+\begin{proof}
+Let $u_n$ be a minimizing sequence for $F$ and let $u \in \X$ be the limit of the converging subsequence. By lower semicontinuity and $\bar{F}\leq F$ we have
+\[
+\bar{F}(u) \leq \lim_{n \to \infty} F(u_{n_k}) = \inf_{v \in \X} F(v),
+\]
+while the opposite inequality follows from the definition of $\bar{F}$.
+\end{proof}
+
+Before we start developing the theory of relaxation even further, a couple of comments/properties are in order: \mbox{}
+\begin{enumerate}[label=(\arabic*),itemsep=.4em]
+\item Minimizers of $\bar{F}$ ``track'' the behavior of minimizing sequences for $F$.
+\item The functional $F$ has a minimizer if and only if there exists $u \in \X$ minimizer of $\bar{F}$ such that
+\[
+\bar{F}(u) = F(u).
+\]
+\end{enumerate}
+Note that the property $(2)$ is, in practice, more useful to prove that {\bf there are no} minimizers for a specific functional $F$ rather than the opposite.
+
+\bl
+If $g$ is continuous, then the relaxation of $F + g$ is equal to $\bar{F} + g$. In other words, the following identity holds:
+\[
+\overline{F+g} = \bar{F}+g.
+\]
+\el
+
+At this point, one might wonder how to determine whether or not a specific functional $G$ is the relaxation of $F$. The following results answer this question.
+
+\bpr
+Let $F$ be as above. A functional $G$ is the relaxation of $F$ (that is, $G \equiv \bar{F}$) if the following two properties hold: \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item $G$ is lower semicontinuous on $\X$ and $G(u) \leq F(u)$ for all $u \in \X$.
+\item For all $u \in \X$ there exists a sequence $(u_n)_{n \in \N} \subset \X$ converging to $u$ such that
+\[
+G(u) = \lim_{n \to \infty} F(u_n).
+\]
+\end{enumerate}
+\epr
+
+The condition ({\romannumeral 2}) can be replaced by an seemingly weaker one which is, in practice, often much easier to verify. First, we need to introduce the notion of {\em dense in energy}:
+
+\bd\index{dense in energy}
+Let $G : \X \to [-\infty,\infty]$ be a functional. A set $\cD \subset \X$ is $G$-dense (or dense in energy for $G$) if for all $u \in \X$ there exists a sequence $(u_n)_{n \in \N} \subset \cD$ such that
+\[
+\text{$u_n \xrightarrow{n \to \infty} u$ in $\X$} \quad \text{and} \quad G(u) \lim_{n \to \infty} G(u_n).
+\]
+\ed
+
+We can now give the weaker characterization of the relaxation $\bar{F}$ replacing $\X$ in ({\romannumeral 2}) with a smaller set $\cD$ which might be easier to deal with.
+
+\bpr
+Let $F$ be as above. A functional $G$ is the relaxation of $F$ (that is, $G \equiv \bar{F}$) if the following two properties hold: \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item $G$ is lower semicontinuous on $\X$ and $G(u) \leq F(u)$ for all $u \in \X$.
+\item For all $u \in \cD$, where $\cD$ is $G$-dense, there exists a sequence $(u_n)_{n \in \N} \subset \X$ converging to $u$ such that
+\[
+G(u) = \lim_{n \to \infty} F(u_n).
+\] 
+\end{enumerate}
+\epr
+
+\br
+Let $\X$ be a standard Sobolev space. It often happens that $F$ is continuous in the strong topology and lower semicontinuous in the weak one. In this case, it can be proved that $\cD = C^\infty$ is dense in energy for $F$.
+\er
+
+\section{Examples of relaxation theorems}
+
+In this section, we investigate the relaxations of a few functionals which are of common occurrence such as the Dirichlet energy. We start with a general result:
+
+\bt
+Let $\Om \subset \R^n$ and consider the functional
+\[
+F(u) := \int_\Om f(\nabla u) \, \dr x,
+\]
+where $u : \Om \to \R$ and $f : \R^n \to [0,\infty]$ is a lower semicontinuous function. Suppose that $F$ is coercive. Then the relaxation with respect to the $W^{1,p}(\Om)$-weak topology is given by
+\begin{equation} \label{eq.4.1}
+\bar{F}(u) = \int_\Om g(\nabla u) \, \dr x,
+\end{equation}
+where $g$ is the convex envelope of $f$.
+\et
+
+\br
+The coercivity of $F$ can be obtained under suitable growth assumptions on the Lagrangian $f$ because the weak topology on $W^{1,p}(\Om)$ is metrizable so
+\[
+\text{$F$ coercive} \iff \lim_{|u| \to \infty} F(u) = \infty.
+\]
+\er
+
+\br
+Guessing what functional could be the relaxation of $F$ is much easier if one knows that $\bar{F}$ has to be of the form
+\[
+\bar{F}(u) = \int_\Om g(\nabla u) \, \dr x.
+\]
+However, this is not easy at all to prove and it requires some integral representation theory.
+\er
+
+In the remainder of the section, we will investigate the relaxations of some specific functionals without relying on the result above. However, we first try to motivate the importance of computing explicitly the relaxation through a simple example.
+
+\br
+We proved that the minimum of the problem
+\[
+\min \left\{ \frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x \: : \:  u \, \big|_{\partial \Om} \equiv u_0 \right\}
+\]
+is a function $u$ that satisfies the Dirichlet's boundary condition
+\[ \begin{cases}
+- \Delta u = 0 & \text{if $x \in \Om$},
+\\ u = u_0 & \text{if $x \in \partial \Om$}.
+\end{cases} \]
+Notice that we tacitly assumed that $u$ was smooth enough to integrate by parts twice taking the second derivative. However, how can we be sure that such a $u$ exists?
+\er
+
+The idea is to extend $F(u)$ to $W_{u_0}^{1,2}(\Om)$, prove the existence there and finally show the regularity of the minimizer(s) to obtain a smooth solution. 
+
+We will describe this procedure (usually referred to as {\em direct method}\index{direct method}) in the most general case, explain what the strategy is and what are the problems.
+
+\subsection{Direct Method} Let $F$ be a functional defined on some space $\X'$ of ``regular'' functions and suppose that $\X'$ has no good compactness properties. 
+
+\step The functional $F$ is not coercive. Find $\X \supset \X'$ such that the extension of $F$, denoted by $F_{\mathrm{ext}}$, is coercive and lower semicontinuous on $\X$.
+
+\step Find a function $\bar{u} \in \X$ that solves the minimizes the functional $F_{\mathrm{ext}}$.
+
+\step Use regularity theory to conclude that $\bar{u} \in \X'$ so that 
+\[
+F(\bar{u}) = \min_{v \in \X'}F(v).
+\]
+The procedure looks simple, but there are a couple of issues regarding the last step that we need to consider (at least in the general case). More precisely:  \mbox{}
+\begin{enumerate}[label=(\arabic*), itemsep=.4em]
+\item Regularity theory is, in general, quite hard. 
+\item Regularity might fail. In other words, the minimizer $\bar{u}$ of $F_{\mathrm{ext}}$ may not be an element of the starting space $\X'$.
+\end{enumerate}
+The second issue is quite delicate to deal with because, if $\bar{u}$ does not belong to $\X'$, then it might not even be a meaningful solution to our problem.
+
+\subsection{Relaxation} Let $\X'\subset \X$ be two functional spaces and $F_{\mathrm{ext}}$ the extension that is coercive and lower semicontinuous on $\X$. If $u_n$ is a minimizing sequence for $F$ and $\bar{u} \in \X$ a minimum of $F_{\mathrm{ext}}$, that is,
+\[
+F_{\mathrm{ext}}(\bar{u}) = \min_{u \in \X} F_{\mathrm{ext}}(u),
+\]
+then we expect $u_n$ to converge to $\bar{u}$. Therefore, it makes sense to wonder whether or not $F_{\mathrm{ext}}$ and the relaxation $\bar{F}$ of $F$ are in some ways connected to each other.
+
+\bd
+Let $F : \X' \subset \X \to [-\infty,\infty]$ be a functional. The {\em relaxation} of $F$ on $\X$ is defined as the relaxation possibly extended to $\infty$. More precisely, we have
+\[
+\bar{F}(u) = \begin{cases} \inf \left\{ \liminf_{n \to \infty} F(v_n) \: \left| \: \text{$(v_n)\subset \X'$ s.t. $v_n \to u$} \right. \right\} & \text{if $u \in \overline{\X'}$},\\[.5em]
+\infty & \text{if $u \notin \overline{\X'}$}. \end{cases}
+\]
+\ed
+
+\br
+The functional $\bar{F}$ is the largest lower semicontinuous functional on $\X$ that satisfies the inequality $\bar{F} \leq F$ on $\X'$.
+\er
+
+\bex
+Let $\Om \subset \R^n$ and consider the functional
+\[
+F(u) = \frac{1}{2}\int_\Om |\nabla u|^2 \, \dr x + \int_\Om g(x,u) \, \dr x,
+\]
+where $g : \Om \times \R \to [0,\infty]$ is a Borel function such that $g(x,\cdot)$ is continuous for a.e. $x \in \Om$ and satisfies the estimate
+\[
+|g(x,u)| \leq C(1 + |u|^2).
+\]
+Let $\X' := C^\infty(\bar{\Om})$. Then the relaxation of $F$ on $\X := W^{1,2}(\Om)$ endowed with the weak topology is
+\[
+\bar{F}(u) =\frac{1}{2}\int_\Om |\nabla u|^2 \, \dr x + \int_\Om g(x,u) \, \dr x.
+\]
+\eex
+
+\begin{proof}[Hint of the proof]
+It is enough to show that $\X'$ is dense in energy in $W^{1,2}(\Om)$. Indeed, the functional $F$ is continuous with respect to the strong convergence and
+\[
+W^{1,2}(\Om) = \overline{C^\infty(\Om)}^{\| \cdot \|_{W^{1,2}(\Om)}}.
+\]
+\end{proof}
+
+\br
+What happens if $g(x,\cdot)$ is lower semicontinuous? The proof above fails, but, if $\X' = C^1(\bar{\Om})$, we could use a Lusin-type theorem (for Sobolev spaces) and obtain the same conclusion.
+\er
+
+\bex
+Let $\X' := C_{u_0}^\infty(\bar{\Om})$, where $u_0$ is a smooth function, and suppose that $\partial \Om$ is smooth. The relaxation of the functional
+\[
+F(u) :=  \frac{1}{2}\int_\Om |\nabla u|^2 \, \dr x
+\]
+on $\X := W_{u_0}^{1,2}(\Om)$ is given by
+\[
+G(u) =\frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x.
+\]
+\eex
+
+\begin{proof}
+Since $G$ is lower semicontinuous on $W_{u_0}^{1,2}(\Om)$ with respect to the weak topology and $G(v) = F(v)$ for $v \in \X'$, it is sufficient to show that for all $u \in W_{u_0}^{1,2}(\Om)$ there exists a smooth sequence $(u_k)_{k \in \N} \subset \X'$ such that
+\[
+\text{$u_k \rightharpoonup u$ in $W_{u_0}^{1,2}(\Om)$} \quad \text{and} \quad F(u_k) \to G(u).
+\]
+Since $F(u_k) = G(u_k)$ and $G$ is continuous with respect to the strong topology, it is enough to find a sequence such that $u_k \to u$ strongly in $W^{1,2}(\Om)$. In other words, we need to prove that $\X'$ is dense in energy in $W_{u_0}^{1,2}(\Om)$, but this is hard to do directly so we introduce an auxiliary space which is easier to deal with, namely
+\[
+\X'' := \{ u \in W^{1,2}(\Om) \: : \: \text{$u(x) = u_0(x)$ for all $x$ in a neighborhood of $\partial \Om$}\}.
+\]
+
+\proofstep{Step 1} We claim that $\X'$ is dense in energy in $\X''$. Let $u \in \X''$, extend\footnote{Here you can use any extension operator defined on $\X'$ as it does not really matter for the proof.} it to $W^{1,2}(\R^n)$, fix $\epsilon > 0$ and take an approximating sequence $(v_\epsilon)_{\epsilon > 0} \subset C_c^\infty(\R^n)$ such that
+\[
+\| u - v_\epsilon \|_{W^{1,2}(\R^n)} \xrightarrow{\epsilon \to \infty} 0.
+\]
+Let $U_\epsilon$ be a $2\epsilon$-neighbourhood of $\partial \Om$. We can always find a smooth function
+\[
+\lambda_\epsilon : \bar{\Om} \to [0,1]
+\]
+such that $\lambda_\epsilon \equiv 1$ on a $\epsilon$-neighborhood of $\partial \Om$, $\lambda_\epsilon \equiv 0$ outside of $U_\epsilon$ and $|\nabla \lambda_\epsilon| \leq \epsilon^{-1}$. The function defined by setting
+\[
+u_\epsilon(x) := \lambda_\epsilon(x) u_0(x) + (1-\lambda_\epsilon(x))v_\epsilon(x),
+\]
+is smooth and, actually, belongs to $\X'$ for all $\epsilon > 0$. We wish to estimate the $L^2$-norm of $u_\epsilon - u$ so we start off by noticing that
+\[
+u_\epsilon - u = \lambda_\epsilon (u_0-u) + (1-\lambda_\epsilon)(v_\epsilon - u).
+\]
+The $L^2$-norm of the first addendum is easy to estimate since
+\[
+\|\lambda_\epsilon (u_0-u)\|_{L^2(\Om)}^2 = \int_\Om \lambda_\epsilon^2 (u_0-u)^2 \, \dr x \leq \int_{U_\epsilon} |u_0 - u|^2 \, \dr x \xrightarrow{\epsilon \to 0^+} 0
+\]
+using the dominated convergence theorem as $|u_0 - u|^2$ is integrable and $U_\epsilon$ tends to the empty set. The second addendum is even easier because
+\[
+\| (1-\lambda_\epsilon)(v_\epsilon - u) \|_{L^2(\Om)} \leq \|v_\epsilon-u\|_{L^2(\Om)},
+\]
+and the right-hand side goes to zero by construction of $v_\epsilon$. In particular, $u_\epsilon$ converges strongly to $u$ in the $L^2$ strong topology. Now notice that
+\[
+\nabla (u_\epsilon -u) = \nabla (u_0-u) \lambda_\epsilon + (1-\lambda_\epsilon) \nabla (v_\epsilon - u) + \nabla \lambda_\epsilon( (u_0-u) + (u-v_\epsilon)),
+\]
+and the first two terms can be estimated with no problems as above. The third addendum can also be rewritten as follows
+\[
+\nabla \lambda_\epsilon( (u_0-u) + (u-v_\epsilon)) = \nabla \lambda_\epsilon (u-v_\epsilon)
+\]
+because $u$ coincides with $u_0$ on a neighborhood of $\partial \Om$. It follows that
+\[
+\| \nabla \lambda_\epsilon (u-v_\epsilon) \|_{L^2(\Om)} \leq \| \nabla \lambda_\epsilon \|_\infty \|v_\epsilon - u\|_{L^2(\Om)} \leq \epsilon^{-1}\|v_\epsilon - u\|_{L^2(\Om)}
+\]
+and, since we can decide how fast $v_\epsilon$ tends to $u$ in $L^2(\Om)$, we infer that $u_\epsilon \in \X'$ tends to $u \in \X''$ strongly in $W^{1,2}(\Om)$.
+
+\proofstep{Step 2} We claim that $\X''$ is dense in energy in $W_{u_0}^{1,2}(\Om)$. Let $u \in W_{u_0}^{1,2}(\Om)$. The goal is to find a sequence $u_\epsilon \in \X''$ that converges to $u$ strongly in $W^{1,2}(\Om)$.
+
+\proofstep{Step 2.1} Assume that, given $x \in \partial \Om$ and $\eta$ the external unit normal, it turns out that
+\[
+u_0(x + t \eta(x)) = u_0(x) \quad \text{for $|t| \leq \delta$ small enough}.
+\]
+Let $\Om_\delta$ be the $\delta$-neighborhood of $\Om$ given by
+\[
+\Om_\delta := \{x \in \R^n \: : \: d(x,\Om) < \delta\},
+\]
+and extend $u$ to $\Om_\delta$ by setting it identically equal to $u_0$ outside of $\Om$ so that\footnote{If we extend $u$ with trace $u_0$ out of $\Om$ with a function having $u_0$ as trace, then the extension stays in the Sobolev space.} the result is still an element of $W^{1,2}(\Om_\delta)$. 
+
+\proofstep{Step 2.2} Take $\Phi_\epsilon : \Om \to \Om_\epsilon$ family of diffeomorphisms (we give the existence for granted momentarily) satisfying the following three properties: \mbox{}
+\begin{enumerate}[label=(\arabic*),itemsep=.4em]
+\item For all $\epsilon > 0$, $|\Phi_\epsilon(x) - x| = \mathcal{O}(\epsilon)$.
+\item For all $\epsilon > 0$, $|\nabla \Phi_\epsilon(x) - \mathrm{Id}| = \mathcal{O}(\epsilon)$.
+\item For $x \in \partial \Om$ and $0 \leq t \leq \epsilon$, $\Phi(x - t \eta(x)) = x + (\epsilon-t)\eta(x)$.
+\end{enumerate}
+The conclusion now follows easily because we can take the sequence $u_\epsilon := u \circ \Phi_\epsilon \in \X''$ and show that it converges strongly in $W^{1,2}(\Om)$ to $u \in W_{u_0}^{1,2}(\Om)$.
+ 
+\proofstep{Step 2.3} The existence of the family of diffeomorphisms $\Phi_\epsilon$ is a consequence of the {\em tubular neighborhood theorem} using that
+\[
+\Om \times [-\delta,\delta] \ni (x,t) \longmapsto x + t \eta(x) \in U_\delta(\partial \Om),
+\]
+for $\delta > 0$ sufficiently small, is a diffeomorphism.
+\end{proof}
+
+\bex
+Consider the Dirichlet energy functional
+\[
+F(u) =\frac{1}{2} \int_\Om  |\nabla u|^2 \, \dr x
+\]
+defined on the space of smooth functions with mixed boundary conditions, namely
+\[
+\X' = \left\{ u \in C^\infty(\bar{\Om}) \: : \: u \, \big|_{\partial \Om} \equiv u_0,\, \frac{\partial u}{\partial \eta} \, \Big|_{\partial \Om} \equiv 0 \right\}.
+\]
+Then the Neumann boundary condition does {\bf not} make sense on the Sobolev space $W^{1,2}(\Om)$ because $\frac{\partial u}{\partial \eta} \in L^2(\Om)$ has no trace on $\partial \Om$. Nonetheless, the relaxation of $F$ on $W_{u_0}^{1,2}(\Om)$ is
+\[
+\bar{F}(u) = \frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x.
+\]
+This means that, if $\bar{u}$ is a minimizer of $\bar{F}$ on $W_{u_0}^{1,2}(\Om)$ there are two possibilities: \mbox{}
+\begin{enumerate}[label=(\alph*), itemsep=.4em]
+\item Either $\frac{\partial \bar{u}}{\partial \eta} \, \Big|_{\partial \Om} \equiv 0$ and $\bar{u}$ is a minimizer for the original problem; or
+\item $\frac{\partial \bar{u}}{\partial \eta} \, \Big|_{\partial \Om} \not\equiv 0$ and the original problem does not admit any minimizer.
+\end{enumerate}
+\eex
+
+\begin{proof}
+The same proof given above works because of the construction along the normal unit vector on the boundary.
+\end{proof}
+
+\bex \label{ex.4.20}
+Let $\Om \subseteq \R^n$, $n \geq 2$, and consider the Dirichlet energy functional $F$ defined on the space
+\[
+\X' = \{ u \in C^\infty(\bar{\Om}) \: : \: u(x_0) = 0, \, u \, \big|_{\partial \Om} \equiv u_0 \},
+\]
+where $x_0 \in \Om$ is fixed. Then the relaxation of $F$ on $W_{u_0}^{1,2}(\Om)$ is given by
+\[
+\bar{F}(u) = \frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x.
+\]
+\eex
+
+\br
+The main issue here is that the Sobolev space $W^{1,2}(\Om)$ does not embed into $C(\Om)$ for these values of $n$.
+\er
+
+Before we can prove that the relaxation of $F$ on the Sobolev space $W_{u_0}^{1,2}(\Om)$ is the one given above, we need a technical result.
+
+\bl \label{lemma.rel.1}
+Let $n \geq 2$. Then there exists a sequence $v_k \in C_c^\infty(\R^n)$ satisfying the following properties: \mbox{}
+\begin{enumerate}[label=(\alph*),itemsep=.4em]
+\item $v_k(x) \in [0,1]$ for all $x \in \R^n$;
+\item $v_k(0) = 1$;
+\item $\supp(v_k) \subset B(0,\frac{1}{k})$, which means that $\|v_k\|_{L^p(\R^n)} \to 0$ for all $p \geq 1$;
+\item $\|\nabla v_k\|_{L^2(\R^n)} \to 0$.
+\end{enumerate}
+\el
+
+\begin{proof}
+We first assume that $n > 2$. Let $v : \R^n \to [0,1]$ be a $C^\infty$ function supported in the ball $B(0,1)$ such that $v(0) = 1$, and set
+\[
+v_k(x) := v(kx).
+\]
+Since $\nabla v_k(x) =  k \nabla v(kx)$ we have
+\[
+\int_{\R^n} |\nabla v_k|^2 \, \dr x = k^2 \int_{\R^n} |\nabla v(kx)|^2 \, \dr x = C k^{2-n} \to 0
+\]
+because $2-n < 0$. If $n = 2$ this proof does not work anymore and one needs a different construction using, for example, non self-similar radial functions.
+\end{proof}
+
+\begin{proof}[Proof of Example \ref{ex.4.20}]
+Let $\X'' = C_{u_0}^\infty(\bar{\Om})$. Since $\X''$ is dense in energy in $W_{u_0}^{1,2}(\Om)$, it suffices to show that $\X'$ is dense in energy in $\X''$. Take $u \in \X''$ and set
+\[
+u_k(x) := u(x) - u(x_0) v_k(x - x_0),
+\]
+where $v_k$ is the sequence given in {\color{blue}Lemma \ref{lemma.rel.1}}. It is easy to check that $u_k(x_0) = 0$ and that $u_k \to u$ strongly in $W^{1,2}(\Om)$.
+\end{proof}
+
+\br
+The embedding $W^{1,2}(\R^2) \hookrightarrow C_0(\R^2)$ fails because
+\[
+I : C_c^\infty(\R^2) \to C_0(\R^2)
+\]
+is {\bf not} bounded, for otherwise it could be extended to $W^{1,2}(\R^2)$. The counterexample here gives a good sequence of functions to prove {\color{blue}Lemma \ref{lemma.rel.1}} when $n = 2$.
+\er
+
+\bex
+Let $\Om \subset \R^n$ and consider the $p$-Dirichlet energy
+\[
+F(u) = \int_\Om |\nabla u|^p \, \dr x
+\]
+for all $u \in \X'$, where
+\[
+\X' = \{ u \in C^\infty(\bar{\Om}) \: : \: \text{$u \, \big|_{\partial \Om} \equiv u_0$}, \, u(x_0) = 0 \}
+\]
+and $u_0$ is a smooth function defined on $\partial \Om$. The relaxation of $F$ on $W_{u_0}^{1,p}(\Om)$ is
+\[
+\bar{F}(u) = \int_\Om |\nabla u|^p \, \dr x
+\]
+if $p \leq n$, and
+\[
+\bar{F}(u) = \begin{cases} \int_\Om |\nabla u|^p \, \dr x & \text{if $u \in W_{u_0}^{1,p}(\Om)$ and $u(x_0) = 0$},
+\\[.6em] \infty & \text{otherwise}, \end{cases}
+\]
+if $p > n$. The reason is that the condition $u(x_0) = 0$ survives under relaxation and this can be shown using the continuous representative.
+\eex
+
+\bex
+If $\X' = C_{u_0}^\infty(\bar{\Om})$ and $F(u) = \frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x$, then the relaxation of $F$ on $W^{1,2}(\Om)$ is given by
+\[
+\bar{F}(u) = \begin{cases} \int_\Om |\nabla u|^2 \, \dr x & \text{if $u \in W_{u_0}^{1,2}(\Om)$ and $u \equiv u_0$ on $\partial \Om$},
+\\[.6em] \infty & \text{otherwise}. \end{cases}
+\]
+This is, once again, due to the continuity of the trace operator that survives under relaxation.
+\eex
+
+\section{Relaxation and $p$-capacity}
+
+Let $F$ be the Dirichlet energy,
+\[
+F(u) = \frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x,
+\]
+and consider the functional space $\X' := \{ C_{u_0}^\infty(\bar{\Om}) \: : \: u(x_0) = 0\}$ for some $x_0 \in \Om$. We proved that the relaxation on $W_{u_0}^{1,2}(\Om)$ endowed with the weak topology is
+\[
+\bar{F}(u) = \frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x.
+\]
+However, the condition $u(x_0) = 0$ is not preserved under relaxation, and therefore a minimizer $\bar{u}$ of $\bar{F}$ is also a minimizer of $F$ if and only if it satisfies $\bar{u}(x_0) = 0$.
+
+\subsection{$p$-Capacity} Let $F$ be as above and consider the functional space
+\[
+\X' := \{ C_{u_0}^\infty(\bar{\Om}) \: : \: u \, \big|_K \equiv 0\},
+\]
+where $K \subset \Om$ is a compact set. At this point, it makes sense to wonder for which $K$ the relaxation of $F$ on $W_{u_0}^{1,2}(\Om)$ is (once again) given by
+\[
+\bar{F}(u) = \frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x.
+\]
+Let $1 < p < \infty$. To deal with this question, we first need to introduce the definition of $p$-capacity. 
+
+\bd
+The {\em $p$-capacity} of a subset $A \subseteq \R^n$ is defined as
+\[
+\mathrm{Cap}_p(A) := \inf \left\{ \int_{\R^n} |\nabla u|^p \, \dr x \: : \: \text{$u \in C_c^\infty(\R^n)$ and $u \geq 1$ on some $U \in \cN(A)$} \right\},
+\]
+where $\cN(A)$ denotes the set of all open neighborhoods of $A$.
+\ed
+
+The following theorem asserts that the value of the $p$-capacity of $K$ determines how the relaxation of the Dirichlet energy looks like.
+
+\bt
+Let $F$ be the $p$-Dirichlet energy,
+\[
+F(u) = \int_\Om |\nabla u|^p \, \dr x,
+\]
+defined on $\X' := \{ C_{u_0}^\infty(\bar{\Om}) \: : \: u \, \big|_K \equiv 0\},$, and let $\bar{F}$ be the relaxation on $W_{u_0}^{1,p}(\Om)$. Then the following assertions hold: \mbox{}
+\begin{enumerate}[label=(\roman*),itemsep=.4em]
+\item If $\mathrm{Cap}_p(K) = 0$, then
+\[
+\bar{F}(u) = \int_\Om |\nabla u|^p \, \dr x.
+\]
+\item Let us consider the functional space
+\[
+\bar{\X} := \{ u \in W_{u_0}^{1,p}(\Om) \: : \: \mathrm{Cap}_p(\{x \in K \: : \: u(x)\neq 0\})= 0 \},
+\]
+where $u$ is the representative which is approximately $p$-continuous at every $x \in \Om$ except in a set of null $p$-capacity. Then
+\[
+\bar{F}(u) = \begin{cases} \int_\Om |\nabla u|^p \, \dr x & \text{if $u \in \bar{\X}$},
+\\ \infty & \text{otherwise}. \end{cases}
+\]
+\end{enumerate}
+\et
+
+\br
+Let $u \in W_{u_0}^{1,p}(\Om)$ be a Sobolev function. If we set
+\[
+\widetilde{u}(x) := \lim_{r \to 0^+} \averint_{B(x,r)} u(y) \, \dr y
+\]
+then the Lebesgue theorem asserts that $\widetilde{u}$ is $p$-continuous at every $x \in \Om$ except in a set of null $p$-capacity. It is usually referred to as {\em precise representative}\index{precise representative} of $u$.
+\er
+
+\begin{proof}[Proof of ({\romannumeral 1})]
+We must prove that for each $u \in W_{u_0}^{1,p}(\Om)$ there exists a sequence of smooth functions $u_k \in C_c^\infty(\bar{\Om})$ satisfying the constraint $u_k \, \big|_{K} \equiv 0$ such that
+\[
+\text{$u_k \rightharpoonup u$ (weakly) in $W^{1,p}(\Om)$} \quad \text{and} \quad F(u_k) \xrightarrow{k \to \infty} F(u).
+\]
+
+\proofstep{Step 1} The space $C_{u_0}^\infty(\bar{\Om})$ is dense in energy for $F$ in $W_{u_0}^{1,p}(\Om)$ because it is strongly dense and $F$ is strongly continuous. Therefore, it suffices to consider $u \in C_{u_0}^\infty(\bar{\Om})$.
+
+\proofstep{Step 2} Since $K$ has $p$-capacity equal to zero, we can find a sequence of smooth functions $v_k \in C_c^\infty(\R^n)$ such that 
+\[
+\int_{\R^n} |\nabla v_k|^p \, \dr x \xrightarrow{k\to \infty} 0
+\]
+and $v_k \geq 1$ on an open neighborhood of $K$. We would like to consider
+\[
+u_k(x) := u(x)(1-v_k(x)),
+\]
+but we first need to modify $v_k$ in such a way that it satisfies the following two properties:\mbox{}
+\begin{enumerate}[label=(\alph*),itemsep=.4em]
+\item $v_k$ is identically equal to $1$ on $K$;
+\item $v_k$ has compact support contained in $\Om$.
+\end{enumerate}
+Assume for the time being that we can modify $v_k$ to satisfy these properties. Then
+\[
+u_k(x) = u(x)(1-v_k(x)) = 0 \quad \text{for all $x \in K$}
+\]
+and
+\[
+\|u-u_k\|_{L^p(\Om)} \leq \|u\|_{L^\infty(\Om)} \| v_k \|_{L^p(\Om)}.
+\]
+Since $v_k$ has compact support in $\Om$, we know that there exists a dimensional constant $c > 0$ such that the following holds:
+\[
+\| v_k \|_{L^p(\Om)} \leq c \| \nabla v_k \|_{L^p(\Om)}.
+\]
+We plug this inequality into the one above and find that
+\[
+\|u-u_k\|_{L^p(\Om)} \leq c \|u\|_{L^\infty(\Om)} \| \nabla v_k \|_{L^p(\Om)} \xrightarrow{k \to \infty} 0,
+\]
+which means that $u_k$ converges strongly to $u$ in $L^p(\Om)$. In a similar fashion, we have
+\[
+\|\nabla u - \nabla u_k\|_{L^p(\Om)} \leq \|\nabla u\|_{L^\infty(\Om)} \|v_k\|_{L^p(\Om)} + \|\nabla v_k\|_{L^p(\Om)} \|u\|_{L^\infty(\Om)} \xrightarrow{n \to \infty} 0,
+\]
+and this concludes the proof of the theorem.
+
+\proofstep{Step 3} To modify $v_k$ and achieve the property $(b)$, namely that $v_k$ is compactly supported in $\Om$, it suffices to replace $v_k$ with $v_k \cdot \Theta$, where $\Theta$ is a smooth cutoff function.
+
+To obtain the property $(a)$ we can either truncate (and show that $C_c^\infty(\R^n)$ in the definition of $p$-capacity is too much), or compose $v_k$ with a suitable function.\end{proof}
+
+We now list a few properties of $p$-capacity (without proofs), which will be quite useful in the investigation of the relaxation of specific functionals.
+
+\br \mbox{}
+\begin{enumerate}[label=(\alph*),itemsep=.4em]
+\item In the definition of $p$-capacity, the space $C_c^\infty(\R^n)$ can be replaced by Lipschitz functions in $\mathrm{Lip}_c(\R^n)$. In this case, we can assume $u$ to be identically equal to one on a neighborhood of $A$ because truncation works in the Lipschitz class.
+\item If $K$ is a compact set, the capacity is also given by
+\[
+\mathrm{Cap}_p(K) := \inf \left\{ \int_{\R^n} |\nabla u|^p \, \dr x \: : \: \text{$u \in C_c^\infty(\R^n)$ and $u \geq 1$ on $K$} \right\}.
+\]
+\end{enumerate}
+\er
+
+\bpr
+Let $1<p<\infty$. The capacity $\mathrm{Cap}_p(\cdot)$ is an outer measure.
+\epr
+
+\br
+If $p = 1$, then the $p$-capacity coincides with the $(n-1)$-dimensional Hausdorff measure $\cH^{n-1}$.
+\er
+
+\br
+If $p > n$, then $\mathrm{Cap}_p(A) > 0$ for every nonempty set $A$. In other words, the $p$-capacity of points is positive, that is,
+\[
+\mathrm{Cap}_p(\{x\}) > 0.
+\]
+This is strictly related to the fact that for these values of $p$ we have the embedding
+\[
+W^{1,p}(\R^n) \hookrightarrow C^0(\R^n).
+\]
+\er
+
+\bpr
+Let $1<p\leq n$. Then there exists a constant $c > 0$ such that
+\[
+\mathrm{Cap}_p(B(x,r)) =  c r^{n-p}.
+\]
+\epr
+
+\begin{proof}
+The scaling with $r$ is easy to verify, while the existence of the constant $c$ is due to the fact that sets of positive measure cannot have $p$-capacity zero when $n-p\geq 0$.
+\end{proof}
+
+\bpr
+Let $1<p\leq n$. If $\cH^{n-p}(A) = 0$, then $\mathrm{Cap}_p(A) = 0$.
+\epr
+
+\begin{proof}
+Fix $\epsilon > 0$. Since $\cH^{n-p}(A) = 0$ we can find a family of balls $B_i$ such that
+\[
+A \subseteq \bigcup_{i \in \N} B_i \quad \text{and} \quad \sum_{i \in \N} r_i^{n-p} \leq \epsilon.
+\]
+The $p$-capacity is subadditive (because it is an outer measure) so
+\[
+\mathrm{Cap}_p(A) \leq \sum_{i \in \N} \mathrm{Cap}(B_i) = c \sum_{i \in \N} r_i^{n-p} \leq c \epsilon,
+\]
+and we conclude using the arbitrariness of $\epsilon$.
+\end{proof}
+
+\bex[Electrostatic potential]
+A function $\bar{u}$ that achieves the infimum
+\[
+\mathrm{Cap}_2(K) = \inf\left\{ \int_\Om |\nabla u|^2 \, \dr x \: :\: u \in C_c^\infty(\R^n), \, u \, \big|_K \equiv 1 \right\}
+\]
+is also a solution to the PDE
+\[
+\begin{cases}
+\Delta \bar{u}(x) = 0 & \text{if $x \in \R^d\setminus K$},
+\\ u(x) = 1 & \text{if all $x \in K$},
+\\ \lim_{|x|\to \infty} \bar{u}(x) = 0.
+\end{cases}
+\]
+Integrating by parts and using the equation satisfied by $\bar{u}$ yields
+\[
+\mathrm{Cap}_2(K) = - \int_\Om \bar{u} \Delta \bar{u} \, \dr x = -\int_K \Delta \bar{u} \,\dr x
+\]
+because $\Delta\bar{u}$ vanishes outside of $K$ and $\bar{u}$ is identically one on $K$.
+\eex
+
+\section{Relaxation that does not coincide with the initial functional}
+
+Let us consider the functional
+\[
+F(u) = \int_\Om f(x,u,\nabla u)\, \dr x,
+\]
+where $f$ is continuous in all three variables and such that $f(x,u,\cdot)$ is convex and consider the restriction on smooth functions $\X' = C^\infty(\bar{\Omega})$. We would like to know if the relaxation $\bar{F}$ on the Sobolev space $W^{1,p}(\bar{\Om})$ coincide with $F$ or not.
+
+\br
+If $\bar{F}(u) = F(u)$ for $u \in \X'$, studying minimizers in the Sobolev space gives important information on minimizing sequence in the space of smooth functions. 
+\er
+
+\br
+If $F$ is continuous with respect to the strong topology on $W^{1,p}(\Om)$, then the answer is affirmative and one can prove that $\bar{F}$ coincide with $F$.
+\er
+
+The next example, which is based on the pioneer work by {\bf Lavrentiev}, gives an example of a functional for which the relaxation fails to coincide with $F$.
+
+\bex[???, Ball-James]
+Let $p < \infty$ and consider the functional
+\[
+F(u) = \int_0^1 |2x^\alpha-u|^\beta |\dot{u}|^\gamma \, \dr x.
+\]
+Choose $\alpha < 1$ in such a way that $2x^\alpha \in W_{u_0}^{1,p}([0,1])$, where $u_0$ is a function satisfying the following boundary constraint: $u_0(0) = 0$ and $u_0(1) = 2$. Then
+\[
+F(2x^\alpha) = \min_{u \in W_{u_0}^{1,p}([0,1])} F(u) =0,
+\]
+and it is the unique minimizer with such boundary values. However, it can be proved that
+\[
+\min_{u\in W_{u_0}^{1,\infty}([0,1])} F(u) \geq c > 0
+\]
+by choosing properly $\beta$ and $\gamma$. This implies that the relaxation on $W_{u_0}^{1,p}([0,1])$ of the restriction to $W_{u_0}^{1,\infty}([0,1])$ is not equal to $F$. 
+\eex
+
+\br
+The minimizer of $F$ on $W^{1,p}([0,1])$ is not regular, that is, it is not of class $C^1$.
+\er
+
+We now show how to choose $\beta$ and $\gamma$ to prove the upper bound on the minimum of $F$ among all functions in the class $W_{u_0}^{1,\infty}([0,1])$.
+
+\begin{proof}
+Let $u \in W_{u_0}^{1,\infty}([0,1])$. Then there exists $0 < a < 1$ such that $u(x) \leq x^\alpha$ for all $x \in [0,a]$. It turns out that
+\[
+F(u) \geq \int_0^a x^{\alpha\beta} |\dot{u}|^\gamma \, \dr x.
+\]
+Let $v(x^\delta) := u(x)$ for some $\delta > 0$ and notice that $\dot{u}(x) = \delta x^{\delta-1} \dot{v}(x^\delta)$. Then
+\[
+F(u) \geq \int_0^a x^{\alpha\beta + (\delta-1)\gamma} \delta^\gamma |\dot{v}(x^\delta)|^\gamma \, \dr x,
+\]
+and the change of variables $t = x^\delta$ yields the inequality
+\[
+F(u) \geq \int_0^{a^\delta} |\dot{v}(t)|^\gamma \dr t \geq a^{\delta(1-\gamma)+\alpha \gamma},
+\]
+provided that $\alpha \beta + (\delta-1)\gamma = \delta - 1$, which can be rewritten as
+\[
+\delta =\frac{\alpha\beta + 1 - \gamma}{1-\gamma}.
+\]
+Finally choose $\gamma$ and $\beta$ in such a way that the exponent of $a$ does not allow the right-hand side $a^{\delta(1-\gamma)+\alpha \gamma}$ to go to zero as $a \to 0^+$.
+\end{proof}
+
+%%23/05 -> 17.30 prossimo giovedì, 9-11 venerdì prossimo e lezione extra martedì 16-18
+%% Pratelli lun 3/06 14-16, mar-gio 11-13
+
+\section{Lavrentiev phenomenon}
+
+In the previous section, we provided an example of the so-called {\em Lavrentiev phenomenon}, which can be ``defined'' in the following way:
+
+\bd \index{Lavrentiev phenomenon}
+Let $F$ be a weakly lower semicontinuos functional on a Sobolev space $\X$. We say that $F$ exhibits the {\em Lavrentiev phenomenon} if the relaxation on $\X$ of the restriction of $F$ to a space $\X'$ of "regular" functions does not coincide with $F$.
+\ed
+
+\br
+If $\X'$ is (strongly) dense and $F$ is (strongly) continuous, then the relaxation of $F$ coincide with $F$ itself.
+\er
+
+We will now show another (rare) example of the Lavrentiev phenomenon, which is particularly important because we consider vector-valued functions. 
+
+\bex
+Let $B := B(0,1)$ be the disk in $\R^2$ and take a function $\varphi : \R^2 \to [0,\infty)$ such that $\varphi(x) = 0$ if and only if $|x| = 1$. Let us consider the functional
+\[
+F(u) := \int_B \varphi(u) |\nabla u|^2 \, \dr x,
+\]
+where $u : B \to \R^2$. In addition, set $u_0(x) := x$ to be the constant function defined on the boundary $\partial B$.
+\eex
+
+\bt \label{thm.20.1}
+Let $p < 2$. The minimum of $F$ over $W_{u_0}^{1,p}(B,\R^2)$ is
+\[
+\min_{u \in W_{u_0}^{1,p}(B,\R^2)} F(u) = 0,
+\]
+and it is achieved by the function $\bar{u}(x) = \frac{x}{|x|}$. Furthermore, there exists a constant $c > 0$ independent of $u$ such that
+\begin{equation}\label{eq.20.1}
+F(u) \geq c \quad \text{for every $u \in C^1(\bar{B},\R^2)$ such that $u \, \big|_{\partial B} \equiv u_0$}.
+\end{equation}
+\et
+
+\br
+In \eqref{eq.20.1} we can replace $C^1$ functions with Lipschitz ones. More precisely, it can be proved that there exists a positive constant $c$ independent of $u$ such that
+\[
+F(u) \geq c \quad \text{for every $u \in \mathrm{Lip}(\bar{B},\R^2)$ such that $u \, \big|_{\partial B} \equiv u_0$}.
+\]
+\er
+
+\begin{proof}
+First, we use the simple algebraic inequality $a^2 + b^2 \geq 2ab$ to infer a similar estimate between $|\nabla u|^2$ and the determinant of the gradient; namely, we have
+\[
+|\nabla u|^2 = \sum_{i,j=1}^2 \left( \frac{\partial u_i}{\partial x_j} \right)^2 \geq 2 \det(\nabla u).
+\]
+It follows that
+\[
+F(u) \geq 2 \int_B \varphi(u) |\det(\nabla u)| \, \dr x \geq 2 \int_{u(B)} \varphi(y) \, \dr y
+\]
+applying the change of variables formula with $y = u(x)$. Notice that we do not have the equality because $u$ might not be injective and hence the multiplicity at each $y$ be greater than one. A standard result in topology tells us that $B \subseteq u(B)$, and thus
+\[
+F(u) \geq 2 \int_B \varphi(y) \, \dr y =: c > 0.
+\]
+It is easy to verify that, as claimed, the constant does not depend on $u$.
+\end{proof}
+
+To conclude the section, a few remarks and exercises concerning this result are in order. 
+
+\br \mbox{}
+\begin{enumerate}[label=(\alph*), itemsep=.4em]
+\item The condition $p < 2$ is necessary to ensure that the function $\bar{u}(x) = \frac{x}{|x|}$ actually belongs to $W_{u_0}^{1,p}(B)$.
+\begin{xca}
+If $p < 2$, it is easy to see that $\nabla \bar{u} \in L^p(B)$. However, this only proves that $u \in W^{1,p}(B\setminus\{0\})$. How can one obtain $u \in W^{1,p}(B)$?
+\end{xca}
+\item The functional $F$ is weakly lower semicontinuous on $W^{1,p}(B,\R^2)$. However, the relaxation of the restriction of $F$ to smooth functions is not equal to $F$ itself.
+\item If $\bar{F}$ is the aforementioned relaxation and $c$ the constant in \eqref{eq.20.1}, one might wonder if it is true that the following equality holds:
+\[
+\bar{F} \left( \frac{x}{|x|} \right) = c.
+\]
+This is possible only if all the inequalities in the proof of {\color{blue}Theorem \ref{thm.20.1}} are, in fact, equalities.
+\begin{xca}
+Verify whether or not $\bar{F} \left( \frac{x}{|x|} \right) = c$ holds. The second and third inequality are easy to fix, while the first one requires some care.
+\end{xca}
+\item As mentioned before, \eqref{eq.20.1} is true even if we replace $C_{u_0}^1(\bar{B})$ with Lipschitz functions because the coarea formula used in the proof of {\color{blue}Theorem \ref{thm.20.1}} holds without any changes.
+\item In \eqref{eq.20.1} we can even replace $C_{u_0}^1(\bar{B})$ with $W_{u_0}^{1,q}(B)$ with $q > 2$, but the coarea formula is not obtained as easily as above.
+\item The functional $F$ is strongly continuous on $W_{u_0}^{1,p}(B)$ for $p > 2$, so it does not exhibit the Lavrentiev phenomenon. {\color{red}Not sure about $p = 2$?}
+\item The functional $F$ is not coercive on $W_{u_0}^{1,p}(B)$, but the perturbation
+\[
+F_\epsilon(u) := F(u) + \epsilon \int |\nabla u|^p \, \dr x
+\]
+is coercive for every $\epsilon > 0$. Furthermore, if $\epsilon$ is small enough $F_\epsilon$ still exhibits the Lavrentiev phenomenon (and the non-regularity of minimizers).
+\end{enumerate}
+\er

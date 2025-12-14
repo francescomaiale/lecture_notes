@@ -1,0 +1,641 @@
+\chapter{$\Gamma$-convergence and Applications}
+
+{\color{red}I will write the introduction after the chapter is complete!}
+
+\section{Introduction and first examples}
+
+The $\Gamma$-convergence is, roughly speaking, a notion of convergence of functionals designed to have the convergence of minimizers. Namely, if $\X$ is a metric space and
+\[
+F_n: \X \to [0,\infty]
+\]
+a sequence of lower semicontinuous functions, then $F_n \xrightarrow{\Gamma} F$ should imply "that a sequence $x_n$ of minimizers for $F_n$ converges to a minimum point $x$ of $F$".
+
+We will now give the formal definition of $\Gamma$-convergence and show that, under certain conditions, the assertion in quotes holds.
+
+\bd[$\Gamma$-convergence] \index{$\Gamma$-convergence}
+Let $\X$ be a metric space and $F_n : \X \to [0,\infty]$. We say that $F_n$ $\Gamma$-converges to $F : \X \to [0,\infty]$ if the following properties hold: \mbox{}
+\begin{enumerate}[label=(\roman*),itemsep=.4em]
+\item For all $x \in \X$ and all sequences $(x_n)_{n \in \N} \subset \X$ such that $x_n \to x$ it turns out that
+\begin{equation}\label{gammaliminf}
+\liminf_{n\to \infty}F_n(x_n)\geq F(x).
+\end{equation}
+\item For all $x \in \X$ there is a sequence $(x_n)_{n \in \N} \subset \X$ such that $x_n \to x$ and
+\begin{equation}\label{gammalimsup}
+\limsup_{n\to \infty} F_n(x_n) \leq F(x).
+\end{equation}
+The sequence $x_n$ is usually referred to in the literature as {\em recovery sequence}.\index{recovery sequence}
+\end{enumerate}
+\ed
+
+\br
+The condition \eqref{gammaliminf} is usually called $\Gamma-\liminf$ inequality, while \eqref{gammalimsup} is known as $\Gamma-\limsup$ inequality.
+\er
+
+\bpr \label{pr.gamma1}
+Let $\bar{x}_n$ be a minimizer for $F_n$ and suppose that $F$ is the $\Gamma$-limit of the sequence $F_n$. If $\bar{x}_n \to \bar{x} \in \X$, then $\bar{x}$ is a minimizer for $F$.
+\epr
+
+\begin{proof}
+It suffices to prove that given any $x \in \X$ we have
+\[
+F(x) \geq F(\bar{x}).
+\]
+Fix $x \in \X$ and take a recovery sequence $x_n$. Then
+\[
+F_n(\bar{x}_n) \leq F_n(x_n) \implies \liminf_{n\to\infty} F_n(\bar{x}_n) \leq \lim_{n \to \infty} F_n(x_n) = F(x)
+\]
+follows from \eqref{gammalimsup}, while the opposite inequality
+\[
+\liminf_{n\to\infty}F_n(\bar{x}_n) \geq F(\bar{x})
+\]
+follows immediately from \eqref{gammaliminf}.
+\end{proof}
+
+\bex
+Let $\X = \R$ and $F_n(x) := x^2 + \sin(nx)$. We claim that
+\[
+\Gamma-\lim_{n\to\infty} F_n(x) = x^2 - 1.
+\]
+The $\Gamma-\liminf$ inequality is easy to check because $-1$ is the minimum of $\sin(nx)$. Similarly, given $x \in \R$ the recovery sequence is $x_n \in \R$ such that
+\[
+\sin(n x_n) = -1 \quad \text{for all $n \in \N$.}
+\]
+An immediate consequence is that, if $\bar{x}_n$ is a minimizer for $F_n(x)$, then $\bar{x}_n \to 0$ as the function $x^2 + 1$ has its unique minimum at $\bar{x} = 0$.
+\eex
+
+It is worth noticing that {\color{blue}Proposition \ref{pr.gamma1}} requires $\bar{x}_n$ to be a sequence that converges to some element of $\X$. Thus, it makes sense to introduce the following notion:
+
+\bd\index{equicoercive}
+A sequence of functionals $F_n : \X \to [0,\infty]$ is said to be {\em equicoercive} if $\{x_n\}_{n \in \N}$ is relatively compact in $\X$ whenever
+\[
+F_n(x_n) \leq C <\infty
+\]
+for some uniform constant $C$ that does not depend on $n$.
+\ed
+
+\bpr \label{pr.gamma2}
+Let $\bar{x}_n$ be a minimizer for $F_n$ and suppose that $F$ is the $\Gamma$-limit of the sequence $F_n$. If $F_n$ is a equicoercive, then $\{x_n\}_{n \in \N}$ is relatively compact in $\X$ and each accumulation point is a minimizer for $F$.
+\epr
+
+\br
+In the applications, we need to choose the ``right'' topology on the space $\X$. In fact, we need to find a good "balance" between these two points: \mbox{}
+\begin{enumerate}[label=(\roman*),itemsep=.4em]
+\item If the topology is too weak, then the $\Gamma-\liminf$ inequality has to be tested on more sequences and thus it might fail.
+\item If the topology is too strong, then \eqref{gammaliminf} is easier but the equicoerciveness (strictly related to compactness) might fail.
+\end{enumerate}
+\er
+
+\br
+The statement of {\color{blue}Proposition \ref{pr.gamma2}} concerns the convergence of minimizers, but it does not say anything about local minimizers.
+\er
+
+\br
+From a numerical point of view $\Gamma$-converge is rather useless because it gives no information about the rate of convergence of minimizers (so, given $\bar{x}_n$, we do not know where to "stop" to find a good approximation of $\bar{x}$).
+\er
+
+\bex
+Let $\X = \R$ and $F_n(x)=\frac{x^2}{n} + \sin(nx)$. Then 
+\[
+F_n \xrightarrow{\Gamma} F \equiv -1,
+\]
+where $F$ is the function identically $-1$. Each $x \in \R$ minimizes $F$ so the $\Gamma$-convergence here gives no information whatsoever on $\bar{x}_n \in \mathrm{argmin}(F_n)$. However, the functional
+\[
+G_n(x) := n(F_n(x) + 1) = x^2 + n(\sin(nx)+1)
+\]
+is well-defined and satisfies $\mathrm{argmin}(F_n) = \mathrm{argmin}(G_n)$. Furthermore, one can prove that
+\[
+\Gamma-\lim_{n \to \infty} G_n = x^2,
+\]
+which admits a unique minimum point. Therefore, any sequence $\bar{x}_n$ of minimizers for $F_n$ must converge to $x = 0$.
+\eex
+
+\br \mbox{}
+\begin{enumerate}[label=(\roman*),itemsep=.4em]
+\item To prove that $F$ is the $\Gamma$-limit of $F_n$, it suffices to show the $\Gamma-\liminf$ inequality and to find a recovery sequence for all $x \in D$, with $D$ a $F$-dense subset of $\X$.
+\item $F_n \xrightarrow{\Gamma} F$ if and only if the epigraphs of $F_n$ converge (in the sense of {\bf Kuratowski}) to the epigraph of $F$.
+\item The $\Gamma$-limit does not always coincide with the pointwise limit. For example, let $\X = \R$ and consider the sequence
+\[
+F_n(x) = \begin{cases}0&\text{if $x \leq 0$ and $x \geq \frac{2}{n}$}, \\[.4em] f_n(x) & \text{if $0 < x < \frac{2}{n}$,} \end{cases}
+\]
+where $f_n$ is a continuous function satisfying $f_n\left(\frac{1}{n}\right) = -1$. The pointwise limit of $F_n$ as $n \to \infty$ is the identically zero function, but
+\[
+F_n \xrightarrow{\Gamma} F(x) := \begin{cases} 0 & \text{if $x \neq 0$}, \\ -1 & \text{if $x = 0$}. \end{cases}
+\]
+However, if $F_n$ is pointwise increasing and lower semicontinuous for all $n \in \N$, then the $\Gamma$-limit and the pointwise limit coincide.
+\end{enumerate}
+\er
+
+%% N
+
+\newpage
+
+\section{Ginzburg-Landau scalar model}\index{Ginzburg-Landau theory}
+
+Suppose that we have a two-phases (say $A^+$ and $A^-$) fluid inside a container. Our goal is to study the equilibrium configuration of the fluid through the so-called {\em Ginzburg-Landau theory} which was introduced in a more general situation to describe phases transitions.
+
+\subsection{Mathematical model} Let $\Om$ be a bounded smooth domain in $\R^d$ ($d=3$ in the applications) and let $u : \Om \to [-1,1]$ be the {\em order parameter}, which describes the configuration of the fluid and it is defined in such a way that
+\[ \begin{aligned}
+ & u(x)= 1 \implies \text{pure phase $A^+$,}
+\\& u(x) = - 1 \implies \text{pure phase $A^-$,}
+\\& u(x) \in (-1,1) \implies \text{mixed phase}.
+\end{aligned} \]
+At the equilibrium configuration, $u$ minimizes the functional
+\[
+F_\epsilon(u) = \int_\Om \left( W(u) + \epsilon^2 |\nabla u|^2 \right) \, \dr x
+\]
+with the constraint
+\begin{equation}\label{eq.22.vc}
+\averint_\Om u \, \dr x = m \in (-1,1),
+\end{equation}
+$m$ fixed, where $W : \R \to \R$ is a {\em double-well potential}\index{double-well potential}, that is, $W$ is everywhere positive and $W(1)=W(-1) = 0$. The most natural example of such a potential is
+\[
+W(u) := (u^2-1)^2.
+\]
+
+\br
+Notice that $W$ favors phases separation, while the gradient term favors the homogeneity of the fluid (because sudden transitions make $|\nabla u|$ bigger).
+\er
+
+\begin{question}
+If $u_\epsilon$ denotes a minimizer of the energy $F_\epsilon$, what can we say about its asymptotic behavior as $\epsilon \to 0$?
+\end{question}
+
+To answer this question thoroughly, we plan (in the next couple of lectures) to carry out the following strategy: \mbox{}
+\begin{enumerate}[itemsep=.4em]
+\item Use a heuristic argument (from physics) to determine the behavior of $F_\epsilon$ and $u_\epsilon$.
+\item Exploit the heuristic result to guess a possible $\Gamma$-limit.
+\item Introduce tools (such as finite perimeter sets) to find the right setting for which the $\Gamma$-limit exists and makes sense.
+\item Prove a relevant $\Gamma$-convergence result and derive information about the asymptotic behavior of $u_\epsilon$ as $\epsilon \to 0$.
+\end{enumerate}
+
+
+\subsection{Heuristic argument, I} The first observation is that, since we only care about the limit behavior as $\epsilon \to 0$, we can restrict to small values of $\epsilon$. In this case, the potential $W$ "dominates" the integral, and therefore we can expect $u_\epsilon$ to take the values $1$ and $-1$ respectively in two sides of $\Om$ which are separated by an ``interface'' ({\bf not} a surface in general) which we {\bf guess} might be a $\delta$-neighborhood of some surface $\Sigma$ as in Figure \ref{fig.11}. The energy should consequently be concentrated in the phases transition $\delta$-neighborhood and should be given by
+\begin{equation}\label{eq.22.1}
+F_\epsilon(u) \simeq \left(1 + \epsilon^2 \frac{1}{\delta^2} \right) \delta |\Sigma| = \left( \delta + \frac{\epsilon^2}{\delta} \right)|\Sigma|,
+\end{equation}
+where $\simeq$ means ``equal up to a constant''. The term $\delta^{-2}$ comes out of $|\nabla u|^2$ because the neighborhood has thickness equal to $\delta$.
+
+\br
+The term $\delta |\Sigma|$ that multiplies everything above is a good approximation of the volume of the $\delta$-neighborhood of $\Sigma$.
+\er
+
+It is worth remarking that we cannot choose $\delta > 0$ to be too small or too large because the right-hand side of \eqref{eq.22.1} contains both $\delta$ and $\delta^{-1}$. Thus, we consider
+\[
+\min_{\delta > 0} \left\{ \delta + \frac{\epsilon^2}{\delta} \right\}
+\]
+and notice that the minimum is achieved at $\delta = \epsilon$. This ``proves'' that the thickness of the interface should be of order $\epsilon$ and $F_\epsilon$ more or less equal to $\epsilon |\Sigma|$, but this is not yet an asymptotic estimate. 
+
+\subsection{Heuristic argument, II} To find (heuristically) a more precise asymptotic estimate, we use the following ansatz:
+\[
+u(x) = v\left( \frac{d_\Sigma(x)}{\epsilon} \right),
+\]
+where $d_\Sigma$ is the {\em oriented distance} from $\Sigma$. Since it is arbitrary, we choose $d_\Sigma$ to be positive on the side where $u = 1$ and negative on the side where $u = -1$. It follows that
+\[
+|\nabla u(x)| = \frac{1}{\epsilon} \left| \dot{v} \left( \frac{d_\Sigma(x)}{\epsilon} \right) \right|
+\]
+because (well-known fact) the modulus of the gradient of the distance $d_\Sigma$ is always equal to one. Using this ansatz, the energy can be rewritten as
+\[
+F_\epsilon(u) = \int_\Om \left[ W\left(v \left( \frac{d_\Sigma(x)}{\epsilon} \right)\right) + \left|\dot{v} \left( \frac{d_\Sigma(x)}{\epsilon} \right)\right|^2  \right] \, \dr x.
+\]
+Let $\Sigma_t := \{ x \in \Om \: : \: d(x,\Sigma) = t\}$ for $t > 0$ (in such a way that $\Sigma=\Sigma_0$). Using the {\em coarea formula} (which we will discuss briefly at another time) we find that
+\[\begin{aligned}
+F_\epsilon(u) &= \int_{-\infty}^{\infty} \left[ W\left(v\left(\frac{t}{\epsilon}\right)\right) + \left| \dot{v}\left( \frac{t}{\epsilon} \right)\right|^2 \right] |\Sigma_t| \, \dr t \sim
+\\ & \sim \int_{-\infty}^{\infty} \left[W\left(v\left(\frac{t}{\epsilon}\right)\right) + \left| \dot{v}\left( \frac{t}{\epsilon} \right)\right|^2 \right] |\Sigma| \, \dr t =
+\\ & = \epsilon |\Sigma| \int_{-\infty}^{\infty} \left[ W\left(v\left(t\right)\right) + \left| \dot{v}\left( t \right)\right|^2 \right] \, \dr t
+\end{aligned}\]
+where the symbol $\sim$ means asymptotically equivalent. Notice that we can replace $|\Sigma_t|$ with $|\Sigma|$ because the $\epsilon$-neighborhoods (as $\epsilon \to 0$) are so close to $\Sigma$ that the surface should not change substantially. The equality, on the other hand, simply follows from the change of variables $t' := \frac{t}{\epsilon}$. Therefore, the ``right'' (heuristically) expansion of the energy should be
+\[
+F_\epsilon(u) \sim \sigma_0 \epsilon |\Sigma|,
+\]
+where $\sigma_0$ is the {\em surface tension} and it is obtained by minimizing the functional
+\[
+\int_{-\infty}^\infty \left[ W(v(t)) + |\dot{v}(t)|^2 \right] \, \dr t
+\]
+among all $v : \R \to [-1,1]$ such that $v(\pm \infty) = \pm 1$. We will come back to compute $\sigma_0$ explicitly in the next point of the strategy.
+
+{\bf Heuristic conclusion.} The function $u_\epsilon$ takes the values $1$ and $-1$ on two sides of $\Om$ separated by an ``interface'' of thickness of order $\epsilon$ around a surface $\Sigma$. More precisely,
+\[
+u_\epsilon(x) = v \left( \frac{d_\Sigma(x)}{\epsilon} \right),
+\]
+where $v$ is a (quasi)minimizer of $\int_{-\infty}^\infty [W(v) + |\dot{v}|^2] \, \dr t$ and $\Sigma$ minimizes the area among all surfaces that divide $\Om$ in two sets $A^+$ and $A^-$ such that the volume constraint \eqref{eq.22.vc} is satisfied, that is,
+\[
+\frac{|A^+| - |A^-|}{\Om} = m.
+\]
+
+\subsection{Heuristic on $\Gamma$-convergence} At this point, we would like to know whether or not we can derive the asymptotic behavior of $u_\epsilon$ formally using $\Gamma$-convergence. This was proved in ’77 by Modica and, a few years later, an even stronger result was obtained via a more ``direct” proof, but we will not discuss it in this course. In any case, we have
+\[
+F_\epsilon \xrightarrow{\Gamma} F(u) := \int_\Om W(u) \, \dr x,
+\]
+but this $\Gamma$-limit is rather useless because {\bf any} function taking values in $\{\pm 1\}$ is a good minimizer for $F$. The heuristic argument above suggests that it could be better to consider
+\[
+G_\epsilon(u) := \frac{F_\epsilon(u)}{\epsilon}
+\]
+and study the corresponding $\Gamma$-limit, which will be denoted by $G$.
+
+\br\label{rmk.22.1}
+If the $\Gamma$-limit $G$ exists, then a natural guess would be a functional equal to $\sigma_0 |\Sigma|$ if $u(x) = \pm 1$ at a.e. $x \in \Om$, where $\Sigma$ is the "interface" between the two phases $A^+$ and $A^-$, and equal to $\infty$ otherwise.
+\er
+
+The functional $F_\epsilon$ is well-defined on $W^{1,2}(\Om)$, but this is not the right space to study the problem because functions in $W^{1,2}(\Om)$ cannot possibly take only two values (jumps are not allowed). Therefore, we need to find a way to solve the following issues: \mbox{}
+\begin{enumerate}[itemsep=.4em]
+\item What functional space should replace the Sobolev one $W^{1,2}(\Om)$?
+\item How does the $\Gamma$-limit $G$ looks like? The idea mentioned in {\color{blue}Remark \ref{rmk.22.1}} is not good enough because functions taking only two values form a class that is not broad enough for equicoerciveness, etc.
+\item What kind of ``interfaces'' should we consider? Surely, it cannot be too regular for otherwise, we would have issues similar to $(2)$.
+\end{enumerate}
+
+To conclude, we would like to compute $\sigma_0$ explicitly. Recall that it is given by the minimum value of
+\[
+\int_{-\infty}^\infty \left[ W(v(t)) + |\dot{v}(t)|^2 \right] \, \dr t,
+\]
+where $v : \R \to [-1,1]$ ranges in some class and satisfies $v(\pm \infty) = \pm 1$. Notice that we need $\dot{v} \in L^2(\R)$, but the condition $v(\pm \infty) = \pm 1$ implies that $v$ cannot possibly be in $L^2(\R)$ so the Sobolev space $W^{1,2}(\R)$ is not good enough. There are further issues: \mbox{}
+\begin{enumerate}[label=(\alph*),itemsep=.4em]
+\item Translation-invariance.
+\item A function with derivative in $L^2(\R)$ admits a continuous representative. However, the values at $\pm \infty$ might not be well-defined. In particular, if $v_n$ is a minimizing sequence converging in $W^{1,2}(\Om)$ to some $v$, there is no way to guarantee that $v$ will also satisfy the condition at infinity.
+\end{enumerate}
+
+The idea is to prove existence of minimizers in a completely different way, namely we provide a lower bound on the functional and show that it is achieved by some $v$.
+
+\br
+Assume that $v \in C^1(\R)$. The algebraic inequality $(a+b)^2 \geq 2ab$ and a simple change of variables $s = v(t)$ allow us to conclude that
+\[ \begin{aligned}
+\int_{-\infty}^\infty \left[ W(v(t)) + |\dot{v}(t)|^2 \right] \, \dr t, & \geq 2 \int_{-\infty}^\infty \sqrt{W(v(t))} |\dot{v(t)}| \, \dr t
+\\ & \geq \int_{-\infty}^\infty 2 \sqrt{W(v(t))} \dot{v(t)} \, \dr t
+\\ & = \int_{-1}^1 2 \sqrt{W(s)} \, \dr s = \sigma_0.
+\end{aligned} \]
+\er
+
+Now notice that the inequality is $(a+b)^2 \geq 2ab$ is an equality if and only if $a = b$, while $|\dot{v}| = \dot{v}$ is true provided that $\dot{v} \geq 0$. It follows that the optimal $v$ is the solution of
+\[
+\dot{v}(t) = \sqrt{W(v(t))}
+\]
+with the additional constraint that $v(\pm \infty) = \pm 1$, and it can be proved that it is of class $C^1$ and, depending on the regularity of $W$, even more regular.
+
+\subsection{Tools: finite perimeter sets}
+
+The first step is to introduce functions with {\em bounded variation}\index{bounded variation}. Let $\Om$ be a regular bounded domain in $\R^d$ and define
+\[
+\mathrm{BV}(\Om) := \{ u \in L^1(\Om) \: : \: \text{$Du$ is a vector-valued measure} \},
+\]
+where $Du$ is the distributional derivative of $u$. In other words, if $u \in \mathrm{BV}(\Om)$, then there are $\mu$ positive finite Borel measure and $f$ unit Borel vector field such that
+\[
+Du = f \mu,
+\]
+as distributions, which can immediately be translated to the condition
+\begin{equation}\label{bv.1}
+\int_\Om u \, \div (\phi) \, \dr x = - \int_\Om \phi \, Du = - \int_\Om \phi \cdot f \, \dr \mu \quad \text{for every $\phi \in C_c^\infty(\Om)$}.
+\end{equation}
+A standard argument in functional analysis allows us to extend the class of test functions to $C_0^1(\Om)$. The space $\mathrm{BV}(\Om)$ is a non-separable Banach space with norm
+\[
+\|u\|_{\mathrm{BV}} := \|u\|_{L^1(\Om)} + \| Du \| = \|u\|_{L^1(\Om)} + \mu(\Om).
+\]
+
+\bpr
+For every $1 \leq p \leq \infty$, the Sobolev space $W^{1,p}(\Om)$ is contained in $\mathrm{BV}(\Om)$.
+\epr
+
+\bex
+Piecewise-$C^1$ functions are contained in $\mathrm{BV}(\Om)$. Let $u : \Om \to \R$ be such a function, let $\Omega_i$ be disjoint open subsets of $\Om$ such that
+\[
+\bigcup_{i=1}^M \overline{\Om_i} = \bar{\Om},
+\]
+with boundary $\partial \Om_i$ of class piecewise-$C^1$, and let $u_i \in C^1(\overline{\Om_i})$ be functions such that $u \equiv u_i$ in the interior of $\Om_i$ for all $i = 1,\dots,m$. We claim that
+\[
+Du = \sum_{i=1}^M \nabla u_i \cdot \cL^d \res \Om_i + \sum_{i<j} (u_j-u_i) n_{i,j} \cdot \cH^{d-1} \res (\partial \Om_i \cap \partial \Om_j),
+\]
+where $\cL^d$ is the $d$-dimensional Lebsgue measure, $\cH^{d-1}$ is the $(d-1)$-dimensional Hausdorff measure and $n_{i,j}$ is the normal pointing from $\Om_i$ to $\Om_j$.
+\eex
+
+\br
+The Sobolev space $W^{1,1}(\Om)$ is a closed subspace of $\mathrm{BV}(\Om)$.
+\er
+
+We now list a few well-known results concerning bounded variation functions. We need some regularity on $\Om$ so we will tacitly assume that $\partial \Om$ is Lipschitz.
+
+\bt[Embedding] 
+The immersion $\mathrm{BV}(\Om) \hookrightarrow L^p(\Om)$ is continuous for every $1 \leq p \leq p^\ast$ and compact for every $1 \leq p < p^\ast$.
+\et
+
+\br
+The Poincaré inequality for $\mathrm{BV}(\Om)$ functions works in the exact same way as for Sobolev functions in $W^{1,1}(\Om)$.
+\er
+
+\bt[Compactness] \label{cpt.bv}
+Let $u_n$ be a sequence of functions such that $\|u_n\|_{\mathrm{BV}(\Om)} \leq C < \infty$. Then (up to subsequences) $u_n$ converges in $L^1(\Om)$ to some $u \in \mathrm{BV}(\Om)$ and
+\[
+D u_n \rightharpoonup Du
+\]
+in the sense of measures, that is, if $D u_n = f_n \mu_n$ and $D u = f \mu$, then
+\[
+\int_\Om \phi f_n \, \dr \mu_n \xrightarrow{n\to\infty} \int_\Om \phi f \, \dr \mu \quad \text{for all $\phi \in C_0(\Om,\R^d)$}.
+\]
+Furthermore, we have
+\[
+\liminf_{n\to\infty} \mu_n(\Om) \geq \mu(\Om).
+\]
+\et
+
+\bt[Approximation]
+Let $u \in \mathrm{BV}(\Om)$. Then there exists a sequence $(u_n)_{n \in \N} \in C^\infty(\bar{\Om})$ such that the following properties hold: \mbox{}
+\begin{enumerate}[label=(\roman*),itemsep=.4em]
+\item $u_n$ converges to $u$ strongly in $L^1(\Om)$;
+\item $D u_n \rightharpoonup Du$ in the sense of measures;
+\item $\|\nabla u_n\|_{L^1(\Om)} \to \|Du\|$.
+\end{enumerate}
+\et
+
+%\subsection{Tools: finite perimeter sets} Recall that, given $E \subset \Om$, we denote by $\chi_E$ the characteristic function of $E$.
+
+\bd \index{finite perimeter set}
+A measurable set $E \subseteq \Om$ {\em has finite perimeter in $\Om$} if the characteristic function $\chi_E$ belongs to $\mathrm{BV}(\Om)$. The perimeter of $E$ inside of $\Om$ is defined by
+\begin{equation}\label{fps.1}
+\mathrm{Per}(E,\Om) := \|D \chi_E\| = \sup \left\{ \int_E \div(\phi) \, \dr x \: : \: \phi \in C_c^\infty(\Om), \|\phi\|_\infty\leq 1 \right\}.
+\end{equation}
+\ed
+
+\bex
+If $E \subset \Om$ and $\partial E \cap \Om$ is a $C^1$-hypersurface, then $E$ has finite perimeter and its distributional derivative is given by
+\[
+D\chi_E =-\eta \cdot \cH^{d-1} \res (\partial E \cap \Om),
+\]
+where $\eta$ is the external unit normal of $E$. Furthermore, the perimeter is given by
+\[
+\mathrm{Per}(E,\Om) = \cH^{d-1}(\partial E \cap \Om).
+\]
+\eex
+
+\br
+It is worth noticing that the definition of perimeter {\bf in} $\Om$ does not take into account the portion of the perimeter of $E$ which is on the boundary of $\Om$.
+\er
+
+\br
+The compactness and the approximation results given for $\mathrm{BV}(\Om)$ functions can be easily specialized to hold for finite perimeter sets.
+\er
+
+%%%%
+
+\newpage
+
+\subsection{Tools: finite perimeter sets} Recall that, given $E \subset \Om$, we denote by $\chi_E$ the characteristic function of $E$.
+
+\bd \index{finite perimeter set}
+A measurable set $E \subseteq \Om$ {\em has finite perimeter in $\Om$} if the characteristic function $\chi_E$ belongs to $\mathrm{BV}(\Om)$. The perimeter of $E$ inside of $\Om$ is defined by
+\begin{equation}\label{fps.1}
+\mathrm{Per}_\Om(E) := \|D \chi_E\| = \sup \left\{ \int_E \div(\phi) \, \dr x \: : \: \phi \in C_c^\infty(\Om), \|\phi\|_\infty\leq 1 \right\}.
+\end{equation}
+\ed
+
+\bex
+If $E \subset \Om$ and $\partial E \cap \Om$ is a $C^1$ surface, then $E$ has finite perimeter and its distributional derivative is given by
+\[
+D\chi_E =-\eta \cdot \cH^{d-1} \res (\partial E \cap \Om),
+\]
+where $\eta$ is the external unit normal of $E$. Furthermore, the perimeter is given by
+\[
+\mathrm{Per}_\Om(E) = \cH^{d-1}(\partial E \cap \Om).
+\]
+\eex
+
+\bpr \label{prp.25.1}
+If $\cH^{d-1}(\partial E \cap\Om)$ is finite, then $E$ has finite perimeter and
+\begin{equation} \label{fpsh1}
+\mathrm{Per}_\Om(E) \leq\cH^{d-1}(\partial E \cap \Om)
+\end{equation}
+\epr
+
+The inequality in \eqref{fpsh1}, as the next example shows, can be strict as a consequence of the fact that the distributional derivative ``does not take into account what happens if we modify a negligible set in $E$.''
+
+\bex
+Let $E$ be the unit disk $B(0,1) \subset \Om$. If we remove the diameter, we obtain a new set $\tilde{E}\subset \Om$ such that
+\[
+\cH^{d-1}(\partial E \cap \Om) <\cH^{d-1}(\partial \tilde{E} \cap \Om).
+\] 
+On the other hand, it is easy to prove that $D \chi_E = D \chi_{\tilde{E}}$ so using \eqref{fpsh1} we conclude that
+\[
+\mathrm{Per}_\Om(\tilde{E}) = \mathrm{Per}_\Om(E) \leq \cH^{d-1}(\partial E \cap \Om) <\cH^{d-1}(\partial \tilde{E} \cap \Om).
+\]
+\eex
+
+\br
+If $E \subset \Om$ and $\partial E$ is $\cH^{d-1}$-finite, then $E$ has finite perimeter in $\Om$ but it is not trivial to determine the distributional derivative.
+\er
+
+In the next example, we show that finite perimeter sets can be rather ``wild'' since they might have boundary which is not negligible w.r.t. the Lebesgue measure $\cL^d$.
+
+\bex
+Let $B_n := B(x_n,r_n) \subset \Om$ be a sequence of balls satisfying
+\[
+\sum_{n \in \N} r_n^{d-1} < \infty.
+\]
+The set $E := \bigcup_{n \in \N} B_n$ has finite perimeter as a consequence of {\color{blue}Proposition \ref{prp.25.1}}, but depending on how we choose $x_n$, several weird behaviors can arise: \mbox{}
+\begin{enumerate}
+\item If $(x_n)_{n \in\N}$ is dense in $\Om$ and $|E| < |\Om|$, then $E$ is dense in $\Om$, its topological boundary is given by $\Om \setminus E$, and
+\[
+|\partial E| = |\Om \setminus E| = |\Om| - |E| > 0.
+\]
+\item There exists a set $E$ of finite perimeter in $\Om$ such that the topological boundary of $E$ is equal to $\bar{\Om}$.
+\end{enumerate}
+\eex
+
+The following compactness result follows immediately from the compactness of $\mathrm{BV}(\Om)$-functions. Is $|\cdot|$ denotes the Lebesgue measure, notice that
+\[
+\| \chi_A - \chi_B \|_{L^1(\Om)} = | A \triangle B |,
+\]
+where $A \triangle B$ denotes the {\em symmetric difference} of the sets $A,B\subset \Om$.\index{symmetric difference}
+
+\bt[Compactness]
+Let $E_n \subset \Om$ be a sequence of sets with uniformly bounded perimeter, that is,
+\[
+\mathrm{Per}_\Om(E) \leq C < \infty.
+\]
+Then there exists a finite perimeter set $E \subset \Om$ such that up to subsequences
+\[
+| E \triangle E_n | \xrightarrow{n\to\infty} 0.
+\]
+Furthermore, the perimeter is lower semicontinuous:
+\[
+\mathrm{Per}_\Om(E) \leq \liminf_{n\to\infty} \mathrm{Per}_\Om(E_n).
+\]
+\et
+
+\begin{xca}
+Find a Borel set $A \subset \Om$ such that $\mathrm{Per}_\Om(A) = \infty$.
+\end{xca}
+
+\bt[Approximation] \label{thm.appfps}
+Let $E \subset \Om$ be a set with finite perimeter. Then there exists a sequence of sets $E_n\subset \Om$ with smooth boundary in $\Om$ such that
+\[
+|E_n \triangle E| \xrightarrow{n\to\infty} 0
+\]
+and
+\[
+\mathrm{Per}_\Om(E) = \lim_{n\to\infty} \mathrm{Per}_\Om(E_n).
+\]
+\et
+
+The next result, known as {\em structure theorem}, is highly nontrivial and the proof requires a great deal of geometric measure theory.
+
+\br
+For $d = 1$, any finite perimeter set is, up to a Lebesgue-null set, equal to a finite unions of intervals.
+\er
+
+\bd \index{$d$-dimensional density}
+The {\em $d$-dimensional density} of $E$ at $x$ is defined by
+\[
+\Theta_d(E,x) := \lim_{r \to 0^+} \frac{|E\cap B(x,r)|}{|B(x,r)|}
+\]
+wherever this limit exists.
+\ed
+
+\bd\index{measure theoretic boundary}
+The {\em measure theoretic boundary} of $E$, denoted by $\partial_\ast E$, is the set
+\[
+\partial_\ast E := \{ x \in E \: : \: \text{either $\Theta_d(E,x)$ does not exists or it belongs to $(0,1)$} \}.
+\]
+\ed
+
+\bt[Structure theorem] \index{structure theorem}
+Let $E \subset \Om$ be a set with finite perimeter. Then the following assertions hold true: \mbox{}
+\begin{enumerate}[label=(\roman*),itemsep=.4em]
+\item The measure theoretic boundary $\partial_\ast E$ is $\cH^{d-1}$-finite and rectifiable (=it can be covered, up to a $\cH^{d-1}$-null set, by countably many hypersurfaces $\Sigma_i$ of class $C^1$). \index{rectifiable set}
+\item For almost every $\bar{x} \in \partial_\ast E$, there exists $\nu(\bar{x})$ such that
+\[
+H(\bar{x}) := \left\{ x \in \R^d \: : \: (x-\bar{x})\cdot \nu(\bar{x}) < 0\right\}
+\]
+satisfies the property
+\[
+\left| (H(\bar{x}) \triangle E) \cap B(\bar{x},r) \right| \ll r^d.
+\]
+In other words, the density of $H(\bar{x}) \triangle E$ at $\bar{x}$ is equal to zero and, consequently,
+\[
+\Theta_d(E,\bar{x}) = \frac{1}{2}.
+\]
+The vector $\nu(\bar{x})$ is usually called {\em measure-theoretic outer normal} of $E$ at $\bar{x}$.\index{measure-theoretic outer normal}
+\item The distributional derivative of $\chi_E$ is given by
+\[
+D \chi_E = - \nu \cdot \cH^{d-1} \res (\partial_\ast E \cap \Om).
+\]
+\end{enumerate}
+\et
+
+\subsection{Tools: coarea formula} Let $u : \Om \to \R$ be a function of class $C^1$ such that $\nabla u(x) \neq 0$ for all $x \in \Om$. For every $t \in \R$, we can consider the $C^1$ hypersurface
+\[
+\Sigma_t := \{ x \in \Om \: : \: u(x) = t \}.
+\]
+
+\bt[Coarea]
+Let $h : \Om \to [0,\infty]$ be a positive\footnote{As usual we require the integrand to be positive for the integral to be well-defined and taking values in $[0,\infty]$.} Borel function. Then
+\begin{equation}\label{eq.coarea}
+\int_{-\infty}^\infty \left( \int_{\Sigma_t} h(x) \, \dr \cH^{d-1}(x) \right) \, \dr t = \int_\Om h(x) |\nabla u(x)| \, \dr x.
+\end{equation}
+\et
+
+The proof of this result is left to the reader as an exercise. Notice that it can be easily proved under these assumptions using a change of variables to reduce to Fubini's theorem. 
+
+\br
+The assumption $\nabla u(x) \neq 0$ that makes $\Sigma_t$ a regular surface is not necessary, but proving the identity \eqref{eq.coarea} is harder because we cannot reduce to Fubini.
+\er
+
+\br
+The assumption $u \in C^1(\Om)$ is not necessary and, in fact, we can replace it with Lipschitz. On the other hand, being differentiable a.e. is not enough - dealing with less regularity is no easy task ({\color{red}nut it should be true if $W^{1,p}(\Om)$ for $p > d$}).
+\er
+
+\br
+The coarea formula for bounded variation functions holds, but it is necessary to change the definition of $\Sigma_t$ accordingly.
+\er
+
+\subsection{$\Gamma$-convergence result} Let us go back to the Ginzburg-Landau scalar model but, for the sake of simplicity, we will assume that the double-well potential
+\[
+W : \R \to [0,\infty)
+\]
+is a continuous function and satisfies $W(u) = 0$ when $u = 0$ (instead of $u = -1$) and $u = 1$. For $\epsilon >0$, recall that the energy is given by
+\[
+F_\epsilon(u) = \int_\Om \left[ W(u) + \epsilon^2 |\nabla u|^2 \right] \, \dr x.
+\]
+We mentioned earlier that the $\Gamma$-limit of $F_\epsilon$ is not interesting so we consider the rescaled functional
+\[
+E_\epsilon(u) := \frac{1}{\epsilon} F_\epsilon(u) =  \int_\Om \left[ \frac{1}{\epsilon} W(u) + \epsilon |\nabla u|^2 \right] \, \dr x.
+\]
+Recall that we consider the constraint $\averint_\Om u \, \dr x = m, $ where $m$ is a fixed number in $(0,1)$ and notice that moving the well from $u = -1$ to $u = 0$ changes the value of $\sigma_0$ to
+\[
+\sigma_0 = 2 \int_0^1 \sqrt{W(s)} \, \dr s.
+\]
+
+The following theorem was proved by Modica in 1987, but the result is usually referred to as Modica-Mortola theorem because it is primarily based on the method introduced by them in a paper in 1978.
+
+\bt[Modica-Mortola] \label{thm.modicamortola}
+Let us consider the functional space
+\[
+\X := \{ u : \Om \to [0,1] \: : \: \averint_\Om u \, \dr x = m \} \subseteq L^1(\Om)
+\]
+equipped with distance induced by the $L^1(\Om)$ one. For $\epsilon > 0$ and $u \in \X$ define
+\[
+E_\epsilon(u) = \begin{cases} \int_\Om \left[\frac{1}{\epsilon} W(u) + \epsilon |\nabla u|^2 \right] \, \dr x & \text{if $u \in W^{1,2}(\Om)$}, \\[.6em] \infty & \text{otherwise}  \end{cases}
+\]
+and
+\[
+E(u) = \begin{cases} \sigma_0 \mathrm{Per}_\Om(A) & \text{if $u = \chi_A \in \mathrm{BV}(\Om)$}, \\[.6em] \infty & \text{otherwise}. \end{cases}
+\]
+Then $E_\epsilon$ is a equicoercive family of functionals and $E_\epsilon \xrightarrow{\Gamma} E$ as $\epsilon \to 0^+$.
+\et
+
+\bc
+Minimizers $\bar{u}_\epsilon$ of $F_\epsilon$ converge in $L^1(\Om)$ to minimizers $\bar{u}$ of $E$.
+\ec
+
+Notice that the functional $E$ admits a minimizer because we can apply lower semicontinuity and compactness results for finite perimeter sets.
+
+\begin{proof}[Proof of Theorem \ref{thm.modicamortola}] We can assume $u_\epsilon \in C^\infty(\bar{\Om})$ because smooth functions are strongly dense and $E_\epsilon$ is continuous with respect to the strong topology.
+
+\proofstep{Step 1} We shall now prove equicoerciveness and the $\Gamma-\liminf$ inequality contemporaneously. Let $u_\epsilon \in \X$ be a sequence of functions such that 
+\[
+E_\epsilon(u_\epsilon) \leq C < \infty
+\]
+for a uniform constant $C > 0$. Then (up to subsequences) $u_\epsilon$ converges in $L^1(\Om)$ to some $u \in \X$ and we have the inequality
+\[
+\liminf_{\epsilon \to 0} E_\epsilon(u_\epsilon) \geq E(u).
+\]
+Using the algebraic inequality $a^2 + b^2 \geq 2ab$ we find that
+\[
+E_\epsilon(u_\epsilon) \geq \int_\Om 2 \sqrt{W(u_\epsilon)} |\nabla u_\epsilon|\, \dr x.
+\]
+If $H : \R \to \R$ is a function satisfying $H(0) = 0$ and $\dot{H}(u) =\sqrt{W(u)}$, then
+\[
+E_\epsilon(u_\epsilon) \geq 2 \int_\Om \dot{H}(u_\epsilon) |\nabla u_\epsilon| \, \dr x = \int_\Om | \nabla(H\circ u_\epsilon)| \, \dr x.
+\]
+Now denote $H\circ u_\epsilon$ by $v_\epsilon$ and notice that the inequality above implies
+\[
+\| \nabla v_\epsilon \|_{L^1(\Om)} \leq C < \infty,
+\]
+where $C$ is a uniform constant. Since $\mathrm{BV}(\Om)$ has good compactness properties (see {\color{blue}Theorem \ref{cpt.bv}}) we have
+\[
+\|v_\epsilon - v \|_{L^1(\Om)} \xrightarrow{\epsilon \to 0} 0 \quad \text{and} \quad \liminf_{\epsilon \to 0} \|\nabla u_\epsilon\|_{L^1(\Om)} \geq \|Dv \|.
+\]
+The limit function $v \in \mathrm{BV}(\Om)$ may not be in $W^{1,1}(\Om)$ so we need to use the distributional derivative $Dv$. In any case, this implies that 
+\[
+u_\epsilon = H^{-1}(v_\epsilon) \xrightarrow{ L^1(\Om)} u = H^{-1}(v)
+\]
+and, consequently, we conclude that
+\[
+\int_\Om W(u_\epsilon(x))\, \dr x \to 0 \implies \int_\Om W(u(x)) \, \dr x = 0 \implies u \equiv \chi_A. 
+\]
+Since $v = H\circ u$ takes the values $H(0) = 0$ and $H(1) = \sigma_0$, we necessarily have
+\[
+v = \sigma_0 \chi_A
+\]
+and, given that $v \in \mathrm{BV}(\Om)$, the set $A$ must have finite perimeter. The $\Gamma-\liminf$ inequality is now easy since
+\[
+\liminf_{n \to \infty} E_\epsilon(u_\epsilon) \geq \liminf_{n \to \infty} \int_\Om |\nabla v_\epsilon|^2 \, \dr x \geq \|Dv\|
+\]
+and $\|Dv\| = \sigma_0 \mathrm{Per}_\Om(A)$.
+
+
+\proofstep{Step 2} We can find a recovery sequence for functions of the form $u = \chi_A$ with $\partial A$ smooth and transversal to $\partial \Om$ as a consequence of {\color{blue}Theorem \ref{thm.appfps}}. If
+\[
+u_\epsilon(x) := v \left( \frac{d_{\partial A}(x)}{\epsilon} \right),
+\] 
+where $v$ is the solution of $\dot{v}(s) = \sqrt{W(v(s))}$ with boundary conditions $v(- \infty) = 0$ and $v(\infty) = 1$, then it is easy to show that
+\[
+\lim_{\epsilon \to 0} E_\epsilon(u_\epsilon) = E(\chi_A),
+\]
+and this concludes the proof.
+\end{proof}

@@ -1,0 +1,1012 @@
+\chapter{Introduction to Calculus of Variations}
+\label{chapter:1}
+
+In this chapter, we will briefly describe how and why the field of {\em calculus of variations} became so crucial in modern mathematics and introduce the basic notions such as the first variation of a functional.
+
+Since this is more of a descriptive part, we shall assume that everything is as much regular as we need to carry out all the computations and come back to deal with it at a later time.
+
+\section{Introduction}
+\label{section:1.1}
+
+Let $\X$ be a space of functions and $F$ a real-valued functional defined on $\X$. The "goal" of the course is to find minimisers of $F$ on $\X$, namely
+\[
+\inf_{u \in \X} F(u) = \sup_{u \in \X} \{ - F(u) \}.
+\]
+We are interested in the existence and regularity of solutions, which is usually possible if $F$ is "nice" enough. However, sometimes even finding a way to approximate a solution via numerical methods will be crucial.
+
+\subsection*{Classical approach}
+
+If $\X = \R^n$ and $F: \R^n \to\R$, then $\bar{x}\in \R^n$ minimiser of $F$ satisfies the equation
+\[
+\nabla F(\bar{x})=0.
+\]
+If, in addition, $F$ is {\em convex}, then the converse is also true. In other words, minimisers are completely characterised by the following relation:
+\[ \nabla F(\bar{x})=0 \iff F(\bar{x}) = \inf_{x \in \R^n} F(x).\]
+In the general framework, if $u$ is a minimiser of $F$, then $u$ satisfies the {\em Euler-Lagrange equation}\index{Euler-Lagrange equation} associated with $F$. We will also see that, if $F$ is convex, then the vice versa holds.
+
+\subsection*{Abstract setting} In general, $\X$ is an open set in a Banach space or a Banach manifold (i.e., a $C^1$-manifold without boundary modeled on a Banach space.) The functional
+\[
+F : \X \longrightarrow \R
+\]
+is Gateaux-differentiable ($G$-differentiable) at every point $u \in \X$ with differential $\dr f(u) : \Tan(X, \, u) \to \R$. We expect that something along the lines of the following holds:
+
+\bt \label{thm.sdl.s}
+If $u$ is a local maximum (or minimum) of $F$, then $\langle \dr f(u), \, v \rangle = 0$ for all $v \in \Tan(\X, \, u)$.
+\et
+
+This framework can be developed (e.g., in the {\em Variational Methods} course), but we will not do it because we are more interested in the existence of minimisers. Furthermore, some problems arising in applications do not fit in this framework.
+
+\section{First variation of functionals and Euler-Lagrange equation}
+\label{section:1.2}
+
+\bd
+Let $\X$ be a vector space (of functions). Fix a point $u \in \X$ and fix a {\em direction} $v \in \X$. The {\em directional derivative}\index{directional derivative} of $F$ at $u$ in the direction $v$ is defined by setting
+\[
+\frac{\dr}{\dr t} \, \big|_{t = 0} F(u + tv).
+\]
+We can either indicate it with the symbol $\frac{\partial F}{\partial v}(u)$ or, with some abuse of notation, $\langle \dr F(u), \, v \rangle$.
+\ed
+
+\br
+We will try to avoid the second notation, $\langle \dr F(u), \, v \rangle$, because when $\X$ is only a vector space there is no guarantee that there exists such a linear mapping.
+\er
+
+\bd
+Let $\X$ be a vector space. The map
+\[
+\X \ni v \longmapsto \frac{\partial F}{\partial v}(u) \in \R
+\]
+is called {\em first variation}\index{first variation} of $F$ at $u$.
+\ed
+
+\br
+If $u$ is a minimiser (or local minimiser) of $F$, then the first variation of $F$ at $u$ is equal to zero, that is,
+\begin{equation}\label{eq:1}
+\frac{\partial F}{\partial v}(u)= 0 \quad \text{for all $v\in \X$}. 
+\end{equation}
+Note that this is the Euler-Lagrange equation in its simplest form. Furthermore, if $F$ is convex, then the vice versa holds; in other words, the relation \eqref{eq:1} implies that $u$ is a minimiser.
+\er
+
+The relation \eqref{eq:1} is often useless because using the Euler-Lagrange equation to find minimisers requires a way to compute the directional derivative rather than the abstract theory behind it.
+
+We will now present several examples of simple minimisation problems which, we hope, will give a satisfying understanding of the following phenomena: \mbox{}
+\begin{enumerate}[label={\color{magenta}\textbf{(\alph*)}}, itemsep=.4em]
+\item Weak and strong formulation of the Euler-Lagrange equation.
+\item Dirichlet boundary conditions and the appearance of Neumann ones.
+\item Obstacle-type problems.
+\item Higher-order problems; namely, the functional depends on derivatives of order bigger than or equal to two.
+\item Vector-valued problems, e.g., $u$ maps $\R^n$ into $\R^m$.
+\item The space $\X$ is not linear but, for example, affine.
+\end{enumerate}
+
+\subsection{Technical result}
+
+To formally compute the Euler-Lagrange equation, we first need to recall a few technical results such as the divergence theorem and the fundamental lemma in the calculus of variations.
+
+\bl[Divergence theorem]\label{lemma:div1}
+Let $U$ be a vector field defined on $\Omega$ of class $C^1$. Then
+\[
+\int_{\partial \Omega} U \cdot \nu \, \dr \sigma = \int_\Omega \div U \, \dr x.
+\]
+\el
+
+\bc \label{lemma:div2}
+Let $U$ be a vector field defined on $\Omega$ of class $C^1$ and let $v \in C_0^1(\Omega)$. Then
+\[
+\int_{\partial \Omega} (vU) \cdot \nu \, \dr \sigma = \int_\Omega \div (vU) \, \dr x = \int_\Omega \nabla v \cdot U \, \dr x + \int_\Omega v\, \div U \, \dr x.
+\]
+\ec
+
+We now give the statement of the {\em fundamental lemma in calculus of variations}. In \eqref{eq:3} we do not need such generality, but we take the opportunity to give it once and for all.
+
+\bl \label{lemma:fcv}
+Let $f : \Omega \to \R$ be a $L_{\mathrm{loc}}^1(\Omega)$ function. If
+\begin{equation} \label{eq:5}
+\int_\Omega f(x) v(x)\, \dr x = 0 \quad \text{for all $v \in C_c^\infty(\Omega)$,}
+\end{equation}
+then $f$ is identically equal to zero almost everywhere.
+\el
+
+\begin{proof}
+The condition \eqref{eq:5} implies that
+\[
+\int_\Omega f(x) v(x)\, \dr x = 0 \quad \text{for all $v \in C_c(\Omega)$}
+\]
+by means of an approximation argument. We now claim that we can further require that
+\[
+\int_\Omega f(x) v(x)\, \dr x = 0 \quad \text{for all $v \in L_c^\infty(\Omega)$.}
+\]
+The reason is that $L_c^\infty(\Omega)$ can be obtained as the "pointwise limit" of uniformly bounded\footnote{This is important because we need to use Lebesgue's dominated convergence theorem.} continuous functions. Assume now that $f$ is not a.e. zero and let $E$ be a set of positive finite measure such that
+\[
+f \, \big|_E > 0.
+\]
+Then we can choose $v := \chi_E$ as a test function and notice that $\int_\Omega f(x) \chi_E(x) \, \dr x > 0$. This gives a contradiction with the assumption and concludes the proof.
+\end{proof}
+
+\subsection{Dirichlet boundary conditions} \index{boundary condition!Dirichlet}
+
+Let $\Omega \subset \R^n$ be a bounded open set and consider the vector space of continuously differentiable functions equal to zero at the boundary:
+\[
+\X := \left\{ u : \bar{\Omega}\to \R \: : \: u \in C^1(\Omega), \, \, u \, \big|_{\partial\Omega} \equiv 0 \right\} = C_0^1(\Omega).
+\]
+We are interested in the minimisation of the following functional\footnote{The first term is usually referred to in the literature as {\em Dirichlet energy}\index{Dirichlet energy}.}
+\[
+F(u)= \frac{1}{2}\int_\Omega |\nabla u|^2 \, \dr x + \int_\Omega f(x, \, u(x)) \, \dr x.
+\]
+Let $t \in \R$. To compute the first variation, we first evaluate $F$ at $u + tv \in \X$,
+\[
+F(u+tv)= \frac{1}{2}\int_\Omega |\nabla u + t \nabla v|^2 \, \dr x + \int_\Omega f(x, \, u + tv) \, \dr x,
+\]
+and then we take (assuming that $f$ is regular enough) the derivative with respect to $t$ at $t = 0$:
+\begin{equation} \label{eq:2}
+\frac{\dr}{\dr t} \, \Big|_{t = 0} F(u + tv) = \int_\Omega \nabla u \cdot \nabla v \, \dr x + \int_\Omega f_u(x, \, u) v \, \dr x,
+\end{equation}
+where $f_u(x, \, u)$ is the derivative of $f$ with respect to the second variable. We will refer to \eqref{eq:2} as {\em weak formulation}\index{first variation!weak formulation} of the first variation. To go further, we can apply {\color{blue}Corollary \ref{lemma:div2}} to infer that
+\[
+\frac{\partial F}{\partial v}(u) = \int_{\partial \Omega} (\nabla u \cdot \nu)v \,\dr \sigma - \int_\Omega \Delta u v \, \dr x + \int_\Omega f_u(x, \, u) v \, \dr x,
+\]
+and, since $v \in \X$ is zero at the boundary, we finally get
+\begin{equation} \label{eq:3}
+\frac{\partial F}{\partial v}(u) = \int_\Omega \left[ f_u(x, \, u) - \Delta u \right] v \, \dr x.
+\end{equation}
+We will refer to \eqref{eq:3} as {\em strong formulation}\index{first variation!strong formulation} of the first variation since it requires more regularity on $u$ (e.g., $C^2$) and $\Omega$ (e.g., Lipschitz) than \eqref{eq:2}. Now, if $u$ is a minimiser, then
+\[
+\int_\Omega \left[ f_u(x, \, u) - \Delta u \right] v \, \dr x = 0 \quad \text{for all $v \in \X$},
+\]
+from which it follows (see {\color{blue}Lemma \ref{lemma:fcv}}) that $u$ satisfies the Euler-Lagrange equation
+\begin{equation} \label{eq:4} \begin{cases}
+- \Delta u(x) = f_u(x, \, u(x)) & \text{if $x \in \Omega$},
+\\[.6em] u(x) = 0 & \text{if $x \in \partial \Omega$}.
+\end{cases} \end{equation}
+
+\br
+If $f(x, \, u) = \rho(x) u(x)$, then \eqref{eq:4} becomes the so-called {\em Poisson equation}\index{Poisson equation}, which is the PDE describing the shape of the electric potential $u$ inside a non-conductive domain $\Omega$ (with conductive boundary) under the effect of a distributional charge $\rho$.
+\er
+
+\subsection{Neumann boundary conditions.}  \index{boundary condition!Neumann}
+
+Let $\X = C^1(\bar{\Omega})$ so that there is no boundary condition. As before, we find that the directional derivative is given by
+\[
+\frac{\partial F}{\partial v}(u) = \int_{\partial \Omega} (\nabla u \cdot \nu)v \, \dr \sigma + \int_\Omega \left[ f_u(x,\, u) - \Delta u \right] v \, \dr x,
+\]
+but the first term is not zero anymore. We now claim that
+\[
+\frac{\partial F}{\partial v}(u) = 0 \quad \text{for all $v \in C^1(\bar{\Omega})$}
+\]
+if and only if $u$ solves
+\begin{equation} \label{eq:5}\begin{cases}
+- \Delta u(x) = f_u(x, \, u(x)) & \text{if $x \in \Omega$},
+\\[.6em] \frac{\partial u}{\partial \nu}(x) = 0 & \text{if $x \in \partial \Omega$}.
+\end{cases} \end{equation}
+The condition $\frac{\partial u}{\partial \nu} = 0$ is referred to as {\em Neumann boundary condition}. One implication is obvious, so we only have to prove that $u$ is a minimiser implies $u$ solution of \eqref{eq:5}. But now we know that
+\[
+0 = \int_\Omega \left[ f_u(x,\, u) - \Delta u \right] v \, \dr x \quad \text{for all $v \in C_c^\infty(\Omega)$},
+\]
+which implies (by {\color{blue}Lemma \ref{lemma:fcv}}) that $- \Delta u(x) = f_u(x, \,u(x))$. Now plug this back into the directional derivative to find that
+\[
+\int_{\partial \Omega} (\nabla u \cdot \nu)v \, \dr \sigma = 0
+\]
+for all $v \in C^1(\bar{\Omega})$. However, the space of compactly supported smooth functions is a subset of $\X$, and hence
+\[
+\int_{\partial \Omega} (\nabla u \cdot \nu)v \, \dr \sigma = 0 \quad \text{for all $v \in C_c^\infty(\Omega)$} \implies \nabla u \cdot \nu(x) = \frac{\partial u}{\partial \nu}(x) = 0.
+\]
+
+
+\subsection{Mixed boundary conditions} We now present a couple of one-dimensional minimisation problems in which the Lagrangian $f$ is entirely general.
+
+\bex
+Let $\X = C^1([a, \,b])$ and consider the general functional
+\[
+F(u) = \int_a^b f(x, \,u, \, \dot{u}) \, \dr x.
+\]
+Then the first variation is given by
+\[
+\langle \dr F(u), \, v \rangle = \int_a^b \left[ f_u(x, \, u, \, \dot{u}) v + f_\xi(x, \, u, \, \dot{u})\dot{v}\right]\dr x,
+\]
+where $\xi$ denotes the third variable of $F$, i.e., $\dot{u}$. Integrating by parts, we find that
+\[
+\langle \dr F(u), \, v \rangle  = \left[ f_\xi(x, \, u, \, \dot{u}) v \right]_{x=a}^b + \int_a^b \left[- \frac{\dr}{\dr x} f_\xi(x, \, u, \, \dot{u})+ f_u(x,\, u, \, \dot{u}) \right] v \, \dr x.
+\]
+The Euler-Lagrange equation associated to the problem is given by
+\[ \begin{cases}
+\frac{\dr}{\dr x} f_\xi(x, \, u, \, \dot{u}) = f_u(x,\, u, \, \dot{u}) & \text{if $x \in [a,\,b]$},
+\\[.6em] f_\xi(x, \, u, \, \dot{u}) = 0 & \text{if $x = a$ or $x = b$},
+\end{cases} \]
+where the Neumann boundary conditions give the uniqueness of the solution. It is worth remarking that, if we consider
+\[
+\X = \{ u \in C^1([a, \, b]) \: : \: u(a) = 0 \},
+\]
+then a straightforward computation shows that the Euler-Lagrange equation associated to the problem is given by
+\[ \begin{cases}
+\frac{\dr}{\dr x} f_\xi(x, \, u, \, \dot{u}) = f_u(x,\, u, \, \dot{u}) & \text{if $x \in [a,\,b]$},
+\\[.6em] u(x) = 0 & \text{if $x = a$},
+\\[.6em] f_\xi(x, \, u, \, \dot{u}) = 0 & \text{if $x = b$}.
+\end{cases} \]
+In particular, the presence of a Dirichlet condition at some point of the boundary prevents the appearance of a Neumann-type condition there.\index{boundary condition!mixed}
+\eex
+
+\br Notice that, if we consider $\X = C^1([a, \, b]; \; \R^m)$, then we need to be careful carrying out these computations because the Lagrangian is given by
+\[
+f : [a, \, b] \times \R^m \times \R^m \longrightarrow \R,
+\]
+which means that $f_u$ has to be replaced with $\nabla_u f$, the gradient with respect to $u$ of $f$. It is easy to check that the first variation is given by
+\[
+\langle \dr F(u), \, v \rangle = \int_a^b \left[ \nabla_u f(x, \, u, \, \dot{u}) \cdot v + \nabla_\xi f(x, \, u, \, \dot{u})\cdot \nabla v\right]\dr x,
+\]
+which, integrating by parts, leads to
+\[
+\langle \dr F(u), \, v \rangle  = \left[ \nabla_\xi f(x, \, u, \, \dot{u}) \cdot v \right]_{x=a}^b + \int_a^b \left[- \frac{\dr}{\dr x} \nabla_\xi f(x, \, u, \, \dot{u})+ \nabla_u f(x,\, u, \, \dot{u}) \right] \cdot v\, \dr x.
+\]
+The Euler-Lagrange system of equations is obtained using {\color{blue}Lemma \ref{lemma:fcv}} component by component. It turns out that
+\[ \begin{cases}
+\frac{\dr}{\dr x} \nabla_\xi f(x, \, u, \, \dot{u}) = \nabla_u f(x,\, u, \, \dot{u}) & \text{if $x \in [a,\,b]$},
+\\[.6em] \nabla_\xi f(x, \, u, \, \dot{u}) = 0 & \text{if $x = a$ or $x = b$},
+\end{cases} \]
+which corresponds to the system (as $j =1, \, \dots, \, m$)
+\[ \begin{cases}
+\frac{\dr}{\dr x} \partial_{\xi_j} f(x, \, u, \, \dot{u}) = \partial_{u_j} f(x,\, u, \, \dot{u}) & \text{if $x \in [a,\,b]$},
+\\[.6em] \nabla_{\xi_j} f(x, \, u, \, \dot{u}) = 0 & \text{if $x = a$ or $x = b$}.
+\end{cases} \]
+The same computation with $\X$ replaced by $C_{u_0}^1(\bar{\Omega})$ leads to a similar system in which the Neumann conditions are replaced by the Dirichlet ones
+\[
+u_j(x) = (u_0)_j(x) \quad \text{for all $x \in \partial \Omega$ and all $j \in \{1, \, \dots, \, n \}$}.
+\]
+\er
+
+At this point, one might wonder why we only talk about Dirichlet and Neumann boundary conditions since, from a mathematical point of view, there is no reason why we cannot require something different. It is important to notice, however, that most problems arising from Physics (or other disciplines) are naturally endowed with such conditions. The next example will show why the problem is more delicate than it seems.
+
+\bex
+Let $F(u) = \int_a^b f(x, \, \dot{u}) \, \dr x$ and let
+\[
+\X = \{ u \in C^1([a, \, b]) \: : \: u(a)=u_0(a), \, u(b)=u_0(b), \, \dot{u}(a)=v_0(a), \, \dot{u}(b) = v_0(b)\}.
+\]
+Clearly $\X$ is an affine space whose underlying vector space is
+\[
+\mathfrak{V} = \{ v \in C^1([a, \, b]) \: : \: v \, \big|_{\{a, \, b\}} = \dot{v} \, \big|_{\{a, \, b\}} = 0\},
+\]
+so the first variation is given by
+\[
+\langle \dr F(u), \, v \rangle  = \left[ f_\xi(x,\, \dot{u}) v \right]_{x=a}^b + \int_a^b \left[- \frac{\dr}{\dr x} f_\xi(x, \, \dot{u})+\right] v \, \dr x.
+\]
+The Euler-Lagrange equation associated to this variational problem is
+\[ \begin{cases}
+\frac{\dr}{\dr x} f_\xi(x, \, u, \, \dot{u}) = 0 & \text{if $x \in [a,\,b]$},
+\\[.6em] u(x) = u_0(x), \, \dot{u}(x) = v_0(x) & \text{if $x = a$ or $x = b$},
+\end{cases} \]
+and, unless we are very lucky, the boundary conditions are incompatible because fixing the value of $u$ on $\{a, \, b\}$ is already enough to infer existence and {\bf uniqueness}. On the other hand, if we consider
+\[
+\X = \{ u \in C^1([a, \, b]) \: : \: \dot{u}(a)=v_0(a), \, \dot{u}(b) = v_0(b)\},
+\]
+then it is easy to verify that the Euler-Lagrange equation is
+\[ \begin{cases}
+\frac{\dr}{\dr x} f_\xi(x, \, u, \, \dot{u}) = 0 & \text{if $x \in [a,\,b]$},
+\\[.6em] \dot{u}(x) = v_0(x) & \text{if $x = a$ or $x = b$},
+\\[.6em] f_\xi(x, \, \dot{u}) = 0 & \text{if $x = a$ or $x = b$}.
+\end{cases} \]
+The latter condition is obtained because $v$ needs not to be zero at the boundary anymore, and this leads to the same problem as above: the equation is over-determined.
+\eex
+
+The issue about what boundary condition is appropriate for a specific problem is strictly related to the weak formulation in Sobolev spaces, which will be investigated later on in the course.
+
+\subsection{Affine vector spaces}
+
+We now show that we can make the same computations in a functional space $\X$ which is {\bf not} a vector space, but rather an affine space. The main issue to deal with is that
+\[
+u, \, v \in \X \centernot\implies u + tv \in \X.
+\]
+Fix $u_0 : \partial \Omega \to \R$ function defined on the boundary and define
+\[
+\X := \{ u : \bar{\Omega}\to \R \: : \: u \in C^1(\Omega), \, \, u \, \big|_{\partial\Omega} \equiv u_0 \} = C_{u_0}^1(\Omega).
+\]
+The space $\X$ is not a vector space, but an affine one. We compute the directional derivative as before and obtain
+\[
+\frac{\partial F}{\partial v}(u) = \int_{\partial \Omega} \nabla u \cdot \nabla v \, \dr x + \int_\Omega f_u(x, \, u) v \, \dr x.
+\]
+Unfortunately, we cannot take anymore $v \in \X$ because the element $u + tv$ will not necessarily belong to $\X$ because of the affine structure. That said, it is easy to see that
+\[
+v \in C_0^1(\bar{\Omega}) \implies u + tv \in \X \quad \text{for all $x \in \X$},
+\]
+which, in turn, implies that
+\[
+\frac{\partial F}{\partial v}(u) = \int_\Omega \left[ f_u(x, \,u)- \Delta u \right] v \, \dr x.
+\]
+This means that $u$ minimiser implies $u$ solution of the boundary-value PDE
+\begin{equation} \label{eq:6} \begin{cases}
+- \Delta u(x) = f_u(x, \, u(x)) & \text{if $x \in \Omega$},
+\\[.6em] u(x) = u_0(x) & \text{if $x \in \partial \Omega$}.
+\end{cases} \end{equation}
+
+
+\subsection{Higher-order derivatives} The Lagrangian usually depends on the triple $(x, \, u, \, \dot{u})$, but this is by no means a rule. Indeed, there are a lot of problems - arising from the real world - for which
+\[
+f = f(x, \, u, \, \dot{u}, \, \dots, \, u^{(m)}).
+\]
+On the other hand, if no derivative appears in the Lagrangian $f$, then the problem is trivial from a theoretical point of view (formally we have order-zero Euler-Lagrange equation), but it can be not-so-easy from a computational stand.
+
+\begin{xca}[Higher derivatives]
+Let $\ddot{u}$ be the second-order derivative of $u$. Compute first variation and Euler-Lagrange equation for the functional
+\[
+F(u) = \int_a^b f(x, \, \ddot{u}) \, \dr x
+\]
+in the following cases: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}, itemsep=.4em]
+\item $\X = C^2([a, \, b])$;
+\item $\X = C_{u_0}^2([a,\,b])$;
+\item $\X = C_{u_0, \, v_0}^2([a,\,b]) := \{ u \in C_{u_0}^2([a, \, b]) \: : \: \dot{u}(a) = v_0(a), \, \, \dot{u}(b) = v_0(b) \}$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}[Higher derivatives]
+Let $\Delta$ denote the Laplace operator (sum of second derivatives). Compute first variation and Euler-Lagrange equation for the functional
+\[
+F(u) = \int_\Omega |\Delta u|^2(x) \, \dr x
+\]
+in the following cases: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}, itemsep=.4em]
+\item $\X = C^2(\bar{\Omega})$;
+\item $\X = C_{u_0}^2(\bar{\Omega})$;
+\item $\X = C_{u_0, \, v_0}^2(\bar{\Omega})$.
+\end{enumerate}
+\end{xca}
+
+\subsection{Obstacles}
+
+A significant problem in the {\em Calculus of Variations} is to find an equilibrium profile of an elastic membrane $\Omega$ with fixed boundary and constrained to lie above an obstacle. Applications include the study of fluid filtration in porous media, constrained heating and elasto-plasticity - see \cite{Caffarelli1998}.
+
+In this brief section, we will show a simple example of an obstacle-type problem, and we will try to point out the main difficulties which derive from the fact that $u + tv$ may fall {\bf below} the obstacle.
+
+\begin{xca}[Obstacle]\index{obstacle-type problem}
+Let $\X$ be the subset of $C_0^1(\bar{\Omega})$ which elements satisfies the obstacle inequality
+\[
+u(x) \geq u_0(x) \quad \text{for all $x \in E$},
+\]
+where $E$ is a compact subset of $\Omega$ and $u_0 : E \to \R$ is given. Compute the first variation and the Euler-Lagrange equation for the functional
+\[
+F(u) = \frac{1}{2} \int_\Omega |\nabla u|^2 \, \dr x.
+\]
+\end{xca}
+
+\begin{proof}[Solution]
+First, notice that when $u(x_0) = u_0(x_0)$ for some $x_0 \in E$, it suffices to pick a $v \in C_0^1(\Omega)$ satisfying $v(x_0) < 0$ to conclude that
+\[
+\exists t_0 \in (-\delta, \, \delta) \: : \: u + t_0v \notin \X
+\]
+no matter how small $\delta > 0$ is. Indeed, it is easy to verify that
+\[
+\text{$u + tv \in \X$ for all $t \in (-\delta, \, \delta)$} \implies v \, \big|_{E_u} \equiv 0,
+\]
+where $E_u := \{ x \in E \: : \: u(x) = u_0(x) \}$. However, if we work with this class of test functions, then making the usual computations leads to an incomplete Euler-Lagrange equation since
+\[
+- \int_\Omega v \Delta u \, \dr x = 0 \quad \text{for all $v \in E_u$}
+\]
+implies
+\begin{equation}\label{eq.obs.1}
+\begin{cases} - \Delta u=0 & \text{if $x \in \Omega \setminus E_u$},
+\\[.6em] u(x) = 0 & \text{if $x \in \partial \Omega$}, \end{cases}
+\end{equation}
+but we have no information whatsoever on the behaviour of $u$ on the set $E_u$. We thus go back to the choice of $v$ and notice that requiring something less (on $t$) leads to a larger class of test functions:
+\[
+\text{$u + tv \in \X$ for all $t \in (0, \, \delta)$} \implies \text{$v \in C_0^1(\Omega)$ and $v \, \big|_{E_u} \geq 0$ }.
+\]
+Recall that for a function $p : [a, \, b] \to \R$ the fact that $a$ is a critical point only implies that $p^\prime(a) \geq 0$ and, similarly, $b$ critical point implies $p^\prime(b) \leq 0$. We now compute the first variation of the functional taking into account that $t \mapsto F(u + tv)$ is only defined on the $(0, \, \delta)$; it turns out that
+\[
+- \int_\Omega v \Delta u \, \dr x \geq 0 \quad \text{for all $v \in C_0^1(\Omega)$ and $v \, \big|_{E_u} \geq 0$}.
+\]
+Using a variation of the {\em fundamental lemma of calculus of variations}, Lemma \ref{lemma:fcvvar}, we infer that
+\[
+- \Delta u \geq 0 \quad \text{if $x \in \Omega$}.
+\]
+This, together with the information obtained in \eqref{eq.obs.1}, leads to the full Euler-Lagrange equation
+\[\begin{cases}
+- \Delta u(x) = 0 & \text{if $x \in \Omega \setminus E_u$},
+\\[.6em] - \Delta u(x) \geq 0 & \text{if $x \in E_u$},
+\\[.6em] u(x) = 0 & \text{if $x\in \partial \Omega$}.
+\end{cases}\]
+\end{proof}
+
+\bl \label{lemma:fcvvar}
+Let $f \in L_{\mathrm{loc}}^1(\Omega)$ be a function such that
+\begin{equation}\label{eq.fcvvar.1}
+\int_\Omega f \varphi \, \dr x \geq 0 \quad \text{for all $\varphi \geq 0$, $\varphi \in C_c^\infty(\Omega)$},
+\end{equation}
+then $f(x) \geq 0$ for a.e. $x \in \Omega$.
+\el
+
+\begin{proof}
+First, notice that given a nonnegative continuous function $\varphi \in C_c(\Omega)$, we can approximate it via nonnegative smooth functions. Indeed, it suffices to take the sequence
+\[
+\varphi_\epsilon(x) := \varphi \ast \rho_\epsilon(x),
+\]
+where $\{\rho_\epsilon\}_{\epsilon > 0}$ is an {\em approximate identity}. It is easy to see that $\varphi_\epsilon$ converges uniformly to $\varphi$ and $\varphi_\epsilon \geq 0$ if we choose $\rho$ nonnegative. We now claim that
+\[
+\int_\Omega f \varphi \, \dr x \geq 0 \quad \text{for all $\varphi \in L_c^\infty(\Omega)$}
+\]
+satisfying $\varphi(x) \geq 0$ almost everywhere. This is also achieved by approximating $f \in L_c^\infty(\Omega)$ via a sequence of continuous functions $f_n$ such that
+\[
+\text{$f_n(x) \xrightarrow{n \to \infty}f(x)$ at a.e. $x \in \Omega$ and $|f_n(x)| \leq C$.}
+\]
+Since these functions are uniformly bounded, we can apply Lebesgue's dominated convergence theorem to prove the claim. Notice that we can pick an approximating sequence of nonnegative by replacing $f_n$ with
+\[
+g_n(x) := \max\{0, \, f_n(x)\}.
+\]
+Finally, we argue by contradiction. If $f < 0$ on $E$ of positive finite measure, then take $\varphi = \chi_E$ (or replace it with a subset if it is not compactly supported) and notice that
+\[
+\int_E f(x) \, \dr x < 0,
+\]
+which contradict the assumption \eqref{eq.fcvvar.1} with $L_c^\infty(\Omega)$ in place of $C_c^\infty(\Omega)$.
+\end{proof}
+
+\subsection*{Abstract framework} To deal with obstacle-type problems, it is natural to require $\X$ to be either the closure of an open set in a Banach space with $C^1$-regular boundary or a Banach manifold {\bf with} boundary.
+
+\br
+It is possible to give a notion of manifold with boundary in the infinite-dimensional setting, although the definition is not topological and relies on the differential structure - see \cite{Zeidler1988} and the reference therein.
+\er
+
+If we consider a Gateaux-differentiable function $F : \X \to \R$ at all $u \in \X$, then it is not so immediate to find an equivalent of Theorem \ref{thm.sdl.s} and some additional regularity is required.
+
+\begin{xca} Under which assumptions on $E$ and $u_0$ a solution $u$ of the Euler-Lagrange equation
+\[\begin{cases}
+- \Delta u(x) = 0 & \text{if $x \in \Omega \setminus E_u$},
+\\[.6em] - \Delta u(x) \geq 0 & \text{if $x \in E_u$},
+\\[.6em] u(x) = 0 & \text{if $x \in \partial \Omega$},
+\end{cases}\]
+is also a minimizer of $F$ on $\X$ (as defined in the previous exercise)?
+\end{xca}
+
+\subsection{Further examples}
+
+\bex
+Let $\X = C^1(\bar{\Omega})$, $\Omega$ open bounded subset of $\R^n$, and
+\[
+F(u) = \int_\Omega f(x, \,u, \, \nabla u) \, \dr x.
+\]
+Then the first variation is given by
+\[
+\langle \dr F(u), \, v \rangle = \int_\Omega \left[ f_u(x, \, u, \, \nabla u) \cdot v + f_\xi(x, \, u, \, \nabla u)\cdot \nabla v\right]\dr x,
+\]
+and integrating by parts yields
+\[
+\langle \dr F(u), \, v \rangle  = \int_{\partial \Omega} (f_\xi(x, \, u, \, \nabla u)\cdot \eta) v \, \dr \sigma + \int_\Omega \left[ - \div_x f_\xi(x, \, u, \, \nabla u)+ f_u(x,\, u, \, \nabla u) \right] \cdot v \, \dr x.
+\]
+The Euler-Lagrange equation associated to the problem is given by
+\[ \begin{cases}
+\div_x f_\xi(x, \, u, \, \nabla u) = f_u(x,\, u, \, \dot{u}) & \text{if $x \in [a,\,b]$}
+\\[.6em] f_\xi(x, \, u, \, \nabla u)\cdot \nu = 0 & \text{if $x \in \partial \Omega$},
+\end{cases} \]
+with Neumann boundary conditions if we do not require anything on $\X$. Consider the slightly modified ambient space
+\[
+\X_\Gamma = \{ u \in C^1(\bar{\Omega}) \: : \: u \, \big|_\Gamma \equiv u_0, \, \, \Gamma \subset\Omega \},
+\]
+where $\Gamma$ is closed and $u_0 : \Gamma \to \R$ is given. Then the first variation is the same, but the admissible directions $v$ are the ones such that $v \in C^1(\bar{\Omega})$ and $v \, \big|_{\Gamma} \equiv 0$. Then
+\[ \begin{cases}
+\div_x f_\xi(x, \, u, \, \nabla u) = f_u(x,\, u, \, \dot{u}) & \text{if $\Omega$},
+\\[.6em] f_\xi(x, \, u, \, \nabla u)\cdot \nu = 0 & \text{if $x \in \partial \Omega \setminus \Gamma$},
+\\[.6em] u = u_0 & \text{if $x\in \Gamma$},
+\end{cases} \]
+is the Euler-Lagrange equation, which boundary conditions are obtained by applying {\color{blue}Lemma \ref{lemma:fcv}} to the integral on $\partial \Omega\setminus \Gamma$ only.
+\eex
+
+
+\bex
+Let $\Omega \subset \R^n$, $\X = C_{u_0}^1(\bar{\Omega}, \, \R^m)$ and let
+\[
+F(u) = \int_\Omega f(\nabla u) \, \dr x.
+\]
+Notice that, in this case, $\nabla u$ is a $m \times n$ matrix so one would need first to introduce matrices scalar product; to avoid this issue, we only specify all components. Let $v$ be an element of the underlying vector space and compute the $t$-derivative:
+\[ \begin{aligned}
+\frac{\dr}{\dr t} \, \Big|_{t = 0} F(u + tv) & = \int_\Omega\left[ \sum_{i, \, j} f_{\xi_{ij}}(\nabla u) \frac{\partial v_i}{\partial_{x_j}} \right] \, \dr x =
+\\[1em] & \int_\Omega \left[ \sum_{i=1}^m f_{\xi_i}(\nabla u) \cdot \nabla v_i\right] \, \dr x.
+\end{aligned} \]
+We can now apply {\color{blue}Corollary \ref{lemma:div2}} to infer that
+\[ \begin{aligned}
+\frac{\partial F}{\partial v}(u) & = \int_{\partial\Omega} \left[ \sum_{i=1}^m f_{\xi_i}(\nabla u) \nu \cdot v_i\right] \, \dr \sigma + \int_\Omega \left[ \sum_{i=1}^m \div(f_{\xi_i}(\nabla u)) \cdot v_i \right] \, \dr x =
+\\[1em] & = \int_\Omega \left[ \sum_{i=1}^m \div(f_{\xi_i}(\nabla u)) \cdot v_i \right] \, \dr x,
+\end{aligned} \]
+employing the boundary condition ($v = 0$ on $\partial \Omega$). Then {\color{blue}Lemma \ref{lemma:fcv}} applies to each term of the sum separately which, in turns, shows that the Euler-Lagrange system is given by
+\[\begin{cases}
+\div(f_{\xi_i}(\nabla u)) = 0 & \text{if $x \in \Omega$},
+\\[.6em] u_i(x)= (u_0)_i(x) & \text{if $x \in \partial \Omega$},
+\end{cases}\]
+for all $i \in \{1, \, \dots, \, m\}$.
+\eex
+
+\bex[Laplace operator] \index{Laplace operator}
+Let $u : \Omega \subset \R^n \to \R^m$ be a function. Then its gradient $\nabla u$ is a $m \times n$ matrix. Consider the functional
+\[
+F(u) = \frac{1}{2}\int_\Omega |\nabla u|^2 \, \dr x,
+\]
+and endow the space of matrices with the norm $\| M \|_2^2 = \sum_{i, \, j} |M_{i, \, j}|^2$. It follows that
+\[
+F(u) = \sum_i \frac{1}{2}\int_\Omega |\nabla u_i|^2 \, \dr x.
+\]
+In this case, the decoupled structure of the problem shows that the Euler-Lagrange equations are the Laplace ones for each component $u_i$; namely, we have
+\[
+\Delta u_i = 0 \quad \text{for all $i = 1, \, \dots, \, n$}.
+\]
+This is, unfortunately, a very lucky case. Indeed, if we replace the gradient with the symmetric gradient, then the Euler-Lagrange system is not so simple. For example, the functional
+\[
+F(u) = \frac{1}{2}\int_\Omega \left|\frac{\nabla u + \nabla^T u}{2}\right|^2 \, \dr x
+\]
+represents the {\em energy in linearized elasticity}\index{energy in linearized elasticity}. The Euler-Lagrange system of equations, in this case, is not made up of decoupled equations.
+\eex
+
+\begin{xca}
+Compute first variation and Euler-Lagrange equation for the functional
+\[
+F(u) = \frac{1}{2} \int_\Omega |\nabla u|^2 \, \dr x
+\]
+where $\X$ is $C_0^1(\bar{\Omega})$ with prescribed $L^2$-norm $\int_\Omega |u|^2 \, \dr x = 1$.
+\end{xca}
+
+\begin{proof}[Solution]
+Notice that we cannot employ the methods we applied to all the previous problems because the constraint on the $L^2$-norm is hard to deal with. However, we can use {\em Lagrange multipliers}\index{Lagrange multiplier} and consider
+\[
+F_\lambda(u) := \frac{1}{2} \int_\Omega |\nabla u|^2 \, \dr x - \frac{\lambda}{2} G(u),
+\]
+where $G(u) = \int_\Omega |u|^2 \, \dr x - 1$. Then
+\[
+F_\lambda(u + tv) = \frac{1}{2} \left[ \int_\Omega |\nabla (u + tv)|^2 \, \dr x - \lambda G(u + tv) \right],
+\]
+and hence the first variation is given by
+\[ \begin{aligned}
+\frac{\dr}{\dr t} \, \Big|_{t = 0} F_\lambda(u + tv) & = \int_\Omega \nabla u \cdot \nabla v \, \dr x - \lambda \int_{\Omega} uv \, \dr x =
+\\[1em] & = - \int_\Omega (\Delta u + \lambda u) v \, \dr x + \int_{\partial \Omega} (\nabla u \cdot \nu)v \, \dr x =
+\\[1em] & = - \int_\Omega (\Delta u + \lambda u) v \, \dr x.
+\end{aligned} \]
+This leads to the Euler-Lagrange equation
+\[\begin{cases}
+- \Delta u(x) = \lambda u(x) & \text{if $x \in \Omega$},
+\\[.6em] u(x) = 0 & \text{if $x \in \partial \Omega$},
+\end{cases}\]
+is nothing but the {\em eigenvalue problem}\index{eigenvalue problem} of the Laplace operator with Dirichlet boundary conditions.
+\end{proof}
+
+\begin{xca}
+Compute first variation and Euler-Lagrange equation for the functional
+\[
+F(u) = \frac{1}{2} \int_\Omega |\nabla u|^2 \, \dr x + \int_{\partial \Omega} g u \, \dr \sigma,
+\]
+where $g : \partial \Omega \to \R$ is given and $\X=C^1(\bar{\Omega})$ so that $\int_{\partial \Omega} g u \, \dr \sigma $ is nontrivial. Compare it with the case $g = u$, that is,
+\[
+F(u) = \frac{1}{2} \int_\Omega |\nabla u|^2(x) \, \dr x +\frac{1}{2} \int_{\partial \Omega} |u|^2 \, \dr \sigma.
+\]
+\end{xca}
+
+\begin{proof}[Solution]
+Let $v \in \X$ and $t \in \R$. Then
+\[
+F(u + tv) = \frac{1}{2} \int_\Omega |\nabla u + t \nabla v|^2 \, \dr x + \int_{\partial \Omega} g (u + tv) \, \dr \sigma,
+\]
+and thus the first variation is given by
+\[
+\frac{\dr}{\dr t} \, \Big|_{t = 0} F(u + tv) = \int_\Omega \nabla u \cdot \nabla v \, \dr x + \int_{\partial \Omega} gv \, \dr \sigma.
+\]
+We can apply {\color{blue}Corollary \ref{lemma:div2}} to the first term on the right-hand side. It turns out that $u$ is a minimiser if
+\[
+\int_{\partial\Omega} (\nabla u \cdot \nu)v \dr \sigma - \int_\Omega \Delta u v \, \dr x + \int_{\partial \Omega} gv \, \dr \sigma = 0.
+\]
+Choosing $v \in C_c^\infty(\Omega) \subset \X$, we can use {\color{blue}Lemma \ref{lemma:fcv}} to infer that
+\[
+\Delta u = 0,
+\]
+while the Neumann boundary condition changes accordingly to the presence of $g$:
+\[
+\nabla u \cdot \nu(x) =  - g(x) \quad \text{for all $x\in \partial\Omega$}.
+\]
+If we consider the functional
+\[
+F(u) = \frac{1}{2} \int_\Omega |\nabla u|^2(x) \, \dr x + \frac{1}{2} \int_{\partial \Omega} |u|^2 \, \dr \sigma,
+\]
+then there are differences even at the level of first variation. Indeed, it turns out that
+\[ \begin{aligned}
+\frac{\dr}{\dr t} \, \Big|_{t = 0} F(u + tv) & = \int_\Omega \nabla u \cdot \nabla v \, \dr x + \int_{\partial \Omega} uv \, \dr \sigma =
+\\[1em] & = - \int_\Omega \Delta u v \, \dr x + \int_{\partial \Omega} (\nabla u \cdot \nu + u)v \, \dr \sigma
+\end{aligned} \]
+The Euler-Lagrange equation corresponding to the problem is
+\[ \begin{cases}
+- \Delta u(x) = 0 & \text{if $x \in \Omega$},
+\\[.6em] \nabla u \cdot \nu(x) + u(x) = 0 & \text{if $x \in \partial \Omega$}.
+\end{cases} \]
+\end{proof}
+
+\section{Inner variation and free boundary problem}
+\label{section:1.3}
+
+It is often useful to consider minimisation problems for functionals whose natural domains are sets of functions which admit a finite number of discontinuities. These can either be fixed or be an unknown themselves and for this reason, the latter will be called {\em free-discontinuity problems}\index{free-discontinuity problem}.
+
+\bex \label{ex.3.2}
+Let $c \in [a, \, b]$ be a {\bf fixed point}. Our goal is to find the first variation and the Euler-Lagrange equation of the functional
+\[
+F(u) = \int_a^b f(x, \,\dot{u}) \, \dr x
+\]
+when $u$ belongs to the class
+\[
+\X_c := \left\{ u : [a, \, b] \to \R \: : \: \text{$u \in C^1([a, \, b])$ possibly discontinuous at $c$} \right\}.
+\]
+Since $c$ is fixed we can simply split $\int_a^b$ to avoid the discontinuity point $c$. It turns out that
+\[
+F(u) = \int_a^c f(x, \,\dot{u}) \, \dr x + \int_c^b f(x, \,\dot{u}) \, \dr x =: F_1(u) + F_2(u),
+\]
+and it is easy to verify that minimising $F$ is equivalent to minimising $F_1$ and $F_2$ on $C^1([a, \, c])$ and $C^1([c, \, b])$ respectively. The Euler-Lagrange equation is
+\begin{equation} \label{eq.fdp.1}\begin{cases}
+\frac{\dr}{\dr x} (f_\xi(x, \, \dot{u})) = 0 & \text{if $x \in [a, \, c) \cup (c, \, b]$},
+\\[.6em] f_\xi(x, \, \dot{u}) = 0 & \text{if $x = a$, $x = b$ and $x=c^{\pm}$,}
+\end{cases} \end{equation}
+where $x = c^-$ and $x=c^+$ denote, respectively, the following limits:
+\[
+\lim_{x \to c^-} f_\xi(x, \, \dot{u}) = 0 \quad \text{and} \quad \lim_{x \to c^+} f_\xi(x, \, \dot{u}) = 0.
+\]
+\eex
+
+In this example, we decided to keep the discontinuity point fixed, but it makes sense to wonder if moving it around $[a, \, b]$ might lead to a better result in terms of minimising the functional. Note that computing
+\[
+\frac{\dr}{\dr t} \, \Big|_{t = 0} F(u + tv)
+\]
+is not enough anymore because it does not take into account the fact that $c$ moves. For this reason, we now introduce a different type of variation which is usually referred to as {\em inner variation}\index{inner variation}.
+
+\subsection*{Inner variation} Let us consider the functional
+\[
+F(u) = \int_a^b f(x,\, u, \, \dot{u}) \,\dr x
+\]
+and suppose that $u$ belongs to a class of functions with enough regularity to justify the following computations. For $\eta \in C_c^1([a, \, b])$, define
+\[
+\Phi_t(x) := x + t \eta(x) \quad \text{for $|t| < \delta$}.
+\]
+The idea is to use $\Phi_t$ to obtain a new function through the composition. In particular, we introduce the function
+\[
+u_t(y) := u \circ \Phi_t^{-1}(y)
+\]
+and call it the {\em inner variation} of $u$ with respect to $\eta$.
+
+\br
+We are no longer deriving along straight lines, but we are considering paths in the graph of the function $u$ which means that our options are highly dependent on the shape of $u$.
+\er
+
+The map $t \mapsto F(u_t)$ is well-defined for $|t| < \delta$ and maps an open interval to the real line. It follows that if $u$ is a local minimum/maximum, then
+\[
+\frac{\dr}{\dr t} \, \Big|_{t = 0} F(u_t) = 0 \quad \text{for every $\eta \in C_c^1(a, \, b)$}.
+\]
+Before we compute the derivative explicitly, we would like to point out two important properties of $\Phi_t$. Indeed, if we take $\delta > 0$ small enough\footnote{For example, smaller than the uniform norm of $\eta^\prime$.}, then it is easy to verify that
+\[
+\Phi_t^\prime(x) = 1 + t \eta^\prime(x) > 0,
+\]
+which implies that $\Phi_t$ is increasing, $C^1$ with $C^1$ inverse and mapping $[a, \, b]$ into $[a, \, b]$. We are thus allowed to use the change of variables formula and find that
+\[ \begin{aligned}
+F(u_t) & = \int_a^b f(y, \, u_t(y), \, \dot{u}_t(y)) \,\dr y
+\\[1em] & = \int_a^b f\left(y,\, u(\Phi_t^{-1}(y)), \, \dot{u}(\Phi_t^{-1}(y))\frac{1}{\Phi_t^\prime(\Phi_t^{-1}(y))} \right) \, \dr y
+\\[1em] & = \int_a^b f\left(\Phi_t(x), \, u(x), \, \dot{u}(x) \frac{1}{\Phi_t^\prime(x)} \right) \Phi_t^\prime(x) \, \dr x.
+\end{aligned} \]
+Now derive the function with respect to $t$. A simple computation shows that
+\[\begin{aligned}
+\frac{\dr}{\dr t} F(u_t) = & \int_a^b f\left(\Phi_t(x), \, u(x), \, \dot{u}(x) \frac{1}{\Phi_t^\prime(x)} \right) \frac{\partial}{\partial t} \Phi_t^\prime(x) \, \dr x + \cdots
+\\[1em] & \cdots + \int_a^b \Bigg[ f_x\left(\Phi_t(x), \, u(x), \, \dot{u}(x) \frac{1}{\Phi_t^\prime(x)} \right) \frac{\partial}{\partial t} \Phi_t(x) + \cdots
+\\[1em] &  \cdots + \int_a^b f_\xi\left(\Phi_t(x), \, u(x), \, \dot{u}(x) \frac{1}{\Phi_t^\prime(x)} \right) \dot{u}(x) \frac{- \frac{\partial}{\partial t} \Phi_t^\prime(x)}{(\Phi_t^\prime(x))^2} \Bigg] \Phi_t^\prime(x) \, \dr x.
+\end{aligned}\]
+The expression for the derivative is rather complicated, but when we evaluate it at $t = 0$ everything simplifies immensely because the following identities hold:
+\[ \Phi_0^\prime(x) = 1, \quad \frac{\partial}{\partial t} \Phi_0(x) = \eta(x), \quad \frac{\partial}{\partial t} \Phi_0^\prime(x) = \dot{\eta}(x).
+\]
+It turns out that
+\[ \begin{aligned}
+\frac{\dr}{\dr t} \, \Big|_{t = 0} F(u_t) & = \int_a^b f(x, \, u, \, \dot{u}) \dot{\eta} \, \dr x + \int_a^b \left[ f_x(x, \, u, \, \dot{u}) \eta - f_\xi(x, \, u,\, \dot{u}) \dot{u} \dot{\eta} \right] \, \dr x =
+\\[1em] & = \int_a^b \left[ f(x, \, u, \, \dot{u}) - f_\xi(x, \, u, \, \dot{u}) \dot{u} \right] \dot{\eta} \, \dr x + \int_a^b f_x(x, \, u, \, \dot{u}) \eta \, \dr x =
+\\[1em] & = \int_a^b \left[ f_x - \frac{\dr}{\dr x}(f - f_\xi \dot{u}) \right] \eta\, \dr x = 0.
+\end{aligned} \]
+Since this is zero for all $v \in C_c^1([a, \, b])$, we can apply {\color{blue}Lemma \ref{lemma:fcv}} to obtain the identity
+\[ \begin{aligned}
+f_x(x, \, u, \, \dot{u}) & = \frac{\dr}{\dr x} \left( f(x, \, u, \, \dot{u}) - f_\xi(x, \, u, \,\dot{u}) \dot{u} \right)
+\\[1em] & = f_x + f_u \dot{u} + f_\xi \ddot{u} - f_\xi \ddot{u} - f_{\xi x} \dot{u} - f_{\xi u}\dot{u}^2 - f_{\xi \xi} \ddot{u} \dot{u} =
+\\[1em] & = f_x + f_u \dot{u} - f_{\xi x}\dot{u} - f_{\xi u} \dot{u}^2 - f_{\xi \xi} \dot{u} \ddot{u},
+\end{aligned} \]
+which ultimately leads to a slightly weaker type of Euler-Lagrange equation:
+\begin{equation} \label{eq:11}
+\left[ f_u - \frac{\dr}{\dr x} f_\xi \right] \dot{u} = 0.
+\end{equation}
+This result is slightly weaker than the one obtained via the straight lines variation because directional derivatives are strictly related to the differentiability of $F$, while inner variation may not give all possible directions.
+
+\bex[Free-boundary problem]
+Now consider the problem solved in Exercise \ref{ex.3.2}, but let the discontinuity point $c$ move; namely, consider the class of functions
+\[
+\X = \left\{ u : [a, \, b] \to \R \: : \: \text{$u \in C^1([a, \, b])$ discontinuous at most at a single point} \right\}.
+\]
+It is easy to compute the first variation with $u + tv \in \X$, choosing $v$ to be discontinuous at most at the point where $u$ is. However, since {\em we are not exploiting the fact that the discontinuity point can move}, we find once again the equation \eqref{eq.fdp.1} although we expect that more freedom yields a better result.
+
+The idea is to use the inner variation discussed above. For $\eta \in C_c^1([a, \, b])$, define $\Phi_t(x) := x + t \eta(x)$ and denote by $u_t$ the function
+\[
+u_t(y) := u \circ \Phi_t^{-1}(y).
+\]
+The computations carried out above are still valid until we get to
+\[
+\frac{\dr}{\dr t} \, \Big|_{t = 0} F(u_t) =\int_a^b \left[ f(x, \, u, \, \dot{u}) - f_\xi(x, \, u, \, \dot{u}) \dot{u} \right] \dot{\eta} \, \dr x + \int_a^b f_x(x, \, u, \, \dot{u}) \eta \, \dr x.
+\]
+However, at this point we cannot integrate by parts because of the discontinuity $c$. Splitting the integral in the usual way (to avoid $c$) yields to
+\[
+\int_a^b \left( f_x - \frac{\dr}{\dr x}(f - f_\xi \dot{u}) \right) \eta + \left[ (f - f_\xi \dot{u}) \eta \right]_{c^-}^{c^+} = 0
+\]
+for all $\eta \in C_c^1([a,\,b])$. The integral is zero as a consequence of the Euler-Lagrange equation \eqref{eq.fdp.1} so the boundary term must also be zero. This means that the function
+\[
+f - f_\xi \dot{u}
+\]
+is continuous at $c$ (i.e., the limit for $x$ to $c^-$ and $c^+$ coincide). Notice that this is an extra condition since it does not follow from any other in \eqref{eq.fdp.1}.
+\eex
+
+The inner variation leads to the Euler-Lagrange equation whenever $\dot{u}(x) \neq 0$. Intuitively, this makes sense because we are moving along the graph of $u$ and hence we do not expect to find any kind of information where $u$ is {\bf flat}. The next remark shows how limited inner variation can be in some situations.
+
+
+\br \index{inner variation!vector-valued}
+In the vector-valued case, namely $u:[a,\,b] \to \R^m$, the same computation shows that
+\[
+f_x = \frac{\dr}{\dr x}\left( f - f_\xi \cdot \dot{u} \right),
+\]
+where $\cdot$ denotes the scalar product. Differently from the variation along straight lines here we only get one equation (instead of $m$) because we are just moving in the one-dimensional set $u([a, \, b])$.
+\er
+
+\br
+If $m = 1$ and $f(u, \, \dot{u})$ does not depend on $x$ directly, then \eqref{eq:11} reduces to
+\[
+\text{$f - f_\xi \dot{u} = $ constant}.
+\]
+This means that we get a first-order equation which holds even if $u$ belongs to $C^1$ since we do not need to integrate by parts. Indeed, recall that
+\[
+0 = \int_a^b ( f(u, \,\dot{u})- f_\xi(u,\, \dot{u})\dot{u})\dot{\eta} \, \dr x
+\]
+for all $\eta \in C_c^1([a, \, b])$; however, we cannot apply {\color{blue}Lemma \ref{lemma:fcv}} because we have $\dot{\eta}$. The following result is a slightly different version and allows us to conclude that $f - f_\xi \dot{u}$ is constant even if $u$ is $C^1$ only.
+\er
+
+\bl[Du Bois-Reymond]\label{lemma:fcvdr}
+If $g \in L_{\mathrm{loc}}^1((a, \, b))$ and
+\[
+\int_a^b g \dot{\varphi} \, \dr x = 0 \quad \text{for all $\varphi \in C_c^\infty([a, \,b])$},
+\]
+then $g$ is equal to a constant at a.e. $x \in (a, \, b)$.
+\el
+
+\br
+Observe that with the language of distributions this lemma merely asserts that a function whose distributional derivative is zero must be constant almost everywhere.
+\er
+
+\begin{proof}
+Suppose that $(a, \, b) = \R$. Take an approximation identity $\rho_\epsilon$ and notice that $\varphi \ast \epsilon$ is still an admissible test function, that is,
+\[
+\int_a^b g (\varphi \ast \rho_\epsilon)^\prime \, \dr x = 0 \quad \text{for all $\varphi \in C_c^\infty(a, \,b)$}.
+\]
+The regularity properties of the convolution implies that
+\[
+\int_a^b (g\ast \rho_\epsilon) \varphi^\prime \, \dr x = 0 \quad \text{for all $\varphi \in C_c^\infty(a, \,b)$}
+\]
+and, since $g \ast \rho_\epsilon$ belongs to $C^1$, we can integrate by parts and deduce that
+\[
+g \ast \rho_\epsilon = c(\epsilon).
+\]
+Finally the pointwise convergence a.e. of the convolution implies that $g$ is constant almost everywhere and the constant does not depend on $\epsilon$.
+
+If $(a, \, b)$ is a proper subinterval of $\R$, one can fix a smaller interval $(a-\delta, \, b + \delta)$, $\delta > 0$, and use the fact that the convolution is defined there. The reader might fill in the details as an exercise.
+\end{proof}
+
+\begin{xca}
+Let $\Omega \subseteq \R^n$ be a connected subset. Prove that if $g \in L_{\mathrm{loc}}^1(\Omega)$ and
+\[
+\int_a^b g \, \div(\varphi) \, \dr x = 0 \quad \text{for all $\varphi \in C_c^\infty(\Omega)$},
+\]
+then $g$ is equal to a constant at a.e. $x \in \Omega$.
+\end{xca}
+
+
+\begin{xca}
+Let $\X := C_0^1(\Omega)$, $\Omega \subset \R^n$ open, with the additional constraint that $\frac{1}{2} \|u\|_{L^2(\Omega)} = 1$. Consider the Dirichlet energy
+\[
+F(u) = \frac{1}{2} \int_\Omega |\nabla u|^2 \, \dr x.
+\]
+Compute the Euler-Lagrange equation of this functional using the Lagrange multiplier method, namely
+\[
+\langle \dr F(u), \, v \rangle = \lambda \langle \dr G(u), \, v \rangle,
+\]
+and try to justify the use of this kind of theorem in such an abstract framework.
+\end{xca}
+
+\begin{proof}[Solution]
+If $u$ is a local minimum/maximum for $F$, then the Lagrange multiplier theorem implies that there exists $\lambda\in \R$ such that
+\[
+\langle \dr F(u), \, v \rangle = \lambda \langle \dr G(u), \, v \rangle \quad \text{for all $v\in C_0^1(\Omega)$}.
+\]
+The left-hand side gives $\int_\Omega (- \Delta u) v \, \dr x$, while the right-hand side $\lambda \int_\Omega u v \, \dr x$. Using {\color{blue}Lemma \ref{lemma:fcv}} we can deduce the equation
+\[\begin{cases}
+- \Delta u = \lambda u &\text{if $x \in \Omega$},
+\\[.6em] u(x)= 0 & \text{if $x \in \partial \Omega$},
+\end{cases}\]
+which means that $u$ is an eigenfunction of the Laplace operator. It can be proved that it corresponds to the {\em first eigenvalue} for any elliptic operator $\mathrm{div} \, L$, that is,
+\[
+\lambda_1(\Omega, \, L) := \min_{u \in H_0^1(\Omega)} \frac{\sum_{i, \, j=1}^N a_{i, \, j}(x) \frac{\partial}{\partial_{x_i}} u\frac{\partial}{\partial_{x_j}} u \, \dr x + \int_\Omega a_0(x) |u|^2 \, \dr x }{\int_\Omega |u|^2 \, \dr x}.
+\] \end{proof}
+
+We will now provide a proof that shows why we can do all those computations (note that we require the functionals $F$ and $G$ to be actually of class $C^1$). Since
+\[
+\langle \dr G(u), \, v \rangle = \int_\Omega uv\, \dr x \implies \dr G(u) \neq 0
+\]
+as a linear map, for otherwise it would be necessarily $u \equiv 0$ which is impossible because the $L^2$-norm of $u$ is equal to one. We say that $v$ is {\em tangent}\index{tangent vector} to $\X$ at $u$ if
+\[
+\int_\Omega uv \, \dr x = 0,
+\]
+which is to say that $v \perp u$ in $L^2(\Omega)$. We now claim that for all $v \perp u$ there exists a path $(-\delta, \, \delta) \ni t \mapsto u_t \in \X$ for $\delta > 0$ sufficiently small such that $u_0 \equiv u$ and
+\[
+\frac{\partial}{\partial_t} \, \Big|_{t = 0} u_t(x) \equiv v(x).
+\]
+The idea is to take $u_t := u + tv$ and normalize it in such a way that its $L^2$-norm becomes equal to one. One also needs to check that the derivative of $F(u_t)$ is equal to the derivative of $F$ along the direction $v$ or, in other words, that
+\[
+\frac{\dr}{\dr t} \, \Big|_{t = 0} F(u_t) \stackrel{?}{=} \langle \dr F(u), \, v \rangle.
+\]
+If we give this for granted and take a local minimum/maximum $u$, then it is easy to check that
+\[
+- \int_\Omega v \Delta u \, \dr x = 0 \quad \text{for all $v \in \perp u$ in $L^2(\Omega)$},
+\]
+and using the inclusion $\ker(F) \supset \ker(G)$, by a standard linear algebra result we deduce that these functionals are proportional. Namely, there exists $\lambda \in \R$ such that
+\[
+\int_\Omega (- \Delta u - \lambda u)v \, \dr x = 0,
+\]
+and this holds for {\bf all} $v\in \X$. We can now conclude as we did before using {\color{blue}Lemma \ref{lemma:fcv}}. We will come back to formalise these computations once we introduce Sobolev spaces which arethe right framework.
+
+\br
+Notice that $F(u) = \int_\Omega |\nabla u|^2 \, \dr x$ is a {\em positive-definite} quadratic form\index{positive-definite quadratic form}. Using the divergence theorem, we easily deduce that
+\[
+F(u) = \int_\Omega (-\Delta u) u \, \dr x = \langle - \Delta u, \, u \rangle_{L^2(\Omega)}
+\]
+is also a positive-definite quadratic form and, more precisely, the one associated to the Laplace operator $-\Delta$ with respect to the scalar product in $L^2(\Omega)$. Furthermore, it follows from the identity
+\[
+\langle - \Delta u, \, u\rangle_{L^2(\Omega)} = \int_\Omega |\nabla u|^2 \, \dr x = \langle u, \, - \Delta u \rangle_{L^2(\Omega)}
+\]
+that $- \Delta$ is a self-adjoint operator.
+\er
+
+\section{Geodesics}
+
+Let $\cM$ be a $k$-dimensional surface\footnote{We might develop the same theory in the general framework of Riemannian manifold with a few changes. The definition of geodesic and Proposition \ref{proposition:geod} need to be fixed, but otherwise everything else holds.} of class $C^2$ embedded in $\R^n$.
+
+\bd \index{geodesic}
+Let $x_0, \, x_1 \in \cM$. A {\em geodesic} from $x_0$ to $x_1$ is a curve $\gamma : [0,\,1]\to\cM$ connecting these two points and such that it minimizes the length functional\index{geodesic!length}
+\[
+L(\gamma) := \int_0^1 |\dot{\gamma}(s)| \, \dr s.
+\]
+\ed
+
+Denote by $\X$ the set of all curves connecting $x_0$ and $x_1$. The reader might notice that this is slightly different from the one usually introduced in {\em differential geometry} to indicate the length of geodesics; namely,
+\[
+E(\gamma) := \left[ \int_0^1 |\dot{\gamma}(s)|^2 \, \dr s \right]^{\frac{1}{2}}.
+\]
+The reason is that we can use either Jensen's inequality or H\"{o}lder's inequality to infer that
+\[
+L(u) \leq \left[\int_0^1 |\dot{\gamma}(s)|^2 \,\dr s \right]^{\frac{1}{2}},
+\]
+with the equality that holds if and only if $|\dot{\gamma}|$ is constant. However\footnote{Assuming that $\dot{\gamma}$ is different from zero at all points, for example.}, for all $\gamma$ there exists a reparametrization  $\tilde{\gamma} := \gamma \circ \sigma$ such that its speed is constant.
+
+\bc
+If $\gamma_0$ minimizes $E$ in $\X$, then it minimizes $L$. Moreover, the speed $|\dot{\gamma}_0|$ is constant.
+\ec
+
+\begin{proof}
+Let $\gamma \in \X$ be any curve joining $x_0$ and $x_1$, and let $\tilde{\gamma}$ be the reparametrization with constant speed. Then the inequalities above show that
+\[
+L(\gamma) = L(\tilde{\gamma}) = E(\tilde{\gamma}) \geq E(\gamma_0) \geq L(\gamma_0),
+\]
+so $\gamma_0$ minimizes the length $L$. Also $L(\gamma) \geq E(\gamma_0) \geq L(\gamma_0)$ at $\gamma = \gamma_0$ gives $E(\gamma_0) = L(\gamma_0)$, which is possible only when $\gamma_0$ has constant speed.
+\end{proof}
+
+\br
+Notice that $L$ has a significant group of invariants such as reparametrizations, but this is not true for $E(\gamma)$ and it actually {\bf selects} the parametrisation which gives constant speed. This is why it makes more sense to minimise $E$ rather than $L$.
+\er
+
+\bpr \label{proposition:geod}
+If $\gamma_0$ minimizes $E$ on $\X$, then the Euler-Lagrange equation is
+\begin{equation} \label{eq.eulero-geodesic}
+\text{$\ddot{\gamma} \perp \cM$ at every $s \in [0, \, 1]$}.
+\end{equation}
+In other words, the curvature $\vec{\kappa}$ is orthogonal to $\cM$ at all points $\gamma(s)$.
+\epr
+
+\begin{proof}
+Start by considering a path $t \mapsto \gamma_t$ in $\X$ that originates from $\gamma$ and is defined in such a way that $\gamma_t(s) \in \cM$ for all $t,\, s\in[0,\,1]$. Then $s \mapsto \gamma_t(s)$ is a path in $\cM$ and hence
+\[
+\frac{\partial}{\partial t} \, \Big|_{t = 0} \gamma_t(s) \in \Tan_{\gamma(s)} \cM
+\]
+for all $s$. We define the set
+\[
+\Tan_\gamma \X := \{ v : [0,\, 1] \to \R^n \: : \: v(s) \in \Tan_{\gamma(s)} \cM, \, v(0)=v(1) = 0 \}
+\]
+as the space on which we will move the possible variations of $\gamma$. We claim that there exists $t \mapsto \gamma_t$ path in $\X$ such that $\gamma_0 \equiv \gamma$ and, as before, satisfying
+\[
+\frac{\partial}{\partial_t} \, \Big|_{t = 0} \gamma_t(x) \equiv v(x).
+\]
+We can choose $\gamma_t(s) = \gamma(s) + t v(s) + \omega(t, \, s)$, where the remainder $\omega$ belongs to $\mathcal{O}(t^2)$ uniformly with respect to $s$ and its derivative
+\[
+\frac{\partial \omega}{\partial s}(t, \, s)= \mathcal{O}(t^2),
+\]
+once again uniformly with respect to $s$. Using the existence of a {\em tubular neighbourhood} we can define a projection from $\R^n$ to $\cM$ (at least locally) in such a way that $\gamma_t(s)$ for $|t|<\delta$ and $s \in [0, \, 1]$ remains inside of $\cM$. Finally, one simply needs to verify that
+\[
+0 = \frac{\dr}{\dr t} \, \Big|_{t = 0} E(\gamma_t) = \langle \dr E(\gamma), \, v \rangle,
+\]
+and then use the explicit formula for $E$ to deduce that
+\[
+\int_0^1 \ddot{\gamma} \cdot v \, \dr x = 0
+\]
+for all $v \in \Tan_\gamma\X$. This implies $\ddot{\gamma}$ orthogonal to all $v$'s in such a tangent space and hence using an appropriate variation of {\color{blue}Lemma \ref{lemma:fcv}} we conclude.
+\end{proof}
+
+\section{Minimal surfaces}
+
+\bpr
+If $\Sigma_0$ is a $d$-dimensional surface of class $C^2$ in $\R^{d+1}$ which minimizes the area functional $A(\Sigma)$ among all $\Sigma$ $d$-dimensional surfaces in $\R^{d+1}$ with prescribed boundary $\Gamma$, then
+\begin{equation}\label{eq.minsurf}
+H_{\Sigma_0}(x) \equiv 0,
+\end{equation}
+where $H_\Sigma$ is the {\em mean curvature}\index{mean curvature} of $\Sigma$.
+\epr
+
+\begin{proof}
+The set of competitors in this case is given by all $d$-dimensional surfaces with the same prescribed boundary and to avoid technicalities we define
+\[
+\X := \{ \Sigma\subset \R^d \: : \: \text{$\Sigma$ d-dim. surface s.t. $\partial \Sigma = \Gamma$}\}.
+\]
+Let $\eta_0$ be a {\em unit normal} to $\Sigma_0$ and let $v : \Sigma_0 \to \R$ be a regular function which is zero\footnote{This is a technical assumption which is useful to define variations of $\Sigma_0$. Below it will be more clear why we need it.} on a neighbourhood of the boundary $\partial \Sigma_0$. Define
+\[
+\Phi_t(x) := x + t v(x) \cdot \eta_0(x)
+\]
+and notice that for $|t| < \delta$, $\delta$ small enough, this is a diffeomorphism so that $\Sigma_t = \Phi_t(\Sigma_0) \cong \Sigma_0$ and $\Sigma_t \in \X$ since points on the boundary are not moving. Then
+\[
+\frac{\dr}{\dr t} \, \Big|_{t = 0} A(\Sigma_t) = 0,
+\]
+but we first need to give a meaning to the area functional and evaluate it at $\Sigma_t$.\mbox{}
+
+\begin{enumerate}
+\item {\bf Step 1.} The differential of $\Phi_t : \Sigma_0 \to \Sigma_t$ is a linear map between the respective tangent spaces
+\[
+\dr \Phi_t(x) : \Tan_x \Sigma_0 \to \Tan_x \Sigma_t.
+\]
+We can choose two orthonormal bases on these tangent spaces and find a matrix that represent $\dr \Phi_t(x)$; this is usually denoted by $\widetilde{\nabla}_\tau \Phi_t(x)$. The Jacobian is hence given by
+\[
+J \Phi_t(x) :=\left| \det ( \widetilde{\nabla}_\tau \Phi_t(x)) \right|,
+\]
+so we can use the change of variables formula to infer that
+\[
+A(\Sigma_t) = \int_{\Sigma_0} J\Phi_t(x) \, \dr x.
+\]
+However, the choice of the basis on $\Sigma_t$ depends on $t$ and hence the formula above is quite hard to deal with. Consider the differential
+\[
+\dr \Phi_t(x) : \Tan_x \Sigma_0 \to \R^{d+1}
+\]
+and complete a basis of $\Tan_x \Sigma_0$ to a basis of $\R^{d+1}$ by adding $\eta_0(x)$. The basis on the codomain vector space is now independent of $t$ and
+\[
+\nabla_\tau^T \Phi_t(x)
+\]
+is the $(d+1)\times d$ matrix associated to the differential by this choice. One can prove that
+\[
+J \Phi_t(x) = \sqrt{ \det( \nabla_\tau^T \Phi_t(x)\nabla_\tau \Phi_t(x)) },
+\]
+which only makes sense because $\nabla_\tau^T \Phi_t(x) \nabla_\tau \Phi_t(x)$ is a square matrix.
+
+\item {\bf Step 2.} We can now compute the differential explicitly as
+\[
+\dr \Phi_t(x)[h] := h + t\left( \eta_0(x)\langle \dr v(x), \, h \rangle + v(x) \langle \dr \eta_0(x),\, h \rangle \right).
+\]
+Then the matrix associated to this linear map is
+\[
+\nabla_\tau \Phi_t(x) = \begin{pmatrix} \mathrm{Id}_{d \times d} + t v(x) \nabla_\tau \eta(x) \\ \empty \\ \hline t \nabla_\tau v(x) \end{pmatrix}
+\]
+and hence
+\[
+\nabla_\tau^T \Phi_t(x) \nabla_\tau \Phi_t(x) = \mathrm{Id}_{d \times d} + tv(x) ( \nabla \eta(x) + \nabla^T \eta(x)) + \mathcal{O}(t^2).
+\]
+The determinant is thus given (using Taylor's expansion) by
+\[
+\det(\nabla_\tau^T \Phi_t(x) \nabla_\tau \Phi_t(x)) = 1 + 2 t v(x) \mathrm{Tr}(\nabla \eta(x)) + \mathcal{O}(t^2),
+\]
+and $\mathrm{Tr}(\nabla \eta(x))$ is the mean curvature because $\nabla \eta(x)$ is the second fundamental form. Then
+\[
+J \Phi_t(x) = \sqrt{\det(\nabla_\tau^T \Phi_t(x) \nabla_\tau \Phi_t(x))} \simeq 1 + t v(x) H(x) + \mathcal{O}(t^2),
+\]
+exploiting the Taylor's expansion of the square root.
+
+\item {\bf Step 3.} A simple computation shows that
+\[
+\frac{\dr}{\dr t} \, \Big|_{t = 0} A(\Sigma_t) = \int_{\Sigma_0} v(x) H(x) \, \dr x = 0 \quad \text{for all $v$ as above},
+\]
+and we can apply {\color{blue}Lemma \ref{lemma:fcv}} since $v$ can be chosen among the ones with compact support in $\Sigma$ and we deduce that $H \equiv 0$.
+\end{enumerate}
+\end{proof}

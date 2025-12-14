@@ -1,0 +1,1301 @@
+\chapter{Existence Results via Direct Method}
+\label{chapter:2}
+
+In this chapter, we discuss the existence of solutions to minimisation/maximisation problems via the so-called {\em direct method}\index{direct method}, which consists in working in a weaker framework where properties such as compactness and lower semicontinuity are straightforward.
+
+\section{Introduction to the direct method}
+
+Let $F : \X \to [- \infty, \, \infty]$ be a functional. The idea behind the direct method is to investigate the problem $\inf_{u \in \Y} F(u)$, where $\Y$ may be a space that includes $\X$ endowed with a topology that makes $F$ lower semicontinuous and sublevels of $F$ compact.
+
+\bd \index{lower semicontinuous}
+Let $(X, \, d)$ be a metric space. A functional $F : X \to [-\infty, \, \infty]$ is {\em lower semicontinuous} at a point $x_0 \in X$ if
+\[
+f(x_0) \leq \liminf_{x \to x_0} f(x).
+\]
+\ed
+
+The definition of lower semicontinuity can be stated in topological spaces using the preimages of half-open sets $(r,\, \infty)$, but in this course we will not need this degree of generality.
+
+\bt \label{thm.2.1}
+If $K$ is a compact metric space and $F:K \to [-\infty,\, \infty]$ is lower semicontinuous, then there exists $\bar{u} \in K$ minimum point for $F$.
+\et
+
+\begin{proof}
+Let $u_n$ be a minimizing sequence and denote by $m$ the infimum of $F$. By compactness, there exists a subsequence $n(k)$ such that
+\[
+u_{n(k)} \xrightarrow{k \to \infty} \bar{u}
+\]
+and since $F$ is lower semicontinuous, we also have that
+\[
+m = \liminf_{k \to \infty} F(u_{n(k)}) \geq F(\bar{u}) \implies F(\bar{u}) = m.
+\]
+\end{proof}
+
+The assumption {\em $K$ compact metric space} for the applications is usually not verified. Indeed, we can work in a general metric space and only require that $F$ satisfies an additional property.
+
+\begin{Def}[Coercivity] \rm \index{coercivity}
+Let $(X,\, d)$ be a metric space. A functional $F : X \to [-\infty,\, \infty]$ is {\em coercive} if for all sequences $(u_n)_{n \in \N} \subset X$ such that 
+\[
+F(u_n) \leq c < \infty,
+\]
+there is a converging subsequence.
+\ed
+
+\bt \label{thm.2.2}
+Let $X$ be a metric space and let $F : X \to [-\infty, \, \infty]$ be a lower semicontinuous, coercive functional. Then there exists $\bar{u} \in X$ minimum point for $F$.
+\et
+
+\begin{proof}
+This is left as an exercise. A possible way is to observe that $F : X \to [-\infty, \, \infty]$ is lower semicontinuous and coercive if and only if all sublevels
+\[
+\Lambda_M(F) := \{ u \in X \: : \: F(u) \leq M \}
+\]
+are compact with respect to the topology given by the metric structure of $X$.
+\end{proof}
+
+\br
+Since we are interested in the minimization problem $\inf_{u \in X} F(u)$, it makes sense to weaken the coercivity assumption and merely ask $\Lambda_M(F)$ compact for some $C > \inf_{u \in X}F(u)$.
+\er
+
+\br
+In $X = \R^n$, the definition of coercive functional is simpler. Indeed, one can prove that
+\[
+\lim_{|x|\to\infty} F(x) = \infty
+\]
+is {\bf equivalent} to $F$ coercive since bounded sets are relatively compact in $\R^n$. Therefore, the only sequences with no converging subsequences are the unbounded ones.
+\er
+
+\br
+If $X$ is an open subset of $\R^n$ and $F : X \to [-\infty, \, \infty]$ a functional, then $F$ is coercive if and only if $F(x_n) \to \infty$ when $|x_n|\to \infty$ or $x_n$ converges to the boundary of $\Omega$. Note that
+\[
+\lim_{|x|\to\infty} F(x) = \infty
+\]
+is enough if we replace $\Omega$ with its one-point compactifiation (the boundary is identified with $\infty$).
+\er
+
+We conclude this section by describing an example of an infinite-dimensional metric space $X$ in which we can actually apply the stronger result {\color{blue}Theorem \ref{thm.2.1}}. 
+
+\bt Let $(K,\, d_K)$ be a compact metric space, $x_0, \, x_1 \in K$ and assume that there exists a curve of finite length $\gamma : [0,\,1 ] \to K$ such that
+\[
+\gamma(0) = x-0 \quad \text{and} \quad \gamma(1) = x_1.
+\]
+Then there exists $\bar{\gamma}$ geodesic connecting $x_0$ and $x_1$.
+\et
+
+\bd \index{Lipschitz function}
+Let $(X,\, d)$ be a metric space. We say that $f : X \to \R$ is $L$-Lipschitz if
+\[
+d(f(x),\, f(y)) \leq L |x-y| \quad \text{for all $x, \, y \in X$}.
+\]
+The sharpest constant in the inequality is called Lipschitz constant of $f$ and it is usually denoted by $\mathrm{Lip}(f)$.
+\ed
+
+\begin{proof}
+Let $X := \{ \gamma : [0, \, 1] \to K \: : \: \text{$\gamma$ is $L$-Lipschitz and $\gamma(0) = x_0$, $\gamma(1) = x_1$}\}$ endowed with the distance defined by setting
+\[
+d_X(\gamma, \, \gamma^\prime) := \sup_{0 < t < 1} d_K(\gamma(t),\,\gamma^\prime(t)).
+\]
+The space $X$ is compact (by Ascoli-Arzelà) and the functional $F$ that associated $\gamma$ to its length is lower semicontinuous because it is given by the supremum of continuous functionals; namely,
+\[
+F(\gamma) = \sup_{0 \leq t_1 < \cdots < t_n \leq 1} \left\{ \sum_{i=2}^n d_K(\gamma(t_i), \, \gamma(t_{i-1})) \right\}.
+\]
+Then {\color{blue}Theorem \ref{thm.2.1}} shows that there exists a minimiser $\bar{\gamma} \in X$, but a priori we do not know that it is the optimal path also among the ones that are not $L$-Lipschitz. The following result concludes:
+
+\bl
+If $\gamma : [0,\, 1] \to X$ is continuous and has length $L(\gamma) = \ell < \infty$, then there exists $\sigma : [0,\,1]\to[0,\,1]$ reparametrization such that $\tilde{\gamma} := \gamma \circ \sigma$ satisfies: \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=0.4em]
+\item $d_K(\tilde{\gamma}(t), \, \tilde{\gamma}(t^\prime) \leq \ell |t - t^\prime|$;
+\item $\tilde{\gamma}$ is $\ell$-Lipschitz.
+\end{enumerate}
+\el
+
+\end{proof}
+
+\section{Compactness in Banach spaces}
+
+The notion of compactness in Banach spaces is not as simple as in Euclidean spaces, but there is a theorem that achieves it under mild assumptions.
+
+\bd \index{polar set}
+Let $X$ be a topological vector space, and let $S \subset X$. The {\em polar} set associated to $S$ is the set defined by
+\[
+S^\circ := \left\{ f \in X^\ast \: \left| \: \text{$\left| f(x) \right| \leq 1$ for all $x \in S$} \right. \right\}
+\]
+\ed
+
+\bt[Banach-Alaoglu]\index{Banach-Alaoglu theorem} 
+Let $X$ be a topological vector space, and let $V$ be a neighborhood of the origin. The polar $V^\circ$ is convex, weakly-$\ast$ closed and weakly-$\ast$ compact.
+\et
+
+\bc
+Let $\X$ be a Banach space. The closed unit ball $\overline{B_{\X^\ast}}$ in $\X^\ast$ is weakly-$\ast$ compact.
+\ec
+
+The version of the Banach-Alaoglu we are interested in requires $\X$ to be a separable Banach space. The reason is that it yields a metric structure on the space.
+
+\bt[Banach-Alaoglu] \label{thm.ba1}
+Let $\X$ be a separable Banach space. Then the closed ball $\overline{B_{\X^\ast}(0, \, 1)} \subset \X^\ast$ is weakly-$\ast$ metrizable and it is sequentially weakly-$\ast$ compact.
+\et
+
+\br
+If $\X$ is a reflexive separable Banach space and $F: \X \to [-\infty, \, \infty]$ a functional, then $F$ is coercive with respect to the weak topology of $\X$ if and only if
+\[
+\lim_{\|x_n\|_\X \to \infty} F(x_n) = \infty.
+\]
+\er
+
+\bd \index{Sobolev space}
+Let $1 \leq p \leq \infty$. A function $f$ belongs to $W^{1,\,p}(\R^n)$ if $f \in L^p(\R^n)$ and its distributional derivative $Df \in L^p(\R^n)$.
+\ed
+
+\bl
+The space $W^{1,\, p}(\R^n)$ is reflexive for all $1 < p < \infty$ and separable for all $1 \leq p < \infty$.
+\el
+
+\bt
+Let $\Omega$ be a regular\footnote{As an exercise, the reader might try to find the minimal assumptions on $\Omega$ for which the result holds. Observe that the regularity is only required for the compact embedding.} open set in $\R^n$, $1 < p < \infty$ and $(u_n)_{n \in \N} \subset W^{1,\, p}(\Omega)$ be a bounded sequence. Then there exists a subsequence $n(k)$ such that
+\[ \begin{cases}
+\| u_{n(k)} - u \|_{L^p(\Omega)} \to 0,
+\\[.8em] \nabla u_{n(k)} \rightharpoonup \nabla u \quad \text{weakly in $L^p(\Omega)$}.
+\end{cases}
+\]
+\et
+
+\begin{proof}
+The sequence $u_n$ is uniformly bounded in the $W^{1,\,p}$-norm so there exists a positive constant $c$ such that
+\[
+\|u_n\|_{L^p(\Omega)} + \|\nabla u_n \|_{L^p(\Omega)} \leq c < \infty.
+\]
+It follows from {\color{blue}Theorem \ref{thm.ba1}} that (up to subsequences) $u_n$ and $\nabla u_n$ converge weakly in $L^p(\Omega)$ to $u$ and $v$ respectively. It is easy to verify that in a distributional sense we have
+\[
+v = \nabla u,
+\]
+and therefore $u \in W^{1,\,p}(\Omega)$. Finally, we can apply the {\em Sobolev (compact) embedding theorem} that holds for the inclusion
+\[
+W^{1,\,p}(\Omega) \hookrightarrow L^p(\Omega)
+\]
+to infer that $u_n$ converges {\bf strongly} to $u$ in $L^p(\Omega)$.
+\end{proof}
+
+\br
+If $F:W^{1,\,p}(\Omega) \to [-\infty,\, \infty]$, then $F$ coercive with respect to the {\em weak topology} is equivalent to $F(x_n) \to \infty$ whenever $\|x_n\|_{W^{1,\,p}(\Omega)} \to \infty$. In other words, the following are equivalent:\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}, itemsep=.4em]
+\item For all sequences $u_n$ such that $F(u_n) \leq c < \infty$ there exists a subsequence such that $u_{n(k)} \to u$ strongly in $L^p(\Omega)$ and $\nabla u_{n(k)} \to \nabla u$ weakly in $L^p(\Omega)$.
+\item Whenever $\|u_n\|_{W^{1,\,p}(\Omega)} \to \infty$ there holds
+\[
+F(u_n) \to \infty.
+\]
+\end{enumerate}
+\er
+
+\bpr \label{proposition:2.10}
+Let $\X := W^{1,\,2}(\Omega)$, where $\Omega$ is a regular open subset of $\R^n$. Let
+\[
+F(u) = \int_\Omega \left[ \frac{1}{2} |\nabla u|^2 + g(x,\,u) \right] \, \dr x
+\]
+and assume that $g : \Omega \times \R \to \R$ satisfies the following assumptions: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}, itemsep=.4em]
+\item It is Borel-measurable in both variables.
+\item The map $u \mapsto g(x,\,u)$ is lower semicontinuous at almost every $x \in \Omega$.
+\item It has a quadratic growth, that is,
+\[ 
+g(x,\,u) \geq c|u|^2 \quad \text{for all $u \in \R$ and almost every $x \in \Omega$}.
+\]
+\end{enumerate}
+Then $F$ is (weakly) lower semicontinuous and coercive on $\X$. In particular, $F$ admits a minimum point $\bar{u} \in \X$.
+\epr
+
+\begin{proof}
+The coercivity of $F$ is an easy consequence of $\mathbf{(c)}$ since
+\[
+F(u_n) \geq \frac{1}{2} \| \nabla u_n \|_{L^2(\Omega)}^2 + c \| u_n \|_{L^2(\Omega)}^2 \geq c^\prime \|u_n\|_{W^{1,\,2}(\Omega)}^2
+\]
+so $F(u_n)$ goes to $\infty$ whenever $\|u_n\|_{W^{1,\,2}(\Omega)} \to \infty$. For the lower semicontinuity simply split $F$ as the sum of $F_1 + F_2$ and observe that the Dirichlet energy
+\[
+F_1(u) := \frac{1}{2} \int_\Omega |\nabla u|^2 \, \dr x
+\]
+is lower semicontinuous since this is always the case for a norm on a Banach space (with respect to the weak topology). Now let $u_n \rightharpoonup u$ and use {\em Fatou's lemma} to deduce that
+\[
+\liminf_{n\to\infty} F_2(u_n) = \liminf_{n\to\infty} \int_\Omega g(x,\,u_n) \, \dr x \geq \int_\Omega \liminf_{n \to \infty} g(x,\,u_n) \, \dr x.
+\]
+Since $u_n$ converges strongly to $u$ in $L^2(\Omega)$, up to a subsequence we know that $u_n$ converges pointwise to $u$ almost everywhere and hence by $\mathbf{(b)}$ we infer that
+\[
+\int_\Omega \liminf_{n \to \infty} g(x,\,u_n) \, \dr x \geq \int_\Omega g(x,\,u) \, \dr x,
+\]
+and this concludes the proof.
+\end{proof}
+
+\br
+The almost everywhere pointwise convergence forces us to pass through a subsequence. However, in the last step the $\liminf$ is with respect to $n$. This is justified because we can use the usual sub-subsequence trick.
+\er
+
+\begin{xca}
+The space $\X$ is usually unknown for a given functional. Why in Proposition \ref{proposition:2.10} we work in the Sobolev space $W^{1,\,2}(\Omega)$? What happens if we try to do the same in $W^{1,\,p}(\Omega)$ for some $p \neq 2$?
+\end{xca}
+
+\begin{proof}[Hint]
+The functional is coercive on $W^{1,\,p}(\Omega)$ when $1 \leq p \leq 2$, but it is not when $p > 2$. The semicontinuity, on the other hand, is harder in $W^{1,\,p}(\Omega)$ because we have the $W^{1,\,2}(\Omega)$-norm and requires the characterization of closed convex sets that follows.
+\end{proof}
+
+\begin{lemma} \label{lemma:closedeness}Let $\X$ be a Banach space. \mbox{}
+\begin{enumerate}[label=(\alph*)]
+\item If $C \subset \X$ is a convex set, then $C$ is closed in norm if and only if $C$ is weakly closed.
+\item If $C \subset \X^\ast$ is a convex set, then $C$ is closed in norm if it is weakly-$\ast$ closed.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} One implication is clear in both the assertions: if $C$ is closed in the weak (or weak-$\ast$) topology, then it is bounded in norm.  \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Assume that $C$ is closed in the strong topology: we want to prove that the complement $A := C^c$ is weakly open. Let $x_0 \notin C$ and apply Hahn-Banach theorem to find a linear continuous functional $f \in X^\ast$ and a real number $\alpha \in \R$ such that
+\[
+\langle f, \, x_0 \rangle < \alpha < \langle f, \, x \rangle \quad \text{for all $x \in C$}.
+\]
+It follows that $V := \left\{ x \in X \: \left| \: \langle f, \, x \rangle < \alpha \right. \right\}$ is an open neighbourhood of $x_0$, strictly contained in $A$, and this is enough to infer that $A$ is weakly open.
+\item It follows easily from the definitions, but it is interesting to see a counterexample for the opposite implication. For example, a non-reflexive Banach space $X$ is closed in norm (as a subset of the bi-dual $X^{\ast\ast}$), but it is weakly-$\ast$ dense and thus it cannot be weakly-$\ast$ closed.
+\end{enumerate}\end{proof}
+
+\begin{xca} \label{ex.1.2.3}
+Prove that, if we replace the assumption $\mathbf{(c)}$ in Proposition \ref{proposition:2.10} with
+\[
+\text{$g(x,\,u) \geq \omega(|u|)$, where $\omega(t) \to \infty$ as $t \to \infty$},
+\]
+then the same conclusion holds.
+\end{xca}
+
+Before we can solve Exercise \ref{ex.1.2.3}, we need a characterization result for the weak (weak-$\ast$ in $W^{1,\,\infty}(\Omega)$) convergence in Sobolev spaces in terms of uniform boundedness.
+
+\bpr
+Let $1 \leq p \leq \infty$, $\Omega$ open subset of $\R^n$ and $u_n$ a sequence in $W^{1,\,p}(\Omega)$. Then the following assertions are equivalent: \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item $u_n$ converges weakly to $u$ in $W^{1,\,p}(\Omega)$ (resp. weakly-$\star$ in $W^{1,\,\infty}(\Omega)$).
+\item $u_n$ and $\nabla u_n$ converge weakly to $u$ and $\nabla u$ respectively in $L^p(\Omega)$ (weakly-$\ast$ if $p = \infty$).
+\item If $p > 1$, then $u_n$ converges weakly to $u$ in $L^p(\Omega)$ and $\nabla u_n$ is uniformly bounded.
+\item If $p > 1$ and $\Omega$ is regular (i.e., with Lipschitz boundary), then $u_n$ converges strongly to $u$ in $L^p(\Omega)$ and $\nabla u_n$ is uniformly bounded.
+\end{enumerate}
+\epr
+
+\br
+In ({\romannumeral 3}) we need $p > 1$ because the weak limit of a sequence in $W^{1,\,1}(\Omega)$ can be a $L^1$-function with weak differential $\nabla u$ in the class of measures (more precisely, $u \in \mathrm{BV}(\Omega)$).
+\er
+
+\br
+In ({\romannumeral 4}) we need, in addition, a regularity assumption on $\Omega$ because the equivalence requires a setting in which the Sobolev embedding theorem works.
+ \er
+
+\begin{proof}The first equivalence follows from the fact that the embedding $W^{1,\,p}(\Omega) \to (L^p(\Omega))^{n+1}$ is an isomorphism of Banach spaces. \end{proof}
+
+\bpr
+If $1 < p <\infty$, a weakly closed subset $E$ of $W^{1,\,p}(\Omega)$ is weakly-compact if and only if it is bounded.
+\epr
+
+\begin{proof}[Hint]
+The Banach space $W^{1,\,p}(\Omega)$ is both reflexive and separable for $1 < p < \infty$.
+\end{proof}
+
+\bc
+The topology is metrizable on $E$. In particular, a lower semicontinuous coercive functional is a sequentially lower semicontinuous coercive functionals and vice versa.
+\ec
+
+\br
+If $p = \infty$, the results above are true if we replace the weak topology with the weak-$\ast$ topology. 
+\er
+
+\bl
+Let $X$ be a weakly closed subset of $W^{1,\,p}(\Omega)$ for $1 < p < \infty$. A functional $F : X \to \R \cup \{\pm \infty\}$ is coercive if and only if 
+\[
+\|u_n\|_{W^{1,\,p}(\Omega)} \to \infty \implies F(u_n) \to \infty.
+\]
+\el
+
+\begin{proof}[Solution of Exercise \ref{ex.1.2.3}]
+To prove that $F$ is coercive, let $(u_n)_{n \in \N} \subset W^{1,\,2}(\Omega)$ be a sequence such that $\|u_n\|_{W^{1,\,2}(\Omega)} \to \infty$. Thanks to the previous remark, we only need to prove that
+\[
+\lim_{n \to \infty} F(u_n) = \infty.
+\]
+Notice that $\|u_n\|_{W^{1,\,2}(\Omega)} \to \infty$ is equivalent to saying that at least one between $\|u_n\|_{L^2(\Omega)} \to \infty$ and $\|\nabla u_n\|_{L^2(\Omega)}$ goes to infinity. If
+\[
+\|\nabla u_n\|_{L^2(\Omega)} \to \infty,
+\]
+then it is easy to verify that $F(u_n) \geq \frac{1}{2} \| \nabla u_n \|_{L^2(\Omega)} \to \infty$, so we can assume without loss of generality that
+\[
+\|u_n\|_{L^2(\Omega)} \to \infty \quad \text{and} \quad \| \nabla u_n \|_{L^2(\Omega)}  \leq C < \infty.
+\]
+By Poincaré's inequality\index{Poincaré's inequality} (see {\color{blue}Theorem \ref{piins}}) we have
+\[
+\int_\Omega |u_n - (u_n)_\Omega| \, \dr x \lesssim \| \nabla u_n \|_{L^2(\Omega)}^2 \leq c^\prime,
+\]
+where
+\[
+v_\omega := \fint_\omega v(x) \, \dr x
+\]
+is the {\em mean value of $v$ on $\omega \subset \R^n$}. We now claim that for each $M > 0$ we can find $n_0 \in \N$ such that
+\[
+\left| \{ |u_n| \geq M \} \right| \geq \frac{|\Omega|}{2} \quad \text{for $n \geq n_0$}.
+\]
+This would be enough to conclude since we have the estimate
+\[
+\int_\Omega f(x,\,u_n) \, \dr x \geq \frac{|\Omega|}{2} \omega(M) \xrightarrow{M \to \infty} \infty,
+\]
+which gives that $F$ is coercive. To prove the claim, consider the set
+\[
+A^c=\{x \in \Omega \: : \: |u_n(x)|\leq M\}. 
+\]
+We remarked above that by Poincaré's inequality we have
+\[ \begin{aligned}
+\left( |(u_n)_\Omega|- M \right)|A^c| & = |(u_n)_\Omega||A^c| - M |A^c|
+\\[1em] & \leq \int_{A^c} (-|u_n| + |(u_n)_\Omega|) \, \dr x
+\\[1em] & \leq \int_{A^c} |u_n - (u_n)_\Omega| \dr x \leq C,
+\end{aligned}\]
+which ultimately means that $|A^c| \to 0$ since $(|(u_n)_\Omega|-M) \to \infty$.
+\end{proof}
+
+\begin{xca} \label{ex.1.3}
+Let $\X = W^{1,\,2}(\Omega)$ and consider the functional
+\[
+F(u) = \int_\Omega \frac{1}{2} |\nabla u|^2\, \dr x + \int_\Omega \rho u \, \dr x,
+\]
+where $\rho : \Omega \to \R$ is a function with zero mean, that is,
+\[
+\int_\Omega\rho \, \dr x = 0.
+\]
+Discuss the existence of a solution $\bar{u}$ and show that, if we assume $\int_\Omega \rho \, \dr \neq 0$, then there is no minimizer and $\inf_{u \in \X} F(u) = - \infty$.
+\end{xca}
+
+\begin{proof}[Solution]
+If $\rho_\Omega \neq 0$, then it is easy to see that $\inf_{u \in \X}F(u) = - \infty$ since
+\[
+u(x) \equiv t \implies F(u) = t \rho_\Omega,
+\]
+which goes to minus infinity when $t \to \infty$ (or $t \to - \infty$, depending on the sign of $\rho_\Omega$). On the other hand, if $\rho_\Omega = 0$, then
+\[
+F(u) = F(u+t) \quad \text{for all $t\in \R$}
+\]
+so it is not restrictive to assume that $u_\Omega = 0$. Let
+\[
+\X^\prime :=\left\{ u \in \X \: : \: u_\Omega = 0 \right\},
+\]
+and notice that it is closed (and thus weakly closed) in $\X$. The functional $F$ is coercive on $\X^\prime$ because the Sobolev norm,
+\[
+\|\nabla u\|_{L^2(\Omega)} + |u_\Omega|,
+\]
+is equivalent (see Section \ref{equivalentnorms}) to the usual one, namely $\| u\|_{W^{1,\,2}(\Omega)}$. Furthermore, on $\X^\prime$ the $L^2$-norm of the gradient is all that is left since $u_\Omega = 0$ and hence
+\[
+F(u) \geq \frac{1}{2}\|u\|_{\X^\prime}^2 - \|\rho\|_{L^2(\Omega)} \|u\|_{L^2(\Omega)} \geq \frac{1}{2} \|\nabla u\|_{L^2(\Omega)}^2- C \|\rho\|_{L^2(\Omega)} \| \nabla u \|_{L^2(\Omega)},
+\]
+and this goes to infinity as soon as $\| \nabla u \|_{L^2(\Omega)} \to \infty$.
+\end{proof}
+
+\subsection{Trace operator}
+
+We now would like to consider a minimization problem for a function $F$ defined on a Sobolev space with the additional constraint that $u \, \big|_{\partial \Omega} \equiv u_0$. We begin with a fundamental lemma.
+
+\bl
+Let $\Omega = \R_+^n$ and $1 \leq p < \infty$. Then there exists a constant $C$ such that
+\[
+\left[ \int_{\partial \Omega} |u(x', \, 0)|^p \, \dr x' \right]^{\frac{1}{p}} \leq C \|u\|_{W^{1,\,p}(\Omega)} \quad \text{for all $u \in C_c^1(\Omega)$}.
+\]
+\el
+
+An immediate consequence of this lemma is that the map $u \mapsto u \, \big|_\Gamma$ with $\Gamma = \partial \Omega \cong \R^{n-1} \times \{0\}$ defined from $C_c^1(\Omega)$ into $L^p(\Gamma)$ extends, by density, to a bounded linear operator $W^{1,\,p}(\Omega) \to L^p(\Omega)$. This operator is, by definition, the {\em trace of $u$ on $\Gamma$} and corresponds to the restriction to $\Gamma$ when $u$ is regular.\index{Sobolev function!trace}
+
+There is a fundamental difference between $W^{1,\,p}(\Omega)$ and $L^p(\Omega)$: the functions in the latter do not have a trace on $\Omega$. Anyway, it is easy to extend the argument above to $\Omega$ regular open set of $\R^n$ (for example, of class $C^1$ with $\Gamma$ bounded) via local charts.
+
+\br
+The Sobolev space $W_0^{1,\,p}(\Omega)$ is the kernel of the trace operator, that is,
+\[
+W_0^{1,\,p}(\Omega) = \left\{ u \in W^{1,\,p}(\Omega) \: : \: u \, \big|_{\partial \Omega} = 0 \right\}.
+\]
+\er
+
+\bex
+Let $\X := W_{u_0}^{1,2}(\Omega) = \{ u \in W^{1,2} \: : \: u \, \big|_{\partial \Omega} \equiv u_0\}$ and consider the functional
+\[
+F(u) = \int_\Omega \frac{1}{2}|\nabla u|^2 \, \dr x.
+\]
+It is easy to verify that $W^{1,\,2}_{u_0}(\Omega)$ is a closed affine subspace of $W^{1,\,2}(\Omega)$, and hence weakly closed. The functional $F$ is lower semicontinuous as usual and coercive on $W^{1,\,2}_{u_0}(\Omega)$ since
+\[
+\Phi(u) := \|u\|_{L^2(\partial \Omega)} + \| \nabla u \|_{L^2(\Omega)}
+\]
+is an equivalent norm on $W^{1,\,2}(\Omega)$. Since $u$ must coincide with $u_0$ at the boundary, the term $\|u\| _{L^2(\partial \Omega)}$ is fixed and finite so
+\[
+\| u_n \|_{W^{1,\,2}(\Omega)} \to \infty \implies \| \nabla u \|_{L^2(\Omega)} \to \infty,
+\]
+which means that $F$ is coercive.
+\eex
+
+\subsection{Equivalent norms on Sobolev spaces} \label{equivalentnorms}
+
+We now want to prove that the norms we introduced earlier are actually equivalent to the Sobole norm. We prove a much more general result from which the Poincarè inequality will follow as well.
+
+\bpr \label{prpequiv}
+Let $\Omega$ be a connected subset of $\R^n$, $k,\,p$ positive integers and $\E$ a Banach space. Assume that the operator
+\[
+T: W^{k,\,p}(\Omega) \to \E,
+\]
+is linear, bounded and satisfies $\ker(T) \cap \P_{< k}[t] = \{0\}$. Then
+\[
+\Phi(u) = \| Tu \|_\E+ \| \nabla^k u \|_{L^p(\Omega)}
+\]
+is an equivalent norm to $\|\cdot\|_{W^{k\,,p}(\Omega)}$, where $\nabla^k$ is the $k$th derivative.
+\epr
+
+\begin{proof}
+It is easy to verify that $\Phi$ is a seminorm. We only need to check that
+\[
+\Phi(u) = 0 \implies u = 0,
+\]
+but this is an immediate consequence of the kernel assumption. Indeed, we know that $\Phi(u) = 0$ implies that both $T(u) = 0$ and $\nabla^k u = 0$. A standard result asserts that the latter (on a connected set) implies that $u$ is a polynomial of degree $k-1$ a.e. so
+\[
+u \in \ker(T) \cap \P_{< k}[t] = \{0\} \implies u = 0.
+\]
+The operator $T$ is bounded, and hence one inequality is for free:
+\[
+\Phi(u) \leq C \|u\|_{W^{k,\,p}(\Omega)}.
+\]
+For the opposite one, we argue by contradiction. Let $u_n$ be a sequence in $W^{1,\,p}(\Omega)$ such that
+\[
+\Phi(u_n)\leq \frac{1}{n} \quad \text{and}\quad \|u_n\|_{W^{k,\,p}(\Omega)} = 1.
+\]
+Since $\Phi(u_n) \to 0$, we also have $T u_n \to 0$ in $\E$ and $\nabla^k u_n \to 0$ in $L^p(\Omega)$. Then $u_n$ converges (up to subsequences) weakly to some $u$ and 
+\[
+\nabla^k u = 0 \quad \text{almost everywhere in $\Omega$} \implies \text{$u$ is a polynomial of degree at most $k-1$}.
+\]
+Furthermore, we have the convergence
+\[
+T u_n \to T u
+\]
+by continuity of $T$, which immediately tells us that $T u = 0$. Hence $u$ must be zero since no polynomial of degree $k-1$ belongs to $\ker(T)$. By Sobolev embedding $u_n$ converges strongly (with all its derivatives) to zero and this leads to a contradiction since
+\[
+1 = \liminf_{n\to \infty} \|u_n\|_{W^{k,\,p}(\Omega)} \leq \|u\|_{W^{k,\,p}(\Omega)} = 0.
+\]
+\end{proof}
+
+\br
+Notice that we can remove the assumption $\Omega$ connected replacing $\ker(T) \cap \P_{< k}[t] = \{0\}$ with $\ker(T) \cap \ker(\nabla^k) = \{0\}$ but we must require that $\ker(\nabla^k)$ is a finite-dimensional vector space.
+\er
+
+\bc \label{for:raids} \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item If $\Omega$ is regular (i.e., $C^1$ and bounded), then the norm $\| \cdot \|_{W^{1,\,p}(\Om)}$ is equivalent to
+\[
+\|Tu \|_{L^p(\partial \Om)} + \| \nabla u \|_{L^p(\Om)}.
+\]
+\item If $\Om$ is connected (otherwise the kernels might intersect), the Sobolev norm is equivalent to
+\[
+|u_\Om| + \| \nabla u \|_{L^p(\Om)}
+\]
+for $1 \leq p < \infty$.
+\item If $\Omega$ has finitely many connected components (e.g., it is regular), then
+\[
+\| u \|_{L^q(\Om)} + \| \nabla u \|_{L^p(\Om)}
+\]
+is equivalent for all $q \leq p^\ast$, the critical Sobolev exponent.
+\end{enumerate}
+\ec
+
+\bc[Poincarè inequality] \label{piins}\index{Poincaré inequality}
+Let $\Om$ be connected. If $\Lambda : W^{k,\,p}(\Omega) \to \E$ is a bounded operator, $\E$ Banach, and $\ker(\Lambda)$ contains all polynomials in $P_{k-1}$, then there exists $C$ such that
+\begin{equation} \label{poincarinequality}
+\|\Lambda(u)\|_\E \leq C \| \nabla^k u \|_{L^p(\Omega)}.
+\end{equation}
+\ec
+
+\begin{proof}
+Assume for simplicity $k = 1$. Let $T : W^{1,\,p}(\Om) \to W^{1,\,p}(\Om)$ be a bounded linear projection on constant functions, for example
+\[
+T(u) = \fint_A u \, \dr x
+\]
+for some $A \subset \Om$ with finite measure. Then
+\[
+\Phi(u) := \|Tu\|_{W^{1,\,p}(\Om)} + \|\nabla u \|_{L^p(\Om)}
+\]
+is an equivalent norm by {\color{blue}Proposition \ref{prpequiv}}, which means that
+\[
+\| \Lambda u \|_\E \leq C \Phi(u) \quad \text{for all $u \in W^{1,\,p}(\Om)$}.
+\]
+But $\Lambda(u) = \Lambda(u - Tu)$ because of the assumption on $\ker(\Lambda)$. It follows that
+\[
+\| \Lambda u \|_\E \leq C \Phi(u - Tu) = \underbrace{\|T(u - Tu)\|_{W^{1,\,p}(\Om)}}_{= 0} + C \| \nabla u \|_{L^p(\Om)},
+\]
+and this concludes the proof.
+\end{proof}
+
+\br
+The same proof works for $k > 1$, but finding a projection $T$ on polynomials of degree at most $k-1$ is not as trivial. The reader might try to find it out as an exercise.
+\er
+
+\bc \label{class12}
+Let $\Om$ be a bounded regular connected set and let $1 \leq q \leq p^\ast$. Then
+\[
+\| u - u_A \|_{L^q(A)} \leq C \| \nabla u \|_{L^p(\Om)},
+\]
+where $u_A$ is the average of $u$ over a set of positive and finite measure $A$.
+\ec
+
+\begin{proof}
+The operator $\Lambda : W^{1,\,p}(\Omega) \to L^q(A)$ defined by setting
+\[
+\Lambda(u) := u - u_A
+\]
+is linear and bounded. We can apply {\color{blue}Corollary \ref{piins}} to conclude.
+\end{proof}
+
+\begin{xca}
+The constant $C$  in {\color{blue}Corollary \ref{class12}} depends on $p, \, q, \, \Omega$ and $A$. If we let $A = \Om$, how does $C$ behaves with respect to scaling of $\Om$?
+\end{xca}
+
+\section{General theory of existence for integral functionals on Sobolev spaces}
+
+In this section, our goal is to discuss the existence under general assumptions of critical points for functionals of the form
+\begin{equation}\label{desks}
+F(u) = \int_\Om f(x,\,u,\,\nabla u) \, \dr x,
+\end{equation}
+where\footnote{In general $f$ may take values in $(-\infty,\,\infty]$, but in that case one needs additional assumptions on $f$ because \eqref{desks} may not be defined.} $f : \Omega \times \R^m \times\R^{m \times m} \to [0,\, \infty]$ is a Borel (measurable would not be enough) function. In the sequel, we will always assume that $W^{1,\,p}(\Om)$ is endowed with the {\bf weak topology} for $1 < p < \infty$ because we characterized coercivity already in a simple way.
+
+\subsection{Coercivity}
+
+We prove a first criterion for coercivity when $f$ does not depend on $u$. In this case, coercivity can only be achieved in subspaces such as $W_0^{1,\,p}(\Om)$ because
+\[
+F(u) = F(u+c)
+\]
+so we can take a sequence of constants $c_n \to \infty$ and $u \in W^{1,\,p}(\Om)$ to conclude that $u_n := u + c_n$ converges to infinite in norm, but $F(u_n) = F(u)$ does not.
+
+\bpr 
+Let $\Om$ be connected. If $F(u) = \int_\Om f(x,\, \nabla u) \, \dr x$, then $F$ is coercive in $W_0^{1,\,p}(\Om)$ if there exists $\delta > 0$ such that the following $p$-growth condition holds:
+\[
+f(x,\,\xi) \geq \delta |\xi|^p
+\]
+\epr
+
+\begin{proof}
+By {\color{blue}Corollary \ref{for:raids}}, on $W_0^{1,\,p}(\Om)$ the norm $\|\nabla u \|_{L^p(\Om)}$ is equivalent to the Sobolev norm (since $u$ at the boundary is equal to zero). Therefore
+\[
+\|u_n\|_{W^{1,\,p}(\Omega)} \to \infty \implies \|\nabla u \|_{L^p(\Om)} \to \infty,
+\]
+and hence using the growth condition we conclude that
+\[
+F(u_n) \geq \delta \| \nabla u_n \|_{L^p(\Om)} \xrightarrow{n \to \infty} \infty.
+\]
+\end{proof}
+
+\begin{xca}
+Is it possible that $\delta$ in the $p$-growth condition can depend on $x$ without an uniform lower bound?
+\end{xca}
+
+We now prove a criterion in the general case, that is, for $f$ that depends on $(x,\,u,\,\nabla u)$.
+
+\bpr 
+Let $\Om$ be connected. If $F(u) = \int_\Om f(x,\, u,\, \nabla u) \, \dr x$, then $F$ is coercive in $W^{1,\,p}(\Om)$ if there exists $\delta > 0$ such that the following $p$-growth condition holds:
+\[
+f(x,\, u,\, \xi) \geq \delta (|u|^p + |\xi|^p).
+\]
+\epr
+
+The proof of this result is similar to the previous one, but it is actually possible to require much less. For example, we can require that
+\begin{equation}\label{eq.a.1}
+f(x,\,u,\, \xi) \geq \delta |\xi|^p + \omega(|u|) \chi_A(x),
+\end{equation}
+where $0 < |A| < \infty$ and $\omega(t) \to \infty$ as $t \to \infty$.
+
+\begin{proof}
+By {\color{blue}Corollary \ref{for:raids}}, on $W^{1,\,p}(\Om)$ the norm $Phi(u) := \|\nabla u \|_{L^p(\Om)} + |\int_A u \, \dr x|$ is equivalent to the Sobolev norm since $\Om$ is connected. Let $u_n$ be a sequence such that
+\[
+\Phi(u_n) \to \infty.
+\]
+If $\| \nabla u \|_{L^p(\Om)}\to \infty$, then coercivity is trivial using \eqref{eq.a.1}. So we can assume that $\|\nabla u_n\|_{L^p(\Om)}$ is uniformly bounded by a constant $C$ and $|\int_A u \, \dr x| \to \infty$. Then by Poincaré's inequality
+\[
+\int_A |u_n - (u_n)_A| \, \dr x \leq c \| \nabla u_n \|_{L^p(\Om)} \leq C',
+\]
+and if we take $M >0$ arbitrarily big, the set $A_n := \{ x \in A \: : \: |u_n|(x) \leq M \}$ has measure that goes to zero using the same argument as in {\color{blue}Exercise \ref{ex.1.2.3}}. Then
+\[
+F(u_n) \geq \int_{A\setminus A_n} f(x,\,u_n,\, \nabla u_n) \, \dr x \geq \omega(M) |A \setminus A_n| \to \omega(M) |A|
+\]
+using the second part of \eqref{eq.a.1}, and the conclusion follows by taking the limit as $M$ goes to infinity.
+\end{proof}
+
+\begin{xca}
+If we assume that $f$ takes values in $(-\infty,\, \infty]$, what additional conditions are sufficient for a similar result to hold? Note that we not only need to prove coercivity, but also the well-definition of $F$.
+\end{xca}
+
+\subsection{Weak lower semicontinuity}
+
+We now prove a criterion for the weak lower semicontinuity of $F : W^{1,\,p}(\Om) \to (-\infty,\, \infty]$ in terms of strong lower semicontinuity and convexity.
+
+\bt \label{thm.a.1}
+If $F$ is lower semicontinuous and convex, then $F$ is weakly lower semicontinuous provided that $1 \leq p < \infty$.
+\et
+
+This result follows from the following more general statement since being lower semicontinuous is equivalent to the closeness of sublevels $C_t := \{u \in W^{1,\,p}(\Om) \: : \: F(u) \leq t \}$.
+
+\bl
+If $\E$ is a Banach space and $C \subset \E$ is convex and closed, then $C$ is weakly closed.
+\el
+
+\br
+The problem with $p = \infty$ is that the weak topology is not metrizable on compact sets and hence we cannot use the equivalence between compactness and sequential compactness.
+\er
+
+\bc
+If $F(u) = \int_\Om f(x,\, \nabla u) \, \dr x$, $f$ Borel, and $(x,\, \cdot)$ is lower semicontinuous and convex with respect to $\xi$ for a.e. $x \in \Om$, then $F$ is lower semicontinuous and convex on $W^{1,\,p}(\Om)$.
+\ec
+
+\begin{proof}
+Lower semicontinuity is a consequence of Fatou's lemma (as we did in the proof of {\color{blue}Proposition \ref{proposition:2.10}}) while the convexity is trivial.
+\end{proof}
+
+We conclude this section with a result that generalises the previous one to integral functionals whose Lagrangian depends on $(x,\,u,\,\nabla u)$.
+
+\bt \label{thm.4.1.1}
+Let $F(u) = \int_\Om f(x,\,u,\,\nabla u) \, \dr x$ and suppose that the Lagrangian
+\[
+f : \Om \times \R^m \times \R^{m^2} \to [0,\,\infty]
+\]
+is positive\footnote{As we mentioned above, this assumption can be replaced with something else that makes the integral of $f$ well-defined.} and Borel\footnote{This assumption is necessary because the composition of Lebesgue-measurable functions is not necessarily Lebesgue-measurable.}. Then the following assertions hold:
+\mbox{}
+\begin{enumerate}[label=(\roman*),itemsep=.4em]
+\item If for a.e. $x \in \Om$ the function $(s,\,\xi)\mapsto f(x,\,s,\,\xi)$ is lower semicontinuous, then $F$ is strongly lower semicontinuous on $W^{1,\,p}(\Om)$.
+\item If for a.e. $x \in \Om$ the function $(s,\,\xi)\mapsto f(x,\,s,\,\xi)$ is convex and lower semicontinuous, then $F$ is convex and weakly lower semicontinuous on $W^{1,\,p}(\Om)$.
+\end{enumerate}
+\et
+
+\begin{proof}
+We first prove ({\romannumeral 1}). Let $u_n$ be a sequence converges strongly in $W^{1,\,p}(\Om)$ to some $u$ and recall that this is equivalent to
+\[
+\text{$u_n \to u \quad \text{and} \quad \nabla u_n \to \nabla u$},
+\]
+strongly in $L^p(\Om)$. Up to subsequences, we can assume that $u_n$ converges almost everywhere to $u$ and similarly $\nabla u_n$ to $\nabla u$. By lower semicontinuity of $f$ we have
+\[
+f(x,\, u(x),\, \nabla u(x)) \leq \liminf_{n \to \infty} f(x,\, u_n(x),\, \nabla u_n(x)),
+\]
+and this concludes the proof since
+\[ \begin{aligned}
+F(u) & \leq \int_\Om \liminf_{n \to \infty} f(x,\,u_n,\, \nabla u_n) \, \dr x
+\\[1em] & = \liminf_{n \to \infty} \int_\Om f(x,\,u_n,\, \nabla u_n) \, \dr x = \liminf_{n \to \infty} F(u_n).
+\end{aligned}\]
+The assertion ({\romannumeral 2}) now follows easily since in Banach spaces it is always true that strongly lower semicontinuous plus convex is equivalent to weakly lower semicontinuous. For this, simply apply {\color{blue}Proposition \ref{lemma:closedeness}} with a nonempty sublevel of $F$ in place of $C$.
+\end{proof}
+
+\br
+A Lebesgue-measurable function coincide with a Borel one up to a set of zero measure, so we can always assume that functions in $L^p(\Om)$ are Borel (choosing the right representative).
+\er
+
+\section{Is convexity always a necessary condition?}
+
+In the general setting of Banach spaces, convexity is not always a necessary condition for a functional to be {\bf weakly} lower semicontinuous. In this section, we will discuss a few particular instances in which convexity is needed and see how the scalar-valued and the vector-valued cases are different from each other.
+
+\bt \label{thm.4.2.1}
+Let $F(u) = \int_\Om f(\nabla u) \, \dr x$, where $u$ is a {\bf scalar} function, and assume that $f : \R^n \to [0,\,\infty]$ is Borel. Then the following assertions hold: \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item If $F$ is strongly lower semicontinuous on $W^{1,\,p}(\Om)$, then $f$ is lower semicontinuous.
+\item If $F$ is weakly lower semicontinuous on $W^{1,\,p}(\Om)$, then $f$ is convex.
+\end{enumerate} 
+\et
+
+\begin{proof}
+For simplicity, we prove ({\romannumeral 1}) under the additional assumption ``$\Om$ bounded'', but with little effort it can be removed. Take $\xi_n \to \xi$ in $\R^n$ and consider
+\[
+u_n(x) := \xi_n x \quad \text{and} \quad u(x) := \xi x.
+\]
+Then $u_n \to u$ in $C^1(\Om)$ and strongly in $W^{1,\,p}(\Om)$ for all $p \geq 1$. By Fatou's lemma we have
+\[
+|\Omega| \liminf_{n\to\infty}  f(\xi_n) = \liminf_{n\to\infty} F(u_n) \geq F(u) = |\Om| f(\xi),
+\]
+and this shows $f$ that lower semicontinuous with respect to $\xi$. To prove ({\romannumeral 2}) let $\xi_0,\,\xi_1\in \R^n$, $\lambda\in [0,\,1]$ and consider the convex combination
+\[
+\xi = \lambda \xi_0 + (1-\lambda)\xi_1.
+\]
+The goal is to construct a sequence $u_\epsilon$ that converges weakly in $W^{1,\,p}(\Om)$ to some $u$ such that $\nabla u = \xi$ everywhere and, for all $\epsilon > 0$,
+\[
+\nabla u_\epsilon(x) = \begin{cases} \xi_0 & \text{on a set $A_\epsilon$ with $|A_\epsilon| \to \lambda|\Om|$},
+\\[.4em] \xi_1 & \text{on the set $\Om \setminus A_\epsilon$ with $|\Om \setminus A_\epsilon| \to (1-\lambda)|\Om|$}. \end{cases}
+\]
+Suppose we have a sequence satisfying these properties. Then
+\[
+F(u_\epsilon) = f(\xi_0) |A_\epsilon| + f(\xi_1)|\Om \setminus A_\epsilon|,
+\]
+and by Fatou's lemma we infer the thesis:
+\[
+|\Om| \left[ f(\xi_0) \lambda + f(\xi_1)(1-\lambda) \right] = \lim_{\epsilon \to 0^+} F(u_\epsilon) \geq F(u) = |\Om| f(\xi).
+\]
+To construct the sequence, let $u(x) = \xi x$ and define $v : \R \to \R$ to be a $1$-periodic function with slope $\dot{v}$ that satisfies
+\[
+\dot{v}(x) = \begin{cases} \lambda & \text{if $x \in \Z + [0,\,1-\lambda]$,} \\[.4em] \lambda - 1 & \text{if $x \in \Z + [1-\lambda,\, 1]$}, \end{cases}
+\]
+as in the following picture:
+\[\begin{tikzpicture}[
+  declare function={
+    func(\x)= (\x < 0) * (0) +
+				and(\x >= 0, \x < 1/2) * (\x)     +
+				and(\x >= 1/2, \x < 1) * (1-\x)     +
+				  and(\x >= 1, \x < 2) * (1/2-abs(\x -3/2))     +
+				and(\x >= 2, \x < 3) * (1/2-abs(\x -5/2))
+   ;
+  }
+]
+\begin{axis}[
+  axis x line=middle, axis y line=middle,
+  ymin=0, ymax=1, ytick={0,.25,...,1}, ylabel=$y$,
+  xmin=0, xmax=3, xtick={0,...,3}, xlabel=$x$,
+  domain=0:3,samples=200, % added
+]
+
+\addplot [blue,thick] {func(x)};
+\end{axis}
+\end{tikzpicture} \]
+Set $u_\epsilon(x) := \epsilon v \left( \frac{(\xi_1 - \xi_0)x}{\epsilon} \right) + \xi x$. Then $u_\epsilon$ converges uniformly to $u$ as $\epsilon \to 0$ and hence in $L^p(\Om)$ for all $1 \leq p \leq \infty$. Furthermore, the gradient is given by
+\[
+\nabla u_\epsilon(x) = \xi + \dot{v} \left( \frac{(\xi_1-\xi_0)x}{\epsilon} \right) (\xi_1-\xi_0) = \begin{cases} \xi_1 & \text{if $x \in \Om\setminus A_\epsilon$},\\[.4em] \xi_0 & \text{if $x \in A_\epsilon$}, \end{cases}
+\]
+where $A_\epsilon$ is the union of stripes of tickness $\lambda \epsilon$ and $(1-\lambda)\epsilon$ orthogonal to $\xi_1-\xi_0$. Then $\nabla u_\epsilon$ is uniformly bounded in $L^\infty(\Om)$ and hence in every $L^p(\Om)$, which means that
+\[
+u_\epsilon \rightharpoonup u \quad \text{in $W^{1,\,p}(\Om)$}
+\]
+weakly for all $1 \leq p < \infty$ and weakly-$\ast$ for $p = \infty$. Since\footnote{This implication is left as an exercise for the reader. A possible approach would be to take $\varphi : \R \to \R$ which is $1$-periodic and equal to zero for $0 \leq t < 1-\lambda$ and $1$ for $1-\lambda \leq t \leq 1$. Then $\varphi(\epsilon^{-1}t)$ converges weakly (or weakly-$\ast$) to $\lambda$.} $|A_\epsilon| \to \lambda |\Om|$ as $\epsilon \to 0^+$ and similarly $|\Om\setminus A_\epsilon|$ converges to $(1-\lambda) |\Om|$, this concludes the proof.
+\end{proof}
+
+The same result can be proved when $W^{1,\,p}(\Om)$ is replaced with $W_{u_0}^{1,\,p}(\Om)$, the Sobolev space with prescribed value at the boundary. The construction of $u_\epsilon$, in this case, requires extra care as we will see soon.
+
+\bt
+Let $F(u) = \int_\Om f(\nabla u) \, \dr x$, where $u$ is a {\bf scalar} function, and assume that $f : \R^n \to [0,\,\infty]$ is Borel. Then the following assertions hold: \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item If $F$ is strongly lower semicontinuous on $W_{u_0}^{1,\,p}(\Om)$, then $f$ is lower semicontinuous.
+\item If $F$ is weakly lower semicontinuous on $W_{u_0}^{1,\,p}(\Om)$, then $f$ is convex.
+\end{enumerate} 
+\et
+
+\begin{proof}
+We only prove ({\romannumeral 2}) when $u_0 = 0$. Let $\xi_0,\,\xi_1\in \R^n$, $\lambda\in [0,\,1]$ and consider the convex combination
+\[
+\xi = \lambda \xi_0 + (1-\lambda)\xi_1.
+\]
+Our goal is to construct $u_\epsilon \rightharpoonup u$ in $W^{1,\,p}(\Om)$, $1 \leq p < \infty$, such that $\nabla u(x) = \xi$ on some $\Om' \subset \Om$ compactly contained and $\nabla u_\epsilon$ as in the previous theorem but inside $\Om'$, and
+\[
+\nabla u_\epsilon = \nabla u \quad \text{in $\Om \setminus (\Om' \cup B_\epsilon)$}
+\]
+with $|\nabla u_\epsilon| \leq C$ on $B_\epsilon$, a set whose volume satisfies $|B_\epsilon| \to 0$. Suppose for the time being that we are able to construct such a sequence. Then
+\[
+F(u_\epsilon) = \int_{\Om \setminus (\Om' \cup B_\epsilon)} f(\nabla u) \, \dr x + \int_{B_\epsilon} f(\nabla u_\epsilon) \, \dr x + f(\xi_0) |A_\epsilon| + f(\xi_1) |\Om' \setminus A_\epsilon|,
+\]
+and taking the limit as $\epsilon\to 0^+$ the right-hand side converges to
+\[
+\lim_{\epsilon \to 0^+} F(u_\epsilon) = \int_{\Om \setminus \Om'} f(\nabla u) \, \dr x + {\color{red}0} + |\Omega'| \left[ \lambda f(\xi_0) + (1-\lambda)f(\xi_2) \right].
+\]
+Notice that the {\color{red}red} part is not true, unless we put an additional assumption on $f$, but we come back to this later. Assuming that the convergence above holds, we have
+\[\begin{aligned}
+\int_{\Om \setminus \Om'} f(\nabla u) \, \dr x + |\Omega'| \left[ \lambda f(\xi_0) + (1-\lambda)f(\xi_2) \right] & = \liminf_{\epsilon \to 0} F(u_\epsilon)
+\\[1em] & \geq F(u) = \int_{\Om \setminus \Om'} f(\nabla u) \, \dr x + |\Omega| f(\xi),
+\end{aligned}\]
+and this immediately leads (the additional term vanishes) to
+\[
+\lambda f(\xi_0) + (1-\lambda)f(\xi_2) \geq f(\xi) \implies \text{$f$ is convex}.
+\]
+Notice that $\int_{\Om \setminus \Om'} f(\nabla u) \, \dr x$ can be removed if the value of the integral is finite. A possible assumption that makes this true together with {\color{red}red} is
+\[
+f(\xi) \leq \omega(|\xi|),
+\]
+where $\omega$ is increasing and maps $[0,\,\infty)$ to $[0,\,\infty)$.
+To construct $u_\epsilon$, let $\Om'$ be a ball with closure strictly contained in $\Om$ and take $u \in C_c^\infty(\Om)$ in such a way that
+\[
+u(x) = \xi x \quad \text{in $\Om'$}
+\]
+using a smoothing argument. Then
+\[
+u_\epsilon(x) = u(x) + \epsilon v\left(\frac{(\xi_1-\xi_0)}{\epsilon}\right) \sigma_\epsilon(x),
+\]
+where $\sigma_\epsilon(x)$ is a cutoff function equal to $1$ on $\Om'$ and $0$ on $\Om \setminus (\Om')_{r_\epsilon}$, where $(\Om')_{r_\epsilon}$ denotes a $r_\epsilon$ open neighborhood of $\Om'$. Then it makes sense to choose
+\[
+B_\epsilon = (\Om')_{r_\epsilon} \setminus \Om',
+\]
+and all it is left is to balance $r(\epsilon)$ properly, i.e. in such a way that the gradient of $u_\epsilon$ is uniformly bounded as required on the set $B_\epsilon$. A simple computation shows that
+\[
+\nabla u_\epsilon = \nabla u + \sigma_\epsilon \nabla v_\epsilon + \nabla \sigma_\epsilon v_\epsilon,
+\]
+where
+\[
+v_\epsilon(x) =  \epsilon v\left(\frac{(\xi_1-\xi_0)}{\epsilon}\right).
+\]
+The first term is uniformly bounded and, similarly, the second term is uniformly bounded because $\nabla v_\epsilon$ only takes two values. It follows that
+\[
+\| \nabla u_\epsilon \|_\infty \leq \| \nabla u \|_\infty + \| \nabla v_\epsilon \|_\infty + \|\nabla \sigma_\epsilon\|_\infty \|v_\epsilon \|_\infty \leq C_1 + \|\nabla \sigma_\epsilon\|_\infty \|v_\epsilon \|_\infty.
+\]
+By definition, $\|v_\epsilon\|_\infty$ has order $\epsilon$ while $\|\nabla \sigma_\epsilon\|_\infty$ goes to infinity as $r_\epsilon$. Thus, to equilibrate these two quantities, we simply choose $r_\epsilon$ in such a way that
+\[
+\epsilon r_\epsilon \xrightarrow{\epsilon \to 0^+} 0.
+\]
+For example, one can take $r(\epsilon) = \sqrt{\epsilon}$. The construction works as the reader can verify and this concludes the proof.
+\end{proof}
+
+\subsection{General theory} We now give two statements relating lower semicontinuity of the functional and convexity of the Lagrangian under general assumptions, completing the scalar and the one-dimensional cases.
+
+\bt \label{thm.1.2.3}
+Let $F(u) = \int_\Om f(x,\,u,\,\nabla u) \, \dr x$ with $f :\Om \times \R^m \times \R^{m\times n} \to [0,\,\infty]$ Borel and assume that the following holds: \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item $f(x,\,\cdot,\,\cdot)$ is lower semicontinuous for almost every $x \in \Om$;
+\item $f(x,\,u,\cdot)$ is convex for\footnote{Notice that you cannot interchange the quantifiers in this assertion as the meaning would be entirely different.} almost every $x \in \Om$ and every $u$.
+\end{enumerate}
+Then $F$ is weakly lower semicontinuous on $W^{1,\,p}(\Om)$ for any $p$.
+\et
+
+This theorem follows immediately from a much more general result that holds even if the gradient $\nabla u$ is replaced by an independent function $v \in L^p(\Om)$.
+
+\bt
+Let $F(u,\,v) = \int_\Om f(x,\,u,\,v)\,\dr x$ with $f :\Om \times \R^m \times \R^M \to [0,\,\infty]$ Borel and assume that the following holds: \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item $f(x,\,\cdot,\,\cdot)$ is lower semicontinuous for almost every $x \in \Om$;
+\item $f(x,\,u,\cdot)$ is convex for almost every $x \in \Om$ and every $u$.
+\end{enumerate}
+Then $F$ is lower semicontinuous on $L_{\mathrm{s}}^p(\Om,\,\R^m)\times L_{\mathrm{w}} ^p(\Om,\,\R^M)$, where ${\mathrm{s}}$ and ${\mathrm{w}}$ denote, respectively, strong and weak topology.
+\et
+
+We prove this theorem under the additional assumptions that $f(x,\,\cdot,\,\xi)$ is continuous uniformly with respect to $(x,\,u,\,\xi)$ and $|\Om|$ is finite.
+
+\begin{proof}
+Take $u_n \to u$ strongly in $L^p(\Om)$ and $v_n \rightharpoonup v$ weakly in $L^p(\Om)$ and suppose\footnote{Here you can, for example, use the usual subsequences argument together with Egoroff's theorem.} that $u_n$ converges to $u$ uniformly. Fix $\eta$ and take $\delta$ such that
+\[
+\forall (x,\,u,\,\xi) \in \Om \times \R^m \times \R^M \: : \: |u - u'|\leq\delta \implies |f(x,\,u,\,\xi)-f(x,\,u',\,\xi)| \leq \eta.
+\]
+Then there exists $\bar{n}$ such that for all $n \geq \bar{n}$ it turns out that $|u_n(x)-u(x)| \leq \delta$ for all $x \in \Om$, and hence by uniform continuity we have
+\[
+|f(x,\,u_n(x),\,\xi) - f(x,\,u(x),\,\xi)| \leq \eta.
+\]
+Integrate both sides with respect to $x$ to obtain the estimate
+\[
+|F(u_n,\,v_n) - F(u,\,v_n)| \leq \eta |\Om|,
+\]
+which holds for all $n \geq \bar{n}$. However, we know that $v\mapsto F(u,\,v)$ is weakly lower semicontinuous on $L^p(\Om,\,\R^M)$ by assumption using {\color{blue}Theorem \ref{thm.4.1.1}}, and hence
+\[
+\liminf_{n\to \infty} F(u_n,\,v_n) \geq \liminf_{n\to\infty} F(u,\, v_n) - \eta|\Om| \geq \liminf_{n\to \infty} F(u,\,v) - \eta|\Om|.
+\]
+Since $|\Om|$ has finite measure, we conclude the proof using the fact that $\eta > 0$ can be chosen arbitrarily.
+\end{proof}
+
+We now briefly explain how to remove the additional assumptions, both via some kind of approximation argument. First, to remove the uniform continuity one notices that: \mbox{}
+\begin{enumerate}
+\item If $F(u) = \sup_{n\in\N} F_n(u)$ for every $u$ and $F_n$ is lower semicontinuous, then $F$ is also lower semicontinuous.
+\item If $g : X \to [0,\,\infty]$ is lower semicontinuous, where $X$ is a metric space, then
+\[
+g_\epsilon(x) := \inf_{y \in X} \{ g(y) + \frac{1}{\epsilon}d(x,\,y) \}
+\]
+is the pointwise infimum of $\frac{1}{\epsilon}$-Lipschitz functions so it is also $\frac{1}{\epsilon}$-Lipschitz. Moreover, $g_\epsilon$ is monotonically convergent to $g$ and given an explicit formula for the approximation, so it is not hard to introduce more variables.
+\end{enumerate}
+
+For what it concerns the measure of $\Om$, the idea is to take a sequence $\Om_n' \subset \Om$ of sets with finite measure and use them to approximate in the ``right'' way $\Om$.
+
+\bt \label{thm.scalarcase}
+Let $F(u) = \int_\Om f(x,\,u,\,\nabla u) \, \dr x$ with $u$ either scalar ($m= 1$) or one-dimensional\footnote{In other words, $u$ is defined on $[a,\,b]$ and hence $n = 1$.} and assume that \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item $f$ is continuous with respect to all variables;
+\item $F$ is weakly lower semicontinuous on $W_{u_0}^{1,\,p}(\Om)$ for some $p$ and some $u_0$.
+\end{enumerate}
+Then $f(x,\,u,\,\cdot)$ is convex for every $x$ and every $u$.
+\et
+
+\begin{proof}[Proof of the scalar case]
+Fix $\bar{x} \in \Om$, $\bar{u} \in \Om$ and consider the convex combination $\bar{\xi} := \lambda \xi_0 + (1-\lambda)\xi_1$. The thesis is equivalent to proving that
+\[
+f(\bar{x},\,\bar{u},\,\bar{\xi})\leq \lambda f(\bar{x},\,\bar{u},\,\xi_1) + (1-\lambda) f(\bar{x},\,\bar{u},\,\xi_1).
+\]
+Fix $\eta > 0$. We claim that there exists $\Om'$ neighborhood of $\bar{x}$ and $\delta > 0$ such that
+\[
+|f(x,\,u,\,\xi)-f(\bar{x},\,\bar{u},\,\xi)|\leq \eta \quad \text{for all $x\in\Om'$, $|u-\bar{u}|\leq\delta$ and $\xi \in B(\bar{\xi},\,R)$}
+\]
+with $R$ big enough for $\xi_0,\,\xi_1$ to belong to the ball. As in the proof of {\color{blue}Theorem \ref{thm.4.2.1}}, we can choose $u(x)=\bar{u} + \bar{\xi} x$ for all $x \in \Om'$ and
+\[
+v_\epsilon(x) := \epsilon \varphi \left( \frac{x\cdot(\xi_1-\xi_0)}{\epsilon} \right).
+\]
+Let $\sigma_\epsilon$ be a cutoff function such that $\sigma_\epsilon \equiv 1$ on $\Om'$ and $\sigma_\epsilon(x) = 0$ if $d(x,\,\Om') \geq \sqrt{\epsilon}$. The approximating sequence is, once again, given by
+\[
+u_\epsilon(x) = u + \sigma_\epsilon v_\epsilon,
+\]
+and therefore
+\[\begin{aligned}
+F(u) & = \int_{\Om\setminus\Om'} f(x,\,u,\,\nabla u)\,\dr x + \int_{\Om'} f(x,\,u,\,\bar{\xi}) \, \dr x
+\\[1em] & \geq \int_{\Om\setminus\Om'} f(x,\,u,\,\nabla u)\,\dr x + f(\bar{x},\,\bar{u},\,\bar{\xi})|\Om'| - \eta|\Om'|.
+\end{aligned} \]
+On the other hand, we have
+\[\begin{aligned}
+F(u_\epsilon) & = \int_{\Om\setminus(\Om' \cup B_\epsilon)} f(x,\,u,\,\nabla u)\,\dr x + \int_{B_\epsilon} f(x,\,u,\,\bar{\xi}) \, \dr x
+\\[1em] & + \int_{A_\epsilon} f(x,\,u,\,\xi_0)\, \dr x + \int_{\Om' \setminus A_\epsilon} f(x,\,u,\,\xi_1) \, \dr x
+\\[1em] & \leq \int_{\Om\setminus(\Om' \cup B_\epsilon)} f(x,\,u,\,\nabla u)\,\dr x + \int_{B_\epsilon} f(x,\,u,\,\bar{\xi}) \, \dr x
+\\[1em] & + f(\bar{x},\,\bar{u},\,\xi_0)|A_\epsilon| + f(\bar{x},\,\bar{u},\,\xi_1) |\Om' \setminus A_\epsilon| + \eta |\Om'|.
+\end{aligned} \]
+Taking the limit as $\epsilon \to 0^+$, we obtain the estimate
+\[\begin{aligned}
+f(\bar{x},\,\bar{u},\,\bar{\eta}|\Om'| -\eta|\Om'| & \leq \lim_{\epsilon \to 0^+} F(u_\epsilon)
+\\[1em] & \leq \lambda f(\bar{x},\,\bar{u},\,\xi_0)|\Om'| + (1-\lambda) f(\bar{x},\,\bar{u},\,\xi_1)|\Om'| + \eta|\Om'|,
+\end{aligned}\]
+and this concludes the proof because $\eta$ can be chosen arbitrarily small.
+\end{proof}
+
+\begin{xca}
+Prove the existence of minimizers, for $1 < p < \infty$, of
+\[
+F(u) = \int_\Om |\nabla u|^p \, \dr x + \int_\Om g(x,\,u) \, \dr x,
+\]
+where $u \in W_{u_0}^{1,\,p}(\Om)$ and $g : \Om \times \R^m \to \R$ is lower semicontinuous in $u$ for almost every $x \in \Om$ under the following sets of assumptions: \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item If $g(x,\,u)$ is nonnegative.
+\item If $g(x,\,u) \geq - c_0$ for some positive constant $c_0 \in\R$.
+\item If $g(x,\,u) \geq - c_0 - c_1 |u|^q$ for $1<q<p$. In this case, prove non-existence for
+\[
+F(u) = \int_\Om |\nabla u|^p - \lambda |u|^q \, \dr x
+\]
+on $W_0^{1,\,p}(\Om)$ if $q > p$ and $\lambda > 0$. Show also that in the case $p = q$ the existence/non-existence depends on the value of the parameter $\lambda$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+Study the existence of minimizer of
+\[
+F(u) = \int_\Om |\nabla u|^p \, \dr x + \int_\Om g(x,\,u) \, \dr x,
+\]
+where $u \in W^{1,\,p}(\Om)$ and $g : \Om \times \R^m \to \R$ is lower semicontinuous in $u$ for almost every $x \in \Om$ under the following sets of assumptions: \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item If $g(x,\,u)$ is nonnegative, show that existence is not guaranteed. Use, for example, $g = \e^u$.
+\item If $g(x,\,u) \geq \omega(|u|)$, where $\omega(t) \to \infty$ as $t \to \infty$, show that we can recover existence.
+\end{enumerate}
+\end{xca}
+
+\section{Young measures}
+
+In this section, we show that {\color{blue}Theorem \ref{thm.1.2.3}} (which we restate below for the reader's convenience) can also be proved via a general tool, known as {\em Young measure}\index{Young measure}, which will also be helpful later on in the course.
+
+\bt
+Let $F(u) = \int_\Om f(x,u,\nabla u) \, \dr x$ with $f :\Om \times \R^m \times \R^{m\times n} \to [0,\,\infty]$ Borel and assume that the following holds: \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item $f(x,\cdot,\cdot)$ is lower semicontinuous for almost every $x \in \Om$;
+\item $f(x,u,\cdot)$ is convex for almost every $x \in \Om$ and for every $u \in \R^m$.
+\end{enumerate}
+Then $F$ is weakly lower semicontinuous on $W^{1,\,p}(\Om)$ for any $p$.
+\et
+
+\br
+The standard proof of this result follows from the following two reductions to simpler cases: \mbox{}
+\begin{enumerate}[label=(\alph*), itemsep=.4em]
+\item The function $f(x,u,\xi)$ is continuous in all variables and convex with respect to $\xi$.
+\item The function $f$ depends only on $\xi$ and is convex.
+\end{enumerate}
+To follow this strategy, it is first useful to prove the following Lusin-type result which works, for example, for functions of two variables.
+
+\bl
+Let $g : A \times B \to \R$ be Borel and continuous with respect to the second variable $b$. Assume that $B$ is separable. Then for all $\epsilon > 0$ there exists $\tilde{g} : A \times B \to \R$ continuous with respect to both variables such that
+\[
+g(a,b) = \tilde{g}(a,b)
+\]
+for all $a \notin E$ and all $b \in B$, where $E \subset A$ is a set of measure $|E| < \epsilon$.
+\el
+
+\begin{proof}[Hint]
+To prove this lemma it is useful to consider $g$ as a function of one variable, namely
+\[
+A \ni x \longmapsto g(x,\cdot) \in C(B, \, \R),
+\]
+and apply a Lusin-type theorem.
+\end{proof}
+\er
+
+\subsection{Young measures} Let $u_n:\Om\to\R$ be a sequence of functions converging in measure (pointwise a.e.) to some $u$. Then, for all $g : \R\to\R$ continuous, we have
+\[
+g \circ u_n \to g \circ u.
+\]
+But, if $u_n$ converges weakly (in some $L^p$-space) to $u$, one might wonder what happens to the limit of the composition. It is well-known that if $g$ is affine, then
+\[
+g \circ u_n \rightharpoonup g \circ u,
+\]
+but, if $g$ is general, this is not true anymore as the next example shows.
+
+\bex
+Let $g(s) = s^2$ and let $u_n$ be a sequence of oscillating functions taking values in $\{\pm 1\}$ that converges weakly to zero. Then
+\[
+g \circ u_n(x) = 1,
+\]
+which means that it converges to the constant function $1$, but $g \circ u$ is the function identically equal to zero and hence the convergence fails.
+\eex
+
+\subsection{Setting} Let $\Om$ be an open set in $\R^n$, $K$ a compact metric\footnote{Separable would be enough here, but the metric structure simplifies the notations.} space and let $u_n : \Om \to K$ be a sequence of functions. Let $\cP(K)$ be the space of probability measures on $K$.
+
+\bd \index{weak$\star$-Borel function}
+A function $\mu : \Om \to \cP(K)$, $x \mapsto \mu_x$, is {\em weak$\star$-Borel} if it is Borel with respect to the weak$\star$ topology on $\cP(K)$. In other words, the mapping
+\[
+x\longmapsto \int_K g(y) \, \dr \mu_x(y)
+\]
+is Borel for all $g \in C(K)$.
+\ed
+
+The following result, known as the {\em fundamental theorem for Young measures}, shows that each sequence (actually, a subsequence) of maps as above generates a weak$\star$-Borel function with specific properties.
+
+\bt \label{thm.10.1.alt}
+Let $u_n:\Om\to K$ be a sequence of maps. Then there are a subsequence $u_{n_k}$ and a weak$\star$-Borel map $\mu : \Om \to \cP(K)$ such that the following hold: \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item For every $g : \Om \times K \to \R$ such that $g(x,\cdot)$ continuous at a.e. $x \in \Om$ and $\int_\Om \sup_{y \in K} |g(x,y)| \, \dr x< \infty$, we have
+\[
+\int_\Om g(x,u_{n_k}(x)) \, \dr x \to \int_\Om \left( \int_K g(x,y) \, \dr \mu_x(y) \right) \dr x.
+\]
+\item For every continuous map $g : K\to \R$
+\[
+g(u_{n_k}(x)) \stackrel{\star}{\rightharpoonup} \int g(y) \, \dr \mu_x(y) \quad \text{in $L^\infty(\Om, \R)$.}
+\]
+\item For all $g : \Om \times K \to \R$ Borel and bounded such that $g(x,\cdot)$ is continuous for a.e. $x \in \Om$. Then it turns out that
+\[
+g(x,u_{n_k}(x)) \stackrel{\star}{\rightharpoonup} \int_K g(x,y)\,\dr \mu_x(y) \quad \text{in $L^\infty(\Om,\R)$}.
+\]
+\item If $K \subset \R^m$, then $u_{n_k} \stackrel{\star}{\rightharpoonup} u_\infty$ in $L^\infty(\Om,\R^m)$, where
+\[
+u_\infty(x) = \int_K y \, \dr \mu_x(y).
+\]
+\item The measure $\mu_x$ equals $\delta_{u_\infty(x)}$ for a.e. $x \in \Om$ if and only if $u_{n_k}$ converges in measure to $u_\infty$.
+\end{enumerate}
+The map $x \mapsto \mu_x$ is called the {\bf Young measure} generated by the family of functions $u_n$ (by the subsequence, to be more precise).
+\et
+
+\bex
+Let $K = [-1,1]$, $\Om = \R$ and $u_n(x) = f(nx)$ where $f$ is the $1$-periodic function defined by setting
+\[
+f(x) = \begin{cases} y_1 & \text{if $0\leq x < \lambda$},
+\\[.6em] y_2 & \text{if $\lambda \leq x \leq 1$}. \end{cases}
+\]
+In this case, $\mu_x = \lambda \delta_{y_1} + (1-\lambda)\delta_{y_2}$ is the map given by the {\color{blue}Theorem \ref{thm.10.1.alt}}. Note that
+\[
+g(u_n(x)) \to \lambda g(y_1) + (1-\lambda)g(y_2) \quad \text{for a.e. $x \in \Om$}
+\]
+follows immediately from ({\romannumeral 3}), but it can be proved by hands even without relying on such a powerful theorem.
+\eex
+
+Before giving the proof of {\color{blue}Theorem \ref{thm.10.1.alt}}, we recall a few basic facts from functional analysis regarding dual spaces.
+
+\bt \label{thm.eee.}
+If $E$ separable Banach space, then the dual of $L^1(\Om,E)$ is $L_w^\infty(\Om,E^\star)$.
+\et
+
+\br
+Note that the subscript $w$ in $L_w^\infty(\Om,E^\star)$ indicates that we consider Borel functions with respect to the weak$\star$ topology on $E^\star$.
+\er
+
+\br
+The separability of $E$ allows us to avoid measurability issues on $L^1(\Om,E)$ because the $\sigma$-algebras generated by strong and weak topology coincide. We need to specify the topology on $L_w^\infty(\Om,E^\star)$ because
+\[
+\text{$E$ separable} \centernot\implies \text{$E^\star$ separable}.
+\]
+\er
+
+\begin{proof}[Proof of Theorem \ref{thm.10.1.alt}]
+For each $n \in \N$, consider the map defined by setting
+\[
+\mu^n : \Om \ni x \mapsto \delta_{u_n(x)} \in \cP(K).
+\]
+Then $(\mu^n)_{n \in \N}$ is a sequence of maps from $\Om$ to the probability measure space on $K$, which is a subset of $\cM(K)$, the space of signed measures on $K$. A well-known duality theorem asserts that
+\[
+\cM(K) = (C(K))^\star
+\]
+which means that $(\mu^n)_{n \in \N}$ can also be considered as a sequence of elements that belong to $L_w^\infty(\Om,(C(K))^\star)$. This space is the dual (by {\color{blue}Theorem \ref{thm.eee.}}) of
+\[
+L^1(\Om,C(K))
+\]
+and, since $\|\mu^n\|_\infty = 1$ by definition, we can apply Banach-Alaoglu to find a measure $\mu$ and a subsequence $(n_k)_{k \in \N}$ such that 
+\begin{equation}\label{eq.10.1.al}
+\mu^{n_k} \rightharpoonup \mu \quad \text{in $L_w^\infty(\Om,\cM(K))$.}
+\end{equation}
+Now let $G \in L^1(\Om,C(K))$. We can see $G$ as a function $g : \Om \times K \to \R$ satisfying
+\[
+\int \sup_{y \in K} |g(x,y)| \, \dr x < \infty.
+\]
+The convergence \eqref{eq.10.1.al} can also be rewritten as
+\[
+\int_\Om \langle \mu^{n_k}(x),\, G(x) \rangle \, \dr x \to \int_\Om \langle \mu(x),\,G(x)\rangle \, \dr x,
+\]
+for all $G \in L^1(\Om,C(K))$, which is equivalent to requiring that
+\begin{equation}\label{eq.10.2.al}
+\int_\Om g(x,u_{n_k}(x))\, \dr x \to \int_\Om \left(\int_K g(x,y) \, \dr \mu_x(y) \right) \dr x,
+\end{equation}
+where $g$ is the function associated to each $G$. This proves ({\romannumeral 1}). To verify that $\mu_x$ belong to $\cP(K)$ for all $x \in \Om$, plug the function
+\[
+g(x,y) := \alpha(x) \in L^1(\Om)
+\]
+into \eqref{eq.10.2.al}. It turns out that
+\[
+\int_\Om \alpha(x) \, \dr x = \int_\Om \alpha(x) \mu_x(K) \dr x,
+\]
+which implies $\mu_x(K) = 1$ for a.e. $x \in \Om$ since $\alpha$ is arbitrary in $L^1(\Om)$. To prove that $\mu_x$ is not a signed measure, we simply notice that
+\[
+\| \mu^{n_k} \|_\infty = 1 \implies \| \mu \|_\infty \leq 1,
+\]
+and this is enough to infer that $\mu_x$ is positive since we just showed that it has mass equal to $K$ at a.e. $x \in \Om$. Now take
+\[
+g(x,y) := \alpha(x) \beta(y)
+\]
+with $\alpha \in L^1(\Om)$. We use \eqref{eq.10.2.al} once again and find that
+\[
+\int_\Om \alpha(x) \beta(u_{n_k}(x)) \, \dr x \to \int_\Om \alpha(x) \left( \int_K \beta(y) \, \dr \mu_x(y) \right)\dr x,
+\]
+which proves ({\romannumeral 2}). The assertion ({\romannumeral 3}) follows in a similar way so we leave it as an exercise for the reader. To prove ({\romannumeral 4}), consider the function
+\[
+g(x,y) := \alpha(x) y
+\]
+and use \eqref{eq.10.2.al} to infer that
+\[
+\int_\Om \alpha(x) u_{n_k}(x) \, \dr x \to \int_\Om \alpha(x) \left( \int_K y \, \dr \mu_x(y) \right) \, \dr x
+\]
+holds for all $\alpha \in L^1(\Om)$. Finally, to prove ({\romannumeral 5}), we consider the function
+\[
+f(x,y) = d_K(y, u_\infty(x)),
+\]
+where $d_K$ is the distance on $K$ (which is a metric space). It follows that
+\[
+\int_\Om d_K(u_{n_k}(x),u_\infty(x)) \, \dr x \to \int_\Om \left( \int_K d_K(y,u_\infty(x)) \, \dr \mu_x\right) \dr x
+\]
+and, since $u_{n_k}$ converges in measure to $u_\infty$, we can use the Lebesgue's dominated convergence theorem (using the boundedness of the space) and infer that
+\[
+0 = \int_\Om \left( \int_K d_K(y,u_\infty(x)) \, \dr \mu_x\right) \dr x,
+\]
+which is equivalent to $\int_K d_K(y,u_\infty(x)) \, \dr \mu_x(y)$ for a.e. $x \in \Om$ or, in other words, $\mu_x$ is supported on $\{u_\infty(x)\}$. This concludes the proof of the theorem.
+\end{proof}
+
+\br
+The measure $\mu_x$ is the Young measure generated by the subsequence $u_{n_k}$ and it depends on the choice of such subsequence.
+\er
+
+\br
+If $K$ is replaced by $\R^m$ we lose compactness; thus we consider the one-point compactification of $\R^m$ and use it to produce a $\mu$ in such a way that
+\[
+\mu_x \in \cP(\R^n \cup\{\infty\}).
+\]
+The Young measure is usually the restriction of $\mu_x$ to $\R^n$ (removing the $\infty$ point), that is,
+\[
+\bar{\mu}_x := \mu_x \res \R^n.
+\]
+In general, $\bar{\mu}_x$ is a sub-probability measure. However, if one puts additional assumptions on the sequence $u_n$, then it is possible to show that there is no mass at infinity and hence $\bar{\mu}_x$ is a probability measure.
+\er
+
+\begin{xca}
+Find sufficient assumptions on $u_n$ for $\bar{\mu}_x$ to be a probability measure.
+\end{xca}
+
+Note that identifying $\mu$ for a given sequence is usually complicated, but there are a few examples in which this is possible with few efforts.
+
+\bex
+Let $\Om = [0,1]$, $K = [-L,L]$ and $u_n(x) = u(nx)$ and $u:\R \to \R$ is a $1$-periodic function that takes values in $\{ y_1, y_2\}$ with proportion $\lambda$ and $(1-\lambda)$. Then
+\[
+\mu_x = \lambda \delta_{y_1} + (1-\lambda) \delta_{y_2},
+\]
+and it is interesting to notice that it does not depend on $x$.
+\eex
+
+\bex
+Let $u_n$ be as above, but consider the $1$-periodic function $u(x) = \sin(2 \pi x)$. Then $\mu_x$ does not depend on $x$ and
+\[
+\mu_x = u_\#(\cL^1 \res[0,1]) = \rho(y)\cL^1 \res [-1,1],
+\]
+where $\rho$ is a density function that can be computed explicitly. This holds more in general for $1$-periodic functions (although it is not always easy to compute $\rho$).
+\eex
+
+There is an alternative way to construct $\mu$. Consider $\Om \times K$ and let $\lambda^n$ positive measures on $\Om \times K$ defined by
+\[
+\lambda^n := \int_\Om \delta_{x,u_n(x)} \, \dr x.
+\]
+Then $\|\lambda^n\| = |\Om|$ and, up to subsequences, $\lambda^n \rightharpoonup^\star \lambda$ on $\Om \times K$ in $C_0(\Om,K)$. It is easy to see that
+\[
+(\pi_x)^\# \lambda=\cL^n \res \Om,
+\]
+where $\pi_x$ is the projection on $\Om$, and by a well-known result we can disintegrate $\lambda$ as
+\[
+\int_\Om \lambda_x \, \dr x
+\]
+with $\lambda_x \in \cP(\{x\} \times K)$ for all $x \in \Om$. So $\lambda_x = \delta_x\otimes \mu_x$, and $\mu_x \in \cP(K)$ is the image of $x \in \Om$ via $\mu$, i.e., the Young measure.
+
+\section{Relaxation with semicontinuity}
+
+Let $u_n : \Om \to K$ be a sequence and let $x \mapsto \mu_x$ the Young measure associated to a specific subsequence (we will ignore the subscript $n_k$ in this section) of $u_n$. 
+
+\bl \label{l.8.1}
+Let $f : \Om \times K \to [0,\infty]$ be a Borel function such that $f(x,\cdot)$ is lower semicontinuous for almost every $x \in \Om$ and set
+\[
+F(u) := \int_\Om f(x,u) \, \dr x.
+\]
+Then
+\[
+\liminf_{n \to \infty} F(u_n) \geq \int_\Om \left( \int_K f(x,y) \, \dr \mu_x(y)\right) \dr x.
+\]
+\el
+
+\begin{proof}[Idea of the proof]
+Write $f$ as the pointwise supremum of an increasing sequence $\phi_i : \Om \times K \to [0,\infty)$ of Borel functions such that $\phi_i(x,\cdot)$ is continuous for almost every $x \in \Om$. We can thus apply ({\romannumeral 1}) of {\color{blue}Theorem \ref{thm.10.1.alt}}, find that
+\[
+\int_\Om f(x,u_n(x)) \, \dr x \geq \int_\Om \phi_i(x,u_n(x)) \,\dr x \to \int_\Om \left( \int_K \phi_i(x,y) \, \dr \mu_x(y)\right) \dr x,
+\]
+and use the standard tricks we have seen already to conclude.
+\end{proof}
+
+\br
+If we assume moreover that $K \subset \R^m$ and $f(x,\cdot)$ is convex for all $x \in \Om$. Then {\color{blue}Lemma \ref{l.8.1}}, together with Jensen's inequality, allows us to infer that
+\[
+\liminf_{n \to \infty} F(u_n) \geq \int_\Om f \left(x, \int_K y \, \dr \mu_x(y) \right) \, \dr x = \int_\Om f(x,u_\infty(x)) \, \dr x,
+\]
+where $u_\infty$ is the baricenter given in ({\romannumeral 4}) of {\color{blue}Theorem \ref{thm.10.1.alt}}. Notice that Jensen inequality is also necessary, which means that the convexity of $f(x,\cdot)$ here is necessary to obtain the weakly lower semicontinuity of $F$.
+\er
+
+\bt
+Let $f : \Om \times \R^n \times \R^{n \times m} \to [0,\infty]$ be a Borel function such that $f(x,\cdot,\cdot)$ is lower semicontinuous for a.e. $x \in \Om$ and $f(x,u,\cdot)$ is convex for a.e. $x \in \Om$ and all $u \in \R^n$. Then the functional
+\[
+F(u) = \int_\Om f(x,u,\nabla u) \, \dr x
+\]
+is weak$\star$ lower semicontinuous on $W^{1,\infty}(\Om,\R^n)$.
+\et
+
+\begin{proof}
+Let $u_n \stackrel{\star}{\rightharpoonup} u_\infty$ in $W^{1,\infty}(\Om)$ and consider the Young measure $x\mapsto \lambda_x \in \cP(\R^n\times\R^{m\times n})$ generated by a subsequence of 
+\[
+v_n := (u_n, \nabla u_n).
+\]
+By Sobolev embedding theorem
+\[
+u_n \to u_\infty \quad \text{strongly (i.e., pointwise convergence)}
+\]
+so $\lambda_x$ is a Dirac mass on the first variable, that is, $\lambda_x = \delta_{u_\infty(x)} \otimes \mu_x$. Then
+\[ \begin{aligned}
+\liminf_{n \to \infty}F(u_n) & \geq \int_\Om \left( \int_{\R^n \times \R^{m\times n}} f(x,u,\xi) \, \dr \lambda(u,\xi) \right) \dr x
+\\[1em] & = \int_\Om \left( \int_{\R^{m \times n}} f(x,u_\infty(x),\xi) \, \dr \mu_x(\xi) \right) \, \dr x
+\\[1em] & \geq \int_\Om f(x,u_\infty(x), \nabla u_\infty(x)) \, \dr x,
+\end{aligned} \]
+where the last inequality follows once again from Jensen and the fact that the baricenter of $\mu_x$ is exactly given by $u_\infty(x)$.
+\end{proof}
+
+The weak$\star$ lower semicontinuity of $F(u) = \int_\Om f(x,u,\nabla u) \, \dr x$ proved above is a consequence of the following more general result which can be proved with minor changes.
+
+\bt \label{thm.6.4}
+Let $f : \Om \times \R^n \times \R^{n \times m} \to [0,\infty]$ be a Borel function such that $f(x,\cdot,\cdot)$ is lower semicontinuous for a.e. $x \in \Om$ and $f(x,u,\cdot)$ is convex for a.e. $x \in \Om$ and all $u \in \R^n$. Then the functional
+\[
+F(u,v) = \int_\Om f(x,u,v) \, \dr x
+\]
+is lower semicontinuous with respect to strong convergence of $u$ in some $L^p$-space and weak convergence of $v$ in some $L^q$-space.
+\et
+
+\br
+As usual, when $q= \infty$ in the statement the weak convergence should be replaced by the weak$\star$ convergence.
+\er
+
+\begin{proof}
+Let $u_n \to u_\infty$ strongly in $L^p(\Om)$, $v_n \rightharpoonup v_\infty$ in $L^q(\Om)$ and consider the Young measure $x\mapsto \lambda_x \in \cP(\R^n\times\R^{m\times n})$ generated by a subsequence of 
+\[
+w_n := (u_n, v_n).
+\]
+The strong convergence in the first variable implies that $\lambda_x$ is a Dirac mass on the first variable, that is, $\lambda_x = \delta_{u_\infty(x)} \otimes \mu_x$. Then
+\[ \begin{aligned}
+\liminf_{n \to \infty}F(u_n, v_n) & \geq \int_\Om \left( \int_{\R^n \times \R^{m\times n}} f(x,u,\xi) \, \dr \lambda(u,\xi) \right) \dr x
+\\[1em] & = \int_\Om \left( \int_{\R^{m \times n}} f(x,u_\infty(x),\xi) \, \dr \mu_x(\xi) \right) \, \dr x
+\\[1em] & \geq \int_\Om f(x,u_\infty(x), v_\infty(x)) \, \dr x,
+\end{aligned} \]
+where the last inequality follows once again from Jensen and the fact that the baricenter of $\mu_x$ is exactly given by $v_\infty(x)$.
+\end{proof}
+
+\br
+Notice that we tacitly assumed that $u_n$ and $v_n$ are uniformly bounded sequences for otherwise the proof above would fail. The idea is to consider
+\[
+K := (\R^n \cup \{\infty\}) \times (\R^N \cup \{\infty\}),
+\]
+the one-point compactification of $\R^n \times \R^N$, and the corresponding Young measure $\lambda_x$. It is not hard to verify that
+\[
+\int_\Om g(x,u_n,v_n) \, \dr x \to \int_\Om \left( \int_K g(x,y) \, \dr \lambda_x(y)\right) \dr x
+\]
+holds for all functions $g : \Om \times \R^m \times \R^N \to \R$ which are continuous in $(u,v)$ and, for example, tend to zero as $u$ and $v$ tend to zero.
+
+This additional requirement makes $g$ continuous on $K$ as well. Since it is still possible to approximate $f$ with an increasing sequence of functions of this kind, we can prove the weak lower semicontinuity using a similar (but much more technical) strategy as in {\color{blue}Theorem \ref{thm.6.4}}.
+\er

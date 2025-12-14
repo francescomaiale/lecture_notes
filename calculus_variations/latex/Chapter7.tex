@@ -1,0 +1,280 @@
+\chapter{Rearrangement inequalities}
+
+{\color{red}I will write the introduction after the chapter is complete!}
+
+\section{Introduction}
+
+Let $A \subset \R^d$. Throughout this section we will always denote by $|A|$ the volume (w.r.t. the Lebesgue measure) of the set $A$.
+
+\bd \index{symmetric rearrangement}
+The {\em symmetric (or radial) rearrangement} of $A$, denoted by $A^\ast$, is the open ball with center zero and volume $|A|$. In other words,
+\[
+A^\ast := \{x \in \R^d \: : \: \omega_d |x|^d < |A| \},
+\]
+where $\omega_d$ is the volume of the unit ball in $\R^d$. 
+\ed
+
+\bd\index{symmetric decreasing rearrangement}
+Let $u : \R^d\to[0,\infty]$ be a measurable function. The {\em symmetric decreasing rearrangement} of $u$ is the function $u^\ast : \R^d \to [0,\infty]$ such that
+\begin{equation}\label{eq.ri.1}
+\{ x \in \R^d \: : \: u^\ast(x) > t \} = \left( \{x \in \R^d \: : \: u(x) > t \} \right)^\ast
+\end{equation}
+holds for all $t > 0$.
+\ed
+
+\br
+If we require $u$ to take values in $[-\infty, 0]$, we can define the symmetric increasing rearrangement by simply replacing superlevels with sublevels in \eqref{eq.ri.1}.
+\er
+
+\br
+It is possible to define the {\em decreasing rearrangement} of a measurable $u : \R^d \to [-\infty,\infty]$ that is finite a.e. using the distribution
+\[
+d_u(s) : [0,\infty] \to [0,\infty]
+\]
+defined as $d_u(s) := |\{x \in \R^d \: :\: f(x) > s\}|$. The decreasing rearrangement (which is not symmetric anymore) is the function
+\[
+\tilde{u}(t) := \inf \{ s \in [0,\infty] \: : \: d_u(s) \leq t \}.
+\]
+It can be proved that it shares several properties with the symmetric rearrangement introduced above, but we will not discuss it any further in this course.
+\er
+
+\br
+Let $u^\ast(x)$ be the symmetric rearrangement of $u : \R^d \to [0,\infty]$. Then there exists a radially symmetric function $\rho : [0,\infty) \to [0,\infty]$ such that
+\[
+u^\ast(x) = \rho(|x|).
+\]
+Furthermore, the function $\rho$ is {\bf decreasing} and left-continuous.
+\er
+
+We conclude this section with a final remark.
+
+\br
+The definition can be extended to any $\Om \subseteq \R^d$ and $u : \Om \to [0,\infty]$, but we usually introduce $u^\ast$ to compare it with $u$ so we would like to have
+\[
+\Om = \Om^\ast.
+\]
+This means that either $\Om$ is $\R^d$ or $\Om$ is an open ball centered at the origin $0$.
+\er
+
+
+\section{Main properties of the symmetric rearrangement}
+
+The goal of this section is to study the main properties of the symmetric rearrangement which will later be useful in a couple of applications.
+
+\br
+We denote by $E_t(u)$ the superlevel of $u$, that is,
+\[
+E_t(u) := \{ x \in \Om \: : \: u(x) > t\}
+\]
+in such a way that the following identity holds by definition:
+\[
+(E_t(u))^\ast = E_t(u^\ast).
+\]
+\er
+
+In what follows, we will always assume that $u$ and $v$ are measurable functions defined on $\R^d$ taking values in $[0,\infty]$ so that the symmetric rearrangement is well-defined.
+
+\bpr
+If $u \geq v$, then $u^\ast \geq v^\ast$.
+\epr
+
+\begin{proof}
+If $u \geq v$, then $E_t(v) \subseteq E_t(u)$ for all $t > 0$. This immediately implies that
+\[
+E_t(v^\ast) = (E_t(v))^\ast \subseteq (E_t(u))^\ast = E_t(u^\ast),
+\]
+which, in turn, gives $u^\ast \geq v^\ast$ as claimed.
+\end{proof}
+
+\bt
+Let $u$ be as above and let $g : [0,\infty) \to [0,\infty]$ be a lower semicontinuous function with $g(0) = 0$. Then
+\begin{equation} \label{eq.ri.2}
+\int_{\R^d} g(u(x)) \, \dr x = \int_{\R^d} g(u^\ast(x)) \, \dr x.
+\end{equation}
+\et
+
+\begin{proof} We divide the proof into two steps: we first prove \eqref{eq.ri.2} under additional regularity assumptions and then we reduce the general case to it by approximation.
+
+\proofstep{Step 1} Assume that $g \in C^\infty([0,\infty))$ with compact support $\mathrm{spt}(g) \subset (0,\infty)$ so that it stays away from origin and $\infty$. For every $s \geq 0$ we have
+\[
+g(s) = \int_0^s \dot{g}(t) \, \dr t,
+\]
+so taking $s = u(x)$ yields
+\[
+g(u(x)) = \int_0^{u(x)} \dot{g}(t) \, \dr t \implies \int_{\R^d} g(u(x)) \, \dr x = \int_{\R^d} \, \dr x \int_0^{u(x)} \dot{g}(t) \,\dr t.
+\]
+By Fubini's theorem (which we can apply thanks to the extra assumptions on $g$) we find that
+\[ \begin{aligned}
+\int_{\R^d} g(u(x)) \, \dr x & = \int_0^\infty \dot{g}(t) |E_t(u)| \, \dr t
+\\ & = \int_0^\infty \dot{g}(t) |E_t(u^\ast)| \, \dr t = \int_{\R^d} g(u^\ast(x)) \, \dr x
+\end{aligned} \]
+and this concludes the proof.
+
+\proofstep{Step 2} We use the usual approximation via an increasing sequence of functions $g_n$ and use the monotone convergence theorem to conclude that
+\[
+\int_{\R^d} g_n(u(x)) \, \dr x \xrightarrow{n \to \infty} \int_{\R^d} g(u(x)) \, \dr x
+\]
+and
+\[
+\int_{\R^d} g_n(u^\ast(x)) \, \dr x \xrightarrow{n \to \infty} \int_{\R^d} g(u^\ast(x)) \, \dr x.
+\]
+\end{proof}
+
+\bc
+For all $1 \leq p \leq \infty$ the symmetric decreasing rearrangement preserves the $L^p$-norm, that is,
+\begin{equation} \label{eq.ri.3}
+\|u\|_{L^p(\R^d)} = \|u^\ast\|_{L^p(\R^d)}.
+\end{equation}
+\ec
+
+\bt
+Let $u$ and $v$ be as above and let $h : \R \to [0,\infty]$ be a lower semicontinuous, even and convex function with $h(0) = 0$. Then
+\begin{equation} \label{eq.ri.4}
+\int_{\R^d} h(u(x)-v(x))\, \dr x \geq \int_{\R^d} h(u^\ast(x)-v^\ast(x)) \, \dr x.
+\end{equation}
+\et
+
+\begin{proof} We divide, once again, the proof into two steps assuming at first more regularity and then using an approximation argument to conclude.
+
+\proofstep{Step 1} Assume that $h : \R\to [0,\infty)$ is even, convex, belongs to the class $C^2$ and $h(0) = 0$, and notice that $\dot{h}(0) = 0$ as well. Given $s' > s \geq 0$ we have
+\[
+h(s'-s) = \int_s^{s'} \dot{h}(t'-s) \, \dr t' = \int_s^{s'} \, \dr t' \int_{s}^{t'} \ddot{h}(t'-t) \, \dr t.
+\]
+Taking $s' = u(x)$ and $s = v(x)$ leads to
+\[
+h(u(x)-v(x)) = \int_{v(x)}^{u(x)} \, \dr t' \int_{v(x)}^{t'} \ddot{h}(t'-t) \, \dr t.
+\]
+Let $A^+ = \{ x \in \R^d \: : \: u(x) \geq v(x) \}$ so that the identity above holds for all $x \in A^+$. Then
+\[
+\int_{A^+} h(u(x)-v(x)) \, \dr x = \int_{A^+} \left[ \int_{v(x)}^{u(x)} \, \dr t' \int_{v(x)}^{t'} \ddot{h}(t'-t) \, \dr t \right] \, \dr x
+\]
+and it is rather easy to see that in the right-hand side $x$ ranges in $E_{t'}(u) \setminus E_t(v)$. We now apply Fubini's theorem and find that
+\[
+\int_{A^+} h(u(x)-v(x)) \, \dr x = \iint_{0 \leq t \leq t' < \infty} \ddot{h}(t'-t) |E_{t'}(u) \setminus E_t(v)| \, \dr t' \dr t.
+\]
+If we use $A^- = \{ x \in \R^d \: : \: u(x) < v(x) \}$ instead of $A^+$, we obtain a similar identity:
+\[
+\int_{A^-} h(u(x)-v(x)) \, \dr x = \iint_{0 \leq t \leq t' < \infty} \ddot{h}(t'-t) |E_{t'}(v) \setminus E_t(u)| \, \dr t' \dr t.
+\]
+The decomposition $\R^d = A^+ \cup A^-$ immediately implies that
+\[
+\int_{\R^d} h(u(x)-v(x)) \, \dr x = \iint_{0 \leq t \leq t' < \infty} \ddot{h}(t'-t) \left( |E_{t'}(u) \setminus E_t(v)| + |E_{t'}(v) \setminus E_t(u)| \right) \, \dr t' \dr t.
+\]
+We now notice that, given $A$ and $B$ sets in $\R^d$, it is always true that
+\[
+|A \setminus B| \geq (|A|-|B|)^+,
+\]
+where $(\cdot)^+$ denotes the positive part of the quantity between brackets. On the other hand, the rearrangements $A^\ast$ and $B^\ast$ are balls centered at the origin so
+\[
+(|A^\ast| - |B^\ast|)^+ = |A^\ast \setminus B^\ast|
+\]
+because they are contained one inside the other. In particular, it turns out that
+\[ \begin{aligned}
+|E_{t'}(u) \setminus E_t(v)|& \geq (|E_{t'}(u)| - |E_t(v)|)^+
+\\ & = (|E_{t'}(u^\ast)| - |E_t(v^\ast)|)^+
+\\ & = |E_{t'}(u^\ast) \setminus E_t(v^\ast)|,
+\end{aligned} \]
+and, similarly,
+\[
+|E_{t'}(v) \setminus E_t(u)| \geq |E_{t'}(v^\ast) \setminus E_t(u^\ast)|.
+\]
+Since we proved already that
+\[
+\int_{\R^d} h(u^\ast(x)-v^\ast(x)) \, \dr x = \iint_{0 \leq t \leq t' < \infty} \ddot{h}(t'-t) \left( |E_{t'}(u^\ast) \setminus E_t(v^\ast)| + |E_{t'}(v^\ast) \setminus E_t(u^\ast)| \right) \, \dr t' \dr t,
+\]
+we simply put these last two estimates together to obtain \eqref{eq.ri.4}.
+
+\proofstep{Step 2} We use the usual approximation via an increasing sequence of functions $h_n$ and use the monotone convergence theorem as above.
+\end{proof}
+
+\bc
+The symmetric decreasing rearrangement $\ast$ is a contraction from $L^p(\R^d)$ to $L^p(\R^d)$ for all $1 \leq p \leq \infty$, that is,
+\[
+\|u-v\|_{L^p(\R^d)} \geq \| u^\ast - v^\ast \|_{L^p(\R^d)}.
+\]
+\ec
+
+\bt
+If $u \in W^{1,p}(\R^d)$ with $p \geq 1$, then $u^\ast \in W^{1,p}(\R^d)$. Similarly, if $u \in \mathrm{BV}(\R^d)$, then $u^\ast$ also belongs to $\mathrm{BV}(\R^d)$.
+\et
+
+\bt
+Let $1 \leq p \leq \infty$ and let $u \in W^{1,p}(\R^d)$, $1 \leq p \leq \infty$. Suppose that $f : [0,\infty) \times [0,\infty) \to [0,\infty]$ is a function satisfying the following properties: \mbox{}
+\begin{enumerate}[itemsep=.4em]
+\item $f$ is lower semicontinuous in both variables;
+\item $f(u,\cdot)$ is convex for all $u \in [0,\infty)$;
+\item $f(u,0) = 0$ for all $u \in [0,\infty)$.
+\end{enumerate}
+Then
+\begin{equation}\label{eq.ri.5}
+\int_{\R^d} f(u,|\nabla u|) \, \dr x \geq \int_{\R^d}f(u^\ast, |\nabla u^\ast|) \, \dr x.
+\end{equation}
+\et
+
+\begin{proof}
+Assume enough regularity for $u$ and $f$. Since $f(u,\cdot)$ is convex we can find coefficients $a,b$ depending on both $u$ and $\bar{\xi}$ such that
+\[
+f(u,\xi) \geq a\xi - b \quad \text{for every $\xi \in [0,\infty)$ and $f(u,\bar{\xi}) = a\bar{\xi}-b$}.
+\]
+Let $u = u^\ast(x)$ and $\bar{\xi} = |\nabla u^\ast(x)|$. Then
+\[
+f (u^\ast(x),|\nabla u^\ast(x)|) = a (u^\ast(x),|\nabla u^\ast(x)|)|\nabla u^\ast(x)| - b (u^\ast(x),|\nabla u^\ast(x)|),
+\]
+but it can be readily checked that $a$ and $b$ only depend on $u^\ast$ because the gradient of radial functions has modulus which is radial as well. Then
+\[
+\int_{\R^d} f (u^\ast(x),|\nabla u^\ast(x)|) \,\dr x = \int_{\R^d} a(u^\ast(x)) |\nabla u^\ast(x)| \, \dr x - \int_{\R^d}b(u^\ast(x)) \, \dr x,
+\] 
+and we can apply \eqref{eq.ri.2} to conclude that
+\[
+\int_{\R^d}b(u^\ast(x)) \, \dr x = \int_{\R^d} b(u(x)) \, \dr x.
+\]
+To deal with the other integral we use the coarea formula and write
+\[\begin{aligned}
+\int_{\R^d} a(u^\ast(x)) |\nabla u^\ast(x)| \, \dr x & = \int_0^{\infty} a(t) \, \dr t \int_{\Sigma_t(u^\ast)} \dr \cH^{d-1}
+\\ & = \int_0^\infty a(t) \cH^{d-1}(\Sigma_t(u^\ast)) \, \dr t,
+\end{aligned}\]
+where $\Sigma_t(u^\ast)$ is the level surface of $u^\ast$, namely
+\[
+\Sigma_t(u^\ast) = \{ x \in \R^d \: : \: u^\ast(x) = t\}.
+\]
+Since $\Sigma_t(u^\ast)$ is the boundary of $E_t(u^\ast)$, we can apply the {\em isoperimetric inequality} to assert that
+\[
+|E_t(u^\ast)| = |E_t(u)| \implies \cH^{d-1}(\Sigma_t(u^\ast)) \leq \cH^{d-1}(\Sigma_t(u))
+\]
+because $E_t(u^\ast)$ is a ball so its perimeter is the smallest one for fixed volume. This means that
+\[
+\int_0^\infty a(t) \cH^{d-1}(\Sigma_t(u^\ast)) \, \dr t\leq \int_0^\infty a(t) \cH^{d-1}(\Sigma_t(u)) \, \dr t 
+\]
+and applying coarea formula again to the right-hand side we find that
+\[
+\int_0^\infty a(t) \cH^{d-1}(\Sigma_t(u)) \, \dr t = \int_{\R^d} a(u(x)) |\nabla u(x)| \, \dr x.
+\]
+Putting everything we proved so far together leads to \eqref{eq.ri.5}.
+\end{proof}
+
+\bc[Pólya-Szego] \index{Pólya-Szego inequality}
+For $1 \leq p \leq \infty$ and $u \in W^{1,p}(\R^d)$ we have
+\begin{equation}\label{eq.ri.6}
+\| \nabla u \|_{L^p(\R^d)}\geq \| \nabla u^\ast \|_{L^p(\R^d)}.
+\end{equation}
+\ec
+
+\subsection{Application: best constant for Sobolev embedding} It is well-known that
+\[
+\|u\|_{L^{p^\ast}(\R^d)} \leq C \| \nabla u \|_{L^p(\R^d)}
+\]
+for all $u \in C_c^\infty(\R^d)$, so we can also extend it to the closure of $C_c^\infty(\R^d)$ with respect to the seminorm $\| \nabla u \|_{L^p(\R^d)}$. The sharp constant $C > 0$ is given by
+\[
+\sup_{u \in C_c^\infty(\R^d)} \frac{\| u \|_{L^{p^\ast}(\R^d)}}{\| \nabla u\|_{L^p(\R^d)}}.
+\]
+However, applying \eqref{eq.ri.6} and \eqref{eq.ri.3} immediately implies that we can take the supremum among radial functions. Determining the right $u$ and the value of $C$ is particularly important in several fields of mathematics such as analysis of PDEs.
+
+\subsection{Application: first eigenvalue of $- \Delta$} Let $\Om$ be a bounded set in $\R^d$. Then
+\[
+\lambda_1(\Om) := \inf_{u \in W_0^{1,2}(\Om)} \frac{\| \nabla u\|_{L^2(\Om)}}{\|u\|_{L^2(\Om)}}
+\]
+is the first eigenvalue of the Laplacian in $\Om$ with Dirichlet boundary conditions. It is easy to see that 
+\[
+\lambda(\Om^\ast) \leq \lambda(\Om)
+\]
+so for a fixed volume $m$ of $\Om$ the optimal eigenvalue (i.e., the smallest possible) is achieved by the ball.

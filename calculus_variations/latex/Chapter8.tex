@@ -1,0 +1,847 @@
+\chapter{Isoperimetrical Inequalities (by Aldo Pratelli)}
+
+{\color{red}I will write the introduction after the chapter is complete!}
+
+\section{Introduction to finite perimeter sets}
+
+Given $m > 0$, we would like to solve the problem of minimizing the perimeter for a given area, that is,
+\begin{equation} \label{eq.pr.1}
+J(m) := \min_{|E| = m} \mathrm{Per}(E),
+\end{equation}
+where $E$ ranges among all sets in $\R^N$. A priori there is no reason why a minimum should exist, but we will soon see that any ball of volume $m$ works.
+
+\br
+The minimization problem \eqref{eq.pr.1} is translation invariant. In other words, it is easy to see that
+\[
+J(m) = \mathrm{Per}(E) \implies J(m) = \mathrm{Per}(E+x)
+\]
+for all $x \in \R^N$.
+\er
+
+Before we can go any further, we need to establish what we mean exactly by ``perimeter''. It could seem a good idea to define
+\[
+\mathrm{Per}(E) = \cH^{N-1}(\partial E),
+\]
+where $\partial E$ is the topological boundary of $E$ but, as the next example shows, this is a good definition only for sets $E$ with boundary smooth enough.
+
+\bex
+Let $E$ be the unit disk $B(0,1) \subset \R^N$. If we remove the diameter, we obtain a new set $\tilde{E}\subset \R^N$ such that
+\[
+\cH^{N-1}(\partial E) <\cH^{N-1}(\partial \tilde{E}).
+\] 
+This is a situation that we would like to avoid, so the idea is to use bounded variation functions as ``the characteristic will not be able to see that the diameter was removed.''
+\eex
+
+\bd \index{finite perimeter sets}
+A set $E \subset \R^N$ has finite perimeter if $\chi_E \in \mathrm{BV}(\R^N)$. The perimeter of $E$ is given by the total variation of the distributional derivative, that is,
+\begin{equation}\label{eq.v.1}
+\mathrm{Per}(E) := |D \chi_E|(\R^N).
+\end{equation}
+\ed
+
+\br
+If $E$ has finite perimeter and Lipschitz boundary, then the distributional derivative is given by
+\[
+D \chi_E = - \nu_E \cdot \cH^{N-1}(\partial E),
+\]
+and therefore the total variation coincides with the naïve notion of perimeter:
+\[
+| D \chi_E |(\R^N) = \cH^{N-1}(\partial E).
+\]
+\er
+
+\bex
+If $E$ is the unit disk $B(0,1) \subset \R^N$ and $\tilde{E}$ the set obtained by removing the diameter, then it is easy to see that
+\[
+|D \chi_E|(\R^N) = |D \chi_{\tilde{E}}|(\R^N) \implies \mathrm{Per}(E) = \mathrm{Per}(\tilde{E}).
+\]
+\eex
+
+\br
+The situation can be much more complex. If $E$ is a ball and $\tilde{E}$ the set obtained from $E$ by adding all hyper-planes with a rational coordinate, then
+\[
+\mathrm{Per}(E) = \mathrm{Per}(\tilde{E}),
+\]
+but the topological boundary changes drastically $\partial E$ is the sphere and $\partial \tilde{E}$ the whole $\R^N$.
+\er
+
+The notion of topological boundary is therefore not good in this setting and must be replaced by a different one. The idea is to find it in such a way that
+\[
+\mathrm{Per}(E) = \cH^{N-1}(\partial^\ast E)
+\]
+holds even if $E$ is not regular, where $\partial^\ast E$ is the ``new boundary''.
+
+\bd\index{reduced boundary}
+Let $E$ be a set of finite perimeter. We say that $x$ belongs to the {\em reduced boundary} of $E$, denoted by $x \in \partial^\ast E$, if there exists $\nu \in \mathbb{S}^{N-1}$ such that
+\[
+\lim_{\epsilon \to 0} \frac{|(B^+(x,\epsilon) \cap E)|}{|B^+(x,\epsilon)|} = 0 \quad \text{and} \quad \lim_{\epsilon \to 0} \frac{|(B^-(x,\epsilon) \cap E)|}{|B^-(x,\epsilon)|} = 1,
+\]
+where $B^+$ and $B^-$ are respectively defined as
+\[ \begin{aligned}
+& B^+(x,\epsilon) = \{y \in B(x,\epsilon) \: : \: (y-x) \cdot \nu > 0\},
+\\ & B^-(x,\epsilon) = \{y \in B(x,\epsilon) \: : \: (y-x)\cdot \nu < 0 \}.
+\end{aligned}\]
+In this case, the unique $\nu$ achieving this will be called {\em outer normal to $\partial^\ast E$ at $x$}.
+\ed
+
+\bt
+Let $E$ be a set of finite perimeter. Then
+\[
+\mathrm{Per}(E) = \cH^{N-1}(\partial^\ast E).
+\]
+\et
+
+\bd
+The {\em $N$-dimensional density} of $E$ at $x$ is defined by
+\[
+\Theta_N(E,x) := \lim_{r \to 0^+} \frac{|E\cap B(x,r)|}{|B(x,r)|}
+\]
+wherever this limit exists. We shall denote by $E^d$ the set $\{p \in E \: : \: \Theta_N(E,p) = d\}$.
+\ed
+
+\br
+If $E$ has finite perimeter, then the characteristic function $\chi_E$ belongs to $L^1(\R^N)$. It follows that $\cH^{N}$-a.e. $p \in E$ either belongs to $E^0$ or $E^1$.
+\er
+
+\bc
+Let $E$ be a set of finite perimeter. If $p \in \partial^\ast E$, then $p \in E^{\frac{1}{2}}$.
+\ec
+
+For a general set $E \subset \R^N$ we have the chain of inclusions (that would be equalities with some regularity assumptions):
+\[
+\partial^\ast E \subseteq E^{\frac{1}{2}} \subseteq \R^N \setminus (E^0 \cup E^1).
+\]
+It is not completely trivial, but it can be proved that these are at most different up to $\cH^{N-1}$-negligible sets of points.
+
+\section{Existence of minimizers} 
+
+Let us take a step back in the previous section and consider the functional we are interested in minimizing, that is,
+\[
+J(m) := \inf \{ \mathrm{Per}(E) \: : \: |E| = m, \, E\subset \R^N\}.
+\]
+Notice that $J(m) \geq 0$ but, a priori, it may only be an infimum. Furthermore, for all $x \in \R^N$ and $\lambda > 0$ we have
+\[
+|E + x| = |E| \quad \text{and} \quad |\lambda E + x| = \lambda^N |E|.
+\]
+The perimeter is translation invariant but scales with a different factor, that is,
+\[
+\mathrm{Per}(\lambda E + x) = \lambda^{N-1} \mathrm{Per}(E),
+\]
+so it is enough to solve the isoperimetric problem for a fixed value of $m = 1$ and find the value of the minimum for all $m > 0$ using the identity
+\[
+J(m) = m^{\frac{N-1}{N}} J(1).
+\]
+
+\subsection{Existence, Part I} Let $E_j$ be a minimizing sequence for $J(m)$, namely they satisfy the volume constraint $|E_j| = m$ and
+\[
+\mathrm{Per}(E_j) \searrow J(m).
+\]
+The sequence $\chi_{E_j}$ is contained in $\mathrm{BV}(\R^N)$ and it is uniformly bounded because
+\[
+\| \chi_{E_j} \|_{L^1(\R^N)} = m \quad \text{and} \quad \mathrm{Per}(E_j) \leq C < \infty
+\]
+as the sequence of perimeters converges to $J(m)$ as real numbers. By compactness
+\[
+\chi_{E_j} \rightharpoonup^\star f
+\]
+for some $f \in \mathrm{BV}(\R^N)$ in the weak sense of measures (up to subsequences). However, this implies the strong convergence in $L_{\mathrm{loc}}^1(\R^N)$ and hence
+\[
+\chi_{E_j} \xrightarrow{L_{\mathrm{loc}}^1} f.
+\]
+This gives pointwise convergence a.e. starting from functions that only take values in $\{0,1\}$ so $f$ is also the characteristic function of some set $E$. Furthermore, we have
+\[
+|D \chi_E|(\R^N) \leq \liminf_{j \to \infty} |D \chi_{E_j}| (\R^N) = \liminf_{j \to \infty} \mathrm{Per}(E_j) = J(m)
+\]
+so $E$ has finite perimeter which is less than or equal to $J(m)$ so, if $E$ has volume $m$ (which is not true in general), then $E$ is the desired minimum point.
+
+Before we can go on with the proof of the existence, we need to find a reasonable way to modify the sequence $E_j$ in such a way that the limit has volume exactly equal to $m$.
+
+\br \label{rmk.ap.2}
+Let $\epsilon > 0$ be fixed, $F \subset \R^N$ and consider a section $\{ (x_1,\dots,x_n) \in F \: : \: x_1 = t\}$ satisfying
+\[
+\cH^{N-1}(F_t) \leq \epsilon.
+\]
+The section divides $F$ in two parts, the left one $F_\ell$ given by $\{x \in F \: : \: x_1 < t \}$ and the right part $F_r$ given by $\{x \in F \: : \: x_1 > t\}$. It is easy to verify that
+\[
+\mathrm{Per}(F) \geq \mathrm{Per}(F_\ell) + \mathrm{Per}(F_r) - 2 \epsilon \geq J(1) \left[|F_\ell|^{\frac{N-1}{N}} + |F_r|^{\frac{N-1}{N}} \right] - 2\epsilon.
+\]
+If we assume that $\mathrm{Per}(F) \leq J(|F|) + 1$, then it follows that
+\[
+J(1) \left[ |F|^{\frac{N-1}{N}} - |F_\ell|^{\frac{N-1}{N}} - |F_r|^{\frac{N-1}{N}} \right] \geq - 3\epsilon
+\]
+Using the sub-additivity of the function $f(x)= x^{\frac{N-1}{N}}$ we find that
+\[
+|F|^{\frac{N-1}{N}} \leq |F_\ell|^{\frac{N-1}{N}} + |F_r|^{\frac{N-1}{N}},
+\]
+which in turn implies that there must be some positive $\delta = \delta(\epsilon)$ such that
+\[
+\min \{ |F_\ell|, |F_r|\} < \delta.
+\]
+In other words, the volume of one of the two parts must be close to zero, that is, less than $\delta$ where $\delta \to 0$ as $\epsilon \to 0$.
+\er
+
+\subsection{Existence, Part II} Up to a translation we can always assume that
+\[
+|E_j \cap \{x_1 > 0\}| = \frac{m}{2}.
+\]
+If $\epsilon > 0$ is given, then for all $j$ big enough it turns out that
+\[
+\mathrm{Per}(E_j) < J(m) + \epsilon.
+\]
+By Fubini's theorem we can always find $0 < t < \frac{m}{2\epsilon}$ such that
+\[
+\cH^{N-1} (E_j \cap \{x_1 = t\}) < \epsilon,
+\]
+and by Remark \ref{rmk.ap.2} there is $\delta > 0$ such that 
+\[
+|E_j \cap \{x_1 > t\}| <\delta.
+\]
+Notice that it cannot be the left part because $t$ is positive and we already know that there is $m/2$ mass in the interval $t < 0$. Therefore
+\[
+\left|E_j \cap \left\{ x_1 \geq \frac{m}{\epsilon} \right\}\right| \leq \delta
+\]
+and, in a similar fashion, one can prove that
+\[
+\left|E_j \cap \left\{ x_1 \leq - \frac{m}{\epsilon} \right\}\right| \leq \delta.
+\]
+In both cases, the number $\delta$ does not depend on $j$. If we do the same for all directions in $\R^N$, then we easily find that
+\[
+\left| E_j \cap \left[- \frac{m}{\epsilon}, \frac{m}{\epsilon} \right]^N \right| >m - 2 N \delta.
+\]
+We have strong convergence in $L_{\mathrm{loc}}^1(\R^N)$ so inside these boxes the convergence is strong, and therefore it suffices to notice that
+\[
+|E| \geq \left|E \cap \left[- \frac{m}{\epsilon}, \frac{m}{\epsilon}\right]^N\right| = \lim_{j \to \infty} \left|E_j \cap \left[- \frac{m}{\epsilon}, \frac{m}{\epsilon}\right]^N \right| \geq m - 2N \delta.
+\]
+The arbitrariness of $\epsilon$ allows one to conclude that $|E| \geq m - 2N \delta$ and, by taking the limit as $\epsilon \to 0^+$, we easily obtain
+\[
+|E| \geq m \implies |E| = m.
+\]
+
+\section{Symmetries in minimizing the perimeter}
+
+Let $E \subset \R^N$ be a set of finite perimeter, let $\Pi$ be an affine $(N-1)$-dimensional hyperplane and define the two half-spaces $\R_+^N$ and $\R_-^N$ in such a way that
+\[
+\R^N \setminus \Pi = \R_+^N \cup \R_-^N.
+\]
+Assume that
+\[
+|E \cap \R_+^N| = |E \cap \R_-^N|
+\]
+and define $E^-$ and $E^+$ as the two set symmetric sets with respect to $\Pi$, that is,
+\[
+E^+ := (\R_+^N \cap E) \cup \pi(\R_+^N \cap E)
+\]
+where $\pi$ is the symmetry reflects $(\R_+^N \cap E)$ with respect to the hyperplane $\Pi$, and in a similar way we can define $E^-$. Notice that
+\[
+|E| = |E^+| = |E^-|
+\]
+holds by construction.
+
+\bpr
+Let $E$ be as above. Then
+\[
+\mathrm{Per}(E) \geq \frac{ \mathrm{Per}(E^+) + \mathrm{Per}(E^-) }{2}.
+\]
+\epr
+
+\begin{proof}
+First, notice that the reduced boundary of $E^+$ satisfies
+\[
+\partial^\ast E^+ \subseteq (\R_+^N \cap \partial^\ast E) \cup \pi(\R_+^N \cap \partial^\ast E) \cup (\Pi \cap \partial^\ast E)
+\]
+where $\pi$ is the symmetry defined earlier. Replacing $\R_+^N$ with $\R_-^N$ we find a similar inclusion for the reduced boundary of $E^-$, which leads to
+\[ \begin{aligned}
+\mathrm{Per}(E^+) + \mathrm{Per}(E^-) & \leq 2\left[ \cH^{N-1}(\R_+^N \cap \partial^\ast E) + \cH^{N-1}(\R_-^N \cap \partial^\ast E) +\cH^{N-1} (\Pi \cap \partial^\ast E) \right]
+\\ & = 2 \mathrm{Per}(E),
+\end{aligned}\]
+and this concludes the proof.
+\end{proof}
+
+\br
+Suppose that $E^+$ has smaller perimeter. Since $E$ and $E^+$ have the same volume, the previous proposition tells us that $E^+$ is a better candidate for
+\[
+\min \left\{ \mathrm{Per}(A) \: : \: A \subset \R^N, \, |A| = m \right\}.
+\]
+We can use any bisecting hyperplane and, in particular, the coordinate ones, to infer that $E$ can always be replaced by its $N$-symmetrization. 
+\er
+
+\section{Steiner symmetrization}\index{Steiner symmetrization}
+
+Let $E \subset \R^N$ be a set and for $\cH^{N-1}$-a.e. $x \in \R^{N-1}$ define
+\[
+E_x := \{ t \in \R \: : \: (x,t) \in E \} \subseteq \R.
+\]
+The set $E_x$ is well-defined $\cH^1$-almost everywhere (thanks to Fubini's theorem), and therefore we have a function $\varphi : \R^{N-1} \to \R^+$ such that
+\[
+\varphi(x) = \cH^1 (E_x).
+\]
+
+\bd
+The {\em Steiner symmetrization} of $E$ is the set
+\[
+\tilde{E} := \left\{ (x',t) \in \R^N \: : \: - \frac{\varphi(x')}{2} < t < \frac{\varphi(x')}{2} \right\}.
+\]
+\ed
+
+We will now study the main properties of Steiner symmetrization. It is worth remarking that it is useful in the minimization problem because it does not increase the perimeter.
+
+\bpr
+Let $\tilde{E}$ be the Steiner symmetrization of $E$. Then
+\[
+\mathrm{Per}(\tilde{E}) \leq \mathrm{Per}(E).
+\]
+\epr
+
+\begin{proof}
+Suppose $|E| < \infty$. 
+
+\proofstep{Step 1.} Let $\{E_j\}_{j \in \N}$ be a sequence of smooth sets such that $\chi_{E_j} \to \chi_E$ in $L^1(\R^N)$, $D \chi_{E_j} \rightharpoonup^\ast D \chi_E$ in the weak sense of measures and
+\[
+\mathrm{Per}(E_j) \xrightarrow{j \to \infty} \mathrm{Per}(E).
+\]
+Now recall that the perimeter is lower semicontinuous and $\chi_{\tilde{E}_j} \to \chi_{\tilde{E}}$ in $L^1(\R^N)$ as a consequence of $\chi_{E_j} \to \chi_E$. It turns out that
+\[ \begin{aligned}
+\mathrm{Per}(E) & = \lim_{j \to \infty} \mathrm{Per}(E_j)
+\\ & \geq \liminf_{j \to \infty}\mathrm{Per}(E_j)
+\\ & \geq \liminf_{j \to \infty} \mathrm{Per}(\tilde{E}_j) \geq \mathrm{Per}(\tilde{E})
+\end{aligned} \]
+so we only need to prove the thesis for smooth sets.
+
+\proofstep{Step 2.} We now assume that $E$ is a smooth set of finite perimeter with at most a finite number of points with vertical tangent at the boundary, that is,
+\[
+\{ x \in \partial^\ast E \: : \: \nu(x) \in \R^{N-1} \} = \{x_1,\dots,x_q\}.
+\]
+We can consequently find finitely many disjoint open sets $A_\ell \subset \R^{N-1}$ and associate to each one a number $k(\ell)$ defined as the number of ``sections'' in which the set
+\[
+(A_\ell \times \R) \cap E
+\]
+is divided as a consequence of the fact that some of the points with vertical tangent will also be in $A_\ell$. Thus for all $\ell$ we can find smooth functions $g_{i,\ell}^+, g_{i,\ell}^- : A_\ell \to \R$ such that
+\[
+g_{1,\ell}^- < g_{1,\ell}^+ < g_{2,\ell}^- < \cdots < g_{k(\ell),\ell}^+
+\]
+and $(A_\ell \times \R) \cap E$ is contained in the following union of graphs:
+\[
+\bigcup_{i = 1}^{k(\ell)} \left( \mathrm{graph}(g_{i,\ell}^+) \cup \mathrm{graph}(g_{i,\ell}^-) \right).
+\]
+In other words, the reduced boundary $\partial^\ast E$ is locally the graph of a smooth function and the perimeter of $E$ can be written as 
+\[
+\mathrm{Per}(E) = \cH^{N-1}\left( \partial^\ast E \cap \left(\bigcup_\ell A_\ell \times \R\right) \right).
+\]
+We now notice that
+\[
+\cH^{N-1} \left( \{ (x', g(x')) \: : \: x \in A \} \right) = \int_A (1 + |\nabla g|^2) \, \dr \cH^{N-1}(x')
+\]
+and the right-hand side integrand $(1 + |\nabla g|^2)$ is a strictly convex function of $x'$ so it satisfies the following inequality:
+\[
+\frac{\sqrt{1 + |\nabla g^+|^2} + \sqrt{1 + |\nabla g^-|^2}}{2} \geq \sqrt{1 + \left( \frac{|\nabla g^+|+|\nabla g^-|}{2} \right)^2}.
+\]
+We can now use the perimeter formula above with $\tilde{E}$ in place of $E$. In particular, it is easy to prove that
+\[ \begin{aligned}
+\cH^{N-1} \left( \partial^\ast E \cap (A_\ell \times \R) \right) & = 2 \int_{A_\ell} \sqrt{1 + \left( \frac{\nabla \varphi}{2} \right)^2} \, \dr \cH^{N-1}(x')
+\\ & \leq 2 \int_{A_\ell}\sqrt{1 + \left( \frac{|\nabla g^+|+|\nabla g^-|}{2} \right)^2} \, \dr \cH^{N-1}(x')
+\\ & \leq \int_{A_\ell} \left[ \sqrt{1 + |\nabla g^+|^2} + \sqrt{1 + |\nabla g^-|^2}\right] \, \dr \cH^{N-1}(x'),
+\end{aligned} \]
+assuming that $k(\ell) = 1$ and noticing that $\varphi(x') = g^+(x') - g^-(x')$ so that $\nabla \varphi(x') = \nabla g^+(x') - \nabla g^-(x')$ and
+\[
+|\nabla \varphi(x')| \leq |\nabla g^+(x')| + |\nabla g^-(x')|.
+\]
+A similar argument works for $k(\ell) > 1$. Since there are only finitely many $A_\ell$ we obtain similar estimates for all $\ell$ and put all together to conclude that
+\[
+\mathrm{Per}(\tilde{E}) \leq \mathrm{Per}(E),
+\]
+proving the theorem.
+\end{proof}
+
+\br
+The functions used above are strictly increasing and strictly convex.
+\er
+
+\br
+Suppose that $Q$ is a smooth cube (i.e., a cube with smoothened vertexes) and add a ``small'' cubic perturbation on one of the sides obtaining $Q_p$. Then
+\[
+\mathrm{Per}(Q_p) = \mathrm{Per}(\tilde{Q}_p),
+\]
+but after the Steiner symmetrization the set $\tilde{Q}_p$ only moves the perturbation to look ``more symmetric'' but it does not get absorbed to become once again a smooth cube.
+\er
+
+At this point, we would like to say that all the sections are segments, but this is only true in the smooth case as we show in the next lemma.
+
+\bl
+Let $E$ be a smooth set with no vertical points at the boundary and let
+\[
+\Gamma := \{ x' \in \R^{N-1} \: : \: \text{$E_{x'}$ consists of at least $2$ segments}\},
+\]
+where ``consists of at least $2$ segments'' is a well-defined notion up to a $\cH^{N-2}$-negligible set and can be written as
+\[
+\# (\partial^\ast E_{x'}) \geq 2.
+\]
+Then there exists a continuous and increasing function $\psi$ such that $\psi(0) = 0$ and $\psi(x) > 0$ for all $x > 0$ for which the following perimeter estimate holds:
+\begin{equation}\label{eq.pr.2.1}
+\mathrm{Per}(E) \geq \mathrm{Per}(\tilde{E}) + \mathrm{Per}(E) \cdot \psi \left( \frac{\cH^{N-1}(\Gamma)}{\mathrm{Per}(E)} \right).
+\end{equation}
+\el
+
+\bc
+If $E \subset \R^N$ is a set of finite perimeter, then
+\[
+\mathrm{Per}(E) > \mathrm{Per}(\tilde{E}).
+\]
+\ec
+
+\begin{proof}
+Let $E_j$ be a sequence of smooth sets with no vertical points at the boundary such that $\chi_{E_j} \to \chi_E$ in $L^1(\R^N)$, $D \chi_{E_j} \rightharpoonup^\ast D \chi_E$ in the weak sense of measures and
+\[
+\mathrm{Per}(E_j) \xrightarrow{j \to \infty} \mathrm{Per}(E).
+\]
+Notice that
+\[
+\liminf_{j \to \infty} \cH^{N-1}(\Gamma_j) \geq \cH^{N-1}(\Gamma),
+\]
+but the right-hand side is actually equal to the limit the sequence $\cH^{N-1}(\Gamma_j)$. In any case, using \eqref{eq.pr.2.1} and the properties of $\psi$ we find that
+\[ \begin{aligned}
+\mathrm{Per}(E) & = \lim_{j \to \infty} \mathrm{Per}(E_j)
+\\ & \geq \lim_{j \to \infty}  \left[ \mathrm{Per}(\tilde{E_j}) + \mathrm{Per}(E_j) \cdot \psi \left( \frac{\cH^{N-1}(\Gamma_j)}{\mathrm{Per}(E_j)} \right) \right]
+\\ & \geq \liminf_{j \to \infty} \mathrm{Per}(\tilde{E}_j)  + \liminf_{j \to \infty} \left[\mathrm{Per}(E_j) \cdot \psi \left( \frac{\cH^{N-1}(\Gamma_j)}{\mathrm{Per}(E_j)} \right) \right]
+\\ & \geq \mathrm{Per}(\tilde{E}) + \mathrm{Per}(E) \cdot \liminf_{j \to \infty} \psi \left( \frac{\cH^{N-1}(\Gamma_j)}{\mathrm{Per}(E_j)} \right)
+\\ & \geq  \mathrm{Per}(\tilde{E}) + \mathrm{Per}(E) \cdot \psi \left( \frac{ \liminf_{j \to \infty} \cH^{N-1}(\Gamma_j)}{\mathrm{Per}(E)} \right)
+\\ & \geq \mathrm{Per}(\tilde{E}) + \mathrm{Per}(E) \cdot \psi \left( \frac{\cH^{N-1}(\Gamma)}{\mathrm{Per}(E)} \right),
+\end{aligned} \]
+where the last inequality follows from $\psi$ increasing. Since $\psi(x) > 0$ for all $x > 0$ we easily conclude from this estimate that
+\[
+\mathrm{Per}(E) > \mathrm{Per}(\tilde{E}).
+\]
+\end{proof}
+
+\bc
+Isoperimetric sets are convex. In other words, if $E$ is a minimum point, then the set of points with density $1$ (denoted by $E^1$) is convex.
+\ec
+
+
+\newpage
+
+In the previous lecture, we stated (without proof) the following lemma, which gives a precise estimate of the difference between the perimeter of $E$ and the perimeter of $\tilde{E}$.
+
+\bl \label{lemma.pr.3.1}
+Let $E$ be a smooth set with no vertical points at the boundary and let
+\[
+\Gamma := \{ x' \in \R^{N-1} \: : \: \text{$E_{x'}$ consists of at least $2$ segments}\},
+\]
+where ``consists of at least $2$ segments'' is a well-defined notion up to a $\cH^{N-2}$-negligible set and can be written as
+\[
+\# (\partial^\ast E_{x'}) \geq 2.
+\]
+Then there exists a continuous and increasing function $\psi$ such that $\psi(0) = 0$ and $\psi(x) > 0$ for all $x > 0$ for which the following perimeter estimate holds:
+\begin{equation}\label{eq.pr.3.1}
+\mathrm{Per}(E) \geq \mathrm{Per}(\tilde{E}) + \mathrm{Per}(E) \cdot \psi \left( \frac{\cH^{N-1}(\Gamma)}{\mathrm{Per}(E)} \right).
+\end{equation}
+\el
+
+We also stated and proved a corollary that holds for set of finite perimeter so it now only remains to show that \eqref{eq.pr.3.1} holds for smooth sets.
+
+\begin{proof}
+Let $\tau(t) := \sqrt{1+t^2}$ and recall that the perimeter of $\tilde{E}$ can also be written as
+\[
+\mathrm{Per}(\tilde{E}) = 2 \int_{\R^{N-1} \cap \{ \varphi(x')>0\}} \tau \left( \frac{|\nabla \varphi(x')|}{2} \right) \, \dr \cH^{N-1}(x'),
+\]
+while the perimeter of $E$ is slightly more complicated and equal to
+\[
+\mathrm{Per}(E) = \int_{\R^{N-1}\cap \{ \varphi(x')>0\}} \sum_{j=1}^q \sum_{i = 1}^{k(j)} \left[ \tau( |\nabla g_{i,j}^+(x')|) + \tau( |\nabla g_{i,j}^-(x')|) \right] \,\dr\cH^{N-1}(x'),
+\]
+where $q$ is the number of disjoint sets $A_\ell$ and $k(j)$ is the number defined in the previous lecture. Remember also that
+\[
+\varphi(x') = \sum_{j=1}^q \sum_{i = 1}^{k(j)} \left[ g_{i,j}^+(x') + g_{i,j}^-(x') \right],
+\]
+so we have an easy estimate on the absolute value of the gradient of $\varphi$:
+\[
+|\nabla \varphi(x')| \leq \sum_{j=1}^q \sum_{i = 1}^{k(j)} \left[ | \nabla g_{i,j}^+(x')| + |\nabla g_{i,j}^-(x')|\right].
+\]
+Using the strict convexity of $\varphi$ for a fixed $1 \leq j \leq q$ we find that 
+\[ \begin{aligned}
+\sum_{i = 1}^{k(j)} \left[ \tau( |\nabla g_{i,j}^+(x')|) + \tau( |\nabla g_{i,j}^-(x')| \right] & \geq 2 k(j) \tau \left( \frac{\sum_{i = 1}^{k(j)} \left[ | \nabla g_{i,j}^+(x')| + |\nabla g_{i,j}^-(x')|\right] }{2k(j)} \right)
+\\[.6em] & \geq 2k(j) \tau\left(\frac{|\nabla \varphi(x')|}{2k(j)} \right).
+\end{aligned} \]
+Summing over all possible $j$'s, we find the following inequality:
+\[
+\sum_{j = 1}^q \sum_{i = 1}^{k(j)} \left[ \tau( |\nabla g_{i,j}^+(x')|) + \tau( |\nabla g_{i,j}^-(x')| \right] \geq \sum_{j = 1}^q 2k(j) \tau\left(\frac{|\nabla \varphi(x')|}{2k(j)} \right).
+\]
+There are now two possible scenarios. If $k(j) = 1$ for all $j$, then we simply obtain
+\[
+\mathrm{Per}(E) \geq \mathrm{Per}(\tilde{E}),
+\]
+which was already known. On the other hand, if $k(j) \geq 2$ for some (at least one) $j \in \{1,\dots,q\}$, then we find a more precise perimeter inequality:
+\[
+\mathrm{Per}(E) - \mathrm{Per}(\tilde{E}) \geq \int_\Gamma\left[4 \tau \left( \frac{|\nabla \varphi(x')|}{4} \right) - 2 \tau \left( \frac{|\nabla \varphi(x')|}{2} \right)\right] \, \dr \cH^{N-1}(x')
+\]
+We now introduce a positive and strictly decreasing function $f$ in such a way that the right-hand side can be rewritten in a more compact way. More precisely, let $f$ be such that
+\[
+\int_\Gamma\left[4 \tau \left( \frac{|\nabla \varphi(x')|}{4} \right) - 2 \tau \left( \frac{|\nabla \varphi(x')|}{2} \right)\right] \, \dr \cH^{N-1}(x') = \int_\Gamma f(|\nabla \varphi(x')|) \, \dr \cH^{N-1}(x').
+\]
+Notice that $f(0) = 2$ and $\lim_{s \to \infty} f(s) = 0$. Consider the decomposition $\Gamma = \Gamma^+ \cup \Gamma^-$ in such a way that the measures are equal, that is,
+\[
+\cH^{N-1}(\Gamma^+) = \cH^{N-1}(\Gamma^-) = \frac{\cH^{N-1}(\Gamma)}{2}.
+\]
+It is easy to verify that $|\nabla \varphi(x')| \geq |\nabla \varphi(y')|$ for all $x' \in \Gamma^+$ and all $y' \in \Gamma^-$. Therefore, we can find a positive constant $M$ such that
+\[
+|\nabla \varphi(x')| \geq M \geq |\nabla \varphi(y')|
+\]
+for all $x' \in \Gamma^+$ and all $y' \in \Gamma^-$. This means that
+\[
+\mathrm{Per}(E) \geq \mathrm{Per}(\tilde{E}) \geq 2 \int_{\Gamma^+}\tau\left( \frac{|\nabla \varphi(x')|}{2} \right) \, \dr \cH^{N-1}(x') \geq \tau \left(\frac{M}{2} \right) \cH^{N-1}(\Gamma)
+\]
+and, given that $\tau \left(\frac{M}{2} \right) \geq \frac{M}{2}$, we obtain an upper bound for $M$:
+\[
+M \leq \frac{2 \mathrm{Per}(E)}{\cH^{N-1}(\Gamma)}.
+\]
+Since $f$ is strictly decreasing, we can use this bound to say that
+\[
+f(M) \geq f \left(\frac{2 \mathrm{Per}(E)}{\cH^{N-1}(\Gamma)} \right).
+\]
+To conclude, we put this together with the estimate on the difference between the perimeters obtain above to find that
+\[ \begin{aligned}
+\mathrm{Per}(E) - \mathrm{Per}(\tilde{E}) & \geq \int_\Gamma f(|\nabla \varphi(x')|) \, \dr \cH^{N-1}(x')
+\\ & \geq f(M) \frac{\cH^{N-1}(\Gamma)}{2}
+\\ & \geq f\left( \frac{2 \mathrm{Per}(E)}{\cH^{N-1}(\Gamma)} \right) \frac{\cH^{N-1}(\Gamma)}{2 \mathrm{Per}(E)} \mathrm{Per}(E).
+\end{aligned} \]
+In particular, the desired inequality \eqref{eq.pr.3.1} is obtained by choosing $\psi$ as
+\[
+\psi(t) := \frac{t}{2} f \left( \frac{2}{t} \right).
+\]
+The function $\psi$ satisfies all the required properties and hence {\color{blue}Lemma \ref{lemma.pr.3.1}} is proved.
+\end{proof}
+
+\br
+The same formula \eqref{eq.pr.3.1} can be proved for finite perimeter sets using the approximation by smooth sets with no vertical points at the boundary.
+\er
+
+\section{The isoperimetric set is a ball}
+
+The final goal of this section is to prove that the set with the minimal perimeter for a fixed volume is the ball. First, we need a technical result:
+
+\bl \label{lemma.pr.3.2}
+Let $E$ be a isoperimetric set which is symmetric with respect to the origin (any point would be fine). Then $E$ is a ball.
+\el
+
+\begin{proof}
+Throughout this proof, we will always use the symbol $E$ to denote $E^1$, the set of points with density one. In particular, we can assume that $E$ is convex.
+
+\proofstep{Step 1} We first notice that (due to our assumptions) there exists a function $\ell : \mathbb{S}^{N-1} \to \R$ such that for all $\theta\in \mathbb{S}^{N-1}$ we can write
+\[
+E^1 \cap \R \cdot \theta = [ - \ell(\theta),\ell(\theta)] \cdot \theta.
+\]
+In other words, $\ell$ describes the segment in $E^1$ with direction given by $\theta$. Fix $\theta,\nu \in \mathbb{S}^{N-1}$ with $\theta \cdot \nu > 0$ and let $\Pi$ be the hyperplane passing through $\nu$ such that
+\[
+(\mathrm{Span}(\theta,\nu))^\perp \subseteq \Pi.
+\]
+Then $\Pi$ bisects $E$ (i.e., it divides $E$ in two halves with same volume) which is symmetric w.r.t. the origin, so we can divide it as in the previous lecture:
+\[
+E = E^+ \cup E^-.
+\]
+Now let $P = \ell(0) \cdot \theta$ and $Q$ be its symmetric with respect to $\Pi$. Denote by $E'$ the set obtained by symmetrization (w.r.t. $\Pi$) starting from the half-space that contains $P$, that is,
+\[
+P \in \R_+^N \implies E' = E^+ \cup \rho_\Pi(E^+),
+\]
+where $\rho_\Pi$ is the reflection with respect to $\Pi$ (and similarly if $P \in \R_-^N$). Then $E'$ is isoperimetric and both $P$ and $Q$ belong to the boundary $\partial E'$. Moreover, for $\lambda \in(0,1)$ we have
+\[
+\lambda P, \lambda Q \in (E')^1
+\]
+and, more precisely, the whole segment with extrema $\lambda P$ and $\lambda Q$ does:
+\[
+[\lambda P, \lambda Q] \subseteq (E')^1.
+\] 
+Now let $R := \frac{P+Q}{2} \in \Pi$ and notice that $\lambda R \in (E')^1$. Since $E'$ coincides with $E$ on one half of the space, it also turns out that $\lambda R \in E$ has density one. It follows that
+\begin{equation} \label{eq.pr.3.3}
+\ell(\nu) \geq |R| = \ell(\theta) \theta \cdot \nu
+\end{equation}
+for all $\theta,\nu \in \mathbb{S}^{N-1}$ such that $\theta \cdot \nu > 0$.
+
+\proofstep{Step 2} Let us consider a finite number of directions $\theta_i$, $1 \leq i \leq M$, in such a way that $\theta_0 = \theta$, $\theta_M = \nu$ and for all $i$ we have
+\[
+\theta_i \in \mathrm{Span} \langle \nu, \theta \rangle.
+\]
+Let $\alpha \in \mathbb{S}^1$ be the angle between $\theta$ and $\nu$ in such a way that 
+\[
+\theta \cdot \nu = \cos \alpha.
+\]
+It is easy to verify that the scalar product between any two consecutive directions is
+\[
+\theta_i \cdot \theta_{i+1} = \cos \left(\frac{\alpha}{M}\right),
+\]
+so using \eqref{eq.pr.3.3} a finite number of times yields
+\[
+\ell(\nu) = \ell(\theta_{M}) \geq \ell(\theta_{M-1}) \cos \left( \frac{\alpha}{M} \right) \geq \ell(\theta) \cos \left( \frac{\alpha}{M} \right)^M.
+\]
+If we send $M \to \infty$, we find that
+\[
+\ell(\nu) \geq \ell(\theta) \implies \ell(\nu) = \ell(\theta),
+\]
+which means that $\ell$ is a constant function and therefore $E$ is a ball.
+\end{proof}
+
+\bt
+Let $E$ be an isoperimetrical set. Then $E$ is a ball.
+\et
+
+\begin{proof}
+Up to translations we can always assume that
+\[
+\left| E \cap \{x_1 > 0, \dots, x_j > 0\} \right| = 2^{-j} |E| \quad \text{for any $1 \leq j \leq N$}.
+\]
+Now $E^1$ is isoperimetric because $\{x_1 = 0\}$ bisects $E$, where $E^1$ is the symmetrization of the right part, that is,
+\[
+\{ x \in \R^N \: : \: (|x_1|, x_2, \dots, x_N) \in E \}.
+\]
+Similarly, the second hyperplane $\{x_2 = 0\}$ bisects $E_1$ (although it may not bisect $E$), and hence the set
+\[
+E^2 := \{ x \in \R^N \: : \: (|x_1|, |x_2|, x_3, \dots, x_N) \in E \}
+\]
+is isoperimetric as well. We can iterate the argument to find that
+\[
+E^N = \{x \in \R^N \: : \: (|x_1|,\dots,|x_N|) \in E\}
+\]
+is isoperimetric. Furthermore, by construction it is symmetric w.r.t. the origin (actually, something more), so we can use {\color{blue}Lemma \ref{lemma.pr.3.2}} to infer that $E^N$ is a ball. Then
+\[
+E \cap \{x_1 > 0, \dots, x_N > 0\}
+\]
+is also a ball and, since we can do the same for all possible quadrants of the space $\R^N$, we immediately conclude that $E$ itself is a ball.
+\end{proof}
+
+\section{Generalization to more than one set: clusters}
+
+Let $m \in (\R^+)^M$ be a $M$-tuple of real positive numbers. The goal of this section is to minimize the functional
+\[
+\cH^{N-1}\left( \bigcup_{i = 1}^M \partial^\ast E_i \right)
+\]
+among all sets $E_1,\dots, E_M \subset \R^N$ with empty intersections ($E_i \cap E_j = \emptyset$) and satisfying the volume constraint $|E_1| = m_1, \dots, |E_M| = m_M$.
+
+\br
+The problem is nontrivial. Suppose that $M=2$ and take two disjoint balls that satisfy, singularly, the isoperimetrical problem with masses $m_1$ and $m_2$. If we move them closer and closer, we notice that the parts of the boundaries around points which are almost ``in contact'' look flatter and flatter. Therefore, we are essentially counting the perimeter of these flat parts twice (once for each ball), and this is obviously not so convenient. In particular, the solution to the clustering problem is not a disjoint union of balls but rather (?) a figure obtained by merging them so that the issue above does not arise.
+\er
+
+\subsection{Existence of a minimizer} Fix $m \in (\R^+)^M$. We shall denote clusters by italic letters as follows
+\[
+\mathcal{E} = \{E_1,\dots,E_M\}.
+\]
+We will also say that $\mathcal{E}$ has mass $m$ and write $|\mathcal{E}| = m$ if and only if
+\[
+|E_i| = m_i \quad \text{for all $1 \leq i \leq M$.}
+\]
+We would like to find an optimal cluster $\bar{\mathcal{E}} := \{\bar{E}_1,\dots,\bar{E}_M\}$ that achieves the minimum of the variational problem
+\begin{equation}\label{eq.cluster.1}
+J(m) := \inf_{|\mathcal{E}|=m} \mathrm{Per}(\mathcal{E}),
+\end{equation}
+where the perimeter of the cluster is defined by setting
+\[
+\mathrm{Per}(\mathcal{E}) := \cH^{N-1}\left( \bigcup_{i = 1}^M \partial^\ast E_i \right).
+\]
+
+\subsection{Proof, Part I} Let $\{ \mathcal{E}^j \}_{j \in \N}$ be a minimizing sequence of clusters for the functional $J$, and denote by $E_\ell^j$ the sets inside of each $\mathcal{E}$. Fix $1 \leq \ell \leq M$ and notice that
+\[
+\| \chi_{E_\ell^j} \|_{\mathrm{BV}(\R^N)} \leq C_\ell < \infty
+\]
+is uniformly bounded in $\mathrm{BV}$ and hence, up to subsequences, we have that $\chi_{E_\ell^j}$ converges in $\mathrm{BV}$ to a characteristic function $\chi_{\bar{E}_\ell}$ for all $1 \leq \ell \leq M$. Furthermore,
+\[
+\chi_{E_\ell^j} \cdot\chi_{E_{\ell'}^j} = 0
+\]
+holds for all $\ell \neq \ell'$ so we can send $j\to \infty$ (as both converge strongly locally in $L^1$ and in other any $L^p$) to find that the limit sets are also disjoint:
+\[
+\chi_{\bar{E}_\ell} \cdot \chi_{\bar{E}_{\ell'}}=0 \implies \bar{E}_\ell \cap \bar{E}_{\ell'} = \emptyset.
+\]
+It is easy to see that
+\[
+\mathrm{Per}( \bar{\mathcal{E}} ) = \cH^{N-1} \left(\cup_{\ell = 1}^M \partial^\ast \bar{E}_\ell \right) \leq \liminf_{j\to \infty} \mathrm{Per}(\mathcal{E}^j) = J(m)
+\]
+by lower semicontinuity, so we only have to prove that the limit cluster $\bar{\mathcal{E}}$ satisfies the volume constraint.
+
+\br
+Notice that the perimeter of any cluster can be rewritten as
+\[
+\mathrm{Per}(\mathcal{E}) = \frac{1}{2} \left[ \sum_{j = 1}^M \mathrm{Per}(E_j) + \mathrm{Per}\left( \bigcup_{j = 1}^M E_j\right) \right],
+\]
+and this is exactly what we need to prove the lower semicontinuity since each perimeter in the right-hand side is computed at a single set rather than a cluster.
+\er
+
+\newpage %%%%
+
+The goal of today's lecture is to prove that we can find an optimal cluster $\bar{\mathcal{E}}$ that satisfies the mass constraint and, not surprisingly, we will follow what we did for a single set.
+
+\br
+Recall that, in the isoperimetrical problem with a single set, a fundamental step was proving the inequality
+\[
+J(m' + m'') < J(m') + J(m'')
+\]
+for all $m', m'' > 0$. This was an immediate consequence of the scaling property
+\[
+J(m) = m^{\frac{N-1}{N}} J(1),
+\]
+which holds for all $m > 0$. However, for clusters we do not have such a scaling property because two vectors $m$ and $m'$ in $(\R^+)^M$ are not necessarily proportional.
+\er
+
+Nevertheless, we can assume (for the time being) that for all $m', m'' \in (\R^+)^M \setminus \{0\}$ the perimeter inequality
+\[
+J(m'+m'') < J(m') + J(m'')
+\]
+holds. By continuity for all $\epsilon > 0$ we can find a positive $\delta$ such that
+\[
+\min\{|m'|,|m''|\} \geq \epsilon \implies  J(m') + J(m'') -J(m'+m'') \geq \delta.
+\]
+Now let $\mathcal{E}$ be a cluster with total mass equal to $m = m'+m''$ and perimeter satisfying the inequality $\mathrm{Per}(\mathcal{E}) < J(m)+ \frac{\delta}{3}$ and, in addition, assume that
+\[
+\cH^{N-1} \left( \bigcup_{i = 1}^M (E_i \cap \{x_1 = t\}) \right) < \frac{\delta}{3}.
+\]
+We now denote by $\mathcal{E}_\ell$ the left cluster, that is, the cluster that consists of the sets
+\[
+E_{i,\ell} := E_i \cap \{x_1 < t\}
+\]
+and, similarly, define the right cluster $\mathcal{E}_r$. Set $m' := |\mathcal{E}_\ell|$ and $m'' = |\mathcal{E}_r|$, and notice that
+\[
+J(m) > \mathrm{Per}(\mathcal{E}) - \frac{\delta}{3} > \mathrm{Per}(\mathcal{E}_\ell) + \mathrm{Per}(\mathcal{E}_r) - \delta \geq J(m') + J(m'') - \delta,
+\]
+which, in other words, tells us that
+\[
+J(m'+m'') \geq J(m') + J(m'').
+\]
+However, this is in contradiction with the estimate that we assumed to be true so the only possibility is that one of them is not bigger than $\epsilon$, namely
+\[
+\min\{ |m'|, |m''| \} < \epsilon.
+\]
+At this point, the existence of a minimizer with total mass $m$ can be achieved as in the isoperimetrical problem with a single set, but we will not give the details here.
+
+\br
+Notice that 
+\begin{equation}\label{eq.estimate.pr4}
+J(m'+m'') < J(m') + J(m'')
+\end{equation}
+implies the existence of a minimizer, but the opposite is true as well (and this can be proved arguing by contradiction). More precisely, the following two implications are true:
+\[
+\text{existence of a minimizer for all $m$} \implies \text{\eqref{eq.estimate.pr4} for all $m$}.
+\]
+and
+\[
+\text{\eqref{eq.estimate.pr4} for a fixed $m$} \implies \text{existence of a minimizer for the same $m$}.
+\]
+\er
+
+To prove \eqref{eq.estimate.pr4} we start by introducing the notion of {\em irreducible} vector $m$ but, as we will see in the end, it is only useful for the proof but has no real meaning.
+
+\bd
+We say that a vector $m \in (\R^+)^M$ is {\em irreducible} if there is no way to decompose $m$ as a sum $m = m'+m''$ with the additional property that
+\[
+J(m')+J(m'') = J(m).
+\]
+\ed
+
+\br
+In other words, $m$ is irreducible if any decomposition $m = m' + m''$ satisfies the estimate \eqref{eq.estimate.pr4}.
+\er
+
+We will prove that $m$ can always be written as a sum $\sum_\ell m^{(\ell)}$ of vectors such that each $m^{(\ell)}$ is {\em irreducible} and the perimeter satisfies
+\[
+J(m) = \sum_\ell J(m^{(\ell)}).
+\]
+The first step to prove this decomposition is the following lemma, which is easily proved using the definition of ``being irreducible''.
+
+\bl
+For all $m \in (\R^+)^M \setminus \{0\}$ there exists $m' \in (\R^+)^M \setminus \{0\}$ irreducible such that
+\[
+J(m) = J(m') + J(m-m').
+\]
+\el
+
+\begin{proof}
+If $m$ is irreducible, then we simply take $m' := m$. If not, then by definition there must be $m' \neq m''$ nonzero vectors such that $m = m'+m''$ and
+\[
+J(m) = J(m') + J(m'').
+\]
+Since $m'' = m - m'$ this concludes the proof.
+\end{proof}
+
+At this point we must prove that we do not have too many ``pieces'' which are too small, meaning that at least one irreducible vector must be long enough.
+
+\begin{proof}
+Let $m \in (\R^+)^M$ and suppose that $m = \sum_{\ell=1}^k m^{(\ell)}$ is a decomposition in irreducible terms such that
+\[
+J(m) = \sum_{\ell = 1}^k J(m^{(\ell)})
+\]
+and $|m^{(\ell)}| < \frac{|m|}{C}$ for each $\ell$ where $C$ is a (big) constant. Then
+\[
+J(m) \leq N \omega_N^{\frac{1}{N}} \sum_{j = 1}^M m_j^{\frac{N-1}{N}} =: C' |m|,
+\]
+where $\omega_N$ is the volume of the unit ball in $\R^N$ and the $m_j$'s are the components of $m$ as a vector in $(\R^+)^M$. On the other hand, it is easy to verify that
+\[
+J(m) \geq J(|m|),
+\]
+which in turn implies the inequality
+\[
+\sum_{\ell = 1}^k J(m^{(\ell)}) \geq \sum_{\ell = 1}^k J(|m^{(\ell)}|) =: K |m|,
+\]
+where $K$ is a constant that depends on the ratio $\frac{|m|}{C}$. In particular, if we choose the constant $C$ big enough, $K$ will become strictly bigger than $C'$ leading to a contradiction since
+\[
+C' |m| \geq J(m) \geq K |m| \implies C' \geq K.
+\]
+\end{proof}
+
+Now define
+\[
+\eta := \inf \left\{ |m'| \: : \: \text{$m = \sum_\ell m^{(\ell)}$, $J(m)=\sum_\ell J(m^{(\ell)})$ and $|m'| = \max_\ell |m^{(\ell)}|$} \right\}.
+\]
+If the minimum is achieved, then $m'$ is irreducible (otherwise we could get a better one). If not, let us take a minimizing sequence $\eta_j$.
+
+\br
+If $J(m) = \sum_\ell J(m^{(\ell)})$, then we can also write
+\[
+J(m) = J(m')+J(m'' + m''') + \cdots,
+\]
+which means that we can always put things back together.
+\er
+
+As a consequence of this observation, we notice that given a decomposition $m = \sum_\ell m^{(\ell)}$ with $|m'| = \max_\ell |m^{(\ell)}|$, then we can always write it as
+\[
+m = \sum_\ell \tilde{m}^{(\ell)}
+\]
+with $m' = \tilde{m}'$ which is at least $\frac{1}{10}$ of $m$ because of the result above and
+\[
+|\tilde{m}^j| < \frac{|m'|}{2} \quad \text{for all $\ell = 1, \dots, k$}.
+\]
+This concludes the proof of \eqref{eq.estimate.pr4}. To pass from the estimate to the existence of minimizer, we need to prove that the optimal cluster is bounded (which was clear for the problem with a single set as balls are always bounded).
+
+\br
+We shall now prove that the solution of the one-set isoperimetrical problem is bounded (without knowing that it is a ball), but the same works with minor changes to prove that a optimal cluster is bounded.
+\er
+
+\begin{proof}
+We will prove that the isoperimetrical set $E$ is bounded in a single direction as the boundedness is obtained by repeating the same argument in all directions. Let
+\[
+\alpha(t) := | E \cap \{x_1 > t \}|.
+\]
+The goal is to show that for $t$ big enough $\alpha$ vanishes. Clearly, $\alpha$ is decreasing and goes to zero as $t \to \infty$ and its derivative is given exactly by
+\[
+\alpha'(t) = - \cH^{N-1}(E \cap \{x_n=t\}).
+\]
+Suppose that $E$ has a "tentacle", which means an unbounded (possibly thin) part in the chosen direction with nonzero volume. We would like to show that cutting the tentacle at a finite $x_1$ and using the remaining volume in another part of $E$ gives a better set in terms of perimeter, meaning that $E$ itself will not have a tentacle.
+
+\br
+If $E$ is a set of finite perimeter, for each $x \in \partial^\ast E$ there are $\bar{\epsilon}$, a positive constant $K$ and a set $G$ such that for all $0 < \epsilon<\bar{\epsilon}$ we have:
+\mbox{}
+\begin{enumerate}[itemsep=.4em]
+\item $G$ coincides with $E$ up to a ball $B(x,\epsilon)$;
+\item $|G| = |E| + \epsilon$;
+\item $\mathrm{Per}(G) \leq \mathrm{Per}(E) + K\epsilon$.
+\end{enumerate}
+\er
+
+We now choose $\bar{t}$ big enough so that $\alpha(\bar{t}) < \bar{\epsilon}$ and we modify the set $E$ by removing the tentacle and pushing $E$ slightly at some point of the reduced boundary obtaining a set $F$ that satisfies the properties $(a)$, $(b)$ and $(c)$. Then
+\[ \begin{aligned}
+\mathrm{Per}(E) & \leq \mathrm{Per}(F)
+\\ & \leq \mathrm{Per}(E) - \mathrm{Per}(F \cap \{x_1 > t\}) + 2 |\alpha'(t)| + K \alpha(t)
+\\ & \leq \mathrm{Per}(E) - K' \alpha(t)^{\frac{N-1}{N}} + K' \alpha(t) + 2 |\alpha'(t)|.
+ \end{aligned} \]
+Therefore, for $t \geq \bar{t}$ we have the inequality
+\[
+K' \alpha(t)^{\frac{N-1}{N}} - K \alpha(t) \leq 2 |\alpha'(t)|,
+\]
+so up to a change of constant
+\[
+K'' \alpha(t)^{\frac{N-1}{N}} \leq |\alpha'(t)|.
+\]
+A standard argument in calculus shows that this inequality implies $\alpha(\bar{t}) = 0$, concluding the proof.
+\end{proof}

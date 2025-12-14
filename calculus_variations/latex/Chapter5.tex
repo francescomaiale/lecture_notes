@@ -1,0 +1,571 @@
+\chapter{First Variation on Sobolev Spaces}
+
+{\color{red}I will write the introduction after the chapter is complete!}
+
+\section{Introduction}
+
+Let $I \subset \R$ be a time interval and $\Om \subset \R^n$ and let $g : I \times \Om \to \R^m$ be a function satisfying the following properties: \mbox{}
+\begin{enumerate}[label=(\roman*),itemsep=.4em]
+\item For every $x \in \Om$, $g(\cdot, x)\in C^1(I)$;
+\item there exists $t_0 \in I$ such that $g(t_0,\cdot) \in L^1(\Om)$;
+\item if $g_t(s,x)$ denotes the derivative with respect to $t$ of $g$, then
+\[
+\alpha(x):=\sup_{s \in I} |g_t(s,x)| \in L^1(\Om).
+\]
+\end{enumerate}
+
+\bpr \label{prop.20.1}
+The function defined by setting
+\[
+G(t) := \int_\Om g(t,x)\,\dr x
+\]
+is well-defined for every $t \in I$ and belongs to $C^1(I)$. Furthermore, we have
+\begin{equation}\label{eq.20.2}
+\dot{G}(s) = \int_\Om g_t(s,x) \, \dr x.
+\end{equation}
+\epr
+
+\begin{proof}
+Using the property ({\romannumeral 3}) we find that for all $t \in I$ we have
+\[
+|g(t,x)| \leq |g(t_0,x)| + \alpha(x) |t-t_0|,
+\]
+which, exploiting the property ({\romannumeral 2}), gives $g(t,\cdot) \in L^1(\Om)$ for every $t \in I$. It follows that $G(t)$ is well-defined and finite for all $t \in I$. In a similar fashion, we have
+\[
+g_t(s,\cdot) \in L^1(\Om)
+\]
+for all $s \in I$ because it is bounded by a $L^1(\Om)$-function, $\alpha$, by assumption ({\romannumeral 3}). To prove \eqref{eq.20.2} we start by defining the function
+\[
+F(s) := \int_\Om g_t(s,x) \, \dr x.
+\]
+The dominated convergence theorem (using $\alpha$) shows that $F$ is continuous. Therefore, to prove that $\dot{G}(s) = F(s)$, by the fundamental theorem in calculus it is enough to show
+\[
+G(s_2)-G(s_1) = \int_{s_1}^{s_2} F(s) \, \dr s
+\]
+for all $s_1 < s_2 \in I$. This can be proved easily using, for example, Fubini's theorem. We leave to the reader the task to fill in the details here.
+\end{proof}
+
+\section{First variation in weak form and regularity theory}
+
+Let us consider the functional
+\[
+F(u) = \frac{1}{2} \int_a^b \dot{u}^2 \, \dr x + \int_a^b g(x,u) \, \dr x,
+\]
+where $u \in W_{u_0}^{1,2}\left( (a,b) \right)$ and $g : (a,b)\times \R \to \R$ satisfies the following assumptions: \mbox{}
+\begin{enumerate}[label=(\roman*), itemsep=.4em]
+\item $g$ is Borel;
+\item $g(x,\cdot) \in C^1(\R)$ for every $x \in (a,b)$ and there are $c \in L^1\left((a,b)\right)$ and a modulus of continuity $\omega$ such that
+\[
+|g_u(x,u)| \leq c(x) \omega(|u|),
+\]
+where $g_u$ denotes the derivative of $g$ with respect to the second variable.
+\end{enumerate}
+
+We are now ready to compute the first variation of the functional $F$. We first take test functions $v \in W_0^{1,\infty}\left( (a,b) \right)$ because we need $\dot{v}$ to be bounded. It turns out that
+\[ \begin{aligned}
+\langle \dr F(u), v \rangle & = \frac{\dr}{\dr t}\bigg|_{t=0} F(u+tv)
+\\ & = \frac{\dr}{\dr t} \, \bigg|_{t=0} \left[ \frac{1}{2} \int_a^b \dot{u}^2 \, \dr x + \int_a^b g(x,u) \, \dr x \right]
+\\ & = \int_a^b (\dot{u}\dot{v} + g_u(x,u) v) \, \dr x
+\end{aligned}\]
+by applying the integral-derivative swap of {\color{blue}Proposition \ref{prop.20.1}}. We shall refer to the last term as {\em first variation in weak form of $F$}.
+
+\br
+The functional $F$ is {\bf not} differentiable on $W_{u_0}^{1,2}\left((a,b)\right)$ because we can only compute a smaller set of directional derivatives with directions $v \in W_0^{1,\infty}\left((a,b)\right)$. If we want $F$ to be differentiable, then we should assume $c(x) \in L^2((a,b))$.
+\er
+
+Assume now that $u$ is a minimizer for $F$ on $W_{u_0}^{1,2}\left((a,b)\right)$. Then for all $v \in C_c^\infty([a,b])\subset W_0^{1,\infty}(a,b)$ we have
+\[
+\langle \dr F(u),v\rangle = \int_a^b \left( \dot{u}\dot{v} + g_u(x,u) v \right) \, \dr x = 0,
+\]
+which can also be rewritten as
+\[
+-\int_a^b \dot{u}\dot{v} \, \dr x= \int_a^b g_u(x,u) v \, \dr x.
+\]
+If we denote by $D(\dot{u})$ the distributional derivative of $\dot{u}$, then this identity can be rewritten (in the language of distributions) as
+\[
+D(\dot{u}) = g_u(x,u).
+\]
+This shows that $u \in W^{2,1}\left((a,b)\right)$ and, if $c \in L^2\left((a,b)\right)$, then we can go as far as to say that $u \in W^{2,2}\left((a,b)\right)$. In particular, we conclude that
+\[
+\ddot{u} = g_u(x,u).
+\]
+
+\br
+If, in addition, the derivative $g_u$ is continuous, then the minimizer $u$ is regular and belongs to $C^2([a,b])$.
+\er
+
+If we now assume that $u$ is a minimizer for $F$ on $W^{1,2}\left((a,b)\right)$ with no boundary conditions, then we find that
+\[
+-\int_a^b \dot{u}\dot{v} \, \dr x= \int_a^b g_u(x,u) v \, \dr x.
+\]
+holds for all $v \in C^\infty([a,b]) \subset W^{1,\infty}\left((a,b)\right)$. As above we infer that
+\[
+\ddot{u} = g_u(x,u)
+\]
+using as test functions the subspace $C_c^\infty([a,b]) \subset C^\infty([a,b])$. Furthermore, using the inclusion
+\[
+u \in W^{2,1}\left((a,b)\right) \subset C^1\left([a,b]\right)
+\]
+we can integrate by parts and obtain Neumann boundary conditions (which make sense only because the function belongs to $C^1$):
+\[
+\dot{u}(a) = \dot{u}(b) = 0.
+\]
+
+\br
+If we replace $\dot{u}^2$ by $\dot{u}^p$, then the same computation leads to
+\[
+\frac{p}{2} \int_a^b \dot{u}^{p-1} \dot{v} \, \dr x + \int_a^b g_u(x,u) v \, \dr x = 0
+\]
+for all appropriate $v$. However, integrating by parts (assuming that we can do it) yields
+\[
+\int \dot{u}^{p-2}\ddot{u} v \, \dr x = \int_a^b g_u(x,u) v \, \dr x,
+\]
+but it does not give any information on the summability of $\ddot{u}$ because of the term $\dot{u}^{p-2}$ with $p > 2$ (the situation is even worse if $p<2$). There are other ways around in higher-dimensions, but here we cannot deduce anything on the regularity of $\ddot{u}$ from
+\[
+\dot{u}^{p-2}\ddot{u} = g_u(x,u).
+\]
+\er
+
+\subsection{Vector-valued computation} Now let us consider the functional
+\[
+F(u) = \frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x + \int_\Om g(x,u)\, \dr x,
+\]
+where $g:\Om \times \R \to \R$ is a Borel function such that $g(x,\cdot) \in C^1(\R)$ for every $x\in \Om$ and satisfies the estimates
+\begin{equation}\label{eq.20.3}
+|g(x,u)|, \, |g_u(x,u)| \leq c(1+|u|^2).
+\end{equation}
+If we make the same computation as above (assuming that we can swap integral and derivative without any problems), we find that
+\[ \begin{aligned}
+\langle \dr F(u), v \rangle & = \frac{\dr}{\dr t}\bigg|_{t=0} F(u+tv)
+\\ & = \frac{\dr}{\dr t} \, \bigg|_{t=0} \left[\frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x + \int_\Om g(x,u)\, \dr x\right]
+\\ & = \int_\Om \nabla u \cdot \nabla v\, \dr x + \int_\Om g_u(x,u) v \, \dr x.
+\end{aligned}\]
+If $u$ is a minimizer for $F$ in $W_{u_0}^{1,2}(\Om)$, then it is easy that thanks to the estimates \eqref{eq.20.3} we can directly take as test functions all $v \in W_0^{1,2}(\Om)$. It turns out that
+\[
+-\int_\Om \nabla u \cdot \nabla v \, \dr x =  \int_\Om g_u(x,u) v \, \dr x
+\]
+holds, in particular, for all $v \in C_c^\infty(\Om)$. In the language of distributions, this is as to say that
+\[
+- \Delta u = g_u(x,u),
+\]
+but it is not anymore trivial ({\color{red}and, in fact, it might require some additional assumptions?}) to show that from $\Delta u \in L^2(\Om)$ we can conclude $u \in W^{2,2}(\Om)$.
+
+%%% Nuova lezione
+\newpage
+
+\subsection{Vector-valued computation} Consider the functional
+\[
+F(u) = \frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x + \int_\Om g(x,u)\, \dr x,
+\]
+where $g:\Om \times \R \to \R$ is a Borel function such that $g(x,\cdot) \in C^1(\R)$ for every $x\in \Om$ and it satisfies the following estimates:
+\begin{equation}\begin{aligned}\label{eq.20.3}
+&|g(x,u)| \leq c(1+|u|^2),
+\\ & |g_u(x,u)| \leq c(1+|u|^2).
+\end{aligned} \end{equation}
+If we make the same computation as above (assuming that we can swap integral and derivative without any issues), we find that
+\[ \begin{aligned}
+\langle \dr F(u), v \rangle & = \frac{\dr}{\dr t}\bigg|_{t=0} F(u+tv)
+\\ & = \frac{\dr}{\dr t} \, \bigg|_{t=0} \left[\frac{1}{2} \int_\Om |\nabla u|^2 \, \dr x + \int_\Om g(x,u)\, \dr x\right]
+\\ & = \int_\Om \nabla u \cdot \nabla v\, \dr x + \int_\Om g_u(x,u) v \, \dr x.
+\end{aligned}\]
+If $u$ is a minimizer for $F$ in $W_{u_0}^{1,2}(\Om)$, then it is easy that thanks to the estimates \eqref{eq.20.3} we can directly take as test functions all $v \in W_0^{1,2}(\Om)$. It turns out that
+\[
+-\int_\Om \nabla u \cdot \nabla v \, \dr x =  \int_\Om g_u(x,u) v \, \dr x
+\]
+holds, in particular, for all $v \in C_c^\infty(\Om)$. If we denote by $\Delta u$ the distributional divergence of $\nabla u$, we find the Euler-Lagrange equation
+\[
+-\div(\nabla u) = -\Delta u = g_u(x,u),
+\]
+where the equality has to be considered in a distributional sense. However, we need the minimizer $u$ to be more regular to talk about the Laplace operator in a pointwise sense.
+
+\br
+As in the one-dimensional case, we can also study minimizers $u \in W^{1,2}(\Om)$ of $F$ with no prescribed boundary conditions.
+\er
+
+At this point, we are looking for results saying that $u \in W^{1,2}(\Om)$ and $\Delta u \in L^2(\Om)$ is enough to conclude that $u \in W^{2,2}(\Om)$.
+
+We will see soon that the regularity of $g$ plays an important role, but without extra conditions we can only go as far as to say that $u \in W_{\mathrm{loc}}^{2,2}(\Om)$.
+
+\br
+Obtaining more regularity (namely, $u \in W_{\mathrm{loc}}^{2,2}$) is crucial because we want to integrate by parts the weak form of the first variation, namely
+\[
+-\int_\Om \nabla u \cdot \nabla v \, \dr x =  \int_\Om g_u(x,u) v \, \dr x.
+\]
+\er
+
+The following result, which we give for granted, says that a Sobolev function $u \in W^{1,p}(\Om)$ is a.e. {\em approximately differentiable} when $p \leq n$. For $p > n$ we know already that Sobolev functions are a.e. differentiable so for all values $1 \leq p \leq \infty$ it will make sense to talk about the ``differential'' as a pointwise function.
+
+\bt \index{approximately differentiable function}
+Let $1 \leq p \leq \infty$ and let $u \in W^{1,p}(\Om)$. Then for almost every $\bar{x} \in \Om$ it turns out that
+\[
+\averint_{B(\bar{x},r)} \left|\frac{v(x)-v(\bar{x})-\nabla v(\bar{x})(x-\bar{x})}{|x-\bar{x}|}\right|^{p^\ast} \, \dr x \to 0
+\]
+as $r$ goes to zero.
+\et
+
+\br
+Consequently, if we can prove that a minimizer $u$ of $F$ belongs to $W^{2,2}(\Om)$, then it correct to talk about its Laplacian. Moreover, the Euler-Lagrange equation
+\[
+- \Delta u = g_u(x,u)
+\]
+will not be anymore an equality in the distributional sense.
+\er
+
+\bpr \label{prop.21.1}
+If $u \in L^2(\R^n)$ and $\Delta u \in L^2(\R^n)$, where $\Delta u$ is the distributional gradient, then $u \in W^{2,2}(\R^n)$ and there exists a constant $c>0$ such that
+\begin{equation}\label{eq.21.1}
+\| u\|_{W^{2,2}(\R^n)} \leq c ( \|u\|_{L^2(\R^n)} + \|\Delta u\|_{L^2(\R^n)}).
+\end{equation}
+\epr
+
+We will now give a proof of the estimate \eqref{eq.21.1} which is ``almost'' correct because, as we will see at the end, it works only under an additional assumption. 
+
+\begin{proof}
+For the reader's convenience, we divide the proof into three steps.
+
+\proofstep{Step 1} Assume $u \in C_c^\infty(\R^n)$. We define the Fourier transform of $u$ by setting
+\[
+\hat{u}(\xi) := \int_{\R^n} u(x) \mathrm{e}^{-\imath \xi \cdot x} \, \dr x,
+\]
+so that, using a well-known property of the Fourier transform, there results
+\[
+\widehat{\nabla u}(\xi) = \imath \xi \hat{u}(\xi).
+\]
+In a similar fashion, if we denote by $\nabla^2 u$ the Hessian of $u$, we find that
+\[
+\widehat{\nabla^2 u}(\xi) = - (\xi \otimes \xi) \hat{u}(\xi),
+\]
+where $\xi \otimes \xi$ is the matrix with entries $(\xi \otimes \xi)_{i,j} := \xi_i \xi_j$. The trace is given by
+\[
+\mathrm{Tr}\left( \widehat{\nabla^2 u}(\xi) \right) = - |\xi|^2 \hat{u}(\xi),
+\]
+and by {\bf Plancherel's identity} we have
+\[
+\| \Delta u \|_{L^2(\R^n)}^2 = \frac{1}{(2\pi)^n} \int_{\R^n} |\xi|^4 |\hat{u}|^2 \, \dr \xi = \frac{1}{(2\pi)^n}\| |\xi|^2 \hat{u}\|_{L^2(\R^n)}^2.
+\]
+Now notice that
+\[
+\sum_{i,j=1}^n |(\xi\otimes\xi)_{i,j}|^2 = \sum_{i,j=1}^n |\xi_i\xi_j|^2 = |\xi|^2 \sum_{j=1}^n |\xi_j|^2 = |\xi|^4,
+\]
+from which (using Plancherel's identity again) it follows that
+\[
+\| \nabla^2 u\|_{L^2(\R^n)}^2 = \frac{1}{(2\pi)^n} \| |\xi|^2 \hat{u} \|_{L^2(\R^n)}^2.
+\]
+In particular, we have the quite surprising equality
+\[
+\| \Delta u\|_{L^2(\R^n)}^2 = \| \nabla^2 u\|_{L^2(\R^n)}^2.
+\]
+Next, we can use the trivial inequality $ab \leq \frac{1}{2}(a^2 + b^2)$ with $b=1$ to infer that
+\[ \begin{aligned}
+\|\nabla u\|_{L^2(\R^n)}^2 & = \frac{1}{(2\pi)^n} \int |\xi|^2 |\hat{u}|^2 \, \dr \xi
+\\ & \leq \frac{1}{(2\pi)^n} \int \frac{1}{2}(1+|\xi|^4) |\hat{u}|^2 \, \dr \xi
+\\ & \leq \frac{\|u\|_{L^2(\R^n)}^2 + \| \Delta u\|_{L^2(\R^n)}^2}{2}.
+\end{aligned}\]
+In conclusion, we use the definition of the $W^{2,2}(\R^n)$-norm to achieve \eqref{eq.21.1} for smooth functions:
+\[ \begin{aligned}
+\|u\|_{W^{2,2}(\R^n)}^2 & = \|u\|_{L^2(\R^n)}^2 + \|\nabla u\|_{L^2(\R^n)}^2 + \|\nabla^2 u\|_{L^2(\R^n)}^2
+\\ & \leq \frac{3}{2}( \|u\|_{L^2(\R^n)}^2 + \|\Delta u\|_{L^2(\R^n)}^2).
+\end{aligned}\]
+
+\br
+To prove that $ \| \Delta u\|_{L^2(\R^n)}^2 = \| \nabla^2 u\|_{L^2(\R^n)}^2$ we do not need the use the Fourier transform. Let $n=2$ (for simplicity) and notice that
+\[
+\int_{\R^2} |\nabla^2 u|^2 \,\dr x = \int_{\R^2} (u_{11}^2 + u_{22}^2 + u_{12}^2 + u_{21}^2) \, \dr x,
+\]
+where $u_{ij}$ is equal to $\partial_{x_i} \partial_{x_j} u$. A double integration by parts shows that
+\[
+\int_{\R^2} u_{12}^2 \, \dr x = - \int_{\R^2} u_1 u_{122}\, \dr x = \int_{\R^2} u_{11} u_{22} \,\dr x,
+\]
+and we conclude since
+\[ \begin{aligned}
+\int_{\R^2} (u_{11}^2 + u_{22}^2 + u_{12}^2 + u_{21}^2) \, \dr x & = \int_{\R^2} (u_{11}^2 + u_{22}^2 + 2 u_{11} u_{22}) \, \dr x
+\\ & = \int_{\R^2} (u_{11} + u_{22})^2 \, \dr x
+\\ & = \int_{\R^2} |\Delta u|^2 \,\dr x.
+\end{aligned} \]
+\er
+
+\proofstep{Step 2} Now assume that $u \in L^2(\R^n)$ has compact support. Take $u_\epsilon := u \ast \rho_\epsilon$ where $\rho_\epsilon$ is the usual regularizing kernel with compact support. Then $u_\epsilon \in C_c(\R^n)$ so
+\[
+\| u_\epsilon\|_{W^{2,2}(\R^n)}^2 \leq \frac{3}{2} ( \|u_\epsilon\|_{L^2(\R^n)}^2 + \|\Delta u_\epsilon\|_{L^2(\R^n)}^2).
+\]
+However, we know that $\Delta u_\epsilon = (\Delta u) \ast \rho_\epsilon$ so these estimates can be rewritten as
+\[ \begin{aligned}
+\| u_\epsilon\|_{W^{2,2}(\R^n)}^2 &\ \leq \frac{3}{2} \left( \|u_\epsilon\|_{L^2(\R^n)}^2 + \|(\Delta u) \ast \rho_\epsilon\|_{L^2(\R^n)}^2 \right)
+\\ & \leq \frac{3}{2}( \|u\|_{L^2(\R^n)}^2 + \|\Delta u\|_{L^2(\R^n)}^2)
+\end{aligned} \]
+because the convolution decreases the norms. It follows that $u_\epsilon \in W^{2,2}(\R^n)$, and this is enough to conclude that $u \in W^{2,2}(\R^n)$ by semicontinuity of the norm as $\epsilon \to 0$.
+
+\proofstep{Step 3} Let $\Theta$ be a smooth cutoff function from $\R^n$ to $[0,1]$ such that $\Theta(x) = 1$ for all $|x|\leq 1$ and $\Theta(x) = 0$ for all $|x| \geq 2$. Let $\Theta_\epsilon(x) := \Theta(\epsilon x)$ and consider the sequence
+\[
+u_\epsilon(x) := u(x) \Theta_\epsilon(x).
+\]
+The functions $u_\epsilon$ are compactly supported so by the previous step we have
+\[
+\| u_\epsilon\|_{W^{2,2}(\R^n)}^2  \leq \frac{3}{2} \left( \|u_\epsilon\|_{L^2(\R^n)}^2 + \|\Delta u_\epsilon\|_{L^2(\R^n)}^2 \right),
+\]
+but, this time, things are not as easy because the Laplacian is more complicated:
+\[
+\Delta u_\epsilon = \Theta_\epsilon \Delta u + u \Delta\Theta_\epsilon + 2\, \nabla u \cdot \nabla \Theta_\epsilon.
+\]
+We now estimate the $L^2$-norm of the left-hand side as follows:
+\[
+\|\Delta u_\epsilon\|_{L^2(\R^n)}^2 \leq \| \Delta u \|_{L^2(\R^n)}^2 \underbrace{\|\Theta_\epsilon\|_\infty^2}_{\leq 1} +  \|u\|_{L^2(\R^n)}^2 \mathcal{O}(\epsilon^4)+ \|\nabla u\|_{L^2(\R^n)}^2 \mathcal{O}(\epsilon^2)
+\]
+since it is easy to verify that
+\[
+\|\Delta \Theta_\epsilon\|_{L^\infty(\R^n)} = \epsilon^2 \|\Theta_\epsilon\|_{L^\infty(\R^n)} = \mathcal{O}(\epsilon^2).
+\]
+However, the right-hand side of the estimate is a problem because the term $\|\nabla u\|_{L^2(\R^n)}^2 \mathcal{O}(\epsilon^2)$ is fine only if we know already that $\nabla u \in L^2(\R^n)$. Under this {\bf extra assumption} we conclude that
+\[
+\| u\|_{W^{2,2}(\R^n)} \leq c ( \|u\|_{L^2(\R^n)} + \|\Delta u\|_{L^2(\R^n)}).
+\]
+\end{proof}
+
+\br
+To prove \eqref{eq.21.1} without assuming $\nabla u \in L^2(\R^n)$ use the fact that every $u \in L^2(\R^n)$ is a tempered distribution. Then everything works as in {\bf Step 1} because the Fourier transform is well-defined on the space of tempered distributions.
+\er
+
+\bc
+If $u \in W^{1,2}(\Om)$ and $\Delta u \in L^2(\Om)$, then $u \in W_{\mathrm{loc}}^{2,2}(\Om)$.
+\ec
+
+\begin{proof}[Hint of the proof] Let $\Om'$ be a relatively compact subset of $\Om$ and $\Theta$ a cutoff function. Apply {\color{blue}Proposition \ref{prop.21.1}} to the function $\tilde{u} := u \Theta$. \end{proof}
+
+\br
+We cannot improve this result. Indeed, for every $\Om\subset \R^n$ there exists $u \in W^{1,2}(\Om) \cap C^\infty(\Om)$ harmonic ($\Delta u = 0$) that does not belong to $W^{2,2}(\Om)$.
+\er
+
+\begin{proof}
+Consider $\Om = B(0,1)$ and let $u_n$ be the real part of $z^n$, that is,
+\[
+u_n = \mathfrak{Re}(z^n) = \rho^n \cos(n\theta).
+\]
+It is easy to show that $\|u_n\|_{L^2(\Om)}^2 \simeq n^{-1}$, $\|\nabla u_n\|_{L^2(\Om)}^2 \simeq n$ and $\|\nabla^2 u_n\|_{L^2(\Om)}^2 \simeq n^{3}$. Now consider the function defined by setting
+\[
+u := \sum_{n \in \N} \alpha_n u_n,
+\]
+where $\alpha_n$ are coefficients that need to be chosen in such a way that: \mbox{}
+\begin{enumerate}[label=(\roman*),itemsep=.4em]
+\item The series $\sum_{n \in \N} \alpha_n u_n$ converges in $W^{1,2}(\Om)$ and, by completeness, we obtain $u \in W^{1,2}(\Om)$.
+\item The series $\sum_{n \in \N} \alpha_n \|\nabla^2 u_n\|_{L^2(\Om)}$ diverges to infinity.
+\item The function $u$ does not belong to $W^{2,2}(\Om)$ - which is not guaranteed by the previous requirement.
+\end{enumerate}
+This is not trivial so we propose another way to get the same conclusion. Let $\X$ be the space of harmonic functions in $W^{1,2}(\m)$ and consider the operator
+\[
+T : \X \ni u \longmapsto T(u) = \nabla^2 u \in L^2(\Om).
+\]
+It is not hard to see that $T$ is unbounded. If $\rho_\epsilon$ is a regularizing convolution kernel, then we can define the family of operators $\{T_\epsilon\}_{\epsilon > 0}$ by setting
+\[
+T_\epsilon(u) = \nabla^2 u \ast \rho_\epsilon.
+\]
+These are all well-defined and continuous, but
+\[
+\sup_{\epsilon > 0} \|T_\epsilon\| = \infty
+\]
+so by Banach-Steinhaus theorem we can find $u$ such that
+\[
+\|T_\epsilon(u)\|_{L^2(\Om)} \xrightarrow{\epsilon \to 0^+} \infty
+\]
+and, if one is careful enough, it can be proved that $\Delta u$ does not belong to $L^2(\Om)$.
+\end{proof}
+
+\bpr \label{prop.21.2}
+If $u \in W_0^{1,2}(\Om)$ and $\Delta u \in L^2(\Om)$, then $u \in W_0^{2,2}(\Om)$ provided that $\Om$ is "sufficiently regular".
+\epr
+
+\br
+With sufficiently regular we mean that $\Om$ must have a boundary of class at least $C^2$. Note that piecewise polygonal is not good enough in this case.
+\er
+
+\bc
+Let $u_0 \in W^{2,2}(\Om)$. If $u \in W_{u_0}^{1,2}(\Om)$ and $\Delta u \in L^2(\Om)$, then $u \in W_{u_0}^{2,2}(\Om)$ provided that $\Om$ is "sufficiently regular".
+\ec
+
+We now give two {\bf wrong} proofs of {\color{blue}Proposition \ref{prop.21.2}} to get a better understand of what could go wrong when we try to extend the function $u$ from $\Om$ to $\R^n$.
+
+\begin{proof}[Wrong Proof 1]
+Approximate $u \in W_0^{1,2}(\Om)$ with a sequence of smooth functions $u_k \in C_c^\infty(\R^n)$ and apply {\color{blue}Proposition \ref{prop.21.1}} to each $u_k$. We find the estimate
+\[
+\| u_k\|_{W^{2,2}(\R^n)} \leq c ( \|u_k\|_{L^2(\R^n)} + \|\Delta u_k\|_{L^2(\R^n)}).
+\]
+for each $k \in \N$, but the problem is that $\Delta u_k$ has no reason at all to converge to $\Delta u$. For example, the function
+\[
+u(x)= \sin(x)
+\] 
+belongs to $W_0^{1,2}((0,\pi))$ and its distributional second-order derivative is given by
+\[
+\delta_0 + \delta_\pi - \sin(x)
+\]
+since $- \sin(x)$ is the second derivative inside the interval $(0,\pi)$, but we also have to keep in mind the contributes from the boundary which are Dirac masses. However, if
+\[
+u_k''(x) \xrightarrow{k \to \infty} \delta_0 + \delta_\pi - \sin(x) \quad \text{in $L^2((0,\pi))$},
+\]
+then we are not approximating $u$ via smooth functions since $u_k'' \notin L^2((0,\pi))$.
+\end{proof}
+
+\begin{proof}[Wrong Proof 2]
+Let $u \in W_0^{1,2}(\Om)$. We can extend it to $\tilde{u}$ zero outside of $\Om$ because the trace is zero, but it might happen that
+\[
+\Delta u \neq \Delta \bar{u}
+\]
+because the normal derivative of the extension could have jumps at the boundary created by the extension itself.
+\end{proof}
+
+Before we can give the correct proof of {\color{blue}Proposition \ref{prop.21.2}}, a remark about odd extensions of Sobolev functions is in order.
+
+\br
+If $f \in W_0^{2,2}((0,\infty))$, then the odd extension
+\[
+\tilde{f}(x) := \begin{cases}f(x) & \text{if $x > 0$}, \\ -f(-x) & \text{if $x < 0$} \end{cases}
+\]
+belongs to $W^{2,2}(\R)$. Indeed, it is easy to verify $\tilde{f} \in W^{1,2}(\R)$ since we are ``gluing'' together two functions with the same trace so we only need to prove that
+\[
+g(x) = \begin{cases} f''(x) & \text{if $x > 0$}, \\ - f''(-x) & \text{if $x < 0$},\end{cases}
+\]
+is the second-order distributional derivative of the function $\tilde{f}$. A simple computation shows that
+\[ \begin{aligned}
+\int_\R \tilde{f}(x) \varphi''(x) \, \dr x & = \int_0^\infty f(x) (\varphi''(x)-\varphi''(-x)) \, \dr x
+\\ & = \int_0^\infty f''(x) (\varphi(x)- \varphi(-x)) \, \dr x =
+\\ & = \int_\R g(x) \varphi(x) \, \dr x.
+\end{aligned} \]
+We integrated by parts twice and no boundary terms appear, even if $\varphi(x) - \varphi(-x)$ has derivative which is not compactly supported. The remaining boundary term would be
+\[
+\left[ f(x) (\varphi'(x)-\varphi'(-x) \right]_{x=0}^\infty,
+\]
+but $f \in W_0^{2,2}(0,\infty)$ so it vanishes.
+\er
+
+\begin{proof}[Correct Proof]
+Suppose $\Om$ is the half-space, namely $\Om = \R^+ \times \R^{n-1}$. Take $u \in W_0^{1,2}(\Om)$ with $\Delta u \in L^2(\Om)$ and define the odd extension as
+\[
+\tilde{u}(x) = \tilde{u}(x_1,\dots,x_n) = \begin{cases} u(x_1,\dots,x_n) & \text{if $x_1> 0$}, \\ -u(-x_1,x_2,\dots,x_n) & \text{if $x_1 < 0$}. \end{cases}
+\]
+As above, it is easy to verify that $\tilde{u} \in W^{1,2}(\R^n)$ and $\Delta \tilde{u}$ is the odd extension of $\Delta u$ so it must be an element $L^2(\R^n)$. To conclude apply {\color{blue}Proposition \ref{prop.21.1}} to $\tilde{u}$.
+\end{proof}
+
+\br
+If $\Om$ is a general subset with $C^2$ boundary, the idea is to take a partition of unity and decompose $u$ accordingly. Then each ``piece'' can be reduced to the half-plane by a change of variables - which is why we have to assume the boundary to be the graph of a $C^2$ function -.
+\er
+
+%% Nuova lezione
+
+%\bpr
+%Let $u \in W^{1,2}(\Om)$ be a function such that $\Delta u \in L^2(\Om)$. Assume also that the Neumann boundary condition
+%\[
+%\frac{\partial u}{\partial \eta} = 0
+%\]
+%holds in a distributional sense, where $\eta$ is the unit normal at the boundary $\partial \Om$. Then $u \in W^{2,2}(\Om)$ provided that $\Om$ is "sufficiently regular".
+%\epr
+
+%%% Nuova lezione, non salvare sopra
+
+In the previous lecture, we proved that $u \in W^{1,2}(\R^n)$ and $\Delta u \in L^2(\R^n)$, where $\Delta u$ is the distributional Laplacian, is enough to conclude $u \in W^{2,2}(\R^n)$ and
+\[
+\| u \|_{W^{2,2}(\R^n)} \leq c \left( \|u\|_{L^2(\R^n)} + \| \Delta u \|_{L^2(\R^n)} \right).
+\]
+We also proved that the same is not true if $\R^n$ is replaced by $\Om$, unless we add additional conditions as in the next proposition:
+
+\bpr
+Let $\Om \subset \R^n$ be a set with boundary of class $C^2$. If $u \in W_0^{1,2}(\Om)$ and $\Delta u \in L^2(\Om)$, then $u \in W_0^{2,2}(\Om)$ and there is a constant $c := c(\Om) > 0$ such that
+\[
+\|u\|_{W^{2,2}(\Om)} \leq c(\|u\|_{L^2(\Om)} + \|\Delta u\|_{L^2(\Om)}).
+\]
+\epr
+
+\br
+The same conclusion is true with $u \in W_{u_0}^{1,2}(\Om)$, but we must require the boundary datum $u_0$ to belong to the class $W^{2,2}(\Om)$.
+\er
+
+\bpr \label{pr.23.1}
+Let $\Om \subset \R^n$ be a set with boundary of class $C^2$. If $u \in W^{1,2}(\Om)$, $\Delta u = f \in L^2(\Om)$ and $\frac{\partial u}{\partial n} = 0$ on the boundary $\partial \Om$, then $u \in W^{2,2}(\Om)$ and
+\[
+\|u\|_{W^{2,2}(\Om)} \leq c \left(\|u\|_{L^2(\Om)} + \|\Delta u\|_{L^2(\Om)}\right).
+\]
+for some positive constant $c$ that depends on $\Om$.
+\epr
+
+\br
+Since $u$, a priori, only belongs to $W^{1,2}(\Om)$, the normal derivative does not have a trace and hence the condition
+\[
+\text{$\frac{\partial u}{\partial n} = 0$ on $\partial \Om$}
+\]
+is not a pointwise equality. However, it makes perfect sense in the ``world'' of distributions and it is easy to verify that requiring
+\[
+\int_\Om \left( f \varphi + \nabla u \cdot \nabla \varphi \right) \, \dr x = 0 \quad \text{for all $\varphi \in C_c^\infty(\R^n)$}
+\]
+is an {\bf equivalent} condition to both $\Delta u = f$ and $\frac{\partial u}{\partial n}  \, \big|_{\partial \Om} \equiv 0$.
+\er
+
+Before we can prove {\color{blue}Proposition \ref{pr.23.1}}, we need to briefly discuss how to extend a function and preserve the condition on the normal derivative.
+
+\br
+Let $v \in W^{2,2}((0,\infty))$ be such that $\dot{v}(0) = 0$. The odd extension does not work in this situation, but the even extension
+\[
+v_p(x) := \begin{cases}v(x) & \text{if $x > 0$},\\v(-x) & \text{if $x < 0$}, \end{cases}
+\]
+does the trick, namely $\dot{v}_p(x) = 0$.
+\er
+
+\begin{xca}
+Let $v \in W^{2,2}((0,\infty))$. Show that $v_p \in W^{2,2}(\R)$ and the second derivative $\ddot{v_p}$ is the even extension of $\ddot{v}$.
+\end{xca}
+
+\begin{proof}[Proof of Proposition \ref{pr.23.1}]
+Assume that $\Om = (0,\infty) \times \R^{n-1}$. The idea is similar to {\color{blue}Proposition \ref{prop.21.2}}, but given $u \in W_{1,2}(\Om)$ with $\nabla u \in L^2(\Om)$ we define
+\[
+u_p(x) = \tilde{u}(x_1,\dots,x_n) = \begin{cases} u(x) & \text{if $x_1> 0$}, \\ u(-x_1,x_2,\dots,x_n) & \text{if $x_1 < 0$}, \end{cases}
+\]
+and apply {\color{blue}Proposition \ref{prop.21.1}} to $u_p$. The case in which $\Om$ is not the half-plane can be dealt with in the exact same way (partition of unity + change of variables).
+\end{proof}
+
+\br
+After one shows that $u \in W^{2,2}(\Om)$, the trace of the normal derivative exists and hence the condition
+\[
+\frac{\partial u}{\partial n} \, \big|_{\partial \Om} =0
+\]
+is a pointwise equality. Similarly, the Laplacian $\Delta u$ is not anymore a distribution but an actual $L^2(\Om)$-function.
+\er
+
+\bt
+If $1 < p < \infty$, $u \in W^{1,p}(\R^n)$ and $\Delta u \in L^p(\R^n)$, then $u \in W^{2,p}(\R^n)$.
+\et
+
+\br
+The proof of this statement, unlike the case $p = 2$, is nontrivial. The idea is to use once again the Fourier transform and show the key estimate
+\[
+\| \nabla^2 u \|_{L^p(\R^n)} \leq c \|\Delta u\|_{L^p(\R^n)}
+\]
+for all $u \in C_c^\infty(\R^n)$. If $f := \Delta u$, then
+\[
+\hat{f}(\xi) = -|\xi|^2 \hat{u}(\xi).
+\]
+We can recover $\hat{u}$ by writing (at least formally) that
+\[
+\hat{u}(\xi) = -\frac{1}{|\xi|^2} \hat{f}(\xi).
+\]
+It is well-known that there exists $K$ such that $\hat{K}=-\frac{1}{|\xi|^2}$. Therefore, using standard properties of the Fourier transform we find that
+\[
+\hat{u}(\xi) = \hat{K}(\xi) \hat{f}(\xi) = \mathcal{F}( K \ast f ),
+\]
+where $\mathcal{F}$ denotes the Fourier transform. It follows that
+\[
+u = K \ast f,
+\]
+where $K$ is (up to a constant) the fundamental solution of the Laplacian ($|x|^{2-n}$ if $n\geq 3$ and $\log|x|$ if $n = 2$). Next, we apply the following fundamental result:
+
+\bt[Calderón–Zygmund] \index{Calderón–Zygmund theorem}
+Suppose that the operator $T$ given by
+\[
+Tf(x) = \mathrm{p.v.} \int_{\R^n} K(x-y) f(y) \, \dr y
+\]
+has kernel $K$ that satisfies the following conditions: \mbox{}
+\begin{enumerate}[label=(\alph*),itemsep=.4em]
+\item $|K(x)| \leq c |x|^{-n}$ for all $x\in \R^n$;
+\item $\int_{r<|x|<R} K(x) \, \dr x = 0$ for all $0 < r < R < \infty$;
+\item $\int_{|x|>2|y|} |K(x-y)-K(x)| \, \dr x \leq c'$ for a positive constant $c'$ when $|y|>0$.
+\end{enumerate}
+Then for $1 < p < \infty$ we have that $T : L^p(\R^n) \to L^p(\R^n)$ is a bounded operator.
+\et
+
+At this point notice that $K \ast f$ and $\nabla K \ast f$ both make sense as distributions, but $\nabla^2 K \ast f$ only makes sense as a singular integral (as in the CZ theorem).
+\er

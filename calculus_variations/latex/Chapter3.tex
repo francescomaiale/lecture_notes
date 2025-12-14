@@ -1,0 +1,728 @@
+\chapter{Convexity and Lower Semicontinuity}
+\label{chapter:3}
+
+{\color{red}I will write the introduction after the chapter is complete!}
+
+\section{Introduction}
+
+Let $\Om \subset \R^n$ and consider the functional
+\[
+F(u) := \int_\Om f(\nabla u)\, \dr x,
+\]
+where $f : \R^{m\times n} \to [0,\infty]$ is a lower semicontinuous function. We proved in {\color{blue}Theorem \ref{thm.4.2.1}} the following chain of implications
+\[
+\text{$f$ convex} \implies \text{$F$ convex} \implies \text{$F$ weakly lower semicontinuous on $W^{1,p}(\Om,\R^m)$}
+\]
+for all $1 \leq p \leq \infty$ - replacing weakly by weakly$\star$ when $p = \infty$ -.
+
+\br
+Notice that $F$ weakly lower semicontinuous on $W^{1,p}(\Om,\R^m)$ implies that the Lagrangian $f$ is convex if either $m = 1$ or $n = 1$ (see {\color{blue}Theorem \ref{thm.scalarcase}}), so in these two special cases we can close the circle of implications and we get the equivalence
+\[
+\text{$f$ convex} \iff \text{$F$ weakly lower semicontinuous on $W^{1,p}(\Om,\R^m)$}.
+\]
+\er
+
+\br
+Recall that in {\color{blue}Theorem \ref{thm.scalarcase}} we defined a sequence of functions $u_\epsilon$ in such a way that the gradients are given by
+\[
+\nabla u_\epsilon(x) = \begin{cases} \xi_1 & \text{if $x \in \Om\setminus A_\epsilon$},\\[.4em] \xi_0 & \text{if $x \in A_\epsilon$}, \end{cases}
+\]
+where $A_\epsilon$ is the union of stripes of tickness $\lambda \epsilon$ and $(1-\lambda)\epsilon$ orthogonal to $\xi_1-\xi_0$. This means that, when $\xi_1$ and $\xi_0$ are vectors, there exists $\vec{e}$ such that
+\[
+\xi_1 - \xi_0 \perp \vec{e}.
+\]
+However, when $\xi_1$ and $\xi_2$ are matrices (namely, $m$ and $n$ are both different from $1$), the condition on the stripes translates to
+\[
+\xi_1 - \xi_0 = \vec{a} \otimes \vec{e},
+\]
+which means that the matrix $\xi_1-\xi_0$ is equal to the matrix given by the tensor product of two vectors $\vec{a}$ and $\vec{e}$. This should give a hint on why convexity is hard to achieve as soon as $\min\{m,n\} > 1$, but the next result gives a precise explanation.
+\er
+
+\bd \index{rank-one convexity}
+A function $f : \R^{m\times n} \to [0,\infty]$ is {\em rank-one convex} if
+\[
+f(\lambda \xi_0 + (1-\lambda)\xi_1) \leq \lambda f(\xi_0) + (1-\lambda)f(\xi_1)
+\]
+for all $\lambda \in [0,1]$ and all $\xi_0,\xi_1 \in \R^{m\times n}$ such that
+\[
+\rank(\xi_1-\xi_0) = 1.
+\]
+\ed
+
+\bpr
+Let $\min\{m,n\} > 1$. If $F$ weakly lower semicontinuous on $W^{1,p}(\Om,\R^m)$, then $f$ is rank-one convex.
+\epr
+
+We will be more precise in the next section, but there is an additional notion, {\em polyconvexity}, which is easily seen to be different from convexity such that
+\[
+\text{$f$ polyconvex} \implies \text{$F$ weakly lower semicontinuous on $W^{1,p}(\Om,\R^m)$},
+\]
+with the same replacement as above if $p = \infty$. In particular, we can summarise everything we said until now in the following scheme of implications:
+\[
+\text{$f$ polyconvex} \implies \text{$F$ weakly lsc on $W^{1,p}(\Om,\R^m)$} \implies \text{$f$ rank-one convex}.
+\]
+This means that there must be a kind of ``middle ground notion of convexity'', different from the others, which gives equivalence with weakly lower semicontinuity. This notion is known in the literature as {\em quasiconvexity} and it can be proved that
+\[
+\text{$f$ convex} \implies \text{$f$ polyconvex} \implies \text{$f$ quasiconvex}\implies \text{$f$ rank-one convex}.
+\]
+In particular, if $m = 1$ or $n = 1$, then these classes coincide with one another (because the smallest and the largest do) and it is known that for $n \geq 2$ and $m \geq 3$ they are all different.
+
+\br[Open Problem]
+If $n = m = 2$ it is still an open problem (with many important consequences) to determine whether or not
+\[
+\text{$f$ quasiconvex} \iff \text{$f$ rank-one convex}.
+\]
+On the other hand, it is well-known that convexity, polyconvexity and quasiconvexity are all different classes.
+\er
+
+\section{Polyconvexity}
+
+The goal of this section is to give a formal definition of {\em policonvexity} and show that it is indeed enough to obtain weak lower semicontinuity of the functional - although some restrictions on $p$ appear due to technical reasons -.
+
+\bd \index{polyconvex function}
+A lower semicontinuous function $f: \R^{m \times n} \to [0,\infty]$ is {\em polyconvex} if it can be written as
+\[ 
+f(\xi) = g(M(\xi))
+\]
+where $M(\xi)$ is the vector of all minors of the matrix $\xi$ and $g$ is a convex function.
+\ed
+
+\bex
+If $m = n = 2$, $f$ is polyconvex if $f$ can be written as
+\[
+f(\xi) = g(\xi, \det \xi)
+\]
+with $g : \R^{2 \times 2} \times \R \to [0,\infty]$ convex.
+\eex
+
+\bt \label{thm.2.12}
+If $f$ is polyconvex, then $F(u) = \int_\Om f(\nabla u) \, \dr x$ is weakly lower semicontinuous on $W^{1,p}(\Om)$ for $p \geq \min\{m,n\}$.
+\et
+
+Before we can deal with this theorem, we first need to state and prove a couple of technical results concerning the convergence of minors.
+
+\bl
+Let $m = n = 2$. If $u_n \rightharpoonup u_\infty$ in $W^{1,p}(\Om,\R^2)$ and $p > 2$, then
+\[
+\det (\nabla u_n) \rightharpoonup \det(\nabla u_\infty) \quad \text{in $L^{\frac{p}{2}}(\R^2)$.}
+\]
+\el
+
+\begin{proof}
+First, assume that $u \in C^2(\Om,\R^2)$. It is easy to show that the determinant of the gradient, which is equal to
+\[
+\det(\nabla u) = \frac{\partial u_1}{\partial x_1} \frac{\partial u_2}{\partial x_2} - \frac{\partial u_2}{\partial x_2} \frac{\partial u_1}{\partial x_1},
+\]
+can also be rewritten as
+\begin{equation} \label{eq.a.1}
+\det(\nabla u) = \frac{\partial}{\partial x_1} \left( u^1 \frac{\partial u^2}{\partial x_2}\right) - \frac{\partial}{\partial x_2} \left( u^1 \frac{\partial u^2}{\partial x_1}\right),
+\end{equation}
+where $u^1$ and $u^2$ are the components of $u$. We now claim that \eqref{eq.a.1} holds even if there is less regularity, namely $u \in W^{1,p}(\Om,\R^2)$ with $p > 2$, but the equal sign has to be intended in the distributional sense.
+
+This follows from a standard approximation argument via smooth functions $\nu_n$ (converging strongly in $W^{1,p}$ to $\nu$) so it suffices to show that the left-hand and the right-hand sides of \eqref{eq.a.1} are both continuous in the distributional topology. By H\"{o}lder's inequality,
+\[
+\text{$\nu_n^1 \xrightarrow{n \to \infty} \nu^1$ and $\frac{\partial \nu_n^2}{\partial x_2} \xrightarrow{n \to \infty} \frac{\partial \nu_n^2}{\partial x_2}$ in $L^p$} \implies \text{$\nu_n^1 \frac{\partial \nu_n^2}{\partial x_2} \xrightarrow{n \to \infty} \nu^1 \frac{\partial u^2}{\partial x_2}$ in $L^{\frac{p}{2}}$},
+\]
+which gives the continuity in the distributional topology of the right-hand side of \eqref{eq.a.1}. A similar argument works for the left-hand side. Now, by Sobolev embedding,
+\[
+\text{$u_n^i$ converges strongly to $u^i$ for $i = 1,2$ in $L^p$},
+\]
+and, since the sequence of the derivatives converges weakly in $L^p$, a well-known result in functional analysis asserts that the product $u^1 \frac{\partial u^2}{\partial x_2}$ converges weakly in $L^{\frac{p}{2}}$. Therefore
+\[
+\det(\nabla u_n)
+\]
+converges in the sense of distributions to $\det(\nabla u_\infty)$ and, since, $\det(\nabla u_n)$ is uniformly bounded in $L^{\frac{p}{2}}$ we easily infer that
+\[
+\det (\nabla u_n) \rightharpoonup \det(\nabla u_\infty) \quad \text{in $L^{\frac{p}{2}}$}.
+\]
+\end{proof}
+
+\br
+If $p = 2$, the same result holds true but we have to replaced the weak convergence with the weak$\star$ one. The reader might try to prove it as an exercise.
+\er
+
+Note that in the proof of this lemma the dimension of the ambient space, $\Om \subset \R^m$, does not matter and hence $m$ is arbitrary. We can thus replace the gradient with any $2 \times 2$ minor $M(\nabla u_n)$, and the proof only requires small changes.
+
+\bl \label{lemma.6..4.4}
+Let $m = n$. If $u_k \rightharpoonup u_\infty$ in $W^{1,p}(\Om,\R^n)$ and $p > n$, then
+\[
+\det (\nabla u_n) \rightharpoonup \det(\nabla u_\infty) \quad \text{in $L^{\frac{p}{n}}(\R^n)$.}
+\]
+\el
+
+\begin{proof}
+The argument is similar but it is necessary to use a different identity. More precisely, if $u \in C^2(\Om,\R^n)$, then we can use multilinear algebra to write
+\[ \begin{aligned}
+\det(\nabla u) \, \dr x^1 \wedge \cdots \wedge \dr x^n & = \dr u_1 \wedge \cdots \wedge \dr u_n
+\\[1em] & = \dr ( u_1 \dr u_2 \wedge \cdots \wedge \dr u_n ).
+\end{aligned} \]
+This identity holds, as above, even for functions with lower regularity (namely in $W^{1,p}$). Furthermore, it allows us to conclude by induction because
+\[
+\text{$u^1$ converges strongly by Sobolev embedding in $L^p$},
+\]
+and $\dr u_2 \wedge \cdots \wedge \dr u_n$ converges weakly in $L^{\frac{p}{n-1}}$ by inductive hypothesis. Then the product converges weakly in $L^{\frac{p}{n}}$ as explained before, and hence
+\[
+\det(\nabla u_n)
+\]
+converges in the sense of distributions to $\det(\nabla u_\infty)$. Since $\det(\nabla u_n)$ is uniformly bounded in $L^{\frac{p}{n}}$, we easily infer that
+\[
+\det (\nabla u_n) \rightharpoonup \det(\nabla u_\infty) \quad \text{in $L^{\frac{p}{n}}$}.
+\]
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm.2.12}]
+We put the additional assumption $p > \min\{m,n\}$. Now, if we write
+\[
+F(u_n)= \int_\Om g(M(\nabla u_n)) \, \dr x,
+\]
+then we can use {\color{blue}Lemma \ref{lemma.6..4.4}} together with the convexity of $g$ to infer that $F$ is weakly lower semicontinuous (as in {\color{blue}Theorem \ref{thm.4.2.1}}).
+\end{proof}
+
+\section{Quasiconvexity}
+
+Let $f : \R^{m \times n} \to [0,\infty)$ be lower semicontinuous and locally bounded. Before we give the definition of quasiconvexity, we first recall a useful characterisation of convexity.
+
+\bpr
+Let $B$ be the unit ball of $\R^n$. The function $f$ is convex if and only if for every $\xi \in \R^{m \times n}$ and every $v : B \to \R^{m \times n}$ with zero average,
+\[
+\int_B v \, \dr x = 0,
+\]
+it turns out that
+\[
+\averint_B f(\xi + v(x)) \, \dr x \geq f(\xi).
+\]
+\epr
+
+The following definition of quasiconvexity is due to Morrey. See, for example, the paper \cite{morrey1}.
+
+\bd \index{quasiconvex function}
+The function $f$ is {\em quasiconvex} if for every $\xi \in \R^{m \times n}$ and every $u \in W_0^{1,\infty}(B,\R^m)$ it turns out that
+\begin{equation}\label{eq.7.1}
+\averint_B f(\xi + \nabla u(x)) \, \dr x \geq f(\xi).
+\end{equation}
+\ed
+
+\bpr
+If $f$ is convex, then $f$ is quasiconvex.
+\epr
+
+\begin{proof}
+It is enough to show that functions $u \in W_0^{1,\infty}(B,\R^m)$ have gradient with zero average over $B$. Equivalently, we can prove that
+\[
+\int_B \frac{\partial u^1}{\partial x_1} \, \dr x = 0,
+\]
+where $u^1$ is the first component of $u$. This is fairly easy because we can use the identity
+\[
+\int_B \frac{\partial u^1}{\partial x_1} \, \dr x = \int_B \div( (u^1,0,\dots,0) ) \, \dr x,
+\]
+and the right-hand side is, by the divergence's theorem, equal to
+\[
+\int_{\partial B} u^1 \cdot \nu_1 \, \dr x.
+\]
+Since $u$ vanishes on the boundary (as it belongs to $W_0^{1,\infty}(B,\R^m)$), we infer that the last integral is zero and thus $\int_B \frac{\partial u^1}{\partial x_1} \, \dr x = 0$ as well.
+\end{proof}
+
+We are now ready to give the main result concerning quasiconvex functions, which is the equivalence between quasiconvexity and weak$\star$ lower semicontinuity on $W^{1,\infty}(\Om,\R^m)$.
+
+\bt \label{thm.7.1}
+Let $f$ be as above, $\Om \subset\R^n$, and consider the functional
+\[
+F(u) := \int_\Om f(\nabla u) \, \dr x.
+\]
+Then the following assertions hold:
+\begin{enumerate}[label=(\roman*),itemsep=.3em]
+\item If $f$ is quasiconvex, then $F$ is weakly$\star$ lower semicontinuous on $W^{1,\infty}(\Om,\R^m)$. 
+\item If $F$ is weakly$\star$ lower semicontinuous on $W^{1,\infty}(\Om,\R^m)$, then $f$ is quasiconvex.
+\end{enumerate}
+\et
+
+\br
+With extra (growth) assumptions on $f$, one can prove that $f$ quasiconvex implies $F$ weakly lower semicontinuous on $W^{1,p}(\Om,\R^m)$ for all $1 < p < \infty$.
+\er
+
+We will now only prove the point ({\romannumeral 2}) since it is easier and come back to ({\romannumeral 1}) after we studied specific properties of quasiconvex functions.
+
+\begin{proof}[Proof of ({\romannumeral 2})]
+Let $\xi\in \R^{m\times n}$ and $u \in W_0^{1,\infty}(B)$. Our goal is to prove \eqref{eq.7.1}, that is,
+\[
+\averint_B f(\xi + \nabla u(x)) \, \dr x \geq f(\xi).
+\]
+Assume $\xi = f(0) = 0$ for simplicity\footnote{The proof for a generic $\xi$ is more or less the same, while the condition $f(0) = 0$ can always be achieved by adding or subtracting a suitable constant to $f$.} and suppose that there exists $r > 0$ such that
+\[
+\Om \supseteq Q := \mathrm{Cube}(r),
+\]
+namely $\Om$ contains a cube with side-length $r$. For $\ell \in \N$ fix a partition of the cube in $\ell^n$ sub-cubes with sides of length $\frac{r}{\ell}$ and in each small cube $C_i$ of this partition fit a ball
+\[
+B(x_i,r_i) := B\left(x_i, \frac{r}{2\ell}\right).
+\]
+Let us consider the sequence of functions
+\[
+u_\ell(x) := \begin{cases}r_i \, u\left( \frac{x-x_i}{r_i} \right) & \text{if $x \in B(x_i,r_i)$ for some $i$}, \\ 0 & \text{if $x$ does not belong to any ball $B(x_i,r_i)$}.\end{cases}
+\]
+Then $u_\ell$ converges uniformly to the function identically zero because
+\[
+\| u_\ell \|_\infty = \frac{c}{2 \ell} \|u\|_\infty \xrightarrow{\ell \to \infty} 0,
+\]
+and it is easy to verify that $\| \nabla u_\ell \|_\infty \leq C$, with $C$ uniform constant, since
+\[
+\nabla u_\ell(x) = \begin{cases} \nabla u\left( \frac{x-x_i}{r_i} \right) &\text{if $x \in B(x_i,r_i)$ for some $i$}, \\ 0 & \text{if $x$ does not belong to any ball $B(x_i,r_i)$}.\end{cases}
+\]
+It can be proved (using, for example, {\color{blue}Proposition \ref{prop:carlip}}) that $u_\ell \in W_0^{1,\infty}(\Om)$. If we give this for granted, then it is easy to show that
+\[ \begin{aligned}
+F(u_\ell) & = \int_\Om f(\nabla u_\ell) \, \dr x =
+\\[1em] & = \sum_i \int_{B_i} f \left( \nabla u \left( \frac{x-x_i}{r_i} \right) \right) \, \dr x =
+\\[1em] & \stackrel{(\ast)}{=} \sum_i \left[ \int_{B} f( \nabla u(x) ) \, \dr x\right] r_i^n =
+\\[1em] & = \left( \frac{r}{2\ell}\right)^n \ell^n \int_B f(\nabla u(x)) \, \dr x =
+\\[1em] & = \left( \frac{r}{2} \right)^n \int_B f(\nabla u(x) \, \dr x),
+\end{aligned} \]
+where the equality $(\ast)$ follows from the change of variables formula. By weak$\star$ lower semicontinuity of $F$ we infer that
+\[
+\averint_B f(\nabla u(x)) \, \dr x = \left( \frac{r}{2} \right)^n \int_B f(\nabla u(x) \, \dr x) \geq F(0) = 0 = f(0),
+\]
+and this concludes the proof.
+\end{proof}
+
+Concerning the technical point which we avoided, namely the fact that $u_\ell$ belongs to $W_0^{1,\infty}(\Om)$, one could try to use the following characterization.
+
+\bpr \label{prop:carlip}
+A function $u$ belongs to $W_0^{1,\infty}(\Om) \cap C(\Om)$ if and only if $u$ belongs to $u \in \mathrm{Lip}(\R^n)$ with $u = 0$ on $\R^n \setminus \Om$.
+\epr
+
+\br
+We say that $u \in W_0^{1,\infty}(\Om) \cap C(\Om)$ because we require $u$ to be the {\bf continuous representative} of its class of equivalence (to avoid troubles in negligible sets).
+\er
+
+\begin{proof}[Proof for $n = 1$]
+Let $u \in \mathrm{Lip}(\R)$ and denote by $Du$ its weak gradient. It is easy to see that
+\[
+\frac{u(x+h)-u(x)}{h} \to Du(x)
+\]
+in the sense of distributions. This is an easy consequence of how distributions are defined since we have the identity
+\[
+\int_\R \frac{u(x+h)-u(x)}{h} \Phi(x) \, \dr x = \int_\R u(x) \frac{\Phi(x)-\Phi(x+h)}{h}
+\]
+for any smooth function $\Phi$ with compact support and the incremental ratio of a smooth function converges to its derivative. Finally, using the fact that
+\[
+\frac{u(x+h)-u(x)}{h}
+\]
+is uniformly bounded (because $u$ is Lipschitz), it must converge (by Banach-Alaoglu) to a bounded function which means that $Du \in L^\infty(\R)$ and hence $u \in W_0^{1,\infty}(\Om)$.
+\end{proof}
+
+\br
+If $u\in W^{1,p}(\Om) \cap C(\Om)$, $p > n$, then $u$ is differential at a.e. $x \in \Om$ with distributional gradient that coincide with the gradient $\nabla u(x)$.
+\er
+
+We will come back to the almost everywhere differentiability at a later time, but for the time being it is useful to keep it in mind when $p = \infty$.
+
+\bpr
+In the definition of quasiconvexity, we can replace the unit ball $B$ by any bounded open set $A \subset \R^n$.
+\epr
+
+\begin{proof}
+To prove this result, we first introduce a ``definition'' which will at the end be equivalent to quasiconvexity. Namely, we say that $f$ is $A$-quasiconvex if
+\[
+\averint_A f(\xi + \nabla u(x)) \, \dr x \geq f(\xi) \quad \text{for all $\xi \in \R^{m\times n}$ and $u \in W_0^{1,\infty}(A)$}.
+\]
+A simple observation tells us that
+\[
+\text{$f$ quasiconvex} \iff \text{$f$ is $B(x,r)$-quasiconvex for any ball $B(x,r)$}
+\]
+and now it is easy to conclude since if $B(x,r) \subset A$ we get
+\[
+\text{$f$ is $A$-quasiconvex} \implies \text{$f$ is quasiconvex}
+\]
+and, if $B(x,R) \supset A$, we get the opposite implication
+\[
+\text{$f$ is $A$-quasiconvex} \impliedby \text{$f$ is quasiconvex}.
+\]
+\end{proof}
+
+We now want to take a closer look to the chain of implications between the different notions of convexity, that is,
+\[
+\text{$f$ convex} \implies \text{$f$ polyconvex} \implies \text{$f$ quasiconvex}\implies \text{$f$ rank-one convex}
+\]
+in the nontrivial case (=when both $m$ and $n$ are bigger than or equal to two).
+
+\bpr
+The function $f$ is polyconvex if $f$ is convex.
+\epr
+
+\begin{proof}
+This follows trivially from the definition of polyconvexity because we can choose $g$ to be exactly equal to $f$.
+\end{proof}
+
+The next implication, $f$ polyconvex $\implies$ $f$ quasiconvex, follows from {\color{blue}Theorem \ref{thm.7.1}} together with {\color{blue}Theorem \ref{thm.2.12}}, but there is also a direct proof which we will see immediately.
+
+\br
+Suppose $\min\{m,n\} > 1$. We saw already an example of a polyconvex function which is not convex, while for
+\[
+\text{$f$ quasiconvex} \centernot\implies \text{$f$ polyconvex}
+\]
+there is some work to do. Finally, showing that
+\[
+\text{$f$ rank-one convex} \centernot\implies \text{$f$ quasiconvex}
+\]
+is even harder and there are no known counterexamples in the case $n = m = 2$. If $n \geq 2$ and $m \geq 3$, the first work in that direction can be found in the paper \cite{Svevak1}.
+\er
+
+Now, before we can give the mentioned direct proof, we need to present a few technical results.
+
+\bl \label{lemma.7.2}
+If $u \in W_0^{1,\infty}(B)$ and $\xi \in \R^{m\times n}$, then
+\[
+\averint_B M(\xi + \nabla u(x)) \, \dr x = M(\xi).
+\]
+\el
+
+To prove this result, it is sufficient to replace $M$ with the determinant (we leave to the reader the task to figure out why). Before that, recall a well-known property:
+
+\bl \label{lemma.7.3}
+For every $v,v' \in W^{1,\infty}(\Om,\R^n)$ such that $v \equiv \tilde{v}$ on $\partial \Om$ we have
+\[
+\int_\Om \det(\nabla v) \, \dr x = \int_\Om \det (\nabla \tilde{v}) \, \dr x.
+\]
+\el
+
+\begin{proof}
+Suppose that $v$ is smooth. Then
+\[ \begin{aligned}
+\int_\Om \det(\nabla v(x)) \, \dr x & = \int_\Om \dr v^1 \wedge \cdots \wedge \dr v^n
+\\[1em] & = \int_\Om \dr( v^1 \dr v^2 \wedge \dots \wedge \dr v^n)
+\\[1em] & = \int_{\partial\Om} v^1 \dr v^2 \wedge \dots \wedge \dr v^n,
+\end{aligned} \]
+and the last equality follows from Stoke's theorem. Since we can replace the differential form with its restriction to the tangent bundle, the integrand depends on $v^1$ and on the tangential derivatives of the other components, which means that they ultimately depend only on the value of $v$ at the boundary.
+\end{proof}
+
+\bl \label{lemma.7.4}
+If $u \in W_0^{1,\infty}(B,\R^n)$ and $\xi \in \R^{n\times n}$, then
+\[
+\averint_B \det(\xi + \nabla u(x)) \, \dr x = \det(\xi).
+\]
+\el
+
+\begin{proof}
+We use {\color{blue}Lemma \ref{lemma.7.3}} with $v(x) = \xi x + u(x)$ and $\tilde{v}(x) = \xi x$ since $u$ is equal to zero at the boundary so $v$ and $\tilde{v}$ coincide there.
+\end{proof}
+
+\bpr
+The function $f$ is quasiconvex if $f$ is polyconvex.
+\epr
+
+\begin{proof}
+Suppose that $f$ is polyconvex and let $g$ be the convex function such that $f(\xi)=g(M(\xi))$. Then
+\[
+\averint_B f(\xi + \nabla u(x)) \, \dr x = \averint g(M(\xi+\nabla u(x))) \, \dr x,
+\]
+and, using {\color{blue}Lemma \ref{lemma.7.2}} together with Jensen's inequality, we obtain
+\[
+\averint_B f(\xi + \nabla u(x)) \, \dr x \geq g(M(\xi)) = f(\xi),
+\]
+which is exactly the definition of quasiconvexity \eqref{eq.7.1}.
+\end{proof}
+
+\bpr
+The function $f$ is rank-one convex if $f$ is quasiconvex.
+\epr
+
+\begin{proof}
+Suppose $f$ quasiconvex and fix $\xi_0,\xi_1 \in \R^{m\times n}$ such that $\rank(\xi_1-\xi_0)= 1$, i.e., $\xi_1-\xi_0 = a \otimes e$. Fix $\lambda \in [0,1]$ and denote by $\xi$ the convex combination:
+\[
+\xi := \lambda \xi_0 + (1-\lambda)\xi_1.
+\]
+Our goal is to prove that
+\[
+f(\xi) \leq \lambda f(\xi_0) + (1-\lambda) f(\xi_1).
+\]
+The idea is the same one we used in the $1$-dimensional case in {\color{blue}Theorem \ref{thm.4.2.1}}. Namely, we wish to construct a sequence $u_\epsilon : \Om \to \R^m$ such that
+\[
+u_\epsilon \to u(x) := \xi x \quad \text{uniformly}
+\]
+and $\nabla u_\epsilon$ is equal to $\xi_0$ on a set $A_\epsilon^0$ with constant measure $\lambda M$, equal to $\xi_1$ on a set $A_\epsilon^1$ with constant measure $(1-\lambda)M$, bounded on the ``bad set'' $B_\epsilon$ which measure satisfies $|B_\epsilon| \to 0$ and equal to $\xi$ on the rest. It is then easy to verify that
+\[
+\averint_B f(\nabla u_\epsilon) \, \dr x \geq f(\xi)
+\]
+as a consequence of the quasiconvexity of $f$. By passing this inequality to the limit as $\epsilon \to 0^+$ we finally get the desired inequality:
+\[
+f(\xi) \leq \lambda f(\xi_0) + (1-\lambda) f(\xi_1).
+\]
+\end{proof}
+
+\br
+We tacitly assumed $f$ to be locally bounded. Indeed, in the bad part $B_\epsilon$ we cannot estimate the gradient and hence we need $\int_{B_\epsilon} f(\nabla u_\epsilon) \, \dr x$ to be finite.
+\er
+
+We now want to show that rank-one convex functions are locally Lipschitz and, as a consequence, the same is true for polyconvex and quasiconvex functions.
+
+\bl \label{lemma.3.18}
+Let $\Om \subseteq \R^n$ be a convex set. If $g : \Om \subset \R^n \to \R$ is convex, then $g$ is locally Lipschitz on the interior part of $\Om$.
+\el
+
+\bt \label{thm.lowsrank}
+Let $f : \R^{m \times n} \to [0,\infty)$ be lower semicontinuous and locally bounded. If $f$ is rank-one convex, then $f$ is locally Lipschitz.
+\et
+
+\begin{proof}[Idea of the proof]
+Since $f$ is rank-one convex, by definition $f$ is convex on rank-one lines in the space of matrices $\R^{m\times n}$, which means that
+\[
+\rank(\xi_1-\xi_0) = 1 \implies \text{$f$ convex on the line of direction $\xi_1-\xi_0$}.
+\]
+By {\color{blue}Lemma \ref{lemma.3.18}}, the function $f$ is locally Lipschitz on rank-one lines. This is enough to conclude because it can be proved that {\bf any} two matrices can be connected via rank-one segments in such a way that the total length is bounded.
+\end{proof}
+
+\br
+The spirit of this result is similar to the assertion ``$f:\R^2\to\R$ locally Lipschitz on both horizontal and vertical lines implies $f$ locally Lipschitz on $\R^2$.''
+\er
+
+We are now ready to prove the main result concerning quasiconvex Lagrangians ({\color{blue}Theorem \ref{thm.7.1}}), but for the sake of clarity, we give the accurate statement here again.
+
+\bt \label{thm.7.1.1}
+Let $f : \R^{m \times n} \to [0,\infty)$ be lower semicontinuous and finite and let $\Om \subset\R^n$. Consider the functional
+\[
+F(u) := \int_\Om f(\nabla u) \, \dr x.
+\]
+Then the following assertions hold:
+\begin{enumerate}[label=(\roman*),itemsep=.3em]
+\item If $f$ is quasiconvex, then $F$ is weakly$\star$ lower semicontinuous on $W^{1,\infty}(\Om,\R^m)$. 
+\item If $F$ is weakly$\star$ lower semicontinuous on $W^{1,\infty}(\Om,\R^m)$, then $f$ is quasiconvex.
+\item If, in addition, $f$ satisfies the $p$-growth condition
+\[
+f(\xi) \leq C(1+|\xi|^p)
+\]
+for some $1 < p < \infty$, then $F$ is weakly lowersemicontinuous on $W^{1,p}(\Om,\R^m)$.
+\end{enumerate}
+\et
+
+We are now ready to give the proof of the assertion ({\romannumeral 1}) since ({\romannumeral 2}) was proved earlier and ({\romannumeral 3}) is more complicated and left to the interested reader.
+
+\begin{proof}[Proof of ({\romannumeral 1})]
+Let $u_n \stackrel{\star}{\rightharpoonup} u_\infty$ in $W^{1,\infty}(\Om,\R^m)$. The idea is to first prove the theorem under restrictive assumptions on both $\Om$ and $u_\infty$, and then pass to the general case using some tools from geometric measure theory.
+
+\proofstep{Step 1} Assume $\Om = B$, where $B$ is any ball, and $u_\infty$ identically equal to $0$. Note that, if each $u_n$ is identically zero at the boundary of $B$, then
+\[
+F(u_n) = \int_B f(\nabla u_n)\,\dr x \geq |B| f(0) = F(u_\infty),
+\]
+where the inequality $\geq$ follows from the quasiconvexity \eqref{eq.7.1}. If $u_n$ does not vanish at the boundary of $B$, then the idea is to exploit the fact that $u_n$ converges uniformly to zero and modify $u_n$ to some $\tilde{u}_n$ satisfying, more or less, the following ``properties'':
+\[
+\tilde{u}_n \, \big|_{\partial B} \equiv 0 \quad \text{and} \quad F(\tilde{u}_n) \simeq F(u_n).
+\]
+To make this argument formal, start by introducing the distance function $d(x) := \mathrm{dist}(x,\partial B)$ and the function $g$, defined on $B\times \R^m$ and given by
+\[
+g(x,u) := u \left( 1 \wedge \frac{d(x)}{|u|}\right).
+\]
+We can introduce the {\em truncation operator} $T$ which is defined as
+\[
+Tu(x) := g(x,u(x))
+\]
+for all $u \in W^{1,\infty}(B,\R^m)$. Now notice that $g$ is Lipschitz as a function of $(x,u)$ and hence we can use the equivalence between $W^{1,\infty}$ and $\mathrm{Lip}$ discussed earlier to conclude that
+\[ \begin{aligned}
+& u \in W^{1,\infty}(B,\R^m) \implies u \in \mathrm{Lip}(B,\R^m) \implies \cdots
+\\ & \cdots \implies Tu \in \mathrm{Lip}(B,\R^m) \implies Tu \in W^{1,\infty}(B,\R^m).
+\end{aligned} \]
+Furthermore, it is not hard to verify that the following properties hold: \mbox{}
+\begin{enumerate}[label=(\arabic*), itemsep=.4em]
+\item $Tu(x) = 0$ whenever $x \in \partial B$ since $d(\cdot)$ vanishes at the boundary of $B$;
+\item $Tu(x)=u(x)$ on $B\setminus A_u$, where $A_u = \{x \in B \: : \: |u(x)|>d(x)\}$;
+\item $\nabla (Tu)(x) = \nabla u(x)$ at {\bf almost every} $x \in B \setminus A_u$ because they are Lipschitz (so a.e. differentiable and a.e. point is a density point);
+\item $|\nabla (Tu)(x)| \leq \mathrm{Lip}(Tu) \leq c \cdot \mathrm{Lip}(u)$ at a.e. point and, in particular, at a.e. $x \in A_u$.
+\end{enumerate}
+Now recall that (by {\color{blue}Theorem \ref{thm.lowsrank}}) $f$ is finite and quasiconvex if and only if $f$ is finite and rank-one convex, which means that $f$ is locally bounded. Let
+\[
+\omega(t) := \sup_{|M|\leq t}f(M) < \infty
+\]
+be the modulus of growth for $f$, which is finite for $t>0$ sufficiently small. It follows that
+\[ \begin{aligned}
+F(Tu) & = \int_B f(\nabla(Tu)) \, \dr x
+\\ & \leq \int_{B\setminus A_u} f(\nabla u) \, \dr x + \int_{A_u} f(\nabla(Tu)) \, \dr x
+\\[.6em] & \leq F(u) +  \omega(c \cdot \mathrm{Lip}(u)) |A_u|.
+\end{aligned}\]
+In particular, we can reverse the inequality to obtain
+\[
+F(u) \geq F(Tu) - \omega(c \cdot \mathrm{Lip}(u)) |A_u| 
+\]
+and, given that $Tu$ is zero at the boundary of $B$, we use that $f$ is quasiconvex \eqref{eq.7.1} to infer that
+\[
+F(u) \geq |B| f(0) - \omega(c \cdot \mathrm{Lip}(u)) |A_u|.
+\]
+Now notice that $u_n$ converges to zero almost everywhere, so we can apply this inequality to $u := u_n$ and conclude that
+\[
+F(u_n) \geq |B| f(0) - o(1) = F(u_\infty) - o(1)
+\]
+because the maps $u_n$ are uniformly Lipschitz and - as the reader might try to check this by themselves - we have $|A_{u_n}| \to 0$. Taking the limit as $n \to \infty$ yields
+\[
+\lim_{n \to \infty}F(u_n) \geq F(u_\infty),
+\]
+and this concludes the proof of the first step.
+
+\proofstep{Step 2} Assume $\Om = B$ and $u_\infty =$ affine function. Then $u_\infty$ has gradient equal to some fixed $\xi$ and we can define a more efficient truncation by setting
+\[
+\widetilde{T}u := u_\infty + T(u-u_\infty),
+\]
+where $T$ is the truncation operator defined in the first step. Arguing as above yields
+\[
+F(u) \geq |B|f(\xi) - \omega(c \cdot \mathrm{Lip}(u)) |\widetilde{A}_u|,
+\]
+where $\widetilde{A}_u := \{ x \in B \: : \: |u(x) - u_\infty(x) | > d(x) \}$. Since $u_n$ converges to $u_\infty$ almost everywhere, we follow the proof above and obtain the desired inequality:
+\[
+\lim_{n \to \infty}F(u_n) \geq F(u).
+\]
+
+\proofstep{Step 3} Suppose $\Om$ and $u_\infty$ arbitrary and fix $\epsilon > 0$. Since $u_\infty$ is differentiable a.e. in $\Om$, we can always find finitely many disjoint balls $B_i := B(x_i,r_i)\subset \Om$ such that
+\[
+\left|\Om \setminus \bigcup_{i = 1}^\kappa B_i \right| \leq \epsilon
+\]
+and, if we set
+\[
+u^i(x) := u_\infty(x_i) + \nabla u_\infty(x_i)(x-x_i),
+\]
+the following properties hold: \mbox{}
+\begin{enumerate}[label=(\arabic*), itemsep=.4em]
+\item $|u_\infty(x)-u^i(x)| \leq \epsilon \cdot r_i$ for all $x \in B_i$;
+\item $|\nabla u_\infty(x) - \nabla u_\infty(x_i)| \leq \epsilon$ for all $x \in B_i \setminus E_i$, where $|E_i| \leq \epsilon |B_i|$.
+\end{enumerate}
+We will come back to this fact at the end of the proof. Now take $u$ and let $\widetilde{T}_i$ be the truncation operator on $B_i$ constructed in the previous step; namely,
+\[
+\widetilde{T}_i u(x) := u^i(x) + T_i(u(x) - u^i(x))
+\]
+where, setting $d_i(x) := \mathrm{dist}(x,\partial B_i)$, we have
+\[
+T_iu(x) := u(x) \left( 1 \wedge \frac{d_i(x)}{|u(x)|}\right).
+\]
+Arguing as in the previous steps, we can prove that
+\[
+\int_{B_i} f(\nabla u) \, \dr x\geq |B_i| f(\xi_i) - \omega( c \cdot \mathrm{Lip}(u) ) |\widetilde{A}_u^i|
+\]
+where $\widetilde{A}_u^i := \{ x \in B_i \: : \: |u(x) - u^i(x) | > d_i(x) \}$. Then
+\[ \begin{aligned}
+F(u) & \geq \sum_{i=1}^\kappa \int_{B_i} f(\nabla u) \, \dr x 
+\\ & \geq \sum_{i=1}^\kappa|B_i| f(\xi_i) - \omega( c \cdot \mathrm{Lip}(u)) \sum_{i=1}^\kappa |\widetilde{A}_u^i| 
+\\ & \geq \sum_{i=1}^\kappa \int_{B_i}f(\nabla u_\infty)\, \dr x - c' \sum_{i=1}^\kappa |\widetilde{A}_\infty^i(u)| - \cO(\epsilon)
+\\ & \geq F(u_\infty) - c' \left[ \epsilon + \sum_{i=1}^\kappa |\widetilde{A}_\infty^i(u)| \right],
+\end{aligned} \]
+where $\widetilde{A}_\infty^i(u) := \{ x \in B_i \: : \: |u(x) - u_\infty(x) | > d_i(x) \}$. Now notice that $u_n$ is a sequence converging to $u_\infty$ almost everywhere, so it is easy to verify that
+\[
+|A_\infty^i(u_n)| \xrightarrow{n \to \infty} 0,
+\]
+and this leads to the desired inequality up to a big-O of $\epsilon$, namely
+\[
+\lim_{n \to \infty}F(u_n) \geq F(u_\infty) - c' \epsilon,
+\]
+but this is enough to conclude because $\epsilon$ was arbitrary.
+\end{proof}
+
+As promised, we will now make the geometric argument more precise and ``show'' that such a decomposition in balls exists. We first need a couple of technical ingredients:
+
+\bt \label{theorem:lusdnas} Let $\mu$ be locally finite measures defined on a metric space $X$ satisfying certain technical assumptions\footnote{In this point, we are purposely vague because we do not need this result in its full generality. The interested reader might find more information in any standard GMT book.}, and let $u \in L_{\mathrm{loc}}^p(X, \mu)$. Then
+\begin{equation} \label{eq.3.3}
+\averint_{B(x,r)} \left| u(y) - u(x) \right|^p \, \dr \mu(y) \xrightarrow{r \to 0^+} 0,
+\end{equation}
+for $\mu$-a.e. $x \in X$. In other words, the function $u$ is {\bf $L^p$-approximately continuous}\index{$L^p$-approximately continuous} in $X$.
+\et
+
+\bc
+The gradient of the function $u_\infty$, given in {\color{blue}Theorem \ref{thm.7.1.1}}, is $L^p$-approximately continuous for all $1 \leq p < \infty$. In other words,
+\[
+|\nabla u_\infty(x) - \nabla u_\infty(\bar{x})| \leq \epsilon\quad \text{for all $x \in B(\bar{x},r)\setminus E$},
+\]
+where $E = E(\epsilon)$ is called {\em exceptional set} and satisfies $|E|\leq \epsilon |B(\bar{x},r)|$.
+\ec
+
+\bt \label{theorem:aediff}
+Let $\Om \subset \R^n$ and $p > n$. Any function $u \in W^{1,p} \cap C^0(\Om,\R^m)$ is differentiable at a.e. $x \in \Om$.
+\et
+
+\begin{proof}
+Fix a ball $B := B \left(\bar{x}, r \right)$ and notice that by the generalised Poincaré inequality
+\[
+\sup_{x \in B} | u(x) - u(\bar{x}) | \leq c \left( \averint_B |\nabla u|^p \, \dr x \right)^{\frac{1}{p}}.
+\]
+It is not hard to verify (use, for example, a dimensional argument) that $c$ is a constant that depends linearly on $r$. It follows that
+\[
+\sup_{x \in B} |u(x) - u(\bar{x}) | \leq c' r \left( \averint_B |\nabla u|^p \, \dr x \right)^{\frac{1}{p}}
+\]
+for some universal constant $c'$. We can subtract any linear function to $u$, so we choose $\nabla u(\bar{x})$ and assume that $\bar{x}$ is a point of $L^p$-approximate continuity. It turns out that
+\[
+\sup_{x \in B} \|u(x) - u(\bar{x}) - \nabla u(\bar{x})(x-\bar{x}) \| \leq c'r \left( \averint_B |\nabla u(x) - \nabla u(\bar{x})|^p \, \dr x \right)^{\frac{1}{p}},
+\]
+which concludes the proof because the right-hand side is $\mathcal{O}(r)$ using \eqref{eq.3.3} together with the fact that a.e. point of $\Om$ is a density point for $\Om$.
+\end{proof}
+
+\bc
+The function $u_\infty$ in {\color{blue}Theorem \ref{thm.7.1.1}} is differentiable at a.e. $x \in \Om$.
+\ec
+
+We can now go back to the existence of the balls for $u_\infty$. Fix $\epsilon > 0$ and use the results above to infer the existence of some $r(\epsilon) > 0$ such that for all $r \leq r(\epsilon)$ we have
+\[
+|u_\infty(x) - u_\infty(\bar{x}) - \nabla u_\infty(\bar{x})(x-\bar{x})| \leq \epsilon |x-\bar{x}| \leq \epsilon r \quad \text{for every $x \in B(\bar{x},r)$},
+\]
+and, by approximate continuity, also
+\[
+|\nabla u(x) - \nabla u(\bar{x})| \leq \epsilon \quad \text{for every $x \in B(\bar{x},r) \setminus E$},
+\]
+where $E$ is a set depending on $\epsilon$ satisfying $|E|\leq \epsilon |B(\bar{x},r)|$. Let $\cF$ be the family of such balls for which, given any $x\in \Om$, one can find $B(\bar{x},r_n) =: B_n \in \cF$ with $r_n \to 0^+$.
+
+\bl \index{Vitali covering lemma} 
+Let $X$ be a metric space, let $\cF := \{ B(x_i, r_i) \}_{i \in I}$ be a family of closed balls with uniformly bounded radii that covers a set $E \subseteq X$. Then there exists a disjoint subfamily $\cF'$ such that the rescaling
+\[
+\widehat{\cF}' := \{ \widehat{B}(x_i, r_i) \: \left| \: B(x_i, r_i) \in \cF' \right. \} 
+\]
+is a covering of $E$.
+\el
+
+This result is well-known in GMT and usually referred to as {\em Vitali's covering lemma}. A simple consequence of this result is that from our family $\cF$ we can extract finitely many balls in such a way that
+\[
+|\Om \setminus \bigcup_{i = 1}^\kappa B_i| \leq \epsilon
+\]
+and the required properties are satisfied.
+
+\section{A few remarks on Theorem \ref{thm.7.1.1}}
+
+In {\color{blue}Theorem \ref{thm.7.1.1}}, we proved the equivalence between quasiconvexity of the Lagrangian $f$ and weak$\star$ lower semicontinuity on $W^{1,\infty}(\Om,\R^m)$ of the corresponding functional
+\[
+F(u) := \int_\Om f(\nabla u) \, \dr x.
+\]
+At this point, it makes sense to ask what happens when $f$ does not depend only on $\xi$. More precisely, we now consider a Borel function
+\[
+f : \Om \times \R^m \times \R^{m \times n} \to [0,\infty]
+\]
+such that $f(x,\cdot,\cdot)$ is lower semicontinuous for a.e. $x \in \Om$ and $f(x,u,\cdot)$ is quasiconvex for a.e. $x \in \Om$ and every $u \in \R^m$. To investigate the weak$\star$ lower semicontinuity of
+\[
+F(u) := \int_\Om f(x,u,\nabla u) \, \dr x
+\]
+on $W^{1,\infty}(\Om)$, Young measures play a fundamental role but, as expected, there are a few details that needs to be discussed.
+
+\br If $g$ is a convex function, then the inequality
+\[
+\averint g(\xi + y) \, \dr \mu(y) \geq g(\xi)
+\]
+holds for all $\mu$ probability measures with zero barycenter, that is,
+\[
+\int y \, \dr \mu(y) = 0.
+\]
+This means that a quasiconvex function does not satisfy Jensen's inequality with any probability measure $\mu$, and thus we need to obtain additional information on Young measures.
+\er
+
+The result that follows asserts that Young measures generated by gradients belong to a particular class of which has, among several others properties, barycenter zero.
+
+\bpr \label{pr.youngbar}
+Let $u_n$ be a sequence of uniformly bounded functions in $W^{1,p}(\Om,\R^m)$ and let $(\mu_x)_{x \in \Om}$ be the Young (probability) measure on $\R^{m \times n}$ generated by $(\nabla u_n)_{n \in \N}$. Then
+\[
+\mu_x  \in \left\{ \tau_\xi (\nabla v )_\# \cL \: : \: \text{$v \in W_0^{1,\infty}(B,\R^m)$} \right\}
+\]
+for a.e. $x \in \Om$, where $\tau_\xi$ is the translation operator on $\R^{m \times n}$ and $\cL$ is the renormalized Lebesgue measure on the ball $B$.
+\epr
+
+\br
+Since $v \, \big|_{\partial B} \equiv 0$, it is easy to verify that
+\[
+\int_B \nabla v \, \dr x = 0,
+\]
+which means that Young measures generated by sequences of the type $(\nabla u_n)_{n \in \N}$ always have barycenter equal to zero.
+\er
+
+\br
+The main consequence of {\color{blue}Proposition \ref{pr.youngbar}} is that a quasiconvex function satisfy a Jensen-type inequality. Namely, we have
+\[
+\int_B f(\xi + M) \, \dr(\nabla v)_\# \cL(x) \geq f(\xi) %% I'm not sure if here there's an average integral or not!
+\]
+for all $v \in W_0^{1,\infty}(B,\R^m)$.
+\er
