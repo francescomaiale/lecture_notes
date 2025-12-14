@@ -1,0 +1,67 @@
+\chapter{Jordan Theorem}
+
+\section{Multiplicative Property of the Topological Degree}
+
+\paragraph{Setting.} Let $\Omega, \, W \subseteq \R^N$ open subsets of $\R^N$, and assume that $\Omega$ is bounded and
+\begin{equation*} \Phi : \overline{\Omega} \to W \qquad \text{and} \qquad \Psi : W \to \R^N\end{equation*}
+are continuous maps.
+
+\begin{notation}We denote by $\left(W_i\right)_{i \in \N}$ the collection of the connected components of $\R^N \setminus \Phi(\partial \, \Omega)$, and we reserve $W_0$ for the unbounded one (see \hyperref[fig:jt1]{Figure \ref{fig:jt1}}). \end{notation}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm, height=6cm]{Images/MTAGTJ1.png}
+\caption{Setting}
+\label{fig:jt1}
+\end{figure}
+
+\begin{remark}It may happen that an element of the collection $W_i$, for some $i \geq 1$, is not contained in $W$ (see \hyperref[fig:jt2]{Figure \ref{fig:jt2}}).  \end{remark}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm, height=6cm]{Images/MTAGTJ2.png}
+\caption{$W_1$ is not contained in the torus $W$}
+\label{fig:jt2}
+\end{figure}
+
+\begin{theorem}[Multiplicative Property] Let $y \in \R^N \setminus \Psi \circ \Phi\left( \partial \, \Omega \right)$. The topological degree at $y$ of the composition map is given by
+\begin{equation} \label{mpdegree} \mathrm{deg} \left(y, \, \Psi \circ \Phi, \, \Omega \right)= \sum_{i \geq 0} \mathrm{deg} \left(y, \, \Psi, \, W_i \right) \cdot \mathrm{deg} \left(W_i, \, \Phi, \, \Omega \right). \end{equation}\end{theorem}
+
+\begin{remark}If $z_1, \, z_2 \in W_i$ are points in the same connected component, then
+\begin{equation*}\mathrm{deg} \left(z_1, \, \Phi, \, \Omega \right) = \mathrm{deg} \left(z_2, \, \Phi, \, \Omega \right),\end{equation*}
+hence the topological degree $\mathrm{deg} \left(W_i, \, \Phi, \, \Omega \right)$ is well defined, and it is equal to the topological degree of \textbf{any} point in $W_i$.\end{remark}
+
+\begin{remark}\label{rmk:sdosod} If $\mathrm{deg} \left(W_i, \, \Phi, \, \Omega \right) \neq 0$, then $W_i \subseteq \Phi(\Omega)$. In particular,
+\begin{equation*} \overline{W_i} \subset W \end{equation*}
+is bounded (since $\Phi \left(\overline{\Omega} \right)$ is compact), and hence the topological degree $\mathrm{deg} \left(y, \, \Psi \circ \Phi, \, \Omega \right)$ is well-defined since $y \notin \Psi(\partial \, W_i)$, as a consequence of the fact that $\partial \, W_i \subseteq \Phi(\partial \, \Omega)$. \end{remark}
+
+\begin{remark}Fix $y \in \R^N \setminus \Psi \circ \Phi\left( \partial \, \Omega \right)$. The set of indices
+\begin{equation*} \left\{ i \in \N \: \left| \: \Psi^{-1}(y) \cap W_i \cap \Phi(\Omega) \right. \right\} \end{equation*}
+is finite, so that the sum \eqref{mpdegree} is well-defined. Indeed, the intersection
+\begin{equation*}\Psi^{-1}(y) \cap \Phi \left( \overline{\Omega} \right) \end{equation*}
+is a compact set, hence there is a finite collection of $W_i$'s covering it. \end{remark}
+
+\begin{proof} \end{proof}
+
+\section{Open Mapping Theorem}
+
+In this section, we want to apply the multiplicative property of the topological degree, introduced above, to prove a famous - particularly simple - open mapping theorem.
+
+\begin{theorem}[Open Mapping Theorem] Let $\Omega \subseteq \R^N$ be an open set. If $\Phi : \Omega \to \R^N$ is a continuous injective map, then $\Phi$ is also open. \end{theorem}
+
+\begin{proof} Let $B$ be an open ball such that $\overline{B} \subseteq \Omega$. We consider the restriction
+\begin{equation*} \tilde{\Phi} := \Phi \, \big|_{\overline{B}} \: : \: \overline{B} \to \R^N, \end{equation*}
+and we denote by $\left(W_i \right)_{i \in \N}$ the collection of the connected components (as in the previous section) of the following set:
+\begin{equation*} \R^N \setminus \tilde{\Phi} \left( \partial \, \overline{B} \right). \end{equation*}
+The map $\tilde{\Phi}$ is continuous and injective on a compact set, hence there exists the left-inverse
+\begin{equation*} \tilde{\Phi}^{-1} : \tilde{\Phi} \left(\overline{B} \right) \to \overline{B}, \end{equation*}
+which can be extended to a continuous map $\Psi : \R^N \to \R^n$ by \hyperref[tiet]{Tietze Theorem}. The composition
+\begin{equation*} \Psi \circ \tilde{\Phi} : \overline{B} \to \R^N \end{equation*}
+is, by construction, the identity on the boundary $\partial \, \overline{B}$ (since there $\Psi$ coincides with the left inverse of $\Phi$), and hence for any $y \in B$ it turns out that
+\begin{equation*} \mathrm{deg} \left(y, \, \Psi \circ \Phi, \, B \right) = 1. \end{equation*}
+The multiplicative property \eqref{mpdegree} implies that
+\begin{equation*} \sum_{i \geq 0} \mathrm{deg} \left(y, \, \Psi, \, W_i \right) \cdot \mathrm{deg} \left(W_i, \, \Phi, \, B \right) = 1, \end{equation*}
+and thus there exists an index $j > 0$ such that
+\begin{equation*} \mathrm{deg} \left(y, \, \Psi, \, W_j \right) \neq 0 \qquad \text{and} \qquad \mathrm{deg} \left(W_j, \, \Phi, \, B \right)\neq 0.\end{equation*}
+By \hyperref[rmk:sdosod]{Remark \ref{rmk:sdosod}} we infer that $W_j \subseteq \Phi(B)$; since $W_j$ is connected, $\Phi(B)$ is connected and $\partial \, W_j \cap \Phi(B) = \emptyset$, we also infer that $W_j = \Phi(B)$, and this concludes the proof.
+\end{proof}

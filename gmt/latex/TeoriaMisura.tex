@@ -1,0 +1,181 @@
+\title{Teoria della Misura - Lecture Notes}
+\author{Francesco Paolo Maiale
+        }
+        
+\documentclass[a4paper,10 pt]{report}
+
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage[pass]{geometry}
+\usepackage{amsthm}
+\usepackage{amsmath, amssymb}
+\usepackage{setspace}
+\usepackage[english]{babel}
+\usepackage{tikz-cd}
+\usepackage{makeidx}         % permette di generare l'indice
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{accents}
+\usepackage{faktor}
+\usepackage{mathrsfs}  
+\usepackage{pifont}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{scalerel}[2014/03/10]
+\usepackage[usestackEOL]{stackengine}
+\usepackage{bbm}
+
+\makeindex %DDD
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+
+\DeclareRobustCommand\longtwoheadrightarrow
+     {\relbar\joinrel\twoheadrightarrow}
+
+\newcommand{\notimplies}{%
+  \mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
+  
+\pagestyle{plain}
+\setlength{\topmargin}{0.0in}
+\setlength{\headheight}{0.2in}
+\setlength{\headsep}{0.0in}
+\setlength{\footskip}{0.5in}
+\setlength{\textheight}{8.3in}
+\setlength{\textwidth}{6.0in}
+\setlength{\oddsidemargin}{0.5in}
+\setlength{\evensidemargin}{0.5in}
+\setlength{\parindent}{0.2 in}
+
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+\newtheorem{exercise}{Exercise}[chapter]
+
+\newcommand{\smallO}[1]{\scriptstyle\mathcal{O}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand*\conj[1]{\overline{#1}}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\N}{\mathbb N}
+\newcommand{\G}{\mathcal G}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\con}{\mathcal{C}\left(x, \, V, \, \alpha \right)}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\p}{\mathbb P}
+\newcommand{\Le}{\mathcal{L}}
+\newcommand{\can}{\symbol{35}}
+\newcommand*{\double}[2][.1ex]{%
+  \mathrel{\vcenter{\offinterlineskip%
+  \hbox{$#2$}\vskip#1\hbox{$#2$}}}}
+\newcommand*{\doublerightarrow}{\double{\longrightarrow}}
+
+\newcommand{\restr}{%
+  \,\raisebox{-.127ex}{\reflectbox{\rotatebox[origin=br]{-90}{$\lnot$}}}\,%
+}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\newcommand{\bsquare}{\item[\color{magenta}\ding{110}]} 
+\newcommand{\barrow}{\item[\color{blue}\ding{228}]}
+\newcommand{\bwarrow}{\item[\color{gray}\ding{227}]}
+
+\def\dashint{\,\ThisStyle{\ensurestackMath{%
+  \stackinset{c}{.2\LMpt}{c}{.5\LMpt}{\SavedStyle-}{\SavedStyle\phantom{\int}}}%
+  \setbox0=\hbox{$\SavedStyle\int\,$}\kern-\wd0}\int}
+\def\ddashint{\,\ThisStyle{\ensurestackMath{%
+  \stackinset{c}{.2\LMpt}{c}{.5\LMpt+.2\LMex}{\SavedStyle-}{%
+    \stackinset{c}{.2\LMpt}{c}{.5\LMpt-.2\LMex}{\SavedStyle-}{%
+      \SavedStyle\phantom{\int}}}}\setbox0=\hbox{$\SavedStyle\int\,$}\kern-\wd0}\int}
+
+
+\begin{document}
+\newpage
+
+\begin{center}
+
+\begin{spacing}{1.5}
+Lecture Notes\\
+\vspace*{\fill}
+\end{spacing}
+\begin{spacing}{2.5}
+\textbf{\huge Geometric Measure Theory}\\[0.5cm]
+\vspace*{\fill}
+\begin{minipage}{5cm}
+\centering {\textit{Course held by}}
+\end{minipage}
+\hspace{5cm}
+\begin{minipage}{5cm}
+\centering {\textit{Notes written by}} \\
+\end{minipage}
+\end{spacing}
+
+\begin{spacing}{1.3}
+
+\begin{minipage}{5cm}
+\centering {\textbf{\large Prof. Giovanni Alberti}}
+\end{minipage}
+\hspace{5cm}
+\begin{minipage}{5cm}
+\centering {\textbf{\large Francesco Paolo Maiale}}
+\end{minipage}
+
+\vspace*{\fill}
+
+\textnormal{\large Department of Mathematics \\[0.4em] Pisa University \\[0.4em] \today}
+
+\end{spacing}
+\end{center}
+
+\newpage
+{\Huge \textbf{Disclaimer}\par}
+
+\vspace{0.4in} % if you wish
+
+These notes came out of the \textit{Geometric Measure Theory} course, held by Professor Giovanni Alberti in the second semester of the academic year 2016/2017.
+
+They include all the topics that were discussed in class; I added some remarks, simple proof, etc.. for my convenience.
+
+I have used them to study for the exam; hence they have been reviewed thoroughly. Unfortunately, there may still be many mistakes and oversights; to report them, send me an email to frank094 (at) hotmail (dot) it.
+
+
+\tableofcontents
+
+\newpage
+\include{Introduction}
+\include{MeasureTheory}
+\include{CoveringTheorem}
+\include{Density}
+\include{Self-Similar}
+\include{HaarMeasure}
+\include{LipschitzFunc}
+\include{RectSet}
+\include{BoundedVariation}
+\include{Fps}
+\include{Appendix}
+
+\printindex
+
+\bibliography{Bibliografia}{} % BIBLIOGRAFIA
+\bibliographystyle{plain}
+\end{document}

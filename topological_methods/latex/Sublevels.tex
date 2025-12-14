@@ -1,0 +1,239 @@
+\chapter{Topological Method in Calculus of Variations}
+
+\section{Introduction}
+
+Let $f : \R \to \R$ be a continuous function defined on the real line. A sufficient condition for $f$ to admit a critical point is that
+\begin{equation*} \lim_{x \to \pm \infty}f(x) = + \infty. \end{equation*}
+The situation is a lot more complex in higher dimension, even when $N = 2$, since a continuous function $f : \R^2 \to \R^2$ such that
+\begin{equation*} \lim_{|(0, \, y)| \to \infty}f(x, \, y) = + \infty \qquad \text{and} \qquad  \lim_{|(x, \, 0)| \to \infty}f(x, \, y) = - \infty \end{equation*}
+does not necessarily admit a stationary point, let alone a minimum/maximum.
+
+\paragraph{Main Idea.} Let $X \subset \R^N$ be a submanifold (or a Riemann manifold), and let $f$ be a continuous function defined on $X$. For any $a \in \R$, we denote by $f^{(a)}$ the sub-level of $f$ given by
+\begin{equation*} f^{(a)} = \left\{ x \in X \: \left| \: f(x) \leq a \right. \right\}. \end{equation*}
+We shall prove that, if $a < b$ and $f^{(b)} \setminus f^{(a)}$ does not contain any critical point of $f$, then, assuming that there is some compactness, it turns out that $f^{(a)}$ is a deformation retract of $f^{(b)}$ which is constructed along the curves of maximal decreasing of $f$, i.e., 
+\begin{equation*}u^\prime(t) = - \mathrm{grad} \left(f(u(t)) \right) . \end{equation*}
+
+\section{Deformation Lemma}
+
+In this section we shall make more precise the main idea introduced in the previous discussion. We denote by $X$ either \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item a finite/infinite dimensional Hilbert space; or
+\item a complete submanifold (of class $C^2$) of $\R^N$ with respect to the induced metric; or
+\item a complete submanifold (of class $C^2$) of a Hilbert space $H$ with respect to the induced metric.
+\end{enumerate}
+
+\begin{definition}[Gradient] Let $A \subseteq \R^N$ be an open subset such that $X \subseteq A$. The \textit{gradient} of a differentiable function $f : A \to \R$ is the unique vector, denoted by $\mathrm{grad} \, f(u)$, such that
+\begin{equation*} \mathrm{d}f(u)[v] = \left( \mathrm{grad} \, f(u), \, v \right), \qquad \forall \, v \in \R^N. \end{equation*} \end{definition}
+
+The notion of \textit{gradient} depends on the scalar product. Also, if the function $f$ is defined on a submanifold $X \subseteq \R^N$, then the differential at $u \in X$ sends the tangent $T_u \, X$ to $\R$ and hence the $X$-gradient can be identified to the restriction of the usual gradient $X$, i.e.,
+\begin{equation*} \mathrm{grad}_X \, f(p) = \mathrm{grad} \, f(p) \, \big|_{T_u \, X}. \end{equation*}
+
+\begin{remark}If $X$ is a submanifold of codimension one (either of $\R^N$ or a Hilbert space), then the gradient on $X$ is given by the formula
+\begin{equation*} \mathrm{grad}_X \, f(u) = \mathrm{grad} \, f(u) - \frac{\left( \mathrm{grad} \, f(u), \, \nu_X(u) \right)}{\| \nu_X(u) \|^2} \, \nu_X(u), \end{equation*}
+where $\nu_X(u)$ is the normal vector of $X$ at the point $u$. \end{remark}
+
+We are now ready to introduce the compactness mentioned in the previous section, which, as the reader may check, is a much weaker notion than the usual one.
+
+\begin{definition}[Palais-Smale] Let $c \in \R$ be any real number, and let $f : X \to \R$ be any function. We say that $f$ satisfies the \textit{Palais-Smale condition} if any sequence $(u_n)_{n \in \N} \subset X$ such that \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item $f(u_n) \to c$ and
+\item $\mathrm{grad} \, f(u_n) \to 0$
+\end{enumerate}
+is \textit{precompact}, that is, it admits a converging subsequence.\end{definition}
+
+\begin{definition}[Retract] Let $A \subseteq B \subseteq X$ be subspaces, and let $X$ be a metric space. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $A$ is a \textit{retract} of $B$ if there exists $r : B \to A$ continuous retraction (i.e. $r \, \big|_A = \mathrm{Id}_A$).
+\item $A$ is a \textit{deformation retract} of $B$ in $X$ if there exists an homotopy $H$ between the retraction $r : B \to A$ and the inclusion $\imath : A \hookrightarrow B$.
+\item $A$ is a \textit{strong deformation retract} of $B$ in $X$ if it is a \textit{deformation retract} of $B$ in $X$, and the homotopy $H$ has an additional property: $H(t, \, \cdot) \, \big|_A = \mathrm{Id}_A$ for any $t \in [0, \, 1]$.
+\end{enumerate}\end{definition}
+
+\begin{remark}\label{rmk:cris} If the function $f : X \to \R$ satisfies the $\left( \mathrm{PS} \right)_c$ condition for every $c \in [a, \, b]$, and if there are no critical points of $f$ in that interval, then there exists $\epsilon_0 > 0$ such that
+\begin{equation*} \inf_{ u \in f^{-1} \left( I_\epsilon \right) } \left\| \mathrm{grad} \, f(u) \right\| > 0, \end{equation*}
+where $I_\epsilon = \left[ a - \epsilon_0, \, b + \epsilon_0 \right]$. \end{remark}
+
+\begin{proof}Suppose, by contradiction, that for any $\epsilon_0 > 0$ the infimum is equal to $0$. Then there is a sequence $(\epsilon_n)_{n \in \N}$, decreasingly converging to $0$, and a sequence $(u_n)_{n \in \N} \subset X$ such that
+\begin{equation*} \left\| \mathrm{grad} \, f(u_n) \right\| \leq \epsilon_n \qquad \text{and} \qquad f(u_n) \in \left[ a- \epsilon_n, \, b + \epsilon_n \right]. \end{equation*}
+Therefore, up to subsequences, $f(u_n) \to c$ and $\mathrm{grad} \, f(u_n) \to 0$ and by Palais-Smale condition $(u_n)_{n \in \N}$ is precompact.  But this is absurd since it would imply the existence of an element $u \in X$ such that $u_{n_k} \to u$ and $u$ critical point.
+\end{proof}
+
+\begin{lemma}[Deformation Lemma] \label{deflemma}Let $f : X \to \R$ be a function satisfying the $\left( \mathrm{PS} \right)_c$ condition for every $c \in [a, \, b]$, and assume that $\mathrm{grad} \, f(u) \neq 0$ for any $u \in f^{-1}\left([a, \, b] \right)$.
+
+Then there exists $\epsilon_0 > 0$ such that, for any $\epsilon \in [0, \, \epsilon_0]$ and any $\delta \in [0, \, \epsilon_0]$, the sublevel $f^{(a-\epsilon)}$ is a strong deformation retract of $f^{(b + \delta)}$. \end{lemma}
+
+\begin{proof}This theorem requires many steps to be proved. Therefore we shall divide the argument into four little steps, to clarify it for the reader.
+
+\paragraph{Step 1.} The previous \hyperref[rmk:cris]{Remark \ref{rmk:cris}} implies that there exists $\epsilon_0 > 0$ such that
+\begin{equation*} \sigma := \inf_{ u \in f^{-1} \left( I_\epsilon \right) } \left\| \mathrm{grad} \, f(u) \right\| > 0. \end{equation*}
+Therefore it suffices to prove that $f^{(\alpha)}$ is a strong deformation retract of $f^{(\beta)}$ for any $\alpha \in [a-\epsilon_0, \, a]$ and for any $\beta \in [b, \, b+\epsilon_0]$.
+
+\paragraph{Step 2.} Let $u \in f^{(\beta)}$ be any point, and let us consider the initial value problem
+\begin{equation} \label{eq:sdosd} \begin{cases} U^\prime(t) = - \frac{\mathrm{grad} \, f \left(U(t) \right)}{ \left\| \mathrm{grad} \, f \left(U(t) \right) \right\|^2} \\ U(0) = u. \end{cases} \end{equation}
+The main idea is to prove that there exists a unique solution of the initial problem \eqref{eq:sdosd} and that it can be extended up to $f^{(\alpha)}$.
+
+The first assertion is a straightforward application of the Cauchy-Lipschitz theorem, according to which there exists $\delta > 0$ and a unique solution $U : [0, \, \delta] \to X \in C^1$ such that $U$ solves \eqref{eq:sdosd}.
+
+\paragraph{Step 3.} Assume that $f(u) \geq \alpha$ (otherwise the Lemma is trivial).
+
+It is enough to prove that $U$ is defined on $[0, \, f(u) - \alpha]$, that is, the maximal interval of definition $I$ has supremum strictly bigger than $f(u) - \alpha$. We argue by contradiction: suppose that $\sup(I) \leq f(u) - \alpha$. A simple computation shows that
+\begin{equation*} \frac{\mathrm{d}}{\mathrm{d} \, t} \left(f \circ U\right)(t) = \left( \mathrm{grad} \, f \left(U(t) \right), \, - \frac{\mathrm{grad} \, f \left(U \right)}{ \left\| \mathrm{grad} \, f \left(U \right) \right\|^2} \right) = -1, \end{equation*}
+so that $f(u) - \alpha \leq f \left(U(t) \right) \leq f(u)$. It follows that
+\begin{equation*} \left\| \mathrm{grad} \, f \left( U(t) \right) \right\| \geq \sigma \implies \left\| U^\prime(t) \right\| \leq \frac{1}{ \left\| \mathrm{grad} \, f \left(U \right) \right\| } \leq \frac{1}{\sigma}, \end{equation*}
+therefore $U^\prime$ is bounded, $U$ is a Lipschitz function and the limit $\lim_{T \to \sup(I)} U(T)$ exists.
+
+In particular, the maximum of $I$ exists and it is equal to $f(u) - \alpha$: if not, from the Cauchy-Lipschitz theorem, we would be able to extend the solution $U$ starting from $U(\sup(I))$, and this is absurd (since $I$ is maximal).
+
+\paragraph{Step 4.} Let us set $S(u, \, t) := U(t)$, where $U$ is the solution of \eqref{eq:sdosd} with initial data $u$. Then the function
+\begin{equation*} H(t, \, u) := S\left(u, \, t \cdot \left (f(u) - \alpha \right) \right) : [0, \, 1] \times \left( f^{(\beta)} \setminus f^{(\alpha)} \right) \to \R \end{equation*}
+is the sought homotopy. Indeed, the main properties are easy to check, and it can be prolonged to $f^{(\alpha)}$ by continuity (i.e., by setting it equal to the identity for any $u$ such that $f(u) \leq \alpha$).
+\end{proof}%RIVEDI
+
+\begin{theorem}\label{inusual}Let $f : X \to \R$ be a function such that $\alpha := \inf_{x \in X} f(x) > - \infty$. If $f$ satisfies the $\left( \mathrm{PS} \right)_\alpha$ condition, then $f$ admits a minimum. \end{theorem}
+
+\begin{proof}Suppose by contradiction that there is no minimum point. There exists $\epsilon > 0$ such that $f^{(c - \epsilon)}$ is a deformation retract of $f^{(c + \epsilon)}$ (see \hyperref[deflemma]{Lemma \ref{deflemma}}), but the first one is empty and the second one is not.  \end{proof} %RIVEDI
+
+\begin{example}Let $X$ be a Hilbert space, and let $A \in \mathscr{L}_c^{sym}(H)$ be a compact symmetric operator defined on $H$. If we set
+\begin{equation*} f(u) := \frac{1}{2} \left< A \, u, \, u \right> \:  : \: S_H(0, \, 1) \longrightarrow \R, \end{equation*}
+then the following assertions hold true: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If there exists $u \in S_H(0, \, 1)$ such that $f(u) > 0$ strictly, then there exist a maximum point $u_0 \in S_H(0, \, 1)$ for the function $f$ and a real number $\lambda_0 \in \R$ such that
+\begin{equation*} A \, u_0 = \lambda_0 \, u_0.\end{equation*}
+\item If there exists $u \in S_H(0, \, 1)$ such that $f(u) < 0$ strictly, then there exist a minimum point $u_0 \in S_H(0, \, 1)$ for the function $f$ and a real number $\lambda_0 \in \R$ such that
+\begin{equation*} A \, u_0 = \lambda_0 \, u_0.\end{equation*}
+\end{enumerate}
+We only discuss \textbf{(a)} since the proofs are essentially the same. The operator $A$ is symmetric, thus $A$ is equal to the gradient of $f$ in $X$, that is,
+\begin{equation*} A = \mathrm{grad}_X \, f. \end{equation*}
+The operator $A$ is compact, hence it satisfies the Palais-Smale condition at any level $c \neq 0$. Therefore, by \hyperref[inusual]{Theorem \ref{inusual}} it turns out that there exists a maximum point $u_0 \in S_H(0, \, 1)$ for $f$, i.e., a point such that
+\begin{equation*}  \mathrm{grad}_S \, f(u_0) = 0 \implies \mathrm{grad} \, f(u_0) \parallelsum u_0 \implies A \, u_0 = \lambda_0 \, u_0. \end{equation*}
+It remains to justify why the compactness of the operator $A$ is enough to infer that $f$ satisfies the $\left( \mathrm{PS} \right)_c$ condition at every $c \neq 0$. Let $\left(u_n \right)_{n \in \N} \subset S_H(0, \, 1)$ be a Palais-Smale sequence at level $c$, that is,
+\begin{equation*} \begin{cases} f(u_n) \xrightarrow{n \to + \infty} c \\ \mathrm{grad}_S \, f(u_n) = A(u_n) - \frac{ \left(A \, u_n, \, u_n \right)}{\|u_n\|^2} \xrightarrow{n \to + \infty} 0. \end{cases} \end{equation*}
+The operator $A$ is compact, thus there exists a subsequence  $\left(u_{n_k} \right)_{k \in \N} \subset S_H(0, \, 1)$ such that $A(u_{n_k}) \to v \in X$. This concludes the proof since the subsequence cannot converge to $0$, otherwise the gradient of $f$ would not satisfy the Palais-Smale condition.
+\end{example}
+
+\section{Mountain Pass Theorem}
+
+In this section we want to discuss the \textit{Saddle Point Theorem} and the \textit{Mountain Pass Theorem}. These results are fundamental in the study of nonlinear partial differential equations.
+
+\begin{theorem}[Saddle points] \label{th:saddpoi} Let $X$ be a Hilbert space, and let $f \in C^1 \left(X; \; \R \right)$ be a differentiable functional. Suppose that there are $X_0, \, X_1 \subset X$ subspaces such that $\mathrm{dim} (X_0) < + \infty$, and $X$ is equal to their direct sum, that is,
+\begin{equation*} X = X_0 \oplus X_1. \end{equation*}
+Assume that there exists $\rho_0 > 0$ such that, if we set $S_0 := S_X(0, \, \rho_0) \cap X_0$, then
+\begin{equation} \label{eq:sup} \sup_{x \in S_0} f(x) < \inf_{x \in X_1} f(x). \end{equation}
+Assume also that $f$ satisfies the Palais-Smale condition $\left( \mathrm{PS} \right)_c$ at every level $c \in [a, \, b]$, where
+\begin{equation*} a := \inf_{x \in X_1} f(x) \qquad \text{and} \qquad b := \sup_{x \in B_0} f(x). \end{equation*}
+Then there exists a critical point $u \in X$ for the functional $f$, such that $f(u) \in [a, \, b]$.
+\end{theorem}
+
+\begin{lemma}\label{lemma:tech1} Let $X, \, X_0, \, X_1$ and $\rho_0 > 0$ be as in the assumptions of the \hyperref[th:saddpoi]{Saddle Point Theorem}. If $\Phi : \overline{B_0} \to X$ is a continuous function such that
+\begin{equation*} \Phi \, \big|_{S_0} \equiv \mathrm{Id} \, \big|_{S_0}, \end{equation*}
+then the image of the ball intersects the space $X_1$, that is,
+\begin{equation*}\Phi( B_0 ) \cap X_1 \neq \emptyset. \end{equation*} \end{lemma}
+
+\begin{proof} Let $P_0 : X \to X_0$ be the orthogonal projection on $X_0$ with kernel equal to $X_1$, and let us consider the continuous composition
+\begin{equation*} P_0 \circ \Phi : \overline{B_0} \to X_0. \end{equation*}
+Let $u \in S_0$ be any point. It turns out that $P_0 \circ \Phi(u) = P_0(u) = u$, and thus the restriction of $P_0 \circ \Phi$ on the sphere $S_0$ is the identity map. Therefore
+\begin{equation*} B_0 \subset P_0 \circ \Phi \left(B_0 \right), \end{equation*}
+which, in turn, implies that there exists $u \in B_0$ such that $P_0 \circ \Phi(u) = 0$. Since the kernel of $P_0$ is $X_1$, this is equivalent to $\Phi(u) \in \mathrm{Ker}(P_0) = X_1$, that is exactly what we wanted to prove.\end{proof}
+
+\begin{proof}[Proof of Saddle Point Theorem] We argue by contradiction. Let $\epsilon > 0$ be small enough that the following inequality holds:
+\begin{equation*} \sup_{x \in S_0} f(x) < \inf_{x \in X_1} f(x) - \epsilon. \end{equation*}
+By \hyperref[deflemma]{Deformation Lemma \ref{deflemma}} there exists a retraction $r : f^{(b)} \to f^{(a - \epsilon)}$, and it follows easily that
+\begin{equation*} \overline{B_0} \subseteq f^{(b)}, \qquad S_0 \subseteq f^{(a - \epsilon)} \quad \text{and} \quad X_1 \cap f^{(a - \epsilon)} = \emptyset. \end{equation*}
+The map $\Phi := r \, \big|_{\overline{B_0}}$ satisfies the assumptions of \hyperref[lemma:tech1]{Lemma \ref{lemma:tech1}}, hence
+\begin{equation*} \Phi \left(B_0 \right) \cap X_1 \neq \emptyset. \end{equation*}
+In particular, there exists $u \in \overline{B_0}$ such that $\Phi(u) > a - \epsilon$ strictly, and this is absurd since $\Phi(B_0) \subseteq f^{(a - \epsilon)}$, that is, $\Phi(u) \leq a - \epsilon$ follows by assumption \eqref{eq:sup}. %VEDI INC.
+\end{proof}
+
+\begin{theorem}[Mountain Pass] Let $X$ be a Hilbert space. Let $S := S_H(0, \, \rho)$ for any $\rho > 0$, and suppose that there exist $u_0, \, u_1 \in X$ such that
+\begin{equation*} u_0 \in \accentset{\circ}{B}_\rho \qquad \text{and} \qquad u_1 \notin \overline{B_\rho}. \end{equation*}
+Suppose that there exists a functional $f \in C^1 \left(X; \; \R \right)$ such that $f(u_0), \, f(u_1) < \inf_{x \in S} f(x)$. If $\gamma : [0, \, 1] \to X$ is a continuous path from $u_0$ to $u_1$, and if $f$ satisfies the Palais-Smale condition $\left( \mathrm{PS} \right)_c$ at every level
+\begin{equation*} c \in \left[ \inf_{x \in S} f(x), \, \sup_{t \in I} f(\gamma(t)) \right] \end{equation*}
+then there exists a critical level $c$ (in the same interval) for the functional $f$. \end{theorem}
+
+\begin{proof} We argue by contradiction. There exists $\epsilon > 0$ such that $f(u_0), \, f(u_1) < \inf_{x \in S} f(x) - \epsilon$ and, by the \hyperref[deflemma]{Deformation Lemma}. it turns out that there exists a retraction $r : f^{(b)} \to f^{(a - \epsilon)}$. Then
+\begin{equation*} \gamma \left( [0, \, 1] \right) \subseteq f^{(b)} \qquad \text{and} \qquad \text{$r(u_i) = u_i$ since $u_0, \, u_1 \in f^{(a-\epsilon)}$}. \end{equation*}
+This is absurd since
+\begin{equation*}r \left( \mathrm{Ran}(\gamma) \right) \cap S = \emptyset,\end{equation*}
+as a consequence of the fact that $r \circ \gamma (t) \in f^{(a-\epsilon)}$ for any $t \in [0, \, 1]$, and also using the assumption $f^{(a - \epsilon)} \cap S = \emptyset$.
+\end{proof}
+
+\begin{lemma}[Deformation Lemma II] \label{deflemma2}Let $f : X \to \R$ be a functional, and let $c$ be a critical value of $f$. If we set
+\begin{equation*} \mathcal{Z}_c := \left\{ u \in X \: \left| \: \mathrm{grad} \, f(u) = 0, \, f(u) = c \right. \right\} \end{equation*}
+to be the set of critical points, and we assume that the Palais-Smale condition at the level $c$ holds true and that there exists $V$ open neighborhood of $\mathcal{Z}_c$, then there exist $\epsilon > 0$ and a homotopy
+\begin{equation*} H : [0, \, 1] \times \left( f^{(c+\epsilon)} \setminus V \right) \to f^{(c+\epsilon)} \end{equation*}
+such that $H(0, \, u) = u$, $H(1, \, u) \in f^{(c - \epsilon)}$ and $H(t, \, u) = u$ for any $t \in [0, \, 1]$ and any $u \in \left(f^{(c-\epsilon)} \setminus V \right)$. \end{lemma}
+
+\begin{proof}This theorem requires many steps to be proved. Therefore we shall divide the argument into five little steps, to clarify it for the reader.
+
+\paragraph{Step 1.} The Palais-Smale condition at the level $c$ implies that $\mathcal{Z}_c$ is a compact set; the reader may prove this fact as a simple exercise. In particular, it turns out that
+\begin{equation*} d \left(V^c, \, Z_c \right) > 0, \end{equation*}
+and thus there exists an open neighborhood $\mathcal{U}$ of $\mathcal{Z}_c$ such that
+\begin{equation*} \overline{\mathcal{U}} \subseteq V \qquad \text{and} \qquad \delta := d(U, \, V)  > 0. \end{equation*}
+Moreover, since there are no critical points in $X \setminus \mathcal{Z}_c$, there exists $\epsilon_0 > 0$ such that
+\begin{equation*} \sigma := \inf \left\{ \left\| \mathrm{grad} \, f(u) \right\| \: \left| \: u \in X \setminus U, \, c - \epsilon_0 \leq f(u) \leq c + \epsilon_0 \right. \right\} > 0. \end{equation*}
+
+\paragraph{Step 2.} Let $u \in f^{(c + \epsilon_0)} \setminus V$ be any point, and let us consider the initial value problem
+\begin{equation} \label{eq:sdosd2} \begin{cases} U^\prime(t) = - \frac{\mathrm{grad} \, f \left(U(t) \right)}{ \left\| \mathrm{grad} \, f \left(U(t) \right) \right\|^2} \\ U(0) = u. \end{cases} \end{equation}
+The key idea is proving that there exists a unique solution of the initial problem \eqref{eq:sdosd2}, and that it can be extended up to $f^{(c-\epsilon_0)}$ without intersecting $\mathcal{Z}_c$ in any point.
+
+The first assertion is a straightforward application of the Cauchy-Lipschitz theorem, according to which there exists $\delta > 0$ and a unique curve $U : [0, \, \delta] \to X$ of class $C^1$, such that $U$ solves \eqref{eq:sdosd2}.
+
+\paragraph{Step 3.} Let $I$ be an interval such that $\mathrm{min}(I) = 0$, and suppose that the solution $U$ is defined on $I$. If there exists a time $t \in I$ such that
+\begin{equation*} U(t) \in \mathcal{U} \quad \text{and} \quad f \left(U(t) \right) \geq c - \epsilon_0, \end{equation*}
+then it turns out that
+\begin{equation} \label{timecond} t \geq \delta \cdot \sigma. \end{equation}
+This estimate on the time $t$ follows easily from the fact that
+\begin{equation*} t \geq t_0 := \inf \left\{ \tau \in I \: \left| \: U(\tau) \in \mathcal{U} \right. \right\}. \end{equation*}
+Indeed, the length of the curve from $0$ and $t_0$ satisfies the following inequality
+\begin{equation*} \int_{0}^{t_0} \left\| U^\prime(\tau) \right\| \, \mathrm{d}\tau = \int_{0}^{t_0} \frac{1}{\| \mathrm{grad} \, f\left(U(\tau) \right) \|} \, \mathrm{d}\tau \leq \frac{t_0}{\sigma}, \end{equation*}
+since $U(0) = u \in f^{(c+ \epsilon_0)} \setminus V$. On the other hand, the length of the curve needs to be at least equal to $\delta$ to intersect $\mathcal{U}$, thus
+\begin{equation*} \frac{t_0}{\sigma} \geq \delta \implies t \geq t_0 \geq \sigma \cdot \delta \implies \eqref{timecond}. \end{equation*}
+
+\paragraph{Step 4.} From the previous step, it follows that
+\begin{equation*} f \left( U(t) \right) \leq f(u) - \delta \cdot \sigma. \end{equation*}
+Let $\epsilon$ be a real number such that
+\begin{equation*} 0 < \epsilon < \min \left\{ \epsilon_0, \, \frac{1}{2} \, \sigma \cdot \delta \right\}. \end{equation*}
+If $u \in f^{(c + \epsilon)} \setminus V$ and $u \notin f^{(c-\epsilon)}$, then the solution curve $U$ reaches $f^{(c - \epsilon)} \setminus \mathcal{U}$, that is, there is a point such that $U(t) \in f^{(c - \epsilon)}$ and $U(s) \notin \mathcal{U}$ for any $s \leq t$.  Moreover, from the estimate
+\begin{equation*} \| U^\prime \| \leq \frac{1}{\| \mathrm{grad} \, f(U) \|} \leq \frac{1}{\sigma}, \end{equation*}
+it turns out that the curve can be extended in such a way that $U$ is well defined in the interval
+\begin{equation*} J := \left[0, \, f(u) - (c - \epsilon) \right]. \end{equation*}
+
+\paragraph{Step 5.} In conclusion, the sought homotopy is given by
+\begin{equation*} H(t, \, u) := U_u \left(t \cdot \left(f(u) - (c-\epsilon)\right) \right). \end{equation*}
+By continuity we may extend it to any $u$ such that $f(u) \leq c -\epsilon$, by setting it identically equal to zero.
+\end{proof}
+
+\section{Critical Points in Symmetrical Problems}
+
+Let $E$ be a normed space and let $X \subseteq E$ be a complete submanifold of class $C^2$ without boundary such that
+\begin{equation*} u \in X \implies - u \in X. \end{equation*}
+Let $f : X \to \R$ be an \textbf{even} functional of class $C^1(X)$. Then the topological degree of $f$ is odd, and it turns out that
+\begin{equation*} \text{$u$ critical point} \iff \text{$-u$ critical point}. \end{equation*}
+More precisely, if $U$ is the solution of the the initial-value problem
+\begin{equation*} \begin{cases} U^\prime(t) = - \frac{\mathrm{grad} \, f \left(U(t) \right)}{ \left\| \mathrm{grad} \, f \left(U(t) \right) \right\|^2} \\ U(0) = u. \end{cases} \end{equation*}
+then the solution of the problem
+\begin{equation} \label{eq:osdoos} \begin{cases} V^\prime(t) = - \frac{\mathrm{grad} \, f \left(V(t) \right)}{ \left\| \mathrm{grad} \, f \left(V(t) \right) \right\|^2} \\ V(0) = -u. \end{cases} \end{equation}
+is $V \equiv - U$. Therefore, if $X$ is a symmetric submanifold, we can restate the deformation lemmas requiring an additional property (i.e., the homotopy is odd at each level).
+
+\begin{lemma}[Deformation Lemma I] \label{deflemmasym}Let $f : X \to \R$ be an even functional satisfying the $\left( \mathrm{PS} \right)_c$ condition for every $c \in [a, \, b]$, and assume that $\mathrm{grad} \, f(u) \neq 0$ for any $u \in f^{-1}\left([a, \, b] \right)$.
+
+Then there exists $\epsilon_0 > 0$ such that, for any $\epsilon \in [0, \, \epsilon_0]$ and any $\delta \in [0, \, \epsilon_0]$, the sublevel $f^{(a-\epsilon)}$ is a strong deformation retract of $f^{(b + \delta)}$, that is, there exists an homotopy
+\begin{equation*}H : [0, \, 1] \times f^{(b + \delta)} \to f^{(b + \delta)} \end{equation*}
+satisfying the following properties:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $H(0, \, u) = u$ for every $u \in f^{(b + \delta)}$.
+\item $H(1, \, u) \in f^{(a - \epsilon)}$ for every $u \in f^{(b + \delta)}$.
+\item $H(t, \, u) = u$ for every $u \in f^{(a - \epsilon)}$ and every $t \in [0, \, 1]$.
+\item $H_t(u) = - H_t(-u)$, that is, the homotopy is odd at each level.
+\end{enumerate} \end{lemma}
+
+\begin{lemma}[Deformation Lemma II] \label{deflemma2sym}Let $f : X \to \R$ be an even functional, and let $c$ be a critical value of $f$. If we set
+\begin{equation*} \mathcal{Z}_c := \left\{ u \in X \: \left| \: \mathrm{grad} \, f(u) = 0, \, f(u) = c \right. \right\} \end{equation*}
+to be the set of critical points, and we assume that the Palais-Smale condition at the level $c$ holds true and that there exists $V$ open neighborhood of $\mathcal{Z}_c$, then there exist $\epsilon > 0$ and a homotopy
+\begin{equation*} H : [0, \, 1] \times \left( f^{(c+\epsilon)} \setminus V \right) \to f^{(c+\epsilon)} \end{equation*}
+satisfying the following properties:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $H(0, \, u) = u$ for every $u \in f^{(c + \epsilon)} \setminus V$.
+\item $H(1, \, u) \in f^{(c - \epsilon)}$ for every $u \in f^{(c + \epsilon)} \setminus V$.
+\item $H(t, \, u) = u$ for every $u \in f^{(c - \epsilon)} \setminus V$ and every $t \in [0, \, 1]$.
+\item $H_t(u) = - H_t(-u)$, that is, the homotopy is odd at each level.
+\end{enumerate} \end{lemma}

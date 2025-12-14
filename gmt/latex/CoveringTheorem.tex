@@ -1,0 +1,238 @@
+\chapter{Covering Theorem}
+
+ In this chapter, we investigate several covering theorems, that is, the possibility, given a family $\mathcal{F}$ of balls covering $E$, to extract a subfamily $\mathcal{F}^\prime$ which covers $E$ and behaves "better."
+
+More precisely, let $X$ be a metric space and $\mu$ a measure define on $\mathcal{B}(X)$; we would like to extract a subfamily $\mathcal{F}^\prime$ satisfying one of the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The collection $\mathcal{F}^\prime$ is a disjoint covering of $E$. It is, clearly, the best possibility we could be hoping for, but, unfortunately, it is false\footnote{\textbf{Exercise.} Prove that the unitary square $[0, \,1]^2$ in $\R^2$ cannot be covered by disjoint balls.} even in $\R^2$.
+\item The collection $\mathcal{F}^\prime$ is a covering of $E$ made up of balls that do not overlap "too much" (i.e., the measure of the overlapping portion is arbitrarily small.)
+\item The collection $\mathcal{F}^\prime$ is a disjoint covering of $\mu$-almost all of $E$, that is, the portion of $E$ that is not covered has measure zero.
+\item The collection $\mathcal{F}^\prime$ is a covering of $E$ satisfying the inequality
+\begin{equation*} \sum_{B \in \mathcal{F}^\prime} \mu(B) \leq \mu(E) + \epsilon. \end{equation*}
+\end{enumerate}
+In this chapter, we are mainly concerned with two classes of covering theorems, depending on the ambient space: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Covering theorems that works on \textit{every} metric space $X$, provided that the measure $\mu$ satisfies some extra assumptions.
+\item Covering theorems that works only on $X := \R^n$, with no requirement on the measure $\mu$.
+\end{enumerate}
+
+\section{Vitali Covering Theorem}
+
+In this section, to ease the notation we denote by $B(x, \, r)$ the \textbf{closed} ball of center $x$ and radius $r$, and by $\widehat{B}(x, \, r)$ the closed ball of center $x$ and radius $5r$.
+
+\begin{lemma}[Vitali Covering Lemma] \index{Vitali Covering Lemma} \label{lemma:vcl}Let $X$ be a metric space, let $\mathcal{F} := \{ B(x_i, \, r_i) \}_{i \in I}$ be a family of closed balls with uniformly bounded radii that covers a set $E \subseteq X$. Then there exists a disjoint subfamily $\mathcal{F}^\prime$ such that the rescaling
+\begin{equation*} \widehat{\mathcal{F}}^\prime := \{ \widehat{B}(x_i, \, r_i) \: \left| \: B(x_i, \, r_i) \in \mathcal{F}^\prime \right. \} \end{equation*}
+is a covering of $E$. \end{lemma}
+
+\begin{remark}The uniform bound on the radii of the family $\mathcal{F}$ is fundamental, and it is impossible to drop it. Indeed, there is a simple counterexample in the real plane $\R^2$. The family
+\begin{equation*} \mathcal{F} := \left\{ B(n, \, n) \: \left| \: n \in \N \right. \right\}, \end{equation*}
+is an increasing covering of the upper-half plane $E$. Therefore, any disjoint subfamily is necessarily formed by a single ball, and hence it cannot cover $E$ for any $n \in \N$ (see Figure \ref{fig:example1}.)\end{remark}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=7cm]{images/TGM1.jpeg}
+\label{fig:example1}
+\caption{Necessity of the uniform boundedness on radii}
+\end{figure}
+
+\begin{proof}We first prove the result by assuming some additional properties, and then we reduce the general case to it with a simple trick.
+
+\paragraph{Step 1.} Assume that the family $\mathcal{F} = \{ B(x_n, \, r_n) \}_{n \in \N}$ is a countable cover of $E$, and assume also that the sequence of the radii is weakly decreasing, i.e. $r_1 \geq r_2 \geq \dots$. To construct the disjoint subfamily, we proceed as follows: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The first ball $B_1$ automatically belongs to $\mathcal{F}^\prime$.
+\item The second ball $B_2$ either intersect $B_1$ or it does not. If the latter holds true, then we add $B_2$ to the family $\mathcal{F}^\prime$; if the former alternative holds true, we solely throw it away.
+\item Iterate the process for every $n \geq 3$ - taking into account all of the intersections with the balls that were previously added to the subfamily $\mathcal{F}^\prime$.
+\end{enumerate}
+At this point, we only need to prove that the rescaled collection of balls $\widehat{\mathcal{F}}^\prime$ is a covering of $E$. Clearly, we may equivalently show that every ball $B_n$ is a subset of an element in $\widehat{\mathcal{F}}^\prime$. In particular, for every $n \in \N$ there are only two possible outcomes:  \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item The ball $B_n$ already belongs to $\mathcal{F}^\prime$, and thus there is nothing to prove.
+\item The ball $B_n$ intersects the ball $B_m$ for some $m < n$. The distance between the centers $x_n$ and $x_m$ is less than or equal to the sum of the radii, which means that
+\begin{equation*} d(x_m, \, x_n) \leq r_m + r_n \leq 2 r_m \implies B(x_n, \, r_n) \subset B(x_m, \, 3 r_m) \subset \widehat{B}_m. \end{equation*}
+\end{enumerate}
+
+\paragraph{Step 2.} In the general case, we cannot assume that the family is countable or that the radii give an increasing sequence, and thus everything depends on the boundedness assumption. More precisely, there exists a real number $R > 0$ such that
+\begin{equation*} B(x_i, \, r_i) \in \mathcal{F} \implies r_i \leq R.\end{equation*}
+Let us consider the following partition
+\begin{equation*} \mathcal{F}_n := \left\{ B \in \mathcal{F} \: \left| \: \frac{R}{2^{n+1}} < r \leq \frac{R}{2^n} \right. \right\}, \qquad \forall \, n \in \N, \end{equation*}
+in such a way that we can extract a subfamily from each $\mathcal{F}_n$ as follows: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item Extract a maximal (with respect to the inclusion) disjoint subfamily $\mathcal{F}_0^\prime$ from $\mathcal{F}_0$.
+\item Extract a maximal disjoint subfamily $\mathcal{F}_1^\prime$ from $\mathcal{F}_1$, satisfying the additional requirement that it does not intersect any element of $\mathcal{F}_0^\prime$.
+\item Iterate the process for $n \geq 3$ - taking into account all of the intersections with the subfamilies already chosen in the previous steps.
+\end{enumerate}
+Let $\mathcal{F}^\prime = \cup_{n \in \N} \mathcal{F}_n^\prime$: we need to show that the rescaled family $\widehat{\mathcal{F}}^\prime$ is a covering of $E$. Clearly, we may equivalently show that every ball $B_n$ is a subset of an element in $\widehat{\mathcal{F}}^\prime$. In particular, for every $B(x, \, r) \in \mathcal{F}_N$ there are only two possible outcomes: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item The ball $B(x, \, r)$ already belongs to $\mathcal{F}_M^\prime$ for some $M \in \N$, and thus there is nothing to prove.
+\item The ball $B(x, \, r)$ intersects the ball $B(y, \, s)$, with $B(y, \, s) \in \mathcal{F}_M^\prime$ for some $M \leq N$. It follows that $r \leq 2s$, and therefore the distance between the centers is less than or equal to the sum of the radii, which means that
+\begin{equation*} d(x, \, y) \leq r + s \leq 3 s \implies B(x, \, r) \subseteq \widehat{B}(y, \, s). \end{equation*}
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Vitali Covering Theorem] \index{Vitali Covering Theorem}\label{theorem:vct} Let $X$ be a metric space, let $\mu$ be a doubling\index{measure!doubling}\footnote{\textbf{Definition.} A measure $\mu$ is doubling if and only if there exists a positive constant $C > 0$ such that
+\begin{equation*} \mu \left( B(x, \, 2r) \right) \leq C \, \mu \left( B(x, \, r) \right). \end{equation*}} locally finite measure\index{measure!locally finite}\footnote{\textbf{Definition.} A measure $\mu$ is locally finite if and only if for every $x \in X$ there exists a neighborhood $U_x \ni x$ such that $\mu(U_x) < + \infty$.}, and let $E \subseteq X$ be a Borel set. Then, for every $\epsilon > 0$ and every $\mathcal{F}$ fine cover\footnote{\textbf{Definition.} Let $\mathcal{F}$ be a family of closed balls that covers $E$. We say that $\mathcal{F}$ is fine if and only if each $x \in E$ is the center of a closed ball in $\mathcal{F}$ with arbitrarily small radius.}. of $E$ made up of closed balls, there exists a disjoint subfamily $\mathcal{F}^\prime \subset \mathcal{F}$ which covers $\mu$-almost all of $E$, that is,
+\begin{equation*} \mu \left( E \setminus \bigcup_{B \in \mathcal{F}^\prime} B \right) = 0, \end{equation*}
+and the mass does not exceed $\mu(E)$ "too much", that is,
+\begin{equation} \label{eq:vtsssdt} \sum_{B \in \mathcal{F}^\prime} \mu(B) \leq \mu(E) + \epsilon. \end{equation} \end{theorem}
+
+\begin{remark}The statement of the Vitali covering theorem makes sense, but there is a topological issue which may not be apparent: The disjoint subfamily needs to be countable, and thus we need some additional assumptions on $X$ (locally compact, separable, etc.)\end{remark}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=7cm]{images/TEOGEOM2.jpeg}
+\label{fig:example2}
+\caption{Idea of the proof}
+\end{figure}
+
+\begin{proof}Assume, without loss of generality, that $\mu(E) < \infty$, and fix an open neighborhood $A_0$ of $E$ satisfying the additional property
+\begin{equation}\label{oqwe912jidoe109e1} \mu \left(A_0 \setminus E \right) \leq \epsilon \wedge \frac{\mu(E)}{2  C^{3}}, \end{equation}
+where $C$ is the doubling constant.
+
+\paragraph{Step 1.} Let us consider the collection of balls
+\begin{equation*} \mathcal{F}_0 := \left\{ B(x, \, r) \in \mathcal{F} \: \left| \: B(x, \, r) \subseteq A_0  \right.\right\}. \end{equation*}
+By construction, this is still a cover of $E$, and thus, by \hyperref[lemma:vcl]{Lemma \ref{lemma:vcl}}, it follows that there exists a disjoint subfamily of balls $\mathcal{F}_0^\prime$ such that the rescaling $\widehat{\mathcal{F}}_0^\prime$ covers $E$.
+
+\paragraph{Step 2.} We apply the doubling property of $\mu$ three times (since $2^2 < 5 < 2^3$), and it is easy to see that we can find a lower bound for the measure of $\mathcal{F}_0^\prime$:
+\begin{equation*} \mu(E) \leq \sum_{B \in \mathcal{F}_0^\prime} \mu\left(\widehat{B} \right) \leq C^3 \sum_{B \in \mathcal{F}_0^\prime} \mu(B) \implies \sum_{B \in \mathcal{F}_0^\prime} \mu(B) \geq \frac{\mu(E)}{C^3}.\end{equation*}
+In a similar fashion\footnote{\textit{Hint.} Decompose $E$ as the disjoint union of the interior part ($\cap$) and the exterior part ($\setminus$). Then, apply the subadditivity of the measure and the assumption \eqref{oqwe912jidoe109e1} on the measure of the open set$A_0$.}, we obtain the following estimate\footnote{\textbf{Notation.} The union of all the elements in a collection is denoted by
+\begin{equation*} \bigcup \mathcal{F} := \bigcup_{B \in \mathcal{F}} B.\end{equation*} }:
+\begin{equation*}\begin{aligned}  C^3 \sum_{B \in \mathcal{F}_0^\prime} \mu(B) & \leq C^3 \left( \mu \left( \bigcup \mathcal{F}_0^\prime \cap E \right) +\mu \left( \bigcup \mathcal{F}_0^\prime \setminus E \right)  \right) \leq \\[1em] & \leq C^3 \mu \left( \bigcup \mathcal{F}_0^\prime \cap E \right) + \frac{\mu(E)}{2}, \end{aligned} \end{equation*}
+from which it follows that
+\begin{equation*} \frac{\mu(E)}{2 \, C^3} \leq \mu \left( \left( \bigcup \mathcal{F}_0^\prime \right) \cap E \right).\end{equation*}
+As an immediate consequence, the measure of the portion of $E$ that has not been covered yet by $\mathcal{F}_0^\prime$ may be estimated as follows:
+\begin{equation} \label{91jido3ie0392jf} \mu\left(E \setminus \bigcup \mathcal{F}_0^\prime \right) \leq \left( 1 - \frac{1}{2 C^3} \right) \mu(E). \end{equation}
+
+\paragraph{Step 3.} Let us take a suitable \textbf{finite} subfamily $\mathcal{F}_0^{\prime \prime}$, and let $E_1 := E \setminus \bigcup \mathcal{F}_0^{\prime \prime}$. The inequality \eqref{91jido3ie0392jf} proves that
+\begin{equation*} \mu\left(E_1 \right) \leq \left( 1 - \frac{1}{3 C^3} \right) \mu(E). \end{equation*}
+The process can now be iterated in the following way: Let $A_1$ be an open neighborhood of $E_1$ satisfying the additional requirement\footnote{Here we use the finiteness of the subfamily $\mathcal{F}_0^{\prime \prime}$ to ensure that the complement is an open set.} that $E_1 \subset A_1 \subset \left(\bigcup \mathcal{F}_0^{\prime \prime} \right)^c$, and notice that everything works out smoothly as in the previous steps. In particular, it turns out that
+\begin{equation*} \mu\left(E_k \right) \leq \left( 1 - \frac{1}{3 C^3} \right)^k \mu(E), \end{equation*}
+and thus the inevitable candidate is given by
+\begin{equation*} \mathcal{F}^\prime := \bigcup_{n \in \N} \mathcal{F}_n^{\prime \prime}. \end{equation*}
+The reader may check, as an exercise, that the following properties hold (and conclude the proof): \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The family $\mathcal{F}^\prime$ is disjoint.
+\item The family $\mathcal{F}^\prime$ is a covering of $\mu$-almost all of $E$. Hint: prove that
+\begin{equation*} E \setminus \bigcup_{n \in \N} \mathcal{F}_n^{\prime \prime} = \bigcap_{n \in \N} E_n. \end{equation*}
+\item The measure is arbitrarily near to the measure of $E$, that is,
+\begin{equation*} \sum_{B \in \mathcal{F}^\prime} \mu(B) \leq \mu(E) + \epsilon. \end{equation*}
+\end{enumerate}
+\end{proof}
+
+\begin{lemma} \label{lemma:measind} Let $X$ be a metric space, and let $\mu$ be a doubling locally finite measure. Let $E \subseteq X$ be a Borel subset, and let $\mathcal{F}$ be a fine cover of $E$. Then there exist a finite disjoint subfamily $\mathcal{F}^{\prime \prime}$ and a positive real number $\delta > 0$ such that 
+\begin{equation*}\mu \left(E \setminus \bigcup \mathcal{F}^{\prime\prime} \right) \leq \delta \cdot \mu(E). \end{equation*}\end{lemma}
+
+\begin{proof} The statement follows easily from the proof of the \hyperref[theorem:vct]{Vitali's Covering Theorem \ref{theorem:vct}}. \end{proof}
+
+\begin{lemma} \label{lemma:meas0} Let $X$ be a metric space, and let $\mu$ be a doubling locally finite measure. Let $E_0 \subset X$ be a Borel null-set, let $\epsilon > 0$ be a positive real number, and let $\mathcal{F}$ be a fine cover of $E$. Then there exist a subfamily $\mathcal{F}^{\prime\prime}$, which covers $E_0$, such that
+\begin{equation*} \sum_{B \in \mathcal{F}^{\prime\prime}} \mu(B) \leq \epsilon. \end{equation*}
+\end{lemma}
+
+\begin{proof} Let $A_0$ be an open neighborhood of $E_0$ satisfying the inequality
+\begin{equation*} \mu(A_0) \leq \frac{\epsilon}{C^3}. \end{equation*}
+Let us consider the family of balls
+\begin{equation*} \mathcal{G} := \left\{ B_i := B(x_i, \, r_i) \: \left| \: \text{$B_i \subset A_0$ and $\widehat{B}_i \in \mathcal{F}$} \right. \right\}. \end{equation*}
+The reader may check, as an exercise, that $\mathcal{G}$ is a fine cover of $E_0$. By \hyperref[lemma:vcl]{Vitali's Covering Lemma \ref{lemma:vcl}} we can find a disjoint subfamily $\mathcal{G}^\prime$ such that $\widehat{\mathcal{G}}^\prime$ covers $E_0$; hence, we set
+\begin{equation*} \mathcal{F}^{\prime \prime} := \widehat{\mathcal{G}}^{\prime}. \end{equation*}
+By construction $\mathcal{F}^{\prime\prime} \subset \mathcal{F}$, and it is also a covering for $E_0$ such that
+\begin{equation*} \sum_{B \in \mathcal{G}^{\prime}} \mu\left(\widehat{B} \right) \leq C^3 \sum_{B \in \mathcal{G}^{\prime}} \mu(B) \leq C^3 \mu(A_0) \leq \epsilon, \end{equation*}
+which is exactly what we wanted to prove.
+\end{proof}
+
+\begin{remark}The cover $\mathcal{F}$ need not be fine in the statement of \hyperref[lemma:meas0]{Lemma \ref{lemma:meas0}}, but, since this is the only result in this section whose assumptions can be weakened, we will just ignore it.\end{remark}
+
+\begin{theorem} Let $X$ be a metric space, and let $\mu$ be a doubling locally finite measure. Let $E \subseteq X$ be a Borel subset, let $\epsilon > 0$ be a positive real number, and let $\mathcal{F}$ be a fine cover of $E$. Then there exists a subfamily $\mathcal{F}^\prime$, which covers $E$, such that
+\begin{equation*} \sum_{B \in \mathcal{F}^\prime} \mu(B) \leq \mu(E) + \epsilon, \end{equation*}
+that is we can cover $E$ completely with balls, whose measure does not exceed too much $\mu(E)$, by dropping the disjoint requirement. \end{theorem}
+
+\begin{proof} First, we notice that the \hyperref[theorem:vct]{Vitali's Covering Theorem \ref{theorem:vct}} allows us to restrict out attention to null-set (i.e., $\mu(E) = 0$.) Then, we apply \hyperref[lemma:meas0]{Lemma \ref{lemma:meas0}} to conclude. \end{proof}
+
+\section{Besicovitch Covering Theorem}
+
+In this section, we investigate a different type of covering theorem, which is, actually, very similar to the Vitali's result.
+
+The originality of the Besicovitch covering theorem is that it works without further assumption on the measure $\mu$, provided that $X$ is the Euclidean space $\R^n$.
+
+\begin{lemma}[Besicovitch Covering Lemma] \index{Besicovitch Covering Lemma}\label{lemma:bcl} Let $X := \R^n$, and let
+\begin{equation*} \mathcal{F} := \{ B(x_i, \, r_i)  \}_{i \in I} \end{equation*}
+be a family of closed balls with uniformly bounded radii, which is also a fine cover of a Borel set $E \subset \R^n$. Then there exist a natural number $N := N(n)$, which depends only on the dimension $n$, and $\mathcal{F}_1, \, \dots, \, \mathcal{F}_{N + 1} \subset \mathcal{F}$ disjoint subfamilies such that
+\begin{equation*} \bigcup_{i=1}^{N + 1} \mathcal{F}_i \supseteq E. \end{equation*} \end{lemma}
+
+Before we work out the details of the proof of this result, we need to state a technical lemma that allows us to infer easily that the natural number $N(n)$ depends solely on the dimension of the ambient space.
+
+\begin{lemma}\label{lemma:limballs} There exists a constant $N := N(n) \in \N$, depending only on the dimension of the ambient space, such that for any finite collection of closed balls $B_0, \, \dots, \, B_p \subset \R^n$ satisfying\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $B_0 \cap B_i \neq \varnothing$ for every $i = 1, \, \dots, \, p$;
+\item the $0$th ball has the smaller radius, that is $r_0 \leq r_i$, for any $i = 1, \, \dots, \, p$;
+\item the center $x_i$ of the ball $B_i$ does not belong to the ball $B_j$ for every $i \neq j \in \{1, \, \dots, \, p\}$;
+\end{enumerate}
+it turns out that $p \leq N(n)$. Moreover, the conclusion does not change if we replace the assumption \textbf{(b)} with a slightly different one, that is
+\begin{enumerate}
+\item[\textbf{(b)}$^\prime$] $r_0 \leq 2 \, r_i$, for any $i = 1, \, \dots, \, p$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} See \cite[pp. 99--101]{git}. \end{proof}
+
+\begin{proof}[Proof of Lemma \ref{lemma:bcl}] We first prove the result by assuming some additional properties, and then we reduce the general case to it with a simple trick.
+
+\paragraph{Step 1.} Assume that the family $\mathcal{F} = \{ B(x_n, \, r_n) \}_{n \in \N}$ is a countable fine cover of $E$, and assume also that the sequence of the radii is weakly decreasing, i.e. $r_1 \geq r_2 \geq \dots$. To construct the disjoint subfamilies, we proceed as follows: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Select any index $j \in \{1, \, \dots, \, N + 1\}$ and add the ball $B(x_0, \, r_0)$ to the subfamily $\mathcal{F}_j$.
+\item Assume that $n - 1$ balls have already been placed in $\mathcal{F}_1, \, \dots, \, \mathcal{F}_{N+1}$, or thrown away. Let $\{i_1, \, \dots, \, i_k\} \subset \{1, \, \dots, \, n-1\}$ be the subset of the indices of the kept balls.
+\item We consider the $n$-th ball, and we notice that there are only two possible outcomes:
+\mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item If $x_n$ belongs to $\bigcup_{j = 1}^k B_{i_j}$, then we throw the ball $B_n$ away.
+\item If $x_n$ does not belong to $\bigcup_{j = 1}^k B_{i_j}$, then there is an index $i \in \{1, \, \dots, \, N+1\}$ such that $B_n$ can be added to $\mathcal{F}_i$, and that subfamily is still disjoint.
+
+We argue by contradiction. If such an index $i$ does not exist, then, for any $j \in \{1, \, \dots, \, N + 1\}$, there exists a ball $B_j \in \mathcal{F}_j$ such that $B_j \cap B_n \neq \varnothing$. By \hyperref[lemma:limballs]{Lemma \ref{lemma:limballs}} we immediately derive the contradiction $N + 1 \leq N$, which is exactly what we needed to conclude the first part of the proof.
+\end{enumerate}
+\end{enumerate}
+
+\paragraph{Step 2.} In the general case, we cannot assume that the family is countable or that the radii give an increasing sequence, and thus everything depends on the boundedness assumption. More precisely, there exists a real number $R > 0$ such that
+\begin{equation} \label{dksa0e2iomkmd023} B(x_i, \, r_i) \in \mathcal{F} \implies r_i \leq R.\end{equation}
+Let us put a well order on $\mathcal{F} := \{ B_\alpha \}_{\alpha < \omega}$ for some ordinal $\omega$ satisfying the additional property
+\begin{equation*} \alpha^\prime < \alpha \implies r_\alpha < 2 \, r_{\alpha^\prime},\end{equation*}
+which is always possible as a result of \eqref{dksa0e2iomkmd023}. The construction is no different than the previous one, but we do need to use the transfinite induction. In particular, we proceed as follows:
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item Select any index $j \in \{1, \, \dots, \, N+1\}$ and add the ball $B(x_0, \, r_0)$ to the subfamily $\mathcal{F}_j$.
+\item Assume that $\alpha^\prime$ balls have already been placed in $\mathcal{F}_1, \, \dots, \, \mathcal{F}_{N + 1}$,  or thrown away. Let $\tau \subset \alpha^\prime$ be the subset of the indices of the kept balls.
+\item Let $\alpha > \alpha^\prime$. There are two possible outcomes: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item If $x_\alpha$ belongs to $\bigcup_{j \in \tau} B_j$, then we throw the ball $B_\alpha$ away.
+\item If $x_\alpha$ does not belong to $\bigcup_{j \in \tau} B_j$, then there is an index $i \in \{1, \, \dots, \, N + 1\}$ such that $B_\alpha$ can be added to $\mathcal{F}_i$, and that subfamily is still disjoint.
+\end{enumerate}
+\end{enumerate}
+\end{proof}
+
+\begin{lemma} \label{lemma:measind2} Let $X = \R^n$, and let $\mu$ be a locally finite measure. Let $E \subseteq X$ be a Borel subset, and let $\mathcal{F}$ be a fine cover of $E$. Then there exist a finite disjoint subfamily $\mathcal{F}^{\prime \prime}$ and a positive real number $\delta > 0$ such that 
+\begin{equation*}\mu \left(E \setminus \bigcup \mathcal{F}^{\prime\prime} \right) \leq \delta \cdot \mu(E). \end{equation*}\end{lemma}
+
+\begin{proof}By \hyperref[lemma:bcl]{Besicovitch Covering Lemma \ref{lemma:bcl}} there are $N := N(n)$ disjoint subfamilies $\mathcal{F}_1, \, \dots, \, \mathcal{F}_N \subset \mathcal{F}$, whose union covers $E$, that is
+\begin{equation*} E \subset \bigcup_{i = 1}^{N} \mathcal{F}_i . \end{equation*}
+For every $i \in \{1, \, \dots, \, N\}$ we set
+\begin{equation*} E_i := E \setminus \bigcup \mathcal{F}_i, \end{equation*}
+and the reader may readily check that there exists an index $i \in \{1, \, \dots, \, N\}$ such that
+\begin{equation*} \mu(E_i) \leq \frac{\mu(E)}{N}. \end{equation*}
+The thesis follows immediately by taking to a proper finite subfamily of $\mathcal{F}_i$.\end{proof}
+
+\begin{remark} It is not necessary for $\mathcal{F}$ to be a fine cover, but it is enough to have each point of $E$ be the center of such a ball. \end{remark}
+
+\begin{lemma} \label{lemma:meas02} Let $X := \R^n$, and let $\mu$ be a locally finite measure. Let $E_0 \subset X$ be a Borel null-set, let $\epsilon > 0$ be any positive number, and let $\mathcal{F}$ be a fine cover of $E$. Then there exist a subfamily $\mathcal{F}^{\prime\prime}$, which covers $E_0$, such that
+\begin{equation*} \sum_{B \in \mathcal{F}^{\prime\prime}} \mu(B) \leq \epsilon. \end{equation*}
+\end{lemma}
+
+\begin{proof} Let $A_0$ be an open neighborhood of $E_0$ satisfying the inequality
+\begin{equation*} \mu(A_0) \leq \frac{\epsilon}{N}. \end{equation*}
+Let us consider the family of balls
+\begin{equation*} \mathcal{G} := \left\{ B_i := B(x_i, \, r_i) \: \left| \: B_i \subseteq A_0 \right. \right\}. \end{equation*}
+The reader may check, as an exercise, that $\mathcal{G}$ is a fine cover of $E_0$. By \hyperref[lemma:bcl]{Besicovitch Covering Lemma \ref{lemma:bcl}} we can find disjoint subfamilies $\mathcal{G}_1, \, \dots, \, \mathcal{G}_N$ covering $E_0$. Set
+\begin{equation*} \mathcal{F}^{\prime\prime} := \bigcup_{i = 1}^{N} \mathcal{G}_i, \end{equation*}
+and notice that it is also a covering of $E_0$ satisfying the additional property
+\begin{equation*} \sum_{B \in \mathcal{F}^{\prime \prime}} \mu(B) = \sum_{i = 1}^{N} \left[ \sum_{B \in \mathcal{G}_i} \mu(B) \right] \leq N \cdot \mu(A_0) \leq \epsilon.\end{equation*}
+Indeed, the sum of the measures of the balls inside any subfamily $\mathcal{G}_i$ (as a consequence of the disjointness) needs to be equal or less than the measure of $A_0$.
+\end{proof}
+
+\begin{theorem}[Besicovitch Covering Theorem] \index{Besicovitch Covering Theorem} \label{theorem:bct} Let $X := \R^n$ and let $\mu$ be a locally finite measure. Let $E \subseteq X$ be a Borel subset, let $\epsilon > 0$ be any positive real number and let $\mathcal{F}$ be a fine cover of $E$. Then there exists a disjoint subfamily $\mathcal{F}^\prime$, which covers $\mu$-almost all of $E$, satisfying the inequality
+\begin{equation*} \sum_{B \in \mathcal{F}^\prime} \mu(B) \leq \mu(E) + \epsilon. \end{equation*} \end{theorem}
+
+\begin{proof}This is a direct consequence\footnote{The argument is very similar to the one used in Vitali's lemma. The reader may try to fill-in the details as an exercise.} of the \hyperref[lemma:bcl]{Besicovitch Covering Lemma \ref{lemma:bcl}} and \hyperref[lemma:measind2]{Lemma \ref{lemma:measind2}}. \end{proof}

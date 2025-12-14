@@ -1,0 +1,670 @@
+\chapter{Measure Theory}
+
+In this chapter, the chief goal is to give a brief introduction to the theory of measure and acquire the fundamental notions needed for the remainder of the course. The reader with an adequate background, may immediately jump to the next section, and use this one as a reference.
+
+In the first part, we introduce the only three classes of measures we shall be concerned about in this course, and then we study the weak-$\ast$ topology and some of the fundamental properties of the weak-$\ast$ convergence.
+
+In the second part, we introduce the notion of \textit{outer measure}, and we show how it can be used to construct a measure that belongs to one of the classes mentioned above.
+
+In the final part, we construct the Hausdorff $d$-dimensional measure, denoted by $\mathcal{H}^d$, and we prove some of the main properties (e.g., the relation with Lipschitz functions). The last section is devoted to the computation of the Hausdorff dimension of a Cantor-type set.
+
+\section{Definitions and Elementary Properties}
+
+\paragraph{Introduction.} In this course, we will essentially be only concerned with measures that belong to one of the following classes: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Positive, $\sigma$-additive measures, defined on the Borel $\sigma$-algebra of a reasonable space $X$, e.g. we might assume $X$ metric, locally compact and separable.\footnote{We are not very specific here since the reader may try, whenever possible, to derive, as an exercise, the minimal assumption on $X$ for an assertion to be true. }
+\item Positive, $\sigma$-subadditive measures, defined on the set of all parts $P(X)$. These are generally called \textit{outer measures}.
+\item Real-valued and vector-valued (bounded) $\sigma$-additive measures, defined on the Borel $\sigma$-algebra.
+\end{enumerate}
+
+\begin{remark}The Borel $\sigma$-algebra $\mathcal{B}(X)$ is not closed under the action of continuous maps.\end{remark}
+
+\begin{proof}Let $X = [0, \, 1] \subset \R$, and let us consider a space-filling curve\index{space-filling curve} $g : [0, \, 1] \longrightarrow [0, \, 1]^2$ and the projection $\pi : [0, \, 1]^2 \longrightarrow [0, \, 1]$; the reader may easily check that the map $f := \pi \circ g : [0, \, 1] \longrightarrow [0, \, 1]$ is a continuous function.
+
+Thus, given a Borel set $S \subset [0, \, 1]^2$ with $\pi \left(S \right)$ not Borel, it is easy to prove that the image of the Borel set $g^{-1}(S)$ under $f$ is not Borel. \end{proof}
+
+In this course, we will often introduce a suitable\footnote{See \hyperref[sec:caco]{Section \ref{sec:caco}} for a more precise definition of what suitable means here.} outer measure defined on $X$ and, by taking the restriction to the Borel $\sigma$-algebra (see \hyperref[sigmachar]{Theorem \ref{sigmachar}}), we automatically obtain a measure which belongs to the class \textbf{(1)}.
+
+\begin{remark}  If $X$ is a separable Banach space\footnote{It is not necessary to require $X$ to be a separable Banach space, but it is more than enough for our purposes. }, then the class of measures \textbf{(3)} is the dual space of a particular subspace of $C^0(X)$. In the next section, we will also prove that, if the space of measures is endowed with the weak-$\ast$ topology, then this class has good compactness properties (that is, the Banach-Alaoglu theorem holds true). \end{remark}
+
+\begin{definition}[Vector-valued Measure] \index{measure} \index{measure!vector-valued} Let $\mathcal{B}(X)$ be a Borel $\sigma$-algebra on $X$, and let $F$ be a normed space. A function $\mu : X \longrightarrow F$ is a $\sigma$-additive \textit{$F$-valued} measure if
+\begin{equation} \label{eq:sum} \sum_{n \in \N} \mu \left(E_n \right) = \mu \left( \bigcup_{n \in \N} E_n \right), \end{equation}
+for any countable disjoint family of Borel sets $\{E_n\}_{n \in \N} \subset \mathcal{B}(X)$. \end{definition}
+
+\begin{remark} The identity \eqref{eq:sum} does not only imply the $\sigma$-additivity of the measure, but it also gives us a stronger property.
+
+More precisely, the sum on the left-hand side does not depend on the order of the indexes, and thus, if $F$ is a finite-dimensional space, then it is enough to infer that the sum converges absolutely.\end{remark}
+
+\paragraph{Representation Theorem.} In this final brief paragraph, we sketch the proof of the \textit{Riesz representation theorem}, according to which the class of measures \textbf{(3)} is the dual of a suitable subset of the space of all continuous functions.
+
+\begin{definition}[Total Variation] \index{measure}\index{measure!total variation} Let $\mu$ be a measure. The \textit{total variation} of a set $E \subseteq X$ is the supremum of the measure over the possible countable partitions, that is,
+\begin{equation} \label{eq:totvar} \left| \mu \right| (E) := \sup \left\{ \left. \sum_{n = 0}^{+\infty} \left| \mu(E_n) \right| \: \right| \: \text{$\{E_n\}_{n \in \N}$ countable partition of $E$} \right\}. \end{equation}
+\end{definition}
+
+Clearly, the total variation is a positive bounded measure, defined on the Borel $\sigma$-algebra $\mathcal{B}(X)$. The \textbf{mass}\index{measure!mass} of $\mu$ is defined by setting
+\begin{equation} \label{eq:normame} \| \mu \| := \left| \mu \right|(X). \end{equation}
+The formula \eqref{eq:normame} defines a norm on the space of all the $F$-valued $\sigma$-Borel measures, which is also complete. Moreover, it is easy to see that $\mu$ is absolutely continuous with respect to its total variation $\left|\mu \right|$, and hence by \textbf{Radon-Nikodym Theorem} there exists a Borel function $f : X \longrightarrow F$ such that
+\begin{equation*} \mu = f \cdot \left| \mu \right| \leadsto \mu(E) := \int_{E} f(x) \, \mathrm{d} \left| \mu \right|(x), \end{equation*}
+with the additional property that its norm is almost everywhere equal to one, that is, $|f(x)|_F = 1$ for $\left|\mu\right|$-almost every $x \in X$. 
+
+Consequently, vector-valued measures may be identified with the product between a positive measure $\lambda$ and a function $\lambda$-summable, that is, there exists $f \in L^1(\lambda)$ such that
+\begin{equation*} \mu = f \cdot \lambda. \end{equation*}
+This identification is particularly useful when we need to integrate a function $g : X \longrightarrow F$ with respect to a vector valued measure. Indeed, it turns out that
+\begin{equation*} \int_{X} g(x) \, \mathrm{d} \mu(x) = \int_{X} g(x) \cdot f(x) \, \mathrm{d} |\mu|(x), \end{equation*}
+where $\cdot$ is a suitable notion of product\footnote{For example it could be a scalar product, or an external product.} between $f$ and $g$.
+
+\begin{notation}Let $\mu$ be an $\R^n$-valued measure defined on $X$. We denote by $\Lambda_\mu$ the functional given by
+\begin{equation} \label{fucntiosnd} g \longmapsto \int_{X} g \, \mathrm{d}\mu = \int_{X} g(x) \cdot f(x) \, \mathrm{d} \left|\mu\right|(x), \end{equation}
+where $\cdot$ is the scalar product in $\R^n$. \end{notation}
+
+The map \eqref{fucntiosnd} is well-defined at every $\left| \mu \right|$-summable function $g : X \longrightarrow \R^n$ function; thus, the functional is well-defined at every continuous function $h : X \longrightarrow \R^n$ which is infinitesimal at $\infty$ (i.e., equal to zero in the one-point compactification of $\R^n$.)
+
+In particular, $\Lambda_\mu$ is well-defined on $C_0 \left(X; \; \R^n \right)$ - or, equivalently, on $C\left(X; \; \R^n \right)$ if $X$ is compact -, which is a separable Banach spaces with respect to the supremum norm. The functional 
+\begin{equation*}\Lambda_\mu : C_0 \left(X; \; \R^n \right) \longrightarrow \R\end{equation*}
+is linear and bounded (i.e., continuous). More precisely, from \eqref{fucntiosnd} it follows that
+\begin{equation*} \left| \Lambda_\mu(g) \right| \leq \int_{X} |g(x)| \, \mathrm{d} \left|\mu\right|(x) \leq \|g\|_{C_0(X; \; \R^n)} \, \|\mu\|, \end{equation*}
+which, in turn, implies that $\| \Lambda_\mu \| \leq \|\mu\|$. If we set $g := f$, then it turns out that $\|g\| = \|f\| = 1$ and that the equality holds true, i.e.
+\begin{equation*} \| \Lambda_{\mu} \| = \|\mu\|. \end{equation*}
+
+\begin{theorem}[Riesz] \index{Riesz Theorem} \label{RieszTheorem} Let $\mathcal{M} \left(X; \; \R^n\right)$ be the space of all the $\R^n$-valued measures. The map
+\begin{equation*}\mathcal{M} \left(X; \; \R^n\right) \longrightarrow \left(C_0\left(X; \; \R^n \right)\right)^\ast, \qquad \mu \longmapsto \Lambda_\mu \end{equation*}
+is an isometry. Moreover, if $X$ is a compact space, then
+\begin{equation*}\mathcal{M} \left(X; \; \R^n\right) \longrightarrow \left(C\left(X; \; \R^n \right)\right)^\ast, \qquad \mu \longmapsto \Lambda_\mu \end{equation*}
+is also an isometry. \end{theorem}
+
+\begin{theorem}[Riesz] Let $F$ be a finite-dimensional normed space. The map
+\begin{equation*}\mathcal{M} \left(X; \; F^\ast \right) \longrightarrow \left(C_0(X; \; F^\ast)\right)^\ast, \qquad \mu \longmapsto \Lambda_\mu \end{equation*}
+is an isometry. Moreover, if $F$ is a separable Banach space, then
+\begin{equation*}\mathcal{M} \left(X; \; F^\ast \right) \longrightarrow \left(C_0(X; \; F^\ast)\right)^\ast, \qquad \mu \longmapsto \Lambda_\mu \end{equation*}
+is also an isometry, provided that $F^\ast$ is \textit{good} enough.  \end{theorem}
+
+\section{Weak-$\ast$ Topology on Measures Space}
+
+In this section, we endow the space of measures $\mathcal{M} \left(X; \; \R^n \right)$ with the weak-$\ast$ topology since the associated notion of convergence is particularly pleasant.
+
+\begin{definition}[Measures convergence]\index{measure!weak-$\ast$ convergence} A sequence $(\mu_n)_{n \in \mathbb{N}} \subset \mathcal{M} \left(X; \; \R^n \right)$ of $\R^n$-valued measures converges weakly-$\ast$ to a measure $\mu \in \mathcal{M} \left(X; \; \R^n \right)$ if and only if
+\begin{equation} \label{convweaksast} \lim_{n \to \infty} \int_{X} g(x) \, \mathrm{d} \mu_n(x) = \int_{X} g(x) \, \mathrm{d}\mu(x), \qquad \forall g \in C_0^0 \left(X; \; \R^n \right). \end{equation}\end{definition}
+
+\begin{remark}If $X$ is a compact space, then $(\mu_n)_{n \in \mathbb{N}} \subset \mathcal{M} \left(X; \; \R^n \right)$ converges weakly-$\ast$ to a measure $\mu \in \mathcal{M} \left(X; \; \R^n \right)$ if and only if
+\begin{equation} \label{eq:sodoskdottdd} \lim_{n \to \infty} \int_{X} g(x) \, \mathrm{d} \mu_n(x) = \int_{X} g(x) \, \mathrm{d}\mu(x), \qquad \forall g \in C^0 \left(X; \; \R^n \right). \end{equation} \end{remark}
+
+\begin{remark} The notion of strong convergence in the space $\mathcal{M} \left(X; \; \R^n \right)$ is, unfortunately, "\textit{too strong}", and, in general, it is not interesting at all. For this reason, from now on we say that $\mu_n$ converges (in the sense of measures) to $\mu$ if \eqref{convweaksast} is satisfied. \end{remark}
+
+\begin{remark} \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The \textbf{Banach-Alaoglu Theorem}, in the particular case of $\mathcal{M} \left(X; \; \R^n \right)$, may be stated in the following, particularly simple, way.
+
+\begin{theorem}[Banach-Alaoglu] \index{measure!Banach-Alaoglu} Let $(\mu_n)_{n \in \mathbb{N}} \subset \mathcal{M} \left(X; \; \R^n \right)$ be a sequence with uniformly bounded masses, that is, there exists $C > 0$ such that
+\begin{equation*} \| \mu_n \| \leq C < \infty \qquad \forall \, n \in \mathbb{N}. \end{equation*}
+Then, up to subsequences, it converges in the sense of measures to an element $\mu \in \mathcal{M} \left(X; \; \R^n \right)$. \end{theorem}
+
+\item Let $(\mu_n)_{n \in \mathbb{N}} \subset \mathcal{M} \left(X; \; \R^n \right)$ be a sequence of measures with uniformly bounded masses. Then $\mu_n$ converges to $\mu \in \mathcal{M} \left(X; \; \R^n \right)$ if and only if
+\begin{equation*} \lim_{n \to \infty} \int_{X} g(x) \, \mathrm{d} \mu_n(x) = \int_{X} g(x) \, \mathrm{d}\mu(x), \qquad \forall g \in D, \end{equation*}
+where $D$ is a dense subset of $C_0 \left(X; \; \R^n \right)$, e.g. the space of compactly supported functions.
+
+\item The "local version of the theory" works in a very similar way. For example, if we assume that $(\mu_n)_{n \in \mathbb{N}} \subset \mathcal{M} \left(X; \; \R^n \right)$ is a sequence of measures with locally bounded masses, that is, for any $K \subseteq X$ compact there exists $C(K) > 0$ such that
+\begin{equation*}\| \mu_n \|_{K} \leq C(k) < \infty, \qquad \forall n \in \mathbb{N}, \end{equation*}
+then we can infer that $\mu_n$ converges in the sense of measures.
+\end{enumerate}
+\end{remark}
+
+\begin{proposition} \label{proposition:posme} Let $(\mu_n)_{n \in \mathbb{N}} \subset \mathcal{M} \left(X; \; \R \right)$ be a sequence of real-valued positive measures, and assume that it converges to $\mu \in  \mathcal{M} \left(X; \; \R \right)$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item For any open subset $A \subseteq X$, it turns out that
+\begin{equation*}\liminf_{n \to + \infty} \mu_n(A) \geq \mu(A). \end{equation*}
+\item For any compact subset $K \subseteq X$, it turns out that
+\begin{equation*}\limsup_{n \to + \infty} \mu_n(K) \leq \mu(K). \end{equation*}
+\item For any relatively compact $E \subseteq X$ such that $\mu(\partial E) = 0$, it turns out that
+\begin{equation*}\lim_{n \to + \infty} \mu_n(E) = \mu(E). \end{equation*}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The first assertion is equivalent to the fact that the functional
+\begin{equation*}\Phi_A : \mathcal{M} \left(X; \; \R \right) \longrightarrow \R, \qquad \lambda \longmapsto \int_{X} \chi_A \, \mathrm{d}\lambda \end{equation*}
+is (weakly-$\ast$) lower semi-continuous for every $A \in \mathcal{B}(\R)$. The characteristic function of an open set can be approximated by an increasing sequence of continuous function, e.g.,
+\begin{equation*} f_n^{(A)}(x) := \begin{cases} 0 & \text{if $x \notin A$} \\[0.4em] \min \left\{ 1, \, \displaystyle\sup_{r > 0} \{ n \cdot r \: \left| \: B(x, \, r) \subseteq A \right. \} \right\} & \text{if $x \in A$}. \end{cases} \end{equation*}
+The supremum of weakly-$\ast$ lower semi-continuous function\footnote{The sequence $(f_n)_{n \in \N}$ is made up of continuous function, but the supremum will lose the upper semi-continuity.} is weakly-$\ast$ lower semi-continuous; thus from the relation
+\begin{equation*} \chi_A(x) = \sup_{n \in \mathbb{N}} f_n(x),  \end{equation*}
+it follows easily that $\chi_A$ is lower semi-continuous. Therefore, if we apply the standard Fatou Lemma, it turns out that
+\begin{equation*}\liminf_{n \to + \infty} \mu_n(A) \geq \mu(A), \qquad \forall \, A \in \mathcal{B}(\R). \end{equation*}
+\item This assertion follows immediately from the previous one by taking the complement. On the other hand, we can mimic the proof above and obtain the result directly by proving that
+\begin{equation*}\Phi_K : \mathcal{M} \left(X; \; \R \right) \longrightarrow \R, \qquad \lambda \longmapsto \int_{X} \chi_K \, \mathrm{d}\lambda \end{equation*}
+is weakly-$\ast$ upper semi-continuous for every $K \subseteq X$ compact. The characteristic function of a compact set can be approximated by a decreasing sequence of continuous function, e.g.
+\begin{equation*} g_n(x) := \begin{cases} 1 & \text{if $x \in K$} \\[0.4em] 1 - \min \left\{ 0, \, \displaystyle\sup_{r > 0} \{ n \cdot r \: \left| \: B(x, \, r) \right. \subseteq K^c \} \right\} & \text{if $K^c$}. \end{cases} \end{equation*}
+The infimum of a collection of (weakly-$\ast$) upper semi-continuous functions is (weakly-$\ast$) upper semi-continuous; thus from the equality
+\begin{equation*} \chi_K(x) = \inf_{n \in \mathbb{N}} g_n(x),  \end{equation*}
+it follows that $\chi_K$ is upper semi-continuous. Therefore, if we apply the reverse inequality of the Fatou Lemma, it turns out that
+\begin{equation*}\limsup_{n \to + \infty} \mu_n(K) \leq \mu(K). \end{equation*}
+\item Let $E \subseteq X$ be a relatively compact set such that $\mu\left(\partial E \right) = 0$. The interior part $\mathrm{Int} \, E$ has the same measure of $E$ and it is open; thus it follows from \textbf{(a)} that
+\begin{equation*}\liminf_{n \to + \infty} \mu_n(E) = \liminf_{n \to + \infty} \mu_n \left(\mathrm{Int} \, E \right) = \geq \mu \left( \mathrm{Int} \, E \right) = \mu(E). \end{equation*}
+In a similar fashion, since $E$ is relatively compact, the closure $\overline{E}$ is compact and has the same measure of $E$; thus it follows from \textbf{(b)} that
+\begin{equation*}\limsup_{n \to + \infty} \mu_n \left(\overline{E} \right) = \limsup_{n \to + \infty} \mu_n(E) \leq \mu(E) = \mu\left(\overline{E}\right), \end{equation*}
+and this proves the sought identity, i.e., $\lim_{n \to + \infty} \mu_n(E) = \mu(E)$.
+\end{enumerate}
+\end{proof}
+
+\begin{proposition} \label{proposition:posme2} Let $(\mu_n)_{n \in \mathbb{N}} \subset \mathcal{M} \left(X; \; \R \right)$ be a sequence of real-valued positive measures, and assume that it converges to $\mu \in  \mathcal{M} \left(X; \; \R \right)$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $X$ is compact, then
+\begin{equation*}\lim_{n \to \infty} \|\mu_n\| = \|\mu\|. \end{equation*}
+\item If $X$ is locally compact, then
+\begin{equation*}\liminf_{n \to \infty} \|\mu_n\| \geq \|\mu\|. \end{equation*}
+In particular, there exists a sequence $(\mu_n)_{n \in \N}$ of measures, converging to some $\mu$, such that the mass $\|\mu_n\|$ does not converge to $\|\mu \|$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The norm is weakly-$\ast$ lower semi-continuous; hence it suffices to prove that
+\begin{equation*}\mu_n \to \mu \text{   and $X$ compact} \implies \limsup_{n \to \infty} \|\mu_n\| \leq \|\mu\|. \end{equation*}
+By assumption $(\mu_n)_{n \in \N}$ is a sequence of positive measures, which means that the mass is simply given by $ \|\mu_n\| = \mu_n(X)$, that is,
+\begin{equation*}\|\mu_n\| = \int_{X} \mathrm{d}\mu_n, \qquad \forall \, n \in \mathbb{N}. \end{equation*}
+By compactness of $X$, the convergence in sense of measures is equivalent to \eqref{eq:sodoskdottdd}, and thus
+\begin{equation*}\|\mu_n\| = \int_{X} \mathrm{d}\mu_n \to \int_{X} \mathrm{d}\mu = \|\mu\|.  \end{equation*}
+\item It is enough to provide a counterexample to the convergence. Let $X = \R$ and let $(x_n)_{n \in \N}$ be a sequence of points in $\R$ such that $x_n \to + \infty$ as $n \to + \infty$. If we define
+\begin{equation*} \mu_n := \delta_{x_n}, \end{equation*}
+where $\delta_{y}$ is the delta of Dirac at $y$, then it is straightforward to prove that $\mu_n \to 0$ and $\|\mu_n\| = 1$ for every $n \in \mathbb{N}$, that is,
+\begin{equation*} \liminf_{n \to + \infty} \|\mu_n\| = 1 > \|\mu\| = 0. \end{equation*}
+\end{enumerate} \end{proof}
+
+\begin{definition}[Tightness] \index{measure!tightness} Let $(\mu_n)_{n \in \mathbb{N}} \subset \mathcal{M} \left(X; \; \R \right)$ be a sequence of real-valued positive measures. The sequence is \textit{tight} if, for every $\epsilon > 0$, there exists a compact subset $K_\epsilon \subset X$ such that
+\begin{equation*} \mu_n \left(X \setminus K_\epsilon\right) \leq \epsilon, \qquad \forall \, n \in \mathbb{N}. \end{equation*}\end{definition}
+
+\begin{lemma}Let $(\mu_n)_{n \in \mathbb{N}} \subset \mathcal{M} \left(X; \; \R \right)$ be a sequence of real-valued positive measures, converging to an element $\mu \in  \mathcal{M} \left(X; \; \R \right)$. Then the sequence is tight if and only if the mass converges, that is,
+\begin{equation} \label{eq:thight} \|\mu_n\| \xrightarrow{n \to + \infty} \|\mu\|. \end{equation} \end{lemma}
+
+\begin{proof}If the sequence of the masses converges to $\|\mu\|$, then the tightness of $(\mu_n)_{n \in \N}$ follows from the definition (namely, the tail of the masses sequence is as small as we want.)
+
+Vice versa, suppose that the sequence $(\mu_n)_{n \in \N}$ is tight. The norm $\| \cdot \|$ is weakly-$\ast$ lower semi-continuous; hence it suffices to prove the opposite inequality, that is,
+\begin{equation*}\limsup_{n \to \infty} \|\mu_n\| \leq \|\mu\|. \end{equation*}
+Let $\epsilon > 0$ and let $K_\epsilon \subset X$ be the compact subset satisfying \eqref{eq:thight}. If we consider the decomposition of the ambient space $X = K_\epsilon \cup K_\epsilon^c$, then it turns out that
+\begin{equation*}\mu_n(X) = \int_{K_\epsilon} \mathrm{d}\mu_n + \int_{X \setminus K_\epsilon} \mathrm{d}\mu_n \leq \int_{X} \chi_{K_\epsilon}(x) \, \mathrm{d}\mu_n(x) + \epsilon.  \end{equation*}
+Finally, we take the limit as $n \to + \infty$, and we notice that from \textbf{(b)} of \hyperref[proposition:posme]{Proposition \ref{proposition:posme}} it follows that that
+\begin{equation*}\limsup_{n \to +\infty} \mu_n(X) \leq \limsup_{n \to + \infty} \int_{X} \chi_{K_\epsilon} \, \mathrm{d}\mu_n + \epsilon \leq \mu(K_\epsilon) + \epsilon,  \end{equation*}
+which is enough to conclude the proof since $\epsilon > 0$ may be taken arbitrarily small.\end{proof} 
+
+\paragraph{"Strong" Convergence.} In this final paragraph, we introduce a stronger notion of convergence, which turns out to be the right replacement for the convergence in norm for the space of all measures.
+
+\begin{definition}[Convergence in Variation] \index{measure!convergence in variation} Let $(\mu_n)_{n \in \mathbb{N}} \subset \mathcal{M} \left(X; \; \R \right)$ be a sequence of real-valued measures. The sequence \textit{converges in variation} to some $\mu \in \mathcal{M} \left(X; \; \R \right)$ if and only if
+\begin{equation} \label{eq:convergencevariation} \mu_n \longrightarrow \mu \qquad \text{and} \qquad \|\mu_n\| \xrightarrow{n \to + \infty} \|\mu\|.\end{equation}
+\end{definition}
+
+\begin{remark} The convergence in variation induces a finer topology than the weak-$\ast$ one, and it is the right replacement for the norm convergence. \end{remark}
+
+\begin{remark} Let $(\mu_n)_{n \in \N}$ be a sequence of positive measures converging in variation. The assertions of \hyperref[proposition:posme]{Proposition \ref{proposition:posme}} hold true, provided that we modify them accordingly with the new definition: \mbox{}
+\begin{enumerate}
+\item[$\mathbf{(b_1)}$] For any closed subset $C \subseteq X$, it turns out that
+\begin{equation*}\limsup_{n \to + \infty} \mu_n(C) \leq \mu(C). \end{equation*}
+\item[$\mathbf{(c_1)}$] For any $E \subseteq X$ such that $\mu \left(\partial E \right) = 0$, it turns out that
+\begin{equation*}\lim_{n \to + \infty} \mu_n(E) = \mu(E). \end{equation*}
+\end{enumerate}
+\end{remark}
+
+\begin{remark}If $\mu_n \to \mu$ is a converging sequence of $\R^n$-valued measures (not necessarily positive), then there is a subsequence $(n_k)_{k \in \N} \subset (n)_{n \in \N}$ such that
+\begin{equation*} \left|\mu_{n_k}\right| \to \lambda,\end{equation*}
+where $\lambda$ is a positive measure satisfying $\lambda \geq \left|\mu\right|$. Moreover, given a relatively compact set $E \subseteq X$ with $\lambda(E) = 0$, the reader may prove, as an exercise, that
+\begin{equation*}\mu_n(E) \to \mu(E). \end{equation*}\end{remark}
+
+\begin{exercise}Let $(\mu_n)_{n \in \N}$ be a sequence of $\R^n$-valued measures converging in variation to an element $\mu$. Prove that:\mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The sequence of positive measures $\left( \left|\mu_n\right| \right)_{n \in \N}$ weakly-$\ast$ converges to $\left| \mu \right|$.
+\item For every subset $E \subseteq X$ such that $\left|\mu\right|(E) = 0$, it turns out that $\mu_n(E) \to \mu(E)$.
+\end{enumerate}
+\end{exercise}
+ 
+\begin{exercise}Let $X$ be a suitable ambient space, let $(x_n)_{n \in \N}$ be a sequence of points in $X$ such that $x_n \to x$ as $n \to + \infty$, and set $\mu_n := \delta_{x_n} - \delta_x$. Prove that
+\begin{equation*} \left|\mu_n\right| = \delta_{x_n} \qquad \text{and} \qquad  \left|\mu_n\right| \to \left|\mu\right| = 0. \end{equation*}
+\end{exercise} 
+ 
+\section{Outer Measures}
+
+In this section, we introduce the notion of \textit{outer measure}, and we set the ground for the main result of this chapter: the Carathéodory construction of a measure defined on the Borel $\sigma$-algebra $\mathcal{B}(X)$.
+ 
+\begin{definition}[Outer Measure]\index{measure!outer measure} Let $X$ be a set. An \textit{outer measure} on $X$ is a set function $\mu : P(X) \longrightarrow [0, \, \infty]$, where $\mathcal{P}(X)$ denotes the power set, such that \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $\mu(\varnothing) = 0$;
+\item $\mu$ is monotone, i.e. $A \subseteq B \implies \mu(A) \leq \mu(B)$;
+\item $\mu$ is $\sigma$-additive, i.e. $\{A_n\}_{n \in \mathbb{N}} \subset P(X) \implies \mu \left( \cup_{n} A_n \right) \leq \sum_{n} \mu \left(A_n \right)$.
+\end{enumerate}
+\end{definition}
+
+\begin{example} A simple example of an outer measure, which is defined on every set $X$, is given by
+\begin{equation*} \mu(E) := \begin{cases} n & \text{if $\left|E\right| = n$}, \\[0.4em] + \infty & \text{if $\left| E \right| \geq \aleph_0$}. \end{cases} \end{equation*} \end{example}
+
+
+\begin{example}Let $X := \R$. The outer measure from which the Lebesgue measure derives is defined by
+\begin{equation*}  \mu(E) := \inf \left\{ \left. \sum_{n \in \mathbb{N}} \left| I_n \right| \: \right| \: E \subset \bigcap_{n \in \mathbb{N}} I_n \right\},\end{equation*}
+where the $I_n$ are, for example, open intervals.
+\end{example}
+
+\begin{definition}[Carathéodory measurable] \index{Carathéodory measurable} Let $\mu$ be an outer measure defined on $X$. A subset $A \subseteq X$ is \textit{Carathéodory $\mu$-measurable} if and only if
+\begin{equation}\label{cars} \mu(E) = \mu(E \cap A) + \mu(E \cap A^c), \qquad \forall \, E \subseteq X. \end{equation} \end{definition}
+
+\begin{theorem}[Carathéodory]\label{sigmachar}\index{Carathéodory Theorem}Let $\mathcal{M}$ be the class of Carathéodory $\mu$-measurable sets in $X$. Then $\mathcal{M}$ is a $\sigma$-algebra and the restriction of $\mu$ to $\mathcal{M}$, denoted by $\mu \restr \mathcal{M}$, is $\sigma$-additive. \end{theorem}
+
+\begin{proof}To ease the notation for the reader we divide the proof into three steps.
+
+\paragraph{Step 0.} The relation \eqref{cars} is symmetric with respect to the complement; hence $A \in \mathcal{M}$ immediately implies $A^c \in \mathcal{M}$, and vice versa. In particular, the empty set $\varnothing$ belongs to $\mathcal{M}$.
+
+\paragraph{Step 1.} Let $A_1, \, A_2 \in \mathcal{M}$. For every $E \subseteq X$ it turns out that
+\begin{equation*} \begin{aligned} \mu(E)  & = \mu(E \cap A_1) + \mu(E \cap A_1^c) =  \\[1em]
+& = \mu(E \cap A_1 \cap A_2) + \mu(E \cap A_1 \cap A_2^c) + \mu(E \cap A_1^c) \geq  \\[1em]
+ & \geq \mu\left(E \cap (A_1 \cap A_2)\right) + \mu\left(E \cap (A_1 \cap A_2)^c\right), \end{aligned}\end{equation*}
+where the last inequality follows from the monotonicity property of $\mu$. The opposite inequality is always true as a consequence of the subadditivity of the measure; hence we can infer that
+\begin{equation*} A_1, \, A_2 \in \mathcal{M} \implies A_1 \cap A_2 \in \mathcal{M}. \end{equation*}
+
+\paragraph{Step 2.} Let $\{A_n\}_{n \in \mathbb{N}}$ be a disjoint family of elements of $\mathcal{M}$. Then
+\begin{equation*} \begin{aligned}\mu(E) & = \mu(E \cap A_1) + \mu(E \cap A_1^c) =  \\[1em]
+& = \mu(E \cap A_1) + \mu(E \cap A_1^c \cap A_2) + \mu(E \cap A_1^c \cap A_2^c) =  \\[1em]
+& = \mu(E \cap A_1) + \mu(E \cap A_2) + \mu(E \cap A_1^c \cap A_2^c) = \\[1em]
+& = \sum_{n = 1}^{m} \left[ \mu(E \cap A_n) \right] + \mu\left(E \cap \left(\bigcup_{n=1}^{m} A_n \right)^c \, \right). \end{aligned} \end{equation*}
+If we take the supremum, the identity above yields to
+\begin{equation*} \mu(E) \geq  \sum_{n = 1}^{+ \infty} \left[ \mu(E \cap A_n) \right] + \mu\left(E \cap \left(\bigcup_{n=1}^{+ \infty} A_n \right)^c \, \right), \end{equation*}
+and thus, using the $\sigma$-subadditivity of the outer measure $\mu$, we obtain the nontrivial inequality
+\begin{equation*} \mu(E) \geq \mu\left(E \cap \left(\bigcup_{n=1}^{+ \infty} A_n \right) \right) + \mu\left(E \cap \left(\bigcup_{n=1}^{+ \infty} A_n \right)^c \, \right), \end{equation*}
+that is, the countable union of disjoint elements of $\mathcal{M}$ still belongs to $\mathcal{M}$.
+
+\paragraph{Step 3.} In a similar fashion, one can prove that $\mu \restr \mathcal{M}$ is $\sigma$-additive. In fact, one can take a family of disjoint elements $\{A_n\}_{n \in \mathbb{N}}$ and take $E := \bigcup_{n \in \N} A_n$.
+\end{proof}
+
+This theorem, despite the simple proof, is incredibly powerful. Indeed, it is relatively easy to find an outer measure on $X$ and derive a $\sigma$-additive measure, while it is much harder to define it directly.
+
+\begin{remark} The Carathéodory result, on the other hand, gives no information whatsoever on the $\sigma$-algebra $\mathcal{M}$. For example, if we consider the outer measure
+\begin{equation*} \mu(E) := \begin{cases} 0 \qquad \text{if  } E = \varnothing \\ 1 \qquad \text{if  } E \neq \varnothing , \end{cases} \end{equation*}
+then it is easy to prove that the $\sigma$-algebra associated via \hyperref[sigmachar]{Theorem \ref{sigmachar}}) is the trivial one, that is,
+\begin{equation*}\mathcal{M} = \left\{ \varnothing, \, X \right\}, \end{equation*}
+and thus it is not an interesting object to deal with. \end{remark}
+
+The next theorem will give us an easy-to-check criterion for an outer measure to be "\textit{interesting}," in the sense that the $\sigma$-algebra $\mathcal{M}$ contains (at least) the Borel $\sigma$-algebra.
+
+\begin{theorem} \label{theore:sigma}Let $X$ be a metric space and let $\mu$ be an outer measure defined over $X$. If
+\begin{equation*} \mathrm{dist}(A_1, \, A_2) > 0 \implies \mu(A_1 \cup A_2) = \mu(A_1) + \mu(A_2), \end{equation*}
+then $\mathcal{M}$ contains the Borel algebra. \end{theorem}
+
+\begin{proof} First, we notice that it is enough to prove that closed sets belong to $\mathcal{M}$. We divide the argument into two steps: a particular, fairly straightforward, case and the general case.
+
+\paragraph{Step 1.} Let $X$ be a Cantor-type set (in particular, it is totally disconnected). The identity
+\begin{equation*} \mu(E) = \mu(E \cap I) + \mu(E \cap I^c), \qquad \forall \, E \subseteq X, \end{equation*}
+holds for any interval $I$ contained in $X$. By construction, the interval $I$ and the complement $I^c$ are distant, and this concludes the proof since the intervals generate the Borel $\sigma$-algebra of $X$.
+
+\paragraph{Step 2.} Let $C \subseteq X$ be a closed subset, and let us consider the sequence given by
+\begin{equation*} A_n := \left\{ x \in X \: \left| \: d(x, \, C) \geq \frac{1}{n} \right. \right\}. \end{equation*}
+The sequence $(A_n)_{n \in \N}$ is increasing, and its limit is the complement of $C$, that is,
+\begin{equation*}A_n \uparrow \left(X \setminus C \right) = C^c. \end{equation*}
+We may always assume, without loss of generality, that $\mu(E) < + \infty$. It follows from the monotonicity of $\mu$ that
+\begin{equation*} \mu(E) \geq \mu(E \cap C) + \mu(E \cap A_n), \qquad \forall \, n \in \mathbb{N}, \end{equation*}
+and hence, by taking the limit as $n \to + \infty$, an application of \hyperref[lemma:tech]{Lemma \ref{lemma:tech}} proves that
+\begin{equation*} \mu \left(E \cap A_n \right) \to \mu \left(E \cap C^c \right), \end{equation*}
+which is the nontrivial inequality.  \end{proof}
+
+\begin{lemma} \label{lemma:tech} Let $A_n \uparrow A$ be an increasingly converging sequence of subsets, and assume that
+\begin{equation} \label{ass:1230123}\mathrm{dist}(A_n, \, A_{n+1}^c) > 0 \qquad \forall \, n \in \mathbb{N}.\end{equation}
+If the measure of the limit is finite ($\mu(A) < + \infty$), then $\mu(A_n) \uparrow \mu(A)$.\end{lemma}
+
+\begin{proof} Let $a \in \R$ be the real number such that $\mu(A_n) \uparrow a$ (it exists, as a consequence of the monotonicity of the sequence). The reader can easily prove that
+\begin{equation*}a \leq \mu(A). \end{equation*}
+To prove the opposite inequality, we consider the sequence of sets defined by induction as
+\begin{equation*} \begin{cases} B_1 := A_1, \\[0.4em] B_n := A_n \setminus B_{n-1}. \end{cases} \end{equation*}
+By construction, for every $k \in \N$ it turns out that
+\begin{equation*} \mu(A_k) \geq \mu(A) - \sum_{n = k+1}^{+\infty} \mu(B_n), \end{equation*}
+and thus, if we can prove that the sum $\sum_{n \in \N} \mu(B_n)$ is finite, then we can take the limit as $k \to + \infty$ and find that
+\begin{equation*} a = \liminf_{k \to + \infty} \mu(A_k) \geq \mu(A).  \end{equation*}
+The assumption \eqref{ass:1230123} implies that $B_n$ and $B_{n + 2}$ are distant for every $n \in \mathbb{N}$; therefore we can decompose the sum as
+\begin{equation*}\sum_{n \in \N} \mu(B_n) = \sum_{k = 0}^{+ \infty} \mu(B_{2k}) + \sum_{k = 0}^{+ \infty} \mu(B_{2k+1}). \end{equation*}
+The measure $\mu$ satisfies the assumption of \hyperref[theore:sigma]{Theorem \ref{theore:sigma}}; hence
+\begin{equation*}\sum_{k \in \N} \mu(B_{2k}) = \mu \left( \bigcup_{k = 0}^{+ \infty} B_{2k} \right) \leq \mu(A).\end{equation*}
+In conclusion, the assumption $\mu(A) < \infty$ implies that
+\begin{equation*}\sum_{n \in \N} \mu(B_n) \leq 2 \mu(A) < \infty, \end{equation*}
+which is exactly the estimate we needed.
+\end{proof}
+
+\begin{lemma} \label{lemma:ousd} Let $(\mu_n)_{n \in \N}$ be a sequence of outer measures. If $\mu_n \nearrow \mu$ or $\mu_n \searrow \mu$, then also $\mu$ is an outer measure.\end{lemma}
+
+\begin{proof} We may assume that $(\mu_n)_{n \in \N}$ is an increasing sequence of outer measures converging to some $\mu$, that is, $\mu_n \nearrow \mu$. The opposite case is obtained in a similar way.
+
+\paragraph{Step 1.} The equality $\mu(\varnothing) = 0$ is trivial. If $A \subset B$, then
+\begin{equation*} \mu_n(A) \leq \mu_n(B) \implies\mu(A) := \sup_{n \in \N} \mu_n(A) \leq \sup_{n \in \N} \mu_n(B) =: \mu(B). \end{equation*}
+
+\paragraph{Step 2.} Let $\{A_k\}_{k \in \N}$ be any countable collection of subsets of $X$. Then
+\begin{equation*} \mu_n\left(\bigcup_{k \in \N} A_k \right) \leq \sum_{k \in \N} \mu_n(A_k)\qquad \forall \, n \in \N, \end{equation*}
+and it follows from Fatou's lemma that
+\begin{equation*}\begin{aligned} \mu \left( \bigcup_{k \in \N}A_k \right) & = \limsup_{n \to + \infty} \mu_n\left(\bigcup_{k \in \N} A_k \right) \leq \\[1em] & \leq \limsup_{n \to +\infty} \sum_{k \in \N} \mu_n(A_k) \leq \\[1em] &\leq \sum_{k \in \N} \limsup_{n \to + \infty} \mu_n(A_k) = \\[1em] &= \sum_{k \in \N} \mu(A_k). \end{aligned}\end{equation*}\end{proof}
+ 
+\begin{proposition} Let $X$ be a compact space, and let $\mu$ be a positive finite measure, defined on the Borel $\sigma$-algebra. For every $E \subseteq X$ Borel it turns out that
+\begin{equation*} \begin{aligned} \mu(E) & = \inf \left\{ \mu(A) \: \left| \: \text{$A \supseteq E$, $A$ is open} \right. \right\} = \\[1em] & = \inf \left\{ \mu(K) \: \left| \: \text{$K \subseteq E$, $K$ compact} \right. \right\}. \end{aligned}\end{equation*}
+The first identity is usually referred to as \textit{outer-regularity} of a measure; the second one \textit{inner-regularity} of a measure. \end{proposition}
+
+\begin{proof}[Sketch of the Proof] First, we notice that the space $X$ is compact, and thus the inner-regularity follows from the outer-regularity by passing to the complement. If we define the measure
+\begin{equation*}\nu(E) := \inf \left\{ \mu(A) \: \left| \: \text{$A \supseteq E$, $A$ is open} \right. \right\} ,\end{equation*}
+then it is easy to prove that this is an outer measure (thus outer-regular by definition), which is additive on distant sets.
+
+It follows from \hyperref[theore:sigma]{Theorem \ref{theore:sigma}} that $\nu$ is a positive measure on the Borel $\sigma$-algebra. Finally, since $\mu(A) = \nu(A)$ for every open subset $A$, a straightforward application of the \textit{Monotone Class Theorem}\footnote{A monotone class is a collection of sets which is closed under countable monotone union and intersection.} allows us to infer that $\mu \equiv \nu$ on the whole $\sigma$-algebra of Borel.\end{proof}
+ 
+\begin{remark}Let $X$ and $Y$ be spaces satisfying suitable assumption (e.g., metric and locally compact.) If $E$ is a Borel subset of $X$, and $f:E\longrightarrow Y$ is a continuous function, then $f(E)$ is universally measurable\footnote{\textbf{Definition.} The set $f(E) \subset Y$ is universally measurable if and only if, for every finite positive measure $\mu$ on $Y$, there are two Borel sets $A \subseteq f(E) \subseteq B$ such that $\mu(A) = \mu(B)$.}\index{universally measurable}, but it is, in general, not Borel. \end{remark}
+
+\section{Carathéodory Construction}
+\label{sec:caco}
+
+Let $X$ be a metric space, let $\mathcal{F} \subseteq \mathcal{P}(X)$ be a family of subsets, and let $\rho : \mathcal{F} \longrightarrow [0, \, + \infty]$ be the associated \textbf{gauge} function. We also assume that
+\begin{enumerate}[label=(\alph*)]
+\item $\varnothing \in \mathcal{F}$;
+\item $\rho(\varnothing) = 0$.
+\end{enumerate}
+For every positive real number $\delta \in (0, \, + \infty]$ and every $E \in \mathcal{P}(X)$, we define
+\begin{equation} \label{outmes} \Psi_\delta(E) := \inf \left\{ \sum_{n \in \mathbb{N}} \rho(F_n) \: \left| \: \{F_n\}_{n \in \N} \subset \mathcal{F}, \, \mathrm{diam}(F_n) < \delta, \, \bigcup_{n \in \mathbb{N}} F_n \supseteq E \right. \right\}, \end{equation}
+where the diameter\index{set diameter} of a set $F$ is defined by setting
+\begin{equation*} \mathrm{diam}(F) := \sup \left\{ d(x, \, x^\prime)  \: \left| \: x, \, x^\prime \in F \right. \right\}. \end{equation*}
+It may not be clear at this moment, but it is crucial to take the infimum only over countable covers in the definition \eqref{outmes}. We assume that
+\begin{equation*} \inf \, \varnothing = + \infty, \end{equation*}
+in such a way that the function
+\begin{equation*}(0, \, + \infty] \ni \delta \longmapsto \Psi_\delta \end{equation*}
+is (weakly) decreasing. In particular, for any $E \in \mathcal{P}(X)$ we define
+\begin{equation}\label{mess}\Psi(E) := \lim_{\delta \to 0^+} \Psi_\delta(E) = \sup_{\delta > 0} \Psi_\delta(E). \end{equation}
+
+\begin{lemma} \label{lemma:prop1} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item For any $\delta > 0$, the set function $\Psi_\delta$ is an outer measure and it is additive on sets which are distant more than $\delta$ in $\mathcal{F}$, that is, for every $A_1, \, A_2 \in \mathcal{F}$ such that $d(A_1, \, A_2) > \delta$, it turns out that
+\begin{equation*} \Psi_\delta(A_1 \cup A_2) = \Psi_\delta(A_1) + \Psi_\delta(A_2). \end{equation*}
+\item The limit set function $\Psi$ is an outer measure and it is additive on distant set of $\mathcal{F}$, that is, for every $A_1, \, A_2 \in \mathcal{F}$ such that $d(A_1, \, A_2) > 0$, it turns out that
+\begin{equation*} \Psi(A_1 \cup A_2) = \Psi(A_1) + \Psi(A_2). \end{equation*}
+In particular, the outer measure $\Psi$ satisfies the assumption of \hyperref[theore:sigma]{Theorem \ref{theore:sigma}}.
+\end{enumerate} \end{lemma}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The reader may prove that $\Psi_\delta$ is an outer measure, as a relatively straightforward check of the characterizing properties; here we only show that it is additive on distant sets.
+
+Let $\{ E_n \}_{n \in \N}$ be an admissible countable cover of $A_1 \cup A_2$, with $\mathrm{diam}(E_n) < \delta$. By assumption
+\begin{equation*} d(A_1, \, A_2) > \delta, \end{equation*}
+therefore it is immediate to check that, for any $n \in \N$, either $E_n \cap A_1 \neq \varnothing$ or $E_n \cap A_2 \neq \varnothing$. For $i = 1, \, 2$, let us set
+\begin{equation*} I_i := \left\{ n \in \N \: : \ : E_n \cap A_i \neq \varnothing \right\}, \end{equation*}
+and consider the countable covers $\mathscr{E} := \{ E_n \}_{n \in I_1}$ and $\mathscr{F} := \{ E_n \}_{n \in I_2}$ of $A_1$ and $A_2$ respectively. Then the nontrivial inequality follows easily:
+\begin{equation*} \begin{aligned} \Psi_\delta(A_1) + \Psi_\delta(A_2) & \leq \sum_{n \in I_1} \rho(E_n) + \sum_{n \in I_2} \rho(E_n) = \\[1em]
+& = \sum_{n \in \N} \rho(E_n) = \Psi_\delta(A_1 \cup A_2). \end{aligned} \end{equation*}
+\item This assertion is an immediate consequence of \textbf{(a)} and \hyperref[lemma:ousd]{Lemma \ref{lemma:ousd}}.
+\end{enumerate} \end{proof} 
+
+\begin{corollary} The limit set function $\Psi$ is a $\sigma$-additive measure defined on the $\sigma$-algebra of Borel. \end{corollary}
+
+\begin{example}[Lebesgue Measure] Let $X = \R^d$, and let us consider the collection of all \textit{rectangles}, that is,
+\begin{equation*}\mathcal{F} = \left\{ I_1 \times \dots \times I_d \: \left| \: I_i \subset \R \, \, \text{interval} \right. \right\}. \end{equation*}
+The gauge function associated to this collection is given by
+\begin{equation*}\rho \left(I_1 \times \dots \times I_d \right) = \prod_{i = 1}^{d} \left| I_i \right|, \end{equation*}
+where $|I|$ denotes the length of the interval $I \subset \R$. For every $\delta \in (0, \, + \infty]$, it is easy to prove that
+\begin{equation*} \Psi_\delta = \Psi = \mathcal{L}^d, \end{equation*}
+where $\mathcal{L}^d$ denotes the $d$-dimensional Lebesgue measure. Moreover, the limit function coincides with the gauge function on rectangles set, i.e.,
+\begin{equation*} \Psi \left(I_1 \times \dots \times I_d \right) = \rho \left(I_1 \times \dots \times I_d \right). \end{equation*} \end{example}
+
+\begin{exercise}Let $X = \mathbb{Q}$ and $\mathcal{F}$ be the family of $1$-dimensional rectangles, that is,
+\begin{equation*}\mathcal{F} = \left\{ I \: \left| \: I \subset \R \, \, \text{interval} \right. \right\}. \end{equation*}
+Prove that
+\begin{equation*} \rho \left(I \right) = \left| I \right| \implies \Psi_\delta \equiv 0.\end{equation*}
+\textit{Hint:} the set of all rational numbers $\mathbb{Q}$ is totally disconnected countable space, and thus we can take countable covers made up of points, whose length - in the sense of $\rho$ - is zero.)
+\end{exercise}
+
+\section{Hausdorff $d$-dimensional Measure $\mathcal{H}^d$}
+
+Let $X$ be a metric space, let $d \in [0, \, \infty)$ be any positive real number, let $\mathcal{F} = \mathcal{P}(X)$ be the family of all subsets, and let
+\begin{equation*} \rho \left(E \right) = \left( \mathrm{diam} (E) \right)^d \end{equation*}
+be the gauge function. The Hausdorff outer measure is defined by formula \eqref{outmes}, but there is also a multiplicative constant (depending on $d$ only), that is,
+\begin{equation*} \mathcal{H}_\delta^d(E) = c_d \Psi_\delta(E). \end{equation*}
+The Hausdorff measure\index{Hausdorff measure} is the limit as $\delta \to 0^+$, that is, it is defined by formula \eqref{mess} up to the same multiplicative constant:
+\begin{equation*}\mathcal{H}^d(E) = c_d \Psi(E). \end{equation*}
+The constant $c_d$, for integer values of $d$, is defined as follows:
+\begin{equation*} c_d := \frac{\alpha_d}{2^d}, \end{equation*}
+where $\alpha_d$ is the measure of the $d$-dimensional unitary ball, that is,
+\begin{equation*} \alpha_d = \frac{\pi^{d/2}}{\Gamma( \frac{d}{2} + 1 )}. \end{equation*}
+
+\begin{lemma}[Properties of the Hausdorff Measure] \label{lemma:hausdorffprop} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $d = 0$, then $\mathcal{H}^d$ is the counting measure.
+\item If $X = \R^n$, then
+\begin{equation*} \mathcal{H}^d \left( \lambda E \right) = \lambda^d \mathcal{H}^d \left( E \right), \qquad \forall \, \lambda > 0, \, \, \forall \, E \subseteq \R^n. \end{equation*}
+\item If $f : E \subseteq X \longrightarrow Y$ is an isometry, then
+\begin{equation*} \mathcal{H}^d \left( f(E) \right) = \mathcal{H}^d \left( E \right). \end{equation*}
+\item If $f : E \subseteq X \longrightarrow Y$ is an $L$-Lipschitz map, then
+\begin{equation*} \mathcal{H}^d \left( f(E) \right) \leq L^d \mathcal{H}^d \left( E \right). \end{equation*}
+\item Let $X := \R^n$, and let $\Psi_\delta$ be the outer measure associated to the rectangles gauge function. For every $\delta \in (0, \, + \infty]$ and every $E \subseteq \R^n$, it turns out that
+\begin{equation*} \mathcal{H}_\delta^d(E) = \Psi_\delta(E).\end{equation*}
+Moreover, the Hausdorff $d$-dimensional measure and the Lebesgue $d$-dimensional measure coincide on $\R^n$, that is,
+\begin{equation*} \mathcal{H}^d \equiv \mathcal{L}^d. \end{equation*}
+\end{enumerate} \end{lemma}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let $E$ be a finite set with $n := |E|$. Since $E$ is discrete, there exists a real number $\epsilon > 0$ such that any countable cover of $E$ made up by sets of diameter less than $\epsilon$, must be of cardinality at least $n$.
+
+On the other hand, there is a trivial covering by $n$ nonempty sets of diameter less than $\epsilon$ (i.e., small neighborhoods of the $n$ points); hence $\mathcal{H}^0(E) = n$. Employing the monotonicity of the outer measures, this proves the claim.
+\item First, we observe that any subset $A \subset \R^n$ has the following property: for every positive constant $\lambda > 0$, it turns out that
+\begin{equation*} \mathrm{diam}\left(\lambda A \right) = \lambda \cdot \mathrm{diam}(A). \end{equation*}
+Let $E \subseteq \R^n$ be given, and let $\{E_n\}_{n \in \N}$ be an optimal cover\footnote{A cover realizing the infimum in definition \eqref{outmes}.} for $E$ of diameter $\delta > 0$. It follows easily that $\{ \lambda E_n \}_{n \in \N}$ is a countable cover for the rescaling $\lambda E$, of diameter $\lambda \delta$. Hence
+\begin{equation*}\begin{aligned} \mathcal{H}_{\lambda \delta}^d \left( \lambda E \right) & \leq c_d \sum_{n \in \mathbb{N}} \left(\mathrm{diam}\left( \lambda E_n \right) \right)^d = \\[1em] & = c_d \lambda^d \sum_{n \in \mathbb{N}} \left(\mathrm{diam}\left(E_n \right) \right)^d = \lambda^d  \mathcal{H}_{\delta}^d(E), \end{aligned}\end{equation*}
+and, by taking the limit as $\delta$ approaches $0^+$, we infer that
+\begin{equation*} \mathcal{H}^d \left( \lambda E \right) \leq \lambda^d \mathcal{H}^d \left( E \right). \end{equation*}
+In a similar fashion, let $\{F_n\}_{n \in \N}$ be an optimal cover for $\lambda E$ of diameter $\delta > 0$. It follows easily that $\{ \lambda^{-1} E_n \}_{n \in \N}$ is a countable cover for $E$, of diameter $\lambda^{-1} \delta$. Hence
+\begin{equation*}\begin{aligned} \mathcal{H}_{\lambda^{-1} \delta}^d \left( E \right) & \leq c_d \sum_{n \in \mathbb{N}} \left(\mathrm{diam}\left( E_n \right) \right)^d = \\[1em] & = c_d \lambda^{-d} \sum_{n \in \mathbb{N}} \left(\mathrm{diam}\left( \lambda E_n \right) \right)^d = \lambda^d  \mathcal{H}_{\delta}^d(\lambda E), \end{aligned}\end{equation*}
+and, by taking the limit as $\delta$ approaches $0^+$, we infer that
+\begin{equation*} \mathcal{H}^d \left( \lambda E \right) \geq \frac{1}{\lambda^d} \mathcal{H}^d \left( E \right). \end{equation*}
+\item First, we notice that for every isometry $f : X \longrightarrow Y$ and every subset $E \subseteq X$, it turns out that
+\begin{equation*} d(x, \, x^\prime) = d(f(x), \, f(x^\prime)) \implies \mathrm{diam}(E) = \mathrm{diam}\left(f(E) \right). \end{equation*}
+The argument shown in \textbf{(b)} applies here without any significant change, provided that we take into account the property above.
+\item Let $\{E_n\}_{n \in \mathbb{N}}$ be a countable cover of $E$ with diameter less than or equal to $\delta > 0$. The map $f$ is $L$-Lipschitz, and thus $\{f(E_n)\}_{n \in \mathbb{N}}$ is a countable cover of $f(E)$ with diameter less than or equal to $L \delta$. Therefore
+\begin{equation*}\begin{aligned} \mathcal{H}_{L \delta}^d \left( f(E) \right) & \leq c_d \sum_{n \in \mathbb{N}} \left(\mathrm{diam}\left(f(E_n) \right) \right)^d \leq \\[1em] & \leq c_d  L^d  \sum_{n \in \mathbb{N}} \left(\mathrm{diam}\left(E_n \right) \right)^d = L^d \mathcal{H}_{\delta}^d(E), \end{aligned}\end{equation*}
+and the thesis follows by taking the limit as $\delta$ approaches $0^+$.
+\item This assertion is rather nontrivial, and we give a sketch of the proof after we introduce the Steiner symmetrization and the isoperimetrical inequality (see \hyperref[theorem:H=L]{Theorem \ref{theorem:H=L}}.)
+\end{enumerate}\end{proof} 
+
+\begin{lemma} \label{lemma:hausdsurf} Let $E$ be a Borel set contained in a $d$-dimensional surface $\Sigma \subset \R^n$ of class $C^1$. Then the $d$-dimensional Hausdorff measure of $E$ is the $d$-dimensional volume, that is,
+\begin{equation*} \mathcal{H}^d(E) = \mathrm{vol}_{d}(E). \end{equation*} \end{lemma}
+
+\begin{proof}The proof presented here is \textbf{not} rigorous, but the reader may try to expand it, fill the gaps and fix the imprecision as a particularly useful exercise.
+
+\paragraph{Step 1.} Fix $\delta > 0$ and cover the surface $\Sigma$ with a countable collection $\mathcal{U} := \left\{U_n\right\}_{n \in \mathbb{N}}$ of sets such that, for every $n \in \N$, there is an almost-isometry
+\begin{equation*} f_n : U_n \xrightarrow{ \: \sim \: } A_n \subseteq \R^d, \end{equation*}
+where $A_n$ is a flat subset of $\R^d$. More precisely, there exists $\delta > 0$ such that
+\begin{equation*} (1 - \delta) \cdot d\left(x, \, x^\prime\right) \leq d\left(f_n(x), \, f_n(x^\prime)\right) \leq  (1 + \delta) \cdot d\left(x, \, x^\prime\right), \end{equation*}
+where $d$ is the distance of the metric space $X$.
+
+\paragraph{Step 2.} The set $E$ may be written as the disjoint union of a collection of subsets $\mathcal{E} := \left\{E_n\right\}_{n \in \mathbb{N}}$ satisfying the inclusion $E_n \subseteq U_n$ for every $n \in \mathbb{N}$, that is,
+\begin{equation*} E = \bigsqcup_{n \in \N} E_n. \end{equation*}
+The $d$-dimensional volume of $E$ is given by the sum of the $d$-dimensional volumes of the $E_n$s, i.e.,
+\begin{equation*}  \mathrm{vol}_{d}(E) = \sum_{n \in \mathbb{N}}  \mathrm{vol}_{d}(E_n), \end{equation*}
+which is equal, taking the preimages via the almost-isometries, to
+\begin{equation*}\mathrm{vol}_{d}(E) = \left( \sum_{n \in \mathbb{N}} \mathcal{L}^d \left(f_n^{-1}(A_n) \cap E_n\right) \right) \cdot (1 + \mathcal{O}(\delta)). \end{equation*}
+The function $f_n$ is $(1 + \delta)$-Lipschitz; hence
+\begin{equation*} \mathcal{H}^d(E) = \sum_{n \in \mathbb{N}} \mathcal{H}^d(E_n) = \left( \sum_{n \in \mathbb{N}} \mathcal{H}^d \left(f_n(E_n)\right) \right) \cdot (1 + \mathcal{O}(\delta)), \end{equation*}
+and this concludes the proof since the right-hand side coincides with $\mathrm{vol}_{d}(E)$.\end{proof}
+ 
+\begin{remark} The Hausdorff measure $\mathcal{H}^d$ does not change if we replace the family $\mathcal{F}$ with the following alternatives:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item \textbf{Closed Sets.} The diameter of a set $A$ coincides with the diameter of its closure $\overline{A}$.
+\item \textbf{Open Sets.} Given a set $A$, for every $\epsilon > 0$ one can find an open set $B_\epsilon$ such that
+\begin{equation*}A \subseteq B_\epsilon \qquad \text{and} \qquad \mathrm{diam}(B_\epsilon) \leq \mathrm{diam}(A) + \epsilon. \end{equation*}
+\item \textbf{Convex Sets.} In the particular case $X = \R^n$, the reader may prove that the diameter of the convex hull of $A$ is equal to the diameter of $A$.
+\end{enumerate}
+On the other hand, one cannot replace the family $\mathcal{F}$ with, e.g., the family of balls\footnote{The reader may prove this assertion formally, but the rough idea behind it is evident: in general, a $r$-diameter set is \textbf{not} contained in a $r$-diameter ball (see, e.g., an equilateral triangle).}.\end{remark}
+
+\paragraph{Hausdorff Spherical Measure.}\index{Hausdorff spherical measure} Let $X$ be a metric space, let $d \in [0, \, \infty)$ be any positive real number, let $\mathcal{F}_s$ be the family of all the balls, and let
+\begin{equation*} \rho \left(E \right) = \left( \mathrm{diam} (E) \right)^d \end{equation*}
+be the gauge function. The spherical Hausdorff outer measure is defined by formula \eqref{outmes}, but there is also a multiplicative constant (depending on $d$ only), that is,
+\begin{equation*} \mathcal{H}_{\delta, \, s}^d(E) = c_d \Psi_{\delta, \, s}(E). \end{equation*}
+The spherical Hausdorff measure is the limit as $\delta \to 0^+$, that is, it is defined by formula \eqref{mess} up to the same multiplicative constant:
+\begin{equation*}\mathcal{H}_{s}^{d}(E) = c_d \Psi(E). \end{equation*}
+
+\begin{lemma} There is a constant $C > 0$ such that
+\begin{equation*} \mathcal{H}^d(E) \leq \mathcal{H}_s^d(E) \leq C \cdot \mathcal{H}^d(E), \qquad \forall \, E \subseteq X. \end{equation*} \end{lemma}
+ 
+\begin{proof} Let $E \subseteq X$ be a subset of $X$, and let $\{E_n\}_{n \in \N}$ be a countable covering of $E$ with sets whose diameter is strictly less than $\delta$.
+
+\paragraph{Step 1.} Let $x_n \in E_n$ be a sequence of points, and let us consider the family of balls defined by
+\begin{equation*} B_n := B\left(x_n, \, \mathrm{diam}(E_n) \right). \end{equation*}
+By construction, one can easily check that
+\begin{equation*} E_n \subset B_n \qquad \text{and} \qquad \mathrm{diam} \left( B_n \right) = 2 \mathrm{diam}(E_n), \end{equation*}
+and thus $\{B_n\}_{n \in \N}$ is a covering of $E$, made up of balls whose diameter does not exceed $2 \delta$. 
+
+\paragraph{Step 2.} A straightforward application of the definitions proves the inequality
+\begin{equation*}  \mathcal{H}_{2\delta, \, s}^d(E) \leq \sum_{n \geq 0} c_d  \left(\mathrm{diam}(B_n) \right)^d = 2^d  c_d  \sum_{n \geq 0} \left( \mathrm{diam}(E_n) \right)^d. \end{equation*}
+If we take the infimum over all such families $\{E_n\}_{n \in \N}$, then we get the thesis with $C = 2^d$, that is,
+\begin{equation*} \mathcal{H}^d(E) \leq \mathcal{H}_s^d(E) \leq 2^d \cdot \mathcal{H}^d(E), \qquad \forall \, E \subseteq X. \end{equation*} 
+One easily notices that $2^d$ is not the sharp constant, and it can be improved up to
+\begin{equation*} C(d) := \left(\frac{2 n}{n + 1} \right)^{\frac{d}{2}}, \end{equation*}
+but we will not furnish a proof of this result in the course.
+\end{proof}
+
+\begin{lemma} \label{lemma:hausdsurf2} Let $E$ be a Borel set contained in a $d$-dimensional surface $\Sigma \subset \R^n$ of class $C^1$. Then
+\begin{equation*} \mathcal{H}^d(E) = \mathrm{vol}_{d}(E) = \mathcal{H}_s^d(E). \end{equation*} \end{lemma}
+
+\begin{proof}The argument is along the lines of the one used in \hyperref[lemma:hausdsurf]{Lemma \ref{lemma:hausdsurf}}. \end{proof}
+
+\begin{lemma}Let $d < d^\prime$ be two real numbers, and let $E \subseteq X$ be any subset.\mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item If $\mathcal{H}^d(E)$ is finite, then $\mathcal{H}^{d^\prime}(E) = 0$.
+\item If $\mathcal{H}^{d^\prime}(E) > 0$, then $\mathcal{H}^d(E) = + \infty$.
+\end{enumerate}
+In particular, for a fixed set $E$, the function $d \longmapsto \mathcal{H}^d(E)$ is decreasing, and it attains a finite nonzero value at most once.\end{lemma}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Let $\{E_n\}_{n \in \N}$ be a covering of $E$, whose diameter does not exceed a fixed $\delta > 0$. By definition, it turns out that
+\begin{equation} \label{103029931203} \mathcal{H}_\delta^{d^\prime}(E) \leq   \sum_{n \geq 0} \left(\mathrm{diam}(E_n) \right)^{d^\prime} \leq \delta^{d^\prime - d} \cdot \sum_{n \geq 0} \left(\mathrm{diam}(E_n) \right)^d, \end{equation}
+which, in turn, implies that
+\begin{equation*} \mathcal{H}_\delta^{d^\prime}(E) \leq \delta^{d^\prime - d} \cdot \mathcal{H}_\delta^d(E). \end{equation*}
+In conclusion, we notice that $d^\prime - d$ is strictly greater than $0$, and hence the thesis follows by taking the limit as $\delta \to 0^+$.
+\item The inequality \eqref{103029931203} may be rewritten as
+\begin{equation*} \mathcal{H}_\delta^{d}(E) \geq \delta^{d - d^\prime} \cdot \mathcal{H}_\delta^{d^\prime}(E), \end{equation*}
+and thus we conclude as in \textbf{(1)} since $d - d^\prime$ is strictly less than $0$.
+\end{enumerate} \end{proof} 
+
+\begin{definition}[Hausdorff Dimension]\index{Hausdorff dimension} Let $E \subseteq X$. The Hausdorff dimension of $E$, denoted by $\mathrm{dim}_{\mathcal{H}} \, E$, is the unique real number such that
+\begin{equation*} \begin{cases}\mathcal{H}^{d} (E) = 0 & d > \mathrm{dim}_{\mathcal{H}} \, E \\[1em] \mathcal{H}^d(E) = + \infty & d < \mathrm{dim}_{\mathcal{H}} \, E. \end{cases} \end{equation*} \end{definition}
+
+\begin{remark}[Basic Properties] \label{rmk:2o1dokk1} \mbox{} 
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $\underline{d} = \mathrm{dim}_{\mathcal{H}} \, E$ is the Hausdorff dimension of $E$, then $\mathcal{H}^{\underline{d}}(E)$ might be either zero or infinite (i.e., it is not necessarily finite).
+\item The Hausdorff dimension of a countable union is equal to the supremum of the Hausdorff dimensions, that is,
+\begin{equation*} \mathrm{dim}_\mathcal{H} \, \bigcup_{n \in \mathbb{N}}E_n = \sup_{n \in \mathbb{N}} \left\{ \mathrm{dim}_{\mathcal{H}} \, E_n\right\}. \end{equation*}
+\item Let $(E_n)_{n \in \mathbb{N}} \subset \mathcal{P}(\R)$ and assume that $\mathrm{dim}_{\mathcal{H}} \, E_n \nearrow d$. The dimension of the union is equal to $d$, that is,
+\begin{equation*} \mathrm{dim}_{\mathcal{H}} \, \bigcup_{n \in \mathbb{N}} E_n = d, \end{equation*}
+and the Hausdorff measure of the union is zero:
+\begin{equation*}\mathcal{H}^d \left( \bigcup_{n \in \mathbb{N}} E_n \right) = 0. \end{equation*}
+\end{enumerate} 
+ \end{remark}
+
+\begin{exercise}Let $E \subseteq X$. The following properties are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The Hausdorff measure of $E$ is zero, i.e. $\mathcal{H}^d(E) = 0$.
+\item For every $\epsilon > 0$ there is a countable cover $\{E_n\}_{n \in \mathbb{N}}$, whose diameters satisfy the inequality
+\begin{equation*}\sum_{n \geq 0} \left(\mathrm{diam}\left(E_n \right) \right)^d \leq \epsilon. \end{equation*}
+\item The $\infty$-Hausdorff measure of $E$ is zero, i.e. $\mathcal{H}_\infty^d(E) = 0$.
+\end{enumerate}
+\end{exercise}
+
+\begin{theorem}[$\mathcal{H}^d \equiv \mathcal{L}^d$] Let $X := \R^n$. For every $\delta > 0$ and every $E \subseteq X$, it turns out that
+\begin{equation*} \mathcal{H}^d(E) = \mathcal{H}_\delta^d(E) = \mathcal{L}^d(E). \end{equation*}
+\label{theorem:H=L} \end{theorem}
+
+Before we can give the proof of this result, we need to introduce two fundamental tools (the isoperimetrical property of balls and the Steiner symmetrization), which are also extremely important per se.
+
+\begin{theorem}[Isoperimetrical Property of Balls] \label{theorem:ismp} Let $B(r)$ be the \textbf{closed} ball centered at the origin of radius $r$ in $\R^d$. Among all closed sets with given diameter in $\R^d$, the ball $B(r)$ has maximum Lebesgue measure, that is,
+\begin{equation*}c_d \left( \mathrm{diam}(B_r) \right)^d = \mathcal{L}^d\left(B(r) \right) \geq \mathcal{L}^d(E), \qquad \forall \, E \subseteq X \: : \: \mathrm{diam}(E) = 2r. \end{equation*}\end{theorem} 
+
+\begin{proof}[Sketch] The proof of the isoperimetrical property is a direct consequence of the Steiner symmetrization (the reader may consult \cite[pp 195--198]{fef12d1} for a rigorous argument.)
+
+\paragraph{Symmetrization Construction.} Let $E \subseteq \R^d$ be a bounded closed subset and let $V$ be an affine hyperplane in $\R^d$. For every point $x \in V$, we may consider the $1$-dimensional subspace $e_x$, orthogonal to $V$, and replace the intersection $e_x \cap E$ by a closed segment, centered at $x_0$, with the same length\footnote{Hausdorff measure.}. From now on, we denote by $\widetilde{E}$ the symmetrization of $E$.
+
+\paragraph{Symmetrization Properties.} Let $E \subseteq \R^d$ be a bounded closed subset and let $V$ be an affine hyperplane in $\R^d$. The reader may prove that the Lebesgue measure does not change, that is,
+\begin{equation*}\mathcal{L}^d(E) = \mathcal{L}^d \left( \widetilde{E} \right), \end{equation*}
+while the diameter decreases, that is,
+\begin{equation*}\mathrm{diam}(E) \geq \mathrm{diam} \left( \widetilde{E} \right). \end{equation*}
+Moreover, one could easily prove that the set $\widetilde{E}$ is closed.
+
+\paragraph{Proof ($d = 2$).} In this particular case the proof is fairly straightforward (it suffices to look at \hyperref[fig:sss]{Figure \ref{fig:sss}}), but the idea for $d > 2$ is exactly the same.
+
+Let $E$ be any subset of $\R^2$, and consider an orthogonal basis $\{e_1, \, e_2\}$ of the real plane. If we denote by $\widetilde{E}$ the Steiner symmetrization of $E$ with respect to $e_1$ first, and $e_2$ after, then it is easy to prove that $\widetilde{E}$ symmetric with respect to the origin, and it is thus contained in a ball of diameter $\mathrm{diam}\left(\widetilde{E} \right)$. \end{proof}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=15cm, height=8cm]{images/TGM11.png}
+\caption{Idea of the proof in dimension $2$}
+\label{fig:sss}
+\end{figure}
+
+%\begin{lemma} \label{lemma:ballsf} Let $B := B(x, \, r)$ be a ball in $\R^d$, and let $\delta, \, \epsilon > 0$ be positive real numbers. Then there exist a collection of countably many balls $B_n := B_n(x_n, \, r_n)$ such that the
+%\begin{equation*} r_n \leq \frac{\delta}{2} \qquad \text{and} \qquad  \sum_{n \in \mathbb{N}} \mathcal{L}^d(B_n) \leq \mathcal{L}^d(B) + \epsilon. \end{equation*} \end{lemma}
+
+%\begin{proof}This result follows easily from the \hyperref[theorem:vct]{Vitali Covering Theorem \ref{theorem:vct}}, which is introduced in the next chapter. \end{proof}
+
+\begin{proof}[Proof of Theorem \ref{theorem:H=L} ] Recall that the normalization constant of the Hausdorff measure is given by
+\begin{equation*} c_d = \frac{\alpha_d}{2^d}, \end{equation*}
+and thus, for every ball $B_{x, \, r} := B(x, \, r) \subseteq \R^d$, it turns out that
+\begin{equation*}\mathrm{vol}_d(B_{x, \, r}) = c_d \left( \mathrm{diam} (B_{x, \, r}) \right)^d. \end{equation*}
+
+\paragraph{Step 1.} First, we notice that it suffices to prove that
+\begin{equation*} \mathcal{H}_\infty^d(E) \geq \mathcal{L}^d(E), \qquad \forall \, E \subseteq \R^d, \end{equation*}
+in order to obtain the first inequality, that is,
+\begin{equation*} \mathcal{H}^d(E) \geq \mathcal{L}^d(E), \qquad \forall \, E \subseteq \R^d. \end{equation*}
+Let $\{E_n\}_{n \in \N}$ be a countable cover of $E$. It follows from the isoperimetrical property of balls (see \hyperref[theorem:ismp]{Theorem \ref{theorem:ismp}}) that
+\begin{equation*} c_d \left( \mathrm{diam}(E_n) \right)^d \geq \mathcal{L}^d(E_n),\end{equation*}
+and thus
+\begin{equation*} c_d \sum_{n \in \mathbb{N}} \left( \mathrm{diam}(E_n) \right)^d = \sum_{n \in \mathbb{N}} c_d \left( \mathrm{diam}(E_n) \right)^d \geq  \mathcal{L}^d(E).\end{equation*}
+By taking the infimum of the left-hand side, we conclude that
+\begin{equation*} \mathcal{H}_\infty^d(E) \geq  \mathcal{L}^d(E).\end{equation*}
+
+\paragraph{Step 2.} The opposite inequality follows if we are able to prove that
+\begin{equation*} \mathcal{H}_\delta^d(E) \leq \mathcal{L}^d(E), \qquad \forall \, E \subseteq \R^d, \, \, \, \forall \, \delta > 0. \end{equation*}
+Let $\{E_n\}$ be a countable optimal cover for computing the Lebesgue measure\footnote{In particular, the cover does not need to be optimal for computing the Hausdorff measure.} of $E$. The optimal cover cannot be made up of cubes or rectangles\footnote{The reader may prove, as an exercise, that covers made up of cubes or rectangles yield to the sought inequality up to a constant strictly bigger than one.}, but by \hyperref[lemma:vcl]{Vitali's Covering Lemma \ref{lemma:vcl}} it follows that it can be chosen among all covers made up of (closed) balls. Moreover, for every fixed $\epsilon > 0$, there exists a collection of balls $\{B_n\}_{n \in \mathbb{N}}$ such that
+\begin{equation*} \epsilon + \mathcal{L}^d(E) \geq \sum_{n \in \mathbb{N}} \mathcal{L}^d(B_n) = \sum_{n \in \mathbb{N}} c_d \left(\mathrm{diam}(B_n) \right)^d \geq \mathcal{H}_\delta^d(E), \end{equation*}
+and this concludes the proof by arbitrariness of $\delta > 0$.
+\end{proof} 
+
+\section{Hausdorff Dimension of Cantor-Type Sets}
+\label{sec:cts}
+
+In this brief section, we compute the Hausdorff dimension of the standard Cantor set $\mathcal{C}$, and we generalize the process to more elaborate sets.
+
+\begin{lemma} \label{lemma:cset} Let $\mathcal{C}$ be the standard Cantor set. Its Hausdorff dimension is given by
+\begin{equation*}\underline{d} := \mathrm{dim}_{\mathcal{H}} \left(  \mathcal{C} \right) = \frac{\ln 2}{\ln 3}, \end{equation*}
+and the Hausdorff measure is finite, that is,
+\begin{equation*} 0 < \mathcal{H}^{\underline{d}} \left( \mathcal{C} \right) < + \infty. \end{equation*} \end{lemma}
+
+\begin{proof} In this proof for simplicity purposes we assume that the renormalization constant $c_d$ is equal to $1$, and we prove that the Hausdorff measure of $\mathcal{C}$ is bounded as follows:
+\begin{equation*} \frac{1}{2} \leq \mathcal{H}^{\underline{d}}( \mathcal{C} ) \leq 1. \end{equation*}
+
+\paragraph{Upper bound.} The bound from above is, as usual, relatively easy to prove: it is enough to find a cover for the Cantor set $\mathcal{C}$ satisfying the bound. By definition
+\begin{equation*} \mathcal{C} = \bigcap_{k = 0}^{\infty} \left( \bigcup_{i = 1}^{2^k} I_{k, \, i} \right), \end{equation*}
+where the diameter of each interval is given by
+\begin{equation*} \left| I_{k, \, i} \right| = 3^{-k}. \end{equation*}
+Fix $\delta > 0$, and consider the minimal integer $k \in \N$ such that $3^{-k} < \delta$. Clearly
+\begin{equation*} \mathcal{C} \subset \bigcup_{i = 1}^{2^k} I_{k, \, i}, \end{equation*}
+and this implies, by $\sigma$-subadditivity, that
+\begin{equation*} \mathcal{H}_{\delta}^{\underline{d}} \left( \mathcal{C} \right) \leq \sum_{i=1}^{2^k} \mathcal{H}_{\delta}^{\underline{d}} \left( I_{k, \, i} \right) \leq 2^k \frac{1}{3^{\underline{d} k}} = 1.\end{equation*}
+
+\paragraph{Lower bound.} First, we notice that
+\begin{equation*} \mathcal{H}_\delta^{\underline{d}}\left( \mathcal{C} \right) \geq \mathcal{H}_\infty^{\underline{d}}\left( \mathcal{C} \right), \end{equation*}
+and thus it is enough to prove the lower bound for the $\infty$ measure, that is,
+\begin{equation*} \mathcal{H}_\delta^{\underline{d}}\left( \mathcal{C} \right) \geq \mathcal{H}_\infty^{\underline{d}}\left( \mathcal{C} \right) \stackrel{?}{\geq} \frac{1}{2}. \end{equation*}
+Let $\{E_n\}_{n \in \mathbb{N}}$ be a countable cover of $\mathcal{C}$, and assume that each $E_n$ is open and convex. Moreover, by compactness, we may assume that there are only finitely many. Fix $n \in \mathbb{N}$ and take the smallest interval $I_{k, \, i} := I_n$ that contains $E_n$. The reader may prove by herself that
+\begin{equation*}\left| I_n \right| \leq 3 \left|E_n\right|, \end{equation*}
+as a consequence of the fact that, if $I_n$ splits into $I_{n}^{\prime}$ and $I_n^{\prime \prime}$, then $E_n$ must intersect both\footnote{\textbf{N.B.} There could be points of $E_n$ lying between $I_{n}^{\prime}$ and $I_n^{\prime \prime}$, but, since they do not belong to the Cantor set, we can ignore them (with some care).} (otherwise $I_n$ would not be minimal, as required.) As a consequence of our claim, it turns out that
+\begin{equation*} \begin{aligned} \sum_{n \in \mathbb{N}} \left(\mathrm{diam}\left(E_n \right) \right)^d & \geq 3^{-d} \sum_{n \in \mathbb{N}} \left(\mathrm{diam}\left(I_n \right) \right)^d = \\[1em] & =3^{-d} = \frac{1}{2}.\end{aligned}\end{equation*}
+The equality is left as an exercise for the reader. The rough idea behind it is to throw away the repeated intervals $I_n$ in the previous sum; it is not hard to prove that, in this way, we end up with finitely many.
+\end{proof}
+
+\begin{remark}Let $\mathcal{C}$ be a Cantor set and let $\underline{d}$ be its Hausdorff dimension. The lower bound is not sharp, and one could prove that
+\begin{equation*} \mathcal{H}^{\underline{d}}(\mathcal{C}) = 1.\end{equation*}
+\end{remark}
+
+\begin{exercise}[Cantor-Type Set] Fix $0 < \lambda < 1$, and let us consider the following partition of the unitary interval:
+\begin{equation*} I_\lambda = \left[0, \, \frac{\lambda}{2} \right] \sqcup \left[\frac{\lambda}{2}, \, 1 - \frac{\lambda}{2} \right] \sqcup \left[1 - \frac{\lambda}{2}, \, 1 \right]. \end{equation*}
+Let $\mathcal{C}_\lambda$ be the generalized Cantor set, that is
+\begin{equation*} \mathcal{C}_\lambda = \bigcap_{k = 0}^{\infty} \left( \bigcup_{i = 1}^{2^k} I_{k, \, i}^{(\lambda)} \right), \end{equation*}
+where $|I_{k, \, i}^{(\lambda)}| = \left(\frac{\lambda}{2} \right)^k$. Prove that the Hausdorff dimension of $\mathcal{C}_\lambda$ is given by the solution of the equation
+\begin{equation*} 2 \left( \frac{\lambda}{2} \right)^{d_\lambda} = 1, \end{equation*}
+and, actually, it turns out that
+\begin{equation*} 0 < \mathcal{H}^{d_\lambda}( \mathcal{C}_\lambda ) \leq 1. \end{equation*}\end{exercise}
+
+\begin{remark} The Hausdorff dimension of $\mathcal{C}_\lambda$ is explicitly given by
+\begin{equation*} d_\lambda = \frac{\log 2}{\log 2 - \log \lambda}, \end{equation*}
+and thus we get any Hausdorff dimension in $(0, \, 1)$ as $\lambda$ ranges in $[0, \, 1]$. \end{remark}

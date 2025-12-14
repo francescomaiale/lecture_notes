@@ -1,0 +1,147 @@
+\chapter{Other measures and dimensions}
+
+In this chapter, we first introduce the \textit{integralgeometric} measure, and then we investigate the Haar invariant $k$-dimensional measure.
+
+In the second half, we show how the Haar measure may be used to define an invariant measure on the Grassmannian manifold $G(n, \, m)$, which will be extremely useful to study rectifiable sets.
+
+\section{Geometric Integral Measure}
+
+In this first section, we propose an alternative $k$-dimensional measure to the Hausdorff one and, at the same time, we exhibit a motivational example for introducing the notion of \textit{invariant measures}.
+
+\paragraph{Definition ($1$-dimensional).} Let $E \subseteq \R^n$ be a subset, and fix a projection
+\begin{equation*} P_L : \R^n \longrightarrow L \end{equation*}
+onto a $1$-dimensional linear subspace (i.e., a line). We may easily define (see \hyperref[fig:012dkos02]{Figure \ref{fig:012dkos02}}) a measure, which is invariant under translation but not under rotations, as follows:
+\begin{equation} \label{mea1} \int_{x \in L} \can \left( P_L^{-1}(x) \cap E \right) \, \mathrm{d} \mathcal{H}^1(x), \end{equation}
+where $\can ( \cdot )$ denotes the cardinality function.
+
+In order to define a rotation-invariant measure, the simplest idea that comes in mind is to consider the average value of \eqref{mea1}, as $L$ ranges in the set of all the $1$-dimensional subspaces of $\R^n$. More precisely, we "define" the $1$-dimensional integralgeometric\index{measure!integralgeometric} measure as follows:
+\begin{equation} \label{mea11} \mathcal{I}^1(E) := \dashint_{L \in G(n, \, 1)} \left[ \int_{x \in L} \can \left( P_L^{-1}(x) \cap E \right) \, \mathrm{d} \mathcal{H}^1(x) \right]. \end{equation}
+The measure \eqref{mea11} is not well-defined, since we do not know which measure we need to use to integrate over all $L \in G(n, \, 1)$; we will come back to this issue later.
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=8cm]{images/TGMMMS1.png}
+\label{fig:012dkos02}
+\caption{One-dimensional translation-invariant measure.}
+\end{figure}
+
+\paragraph{Definition ($k$-dimensional).} The same construction can be easily generalized to a $k$-dimensional measure. Indeed, if we denote by $G(n, \, k)$ the Grassmannian manifold (i.e, the set of all $k$-dimensional subspaces of $\R^n$) then, it turns out that
+\begin{equation} \label{meak} \mathcal{I}^k(E) := c_{k, \, n} \dashint_{V \in G(n, \, k)} \left[ \int_{x \in V} \can \left( P_V^{-1}(x) \cap E \right) \, \mathrm{d} \mathcal{H}^k(x) \right] \end{equation}
+is a measure, which is invariant under translations and rotations. The reader may prove that, if the renormalization constant $c_{k, \, n}$ is chosen properly, then
+\begin{equation*} \mathcal{I}^k(E) = \mathcal{L}^k(E) = \mathcal{H}^k(E), \end{equation*}
+provided that $E$ is contained in a $k$-hyperplane of $\R^n$.
+
+\paragraph{Definition Issue.} The $k$-dimensional integralgeometric measure \eqref{meak} is not well-defined (as we have already mentioned in the $1$-dimensional case.) Indeed, we are taking the average integral over all the elements of the Grassmannian manifold $(n, \, k)$, but we have not introduced yet a measure on that space that is also invariant.
+
+This issue is the main reason why we are so interested in developing (at least partially) the theory of \textit{invariant measures}. At the end of the chapter, we will be able to prove the existence of an invariant measure $\gamma_{n, \, k}$ on the Grassmannian manifold $(n, \, k)$.
+
+\paragraph{Basic Properties.} To conclude this introduction we give a list of relevant and compelling facts about the $k$-dimensional geometric integral measure and leave them as exercises for the reader.
+
+\begin{lemma} Let $E$ be a subset of a $h$-dimensional surface $\Sigma$. Assume that $h > k$ strictly, and that the $h$-dimensional volume of $\Sigma$ is positive. Then $\mathcal{I}^k(E) = + \infty$. \end{lemma}
+
+\begin{remark}The $k$-dimensional Hausdorff measure is, in general, different from the $k$-dimensional geometric integral measure.
+
+More precisely, it may happen that for some subset $E \subset \R^n$, the Hausdorff dimension is $\mathrm{dim}_{\mathcal{H}}(E) > k$, but $\mathcal{I}^k(E) = 0$. \end{remark}
+
+\begin{example}[Cantor Set] Let us consider the set $\mathcal{C}_2 \subset \R^2$ given by the product of two Cantor-type set with scaling factor equal to $1/4$ (see \hyperref[fig:cs]{Figure \ref{fig:cs}}.) 
+
+In particular, we have the similarities $\Phi_1, \, \dots, \, \Phi_4$, all with scaling factor equal to $1/4$, in such a way that $\mathcal{C}_2$ is a self-similar fractal set in the sense of Hutchinson, that is,
+\begin{equation*} \mathcal{C}_2 = \bigcup_{i =1}^4 \Phi_i(\mathcal{C}_2). \end{equation*}
+By \hyperref[th:hutchisnds]{Theorem \ref{th:hutchisnds}}, the Hausdorff dimension of $\mathcal{C}_2$ is the unique solution to the equation
+\begin{equation*} 4 \left(\frac{1}{4} \right)^d = 1 \implies d = 1, \end{equation*}
+but the reader may prove, as an exercise, that $\mathcal{I}^1( \mathcal{C}_2) = 0$. \end{example}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=12cm, height=6cm]{images/CS.png}
+\label{fig:cs}
+\caption{Cantor Square}
+\end{figure}
+
+\section{Invariant Measures on Topological Groups}
+
+In this section, we examine the assumptions needed for the existence and uniqueness of an invariant measure defined on a topological group $\G$.
+
+\begin{definition}[Push-Forward] \index{measure!push-forward} Let $\mu$ be a positive measure on $X$, and let $f : X \longrightarrow Y$ be a Borel function. The \textit{push-forward} measure of $\mu$ via $f$ is defined by setting
+\begin{equation*}f_{\can}\mu(E) := \mu \left( f^{-1}(E) \right), \qquad \forall \, E \in \mathcal{B}(Y). \end{equation*} \end{definition}
+
+\begin{lemma} Let $\left(X, \, \mathcal{B}(X) \right)$ and $\left(Y, \, \mathcal{B}(Y) \right)$ be measurable spaces, and let $\mu$ be a positive measure on $X$. Then the push-forward $f_\can \mu$ is a well-defined measure on the the Borel $\sigma$-algebra of $Y$. \end{lemma}
+
+\paragraph{Topological Groups.} Let $\G$ be a topological group. For any $y \in \G$, we denote by $\tau_y$ the left-multiplication ($x \mapsto y \cdot x$) and by $\tau_y^\ast$ the right-multiplication ($x \mapsto x \cdot y$).
+
+\begin{definition}[Invariant Measure] \index{measure!invariant} Let $\mu$ be a measure defined on a topological group $\G$. The measure $\mu$ is left-invariant on $\G$ if and only if
+\begin{equation*} \left( \tau_y \right)_{\can} \mu = \mu\qquad \forall \, y \in \G. \end{equation*} 
+In a similar fashion, the measure $\mu$ is right-invariant if and only if
+\begin{equation*} \left( \tau_y^\ast \right)_{\can} \mu = \mu\qquad \forall \, y \in \G, \end{equation*} 
+and, clearly, $\mu$ is \textit{invariant} if and only if $\mu$ is both left-invariant and right-invariant.
+\end{definition}
+
+We are now ready to state the existence and uniqueness results. We will not prove the second theorem in this course, but we will give, at the end of the section, a complete sketch of the proof of the first result (which is the only one we shall be using in this course).
+
+\begin{theorem}\label{theorem:1das} Let $\G$ be a compact group. Then there exists a unique invariant probability measure on $\G$, called Haar measure. \end{theorem}
+
+\begin{theorem}Let $\G$ be a locally compact and separable group. Then there exists a locally finite invariant measure on $\G$, which is unique up to a multiplicative constant. \end{theorem}
+
+\paragraph{Grassmannian Manifold.} The Grassmannian $G(n, \, k)$ is, in general, not a group. Therefore, we cannot apply to it the theorem stated above, but there is another way around since, as we shall see soon, we can identify $G(n, \, k)$ with a quotient $\faktor{\G}{\Gamma}$, where $\Gamma$ satisfies certain properties.
+
+Let $\G$ be a topological group acting on a set $X$, and let $\tau : \G \times X \longrightarrow X$ be the left action map, that is,
+\begin{equation*} \tau(g, \, x) = g \cdot x. \end{equation*}
+In order to be coherent with the previous paragraph, we denote by $\tau_g(x)$ the element $\tau(g, \, x)$ so that
+\begin{equation*} \tau_{g_1 \cdot g_2} = \tau_{g_1} \tau_{g_2}. \end{equation*}
+A measure $\mu$ defined on $X$ is \textit{invariant} under the action of $\G$ if and only if
+\begin{equation*} \left( \tau_g \right)_{\can} \mu = \mu \end{equation*}
+for every $g \in \G$. However, in this general setting, the existence (let alone the uniqueness) of an invariant measure is not guaranteed and, actually, we can exhibit an easy counterexample assuming both $\G$ and $X$ compact.
+
+\begin{example}Let $X = \p^1(\R) \cong \R \cup \{0\}$ and let $\G$ be the group of all the projective transformation of $X$. Since the translation group is contained in $\G$, the only possible invariant measure is the $1$-dimensional Lebesgue measure. On the other hand, the Lebesgue measure is not invariant under homothety, and hence there are no invariant measures. \end{example}
+
+\begin{theorem}\label{theorem:3osds}Let $\G$ be a topological group acting on a set $X$. An invariant measure (not necessarily unique) exists if one of the following conditions is satisfied: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The group $\G$ is abelian (or, more generally, it satisfies the Weyl condition\footnote{We do not need to deal with this delicate condition, but the interested reader may find more information \href{https://en.wikipedia.org/wiki/Weyl_group}{here}.}.)
+\item The set $X$ is isomorphic to the quotient $\faktor{\G}{H}$, where $H$ is a closed subspace\footnote{Notice that $H$ does not need to be a normal subgroup of $\G$.} of $\G$.
+\end{enumerate} \end{theorem}
+
+\begin{remark} If $\mu$ is a left-invariant measure on $\G$ and $\pi : \G \longrightarrow \faktor{\G}{H}$ is a projection onto a closed subset, then the push-forward $\pi_{\can} \mu$ is also an invariant measure.\end{remark}
+
+The non-oriented Grassmannian manifold $G(n, \, k)$ is diffeomorphic to a certain quotient, so that, by \hyperref[theorem:3osds]{Theorem \ref{theorem:3osds}}, an invariant measure $\gamma_{n, \, k}$ exists. In particular, we will finally be able to show that the integralgeometric $k$-dimensional measure \eqref{meak} is well-defined.
+
+\begin{lemma} Let $O(m)$ denote the group of the orthogonal $m\times m$ matrices. Then there is a diffeomorphism
+\begin{equation*} G(n, \, k) \cong \faktor{O(n)}{\left(O(k) \times O(n - k) \right)}, \end{equation*}
+where $O(k) \times O(n - k)$ is the space of orthogonal matrices made up of a $k\times k$ orthogonal block and a $(n-k)\times (n-k)$ orthogonal block. \end{lemma}
+
+The reader may work out the details of the proof by themselves, but the intuitive idea behind it is simple: Given $W \in G(n, \, k)$ element of the Grassmannian manifold, consider an orthonormal basis $w_1, \, \dots, \, w_k$ for it. Complete it to an orthonormal basis $w_1, \, \dots, \, w_n$ of $\R^n$ and, at this point, define an equivalence class naturally (that is, up to change of orthonormal basis for $W$ and the complement of $W$ separately.)
+
+In conclusion, as promised, we sketch the proof of \hyperref[theorem:1das]{Theorem \ref{theorem:1das}} in the special case of $\G$ Lie group, and we give a complete proof (of the existence, at least) in the case of $\G$ commutative).
+
+\begin{proof}[Proof 1] Let $\G$ be a $k$-dimensional Lie group. The idea is to define a left-invariant $k$-form $\omega$, that is, a $k$-form such that the pull-back according to $\tau_y$ is $\omega$ itself. Then it suffices to check that
+\begin{equation*} \mu(E) := \int_E \omega \end{equation*}
+is the sought invariant measure, and also that it is unique. \end{proof}
+
+\begin{proof}Let $\G$ be a commutative group, and let $\mathcal{P}$ be the space of probability measures defined on $\G$. For any $g \in \G$, set
+\begin{equation*} \mathcal{P}_g := \left\{ \mu \in \mathcal{P} \: \left| \: \left(\tau_g\right)_{\can} \mu = \mu \right. \right\} \end{equation*}
+be the subset of $\mathcal{P}$ containing all the $g$-invariant probability measures defined on $X$.
+
+\paragraph{Step 1.} We want to prove that, for every $g \in \G$, the subset $\mathcal{P}_g$ is nonempty. Fix $\mu_0 \in \mathcal{P}$ and let us consider, for every $n \in \N$, the probability measure defined by setting
+\begin{equation*} \mu_n := \frac{\mu_0 + \left(\tau_{g} \right)_{\can} \mu_0 + \dots + \left(\tau_{g^n} \right)_{\can} \mu_0}{n+1} \in \mathcal{P}, \end{equation*}
+where $g^{n}$ denotes the product of $n$ copies of $g$.
+
+By compactness there exists a subsequence $\mu_{n_k}$ weakly-$\ast$ converging to a measure $\mu_\infty$. We now claim that $\mu_\infty$ is a $\tau_g$-invariant probability measure. Indeed, by definition of $\mu_n$, it follows that
+\begin{equation*} \left(\tau_g \right)_{\can} \mu_{n_k} \to \mu_\infty \implies \left(\tau_g\right)_{\can} \mu_\infty = \mu_\infty.  \end{equation*}
+
+\paragraph{Step 2.} We want to prove that the intersection of all the $\mathcal{P}_g$ is nonempty, which is clearly enough to infer the existence of an invariant measure.
+
+Let $g, \, h \in \G$ be two elements, let $\mu_0 \in \mathcal{P}_g$ be an invariant measure, and let $\mu_\infty$ be the weakly-$\ast$ limit of the sequence
+\begin{equation*} \mu_n := \frac{\mu_0 + \left(\tau_{h} \right)_{\can} \mu_0 + \dots + \left(\tau_{h^n} \right)_{\can} \mu_0}{n+1} \in \mathcal{P}. \end{equation*}
+The set $\mathcal{P}_g$ is weakly-$\ast$ closed; therefore $\mu_\infty \in \mathcal{P}_g \cap \mathcal{P}_h$. By induction we can prove that the family $\{\mathcal{P}_g\}_{g \in \G}$ has the finite intersection property, and thus, by compactness of $\G$, it immediately follows that
+\begin{equation*} \bigcap_{g \in \G} \mathcal{P}_g \neq \varnothing. \end{equation*}
+
+\paragraph{Step 3.} We want to prove that the intersection above contains only one element. In order to do that, we define the convolution product of two measures by setting
+\begin{equation*} \mu_1 \ast \mu_2 (E) := \left(\mu_1 \times \mu_2 \right) \left( \{ (x_1, \, x_2) \: \left| \: x_1 + x_2 \in E \right. \} \right). \end{equation*}
+The reader may prove that the convolution is commutative, and also that
+\begin{equation*} \mu_1 \ast \mu_2 = \mu_1,\end{equation*}
+if $\mu_1$ is an invariant measure.
+
+This is enough to infer that the invariant measure is unique. Indeed, if $\lambda, \, \mu \in \cap_{g \in \G} \mathcal{P}_g$ are two invariant measures, then the properties above of the convolution implies that
+\begin{equation*} \mu = \mu \ast \lambda = \lambda \ast \mu = \lambda \implies \mu = \lambda. \end{equation*}
+\end{proof}

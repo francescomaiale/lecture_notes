@@ -1,0 +1,74 @@
+\chapter{Introduction}
+
+In this chapter, we introduce the main topics of the course and give a brief overview of what we will see and what we will be able to prove by the end of the course.
+
+\section{Plateau's Problem}
+
+The primary goal and the motivating example of this course is the \textbf{Plateau's problem}, that is, the problem to find the $d$-dimensional surface $\Sigma$ of the minimal area with prescribed $(d-1)$-dimensional boundary $\Gamma$.
+
+By the end, we will be able to prove that a solution indeed exists, but we will not find it explicitly since it is a $NP$ (hard) numerical problem.
+
+As of now, the problem is not well defined. In fact, the notions of \textit{surface}, \textit{area}, and \textit{boundary} make sense in the smooth setting but, as the examples below show, we need to work in a less regular setting.
+
+More precisely, requiring the surface to be smooth is not enough for modeling reasons (e.g., dip a wire frame into a soap solution, form a soap film, and look for the minimal surface whose boundary is the wire frame), and also for existence reasons.
+
+\begin{example} Here we give a list of Plateau's problems with prescribed boundary conditions, and we write down the correct solutions, without proving anything. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let us identify $\R^4 \cong \C \times \C$ and, if $d = 2$, let us consider the smooth boundary given by
+\begin{equation*} \Gamma_1 := \left( S^1 \times \{0\} \right) \cup \left( \{0\} \times S^1 \right). \end{equation*}
+Surprisingly, every minimizing sequence of smooth surfaces converges to a surface which is not smooth at all. Indeed, the solution of the problem is
+\begin{equation*} \Sigma_1 := \left( D^2 \times \{0\} \right) \cup \left( \{0\} \times D^2 \right). \end{equation*}
+The surface $\Sigma_1$ is clearly singular at the origin, but the singularity may be removed (by factorizing it into two nonsingular surfaces).
+\item Let us identify $\R^4 \cong \C \times \C$ and, if $d = 2$, let us consider the smooth boundary given by
+\begin{equation*} \Gamma_2 := \left\{ (z^2, \, z^3) \: : \: z \in S^1 \right\}. \end{equation*}
+The solution to the Plateau's problem is
+\begin{equation*} \Sigma_2 := \left\{ (z^2, \, z^3) \: : \: z \in D^2 \right\}, \end{equation*}
+which is a non-smooth surface, whose singularity cannot be removed (since the polynomial $z_1^3 = z_2^2$ cannot be factorized).
+\item Let us identify $\R^8 \cong \R^4 \times \R^4$ and, if $d = 7$, let us consider the smooth boundary given by
+\begin{equation*} \Gamma_3 := S^3 \times S^3. \end{equation*}
+The minimal surface of prescribed boundary $\Gamma_3$ is
+\begin{equation*} \Sigma_3 := \left\{ (x_1, \, x_2) \in \R^4 \times \R^4 \: : \: |x_1| = |x_2| \leq 1 \right\}. \end{equation*}
+\end{enumerate}
+\end{example}
+
+To conclude this introductive chapter, we give a brief overview of the main approaches (studied in this course) to the Plateau's problem, as $d$ ranges between $1$ and $\infty$.
+
+\section{Geodesics problem ($d=1$)}
+
+The geodesics problem (that is, find the shortest curve connecting two points) is, surprisingly, still an open in the non-Riemannian setting. However, in the Riemannian setting, the geodesics problem is completely solved.
+
+Indeed, if we consider the curves parametrized by paths, the \textit{length} is a well-defined notion, and the associated functional is lower semi-continuous and coercive; hence the compactness is easy to prove.
+
+There are many possible approaches to the geodesics problem, e.g., the Steiner approach and the set theoretical approach, which we describe briefly in the remainder of the section.
+
+\paragraph{Steiner Problem.} It is also called networks approach, and it is used to prove the existence of the geodesics and find the explicit expression for it. The reader may consult \cite{steinerpro} for a detailed dissertation on the topic.
+
+\paragraph{Set Theoretical Approach.} The main idea is to find a closed and connected set $\Sigma$ of minimum \textit{length}, containing a given finite set $\Gamma$. As we shall see later in the course, in this case the length is a well defined concept: the \textit{Hausdorff distance}.
+
+In fact, if $X$ is a suitable space (metric, endowed with Hausdorff distance, etc...), then the class defined by
+\begin{equation*}\mathcal{X} := \left\{ K \subseteq X \: : \: K \, \, \text{compact and connected} \right\} \end{equation*}
+is compact and, by Gotab theorem\footnote{\cite{falconer} Let $\mathscr{C}$ be an infinite collection of non-empty compact sets all lying in a bounded portion $B$ of $\R^n$. Then there exists a sequence $\{E_j\}$ of distinct sets of $\mathfrak{C}$ convergent in the Hausdorff metric to a non-empty compact set $E$.}, $\mathcal{H}^1$ is lower semi-continuous on $X$. 
+
+\section{"Surface" Problem ($d>1$)}
+
+\paragraph{3.} The Plateau's problem is much harder when $d = 2$, but there are still many approaches possible some of which relying, in a certain sense, on the work already done in the geodesics case.
+
+\paragraph{Set Theoretical Approach.} This approach is highly nontrivial. For example, one may ask what does it mean that a compact set $\Sigma$ spans a boundary $\Gamma$? Moreover, there is another problem one should deal with: the $2$-dimensional Hausdorff measure $\mathcal{H}^2$ is, generally, not lower semi-continuous. The reader may consult \cite{Reifenberg1960} for a complete treatise of the topic.
+
+\begin{remark}Suppose that $d = 2$, $n = 3$ and that $\Sigma$ is a surface with boundary $\Gamma$. If $\gamma$ is another closed curve, linked to $\Gamma$ (by a nonzero linking number), then $\gamma \cap \Sigma \neq \emptyset$. \end{remark}
+
+\paragraph{Parametric Approach.} This method is essentially due to Douglas \cite{douglas}. The main idea is the following: since a parametrization $\phi : D^2 \to \R^n$ defines surfaces in $\R^n$, the area functional is well-defined and given by the formula
+\begin{equation*}A(\phi) := \int_{D^2} \left| \frac{\partial \, \phi}{\partial \, s_1} \wedge \frac{\partial \, \phi}{\partial \, s_2} \right| \, \mathrm{d}s_1 \, \mathrm{d}s_2. \end{equation*}
+On the other hand, the existence through lower semi-continuity and the compactness are a delicate matter, since coercivity is not an easy property to obtain (the integrand is similar to a determinant).
+
+There is a trick which is similar to the one we can use to find geodesics in the differential geometry setting. More precisely, we consider the functional
+\begin{equation*}E(\phi) := \frac{1}{2} \, \int_{D^2} \left| \nabla \phi \right|^2 \, \mathrm{d}s_1 \, \mathrm{d}s_2. \end{equation*}
+If we find a minimal point $\phi$ for $E$, then $\phi$ will be a \textbf{conformal parametrized} minimum for $A$. This trick, on the other hand, heavily depends on a nontrivial theorem: every such $\Sigma$ admits a conformal re-parametrization.
+
+The lack of conformal parametrization, though, is what stop us from extending the same trick to dimension $d$ strictly bigger than $2$.
+
+\paragraph{Higher Dimension.} If the codimension of $\Sigma$ is equal to $1$ (that is, $n = d+1$), then finite perimeter sets generalize the notion of open $(d+1)$-dimensional sets with smooth boundary in $\R^n$.
+
+The class of finite perimeter sets has excellent compactness properties and a notion of area lower semi-continuous. 
+
+This approach is called "weak" surfaces approach, and it is essentially due to Caccioppoli \cite{cacio} and De Giorgi \cite{degi}. A different approach, working for any $d$ and $n$, referred to as \textit{integral currents}, was introduced by Federer and Flaming in their joint paper \cite{fed}.

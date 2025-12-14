@@ -1,0 +1,327 @@
+\chapter{Appendix}
+
+\section{First Variation of a Functional}
+
+\paragraph{Framework.} Let $\Sigma$ be a $d$-rectifiable and $\mathcal{H}^d$-finite set in $\R^n$, and let $(\Phi_t)_{t \in \R}$ be a one parameter family of diffeomorphisms of  $\R^n$ such that $\Phi_0 = \mathrm{id}_{\R^n}$. Let
+\begin{equation*} v(x) := \frac{\mathrm{d} \Phi_t(x)}{\mathrm{d}t} \, \big|_{t = 0}, \end{equation*}
+and suppose that $\Sigma_t := \Phi_t(\Sigma)$ is the collection of all the competitors (of $\Sigma$) to a certain minimum problem.
+
+\begin{lemma}Let $x \in \Sigma$ be a point, and let $\{e_1, \, \dots, \, e_d\}$ be an orthonormal basis of the tangent space $\mathrm{Tan}(\Sigma, \, x)$. Then it turns out that
+\begin{equation} \label{app:eq1} \frac{\mathrm{d} \mathcal{H}^d(\Sigma_t)}{\mathrm{d}t} \, \big|_{t = 0} = \int_\Sigma \mathrm{div}_T(v)(x) \, \mathrm{d}\mathcal{H}^d(x), \end{equation}
+where $\mathrm{div}_T(-)$ denotes the divergence along the tangent plane, that is,
+\begin{equation*} \mathrm{div}_T(v)(x) = \sum_{i = 1}^d \frac{\partial \left( \langle v, \, e_i \rangle \right)}{\partial e_i}(x). \end{equation*} \end{lemma}
+
+\begin{proof}The map $\Phi_t$ is a diffeomorphism for every $t$; hence we can apply the area formula \eqref{areaformula2} to $\Sigma_t$, and obtain the following identity:
+\begin{equation}\label{app:eq2} \mathcal{H}^{d} \left( \Sigma_t \right) = \int_\Sigma J_T (\Phi_t) (x) \, \mathrm{d} \mathcal{H}^d(x), \end{equation}
+where $J_T$ denotes the tangential Jacobian, that is,
+\begin{equation*}J_T (\Phi_t) = \sqrt{ \mathrm{det} \left( (\nabla_T \Phi_t)^t (\nabla_T \Phi_t) \right)}. \end{equation*}
+Fix $x \in \Sigma$. By Taylor's expansion theorem one can prove that
+\begin{equation*} \begin{cases} \Phi_t(x) = x + t \, v(x) + \mathcal{O}_x(t), \\[0.5em] \mathrm{d} \Phi_t(x) = \mathrm{Id} + t \, \mathrm{d}v(x) + \mathcal{O}_x(t). \end{cases} \end{equation*}
+Let $\{e_1, \, \dots, \, e_n\}$ be an orthonormal basis of $\R^n$ such that $\{e_1, \, \dots, \, e_d\}$ is an orthonormal basis of the tangent space $\mathrm{Tan}(\Sigma, \, x)$. Then we can write the relations above as follows:
+\begin{equation*} \nabla_T \Phi_t = \begin{bmatrix}[c|c] \mathrm{Id}_{d \times d} & \underline{0} \\[0.3em]   \underline{0} & \underline{0} \end{bmatrix} + t \begin{pmatrix} \nabla_T v \\[0.3em] \underline{0} \end{pmatrix} + \mathcal{O}_x(t). \end{equation*}
+If we refer to the first matrix on the right-hand side by $J$, then it is easy to prove that
+\begin{equation*} (\nabla_T \Phi_t)^t (\nabla_T \Phi_t)(x) = \mathrm{Id}_{d \times d}(x) + t \left(J^t \, \nabla_T v(x) + \left(\nabla_T v(x) \right)^t J \right) + \mathcal{O}_x(t),\end{equation*}
+from which it follows that
+\begin{equation*} \begin{aligned} J_T (\Phi_t)(x) & = \sqrt{ \mathrm{det} \left( (\nabla_T \Phi_t)^t (\nabla_T \Phi_t) \right)} \simeq
+\\[1em] & \simeq \sqrt{1 + t \cdot \mathrm{tr}\left(J^t \, \nabla_T v(x) + \left(\nabla_T v(x) \right)^t J \right) + \mathcal{O}_x(t)} =
+\\[1em] & = \sqrt{1 + 2t \, \mathrm{div}_T (v)(x) + \mathcal{O}_x(t)} \simeq
+\\[1em] & \simeq 1 + t \, \mathrm{div}_T (v)(x) + \mathcal{O}_x(t),\end{aligned} \end{equation*}
+where the first approximation $\simeq$ follows from the Taylor's expansion
+\begin{equation*} \mathrm{det}( \mathrm{Id}_{n \times n} + t A ) \simeq 1 + t \, \mathrm{Tr}(A) + o(t) \quad \text{as $t \to 0$}, \end{equation*}
+and the last approximation follows from the Taylor's expansion of $\sqrt{1 + x}$. In particular, it turns out that
+\begin{equation*}\begin{aligned} \int_\Sigma J_T (\Phi_t) (x) \, \mathrm{d}\mathcal{H}^d(x) & = \int_\Sigma \left(1 + t \, \mathrm{div}_T (v)(x) + \mathcal{O}_x(t) \right) \, \mathrm{d}\mathcal{H}^d(x) =
+\\[1em] & = \mathcal{H}^d(\Sigma) + t \int_\Sigma \mathrm{div}_T(v)(x) \, \mathrm{d}\mathcal{H}^{d}(x) + o(t). \end{aligned} \end{equation*}
+Notice that the remainder needs a reasonable assumption to behave properly: For example, we can require either $\Sigma$ bounded or $\Phi_t$ is the identity outside of a compact set $K$ for every $t \in \R$.
+
+In conclusion, it is enough to take the derivative with respect to the time of \eqref{app:eq2}, and evaluate it at $t = 0$, to obtain exactly the sought formula \eqref{app:eq1}.
+\end{proof}
+
+\begin{theorem}[Divergence Theorem] Let $\Sigma$ be a compact $(d- 1)$-dimensional surface with a boundary $\partial \Sigma$ of class $C^2$. Then
+\begin{equation}\label{divth} \frac{\mathrm{d}}{\mathrm{d}t} \mathcal{H}^{d - 1}(\Sigma_t) \, \big|_{t = 0} = - \int_{\Sigma} \vec{H}(x) v(x) \, \mathrm{d}\mathcal{H}^{d - 1}(x) + \int_{\partial \Sigma} \eta_{\partial \Sigma}(x) v(x) \, \mathrm{d}\mathcal{H}^{d - 2}(x), \end{equation}
+where $\vec{H}(x)$ is the mean curvature vector of $\Sigma$ at $x$ and $\eta_{\partial \Sigma}$ is the outward normal of $\partial \Sigma$ at $x$. \end{theorem}
+
+\begin{lemma} Let $\Sigma_0 \subset \R^n$ be a hypersurface which minimizes the area (the $(n - 1)$-dimensional volume) among all $\Sigma$ such that
+\begin{equation*} \Sigma \, \triangle \, \Sigma_0 \subset \subset \Omega, \end{equation*}
+where $\Omega$ is a fixed open set in $\R^n$. Then
+\begin{equation*} \vec{H}_{\Sigma_0}(x) = 0, \qquad \forall \, x \in \Omega \cap \Sigma_0. \end{equation*} \end{lemma}
+
+\begin{proof} Let $v$ be a compactly supported smooth vector field on $\Omega$. Then there exists a family $\left( \Phi_t \right)_{t \in I}$ of diffeomorphisms with $v$ as initial speed\footnote{For example, the reader may consider the family of diffeomorphisms $\Phi_t(x) := x + t \, v(x)$, which is well-defined in a small neighborhood of $0$.} and $\Phi_0 = \mathrm{id}_{\R^n}$. It turns out that the hypersurfaces $(\Sigma_t)_{t \in I} := \left( \Phi_t(\Sigma_0) \right)_{t \in I}$ are all competitors for the area problem; hence the function
+\begin{equation*} t \longmapsto \mathcal{H}^{n - 1}( \Sigma_t ) \end{equation*}
+has a (local) minimum at $t = 0$. From the divergence formula \eqref{divth} we obtain the relation
+\begin{equation*} \frac{\mathrm{d}}{\mathrm{d}t} \mathcal{H}^{n - 1}(\Sigma_t) \, \big|_{t = 0} = 0 \implies  \int_{\Sigma} \vec{H}_{\Sigma_0}(x) v(x) \, \mathrm{d}\mathcal{H}^{n - 1}(x) = 0, \end{equation*}
+since the boundary term is equal to zero. Therefore, a straightforward application of the fundamental lemma in calculus of variation allows us to infer that
+\begin{equation*} \vec{H}_{\Sigma_0}(x) = 0, \qquad \forall \, x \in \Omega \cap \Sigma_0. \end{equation*}\end{proof}
+
+\begin{remark} If $\Sigma$ is a finite perimeter set, then a similar computation shows that
+\begin{equation*} \int_{\partial_\ast \Sigma} \mathrm{div}_T (v)= 0, \end{equation*}
+which means that we cannot choose any smooth vector field $v$ when dealing with it.\end{remark}
+
+We can summarize the results obtained in this section with a slightly different version of the divergence formula \eqref{divth}, which holds for every smooth vector field $v$.
+
+\begin{proposition}Let $\Sigma$ be a compact $(n- 1)$-dimensional (hyper)surface with a boundary $\partial \Sigma$ of class $C^2$. Then
+\begin{equation}\label{divth2} \int_\Sigma \mathrm{div}_T(v)(x) \, \mathrm{d}\mathcal{H}^{n-1}(x) = - \int_{\Sigma} \vec{H}(x) v(x) \, \mathrm{d}\mathcal{H}^{n - 1}(x) + \int_{\partial \Sigma} \eta_{\partial \Sigma}(x v(x) \, \mathrm{d}\mathcal{H}^{n - 2}(x) \end{equation}
+for every\footnote{Here we can take any smooth vector field $v$ because $\Sigma$ is compact by assumption. If not, then $v$ needs to be a compactly supported vector field.} $v \in C^\infty(\R^n)$. \end{proposition}
+
+\begin{proof}We can decompose the vector field as follows:
+\begin{equation*}v = v_N \cdot \eta_{\partial \Sigma} + v_T, \end{equation*}
+where $v_N$ is the normal component, and $v_T$ is the tangential component. Then one can easily check that the following identity holds:
+\begin{equation*}\mathrm{div}_T (v) = \underbracket{\mathrm{div}_T(v_N)}_{= 0} \cdot \eta_{\partial \Sigma} + v_N \cdot \mathrm{div}_T (\eta_{\partial \Sigma}) + \mathrm{div}_T(v_T). \end{equation*}
+We notice that $\mathrm{div}_T(\eta_{\partial \Sigma})$ is the trace of the second fundamental form, which means that
+\begin{equation*}\mathrm{div}_T(\eta_{\partial \Sigma}) = |\vec{H}|(x) =: H(x). \end{equation*}
+The usual divergence theorem for a smooth vector field gives us the identity
+\begin{equation*}\int_\Sigma \mathrm{div}_T(v)\, \mathrm{d}\mathcal{H}^{n - 1}(x) = \int_{\partial \Sigma} v(x)\eta_{\partial \Sigma}(x)\, \mathrm{d}\mathcal{H}^{n - 2}(x). \end{equation*}
+If we plug the first relation (for the divergence) into the second one (divergence theorem for smooth functions), then it turns out that
+\begin{equation*} \int_\Sigma \mathrm{div}_T(v)(x) \, \mathrm{d}\mathcal{H}^{n-1}(x) = - \int_{\Sigma} \vec{H}(x) v(x) \, \mathrm{d}\mathcal{H}^{n - 1}(x) + \int_{\partial \Sigma} \eta_{\partial \Sigma}(x) v(x) \, \mathrm{d}\mathcal{H}^{n - 2}(x),\end{equation*}
+which is exactly what we wanted to prove.
+\end{proof}
+
+\begin{remark}Let $\Sigma \subset \R^n$ be a compact $(n- 1)$-dimensional surface with a boundary $\partial \Sigma$ of class $C^2$. If $\Sigma$ minimizes the $(n-1)$-dimensional volume among all $\widetilde{\Sigma}$ such that
+\begin{equation*} \left( \widetilde{\Sigma} \, \triangle \, \Sigma \right) \cap \partial \Sigma = \varnothing, \end{equation*}
+then the mean curvature $\vec{H}_{\Sigma}$ is identically equal to $0$. \end{remark}
+
+We can state and prove a similar result for finite perimeter sets, but first we need a technical result concerning the closure of $\mathrm{BV}(\Omega)$ with respect to the action of a diffeomorphism.
+
+\begin{lemma}Let $\Omega$ be a fixed open set in $\R^n$, and let $\Phi$ be a diffeomorphism of $\Omega$. If $u \in \mathrm{BV}(\Omega)$, then the composition $u \circ \Phi^{-1}$ also belongs to $\mathrm{BV}(\Omega)$. \end{lemma}
+
+\begin{lemma}\label{bvdiff} Let $\Omega$ be a fixed open set in $\R^n$, and let $E$ be a finite perimeter set which minimizes the perimeter inside $\Omega$ among all $\widetilde{E}$ f.p.s. in $\Omega$ such that
+\begin{equation*} E \, \triangle \, \widetilde{E} \subset \subset \Omega \end{equation*}
+up to null sets. Then it turns out that
+\begin{equation*} \int_{\partial_\ast E} \mathrm{div}_T(v) \, \mathrm{d} \mathcal{H}^{n - 1} = 0, \qquad \forall \, v \in C_c^\infty(\Omega). \end{equation*} \end{lemma}
+
+\begin{proof}Fix $v$ compactly supported smooth vector field on $\Omega$. Then there exists a family $\left( \Phi_t \right)_{t \in I}$ of diffeomorphisms with $v$ as initial speed\footnote{For example, the reader may consider the family of diffeomorphisms $\Phi_t(x) := x + t \, v(x)$, which is well-defined in a small neighborhood of $0$.} and $\Phi_0 = \mathrm{id}_{\R^n}$. Since $\Phi_t(x) = x$ for every $x$ which does not belong to the support of $v$, \hyperref[bvdiff]{Lemma \ref{bvdiff}} proves that $(E_t)_{t \in I} := \left( \Phi_t(E_0) \right)_{t \in I}$ is a collection of finite perimeter set such that
+\begin{equation*} \partial_\ast E_t = \Phi_t( \partial_\ast E ). \end{equation*}
+In particular, the f.p.s. $E_t$ are all competitors for the perimeter problem; hence the function
+\begin{equation*}t \longmapsto \mathrm{Per}_\Omega(E_t) \end{equation*}
+admits a (local) minimum at $t = 0$. The thesis follows from a simple identity which is left to the reader:
+\begin{equation*} \frac{\mathrm{d} \left( \mathrm{Per}_\Omega(E_t) \right)}{\mathrm{d}t} \, \big|_{t = 0} = \int_{\partial_\ast E} \mathrm{div}_T(v) \, \mathrm{d} \mathcal{H}^{n - 1}. \end{equation*}\end{proof}
+ 
+\begin{definition}[Weak Mean Curvature] \index{weak mean curvature} Let $\Sigma$ be a $d$-rectifiable set in $\R^n$. We say that $\Sigma$ has mean curvature in the weak sense if and only if there exists $\vec{g} \in L^p \left(\R^n, \, \mathcal{H}^d \restr \Sigma \right)$ such that
+\begin{equation*} \int_\Sigma \mathrm{div}_T(v)(x) \, \mathrm{d}\mathcal{H}^d(x) = \int_\Sigma \vec{g}(x) v(x) \, \mathrm{d}\mathcal{H}^d(x), \qquad \forall \, v \in C_c^\infty(\R^n). \end{equation*}  \end{definition}
+
+\begin{remark} Let $\Sigma$ be a compact $(n- 1)$-dimensional (hyper)surface with a boundary $\partial \Sigma$ of class $C^2$. If $\Sigma$ admits a weak mean curvature $\vec{g}$, then the following properties hold: \mbox{}
+\begin{enumerate}[label=(\roman*)]
+\item The weak mean curvature $\vec{g}$ coincides with the mean curvature $\vec{H}$ almost everywhere.
+\item The boundary of $\Sigma$ is empty\footnote{This follows fairly easily from the integration by parts formula.}.
+\end{enumerate} \end{remark}
+
+\begin{definition}[$k$-Varifold] \index{varifold} An \textit{integral $k$-dimensional varifold} is a couple $(\Sigma, \, \theta)$, where $\Sigma$ is a $k$-rectifiable set in $\R^n$, and $\theta : \Sigma \longrightarrow \N$ is a function in $L^1 \left(\R^n, \, \mathcal{H}^k \restr \Sigma \right)$. \end{definition}
+
+\begin{definition}[Varifold W.M.C.] \index{weak mean curvature!varifold} Let $(\Sigma, \, \theta)$ be a $k$-dimensional varifold in $\R^n$. We say that $\Sigma$ has mean curvature in the weak sense if and only if there exists $\vec{g} \in L^p \left(\R^n, \, \mathcal{H}^d \restr \Sigma \right)$ such that
+\begin{equation*} \int_\Sigma \theta(x) \mathrm{div}_T(v)(x) \, \mathrm{d}\mathcal{H}^k(x) = \int_\Sigma \theta(x) \vec{g}(x) v(x)\, \mathrm{d}\mathcal{H}^k(x), \qquad \forall \, v \in C_c^\infty(\R^n). \end{equation*}  \end{definition}
+
+\begin{exercise} Let $\Sigma$ be a compact $(n- 1)$-dimensional (hyper)surface with a boundary $\partial \Sigma$ of class $C^2$, and let $\theta \in \mathrm{BV}(\Sigma; \; \N)$. Suppose that
+\begin{equation*} \int_\Sigma \theta(x) \, \mathrm{div}(v)(x) \, \mathrm{d}\mathcal{H}^k(x) = - \int_\Sigma v(x) \, \mathrm{d}\theta(x) \end{equation*}
+for every tangent vector field $v \in C_c^\infty(\Sigma)$. Prove that:
+\begin{enumerate}[label=(\roman*)]
+\item The weak mean curvature $\vec{g}$ coincides with the mean curvature $\vec{H}$ almost everywhere.
+\item The boundary of $\Sigma$ is empty.
+\item The function $\theta$ is locally constant.
+\end{enumerate} 
+\end{exercise}
+
+\begin{exercise} Let $\Sigma$ be a compact $(n- 1)$-dimensional (hyper)surface with a boundary $\partial \Sigma$ of class $C^2$, and let $\theta \in C^\infty(\Sigma; \; \R)$. Suppose that
+\begin{equation*} \int_\Sigma \theta(x) \, \mathrm{div}(v)(x) \, \mathrm{d}\mathcal{H}^k(x) = - \int_\Sigma v(x) \, \mathrm{d}\theta(x) \end{equation*}
+for every tangent vector field $v \in C_c^\infty(\Sigma)$. Prove or disprove the following formula:
+\begin{equation*}\vec{g} = \vec{H} - \frac{\nabla_T \theta}{\theta}. \end{equation*}
+\end{exercise}
+
+\section{Regularity in Capillarity Problems}
+
+\paragraph{Framework.} Let $\Omega \subset \R^n$ be an open bounded subset of $\R^n$. In this section, we shall discuss the capillarity problem equilibrium when the container ($\Omega$) is fixed and the volume of the liquid is fixed. More precisely, the drop of liquid (denoted by $E$), contained in $\Omega$, is at equilibrium if and only if it is a critical point (local minima) of the capillarity energy functional
+\begin{equation} \label{funccap:app} \mathscr{F}(E) := \mathcal{H}^{n-1} \left( \partial E \cap \Omega \right) + \sigma \mathcal{H}^{n-1} \left(\partial E \cap \partial \Omega \right), \end{equation}
+where $\sigma \in \R$ is a constant, subject to the constraint that the volume is fixed, e.g. $|E| = m$.
+
+\paragraph{Mean Curvature.} Assume that $E$ is a f.p.s. which minimizes the capillarity energy \eqref{funccap:app} and satisfies the constraint on the volume. If $E$ is regular enough, then one can prove that
+\begin{equation*} \begin{cases} \text{$H_f$ is constant on the free portion of the surface $\Sigma^f$}, \\[0.5em] \text{$\theta_Y$ is constant on the boundary $\Gamma$}. \end{cases} \end{equation*}
+More precisely, the free mean curvature $H_f$ is the Lagrange multiplier associated to the volume constraint, while $\theta_Y$ is the solution of the trigonometric equation
+\begin{equation} \label{youngang} \cos \theta_Y = - \sigma. \end{equation}
+The first assertion is easy to prove. Let $(\Phi_t)_{t \in I}$ be a family of diffeomorphisms fixing the boundary, and choose a smooth vector field $v$ in such a way that the volume constraint is not violated, that is,
+\begin{equation*}\text{the constraint is preserved} \iff \int_{\Sigma^f} v \cdot \eta = 0,\end{equation*}
+which means that the first variation of the volume is zero. As a result of the technical tools introduced in the previous section, it turns out that if we set the first variation equal to zero, then we obtain
+\begin{equation*} \int_{\Sigma^f} H (v \cdot \eta) = 0, \qquad \forall \, v \in C_c^\infty \: : \: \int_{\Sigma^f} v \cdot \eta = 0. \end{equation*}
+The Du Bois-Reymond's fundamental lemma in calculus of variation allows us to infer that
+\begin{equation*} H \, \big|_{\Sigma^f} = c \implies H_f = c ,\end{equation*}
+that is, the free mean curvature is constant. The proof of \eqref{youngang} is very similar, but we need to consider a family of transformations which moves the boundary.
+
+\begin{remark}If $E$ is not regular enough, then one might translate the problem in the setting of $k$-varifolds, and prove that the weak mean curvature is constant on $\Sigma^f$. Unfortunately, it is not easy at all to give a meaning to $\theta$, and recover something like formula \eqref{youngang}. \end{remark}
+
+\section{Regularity in the F.P.S. Setting}
+
+\paragraph{Introduction.} Let $\Omega \subset \R^n$ be an open bounded subset of $\R^n$, and let $E$ be a finite perimeter set in $\Omega$ minimizing the perimeter $\mathrm{Per}_\Omega(-)$ among all f.p.s. $\widetilde{E}$ such that
+\begin{equation*} E \, \triangle \, \widetilde{E} \subset \subset \Omega. \end{equation*}
+
+\begin{theorem} \label{th:regper} The essential boundary $\partial_\ast E$ is closed in $\Omega$, and there is a representative of $E$ in its equivalence class which satisfies the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The topological boundary $\partial E$ coincides with the essential boundary $\partial_\ast E$.
+\item The perimeter formula is satisfies, that is,
+\begin{equation*} \mathrm{Per}_\Omega(E) = \mathcal{H}^{n - 1}(\partial E). \end{equation*}
+\end{enumerate}
+Moreover, the representative above can be uniquely characterized as follows:
+\begin{equation*} E = \left\{ x \in E \: \left| \: \Theta(E, \, x) = 1 \right. \right\}. \end{equation*} \end{theorem}
+
+\begin{lemma} \label{lemma:regper} There exists a universal constant $\delta_0 := \delta_0(n) > 0$ such that for every $(x_0, \, r_0) \in \Omega \times \R$ satisfying $B(x_0, \, r_0) \subset \Omega$, it turns out that
+\begin{equation*} \begin{aligned} & \frac{\left| E \cap B(x_0, \, r_0) \right|}{\alpha_n r_0^n} \leq \delta_0 \implies \left|E \cap B \left(x_0, \, \frac{r_0}{2} \right) \right| = 0,
+\\[1em] & \frac{\left| E \cap B(x_0, \, r_0) \right|}{\alpha_n r_0^n} \geq 1- \delta_0 \implies \left|E \cap B \left(x_0, \, \frac{r_0}{2} \right) \right| = \left| B(x_0, \, r_0) \right|, \end{aligned} \end{equation*}
+almost everywhere. \end{lemma}
+
+\begin{proof}[Truncation Argument] Fix $(x_0, \, r_0) \in \Omega \times \R$. For every $r \in [\frac{r_0}{2}, \, r_0]$, set
+\begin{equation*} E_r := E \setminus B(x_0, \, r). \end{equation*}
+
+\paragraph{Step 1.} The set $E$ minimizes the perimeter; hence
+\begin{equation*} \mathrm{Per}_\Omega(E_r) \geq \mathrm{Per}_\Omega(E). \end{equation*}
+The usual isoperimetrical inequality yields to\footnote{The last inequality needs to be justified. The reader should check very carefully the details since a lot of issues could arise here.}
+\begin{equation*} \begin{aligned} c(n) \left| E \cap B(x_0, \, r) \right|^{1 - \frac{1}{n}} & \leq \mathrm{Per}_{B(x_0, \, r)}(E) =
+\\[1em] & = \mathcal{H}^{n - 1}\left( \partial_\ast E \cap B(x_0, \, r) \right) \leq
+\\[1em] & \leq \mathcal{H}^{n - 1}\left(E \cap \partial B(x_0, \, r) \right)\end{aligned} \end{equation*}
+for almost every $r \in [\frac{r_0}{2}, \, r_0]$. Recall that
+\begin{equation*} D( \mathbbm{1}_{E_r} ) = \mathbbm{1}_{\Omega \setminus B(x_0, \, r)} \, D(\mathbbm{1}_E) + \nu \, \mathbbm{1}_{E \cap \partial B(x_0, \, r)} \cdot \mathcal{H}^{n - 1}, \end{equation*}
+from which it follows that
+\begin{equation*} \partial_\ast E_r = \left( \partial_\ast E \setminus \overline{B(x_0, \, r)} \right) \cup \left(E \cap \partial B(x_0, \, r) \right) \end{equation*}
+for almost every admissible $r$.
+
+\paragraph{Step 2.} Let $v(r) := \left| E \cap B(x_0, \, r) \right|$ be the $n$-dimensional Lebesgue measure. Then\footnote{Here the reader needs to be extremely careful. A priori $v$ is simply differentiable in the weak sense of distributions, while in the computation above we need to deal with the classical derivative of $v$.}
+\begin{equation*} \dot{v}(r) = \mathcal{H}^{n - 1} \left( E \cap \partial B(x_0, \, r) \right) \qquad \text{for a.e. admissible $r$.} \end{equation*}
+It follows from the isoperimetrical inequality that
+\begin{equation*}c(n) \, v(r)^{1 - \frac{1}{n}} \leq \dot{v}(r), \end{equation*}
+from which it follows that\footnote{To solve the differential inequality one needs to divide by $v$. If $v(r) \neq 0$ for a.e. admissible $r$, then everything is fine. On the other hand, if $v(r) = 0$ in the middle of the interval, then one needs to check that $v$ is strictly increasing, and thus $\{r \: : \: v(r) = 0\}$ is a null set. }
+\begin{equation*} v\left(r_0 \right)^{\frac{1}{n}} - v\left(\frac{r_0}{2} \right)^{\frac{1}{n}} \geq \frac{c(n)}{n} \, \frac{r_0}{2}. \end{equation*}
+If we rearrange the inequality, then we obtain the following estimate:
+\begin{equation*}v\left(\frac{r_0}{2} \right)^{\frac{1}{n}} \leq \left[ \alpha_n^{\frac{1}{n}} \, \left(\frac{v(r_0)}{\alpha_n r_0^n}\right)^{\frac{1}{n}} - \frac{c(n)}{2n} \right] r_0.\end{equation*}
+In particular, the thesis follows by choosing the universal constant $\delta_0$ in such a way that $v(r_0/2)$ is either $0$ or equal to the volume of the ball, that is,
+\begin{equation*} \delta_0 = \frac{1}{\alpha_n} \left( \frac{c(n)}{2n} \right)^n. \end{equation*} \end{proof}
+
+\begin{proof}[Proof of Theorem \ref{th:regper}] Everything is obvious except the fact that $\partial_\ast E$ is a closed set; we shall show that the complement is open.  \mbox{}
+
+\paragraph{Case 1.} Fix a point $x_0$ with density $\Theta(E, \, x_0)$ equal to $0$. Then there exists $r_0 > 0$ small enough such that
+\begin{equation*} \frac{\left| E \cap B(x_0, \, r_0) \right|}{\alpha_n r_0^n} \leq \delta_0, \end{equation*}
+and thus by \hyperref[lemma:regper]{Lemma \ref{lemma:regper}} it turns out that
+\begin{equation*} \left|E \cap B \left(x_0, \, \frac{r_0}{2} \right) \right| = 0. \end{equation*}
+In particular, it turns out that
+\begin{equation*} \Theta(E, \, x) = 0 \qquad \forall \, x \in E \cap B \left(x_0, \, \frac{r_0}{2} \right). \end{equation*}
+
+\paragraph{Case 2.} Fix a point $x_0$ with density $\Theta(E, \, x_0)$ equal to $1$. Then there exists $r_0 > 0$ small enough such that
+\begin{equation*} \frac{\left| E \cap B(x_0, \, r_0) \right|}{\alpha_n r_0^n} \geq 1 - \delta_0, \end{equation*}
+and thus by \hyperref[lemma:regper]{Lemma \ref{lemma:regper}} it turns out that
+\begin{equation*} \left|E \cap B \left(x_0, \, \frac{r_0}{2} \right) \right| = \left|B \left(x_0, \, \frac{r_0}{2} \right) \right|. \end{equation*}
+In particular
+\begin{equation*} \Theta(E, \, x) = 1 \qquad \forall \, x \in E \cap B \left(x_0, \, \frac{r_0}{2} \right), \end{equation*}
+which means that the complement of $\partial_\ast E$ is open (i.e., $\partial_\ast E$ is closed).
+\end{proof}
+
+\begin{exercise} What happens if the f.p.s. $E$ minimizes the perimeter $\mathrm{Per}_\Omega(-)$ among all f.p.s. $\widetilde{E}$ such that
+\begin{equation*} E \, \triangle \, \widetilde{E} \subset \subset \Omega, \end{equation*}
+subject to a volume constraint? Is $\partial_\ast E$ still closed?\end{exercise}
+
+\section{Structure of Finite Length Continua in $\R^n$}
+
+The main goal of this section is to prove that a continua (= compact and connected) set $K$ in $\R^n$ with finite length is the image of a surjective path $\gamma$ such that
+\begin{equation*} \mathrm{Length}(\gamma) \leq 2 \cdot \mathcal{H}^1(K) < + \infty. \end{equation*}
+
+\begin{definition}Let $I := [a, \, b]$. A continuous path $\gamma: I \longrightarrow \R^n$ of finite length has constant speed $c$ if and only if
+\begin{equation*}\mathrm{Length}(\gamma, \, J) < c \cdot \mathrm{Length}(\gamma, \, I) \end{equation*}
+for every $J \subset I$. \end{definition}
+
+\begin{remark}[Arc Length] Let $\gamma: I \longrightarrow \R^n$ be a continuous path of finite length $L$. If we set
+\begin{equation*} \sigma(s) := \inf \left\{ t \in [a, \, b] \: \left| \: \mathrm{Length}\left(\gamma, \, [a, \, t] \right) \geq Ls \right. \right\}, \end{equation*}
+then the riparametrization $\gamma \circ \sigma : [0, \, 1] \longrightarrow \R^n$ is a continuous path with constant speed $L$. \end{remark}
+
+\begin{remark}[Tangent Plane] Let $K$ be a continua set in $\R^n$. Then the tangent plane $\mathrm{Tan}(K, \, x)$ is the vector space in the classical sense for $\mathcal{H}^1$-almost every $x$.\end{remark}
+
+\begin{lemma} \label{conle:1} Let $K$ be a continua set in $\R^n$ with finite length. Then $K$ is connected by arcs and, more precisely, it is connected by injective paths of finite length. \end{lemma}
+
+\begin{proof}[Sketch of the Proof] The main idea is to obtain the injective path $\gamma$ as the uniform limit (with respect to the Hausdorff distance) of a sequence of finite length paths $\gamma^\delta$ satisfying certain properties.
+
+\paragraph{Step 1.} Fix $x_0, \, x \in K$. For every $\delta > 0$ we may consider the (almost) shortest $\delta$-chain of points $x_0^\delta, \, \dots, \, x_n^\delta \in K$ and times $0 =: t_0^\delta \leq \dots \leq t_n^\delta := 1$, where $n$ depends on $\delta$, such that the following properties hold: \mbox{}
+\begin{enumerate}[label=\textbf{\roman*)}]
+\item The first point is $x_0 := x_0^\delta$, and the final point is $x := x_n^\delta$ for every $\delta > 0$.
+\item The distance between two consecutive points is less than $\delta$, that is,
+\begin{equation*} |x_i^\delta - x_{i - 1}^\delta| < \delta, \end{equation*}
+and the total length is less than the length of $K$, that is,
+\begin{equation*} \sum_{i = 1}^{n} |x_i^\delta - x_{i - 1}^\delta| < \mathcal{H}^1(K). \end{equation*}
+\item For every $i = 1, \, \dots, \, n$ it turns out that $\gamma^\delta$ reaches the point $x_i^\delta$ at the time $t_i^\delta$.
+\item The Lipschitz constant of $\gamma^\delta$ is less or equal than $4$ times its length.
+\end{enumerate}
+The reader may prove that the curve $\gamma$ can be obtained as the uniform limit of the sequence $(\gamma^\delta)_{\delta > 0}$. \end{proof}
+
+\begin{theorem}\label{strlsds}Let $K$ be a continua set in $\R^n$ with finite length. Then there exists a surjective path $\gamma : [0, \, 1] \longrightarrow K$ such that
+\begin{equation*} \mathrm{Length}(\gamma) \leq 2 \cdot \mathcal{H}^1(K) < + \infty. \end{equation*}
+In particular, every continua $\mathcal{H}^1$-finite set is rectifiable. \end{theorem}
+
+\begin{proof}The assertion is an immediate consequence of \hyperref[conle:1]{Lemma \ref{conle:1}}. \end{proof}
+
+%\begin{proof}[Sketch of the Proof] Let $x_0, \, x_1 \in K$ be the points maximizing the distance, that is, 
+%\begin{equation*}(x_0, \, x_1) \in \mathrm{argmax} \left\{ d(y_0, \, y_1) \: : \: (y_0, \, y_1) \in K \times K \right\}. \end{equation*}
+%Let $\gamma$ be the injective finite length path connecting $x_0$ and $x_1$ (which exists by \hyperref[conle:1]{Lemma \ref{conle:1}}), and let us consider the following additional paths: \mbox{}
+%\begin{enumerate}[label=\textbf{(\alph*)}]
+%\item A closed curve $\gamma_1$ which is obtained as follows. Start from $x_0$ and go to $x_1$ along $\gamma$, and then come back to $x_0$ in the same way.
+%\item A curve $\gamma_2$ which maximizes the distance between $x_2$ and $\gamma \, \big|_{[0, \, 1]}$.
+%\end{enumerate}
+%... \end{proof} %DA FINIRE
+
+\begin{remark}[Degree] \label{rmk:degree} The degree of $\gamma$ at $x$, which will be denoted by $\mathrm{deg}(\gamma, \, x)$, is well-defined for $\mathcal{H}^{1}$-almost every $x$. In particular, for every vector field $v \in C_c^\infty(\R^n; \; \R^n)$, it turns out that
+\begin{equation*} \int v(\gamma_i(s)) \, \dot{\gamma}_i(s) \, \mathrm{d}s = 0 \end{equation*}
+for every $i \in \N$, which means that
+\begin{equation*} \int v(\gamma(s)) \, \dot{\gamma}(s) \, \mathrm{d}s = 0, \qquad \forall \, v \in C_c^\infty(\R^n; \; \R^n). \end{equation*}
+Since $v(\gamma_n)$ converges uniformly to $v(\gamma)$ and $\dot{\gamma}_n$ converges to $\dot{\gamma}$ in $L_{w^\ast}^\infty$ (i.e., in the weak-$\ast$ topology of $L^\infty$), then the area formula implies that
+\begin{equation*}0 = \int v(\gamma(s)) \frac{\dot{\gamma}(s)}{|\dot{\gamma}(s)|}\, J(\gamma)(s) \mathrm{d}s = \int_K v(x) \sum_{s \in \gamma^{-1}(x)}\tau(s) \cdot \mathrm{deg}(\gamma, \, x) \, \mathrm{d}\mathcal{H}^1(x), \end{equation*}
+where
+\begin{equation*} \tau(s) := \frac{\dot{\gamma}(s)}{|\dot{\gamma}(s)|}  \end{equation*}
+indicates the orientation of the curve. In particular, it turns out that
+\begin{equation*} \tau(x) \cdot \mathrm{deg}(\gamma, \, x) = 0 \end{equation*}
+for $\mathcal{H}^1$-almost every $x$, which means that the cardinality of the set $\gamma^{-1}(x)$ is even for $\mathcal{H}^1$-almost every $x$. \end{remark}
+
+\section{Lower Semi-Continuity: Golab Theorem}
+
+In this brief section, we use the structure theorem of a continua set to prove the famous Golab compactness result.
+
+\begin{theorem}[Golab] Let $(K_i)_{i \in \N}$ be a sequence of continua sets in $\R^n$. If $K_i$ converges to a continua set $K$ with respect to the Hausdorff distance, then
+\begin{equation*} \liminf_{i \to + \infty} \mathcal{H}^1(K_i) \geq \mathcal{H}^1(K). \end{equation*} \end{theorem}
+
+\begin{proof}By \hyperref[strlsds]{Theorem \ref{strlsds}} for every $i \in \N$ there exists a surjective path $\gamma_i$ of finite length that parametrizes the corresponding continua set $K_i$. Up to subsequences, it turns out that $\gamma_i$ converges to some path $\gamma$, which parametrizes $K$. 
+
+The preimage $\gamma^{-1}(x)$ is nonempty, and its cardinality is even (see \hyperref[rmk:degree]{Remark \ref{rmk:degree}}). Therefore, one can easily infer that
+\begin{equation*} \left|\gamma^{-1}(x) \right| \geq 2 \quad \text{at $\mathcal{H}^1$-almost every $x \in K$}, \end{equation*}
+which means that
+\begin{equation*} \mathcal{H}^1(K) \leq \frac{1}{2} \cdot \mathrm{Length}(\gamma). \end{equation*}
+The length is a semi-lower continuous functional
+\begin{equation*} \mathrm{Length}(\gamma) \leq \liminf_{i \to + \infty} \mathrm{Length}(\gamma_i), \end{equation*}
+and by \hyperref[strlsds]{Theorem \ref{strlsds}} it turns out that
+\begin{equation*} \mathrm{Length}(\gamma) \leq \liminf_{i \to + \infty} \mathrm{Length}(\gamma_i) \leq 2 \liminf_{i \to + \infty} \mathcal{H}^1(K_i). \end{equation*}
+If we combine the two inequalities, then we obtain the thesis:
+\begin{equation*} \mathcal{H}^1(K) \leq \frac{1}{2} \cdot \mathrm{Length}(\gamma) \leq \liminf_{i \to + \infty} \mathcal{H}^1(K_i). \end{equation*}
+\end{proof}
+
+\section{Simons' Cone}
+
+In this final section, we show that the minimality of the functional $\mathcal{H}^{n-1}(- \cap K)$ may be achieved via a calibration. We shall apply this result to prove the minimality of the Simons' Cone, which is a singular surface, in dimension $n = 8$.
+
+\begin{theorem}[Minimality through Calibration] Let $\Sigma_0$ be a compact $(n-1)$-dimensional hypersurface in $\R^n$ with boundary $\partial \Sigma_0$ oriented by a continuous unit normal $\eta_0$. Assume that there exists a calibration for $\Sigma_0$, that is, a vector field $v$, defined on the space $\R^n$, with the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item The vector field $v$ coincides with $\eta_0$ on $\Sigma_0$.
+\item The norm of $v$ is less than or equal to $1$.
+\item The divergence of $v$ is identically zero.
+\end{enumerate}
+Then $\Sigma_0$ is the hypersurface minimizing the functional $\mathcal{H}^{n-1}(-)$ among all the $(n - 1)$-dimensional hypersurfaces $\Sigma$ with the same boundary, oriented in the same way.\end{theorem}
+
+\begin{proof} A straightforward computation shows that
+\begin{equation*} \begin{aligned} \mathcal{H}^{n - 1}(\Sigma_0) & \: {\color{blue}=} \: \int_{\Sigma_0} v \cdot \eta_0 \, \mathrm{d}\mathcal{H}^{n - 1} \: {\color{red}=}
+\\[1em] & \: {\color{red}=}\: \int_\Sigma v \cdot \eta_0 \, \mathrm{d}\mathcal{H}^{n - 1} \leq
+\\[1em] & \leq \mathcal{H}^{ n -1}(\Sigma),
+\end{aligned} \end{equation*}
+where the {\color{blue} blue} equality follows from \textbf{(i)}, and the {\color{red} red} follows from \textbf{(ii)}, \textbf{(iii)}, and the divergence theorem. \end{proof} 
+
+\begin{theorem}[Minimality through Calibration, II] Let $\Sigma_0$ be a complete $(n-1)$-dimensional hypersurface in $\R^n$ without boundary. Assume that there exist a Borel set $E$ and a calibration for $\Sigma_0$, that is, a vector field $v$, defined on the space $\R^n$, with the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item The vector field $v$ coincides with $\eta_0$ on $\Sigma_0$.
+\item The norm of $v$ is less than or equal to $1$.
+\item The divergence of $v$ is less than or equal to zero in $E$, and greater than or equal to zero in the complement $\R^n \setminus E$.
+\item The surface $\Sigma_0$ is the boundary of $E$, and $\eta_0$ is the outwards normal.
+\end{enumerate}
+Then $\Sigma_0$ is the hypersurface minimizing the functional $\mathcal{H}^{n-1}(- \cap K)$ among all the $(n - 1)$-dimensional hypersurfaces $\Sigma$ which agrees with $\Sigma$ outside of a compact set $K$.\end{theorem}
+
+\paragraph{Simons' Cone.} The surface
+\begin{equation*}\Sigma_S := \left\{ (x, \, y) \in \R^4 \times \R^4 \: \left| \: |x| = |y| \right. \right\} \end{equation*}
+admits a calibration $v$. In particular, the Simons' cone is the minimal surface (with respect to the $(n-1)$-dimensional Hausdorff measure) in dimension $n = 8$, and it is easy to prove that the origin $(0, \, 0)$ is a singular point (as stated in the final remark of the previous chapter). We will not present a proof here, but the calibration is given by
+\begin{equation*} v(x, \, y) := \frac{\nabla f(x, \, y)}{f(x, \, y)}, \quad \text{where $f(x, \, y) = \frac{|x|^4 - |y|^4}{4}$}, \end{equation*}
+and the Borel set $E$ is given by
+\begin{equation*}E := \left\{ (x, \, y) \in \R^4 \times \R^4 \: \left| \: |x| < |y| \right. \right\}. \end{equation*}

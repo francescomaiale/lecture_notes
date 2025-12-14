@@ -1,0 +1,134 @@
+\chapter{Self-Similar Sets}
+
+In this brief chapter, we investigate the notion of Hutchinson's \textit{fractals} (or self-similar sets), and we prove that, under suitable assumptions, given a certain number of similarities, there exists a unique compact self-similar set with a precise Hausdorff dimension $d$.
+
+\begin{definition}[Self-Similar] \index{self-similar set} A subset $E \subseteq \R^n$ is \textit{self-similar} if there exist a finite collection $\phi_1, \, \dots, \, \phi_N$ of similarities
+\begin{equation*} \phi_i(x) := x_i + \lambda_i \cdot R_i x, \quad \text{where $R_i \in O(n)$ and $\lambda_i \in (0, \, 1)$}, \end{equation*}
+such that
+\begin{equation*} E = \bigcup_{i = 1}^{N} \phi_i(E). \end{equation*}
+\end{definition}
+
+\begin{remark}If the $\phi_i(E)$ are (essentially) disjoint\footnote{More precisely, we say that $\phi_i(E)$ and $\phi_j(E)$ are \textit{essentially} disjoint if and only if $\mathcal{L}^n \left(\phi_i(E) \cap \phi_j(E) \right) = 0$. }, then we expect the Hausdorff dimension of $E$ to be equal to the unique solution of the equation
+\begin{equation} \label{equazionesol} \sum_{i = 1}^{N} \lambda_i^d = 1. \end{equation} \end{remark}
+
+It is important to stress that the Hausdorff dimension should be equal to $d$, but, a priori, there is no guarantee that the $d$-dimensional Hausdorff measure of $E$ is finite. We now state two lemmas that explain what we mean by \textit{should be equal to}.
+
+\begin{lemma} The equation \eqref{equazionesol} admits a unique solution $d \geq 0$, provided that the $\lambda_i$s are positive and strictly less than one. \end{lemma}
+
+\begin{lemma} If the $\phi_i(E)$ are (essentially) disjoint and if there exists $d \geq 0$ such that $0 < \mathcal{H}^d(E) < + \infty$, then $d$ is the unique solution of \eqref{equazionesol}.  \end{lemma}
+
+\begin{proof} This is a straightforward application of the properties of the Hausdorff measure:
+\begin{equation*} E = \bigsqcup_{i = 1}^{N} \phi_i(E) \implies \mathcal{H}^d(E) = \sum_{i=1}^{N} \mathcal{H}^d \left(\phi_i(E) \right) = \left( \sum_{i=1}^{N} \lambda_i^d \right) \, \mathcal{H}^d(E),\end{equation*}
+that is, the factor $\left( \sum_{i=1}^{N} \lambda_i^d \right)$ needs to be equal to one for the identity to hold. \end{proof}
+
+\paragraph{Hutchinson Construction of Self-Similar Sets.} Let be given $\phi_1, \, \dots, \, \phi_N$ similarities with scaling factors $\lambda_i \in (0,\, 1)$. For the next theorem to be true, we need to introduce the \textit{open set condition}.
+
+\paragraph{The open set condition (OSC).}\index{open set condition (OSC)} The finite family of similarities $\phi_1, \, \dots, \, \phi_N$ satisfies the open set condition if and only if there exists a nonempty open set $V \subset \R^n$ such that
+\begin{equation*} \bigcup_{i = 1}^{N} \phi_i(V) \subseteq V \qquad \text{and} \qquad \phi_i(V) \cap \phi_j(V) = \varnothing \: \: \text{for $i \neq j$}.\end{equation*}
+
+\begin{theorem}[Hutchinson] \index{Hutchinson Theorem}\label{th:hutchisnds} Let be given a finite collection $\phi_1, \, \dots, \, \phi_N$ of similarities with scaling factors $\lambda_i \in (0,\, 1)$ satisfying the (OSC) condition. Then there exists a unique self-similar compact set $C \subseteq \R^n$, that is,
+\begin{equation*} C = \bigcup_{i=1}^{N} \phi_i(C). \end{equation*}
+The Hausdorff dimension of $C$ is the unique solution $d$ of the equation \eqref{equazionesol}, and the $d$-dimensional Hausdorff measure of $C$ is finite and nonzero, that is,
+\begin{equation*} 0 < \mathcal{H}^d(C) < + \infty. \end{equation*}
+\end{theorem}
+
+The proof of this theorem is hard, and we need extra care to deal properly with the open set condition. For this reason, we replace it with a stronger condition: 
+\begin{equation*} \phi_i \left (\overline{V} \right) \cap \phi_j \left(\overline{V} \right) = \varnothing, \qquad \forall \, i \neq j. \end{equation*}
+More precisely, we assume that the images of $V$ via the similarities are distant.
+
+\begin{proof}Let $X := \overline{V}$, and let $\mathcal{F} := \left\{F \subseteq X \: \left| \: \text{$F$ is closed.} \right. \right\}$ be the family of all the closed (and thus compact) subsets of $X$.
+
+\paragraph{Step 1.} The Hausdorff distance induces a structure of metric space on $\mathcal{F}$. Indeed, if we denote by $\mathcal{U}_r(A)$ an open neighborhood of $A$ with diameter $r$, then one can prove that
+\begin{equation*}d_{\mathcal{H}}(C_1, \, C_2) := \inf \left\{ r > 0 \: \left| \: \text{$C_1 \subseteq \mathcal{U}_{r}(C_2)$ and $C_2 \subseteq \mathcal{U}_{r}(C_1)$} \right. \right\}, \end{equation*}
+is a metric. Moreover, the following implications hold\footnote{These two statements are not related to the content of this course; hence both are left as an exercise for the reader.}: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $X$ is complete, then $\left( \mathcal{F}, \, d_\mathcal{H} \right)$ is complete.
+\item If $X$ is compact, then $\left( \mathcal{F}, \, d_\mathcal{H} \right)$ is compact.
+\end{enumerate}
+
+\paragraph{Step 2.} Let us consider the following operator
+\begin{equation*}\Phi : \mathcal{F} \longrightarrow \mathcal{F}, \qquad F \longmapsto \bigcup_{i = 1}^{N} \phi_i(F). \end{equation*}
+between two Banach spaces, and let $\lambda_{max} := \max_{i = 1, \, \dots, \, N} \lambda_i \in (0, \, 1)$. By definition, it turns out that
+\begin{equation*} d_{\mathcal{H}} \left(\Phi(F_1), \, \Phi(F_2) \right) \leq \lambda_{max}\cdot d_{\mathcal{H}} (F_1, \, F_2), \end{equation*}
+which means that the operator $\Phi$ is a contraction. The Banach fixed point theorem\footnote{\textbf{Theorem.} Let $B$ be a Banach space, and let $T : B \longrightarrow B$ be a contraction. Then there exists a unique $b \in B$ such that $T(b) = b$, and for every $x \in B$ it turns out that $b$ is the limit point of the sequence $\{ x_n := T^n x \}_{n \in \N}$. } proves that there exists a unique fixed point $C$ which is given by
+\begin{equation*} \lim_{j \to + \infty} \Phi^j(F), \end{equation*}
+for every $F \in \mathcal{F}$. In particular, one can choose $X$ as a starting point for the sequence.
+
+\paragraph{Step 3.} First, we observe that
+\begin{equation*} X \supset \Phi(X) \supset \Phi^2(X) \supset \dots \implies \lim_{j \to + \infty} \Phi^j(X) = \bigcap_{j \in \N} \Phi^j(X) = C. \end{equation*}
+For any $j \in \N$ and any $j$-tuple of indices $(i_1, \, \dots, \, i_j) \in \{1, \, \dots, \, N\}^j$, we denote by $X_{i_1, \, \dots, \, i_j}$ the iterated image of $X$, that is,
+\begin{equation*} X_{i_1, \, \dots, \, i_j} := \phi_{i_j} \circ \dots \circ \phi_{i_1}(X). \end{equation*}
+This notation is particularly useful since we can now express $C$ as an infinite intersection of finite unions (a fairly straightforward generalization of the construction of the Cantor set), that is,
+\begin{equation} \label{eqsikdkls} \bigcap_{j \in \N} \left( \bigcup_{1 \leq i_1, \, \dots, \, i_j \leq N} X_{i_1, \, \dots, \, i_j} \right) = C. \end{equation}
+
+\paragraph{Step 4.} In this brief step, we want to find an \textbf{upper bound} on the $d$-dimensional Hausdorff measure of $C$ and, more precisely, we prove that
+\begin{equation*} \mathcal{H}^d(C) \leq \frac{\alpha_d}{2^d} \left(\mathrm{diam}(X) \right)^d. \end{equation*}
+Fix $\delta > 0$, choose $j$ so that $\lambda_{max}^j \cdot \mathrm{diam}(X) < \delta$, and observe that
+\begin{equation*} \mathrm{diam}\left(X_{i_1, \, \dots, \, i_j} \right) \leq \lambda_{max}^j \cdot \mathrm{diam}(X) \quad \text{and} \quad \mathrm{diam}\left(X_{i_1, \, \dots, \, i_j} \right) = \lambda_{i_1} \dots \lambda_{i_j} \cdot \mathrm{diam}(X). \end{equation*}
+As a consequence of the identity \eqref{eqsikdkls}, it follows that the family $\left\{ X_{i_1, \, \dots, \, i_j} \right\}$ is a covering of $C$ with diameter less than $\delta$ as $(i_1, \, \dots, \, i_j)$ ranges in the set of all the $j$-tuples; hence
+\begin{equation*} \begin{aligned} \mathcal{H}_\delta^d(C) & \leq \frac{\alpha_d}{2^d} \sum_{1 \leq i_1, \, \dots, \, i_j \leq N}\left( \mathrm{diam}\left(X_{i_1, \, \dots, \, i_j}\right) \right)^d \leq \\[1em] & \leq \frac{\alpha_d}{2^d} \left( \mathrm{diam}(X) \right)^d \sum_{1 \leq i_1, \, \dots, \, i_j \leq N} \left(\lambda_{i_1} \dots \lambda_{i_j} \right)^d. \end{aligned} \end{equation*}
+The right-hand side is, up to a constant, equal to $\left(\mathrm{diam}(X)\right)^d$ since
+\begin{equation*} \sum_{1 \leq i_1, \, \dots, \, i_j \leq N} \left(\lambda_{i_1} \dots \lambda_{i_j} \right)^d = \left( \sum_{i = 1}^{N} \lambda_i^d \right)^j = 1. \end{equation*}
+In particular, notice that the existence of the fixed point $C$ and the upper bound on the $d$-dimensional Hausdorff measure rely on the completeness of $X$ only: all the other assumptions are necessary for the lower bound!
+
+\paragraph{Step 5.} The lower bound is rather delicate, and the rough idea behind it is to construct a probability measure $\mu$ on $C$ such that
+\begin{equation*} \Theta_d^\ast(\mu, \, x) < + \infty, \qquad \forall \, x \in C. \end{equation*}
+More precisely, we construct $\mu$ as the weak limit of a sequence of probability measures $(\mu_k)_{k \in \N}$ as follows. Let $x \in C$ be a point, and let $\mu_0 := \delta_{x}$ be the Dirac measure centered at that point. We define the measure
+\begin{equation*} \mu_1 := \lambda_1^d  \delta_{\phi_1(x)} + \dots + \lambda_N^d \delta_{\phi_N(x)}, \end{equation*}
+where the renormalization constants need to be chosen in this way since the problem is asymmetrical\footnote{The reader may check that a different choice of renormalization constants yields to a different result (e.g., with $1/N$).} as the weight is not uniformly distributed.
+
+\paragraph{Step 5.1.} Let us denote by $x_{i_1, \, \dots, \, i_j}$ the image via the collection $\phi_1, \, \dots, \, \phi_N$ of $x$, that is,
+\begin{equation*} x_{i_1, \, \dots, \, i_j} := \phi_{i_j} \circ \dots \circ \phi_{i_1}(x). \end{equation*}
+The $j$th element of the sequence is thus given by
+\begin{equation*} \mu_j := \sum_{1 \leq i_1, \, \dots, \, i_j \leq N} \left(\lambda_{i_1} \dots \lambda_{i_j} \right)^d \, \delta_{x_{i_1, \, \dots, \, i_j}}. \end{equation*}
+The set function $\mu_j$ is a probability measure defined on $C$ for every $j \in \N$; hence there exists a subsequence\footnote{The whole sequence converges to $\mu$, but we do not use this fact in the proof. On the other hand, we will use this property in the next chapters; thus the reader may try to prove it by herself.} $\mu_{j_k}$ that converges to a probability measure $\mu$. We now claim that for every $j \in \N$ and for every $j$-tuple of indices $(i_1, \, \dots, \, i_j) \in \{1, \, \dots, \, N\}^j$, it turns out that
+\begin{equation*} \mu \left(X_{i_1, \, \dots, \, i_j} \right) = \lambda_{i_1}^d \dots \lambda_{i_j}^d. \end{equation*}
+It is easy to see that for any $k \geq j$, we have
+\begin{equation*} \mu_{k} \left(X_{i_1, \, \dots, \, i_j} \right) = \lambda_{i_1}^d \dots \lambda_{i_j}^d,\end{equation*}
+and hence our claim follows immediately if we can pass this identity to the limit as $k \to + \infty$.
+
+Here we use the strong replacement for the open set condition: For every $j$-tuple, the set $X_{i_1, \, \dots, \, i_j}$ is both open and closed in $C$, and thus we can take the limit for $k \to + \infty$.
+
+\paragraph{Step 5.2.} Fix $x \in C$. Then $x$ is uniquely identified by a sequence of indices $(i_j)_{j \in \N}$ in such a way that $x \in X_{i_1, \, \dots, \, i_j}$ for every $j \in \N$. Moreover, we have the identity
+\begin{equation} \label{eqlsd} \frac{\mu\left(X_{i_1, \, \dots, \, i_j} \right)}{\left[ \mathrm{diam}(X_{i_1, \, \dots, \, i_j}) \right]^d} = \frac{1}{\mathrm{diam}(X)^d}, \end{equation}
+since $\mathrm{diam}(X_{i_1, \, \dots, \, i_j}) = \lambda_{i_1} \dots \lambda_{i_j} \cdot \mathrm{diam}(X)$ by construction.
+
+It remains to prove that \eqref{eqlsd} is enough to infer that the $d$-dimensional upper density of $\mu$ is finite. Fix $x \in C$ and fix $0 < r < d_{min}$, where
+\begin{equation*}d_{min} := \inf_{i, \, j = 1, \, \dots, \, N} d\left(\phi_i(x), \, \phi_j(x) \right). \end{equation*}
+There exists a natural number $j \in \N$ such that
+\begin{equation*} d_{min}\cdot \lambda_{i_1} \dots \lambda_{i_{j+1}} < r \leq d_{min} \cdot \lambda_{i_1} \dots \lambda_{i_j}, \end{equation*}
+and therefore
+\begin{equation*} \overline{B(x, \, r)} \cap C \subseteq X_{i_1, \, \dots, \, i_j}. \end{equation*}
+It follows that
+\begin{equation*} \mu \left( \overline{B(x, \, r)} \right) \leq \mu \left(X_{i_1, \, \dots, \, i_j} \right), \end{equation*}
+and this is enough to estimate the density ratio, that is,
+\begin{equation*}\frac{ \mu \left( \overline{B(x, \, r)} \right) }{r^d} \leq \frac{ \mu \left(X_{i_1, \, \dots, \, i_j} \right) }{\left( d_{min} \cdot \lambda_{i_1} \dots \lambda_{i_j} \right)^d} = \left( \frac{1}{d_{min} \cdot \mathrm{diam}(X)} \right)^d < + \infty. \end{equation*}
+%In a similar fashion, we notice that
+%\begin{equation*} \overline{B(x, \, r)} \cap C \supseteq X_{i_1, \, \dots, \, i_{j+1}}, \end{equation*}
+%and this is enough to estimate the density ratio, that is,
+%\begin{equation*}\frac{ \mu \left( \overline{B(x, \, r)} \right) }{r^d} > \frac{ \mu \left(X_{i_1, \, \dots, \, i_{j+1}} \right) }{\left( d_{min} \cdot \lambda_{i_1} \dots \lambda_{i_j} \right)^d} \geq 0. \end{equation*}
+
+\paragraph{Step 5.3} Here we rephrase the argument presented in \cite{manilla}. We want to prove that
+\begin{equation*} \Theta_d^\ast(\mu, \, x) < + \infty, \qquad \forall \, x \in C \end{equation*}
+is enough to infer that $\mathcal{H}^d(C) > 0$ strictly. Suppose that
+\begin{equation*} B_r \subseteq X \subseteq B_R, \end{equation*}
+and let $\rho > 0$ be a fixed real number. Denote by $\mathscr{S}$ the space of all finite sequences $(i_1, \, \dots, \, i_j)$ such that the following inequality holds:
+\begin{equation}\label{eq.53} \lambda_{min} \cdot \rho \leq \lambda_{i_1} \dots \lambda_{i_j} \leq \rho. \end{equation}
+It follows that the collection
+\begin{equation*} \mathscr{X} := \left\{ X_{i_1, \, \dots, \, i_j} \: : \: (i_1, \, \dots, \, i_j) \in \mathscr{S} \right\} \end{equation*}
+is disjoint, and thus every $X_{i_1, \, \dots, \, i_j} \in \mathscr{X}$ contains a ball of radius $r \cdot \lambda_{i_1} \dots \lambda_{i_j}$ and it is contained in a ball of radius $R \cdot \lambda_{i_1} \dots \lambda_{i_j}$. By \eqref{eq.53} we infer that
+\begin{equation*}B_{r \cdot \lambda_{min} \cdot \rho} \subseteq X_{i_1, \, \dots, \, i_j}  \subseteq B_{R \cdot \rho}. \end{equation*}
+In particular, every ball of radius $\rho$ intersects $q$ sets of the collection $\mathscr{X}$, where
+\begin{equation*}q := \left(\frac{1 + 2R}{\lambda_{min} r} \right)^{n}. \end{equation*}
+Moreover, by definition the support of $\mu_{i_1, \, \dots, \, i_j}$ is contained in $\overline{X_{i_1, \, \dots, \, i_j}}$ for every $j \geq 1$, and therefore
+\begin{equation*} \mu = \sum_{(i_1, \, \dots, \, i_j) \in \mathscr{S}} \left( \lambda_{i_1} \dots \lambda_{i_j} \right)^d \mu_{i_1, \, \dots, \, i_j}. \end{equation*}
+For every ball $B_\rho$ of radius $\rho$ such that $B_\rho \cap \overline{X_{i_1, \, \dots, \, i_j}} \neq \varnothing$, it turns out that
+\begin{equation*} \mu(B_\rho) \leq \sum_{(i_1, \, \dots, \, i_j) \in \mathscr{S}} \left( \lambda_{i_1} \dots \lambda_{i_j} \right)^d \mu_{i_1, \, \dots, \, i_j}(\R^n), \end{equation*}
+which means that
+\begin{equation*} \mu(B_\rho) \leq q \rho^d = \frac{q |B_\rho|^d}{2^d} \end{equation*}
+whenever $|B_\rho| < |X|$. Let $\{ U_i \}_{i \in I}$ be a countable cover of $C$, and notice that
+\begin{equation*} C \subseteq \bigcup_{i \in I} B_i \quad \text{where $|B_i| \leq 2|U_i|$}, \end{equation*}
+from which it follows that
+\begin{equation*}1 = \mu(X) \leq \sum_{i \in I} \mu(B_i) \leq q \sum_{i \in I} |U_i|^d \simeq q \mathcal{H}^d(E),\end{equation*}
+and thus $\mathcal{H}^d(E) \geq q^{-1} > 0$, which is what we wanted to prove.
+\end{proof}

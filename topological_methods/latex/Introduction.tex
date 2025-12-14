@@ -1,0 +1,38 @@
+\chapter{Introduction}
+
+In this chapter, we want to give a brief and incomplete motivation to the study of the topological degree theory, by stating some of the most relevant results we shall be able to prove by the end of the course.
+
+\section{Motivating Examples}
+
+In this section, we denote by $\Omega$ an open subset of $\R^N$, and we denote by $B^N$ the open ball in $\R^N$ and by $D^N$ the closed ball in $\R^N$, that is, $D^N = \overline{B^N}$.
+
+\begin{theorem}Assume that $\Omega$ is bounded, and let $\Phi : \overline{\Omega} \to \R^N$ be a continuous map such that $\Phi(x) = x$ for any $x \in \partial \, \Omega$. Then
+\begin{equation*}\Phi^{-1}(y) \neq \emptyset\end{equation*}
+for any $y \in \Omega$.\end{theorem} 
+
+\begin{proof}[Non-rigorous Proof] Let us consider the map
+\begin{equation*} \Phi_t(x) := (1 - t) \, x + t \, \Phi(x) : \overline{\Omega} \to \R^N, \qquad t \in [0, \, 1] \end{equation*}
+and observe that, for $t = 0$, the equation $\Phi_{0}(x) = y$ admits one and only one solution for any $y \in \Omega$ (since it is the identity map). Moreover, it turns out that
+\begin{equation*} x \in \partial \, \Omega \implies \Phi_t(x) = x \qquad \forall \, t \in [0, \, 1]. \end{equation*}
+This is enough to infer that $\Phi_t$ preserves the topological degree modulo $2$, that is,
+\begin{equation*} \mathrm{deg}_2 (\Phi_1)(y, \, \Omega) = \mathrm{deg}_2 (\Phi_0)(y, \, \Omega) = 1, \end{equation*}
+and this implies that for any $y \in \Omega$, there exists $x \in \Omega$ such that $\Phi(x) = y$.
+\end{proof}
+
+\begin{theorem}[Open Map] Let $\Phi : \Omega \to \R^N$ be a continuous map. If $\Phi$ is injective, then $\Phi$ is an open map, that is, 
+\begin{equation*} \text{$A \subset \Omega$ open in $X$} \implies \text{$\Phi(A)$ open in $\R^N$}. \end{equation*}
+\end{theorem}
+
+\begin{corollary} Let $W \subset \R^M$ be an open subset. Then there exists an homeomorphism $\Phi : \Omega \to W$ if and only if $N = M$. \end{corollary}
+
+\begin{theorem}[Brouwer Fixed Point] Let $\Phi : D^N \to D^N$ be a continuous map. Then there exists at least one fixed point for $\Phi$, that is, there is $x \in D^N$ such that $\Phi(x) = x$. \end{theorem}
+
+\begin{remark} Let $A : \R^N \to \R^N$ be a linear symmetric application. As a result of the Spectral theorem, it turns out that there exists a basis of eigenvectors and $A$ is equal to the gradient of a function $f : \R^N \to \R^N$. Indeed, if we define
+\begin{equation*} f(x) := \frac{1}{2} \, (A \, x, \, x), \end{equation*}
+then the differential is $\mathrm{d}\,f(x)[h] = (A\,x, \, h)$ and, clearly, this means that $A = \mathrm{grad}(f)$. \end{remark}
+
+\begin{theorem}[Nonlinear eigenvalues] Let $\Phi : S^N \to \R^{N+1}$ be a continuous map. Assume that there exists an \textbf{even} function $f \in C^1 \left(\R^{N+1}; \, \R \right)$ such that $\Phi = \mathrm{grad}(f)$. Then $\Phi$ is diagonalizable, that is, there are $e_1, \, \dots, \, e_{N+1} \in \R^{N+1}$ and $\lambda_1, \, \dots, \, \lambda_{N+1} \in \R$ such that
+\begin{equation*} \Phi(e_i) = \lambda_i \, e_i \qquad \forall \, i \in \{1, \, \dots, \, N+1\}. \end{equation*}
+\end{theorem}
+
+\begin{scolium}If $\Omega \subset \R^N$, is it true that $\partial \, \Omega$ is not contractible in itself? The answer is clearly no, since we can always consider the upper half plane $\{ x \in \R^N  \, : \, x_N = 0 \}$.\end{scolium}

@@ -1,0 +1,309 @@
+\chapter{Brouwer Topological Degree}
+
+\begin{scolium} Let $\mathrm{id}: S^n \to S^n$ be the identity and let $\imath: S^n \to S^n$ be the antipodal map, both defined on the $n$-dimensional sphere. Is there an \textbf{homotopy} $H : [0, \, 1] \times S^n \to S^n$ such that
+\begin{equation*} H(0, \, x) = x \qquad \text{and}\qquad H(1, \, x) = - x \end{equation*}
+for every $x \in S^n$?
+
+\vspace{1.8mm}
+\noindent The answer is \textbf{yes} if the dimension is even and \textbf{no} if the dimension is odd. Unfortunately the topological degree modulo $2$ is not enough to prove our claims (since it cannot distinguish $1$ from $-1$), thus we need to introduce a more powerful tool, that is, the Brouwer topological degree. \end{scolium}
+
+\section{Representation and Orientation}
+
+In this section we denote by $X$ and $Y$ real vector spaces of dimensions $N$ and $M$ respectively.
+
+\begin{definition}[Representation] Let $\mathcal{B} := \{b_1, \, \dots, \, b_N\}$ be a basis for $X$. A \textit{representation} of $X$ on $\R^N$ (with respect to the basis $\mathcal{B}$) is the isomorphism $r : X \to \R^N$ such that
+\begin{equation*} x = \sum_{i = 1}^{N} x_i \, b_i \implies r(x) = (x_1, \, \dots, \, x_N). \end{equation*} \end{definition}
+
+Let $\left(\mathcal{B}, \, r\right)$ be a representation of $X$ and let $\left(\mathcal{B}^\prime, \, s\right)$ be a representation of $Y$. The matrix associated to a linear application $L \in \mathcal{L}(X, \, Y)$ is defined as follows:
+\begin{equation*} A_L := s^{-1} \circ L \circ r. \end{equation*}
+
+\begin{remark}Let $L \in \mathcal{L}(X, \, X)$ be a linear application. The determinant of the associated matrix $A_L$ does not depend on the particular choice of representations of $X$.\end{remark}
+
+\begin{proof} Indeed, if we let $r$ and $r^\prime$ be representation of $X$, it turns out that
+\begin{equation*}A_L = r^{-1} \circ L \circ r \implies A_L = r^{-1} \circ r^\prime \circ A_L^\prime \circ \left(r^\prime\right)^{-1} \circ r, \end{equation*}
+and the conclusion follows from Binet's theorem\footnote{Let $A, \, B \in M\left(n, \, \mathbb{K}\right)$ be two square matrices. Then $\mathrm{det} \left(A \cdot B \right) = \mathrm{det} A \cdot \mathrm{det} B$.}.  \end{proof}
+
+\begin{definition}[Determinant] Let $L \in \mathcal{L}(X, \, X)$ be a linear application. The \textit{determinant} of $L$ is the determinant of the associated matrix $A_L$, for any choice of the representations.\end{definition}
+
+\begin{definition}[Orientation] Let $L \in \mathcal{L}(X, \, X)$ be a linear isomorphism. We say that $L$ is  \textit{orientation-preserving} if $\mathrm{det}(L) > 0$, and \textit{orientation-reversing} otherwise.\end{definition}
+
+\begin{definition} Let $\mathcal{B}$ and $\mathcal{B}^\prime$ be bases of $X$. We say that they have the same orientation if the transition matrix $A_{\mathrm{id}_X}$ has positive determinant.\end{definition}
+
+\begin{remark}\label{rmk:cf}If $(\mathcal{B}_t)_{t \in [0, \,1]}$ is a continuous family of basis for $X$, then $\mathcal{B}_0$ and $\mathcal{B}_1$ have the same orientation.\end{remark}
+
+\begin{remark}The automorphisms group is made up of two connected components: positively-oriented basis and negatively-oriented basis.\end{remark}
+
+\begin{exercise} Let $X$ be a $N$-dimensional vector space and let $r$ and $r^\prime$ be two representations (of two different bases). If $A$ is an isomorphism and $s$ represents a basis oriented as $r$, then 
+\begin{equation*} \mathrm{sgn} \left[ \mathrm{det} \, A_{\mathcal{B}, \, \mathcal{B}^\prime} \right] = \mathrm{sgn} \left[ \mathrm{det} \, A_{\mathcal{B}^{\prime\prime}, \, \mathcal{B}^\prime} \right]. \end{equation*} \end{exercise}
+
+\begin{proof} By definition
+\begin{equation*} A_{\mathcal{B}, \, \mathcal{B}^\prime}  = r^\prime \circ \left(r^\prime\right)^{-1} \circ A_{\mathcal{B}^{\prime\prime}, \, \mathcal{B}^\prime} \circ r^{\prime\prime} \circ r^{-1} = A_{\mathcal{B}^{\prime\prime}, \, \mathcal{B}^\prime} \circ (r^{\prime\prime} \circ r^{-1}) \end{equation*}
+and the thesis follows from the fact that $\mathrm{det} \, (r^{\prime\prime} \circ r^{-1})  > 0$ along with the Binet theorem.\end{proof}
+
+\section{The Brouwer Degree}
+
+\paragraph{Degree for Differential Mappings.} Let $\Omega \subset \R^N$ be a bounded open subset, let $\Phi \in C^1( \overline{\Omega}, \, \R^N)$ and let $y \in \R^N \setminus \Phi \left( \partial \, \Omega \cup Z_\Phi \right)$.  The primary goal of this chapter is to study the sum
+\begin{equation} \sum_{x \in f^{-1}(y)} \mathrm{sgn} \, J(x). \end{equation}
+
+\begin{lemma}[Dog on Leash] \label{lemmagui} Let $v : [a, \, b] \to \R \times \R^N$ be a path of class $C^2\left([a, \, b]\right)$ such that
+\begin{equation*} v(\tau) \neq 0 \qquad \forall \, \tau \in [a, \, b].\end{equation*}
+Assume that $\mathcal{B}_a := \{ v(a), \, z_1, \, \dots, \, z_N \}$ is a basis of $\R^{N+1} = \R \times \R^N$. There are differentiable paths $\beta_1, \, \dots, \, \beta_N : [a, \, b] \to \R \times \R^{N}$ such that $\beta_i(a) = z_i$ and
+\begin{equation*} \mathcal{B}_\tau := \left\{ v(\tau), \, \beta_1(\tau), \, \dots, \, \beta_N(\tau) \right\} \end{equation*}
+is also a basis of $\R^{N+1}$ for every $\tau \in [a, \, b]$.\end{lemma}
+
+\begin{proof}Let us set
+\begin{equation*} F(\tau, \, x) := \left \langle x, \, \frac{v(\tau)}{|v(\tau)|^2} \right\rangle \, v^\prime(\tau), \qquad (\tau, \, x) \in [a, \, b] \times \R^{N+1}, \end{equation*}
+and let us consider the associated differential equation
+\begin{equation} \label{eq:edo1} u^\prime(\tau) = F(\tau, u). \end{equation}
+The initial path $v$ is clearly a solution of the differential equation. Moreover, for any given initial condition $x \in \R^{N + 1}$, by Lipschitz-Cauchy theorem the initial value problem \eqref{eq:edo1} admits one and only one solution: we denote it by $S(\tau, \, x) = u_x(\tau)$.
+
+For any fixed $\tau$, the map $S(\tau, \, \cdot) : \R^{N + 1} \to \R^{N + 1}$ is an isomorphism and, more precisely, $S(0, \, \cdot)$ is the identity. Therefore, it suffices to set
+\begin{equation*}\beta_j(\tau) := S(\tau, \, z_j), \end{equation*}
+and the thesis follows easily from what we have already proved above. \end{proof}
+
+\begin{remark} The isomorphism $S(\tau, \, \cdot)$ introduced in the proof is, actually, an isometry for every $\tau \in [a, \, b]$. Indeed, the reader may prove as an exercise that
+\begin{equation*} \langle F(\tau, \, x), \, y \rangle = - \langle F(\tau, \, y), \, x \rangle, \qquad \forall \, x, \, y \in \R^N\end{equation*}
+for any fixed $\tau \in [a, \, b]$.
+
+In particular, if the first basis is \textit{orthonormal}, then the intermediate bases are orthonormal and so is the final basis. \end{remark}
+
+\begin{lemma} \label{lemma:imspd} Let $I \supset [0, \, 1]$ be an open interval of $\R$, let $F : I \times \Omega \to \R^N$ be a $C^1$ map and let $\alpha : [a, \, b] \to I \times \Omega$ be a curve of class $C^1$ such that
+\begin{equation*} \alpha^\prime(\tau) \neq 0, \qquad F\circ \alpha(\tau) = c \quad \text{and} \quad \alpha(\tau) \notin Z_F, \qquad \forall \, \tau \in I. \end{equation*}
+Let $z_1, \, \dots, \, z_N \in \R \times \R^{N}$ be vectors such that $\mathcal{B}_a := \{ \alpha^\prime(a), \, z_1, \, \dots, \, z_N \}$ is a basis of $\R^{N+1}$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item There are vectors $z_1^\prime, \, \dots, \, z_N^\prime \in \R \times \R^N$ such that $\mathcal{B}_b := \{ \alpha^\prime(b), \, z_1^\prime, \, \dots, \, z_N^\prime \}$ is a basis, with the same orientation as $\mathcal{B}_a$.
+\item If $F_1, \, \dots, \, F_N$ are the components of $F$ with respect to the canonical base, then the determinant of the $N\times N$-minor
+\begin{equation*} \left( F_i^\prime(\alpha(a)) (z_j) \right)_{i, \, j = 1, \, \dots, \, N}  \end{equation*}
+is nonzero, and it has the same sign as of the determinant of the $N\times N$-minor
+\begin{equation*} \left( F_i^\prime(\alpha(b)) (z_j^\prime) \right)_{i, \, j = 1, \, \dots, \, N}.\end{equation*}
+\item If $\alpha^\prime(b) \notin \{0\} \times \R^N$, then we may always choose the $z_i^\prime$'s in $\{0\} \times \R^N$.
+\end{enumerate} \end{lemma}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If we set $v(\tau) := \alpha^\prime(\tau)$, then it follows from \hyperref[lemmagui]{Lemma \ref{lemmagui}} that there are $N$  differentiable paths $\beta_1, \, \dots, \, \beta_N : [a, \, b] \to \R \times \R^N$ such that $\beta_i(a) = z_i$ and, for every $\tau \in [a, \, b]$,
+\begin{equation*}\left\{ \alpha^\prime(\tau), \, \beta_1(\tau), \, \dots, \, \beta_N(\tau) \right\}\end{equation*}
+is a basis of $\R \times \R^N$. Finally, \hyperref[rmk:cf]{Remark \ref{rmk:cf}} proves that the orientations need to be the same.
+\item Since $\alpha(\tau)$ does not belong to $Z_F$, the differential at $\alpha(\tau)$ is surjective and thus the matrix
+\begin{equation*} \begin{pmatrix} F_1^\prime(\alpha(\tau))(\alpha^\prime(\tau)) & F_1^\prime(\alpha(\tau))(\beta_1(\tau)) & \dots & F_1^\prime(\alpha(\tau))(\beta_N(\tau)) \\ \vdots & \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots & \vdots \\ F_N^\prime(\alpha(\tau))(\alpha^\prime(\tau)) & F_N^\prime(\alpha(\tau))(\beta_1(\tau)) & \dots & F_N^\prime(\alpha(\tau))(\beta_N(\tau)) \end{pmatrix} \end{equation*}
+has maximal rank (that is, $N$). By assumption $F$ is constant along the path $\alpha$, hence the first column of the matrix is identically zero, that is, the $N \times N$-minor is uniquely determined.
+\item Let $Q : \R \times \R^N \to \{0\} \times \R^N$ be the projection with kernel
+\begin{equation*} \mathrm{Ker}(Q) = \mathrm{Span} \left< \alpha^\prime(b) \right>. \end{equation*}
+By assumption, the vectors $z_1^\prime = Q(\beta_1(b)), \, \dots, \, z_N^\prime = Q(\beta_N(b))$ are also a basis of $\R^N$ in $\{0\} \times \R^N$, hence is suffices to prove that the bases
+\begin{equation*} \left\{ \alpha^\prime(a), \, z_1, \, \dots, \, z_n \right\}, \qquad \left\{ \alpha^\prime(b), \, \beta_1(b), \, \dots, \, \beta_N(b) \right\} \quad \text{and} \quad \left\{ \alpha^\prime(b), \, z_1^\prime, \, \dots, \, z_N^\prime \right\}  \end{equation*}
+have all the same orientation.
+
+Indeed, the middle and the latter ones are linked via the continuous family of bases
+\begin{equation*} \left\{ \alpha^\prime(b), \, \beta_1^\ast(\tau), \, \dots, \, \beta_N^\ast(\tau) \right\}, \qquad\beta_i^\ast(\tau) := (1 - \tau) \, \beta_i(b) + \tau \, z_i^\prime. \end{equation*}
+Finally, it remains to prove that the determinant of the $N \times N$-minor
+\begin{equation*} \left( F_i^\prime(\alpha(a)) (\beta_j(b)) \right)_{i, \, j = 1, \, \dots, \, N}  \end{equation*}
+is nonzero, and that it has the same sign as of the determinant of the $N\times N$-minor
+\begin{equation*} \left( F_i^\prime(\alpha(b)) (z_j^\prime) \right)_{i, \, j = 1, \, \dots, \, N}.\end{equation*}
+Since $\alpha(b) \notin Z_F$ it turns out that the differential at $\alpha(b)$ is surjective, hence the matrix
+\begin{equation*} \begin{pmatrix} F_1^\prime(\alpha(b))(\alpha^\prime(b)) & F_1^\prime(\alpha(b))(\beta_1^\ast(\tau)) & \dots & F_1^\prime(\alpha(b))(\beta_N^\ast(\tau)) \\ \vdots & \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots & \vdots \\ F_N^\prime(\alpha(b))(\alpha^\prime(b)) & F_N^\prime(\alpha(b))(\beta_1^\ast(\tau)) & \dots & F_N^\prime(\alpha(b))(\beta_N^\ast(\tau)) \end{pmatrix}. \end{equation*}
+has maximal rank, i.e., $N$. By assumption $F$ is constant along the path $\alpha$, thus the first column is zero and the thesis follows easily.
+\end{enumerate}
+\end{proof}
+
+
+\paragraph{Fundamental Lemma.} Let $\Omega \subset \R^N$ be an open set, let $I \subset \R$ be an open interval such that $0, \, 1 \in I$ and let $F \in C^2 \left(I \times \overline{\Omega}; \; \R^N \right)$. Set
+\begin{equation*} \Phi_0 (x) := F(0, \, x) \qquad \text{and} \qquad \Phi_1(x) := F(1, \, x), \end{equation*}
+and let $y \in \R^N$ be a point such that $y \notin F \left(I \times \partial \, \Omega \cup Z_F \right)$ and $y \notin \Phi_0 \left( Z_{\Phi_0} \right) \cup \Phi_1 \left( Z_{\Phi_1} \right)$.
+
+\begin{lemma} \label{fund} In this setting, it turns out that
+\begin{equation*} \sum_{x \in \Phi_0^{-1}(y)} \sgn \left( J_{\Phi_0}(x) \right) = \sum_{x \in \Phi_1^{-1}(y)} \sgn \left( J_{\Phi_1}(x) \right), \end{equation*} 
+where $J_{\Phi_i}(x)$ denotes the determinant of the Jacobian of $\Phi_i$ at $x \in \Omega$.\end{lemma}
+
+\begin{proof} As a result of \hyperref[lemma:fundmod2]{Lemma \ref{lemma:fundmod2}}, it turns out that
+\begin{equation*} Y := F^{-1}(y) \cap \left( [0, \, 1] \times \partial \, \Omega \right) \end{equation*}
+is a smooth $1$-manifold, with a finite number of connected components. Let $\Gamma$ be one of them, and assume that it intersects $\{0, \, 1\} \times \Omega$; then $\Gamma$ is diffeomorphic to an interval, that is, there exists a diffeomorphism
+\begin{equation*} \gamma : [a, \, b] \xrightarrow{\sim} [0, \, 1]\end{equation*}
+such that $\gamma \left([a, \, b]\right) = \Gamma$, $\gamma^\prime(\tau) \neq 0$ for any $\tau \in [a, \, b]$ and
+\begin{equation*} \Gamma \cap \left(\{0, \, 1\} \times \Omega \right) = \left\{ \alpha(a), \, \alpha(b) \right\}.\end{equation*}
+There are two possible scenarios to discuss: \mbox{} %
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item If $\alpha(a) = (0, \, x_a)$ and $\alpha(b) = (0, \, x_b)$, then we expect to find that
+\begin{equation*}\sgn \left( J_{\Phi_0}(x_a) \right) + \sgn \left( J_{\Phi_0}(x_b) \right) = 0. \end{equation*}
+Let us set $z_1 := (0, \, e_1), \, \dots, \, z_N := (0, \, e_N)$. Since $\gamma^\prime(\tau)$ is non-vanishing in $[a, \, b]$, and it does not intersect $\{0\} \times \Omega$ (see \hyperref[lemma:fundmod2]{Lemma \ref{lemma:fundmod2}}), then
+\begin{equation*} \mathcal{B} = \left\{ \gamma^\prime(a), \, z_1, \, \dots, \, z_N \right\} \end{equation*}
+is a basis of $\R \times \R^N$. By \hyperref[lemma:imspd]{Lemma \ref{lemma:imspd}} there are vectors $z_1^\prime, \, \dots, \, z_N^\prime \in \{0\} \times \Omega$ such that
+\begin{equation*} \mathcal{B}^\prime = \left\{ \gamma^\prime(b), \, z_1^\prime, \, \dots, \, z_N^\prime \right\} \end{equation*}
+is also a basis of $\R \times \R^N$, with the same orientation as $\mathcal{B}$, such that the determinant of
+\begin{equation*} \left( F_i^\prime(\gamma(a)) (z_j) \right)_{i, \, j = 1, \, \dots, \, N}  \end{equation*}
+is nonzero and it has the same sign of the determinant of
+\begin{equation*} \left( F_i^\prime(\gamma(b)) (z_j^\prime) \right)_{i, \, j = 1, \, \dots, \, N}.\end{equation*}
+Since $F_i^\prime(\gamma(a) (z_j) = \Phi_{0, \, i}^\prime (x_a) (e_j)$, it turns out that
+\begin{equation*} \mathrm{det} \, \left[ F_i^\prime(\gamma(a)) (z_j) \right]_{i, \, j = 1, \, \dots, \, N} = J_{\Phi_0}(x_a).  \end{equation*}
+If we set $z_i^\prime := (0, \, e_i^\prime)$ for $i = 1, \, \dots, \, N$, then it is easy to prove that $F_i^\prime(\gamma(b) (z_j^\prime) = \Phi_{0, \, i}^\prime (x_b) (e_j^\prime)$, and thus
+\begin{equation*} \mathrm{det} \, \left[ F_i^\prime(\gamma(b)) (z_j^\prime) \right]_{i, \, j = 1, \, \dots, \, N} = \pm \, J_{\Phi_1}(x_b).  \end{equation*}
+To find the right sign, recall that $\mathcal{B}$ and $\mathcal{B}^\prime$ have the same orientation. On the other hand, since $\alpha^\prime(a)$ and $\alpha^\prime(b)$ have opposite orientations, then $\{z_1, \, \dots, \, z_N\}$ and $\{ z_1^\prime, \, \dots, \, z_N^\prime\}$ necessarily have the opposite orientations, and thus
+\begin{equation*}\sgn \, J_{\Phi_0}(x_a) =\sgn \, \mathrm{det} \, \left[ F_i^\prime(\gamma(b)) (z_j^\prime) \right]_{i, \, j = 1, \, \dots, \, N} = - \sgn \, J_{\Phi_1}(x_b).  \end{equation*}
+
+\item If $\alpha(a) = (0, \, x_a)$ and $\alpha(b) = (1, \, x_b)$, then we expect to find that
+\begin{equation*}\sgn \left( J_{\Phi_0}(x_a) \right) = \sgn \left( J_{\Phi_1}(x_b) \right). \end{equation*}
+The proof of this identity is exactly as the previous one, so we will not give any detail. The sole difference is the fact that here $\alpha^\prime(a)$ and $\alpha^\prime(b)$ have the same orientation.
+\end{enumerate} \end{proof}
+
+\begin{definition}[Topological Degree] Let $\Omega \subset \R^N$ be an open and bounded subset, let $\Phi : \overline{\Omega} \to \R^N$ be a function of class $C^2$ and let $y \notin \Phi \left(\partial \, \Omega \cup Z_\Phi \right)$. The topological degree is defined by setting
+\begin{equation*} \mathrm{deg}\left(y, \, \Phi, \, \Omega\right) := \sum_{x \in F^{-1}(y)}  \sgn \left( J_{\Phi}(x) \right). \end{equation*} \end{definition}
+
+\begin{proposition}\label{prop:tg0} Let $\Omega \subset \R^N$ be an open and bounded subset, and let $\Phi : \overline{\Omega} \to \R^N$ be a function of class $C^2(\Omega)$. Assume that $y_0, \, y_1 \in \mathcal{C} \subseteq \R^N \setminus \Phi(\partial \, \Omega)$, where $\mathcal{C}$ is a connected component, and assume also that $y_0, \, y_1 \notin \Phi \left(Z_\Phi \right)$. Then
+\begin{equation*} \mathrm{deg}\left(y_0, \, \Phi, \, \Omega\right) =  \mathrm{deg}\left(y_1, \, \Phi, \, \Omega\right). \end{equation*} 
+\end{proposition}
+
+\begin{remark}As a result of \hyperref[prop:tg0]{Proposition \ref{prop:tg0}} and \hyperref[lemma:sard]{Sard's Lemma}, the topological degree is a well defined notion for every $y \in \R^N \setminus \Phi(\partial \, \Omega)$. Moreover, if $\Phi \in C^2 \left( \overline{\Omega}; \; \R^N \right)$, then the map
+\begin{equation*}\R^N \setminus \Phi (\partial \, \Omega) \ni y \longmapsto \mathrm{deg}\left(y, \, \Phi, \, \Omega\right) \in \Z \end{equation*}
+is continuous, and thus constant on connected components.\end{remark}
+
+\begin{definition}Let $y \in \R^N$. We define the sets of continuous mappings such that $y$ doesn't belong to the image of the border of $\Omega$ as
+\begin{equation*} \mathcal{F}_y = \left\{ \Phi \in C^0\left(\overline{\Omega}, \, \R^N \right) \: \left| \: y \notin \Phi(\partial \, \Omega) \right. \right\} \end{equation*}
+equipped with the uniform norm. Also, for any $k \in \N$, we define
+\begin{equation*} \mathcal{F}_{y}^{k} = \left\{ \Phi \in C^0 \left(\overline{\Omega}, \, \R^N \right) \: \left| \: y \notin \Phi(\partial \, \Omega) \right. \right\} \cap C^k \left( \overline{\Omega}, \, \R^N \right). \end{equation*}
+\end{definition}
+
+\begin{remark}With the topology of subspaces (induced by the restriction of the uniform norm), it turns out that $\mathcal{F}_y$ is an open subset of $C^0\left(\overline{\Omega}, \, \R^N \right)$. Moreover, for any $k \geq 1$, it turns out that $\mathcal{F}_y^k$ is dense in $\mathcal{F}_y$. \end{remark}
+
+\begin{lemma}The map
+\begin{equation*} \mathcal{F}_y^2 \ni \Phi \longmapsto \mathrm{deg}_2(y, \, \Phi, \, \Omega) \in \Z\end{equation*}
+is continuous, and thus constant on the connected component of $\mathcal{F}_y$. \end{lemma}
+
+\begin{definition}[Topological Degree] Let $\Phi \in C^0\left( \overline{\Omega}, \, \R^N \right)$, let $y \in \R^N \setminus \Phi(\partial \, \Omega)$ and let $\mathcal{C}$ be the connected component of $\mathcal{F}_y$ containing $\Phi$. The topological degree of $\Phi$ is defined as follows:
+\begin{equation*} \mathrm{deg}(y, \, \Phi, \, \Omega) = \mathrm{deg}(y, \, \Psi, \, \Omega), \qquad \Psi \in \mathcal{C} \cap C^2 \left(\overline{\Omega}, \, \R^N \right). \end{equation*} \end{definition}
+
+\paragraph{Main Properties of the Topological Degree.} Here we give a list of the main properties of the topological degree; since the proofs are similar to the ones we have already written for the modulo $2$ degree, we won't give any.
+
+\begin{lemma}[Homotopy Invariance] \label{lemma:ivsjj}Let $H : [0, \, 1] \times \overline{\Omega} \to \R^N$ be a continuous homotopy and let $\Phi(\cdot) = F(0, \, \cdot)$ and $\Psi(\cdot) = F(1, \, \cdot)$. If $y \notin H \left([0, \, 1] \times \partial \, \Omega \right)$, then
+\begin{equation*} \mathrm{deg}(y, \, \Phi, \, \Omega) = \mathrm{deg}(y, \, \Psi, \, \Omega).\end{equation*} \end{lemma}
+
+\begin{lemma} \label{lemma:imagjejj}Let $\Phi \in C^0\left(\overline{\Omega}, \, \R^) \right)$ and let $y \in \R^N \setminus \Phi(\partial \, \Omega)$ be any point such that $\mathrm{deg}_(y, \, \Phi, \, \Omega) \neq 0$. Then $y \in \Phi(\Omega)$. \end{lemma}
+
+\begin{lemma}[Solution Property]\label{prop:1239}Let $\Phi, \, \Psi \in C^0 \left(\overline{\Omega}, \, \R^N \right)$ and let $y \in \R^N \setminus \Phi(\partial \, \Omega) = \Psi(\partial \, \Omega)$. Assume also that $\Phi \, \big|_{\partial \Omega} \equiv \Psi \, \big|_{\partial \Omega}$. Then the topological degree depends only on the value on the border, that is,
+\begin{equation*} \mathrm{deg} \left(y, \, \Phi, \, \Omega \right) =  \mathrm{deg} \left(y, \, \Psi, \, \Omega \right). \end{equation*} \end{lemma}
+
+\section{Applications}
+
+The motivating example to develop the topological degree theory was the following problem:
+
+\begin{scolium} Let $\mathrm{id}: S^{N-1} \to S^{N-1}$ be the identity and let $\imath: S^{N-1} \to S^{N-1}$ be the antipodal map both defined on the $(N-1)$-sphere. Is there an \textbf{homotopy} $H : [0, \, 1] \times S^{N-1} \to S^{N - 1}$ such that
+\begin{equation*} H(0, \, x) = x \qquad \text{and}\qquad H(1, \, x) = - x \end{equation*}
+for any $x \in S^{N-1}$? \end{scolium}
+
+\noindent We are now ready to give a negative answer to this question, provided that $N$ is an odd number, as a consequence of a way more general theorem.
+
+\begin{theorem} \label{fundamentaltheorem} Let $\Omega \subset \R^N$ be an open bounded subset of $\R^N$, and let $H : [0, \, 1] \times \partial \, \Omega \to \partial \, \Omega$ be a homotopy between 
+\begin{equation*} \mathrm{id}_{ \partial \, \Omega } :\partial \, \Omega \ni x \mapsto x \in \partial \, \Omega \quad \text{and} \quad \imath \, \big|_{\partial \, \Omega} : \partial \, \Omega \ni x \mapsto -x \in \partial \, \Omega. \end{equation*}
+If $N$ is odd, then 
+\begin{equation*} \Omega \cup \left(- \Omega \right) \subset \mathrm{Ran}(H). \end{equation*} \end{theorem}
+
+\begin{proof}We argue by contradiction. Suppose that there is a point $p \in \Omega$ such that $p \notin \mathrm{Ran}(H)$. Then the topological degree of $H(0, \, \cdot)$, computed at the point $p$, is clearly equal to $1$ since $p$ is a point of $\Omega$, and $H(0, \, \cdot)$ is the identity map.
+
+The homotopy invariance property (\hyperref[lemma:ivsjj]{Lemma \ref{lemma:ivsjj}}) implies that also the degree of $H(1, \, \cdot)$, computed at $p$, needs to be equal to $1$. On the other hand, a simple argument proves that
+\begin{equation*} \mathrm{deg} \left(y, \, H(1, \, \cdot), \, \Omega \right) = \begin{cases} (-1)^N & \text{if $-p \in \Omega$} \\ 0 & \text{if $-p \notin \Omega$}, \end{cases} \end{equation*}
+and this is a contradiction since we assumed $N$ to be odd. The case $p \in - \Omega$ is exactly the same, hence we will not work out the details.
+\end{proof}
+
+Note that this assertion is \textbf{false} if $N$ is an even number. A simple counterexample is given by the circumference in the plane $\R^2$.
+
+Indeed, if we denote by $R_\theta$ the counterclockwise rotation of angle $\theta$ around the origin, then it turns out that the map
+\begin{equation*} H : [0, \, 1] \times S^1 \to S^1, \qquad (t, \, p) \longmapsto R_{t \cdot \pi}(p) \end{equation*}
+is a homotopy between the identity $R_0 = \mathrm{id}_{S^1}$, and the antipodal map $R_{\pi} = \imath \, \big|_{S^1}$.
+
+\vspace{1.6mm}
+On the other hand, the theorem we have just proved easily implies that the answer to the motivating \textit{problem} is negative if $N$ is odd. More precisely, any homotopy between the identity and the antipodal map necessarily covers the whole ball, hence $\mathrm{Ran}(H) \not \subset S^{N - 1}$, that is, the homotopy cannot achieve the result without trespassing the boundary.
+
+\begin{corollary}[Eigenvalue] Let $\Phi : S^{N-1} \to \R^N$ be a continuous mapping and assume that $N$ is odd. There exist $x \in S^{N-1}$ and $\lambda \in \R$ such that
+\begin{equation*} \Phi(x) = \lambda \cdot x. \end{equation*} \end{corollary}
+
+\begin{proof}The map defined by setting
+\begin{equation*} H(t, \, x) := \cos(t) \, \Phi(x) + \sin(t) \, x, \qquad t \in \left[ - \frac{\pi}{2}, \, \frac{\pi}{2} \right] \end{equation*}
+is a homotopy between the identity and the antipodal map on the sphere. Since $N$ is odd \hyperref[fundamentaltheorem]{Theorem \ref{fundamentaltheorem}} implies that there exists a point $(t, \, x) \in  \left[ - \frac{\pi}{2}, \, \frac{\pi}{2} \right] \times S^{N-1}$ such that $H(t, \, x) = 0$, that is,
+\begin{equation*} \cos(t) \, \Phi(x) + \sin(t) \, x = 0. \end{equation*}
+Clearly $\cos(t)$ cannot be equal to zero, otherwise $x$ would be also equal to zero and this is impossible (since $x$ is a point of the sphere). Therefore, if we divide by $\cos(t)$, it turns out that
+\begin{equation*}\Phi(x) = - \frac{\sin (t)}{\cos(t)} \cdot x \implies \lambda := -\frac{\sin (t)}{\cos(t)}. \end{equation*}
+\end{proof}
+
+The above corollary proves a much stronger result (assuming $N$ odd): \textit{one cannot comb a hairy ball flat without creating a cowlick}. More precisely, there is no nonvanishing continuous tangent vector field on the $(N-1)$-spheres for any $N$ odd.
+
+Moreover, the eigenvalue property can be generalized to different subsets of $\R^N$, as we prove in the next theorem.
+
+\begin{theorem} Let $\Omega \subset \R^N$ be a bounded open set containing the origin, and let $\Phi : \partial \, \Omega \to \R^N$ be a continuous map. If $N$ is odd, then there are $x \in \partial \, \Omega$ and $\lambda \in \R$ such that $\Phi(x) = \lambda \cdot x$. \end{theorem}
+
+\begin{proof}The map defined by setting
+\begin{equation*} H(t, \, x) := \cos(t) \, \Phi(x) + \sin(t) \, x, \qquad t \in \left[ - \frac{\pi}{2}, \, \frac{\pi}{2} \right] \end{equation*}
+is a homotopy between the identity and the antipodal map on the boundary of $\Omega$. Since $0$ belongs to $\Omega$ the topological degree of the identity at $0$ is equal to one. For the same reason, the topological degree of the antipodal map is $(-1)^N = -1$.
+
+It follows from \hyperref[fundamentaltheorem]{Theorem \ref{fundamentaltheorem}} that there exists a point $(t, \, x) \in \left[ - \frac{\pi}{2}, \, \frac{\pi}{2} \right] \times \partial \, \Omega$ such that $H(t, \, x) = 0$, i.e.,
+\begin{equation*} \cos(t) \, \Phi(x) + \sin(t) \, x = 0, \end{equation*}
+and the thesis follows easily as in the previous proof.
+\end{proof}
+
+\begin{theorem}[Fixed Point] Let $\Phi : S^{N-1} \to S^{N-1}$ be a continuous map homotopic to the identity. If $N$ is odd, then there is $x \in S^{N-1}$ such that $\Phi(x) = x$. \end{theorem}
+
+\begin{proof} The map defined by setting
+\begin{equation*} H(t, \, x) : [0, \, 1] \times S^{N-1} \to S^{N-1}, \qquad (t, \, x) \longmapsto (1 - t) \cdot \Phi(x) - t \cdot x \end{equation*} 
+is a homotopy between $\Phi$ and the antipodal map.
+
+The topological degree, at the origin, of the map $\Phi$ is equal to $1$ (since it is homotopic to the identity), while the topological degree, at the origin, of the antipodal map is equal to $(-1)^N = -1$.
+
+It follows from \hyperref[fundamentaltheorem]{Theorem \ref{fundamentaltheorem}} that there exists a point $(t, \, x) \in \left[ 0, \, 1\right] \times S^{N-1}$ such that $H(t, \, x) = 0$, i.e.,
+\begin{equation*}(1 - t) \cdot \Phi(x) - t \cdot x = 0.  \end{equation*}
+Clearly $t$ cannot be equal to $1$, otherwise $x$ would be zero which is not a point of the sphere. Hence, it turns out that
+\begin{equation*}\Phi(x) = \frac{t}{1 - t} \cdot x.  \end{equation*}
+The multiplicative constant $\frac{t}{1 - t}$ is positive and its absolute value needs to be equal to $1$ (the point belongs to the sphere). In conclusion, it turns out that $t = 1/2$ is the unique possible value and
+\begin{equation*}\Phi(x) = x.  \end{equation*}\end{proof}
+
+\section{More Properties of the Topological Degree}
+
+Let $\Omega \subset \R^N$ be a bounded and open set and let $\Phi : \overline{\Omega} \to \R^N$ be a continuous map.
+
+\begin{theorem}[Locality and Additivity] \label{locality} Let $\Omega_1, \, \dots, \, \Omega_k$ be disjoint open subsets of $\Omega$, and let $y \in \R^N$ be a point such that
+\begin{equation*} y \notin \Phi \left( \overline{\Omega} \setminus \bigcup_{i = 1}^{k} \Omega_i \right). \end{equation*}
+Then the topological degree is additive, that is,
+\begin{equation*} \mathrm{deg} \left(y, \, \Phi, \, \Omega \right) = \sum_{i = 1}^{k}  \mathrm{deg} \left(y, \, \Phi, \, \Omega_i \right). \end{equation*} \end{theorem}
+
+\begin{proof}Let us set 
+\begin{equation*} K_\Phi := \Phi \left( \overline{\Omega} \setminus \bigcup_{i = 1}^{k} \Omega_i \right). \end{equation*}
+Since $K_\Phi$ is the difference between a compact set and a finite union of open subsets it is still compact, hence there exists $\rho > 0$ such that
+\begin{equation*} B(y, \, 2 \, \rho) \cap K_\Phi = \emptyset. \end{equation*}
+By density, there exists $\psi \in C^2\left( \overline{\Omega} \right)$ such that $\| \Psi - \Phi \|_\infty < \rho$ and the above property is preserved, that is,
+\begin{equation*} B(y, \, 2 \, \rho) \cap K_\Psi = \emptyset. \end{equation*}
+The ball $B(y, \, \rho)$ is connected, hence for any $y^\prime \in B(y, \, \rho)$ the topological degree is equal to the one computed at $y$, i.e.,
+\begin{equation*}\begin{aligned} & \mathrm{deg} \left(y, \, \Phi, \, \Omega \right) = \mathrm{deg} \left(y^\prime, \, \Phi, \, \Omega \right), \\ & \mathrm{deg} \left(y, \, \Phi, \, \Omega_i \right) = \mathrm{deg} \left(y^\prime, \, \Phi, \, \Omega_i \right), \\ & \mathrm{deg} \left(y, \, \Psi, \, \Omega \right) = \mathrm{deg} \left(y^\prime, \, \Psi, \, \Omega \right), \\ & \mathrm{deg} \left(y, \, \Psi, \, \Omega_i \right) = \mathrm{deg} \left(y^\prime, \, \Psi, \, \Omega_i \right). \end{aligned} \end{equation*}
+On the other hand, by \hyperref[lemma:sard]{Sard's Lemma} there exists $y^\prime \in B(y, \, \rho) \setminus \Psi(Z_\Psi)$. The additive property holds true for a regular value, that is,
+\begin{equation*} \mathrm{deg} \left(y^\prime, \, \Psi, \, \Omega \right) = \sum_{i = 1}^{k}  \mathrm{deg} \left(y^\prime, \, \Psi, \, \Omega_i \right),\end{equation*}
+and this relation concludes the proof since the topological degree is also locally constant with respect to the function.
+\end{proof}
+
+\begin{exercise} Let $\Psi : \R^N \to \R^N$ be a continuous map such that
+\begin{equation*} \lim_{|x| \to + \infty} \left| \Psi(x) \right| = + \infty. \end{equation*}
+Then for any $y \in \R^N$ there exists $R> 0$ such that
+\begin{equation*} \mathrm{deg} \left(y, \, \Psi, \, B_r \right) =  \mathrm{deg} \left(y, \, \Psi, \, B_R \right) =  \mathrm{deg} \left(0, \, \Psi, \, B_r \right), \qquad \forall \, r \geq R. \end{equation*} \end{exercise}
+
+\begin{proof}[\textbf{Solution}] The assumption on the limit of $\Psi$ implies that, for any $y \in \R^N$ (uniformly with respect to the norm of $y$), there exists $R > 0$ such that
+\begin{equation*} \left| \Psi(x) \right| > |y|, \qquad \forall \, x \in \R^N \: : \:  |x| \geq R. \end{equation*}
+In particular, the fiber $\Psi^{-1}(y)$ is contained in the ball of radius $R$ and, by the previous \hyperref[locality]{Theorem \ref{locality}}, it follows that
+\begin{equation*} \mathrm{deg} \left(y, \, \Psi, \, B_r \right) =  \mathrm{deg} \left(y, \, \Psi, \, B_R \right) , \qquad \forall \, r \geq R. \end{equation*}
+The last equality follows from the fact that
+\begin{equation*}\Psi \left( \partial \, B(0, \, R) \right) \cap B\left(0, \, |y| \right) = \emptyset, \end{equation*}
+since the topological degree depends only on the values on the border.
+\end{proof}
+
+\begin{exercise} Let $\Phi, \, \Psi : \R^N \to \R^N$ be continuous maps such that
+\begin{equation*} \lim_{|x| \to + \infty} \left| \Psi(x) \right| = + \infty \qquad \text{and} \qquad \lim_{R \to + \infty} \mathrm{deg} \left(0, \, \Psi, \, B(0, \, R) \right) \neq 0.\end{equation*}
+If $\Phi - \Psi$ is a bounded function, then $\Phi$ is surjective.\end{exercise}
+
+\begin{proof}[\textbf{Solution}] Let us consider the following homotopy between the two maps:
+\begin{equation*} H(t, \, x) := \Psi(x) + t \cdot \left( \Phi(x) - \Psi(x) \right), \qquad t \in [0, \, 1]. \end{equation*}
+We can easily give an estimate a priori to the module of the homotopy:
+\begin{equation*}\left| H(t, \, x) \right| \geq \left|\Psi(x) \right| - \left| \Phi(x) - \Psi(x) \right| \geq \left| \Psi(x) \right| - \| \Phi - \Psi \|_\infty. \end{equation*}
+Since $\Psi$ goes to $+ \infty$ and the $\infty$-norm of the difference is bounded, it turns out that for any $y \in \R^N$ there is $R > 0$ such that
+\begin{equation*}\left| H(t, \, x) \right| \geq |y|, \qquad \forall \, x \in \R^N \: : \: |x| = R. \end{equation*}
+Therefore $H$ is an actual homotopy between $\Phi$ and $\Psi$ such that $y \notin H\left(t, \, \partial \, B(0, \, R) \right)$ for any $t \in [0, \, 1]$ and, by the homotopy invariance property, we infer that
+\begin{equation*} \mathrm{deg} \left(y, \, \Psi, \, B_R \right) =  \mathrm{deg} \left(y, \, \Phi, \, B_R \right). \end{equation*}
+By taking the limit as $R \to + \infty$, we conclude that $\mathrm{deg} \left(y, \, \Phi, \, B_R \right) \neq 0$ for any $y \in \R^N$ and thus $\Phi$ is surjective.
+\end{proof}
+
+\begin{exercise} Let $P : \C \to \C$ the application defined by a complex-valued polynomial of degree equal to $n \geq 1$. For any $w \in \C$ there exists $R > 0$ such that
+\begin{equation*} P^{-1}(w) \subset B(0, \, R), \end{equation*}
+and also it turns out that
+\begin{equation*} \mathrm{deg} \left( w, \, P, \, B_r \right) = n, \qquad \forall \, r \geq R. \end{equation*}\end{exercise}

@@ -1,0 +1,674 @@
+\chapter{Finite Perimeter Sets}
+
+In this final chapter, we introduce the notion of \textit{finite perimeter set}, and we also present a variational setting that allows us to prove the existence of a solution to the Plateau's problem (for suitable boundary conditions) and the capillarity problem.
+
+In the second half of the chapter, we introduce the essential and the reduced boundary, and we prove the \textit{Structure Theorem} due to De Giorgi and Federer.
+
+\section{Main Definitions and Elementary Properties}
+
+In this section, we present the definition of finite perimeter set, and we exploit the theory of bounded variation functions introduced in the previous chapter to derive approximation and compactness results.
+
+\begin{definition}[Finite Perimeter Set] \index{finite perimeter set} Let $E \subseteq \R^n$. We say that $E$ has finite perimeter if and only if the characteristic function has bounded variation, that is,
+\begin{equation*} \mathbbm{1}_E \in \mathrm{BV} \left( \R^n \right). \end{equation*}
+Recall that the functional associated to $\mathbbm{1}_E$ is given by
+\begin{equation*}\Lambda_{\mathbbm{1}_E}(\varphi) := \int_{E} \mathrm{div}(\varphi)(x) \, \mathrm{d}x,  \end{equation*}
+and it is bounded with respect to the uniform norm. The perimeter of $E$ is defined by the operator norm of the functional $\Lambda_{\mathbbm{1}_E}(\varphi)$, that is,
+\begin{equation*} \mathrm{Per} (E) := \left\| \Lambda_{\mathbbm{1}_E} \right\|_{\ast}. \end{equation*} \end{definition}
+
+\begin{definition}[Relative F.P.S.] \index{finite perimeter set!relative} Let $\Omega \subseteq \R^n$ be an open set, and let $E \subseteq \Omega$ be a subset. We say that $E$ has finite perimeter in $\Omega$ if and only if
+\begin{equation*} \mathbbm{1}_E \in \mathrm{BV} \left( \Omega \right). \end{equation*}
+The perimeter of $E$ in $\Omega$ is defined by the operator norm of the functional associated to $\mathbbm{1}_E$, that is,
+\begin{equation*} \mathrm{Per}_{\Omega}(E) = \left\| \Lambda_{\mathbbm{1}_E} \right\|_{\ast}, \end{equation*}
+where $\Lambda_{\mathbbm{1}_E}$ denotes the restriction of the functional to the space $C_c^\infty(\Omega)$. \end{definition}
+
+\begin{remark}Let $E \subseteq \Omega \subseteq \R^n$ be a smooth subset (e.g., assume that the boundary of $E$ is at least of class $C^1$). The reader may prove that the perimeter of $E$ in $\Omega$ is simply given by the following formula:
+\begin{equation} \label{fps:gf} \mathrm{Per}_{\Omega}(E) = \mathcal{H}^{n-1} \left( \partial E \cap \Omega \right). \end{equation}
+\textit{Hint.} A similar argument to the one used in the \hyperref[ex:bvfps]{Example \ref{ex:bvfps}} works here. In particular, we notice that the derivative of the characteristic function is given by
+\begin{equation*}D \left( \mathbbm{1}_E \right) = \nu_i \mathbbm{1}_{\partial E \cap \Omega} \cdot \mathcal{H}^{n-1}. \end{equation*} \end{remark}
+
+\begin{remark} It is important to notice that, in general, the formula
+\begin{equation*} \mathrm{Per}_{\Omega}(E) = \mathcal{H}^{n-1} \left( \partial E \right)\end{equation*}
+is not true, not even if $E$ is smooth. The intuitive idea  is clear: Since $\Omega$ is an open set, the boundary of $E$ may overlap with the boundary of $\Omega$ as it happens in \hyperref[fig:fpspr1]{Figure \ref{fig:fpspr1}}.  \end{remark}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=8cm]{images/TGMFPS1.png}
+\caption{The boundary of the set $E$ partially overlaps with the boundary of $\Omega$. Therefore only the {\color{magenta}magenta} part of $\partial E$ contributes to the perimeter of $E$ in $\Omega$.}
+\label{fig:fpspr1}
+\end{figure}
+
+\paragraph{Compactness Results.} In this paragraph, we state two compactness results for finite perimeter sets, both of which derive from the functional properties of bounded variations functions.
+
+\begin{notation}Let $\Omega$ be an open set, and let $E, \, F \subseteq \Omega$ be two subsets. The distance between $E$ and $F$ is the $n$-Lebesgue measure of the symmetric difference, that is,
+\begin{equation*}d(E, \, F) := \| \mathbbm{1}_E - \mathbbm{1}_F \|_{L^1(\Omega)} = \mathcal{L}^n \left(E  \,\triangle \, F \right).  \end{equation*} \end{notation}
+
+\begin{theorem}[Compactness, I] \label{th:cpfps}Let $(E_k)_{k \in \N} \subset \mathcal{P}(\R^n)$ be a uniformly bounded sequence of finite perimeter sets, that is,
+\begin{equation*} \mathrm{Per} (E_k) < + \infty \qquad \text{and} \qquad E_k \subseteq \Omega^\prime \subset \subset \Omega, \end{equation*}
+where $\Omega \subset \R^n$ is a bounded open subset. Then there exist a finite perimeter set $E \subseteq \Omega$ and an increasing subsequence $(n_k)_{k \in \N}$ such that
+\begin{equation*} d(E_k, \, E) \xrightarrow{k \to + \infty} 0. \end{equation*}
+Moreover, the perimeter is a lower semi-continuous functional, that is
+\begin{equation*} \liminf_{k \to + \infty}\left( \mathrm{Per} (E_k) \right) \geq \mathrm{Per} (E). \end{equation*}\end{theorem}
+
+\begin{remark}The assumption "$(E_k)_{k \in \N}$ is a uniformly bounded sequence" is crucial here, otherwise one can exhibit the easy counterexample
+\begin{equation*} E_k := B(k, \frac{1}{2}), \end{equation*}
+which is a collection given by integer translations of a ball centered at zero with radius one half. \end{remark}
+
+\begin{theorem}[Compactness, II] Let $(E_k)_{k \in \N} \subset \mathcal{P}(\R^n)$ be a uniformly bounded sequence of finite perimeter sets, that is,
+\begin{equation*} \mathcal{L}^n\left(E_k \right), \,  \mathrm{Per} (E_k) \leq c < + \infty. \end{equation*}
+Then there exist a finite perimeter set $E \subseteq \Omega$ and an increasing subsequence $(n_k)_{k \in \N}$ such that
+\begin{equation*} \left| \left( E_k \, \triangle \, E\right) \cap B(x, \, r) \right| \xrightarrow{k \to + \infty} 0, \qquad \forall \, B(x, \, r) \subseteq \R^n. \end{equation*}
+Moreover, the perimeter is a lower semi-continuous functional, that is
+\begin{equation*} \liminf_{k \to + \infty}\left( \mathrm{Per} (E_k) \right) \geq \mathrm{Per} (E). \end{equation*}\end{theorem}
+
+\section{Approximation Theorem via Coarea Formula}
+
+The primary goal of this section is to prove that any finite perimeter set can be approximated via a sequence of smooth (e.g. $C^\infty$ boundary) sets. In order to prove this assertion, we will need to use the \textit{coarea} formula presented in \hyperref[sec:coafor]{Section \ref{sec:coafor}}.
+
+\begin{theorem} \label{fpsapprox} Let $E \subseteq \R^n$ be a finite perimeter set. Then there exists a sequence of smooth (boundary of class $C^\infty$) sets $(E_k)_{k \in \N}$ such that
+\begin{equation*} \begin{cases} E_k \xrightarrow{d} E, \\[0.5em] \mathcal{H}^{n-1} \left( \partial E_k \right) = \mathrm{Per}(E_k) \xrightarrow{k \to + \infty} \mathrm{Per} (E),\end{cases} \end{equation*}
+where $d$ denotes the symmetric distance introduced in the previous section. \end{theorem}
+
+\begin{proof}Let $\rho$ be a mollifier kernel. Denote by $\rho_{\epsilon}$ the $\epsilon$-rescaling, which is defined in the usual way:
+\begin{equation*} \rho_\epsilon(x) := \frac{1}{\epsilon^n} \, \rho \left( \frac{x}{\epsilon} \right). \end{equation*}
+Let $u_\epsilon := \rho_\epsilon \ast \mathbbm{1}_E$ be the convolution. For every $s_\epsilon \in [0, \, 1]$ and $\epsilon > 0$ the set
+\begin{equation*} E_{s_\epsilon, \, \epsilon} := \left\{ x \in \Omega \: \left| \: u_\epsilon(x) > s_\epsilon \right. \right\} \end{equation*}
+is open and smooth, provided that we pick an $s_\epsilon$ such that it is not a critical value (which is always possible by Sard's Lemma).
+
+\paragraph{Step 1.} We claim that, if $\delta \leq s_\epsilon \leq 1 - \delta$, then
+\begin{equation} \label{claim:1:1} u_\epsilon \xrightarrow{L^1(\Omega)} u \implies E_{s_\epsilon, \, \epsilon} \xrightarrow{d} E. \end{equation}
+Indeed, a straightforward application of the Fubini-Tonelli's theorem proves that
+\begin{equation*}\| u_\epsilon - u \|_{L^1(\Omega)} = \int_{0}^1 d\left(E, \, E_{s, \, \epsilon} \right) \, \mathrm{d}s. \end{equation*}
+On the other hand, for every $s^\prime < s$ it turns out that $E_{s^\prime, \, \epsilon} \supseteq E_{s, \, \epsilon}$; hence we can easily estimate the $L^1$-norm of the difference as follows:
+\begin{equation*}\| u_\epsilon - u \|_{L^1(\Omega)} \geq \int_{s_\epsilon}^1 \left| E \setminus E_{s_\epsilon, \, \epsilon} \right| \, \mathrm{d}s \geq (1 - s_\epsilon) \cdot \left| E \setminus E_{s_\epsilon, \, \epsilon} \right|,\end{equation*}
+where $\setminus$ denotes the usual difference between two sets.
+
+In particular, if we take $s_\epsilon$ strictly less than $1$, then $\| u_\epsilon - u \|_{L^1(\Omega)} \to 0$ implies $\left| E \setminus E_{s_\epsilon, \, \epsilon} \right| \to 0$, which is exactly what we wanted to prove.
+
+\paragraph{Step 2.} The function $u_\epsilon$ is smooth (by convolution). Hence we can apply the \textit{coarea formula} \eqref{coarea} with $h \equiv 1$ and $f = u_\epsilon$ to obtain the following relation:
+\begin{equation*} \int_{\R^n} \left| \nabla u_\epsilon(x) \right|  \, \mathrm{d}x = \int_{0}^{1} \mathcal{H}^{n-1} \left( u_\epsilon^{-1}(s) \right) \, \mathrm{d}s,\end{equation*}
+where $u_\epsilon^{-1}(s) = \partial E_{s, \, \epsilon}$ if $s$ is a regular value\footnote{In particular, the formula holds with $u_\epsilon^{-1}(s) = \partial E_{s, \, \epsilon}$ for $\mathcal{L}^n$-almost every $s \in [0, \, 1]$ since the set of singular values is negligible by Sard's Lemma.}. One can easily prove that
+\begin{equation*} \frac{1}{1 - 2 \delta} \, \mathrm{Per} (E) \geq  \frac{1}{1 - 2 \delta} \int_{0}^{1} \mathrm{Per}(E_{s, \, \epsilon}) \, \mathrm{d}s \geq \dashint_\delta^{1 - \delta} \mathrm{Per} (E_{s, \, \epsilon}) \, \mathrm{d}s, \end{equation*}
+for $\delta > 0$ small enough; hence there exists a non-null (with respect to the Lebesgue measure) set of regular values in the interval $[\delta, \, 1- \delta]$ such that
+\begin{equation*}\frac{1}{1 - 2 \delta} \, \mathrm{Per} (E) \geq \mathrm{Per} (E_{s_\epsilon, \, \epsilon}) \implies \limsup_{\epsilon \to 0^+}\, \mathrm{Per} (E_{s_\epsilon, \, \epsilon}) \leq \frac{1}{1 - 2 \delta} \, \mathrm{Per} (E)\end{equation*}
+for every regular value $s_\epsilon \in [\delta, \, 1 - \delta]$. Recall that the perimeter is a lower semi-continuous functional; hence we only need to refine the estimate and rule $\delta$ out of the equation.
+\end{proof}
+
+\begin{exercise} State the approximation theorem in a smooth bounded domain $\Omega \subset \R^n$.\end{exercise}
+
+\section{Existence Results for Plateau's Problem}
+
+\paragraph{Introduction.} Let $\Omega \subset \R^n$ be a bounded smooth subset of $\R^n$. Assume that $\Gamma$ is the boundary of a regular hypersurface $\mathcal{G} \subset \partial \Omega$, that is,
+\begin{equation*} \Gamma = \partial \mathcal{G}. \end{equation*}
+The Plateau's problem consists of finding the minimal hypersurface $\Sigma$ contained in $\Omega$ such that its boundary is given by $\Gamma$, that is, satisfying the boundary condition $\partial \Sigma = \Gamma$.
+
+\paragraph{Finite Perimeter Setting.} Let $E$ be a subset of $\Omega$ satisfying the following condition:
+\begin{equation*} \partial  E \cap \partial \Omega = \mathcal{G}. \end{equation*}
+If $\Sigma$ is a regular hypersurface given by the intersection $\partial E \cap \Omega$, then the following relations holds:
+\begin{equation} \label{eq:ddlslds} \mathrm{Per} (E) = \mathcal{H}^{n-1} \left( \partial  E \cap \partial \Omega \right) + \mathcal{H}^{n-1}(\Sigma). \end{equation}
+This identity allows us to infer that minimizing the functional $\mathcal{H}^{n-1}(\Sigma)$ is equivalent to minimizing the functional $\mathrm{Per} (E)$ among all finite perimeter sets $E$ such that
+\begin{equation*} T\left(\mathbbm{1}_E\right) = \mathbbm{1}_{\mathcal{G}}. \end{equation*}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=7cm, height=10cm]{images/TGMFPS6.png}
+\caption{Plateau's Problem in the F.P.S. formulation.}
+\end{figure}
+
+\begin{remark} In the previous sections, we proved that the perimeter is a nice functional, which is also semi-lower continuous. Hence the equivalent formulation in the f.p.s. setting should be enough to demonstrate the existence of a solution. But, as the problem is formulated now, many things could go wrong: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item Assume that one can find a solution of the minimum problem \eqref{eq:ddlslds}. How can one recover a surface $\Sigma$?
+\item The minimum of the functional \eqref{eq:ddlslds} actually exists?
+\item If $(E_n)_{n \in \N}$ is a minimizing sequence, then the trace $T(\mathbbm{1}_{E_n})$ may not converge to $\mathbbm{1}_{\mathcal{G}}$, as proved in the previous chapter.
+\item Topological issues. The hypersurface $\mathcal{G}$ with boundary $\Gamma$ may not even exist.
+\end{enumerate} \end{remark}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=10cm]{images/TGMFPS51.png}
+\caption{In this Plateau's problem, the minimizing surface $\Sigma$ makes an extra contact with the boundary of $\Omega$, which means that $T( \mathbbm{1}_{E_n} )$ does not converge to $\mathbbm{1}_{\mathcal{G}}$.}
+\end{figure}
+
+\paragraph{Alternative Formulation.} The Plateau's problem needs to be reformulated differently (in the f.p.s. setting) to avoid the issues listed above (except the topological ones, which are way more delicate to deal with).
+
+Let $\Omega \subset \R^n$ be a bounded smooth subset of $\R^n$. Assume that $\Gamma$ is the boundary of a regular hypersurface $\mathcal{G} \subset \partial \Omega$, that is,
+\begin{equation*} \Gamma = \partial \mathcal{G}. \end{equation*}
+Let $E_0$ be a fixed subset contained in the complement of $\Omega$, that is, $E_0 \subset \R^n \setminus \overline{\Omega}$. The Plateau's problem, again, constist of finding the minimal hypersurface $\Sigma$ contained in $\Omega$ such that
+\begin{equation*} \partial \Sigma = \Gamma. \end{equation*}
+In the finite perimeter setting, the idea is to look for the minimum point(s) of the functional
+\begin{equation} \label{eq:ddlslds2} \mathrm{Per} (E) - \mathcal{H}^{n-1} \left( \partial E_0 \setminus \overline{\Omega} \right) \end{equation}
+among all finite perimeter sets $E$ satisfying the following condition:
+\begin{equation*} E \setminus \Omega = E_0 \qquad \text{up to $\mathcal{L}^n$-null sets}. \end{equation*}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=10cm]{images/TGMFPS52.png}
+\caption{In this picture, one can see how the trace issues are no longer a treat using this alternative formulation of the Plateau's problem. }
+\end{figure}
+
+\paragraph{Plateau's problem.} In this brief paragraph, we summarize the classical formulation of the Plateau's problem and we reinterpret it into the finite perimeter set framework.\mbox{}
+\begin{enumerate}[label=\textbf{C\arabic*)}]
+\item Given $\Omega$ be a bounded smooth subset of $\R^n$.
+\item Given $\Gamma$ be a $(n-2)$-dimensional surface contained in $\partial \Omega$.
+\item Goal: Find a $(n-1)$-dimensional surface $\Sigma$ such that $\partial \Sigma = \Gamma$ and $\Sigma$ minimizes the area functional $\mathcal{H}^{n-1}(\Sigma)$.
+\end{enumerate}
+In the finite perimeter set framework, the Plateau's problem can be formulated in the following way:
+\mbox{}
+\begin{enumerate}[label=\textbf{F\arabic*)}]
+\item Given $\Omega$ be a bounded smooth subset of $\R^n$.
+\item Given $\mathcal{G} \subset \partial \Omega$ such that there exists a finite perimeter set $E_0$ in $\R^n$ contained in the complement of $\Omega$, that is,
+\begin{equation*} E_0 \subseteq \R^n \setminus \overline{\Omega} \qquad \text{and} \qquad  T(\mathbbm{1}_{E_0}) = \mathbbm{1}_{\mathcal{G}} \end{equation*}
+up to $\mathcal{L}^n$-null sets.
+\item Goal: Find a finite perimeter set $E$ in $\R^n$ such that $E \setminus \overline{\Omega}$ is - up to $\mathcal{L}^n$-null sets - equal to $E_0$, such that $E$ is a minimum point of the perimeter functional.
+\end{enumerate}
+
+In conclusion, a natural question arises: For which $\mathcal{G}$ there exists $E_0$ satisfying the property \textbf{F2)}? Surprisingly, it is enough to ask that $\mathcal{G}$ is any Borel set as a consequence of the following theorems.
+
+\begin{theorem}The trace operator
+\begin{equation*} T : C^1\left( \overline{\Omega} \right) \longrightarrow L^1 \left( \partial \Omega \right), \qquad u \longmapsto u \, \big|_{\partial \Omega} \end{equation*}
+is surjective. \end{theorem}
+
+\begin{remark}In general, the trace operator introduced above does not admit a linear right inverse. \end{remark}
+
+\begin{theorem}Let $u$ be a characteristic function in $L^1 \left(\partial \Omega \right)$. Then there exists a finite perimeter set $E \subseteq \R^n$ such that
+\begin{equation*} T (\mathbbm{1}_E) = u. \end{equation*}
+\end{theorem}
+
+In particular, the only problems one needs to deal with in Plateau's problem are of topological nature (see, e.g., \hyperref[fig:oewoe]{Figure \ref{fig:oewoe}}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=10cm]{images/TGMFPS53.png}
+\caption{The surface $\Gamma$ is not the boundary of any hypersurface $\mathcal{G}$ contained in the torus $\Omega$. }
+\label{fig:oewoe}
+\end{figure}
+
+\paragraph{Conclusion.} To conclude this chapter, we sketch the framework and the solution of a Plateau's problem. The reader may refer to \hyperref[fig:211]{Figure \ref{fig:211}} for a better understanding of what is going on, but the main idea is to take $\Gamma$ equal to the disjoint union of two circumferences (lying on the planes $\pi_1$ and $\pi_2$ respectively), and $\mathcal{G}$ equal to the disjoint union of the two closed disks.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=10cm]{images/TGMFPS211.png}
+\caption{Example of Plateau's problem}
+\label{fig:211}
+\end{figure}
+
+The set $\Omega$ is convex, but once again the condition on the trace is \textbf{not} closed. Therefore this example shows how important is the introduction of a different formulation where the operator $T$ does not appear.
+
+The solution of the minimum problem depends on the distance $d$ between the planes $\pi_1$ and $\pi_2$, and it is either a catenoid or a disjoint union of disks.
+
+\section{Capillarity Problem}
+
+\paragraph{Introduction.} Let $\Omega \subset \R^n$ be an open bounded subset of $\R^n$. In this section, we shall discuss the capillarity problem equilibrium when the container ($\Omega$) is fixed and the volume of the liquid is fixed. More precisely, the drop of liquid (denoted by $E$), contained in $\Omega$, is at equilibrium if and only if it is a critical point (local minima) of the capillarity energy functional
+\begin{equation} \label{funccap} \mathscr{F}(E) := \mathcal{H}^{n-1} \left( \partial E \cap \Omega \right) + \sigma \mathcal{H}^{n-1} \left(\partial E \cap \partial \Omega \right), \end{equation}
+where $\sigma \in \R$ is a constant, subject to the constraint that the volume is fixed, e.g. $|E| = m$.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=8cm]{images/TGMFPS54.png}
+\caption{Capillarity Problem}
+\label{fig:oewoe12}
+\end{figure}
+
+In the Appendix, we shall prove that, if we set the first variation of the functional $\mathscr{F}$ equal to zero, then we find that the mean curvature $H$ is constant. More precisely, it is equal to the Lagrange multiplier associated with the constraint on\footnote{We denote by $\Sigma^f$ the free portion of the surface, that is, the portion of the surface that does not lie on $\partial \Omega$.} $\Sigma^f$, and $\theta := \theta_Y$ is constant on $\Gamma$ and equal to the so-called \textit{Young angle}, i.e. the solution to the following trigonometric equation:
+\begin{equation*} \cos( \theta_Y ) = - \sigma. \end{equation*}
+
+\begin{remark} Suppose that the drop of liquid is subject to the action of the gravitational force. Then one needs to slightly modify the functional $\mathscr{F}$ to take into account the gravity in the following way:
+\begin{equation} \label{funccapg} \mathscr{G}(E) := \mathcal{H}^{n-1} \left( \partial E \cap \Omega \right) + \sigma  \mathcal{H}^{n-1} \left(\partial  E \cap \partial \Omega \right) + \int_{E} \vec{g} \cdot x. \end{equation}
+The reader may compute the first variation of the functional $\mathscr{G}$ and set it equal to zero. It is not hard to check that the mean curvature $H$ is not constant anymore. \end{remark}
+
+\paragraph{Finite Perimeter Formulation.} In the f.p.s. framework, we can translate the capillarity problem associated to the functional $\mathscr{F}$ (subject to the volume constraint) as follows:
+\mbox{}
+\begin{enumerate}[label=\textbf{F\arabic*)}]
+\item Given $\Omega$ bounded smooth subset of $\R^n$.
+\item Goal: Find a finite perimeter set $E \subseteq \Omega$ in $\R^n$, with fixed volume $|E| = m$, which minimizes the functional
+\begin{equation} \label{funccacfps} \mathscr{F}(E) = \mathrm{Per}_\Omega (E) + \sigma \mathcal{H}^{n-1} \left( \Sigma^c \right), \end{equation}
+where $\mathbbm{1}_{\Sigma^c} = T( \mathbbm{1}_E )$ denotes the portion of the surface $\Sigma$ that lies on the boundary of $\Omega$.
+\end{enumerate}
+
+\begin{proposition} Suppose that $\sigma \notin [-1, \, 1]$. Then the minimization problem \eqref{funccacfps}, with fixed volume, is ill-posed. \end{proposition}
+
+\begin{remark}More precisely, we shall prove that the functional \eqref{funccacfps} is not lower semi-continuous with respect to the distance $d$ whenever $|\sigma| > 1$. \end{remark}
+
+\begin{proof} Let us consider the sequence of subsets $(E_{1/n})_{n \in \N}$ portrayed in \hyperref[fig:oewoe124]{Figure \ref{fig:oewoe124}}, and suppose that $E_{1/n}$ is smooth for every $n \in \N$. If $|\sigma| > 1$, then one can prove that the functional $\mathscr{F}$ is not lower semi-continuous using this sequence, that is,
+\begin{equation*}\mathscr{F}(E_{1/n}) = \left| \Sigma^f \right| + \left| \Sigma^c \right| + o(1) \xrightarrow{\epsilon \to 0^+} \left| \Sigma^f \right| \pm \left| \Sigma^c \right| < \mathscr{F}(E). \end{equation*}
+In other words, the relaxation of the functional $\mathscr{F}$ is given by
+\begin{equation*}\widetilde{\mathscr{F}}(E) = \begin{cases} \left| \Sigma^f \right| + \left| \Sigma^c \right|, & \text{if $\sigma > 1$}, \\[0.5em] \left| \Sigma^f \right| - \left| \Sigma^c \right| & \text{if $\sigma < - 1$}, \end{cases} \end{equation*}
+and this is enough to prove the claim above since
+\begin{equation*} \sigma > 1 \implies \widetilde{\mathscr{F}}(E) < \mathscr{F}(E) =  \left| \Sigma^f \right| + \sigma \left| \Sigma^c \right|, \end{equation*} 
+and similarly
+\begin{equation*} \sigma < - 1 \implies \widetilde{\mathscr{F}}(E) > \mathscr{F}(E) =  \left| \Sigma^f \right| + \sigma \left| \Sigma^c \right|. \end{equation*} \end{proof}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=12cm, height=8cm]{images/TGMFPS55.png}
+\caption{Left: Sequence when $\sigma > 1$. Right: Sequence when $\sigma < - 1$.  }
+\label{fig:oewoe124}
+\end{figure}
+
+\begin{claim}If $\sigma \in [-1, \, 1]$, then the functional \eqref{funccacfps} is lower semi-continuous. \end{claim}
+
+The proof of this claim cannot be tackled with the tools introduced in this section since we need to use more sophisticated methods. We will come back to this result in the next chapter.
+
+\section{Finite Perimeter Sets: Structure Theorem}
+
+The primary goal of this section is to state and prove the structure theorem for finite perimeter set, due to both De Giorgi and Federer (it appeared in different papers, but we shall merge them to obtain a very reasonable result.)
+
+\begin{lemma} Let $E \subset \R^n$ be a bounded subset of $\R^n$ such that $\partial E$ is a Lipschitz boundary. If $\nu_e$ is the external normal to $E$, then
+\begin{equation*}D (\mathbbm{1}_E) = - \nu_e \, \mathbbm{1}_{\partial E} \cdot \mathcal{H}^{n-1} \end{equation*}
+and, in particular, it turns out that
+\begin{equation} \label{perform} \mathrm{Per}(E) = \mathcal{H}^{n-1} \left( \partial E \right).\end{equation} \end{lemma}
+
+\begin{proof} The identity follows immediately from the divergence theorem for Lipschitz boundaries. \end{proof}
+
+\begin{example} In general, the $\mathcal{H}^{n-1}$ measure of the boundary $\partial E$ does not coincide with the perimeter of the set $\mathrm{Per} (E)$. For example, if $E$ is any $\mathcal{L}^n$-null set, then it is easy to prove that
+\begin{equation*} \mathrm{Per} (E) = \mathrm{Per} (\varnothing) = 0. \end{equation*}
+On the other hand, the interior of $E$ is empty and hence
+\begin{equation*} \mathcal{H}^{n-1} \left( \partial E \right) = \mathcal{H}^{n-1} \left( \overline{E} \right), \end{equation*}
+and this last quantity is, in general, strictly positive. \end{example}
+
+There is a result which links the notion of the perimeter, and the Hausdorff measure of the boundary for every Borel set $E$ Borel, but the proof is rather involved. Here we state the result and sketch the proof of a slightly weaker statement.
+
+\begin{theorem}For every $E \subset \R^n$ Borel, it turns out that
+\begin{equation} \label{perform2} \mathrm{Per} (E) \leq \mathcal{H}^{n-1} \left( \partial E \right).\end{equation}  \end{theorem}
+
+\begin{theorem}There is a constant $c > 1$ such that
+\begin{equation} \label{perform3} \mathrm{Per} (E) \leq c \cdot  \mathcal{H}^{n-1} \left( \partial E \right)\end{equation}
+for every $E \subset \R^n$ Borel. \end{theorem}
+
+\begin{proof}[Sketch of the Proof] We can assume without loss of generality that $E$ is a closed and bounded Borel set with finite Hausdorff measure of the boundary, that is,
+\begin{equation*}\mathcal{H}^{n-1} \left( \partial E \right) < + \infty. \end{equation*}
+
+\paragraph{Step 1.} Let $\delta > 0$  be a positive number, and let $\{B_i^\delta\}_{i \in \N}$ be a collection of open balls of uniformly bounded radii $r_i \leq \delta$, which is an optimal cover of the boundary $\partial E$ with respect to the spherical Hausdorff measure. By compactness of $\partial E$, it turns out that
+\begin{equation*} \partial E \subseteq \bigcup_{i = 1}^{N(\delta)} B_i^\delta, \end{equation*}
+where $N(\delta)$ is a positive integer. In particular, we have the estimate
+\begin{equation*} \sum_{i = 1}^{N(\delta)} (2 r_i)^{n-1} \leq \mathcal{H}_{s}^{n - 1} \left( \partial E \right) \leq C \cdot \mathcal{H}^{n-1}(\partial E), \end{equation*}
+as a consequence of the fact that the Hausdorff measure is equivalent to the Hausdorff spherical measure. Let
+\begin{equation*}E_\delta := E \cup \bigcup_{i = 1}^{N(\delta)} B_i^\delta, \end{equation*}
+and notice that $E_\delta \xrightarrow{d} E$ as $\delta \to 0^+$, that is,
+\begin{equation*}|E_\delta \, \triangle \, E| = |E_\delta \setminus E| \xrightarrow{\delta \to 0^+} 0, \end{equation*}
+since we assumed $E$ to be a closed set. 
+
+\paragraph{Step 2.} Suppose that the balls intersect transversally. Then the boundary $\partial E_\delta$ is Lipschitz, which means that the perimeter formula \eqref{perform} holds. Moreover, the perimeter functional is a lower semi-continuous function, and therefore
+\begin{equation*} \mathrm{Per} (E) \leq \liminf_{\delta \to 0^+} \mathrm{Per} (E_\delta) = \liminf_{\delta \to 0^+} \mathcal{H}^{n-1} \left( \partial E_\delta \right). \end{equation*}
+On the other hand, the boundary of $E_\delta$ is covered by the finite family of $\delta$-balls, which means that
+\begin{equation*} \begin{aligned} \mathcal{H}^{n-1} \left( \partial E_\delta \right) & \leq \mathcal{H}^{n-1} \left( \bigcup_{i = 1}^N \partial B_i^\delta \right) \leq \\[1em] & \leq \sum_{i = 1}^N \mathcal{H}^{n-1} \left( \partial B_i^\delta \right) \leq \\[1em]& \leq C^\prime \sum_{i = 1}^N (2r_i)^{n-1} \leq c \cdot \mathcal{H}^{n-1} \left( \partial E \right), \end{aligned} \end{equation*}
+where $c := C \cdot C^\prime$ is the sought constant.
+\end{proof}
+
+\begin{exercise}Let $E \subset \R$ be a finite perimeter set. Prove that $E$ is, up to $\mathcal{L}^1$-null sets, the union of finitely many intervals. \label{ex:finasmdsd} \end{exercise}
+
+\begin{lemma}Let $E \subseteq \R$ be a finite perimeter set. There exists a representative of $E$, also denoted by $E$, such that formula \eqref{perform} holds.\end{lemma}
+
+\begin{proof}The function $\mathbbm{1}_E$ belongs to $\mathrm{BV}(\R)$ by assumption. Therefore, by \hyperref[lemma:bridge]{Lemma \ref{lemma:bridge}} there exists a constant $c \in \R$ such that
+\begin{equation*}\mathbbm{1}_E(x) = c + \mu \left([- \infty, \, x] \right), \end{equation*}
+where $\mu$ denotes the weak derivative $D (\mathbbm{1}_E)$. The reader may prove that, if $\mu( \{x\} ) = 0$ for every $x \in \R$, then this is a continuous representative of $\mathbbm{1}_E$ that satisfies the formula \eqref{perform}.\end{proof}
+
+\begin{proposition}Let $E \subset \R^n$ and $n \geq 2$. Then there exists a Borel set $E$ such that no representative of $E$ satisfies the perimeter formula \eqref{perform}, that is, the inequality is strict for every representative $E^\prime$ of $E$.\end{proposition}
+
+\begin{proof}Let $\{x_n\}_{n \in \N} \subset \R^2$ be a dense sequence of points, and let $(r_n)_{n \in \N}$ be a sequence of positive real numbers satisfying the condition
+\begin{equation} \label{ex.fps.1} \sum_{n \in \N} n \cdot r_n < + \infty. \end{equation}
+
+\paragraph{Step 1.} Let
+\begin{equation*} L := \sum_{n \in \N} r_n < + \infty\end{equation*}
+and set $B_n := B(x_n, \, r_n)$. We define inductively a sequence of finite perimeter sets given by the symmetric differences, that is,
+\begin{equation*} \begin{cases} E_0 = B_0, \\[0.5em] E_n = E_{n-1} \: \triangle \: B_n. \end{cases} \end{equation*}
+We claim that $\left(\mathbbm{1}_{E_n}\right)_{n \in \N} \subset \mathrm{BV}(\R^2)$ is a Cauchy sequence with respect to the $\| \cdot \|_{\mathrm{BV}}$-norm. If the claim holds, then we can infer that
+\begin{equation*} \mathbbm{1}_{E_n} \xrightarrow{L^1} \mathbbm{1}_E, \end{equation*}
+and also that
+\begin{equation*} D (\mathbbm{1}_E) = \pm \, \nu \, \mathbbm{1}_\Sigma \cdot \mathcal{H}^1, \end{equation*}
+where 
+\begin{equation*} \Sigma = \bigcup_{n \in \N} \partial B(x_n, \, r_n) \end{equation*}
+is a $1$-rectifiable surface. In fact, it is enough to notice that
+\begin{equation*} \partial E_n = \bigcup_{i = 0}^n \partial B_i \implies \mathcal{H}^1 \left( \partial E_n \right) \leq 2\pi L, \end{equation*}
+and
+\begin{equation*}D \mathbbm{1}_{E_n} = \pm \, \nu_n \, \mathbbm{1}_{\partial E_n} \cdot \mathcal{H}^1.\end{equation*}
+
+\paragraph{Step 2.} We now prove the claim. By definition of symmetric difference it turns out that
+\begin{equation*} \mathbbm{1}_{E_n} = \mathbbm{1}_{B_0} + \left( \mathbbm{1}_{B_1 \setminus E_0} - \mathbbm{1}_{B_1 \cap E_0} \right) + \dots =: \sum_{i = 0}^n u_i, \end{equation*}
+and therefore it is equivalent to show that
+\begin{equation*} \sum_{i = 0}^{+ \infty} \|u_i\|_{\mathrm{BV}(\R^n)} < + \infty. \end{equation*}
+The $L^1$-norm of $u_i$ may be roughly estimated by the area of the ball $B_i$, which means that
+\begin{equation*} \|u_i\|_{L^1(\R^n)} = \pi \cdot r_i^2. \end{equation*}
+In a similar way, the total variation of the derivative may be estimated by
+\begin{equation*} \|D u_i\| = 2 \pi \cdot r_i + 2 \mathcal{H}^1 \left( \partial E_{i-1} \cap B_i \right) \leq 2 \pi (i + 1) r_i,\end{equation*}
+and therefore the assumption \eqref{ex.fps.1} proves the claim.
+
+In particular, the support of the measure $D \mathbbm{1}_E$ is the whole plane $\R^2$, and hence every representative of $E$ has boundary containing the support of $\mathbbm{1}_E$, that is,
+\begin{equation*} " \partial \widetilde{E} = \R^2. " \end{equation*}
+We finally infer that no representative $\widetilde{E}$ of $E$ has $\mathcal{H}^1$-finite boundary.\end{proof}
+
+\paragraph{Main Result.} In this final paragraph, we are finally ready to state and prove the so-called \textit{structure theorem} due to De Giorgi and Federer. The proof is quite involved. Therefore we will need a lot of work to get through it.
+
+\begin{definition}[Essential Boundary] \index{essential boundary} Let $E$ be a Borel set in $\R^n$. The \textit{essential boundary} of $E$ in $\R^n$ is defined by
+\begin{equation*} \partial_\ast E := \left\{ x \in \partial E \: \left| \: \text{$\Theta_n \left(E, \, x \right) \neq 0, \, 1$ or $\Theta_n \left(E, \, x \right)$ does not exist} \right. \right\}, \end{equation*}
+where $\Theta_n$ denotes the $n$-dimensional Hausdorff density.\end{definition}
+
+\begin{remark}The essential boundary is, in general, strictly contained in the boundary. For example, if $\partial E$ is locally the graph of a function $f$ that admits a cuspid $p$, then $p \in \partial E \setminus \partial_\ast E$. \end{remark}
+
+\begin{definition}[Normal Vector Field] If $\Sigma$ is a $(n - 1)$-rectifiable set, then $\eta : \Sigma \longrightarrow \R^n$ is a \textit{normal vector field} if $|\eta(x)| = 1$ for every $x \in \Sigma$ and
+\begin{equation*}\eta(x) \perp \mathrm{Tan}(\Sigma, \, x) \quad \text{for $\mathcal{H}^{n-1}$-almost every $x \in \Sigma$}. \end{equation*} \end{definition}
+
+\begin{theorem}[De Giorgi-Federer] \label{th:dgf} Let $E$ be a finite perimeter set in $\R^n$ (or in $\Omega$). Then the following assertions hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The essential boundary $\partial_\ast E$ is $\mathcal{H}^{n - 1}$-finite.
+\item The essential boundary $\partial_\ast E$ is $(n-1)$-rectifiable.
+\item There exists a normal vector field $\eta$ which is "inner normal" in the following sense:
+\begin{equation} \label{degiorgifederer1} \mathcal{L}^n \left(  \left( E \, \triangle \, (x + M_{\eta(x)}^+) \right) \cap B_{x, \, r} \right) \ll r^n \quad \text{as $r \to 0^+$}\end{equation}
+for $\mathcal{H}^{n-1}$-almost every $x \in \partial_\ast E$.
+\item The derivative of the characteristic function of $E$ is given by
+\begin{equation} \label{degiorgifederer2} D (\mathbbm{1}_E) = \mathbbm{1}_{\partial_\ast E} \, \eta \cdot \mathcal{H}^{n-1} \end{equation} 
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}The assertion \eqref{degiorgifederer1} is completely equivalent to the following one:
+\begin{equation} \label{degiorgifederer3} \frac{1}{r} (E - x) \xrightarrow{L_{loc}^1(\R^n)}_{r \to 0^+} M_{\eta(x)}^+.\end{equation}\end{remark}
+
+\begin{corollary}Under the assumptions of the \hyperref[th:dgf]{Theorem \ref{th:dgf}} it turns out that
+\begin{equation*} \Theta_n(E, \, x) = \frac{1}{2} \end{equation*}
+for $\mathcal{H}^{n - 1}$-almost every $x \in \partial_\ast E$. \end{corollary}
+
+\begin{corollary}Under the assumptions of the \hyperref[th:dgf]{Theorem \ref{th:dgf}} it turns out that
+\begin{equation*}  \mathrm{Per} (E) = \mathcal{H}^{n-1} \left( \partial_\ast E \right) < \infty. \end{equation*}\end{corollary}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=8cm]{images/TGMFPS215.png}
+\caption{Intuitive idea of the statement of the De Giorgi-Federer structure theorem. The picture is slightly misleading: the vector space $M_\eta(x)^+$ is the whole space "under" the tangent to $\partial_\ast E$ at $x$.}
+\end{figure}
+
+In a different paper, Federer proved that also a sort of converse of this theorem holds true, but we will only state it here since the proof is far beyond the reach of this course.
+
+\begin{theorem}[Federer] Let $E \subseteq \R^n$ be a Borel set such that $\mathcal{H}^{n - 1}(\partial_\ast E) < + \infty$. Then $E$ is a finite perimeter set. \end{theorem}
+
+\begin{exercise}Let $E \subseteq \R^n$ be a set with empty essential boundary, that is $\partial_\ast E = \varnothing$. Prove that either $|E| = 0$ or $|\R \setminus E| = 0$. \end{exercise}
+
+\begin{definition}[Reduced Boundary] \index{reduced boundary} Let $E$ be a finite perimeter set in $\R^n$. The \textit{reduced boundary} of $E$ in $\R^n$, denoted by $\partial^\ast E$, is the set of all $x \in \R^n$ such that the Radon-Nikodym density
+\begin{equation*}\eta(x) := \frac{\mathrm{d} (D \mathbbm{1}_E)}{\mathrm{d} |D \mathbbm{1}_E|}(x) \end{equation*}
+exists and has norm equal to one.\end{definition}
+
+\begin{remark}Equivalently, if we denote by $\tau \cdot \mu$ the weak derivative of $\mathbbm{1}_E$, then $\eta(x)$ is the $L^1$-approximate limit, with $|\tau| = 1$, of $\tau$ at $\mathcal{H}^{n-1}$-almost every $x$, that is,
+\begin{equation*}\dashint_{B(x, \, r)} |\tau(y) - \eta(x)| \, \mathrm{d}\mu(y) \xrightarrow{r \to 0^+} 0. \end{equation*} \end{remark}
+
+\begin{example}In general, the reduced boundary is a proper subset of the boundary. For example, if $E$ is a rhombus, then the four vertexes are not in the reduced boundary $\partial^\ast E$.\end{example}
+
+\begin{theorem}[De Giorgi] \label{th:dg} Let $E \subseteq \R^n$ be a finite perimeter set in $\R^n$, and set $D( \mathbbm{1}_E) := \tau \cdot \mu$. Then the following assertions hold true: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The Radon-Nikodym density $\eta(x)$ coincides $\mu$-almost everywhere with $\tau(x)$. Moreover, the measure $\mu$ is supported in the reduced boundary, that is,
+\begin{equation} \label{degiorgi0} \mu \left(\R^n \setminus \partial^\ast E \right) = 0. \end{equation}
+\item The reduced boundary $\partial^\ast E$ is $(n-1)$-rectifiable.
+\item The measure $\mu$ is the restriction of the $(n-1)$-dimensional Hausdorff measure to the reduced boundary, that is,
+\begin{equation} \label{degiorgi1} \mu = \mathcal{H}^{n - 1} \restr \partial^\ast E.\end{equation}
+\item The Radon-Nikodym density $\eta(x)$ is normal to the reduced boundary at $x$ for every $x \in \partial^\ast E$, that is,
+\begin{equation*} \eta(x)^\perp = \mathrm{Tan}_\ast \left(\partial^\ast E, \, x \right) \end{equation*}
+where $\mathrm{Tan}_\ast \left(-, \, \cdot \right)$ denotes the approximate tangent plane.
+\item The normal vector field $\eta$ satisfies the following property:
+\begin{equation} \label{degiorgi2} \mathcal{L}^n \left(  \left( E \, \triangle \, (x + M_{\eta(x)}^+) \right) \cap B_{x, \, r} \right) \ll r^n \quad \text{as $r \to 0^+$}\end{equation}
+for every $x \in \partial^\ast E$. Equivalently,
+\begin{equation} \label{degiorgi3} \frac{1}{r} (E - x) \xrightarrow{L_{loc}^1(\R^n)}_{r \to 0^+} M_{\eta(x)}^+.\end{equation}
+\end{enumerate}
+\end{theorem}
+
+\begin{corollary}Under the assumptions of the \hyperref[th:dg]{Theorem \ref{th:dg}} it turns out that
+\begin{equation*} \Theta_n(E, \, x) = \frac{1}{2} \end{equation*}
+for every $x \in \partial^\ast E$. \end{corollary}
+
+The proof of \hyperref[th:dg]{De Giorgi's Theorem \ref{th:dg}} will follow reasonably quickly from a sequence of many technical lemmas that we will patently state and prove here.
+
+In order to ease the statements of the following results, we will fix a point $x \in \partial^\ast E$ and denote it by $0$ unless otherwise stated.
+
+\begin{lemma} \label{lemma:dg1} There exists an universal constant $c := c(n) > 0$ such that
+\begin{equation} \label{eq:dg1} \mu(B_r) \leq c \cdot r^{n - 1}. \end{equation}
+In particular, it turns out that there exists an universal constant $c^\prime := c^\prime(n) > 0$ such that
+\begin{equation} \label{eq:dg2} \mu(B_r) \leq c^\prime \cdot \mathcal{H}^{n - 1} \left( \partial B_r \cap E \right). \end{equation} \end{lemma}
+
+\begin{proof}Set $E_r := E \cap B_r$.
+
+\paragraph{Step 1.} We claim that, for almost every $r > 0$, the weak derivative of the characteristic function satisfies an additive formula:
+\begin{equation} \label{fps.st.claim1} D (\mathbbm{1}_{E_r}) = \mathbbm{1}_{B_r} \cdot D (\mathbbm{1}_E) + \mathbbm{1}_{E} \cdot D (\mathbbm{1}_{B_r}). \end{equation}
+We notice that the integral of $\eta(0)$ with respect to the measure $D (\mathbbm{1}_{E_r})$ is given by
+\begin{equation*} \int_{\R^n} \eta(0) \, \mathrm{d}D (\mathbbm{1}_{E_r}) = 0,\end{equation*}
+since $\eta(0)$ is constant. On the other hand, it follows from \eqref{fps.st.claim1} that
+\begin{equation*} \begin{aligned} \int_{\R^n} \eta(0) \, \mathrm{d}D(\mathbbm{1}_{E_r}) & = \int_{B_r} \eta(0) \eta(x) \, \mathrm{d}\mu(x) + \int_{E} \eta(0) \mathrm{d}D( \mathbbm{1}_{B_r} )(x) =
+\\[1em] & = \int_{B_r} \eta(0) \eta(x) \, \mathrm{d}\mu(x) + \int_{\partial B_r \cap E} \eta(0) \nu_{inn}(x) \, \mathrm{d}\mathcal{H}^{n - 1}(x), \end{aligned}  \end{equation*}
+where $\nu_{inn}(x)$ denotes the inner normal vector to the sphere at $x$. In particular, it turns out that
+\begin{equation*} \begin{aligned} \int_{B_r} \eta(0) \eta(x) \, \mathrm{d}\mu(x) & = - \int_{\partial B_r \cap E} \eta(0) \nu_{inn}(x) \, \mathrm{d}\mathcal{H}^{n - 1}(x) \leq \\[1em] & \leq \mathcal{H}^{n - 1}(\partial B_r) \sim \alpha_n r^{n - 1}, \end{aligned} \end{equation*}
+where the inequality follows from the fact that both $\nu_{inn}$ and $\eta$ are vectors of norm less or equal than $1$.
+
+In conclusion, we notice that for $r \to 0^+$ the left-hand side of the inequality above is asymptotically equivalent to $\mu(B_r)$, which means that there exists a $r_0 > 0$ small enough such that
+\begin{equation*} \frac{1}{2} \, \mu(B_r) \leq \int_{B_r} \eta(0) \eta(x) \, \mathrm{d}\mu(x)  \leq \mathcal{H}^{n - 1}(\partial B_r) \sim c(n) \cdot r^{n - 1},\end{equation*}
+for almost every $0 < r < r_0$.
+
+\paragraph{Step 2.} We now sketch the proof of the claim \eqref{fps.st.claim1}. More precisely, we show that the formula holds for every f.p.s. $E$ and almost every $r  > 0$ - even when $0$ does not belong to the reduced boundary -.
+
+\paragraph{Step 2.1.} First, we notice that \eqref{fps.st.claim1} holds for every smooth f.p.s. $E$ that is also transversal to the boundary of the ball $B_r$. Indeed, one can easily prove that
+\begin{equation*} \partial E_r = \left(\partial B_r \cap \overline{E} \right) \cup \left( \overline{B_r} \cap \partial E \right).\end{equation*}
+
+\paragraph{Step 2.2.} Let $E^n$ be an approximation of $E$ by smooth sets, that is
+\begin{equation*}E^n \xrightarrow{L_{loc}^1} E. \end{equation*}
+Choose $r > 0$ in such a way that $\partial E_r^n$ is transversal to the sphere $\partial B_r$ for every $n \in \N$. The previous step proves that $E^n$ satisfies \eqref{fps.st.claim1} for every $n \in \N$, which means that we can pass the identity to the limit\footnote{We will not give any detail, but one needs to be careful to the notion of convergence that comes into play here.}.  \end{proof}
+
+\begin{lemma} \label{lemma:dg2} There are two universal constants $c := c(n), \, c^\prime := c^\prime(n) > 0$ such that for every $r > 0$ small enough
+\begin{equation} \label{eq:dg3} c \cdot r^n \leq |E \cap B_r| \leq c^\prime \cdot r^n, \end{equation}
+and
+\begin{equation} \label{eq:dg4} c \cdot r^n \leq |E^c \cap B_r| \leq c^\prime \cdot r^n. \end{equation}\end{lemma}
+
+\begin{remark}It is easy to prove that the complement of a f.p.s. is also a f.p.s. with the same weak derivative up to null sets. In particular, the inequality \eqref{eq:dg3} implies the inequality \eqref{eq:dg4} by passing to the complement. \end{remark}
+
+\begin{proof} Set $E_r := E \cap B_r$.
+
+\paragraph{Step 1.} We claim that the following \textit{isoperimetrical inequality} holds: For every $r > 0$ there exists an universal constant $c := c(n) > 0$ such that
+\begin{equation} \label{claim.iso} v(r)^{ \frac{n - 1}{n} } \leq c \cdot \mathrm{Per} (E_r), \end{equation}
+where $v(r)$ denotes the Lebesgue measure of $E_r$. If the inequality holds, then it is easy to see that
+\begin{equation*} \begin{aligned} v(r)^{ \frac{n-1}{n} } & \leq c_1 \cdot \left\| D( \mathbbm{1}_{E_r}) \right\| \leq
+\\[1em] & \leq c_2 \left( \mathrm{Per}_{B_r}(E) + \mathcal{H}^{n -  1}\left(E \cap \partial B_r \right) \right) \leq
+\\[1em] & \leq c_3 \cdot \mathcal{H}^{n - 1}\left(E \cap \partial B_r \right) = c_3 \cdot \dot{v}(r), \end{aligned} \end{equation*}
+since
+\begin{equation*}\mathrm{Per}_{B_r}(E) = |D(\mathbbm{1}_E)|(B_r) = \mu(B_r), \end{equation*}
+and clearly $\mu(B_r)$ and $\mathcal{H}^{n - 1}\left(E \cap \partial B_r \right)$ are comparable quantities as a consequence of the previous result.
+
+\paragraph{Step 2.} The symbol $\dot{v}$ denotes the classic derivative of $v$ since a Lipschitz function is almost everywhere differentiable (by \hyperref[th:rad]{Rademacher Theorem \ref{th:rad}}). The reader may prove, as an exercise, that the formula used above holds:
+\begin{equation} \label{claim.iso2} \dot{v}(r) = \mathcal{H}^{n - 1} \left(E \cap \partial B_r \right) \quad \text{for almost every $r > 0$.} \end{equation}
+
+\paragraph{Step 3.} In conclusion, we notice that $v(r)$ is an almost everywhere differentiable function which satisfies the following inequality:
+\begin{equation*} v(r)^{ \frac{n - 1}{n} } \leq c_3 \cdot \dot{v}(r). \end{equation*}
+A straightforward computation yields to
+\begin{equation*} v(r) \geq c(n) \cdot r^n, \end{equation*}
+which is exactly the nontrivial part of \eqref{eq:dg3}. The trivial one, on the other hand, follows immediately from the worst estimate possible:
+\begin{equation*} v(r) \leq |B_r| \sim c^\prime(n) \cdot r^n. \end{equation*}
+
+\paragraph{Step 4.} It remains to prove the the claimed isoperimetrical inequality \eqref{claim.iso}; surprisingly, it follows easily from a far more general theorem.
+
+Precisely, one can prove that there exists a universal constant $c := c(n)$ such that for any given $F$ bounded f.p.s., it turns out that
+\begin{equation*} |F|^{\frac{n - 1}{n}} \leq c(n) \cdot \mathrm{Per}(F). \end{equation*}
+Recall that the immersion
+\begin{equation*} \mathrm{BV}(\Omega) \hookrightarrow L^{1^\ast}(\Omega), \end{equation*}
+where $1^\ast = \frac{n }{n - 1}$, is continuous (and compact). Therefore, there exists a universal constant $c^\prime := c^\prime(n) > 0$ such that
+\begin{equation*} \| u \|_{L^{ \frac{n}{n- 1} }(\Omega)} \leq c^\prime \cdot \| u \|_{\mathrm{BV}(\Omega)}. \end{equation*}
+The reader may prove that one can always replace the $\mathrm{BV}(\Omega)$-norm with the total variation $ \|Du \|$ if $u$ is, for example, compactly supported. The isoperimetrical inequality follows immediately by taking $u := \mathbbm{1}_F$ for every \textbf{bounded} f.p.s. $F$.\end{proof}
+
+\begin{lemma} \label{lemma:dg3} Let $E_r := \frac{1}{r} (E - x) = \frac{1}{r} E$. Then
+\begin{equation} \label{eq:dg6} E_r \xrightarrow{L_{loc}^1} M_{\eta(0)}^+, \end{equation}
+or, equivalently, it turns out that
+\begin{equation} \label{eq:dg7} \left| (E \, \triangle \, M_{\eta(0)}^+) \cap B_r \right| \ll r^n \quad \text{as $r \to 0^+$}. \end{equation}\end{lemma}
+
+\begin{proof} Denote by $\eta_r$ and $\mu_r$ the rescaling of $\eta$ and $\mu$ respectively, in such a way that
+\begin{equation*} D ( \mathbbm{1}_{E_r} ) = \eta_r \cdot \mu_r. \end{equation*}
+
+\paragraph{Step 1.} By \hyperref[lemma:dg1]{Lemma \ref{lemma:dg1}} it turns out that
+\begin{equation} \label{eq.1.1} \mu_r(B_1) = \frac{\mu(B_r)}{r^{n - 1}} \leq c(n) \implies \mu_r(B_R) \leq c(n) \cdot R^{n - 1} \end{equation}
+for every $R > 0$. Similarly, by \hyperref[lemma:dg2]{Lemma \ref{lemma:dg2}} it turns out that
+\begin{equation*} c_1(n) \leq |E_r \cap B_1| \leq c_1^\prime(n), \end{equation*}
+from which it follows that
+\begin{equation} \label{eq.1.2}c_1(n) \cdot R^n \leq |E_r \cap B_R| \leq c_1^\prime(n) \cdot R^{n} \end{equation}
+for every $R > 0$. The compactness property of the f.p.s. (see \hyperref[th:cpfps]{Theorem \ref{th:cpfps}}), together with the inequality \eqref{eq.1.1}, imply that, up to subsequences,
+\begin{equation*}\begin{aligned} & \mathbbm{1}_{E_r} \xrightarrow{L_{loc}^1} \mathbbm{1}_{E_0} \\[1em] & D \left( \mathbbm{1}_{E_r} \right) \xrightarrow{\text{locally}} D \left( \mathbbm{1}_{E_0} \right)\end{aligned} \end{equation*} 
+for some f.p.s. $E_0$. Since $0$ belongs to the reduced boundary $\partial^\ast E$, we have that
+\begin{equation*} \dashint_{B_r} | \eta(x) - \eta(0) | \, \mathrm{d}\mu(x) \xrightarrow{r \to 0^+} 0, \end{equation*}
+which means that for every $R > 0$
+\begin{equation*} \dashint_{B_R} | \eta_r(x) - \eta(0) | \, \mathrm{d}\mu_r(x) \xrightarrow{r \to 0^+} 0. \end{equation*}
+We may assume without loss of generality that $\eta(0) = e_1$, where $\{e_1, \, \dots, \, e_n\}$ is the standard orthonormal basis of $\R^n$. It turns out that
+\begin{equation*} D \left( \mathbbm{1}_{E_0} \right) = \eta(0) \cdot \mu_0, \end{equation*}
+from which we infer that $D^i \left( \mathbbm{1}_{E_0} \right)$ is zero for every $i = 2, \, \dots, \, n$.
+
+\paragraph{Step 2.} By \hyperref[lemma:dgex1]{Lemma \ref{lemma:dgex1}} it turns out that $\mathbbm{1}_{E_0}$ has a representative which depends only on the first variable $x_1$, and thus we can infer that
+\begin{equation*} E_0 = x_0 + M_{\eta(0)}^+ \end{equation*}
+for some $x_0 \in \R^n$. It remains to prove that $x_0$ is necessarily equal to zero.
+
+We argue by contradiction: suppose that $x_0$ is not $0$. Then one can find a radius $R > 0$ small enough such that the Lebesgue measure of the intersection $E_0 \cap B_R$ is zero, in contradiction with the inequality \eqref{eq.1.2}. Therefore
+\begin{equation*}E_0 = M_{\eta(0)}^+ \qquad \text{and} \qquad E_r \xrightarrow{L_{loc}^1} E_0 = M_{\eta(0)}^+, \end{equation*}
+which is exactly what we wanted to prove.\end{proof}
+
+\begin{lemma} \label{lemma:dgex1} Let $f \in L_{loc}^1(\R^n)$ be a function such that
+\begin{equation*} D^i f \equiv 0 \qquad \forall \, i = 2, \, \dots, \, n. \end{equation*}
+Then there exists $\widetilde{f} \in L_{loc}^1(\R)$ such that
+\begin{equation*} \widetilde{f}(x_1) = f(x_1, \, \dots, \, x_n) \quad \text{for $\mathcal{L}^n$-almost every $x = (x_1, \, x_2, \, \dots, \, x_n) \in \R^n$.} \end{equation*} \end{lemma}
+
+\begin{lemma} \label{lemma:dg4} Let $E_r := \frac{1}{r} (E - x) = \frac{1}{r} E$. Then
+\begin{equation} \label{eq:dg8} D(\mathbbm{1}_{E_r}) \xrightarrow{\text{locally}} D( \mathbbm{1}_{M_{\eta(0)}^+}) = \eta(0) \, \mathbbm{1}_{\eta(0)^\perp} \cdot \mathcal{H}^{n - 1}.\end{equation}\end{lemma}
+
+\begin{lemma} \label{lemma:dg5} For every $r > 0$ it turns out that
+\begin{equation} \label{eq:dg10} \mu(B_r) \sim \alpha_{n - 1} r^{n - 1}.\end{equation}\end{lemma}
+
+\begin{proof} We divide the argument into two steps to ease the notation.
+
+\paragraph{Step 1.} First, we deduce from \hyperref[lemma:dg4]{Lemma \ref{lemma:dg4}} that
+\begin{equation} \label{eq:dg11} \left| D(\mathbbm{1}_{E_r}) \right| \xrightarrow{\text{locally} } \left| D( \mathbbm{1}_{M_{\eta(0)}^+}) \right|.\end{equation}
+Indeed, if $\eta(0) = e_1$, then
+\begin{equation*}\dashint_{B_R} |\eta_r(x) - \eta(0)| \, \mathrm{d}\mu_r(x) \xrightarrow{r \to 0^+} 0, \qquad \forall \, R > 0 \end{equation*}
+implies that
+\begin{equation*}\left| \frac{\partial \, \mathbbm{1}_{E_r}}{\partial x_1} \right| \xrightarrow{r \to 0^+} \left| \frac{\partial \, \mathbbm{1}_{E_0}}{\partial x_1} \right|,\end{equation*}
+which is exactly what we wanted to prove since $E_0 = M_{\eta(0)}^+$.
+
+\paragraph{Step 2.} From \eqref{eq:dg11} it follows that\footnote{Here the reader needs to be careful. The convergence is not true in general, but one can prove that it is enough to ask that $\mathcal{H}^{n-1}( \eta(0)^\perp \cap B_1) = 0$.}
+\begin{equation*} \frac{\mu(B_r)}{r^{n-1}} = \mu_r(B_1) \xrightarrow{ \qquad } \mathcal{H}^{n - 1}( \eta(0)^\perp \cap B_1 ) = \alpha_{n - 1} \end{equation*}
+for almost every $r > 0$. To conclude the proof, we need the following auxiliary lemma.
+
+\begin{lemma} Let $(\lambda_n)_{n \in \N}$ be a sequence of vector measures on $X$. Assume that $\lambda_n := \tau_n \cdot \mu_n$ converges in the sense of measures (weakly-$\ast$) to a measue $\lambda :=  \tau \cdot \mu$, and assume that there exists a constant vector $v$ such that
+\begin{equation*} \int_X |\tau_n - v|(x) \, \mathrm{d}\mu_n(x) \xrightarrow{n \to + \infty} 0. \end{equation*}
+Then $\mu_n$ converges to $\mu$ and $\lambda = v \cdot \mu$ almost everywhere. \end{lemma}
+\end{proof}
+
+We have finally introduced all the technical tools to prove the statements of the De Giorgi's theorem presented above. 
+
+\begin{proof}[Proof of Theorem \ref{th:dg}] \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The first statement about the density and the support of $\mu$ is an immediate consequence of the argument used in the next point.
+\item We sketch two different proofs of the fact that the reduced boundary is $(n - 1)$-rectifiable. The first proof is due to De Giorgi, while the second one relies more on the sequence of technical lemmas above.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item For every $r_0 > 0$ and $\delta_0 > 0$ we consider
+\begin{equation*} S_{r_0, \, \delta_0} := \left\{ x \in \partial^\ast E \: \left| \: \text{$\left| ( E \, \triangle (x + M_{\eta(x)}^+) ) \cap B(x, \, r) \right| \leq \delta_0 r^n$ for every $r \leq r_0$}. \right. \right\}. \end{equation*}
+The idea is to prove that each $S_{r_0, \, \delta_0}$ is $(n - 1)$-rectifiable. In fact, we know that the countable union of $d$-rectifiable set is also $d$-rectifiable, and hence the thesis follows from the fact that
+\begin{equation*} \partial^\ast E = \bigcup_{(n, \, m) \in \N^2} S_{\frac{1}{n}, \, m}. \end{equation*}
+\item The support of the measure $\mu$ is contained in the reduced boundary $\partial^\ast E$; hence by \hyperref[lemma:dg5]{Lemma \ref{lemma:dg5}} we can infer that
+\begin{equation*} \mu \left( B(x, \, r) \right) \sim \alpha_{n - 1} r^{n - 1} \quad \text{for $\mu$-almost every $x \in \partial^\ast E$}. \end{equation*}
+We claim that there exists $F \subseteq \mathrm{spt}(\mu)$ such that
+\begin{equation*}c_1 \, \mathbbm{1}_F \cdot \mathcal{H}^{n - 1} \leq \mu \leq c_2 \, \mathbbm{1}_F \cdot \mathcal{H}^{n - 1} \qquad \text{and} \qquad \mu \left( \partial^\ast E \setminus F \right) = 0. \end{equation*}
+Indeed, it is enough to notice that $\mu \left(E \setminus \partial^\ast E \right) = 0$ as the support of $\mu$ is contained in the reduced boundary. Moreover, the $(n-1)$-dimensional upper density is zero at almost every point of $F$, that is,
+\begin{equation*} \Theta^\ast(\mu, \, x) = 0 \quad \text{for $\mathcal{H}^{n - 1}$-almost every $x \in F$}, \end{equation*}
+and this implies that
+\begin{equation*} \begin{cases} \mathcal{H}^{n - 1}\left(\partial^\ast E \setminus F \right) = 0, \\[0.5em] \mathcal{H}^{n - 1}\left(\partial^\ast E \, \triangle \, F \right) = 0. \end{cases} \end{equation*}
+The measure $\mu$ is thus equivalent to the restriction of the $\mathcal{H}^{n-1}$ measure to the reduced boundary, that is, there are two constants $c_1, \, c_2 > 0$ such that
+\begin{equation*}c_1^\prime \, \mathbbm{1}_{\partial^\ast E} \cdot \mathcal{H}^{n - 1} \leq \mu \leq c_2^\prime \, \mathbbm{1}_{\partial^\ast E} \cdot \mathcal{H}^{n - 1} \implies \mu \sim \mathcal{H}^{n - 1} \restr \partial^\ast E. \end{equation*}
+We deduce that the blowup of $\mu$ at $x$ is given by
+\begin{equation*} \mathbbm{1}_{\eta(x)^\perp} \cdot \mathcal{H}^{n - 1}, \end{equation*}
+which means that $\eta(x)^\perp$ is the approximate tangent plane of $\partial^\ast E$ at $x$.
+
+Moreover, the lower density is bounded from below; therefore, by \hyperref[crthasjdkso]{Corollary \ref{crthasjdkso}}, we can finally infer that $\partial^\ast E$ is $(n - 1)$-rectifiable.
+\end{enumerate}
+\item In the previous point we have proved that $\mu$ is equivalent to $\mathbbm{1}_{\partial^\ast E} \cdot \mathcal{H}^{n - 1}$, which means that there exists a function $g$ such that
+\begin{equation*}\mu = \mathbbm{1}_{\partial^\ast E} \, g \cdot \mathcal{H}^{n - 1}. \end{equation*}
+Therefore it is enough to show that $g$ is equal to $1$ $\mathcal{H}^{n-1}$-almost everywhere. The $(n-1)$-dimensional upper density of the Hausdorff measure is given by
+\begin{equation*} \Theta_{n - 1}^\ast(\partial^\ast E, \, x) = 1 \quad \text{for $\mathcal{H}^{n - 1}$-almost every $x \in \partial^\ast E$}, \end{equation*}
+while the $(n- 1)$-dimensional upper density of $\mu$ is given by
+\begin{equation*} \Theta_{n - 1}^\ast(\mu, \, x) = 1 \quad \text{for $\mu$-almost every $x \in \partial^\ast E$}. \end{equation*}
+In particular, it follows that $g = 1$ almost everywhere (with respect to either $\mu$ or $\mathcal{H}^{n - 1}$).
+\item This assertion also follows immediately from the second proof of \textbf{(2)}.
+\item This assertion simply summarize the content of \hyperref[lemma:dg3]{Lemma \ref{lemma:dg3}}.
+\end{enumerate} \end{proof}
+
+We are finally ready to prove the \hyperref[th:dgf]{De Giorgi-Federer Theorem \ref{th:dgf}}. The reduced boundary is a subset of the essential boundary, therefore everything follows from the previous result if we are able to prove that
+\begin{equation*} \mathcal{H}^{n - 1} \left( \partial_\ast E \setminus \partial^\ast E \right) = 0. \end{equation*}
+
+\begin{proposition}[Isoperimetrical Inequality] \label{prop:dgiso}Let $E \subseteq \R^n$ be a finite perimeter set in $B(x, \, r)$. Then there exists an universal constant $c := c(n) > 0$ such that\footnote{The inequality presented here is \textbf{not} sharp! The result can be refined, but it is not necessary for our purposes.}
+\begin{equation} \label{prop:dgisoeq} \left( |E| \wedge |B(x, \, r) \setminus E| \right)^{\frac{n - 1}{n}} \leq c \cdot \mathrm{Per}_{B(x, \, r)}(E). \end{equation} \end{proposition}
+
+\begin{proof} The Sobolev Embedding Theorem implies that the immersion
+\begin{equation*} \mathrm{BV}(B(x, \, r)) \hookrightarrow L^{1^\ast}(B(x, \, r)), \end{equation*}
+where $1^\ast = \frac{n}{n - 1}$, is continuous. Therefore, there exists a universal constant $c := c(n) > 0$ (which does not depend on the radius and the center of the ball) such that
+\begin{equation*} \| u \|_{L^{ \frac{n}{n - 1} }(B(x, \, r))} \leq \| u \|_{\mathrm{BV}(B(x, \, r))}. \end{equation*}
+We replace the $\mathrm{BV}(B(x, \, r))$ norm with the equivalent one
+\begin{equation*} \| Du \| + \left| \dashint_{B(x, \, r)} u \right|. \end{equation*}
+It turns out that
+\begin{equation*} \| u - \dashint_{B(x, \, r)}u \|_{L^{ \frac{n}{n - 1} }(B(x, \, r))} \leq c(n) \, \|Du \|. \end{equation*}
+By symmetry, we may assume without loss of generality that $|E| < |B(x, \, r) \setminus E|$. Then it is easy to prove that
+\begin{equation*} \mathbbm{1}_E(x) - \frac{|E|}{|B(x, \, r)|} > \frac{1}{2}, \qquad \text{if $x \in E$}, \end{equation*}
+and the thesis follows from the inequality above since
+\begin{equation*}  c(n) \, \|Du \| \geq  \| u - \dashint_{B} u\|_{L^{ \frac{n}{n - 1} }(B(x, \, r))} \geq \frac{1}{2} |E|^{ \frac{n - 1}{n}}. \end{equation*}
+\end{proof}
+
+\begin{lemma} \label{lemma:dg10}Under the assumptions of the \hyperref[th:dgf]{Theorem \ref{th:dgf}}, it turns out that
+\begin{equation*} \mu \left(B(x, \, r) \right) \ll r^{n - 1} \implies \Theta_n^\ast(E, \, x) \in \{0, \, 1\}. \end{equation*}
+In particular, the point $x$ does not belong to the essential boundary $\partial_\ast E$. \end{lemma}
+
+\begin{proof} Let $x \in \R^n$ be a point such that $\Theta_n(E, \, x) \neq 0, \, 1$ (i.e., $x$ belongs to the essential boundary). Then there exists $\delta > 0$ and a sequence $(r_n)_{n \in \N}$ converging to $0$ such that either
+\begin{equation*} \exists \: (r_{n_k})_{k \in \N} \: : \: r_k \xrightarrow{k \to + \infty} 0 \quad \text{and} \quad \frac{|E \cap B(x, \, r_{n_k})|}{r_{n_k}^n} \geq \delta, \end{equation*}
+or
+\begin{equation*} \exists \: (r_{n_k})_{k \in \N} \: : \: r_k \xrightarrow{k \to + \infty} 0 \quad \text{and} \quad \frac{|E \cap B(x, \, r_{n_k})|}{r_{n_k}^n} \leq \alpha_n - \delta, \end{equation*}
+Either way the function
+\begin{equation*} \R \ni r \longmapsto \frac{|E \cap B(x, \, r)|}{r^n} \end{equation*}
+is continuous; hence there exists $\lambda^\prime < \lambda$ real numbers such that
+\begin{equation*}\lambda^\prime \leq \frac{|E \cap B(x, \, r_{n_k})|}{r_{n_k}^n} < \lambda \end{equation*}
+for $r_{n_k} \xrightarrow{k \to + \infty} 0$. On the other hand, the isoperimetrical inequality \eqref{prop:dgisoeq} implies that
+\begin{equation*}|E \cap B(x, \, r) \setminus E|^{\frac{n-1}{n}} \leq c \cdot \mathrm{Per}_{B(x, \, r)}(E) = \mu \left(B(x, \, r) \right), \end{equation*}
+from which we derive a contradiction with the assumption $\mu(B(x, \, r)) \ll r^{n-1}$ by noticing that
+\begin{equation*}\lambda^\prime r^{n-1} \leq |E \cap B(x, \, r) \setminus E|^{\frac{n-1}{n}} \leq c \cdot \mathrm{Per}_{B(x, \, r)}(E) = \mu \left(B(x, \, r) \right) \end{equation*}
+for every $r > 0$ small enough.\end{proof}
+
+\begin{lemma} Under the assumptions of the \hyperref[th:dgf]{Theorem \ref{th:dgf}}, it turns out that
+\begin{equation*} \mathcal{H}^{n - 1} \left( \partial_\ast E \setminus \partial^\ast E \right) = 0. \end{equation*} \end{lemma}
+
+\begin{proof} Equivalently, we may prove that for $\mathcal{H}^{n-1}$-almost every point $x \notin \partial^\ast E$, it turns out that $x$ does not belong to $\partial_\ast E$ as well. By \hyperref[lemma:dg10]{Lemma \ref{lemma:dg10}}, it suffices to prove that
+\begin{equation*} \mu \left( B(x, \, r) \right) \ll r^{n-1},\end{equation*}
+but this follows easily from the fact that
+\begin{equation*} \mu = \mathcal{H}^{n-1} \restr \partial^\ast E. \end{equation*} \end{proof}
+
+\section{Back to the Capillarity Problem}
+
+We are finally ready to prove the existence of a solution to the capillarity problem for any $\sigma \in [- 1, \, 1]$ using the new notion of essential boundary.
+
+\paragraph{Framework.} Fix $\Omega \subset \R^n$ regular bounded open set, and fix a volume
+\begin{equation*} 0 < m < |\Omega|. \end{equation*}
+The capillarity energy is given by
+\begin{equation} \label{cap:fun} \mathscr{F}(E) := \mathcal{H}^{n - 1}(\Sigma^f) + \sigma \, \mathcal{H}^{n - 1}(\Sigma^c), \end{equation}
+where we define
+\begin{equation*} \begin{cases} \Sigma^f := \partial_\ast E \cap \Omega, \\[0.5em] \Sigma^c := \partial_\ast E \cap \partial \Omega. \end{cases} \end{equation*}
+
+\begin{theorem} The functional \eqref{cap:fun} is lower semi-continuous on the set of all finite perimeter set. Moreover, there exists (at least) a minimum point $E$ for $\mathscr{F}$ for every $\sigma \in [-1, \, 1]$. \end{theorem}
+
+\begin{proof}We split the proof into two cases: positive and negative $\sigma$.
+
+\paragraph{Case "$1 \leq \sigma \geq 0$":} The functional \eqref{cap:fun} can be equivalently written as
+\begin{equation} \label{cap:fun1} \begin{aligned} \mathscr{F}(E) & = \sigma \, \mathcal{H}^{n - 1}(\partial_\ast E) + (1 - \sigma) \, \mathcal{H}^{n - 1} \left(\Sigma^f \right) = \\[1em] & = \sigma \cdot \mathrm{Per}(E) + (1 - \sigma) \cdot \mathrm{Per}_\Omega(E). \end{aligned} \end{equation}
+In particular, the functional \eqref{cap:fun1} is equal to the convex sum of two lower semi-continuous functionals, which means that it is also lower semi-continuous.
+
+The functional $\mathscr{F}$ is also coercive. Indeed, let $(E_n)_{n \in \N} \subset \mathcal{X}$ be a uniformly bounded sequence, that is, there exists a constant $M \in \R$ such that
+\begin{equation*} \mathscr{F}(E_n) \leq M, \qquad \forall \, n \in \N. \end{equation*}
+Then, up to subsequences, there exists a finite perimeter set $E$ such that $E_n \xrightarrow{ \mathcal{X} } E$. If $\sigma$ is strictly greater than $0$, then the perimeters are equibounded
+\begin{equation*} \sigma \cdot \mathrm{Per}(E_n) \leq \mathscr{F}(E_n) \leq M, \end{equation*}
+which means that we can apply a compactness theorem for f.p.s. and conclude that the functional is coercive. On the other hand, if $\sigma = 0$, then the coerciveness follows immediately from the following estimate:
+\begin{equation*} \mathrm{Per}(E_n) \leq \mathcal{H}^{n - 1}(\partial \Omega) + \mathrm{Per}_\Omega(E_n) \leq \mathcal{H}^{n - 1}(\partial \Omega) + M < + \infty. \end{equation*}
+
+\paragraph{Case "$-1 \geq \sigma \leq 0$":} The idea is to pass everything to the complement, that is, we consider as a variable for the functional \eqref{cap:fun} the set $E^c := \Omega \setminus E$ instead of $E$. In particular, we notice that there are nice relations between the surfaces, that is,
+\begin{equation*} \begin{cases} \Sigma_c^f = \Sigma^f, \\[0.5em] \Sigma_c^c = \partial \Omega \setminus \Sigma^c. \end{cases} \end{equation*}
+It turns out that
+\begin{equation} \label{cap:fun2} \begin{aligned} \mathscr{F}(E) & = \sigma \, \mathcal{H}^{n - 1}(\partial \Omega) - \sigma \, \mathcal{H}^{n - 1}(\partial \Omega) + \mathscr{F}(E) = \\[1em] & = \sigma \, \mathcal{H}^{n-1}(\partial \Omega) + \mathcal{H}^{n - 1}(\Sigma_c^f) + |\sigma| \, \mathcal{H}^{n - 1}(\Sigma_c^c) =
+\\[1em] & = \mathscr{F}_{|\sigma|}(E^c) + \sigma \, \mathcal{H}^{n - 1}(\partial \Omega). \end{aligned} \end{equation}
+Since $\sigma \, \mathcal{H}^{n - 1}(\partial \Omega)$ is a constant, we can immediately reduce to the previous case $1 \geq |\sigma| \geq 0$.
+\end{proof}
+
+\begin{remark}The restriction of \eqref{cap:fun} to any smooth subset $\Omega$ in $\mathcal{X}$ agrees with the classical capillarity energy presented in the previous section, and the relaxation of $\mathscr{F}$ to $\mathcal{X}$ is given by $\mathscr{F}$ itself. Therefore every minimizing sequence, made up of smooth sets, converges to the minimum of $\mathscr{F}$ on $\mathcal{X}$. \end{remark}
+
+\begin{remark}Up to dimension $8$, the inner regularity theory of the capillarity problem works just fine; the boundary regularity, on the other hand, is quite messy. \end{remark}
+
+\begin{remark}A similar problem arises when dealing with Plateau's type problems. More precisely, the surface
+\begin{equation*} \Sigma = \left(\partial_\ast E_{min} \right) \cap \overline{\Omega} \end{equation*}
+is closed (in $\Omega)$, and it is also analytic up to dimension $7$. As we shall prove at the end of the course, starting from dimension $8$, one can find a counterexample to this statement (actually, it is possible to find a minimal surface such that it is analytic outside of a closed singular set of dimension $n - 8$).  \end{remark}

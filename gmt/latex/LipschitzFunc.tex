@@ -1,0 +1,296 @@
+\chapter{Lipschitz Functions}
+
+In the first half of the chapter, we present some of the basic properties of Lipschitz maps and their relations to Hausdorff measures. 
+
+In the second half, we derive the so-called \textit{area formula} for Lipschitz maps and we show the close relations with the \textit{coarea formula}. 
+
+\section{Definitions and Main Properties}
+
+In this section, we introduce Lipschitz function and Lipschitz maps (between metric spaces), and we state some of the main properties (which explains why they are such a good replacement in geometric measure theory for $C^1$ functions.)
+
+\begin{definition}[Lipschitz] \index{Lipschitz map} Let $X$ and $Y$ be metric spaces. A map $f : X \longrightarrow Y$ is \textit{Lipschitz} if there exists a positive constant $L > 0$ such that
+\begin{equation*} d_Y \left( f(x), \, f(y) \right) \leq L \cdot d_X \left( x, \, y \right) \end{equation*}
+for every $x, \, y \in X$. The Lipschitz constant of $f$ is the optimal one, that is,
+\begin{equation*} \mathrm{Lip}(f) := \inf  \left\{ L > 0 \: \left| \: \text{$d_Y \left( f(x), \, f(y) \right) \leq L \cdot d_X \left( x, \, y \right)$ for every $x, \, y \in X$} \right. \right\}. \end{equation*}\end{definition}
+
+\paragraph{Compactness.} We now present an Ascoli-Arzelà result, that is, a compactness criteria for Lipschitz maps.
+
+\begin{theorem} \index{Lipschitz map!Ascoli-Arzelà Theorem} Let $(f_n)_{n \in \N}$ be a sequence of maps $f_n : X \longrightarrow Y$ between compact metric spaces, and assume that it is uniformly Lipschitz, that is, each $f_n$ has the same Lipschitz constant.
+
+Then there exists a subsequence $(f_{n_k})_{k \in \N}$ converging uniformly to a Lipschitz map $f_\infty : X \longrightarrow Y$ with the same Lipschitz constant. \end{theorem}
+
+This result follows immediately from an application of the typical Ascoli-Arzelà theorem for metric spaces, but the reader may notice that the assumptions are not optimal. Indeed, one may only assume that $X$ is locally compact and $Y$ is a pre-compact space.
+
+\paragraph{Extension Property.} Lipschitz functions $f: X \longrightarrow \R$ have an excellent extension property, which preserves the Lipschitz constant so that, even if it is defined on a subset $E \subset X$, we can always talk about $f$ as a function defined on $X$.
+
+\begin{lemma}[Mc Shame] \index{Lipschitz map!Mc Shame Theorem}\label{extprop} Let $f : E \subset X \longrightarrow \R$ be a Lipschitz function. There exists $F : X \longrightarrow \R$ such that
+\begin{equation*}F \, \big|_E = f \qquad \text{and} \qquad \mathrm{Lip}(F) =\mathrm{Lip}(f). \end{equation*} \end{lemma}
+
+\begin{proof}Let $L := \mathrm{Lip}(f)$, and set
+\begin{equation} \label{ext1} F(x) := \inf \left\{ f(y) + L \cdot d_X(x, \, y) \: \left| \: y \in E \right. \right\}. \end{equation}
+The reader may prove by themselves that $F$ is an extension of $f$, and also that $F$ is a $L$-Lipschitz map (since it is a lower envelope.)\end{proof}
+
+The extension is, in general, not unique. Indeed, we can easily define a different extension by setting
+\begin{equation} \label{ext2} \widetilde{F}(x) := \sup \left\{ f(y) - L \cdot d_X(x, \, y) \: \left| \: y \in E \right. \right\}. \end{equation}
+The reader may check that \eqref{ext1} and \eqref{ext2} define, in general, two different extension of $f$. The extension property is also true for $Y := \R^m$-valued functions, but the argument above does not preserve the Lipschitz constant in general.
+
+\begin{lemma} Let $f : E \subset X \longrightarrow \R^m$ be a Lipschitz function. There exists $F : X \longrightarrow \R^m$ such that
+\begin{equation*}F \, \big|_E = f \qquad \text{and} \qquad \mathrm{Lip}(F) \leq \sqrt{m} \cdot \mathrm{Lip}(f). \end{equation*} \end{lemma}
+
+\begin{proof}Let $L := \mathrm{Lip}(f)$. We may extend each component by setting
+\begin{equation} \label{ext31} F_i(x) := \inf \left\{ f_i(y) + L \cdot d_X(x, \, y) \: \left| \: y \in E \right. \right\}. \end{equation}
+The reader may prove by themselves that $F = (F_1, \, \dots, \, F_m)$ is an extension of $f$ satisfying the properties mentioned above.\end{proof}
+
+If $X$ and $Y$ are metric spaces, then there is no guarantee that such an extension exists. On the other hand, if they are Hilbert spaces, then there is a highly nontrivial theorem that proves the existence of an extension that preserves the Lipschitz constant.
+
+\begin{theorem}[Kirszbraun] \index{Lipschitz map!Kirszbraun Theorem} Let $f : E \subseteq X \longrightarrow Y$ be a Lipschitz map between Hilbert spaces. Then there exists $F : X \longrightarrow Y$ such that
+\begin{equation*}F \, \big|_E = f \qquad \text{and} \qquad \mathrm{Lip}(F) = \mathrm{Lip}(f). \end{equation*} \end{theorem}
+
+\section{Differentiability of Lipschitz Functions}
+
+In this section, we investigate the Lusin property of Lipschitz maps (from $\R^n$ to $\R^m$) with $C^1$ maps and, in particular, we prove that Lipschitz maps are $\mathcal{L}^n$-almost everywhere differentiable.
+
+\begin{theorem} [Lusin Property] \label{diff:lip} Let $f : \R^n \longrightarrow \R$ be a Lipschitz map. Then, for every $\epsilon > 0$ there exists a function $g_\epsilon \in C^1(\R^n; \; \R)$ satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The two maps coincide up to a set of measure at most $\epsilon$, that is,
+\begin{equation*}\mathcal{L}^n \left( \left\{ x \in \R^n \: \left| \: f(x) \neq g_\epsilon(x)  \right. \right\} \right) \leq \epsilon. \end{equation*}
+\item The Lipschitz constant is bounded from above, that is,
+\begin{equation*}\mathrm{Lip}(g_\epsilon) \leq \mathrm{Lip}(f). \end{equation*}
+\end{enumerate}  \end{theorem}
+
+We will not prove this theorem entirely as we will only sketch the proof of a "local" statement. On the other hand, at the end of the section we briefly show how to obtain the global statement via a \textit{partition of unity} (but this is a highly nontrivial result!)
+
+\paragraph{Regularity.} First, we prove that Lipschitz maps from $\R^n$ to $\R$ (and thus to $\R^m$) are almost everywhere differentiable with respect to the Lebesgue measure.
+
+\begin{theorem}[Rademacher] \index{Rademacher Theorem} \label{th:rad} Let $f : \R^n \longrightarrow \R$ be a Lipschitz map. Then $f$ is $\Le^n$-almost everywhere differentiable. \end{theorem}
+
+\begin{remark}The extension property (i.e., \hyperref[extprop]{Mc Shame Lemma \ref{extprop}}) automatically gives us the Rademacher theorem for Lipschitz maps defined on a subset $E \subset \R^n$. \end{remark}
+
+\begin{remark}The statement of the Rademacher theorem presented here is not the most general possible. Indeed, the proof we are about to give works for Lipschitz maps with values in \textit{any finite-dimensional normed space}.
+
+On the other hand, for infinite-dimensional Banach spaces, the statement is usually false. There is a particular class of Banach spaces for which the theorem holds, usually referred in the literature as \textit{Banach spaces with the Lusin property}).\end{remark}
+
+\begin{lemma} Let $f : \R^n \longrightarrow \R$ be a Lipschitz map. Then $f$ belongs to $W_{\mathrm{loc}}^{1, \, \infty}(\R^n)$, that is, the distributional gradient $D f$ is essentially bounded. \end{lemma}
+
+\begin{proof}[Sketch of the Proof] Given a locally summable $f \in L_{\mathrm{loc}}^{1}(\R^n)$, and given a direction $v \in \R^n$, it is a well-known fact that the distributional directional derivative is given by
+\begin{equation*} \frac{\partial f}{\partial v} = \lim_{h \to 0} \frac{f - \tau_{hv} f}{h}. \end{equation*}
+Since $f$ is a Lipschitz map, we easily infer that
+\begin{equation*} \sup_{x \in \R^n} \left|  \frac{f(x) - \tau_{hv} f(x)}{h} \right| \leq \mathrm{Lip}(f) |v|, \end{equation*}
+that is, the directional distributional derivative belongs to $L^\infty(\R^n)$, and so also the distributional gradient.\end{proof}
+
+\begin{remark}For every $p \in [1, \, + \infty)$ it turns out that
+\begin{equation*}W_{\mathrm{loc}}^{1, \, \infty}(\R^n) \subset W_{\mathrm{loc}}^{1, \, p}(\R^n). \end{equation*} \end{remark}
+
+\begin{theorem} Let $f : \R^n \longrightarrow \R$ be a continuous Sobolev function, that is $f \in W_{\mathrm{loc}}^{1, \, p}(\R^n)$ for some $p \in (n, \, + \infty)$. Then $f$ is $\Le^n$-almost everywhere differentiable, and the pointwise gradient agrees with the distributional gradient for $\Le^n$-almost every $x \in \R^n$. \end{theorem}
+
+\begin{proof} Fix a ball $B := B \left(\underline{x}, \, r \right)$. 
+
+\paragraph{Step 1.} We claim that
+\begin{equation} \label{eq:ineqosc} \omega \left(f, \, B \right) \leq C(n) \cdot r \left( \dashint_B \left| \nabla f(x) \right|^p \, \mathrm{d}x \right)^{1/p}, \end{equation}
+where $C(n)$ is a universal constant\footnote{We say that a constant is universal if it depends only on the dimension of the ambient space} and $\omega$ is oscillation function, that is,
+\begin{equation*} \omega \left(f, \, B \right) := \sup \left\{ \left|f(x) - f(\underline{x}) \right| \: \left| \: |x - \underline{x}| < r \right. \right\} .\end{equation*}
+
+\paragraph{Step 2.} In order to prove \eqref{eq:ineqosc}, we notice that we can always reduce to the case $B = B \left(0, \, 1 \right)$ by composing with the transformation
+\begin{equation*}x \longmapsto \frac{x - \underline{x}}{r}. \end{equation*}
+The Poincaré inequality gives the inequality\footnote{The constant depends only on the dimension $n$ since the domain is the unitary ball!}
+\begin{equation*} \left| \int_{B(0, \, 1)} f(x) \, \mathrm{d}x - \dashint_{B(0, \, 1)} f(x) \, \mathrm{d}x \right| \leq c(n) \| \nabla f \|_{L^p(B)}, \end{equation*}
+from which we infer that
+\begin{equation*} \Phi(f) = \| \nabla f \|_{L^p(B(0, \, 1))} + \left| \dashint_{B(0, \, 1)} f(x) \, \mathrm{d}x \right|\end{equation*}
+is equivalent to the usual $W^{1,\, p}(B(0, \, 1))$ norm. Therefore, we apply Sobolev embedding theorem and obtain the inequality
+\begin{equation*} \|f\|_{\infty, \, B(0, \, 1)} \leq c_1(n) \left[ \| \nabla f \|_{L^p(B(0, \, 1))} + \left| \dashint_{B(0, \, 1)} f(x) \, \mathrm{d}x \right| \right]. \end{equation*}
+In conclusion, it turns out that
+\begin{equation*} \omega \left(f, \, B \right) \leq 2 \, \|f\|_\infty \leq 2 \, c_1(n)  \left[ \| \nabla \, f \|_{L^p(B(0, \, 1))} + \left| \dashint_{B(0, \, 1)} f(x) \, \mathrm{d}x \right| \right], \end{equation*}
+and, by replacing $f$ with $f - \mathrm{av}(f)$, we infer that \eqref{eq:ineqosc} holds true since the left-hand side does not change if we add a constant to the function.
+
+\paragraph{Step 3.} For every $h \in \R^n$ it turns out that
+\begin{equation*} \left| f(\underline{x} + h) - f(\underline{x}) \right| \leq C(n)  |h|  \left( \dashint_B \left| \nabla f(x) \right|^p \, \mathrm{d}x \right)^{1/p}.\end{equation*}
+Therefore, if $L$ is a linear application, it turns out that
+\begin{equation*} \left| f(\underline{x} + h) - f(\underline{x}) - Lh \right| \leq C(n) |h| \left( \dashint_B \left| \nabla f(x)  - L \right|^p \, \mathrm{d}x \right)^{1/p},\end{equation*}
+and this concludes the proof. Indeed, if $\underline{x}$ is a point of $L^p$-approximate continuity of $\nabla f \in \L_{\mathrm{loc}}^p(\R^n)$, and if we take $L := \nabla f(\underline{x})$, then it turns out that
+\begin{equation*} \left| f(\underline{x} + h) - f(\underline{x}) - \nabla f(\underline{x}) h \right| \leq C(n) |h| \mathcal{O}(1) = C(n) \, \mathcal{O}( \|h\| ).\end{equation*}
+\end{proof}
+
+The Rademacher theorem for Lipschitz maps follows easily combining the lemma and the theorem above. We are finally ready to state the local version of the Lusin property theorem and to give, at least, the main ideas behind it.
+
+\begin{theorem} Let $f : \R^n \longrightarrow \R$ be a $\Le^n$-almost everywhere differentiable map, and let $\Omega$ be an open bounded subset of $\R^n$. For every $\epsilon > 0$ there exist a compact subset $K_\epsilon \subset \Omega$ and a function $g_\epsilon \in C^1(\R^n; \; \R)$ satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The two maps coincide up to a set of measure at most $\epsilon$, that is,
+\begin{equation*}f \, \big|_{K_\epsilon} = g_\epsilon \, \big|_{K_\epsilon} \qquad \text{and} \qquad \mathcal{L}^n \left( \Omega \setminus K_\epsilon \right) \leq \epsilon. \end{equation*}
+\item The Lipschitz constant is bounded from above, that is,
+\begin{equation*}\mathrm{Lip}(g_\epsilon) \leq \mathrm{Lip}(f) + \epsilon \end{equation*}
+provided that $f$ is Lipschitz.
+\end{enumerate} \end{theorem}
+
+\begin{proof} Let
+\begin{equation*} D := \left\{ x \in \R^n \: \left| \: \text{$f$ is differentiable at $x$} \right. \right\}\end{equation*}
+be the set of points where $f$ is differentiable. Then, for any $x \in D$, it turns out that
+\begin{equation*} \omega(x, \, r) := \sup_{|h| < r} \left| \frac{f(x + h) - \nabla f(x) h}{h} \right| \to 0 \end{equation*}
+decreasingly as $r \to 0^+$. For every $\epsilon > 0$ we can find a compact set $K_\epsilon \subset \Omega$ such that \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $\Le^n \left(\Omega \setminus K_\epsilon \right) \leq \epsilon$;
+\item $\nabla f$ is continuous at each point of $K_\epsilon$ (Lusin);
+\item $\omega_r(x) \searrow 0$ as $r \to 0^+$, uniformly with respect to $x \in K_\epsilon$.
+\end{enumerate}
+The reader may check these assertions as an exercise\footnote{\textbf{Hint.} The second assertion follows from the Lusin theorem, while the third one follows from the Egorov theorem.}. Let $A = \R^n \setminus K_\epsilon$ be the complement of $K_\epsilon$ in $\Omega$; for any integer $i \in \Z$ we consider the set
+\begin{equation*} A_i := \left\{ x \in A \: \left| \: \frac{1}{2^{i+1}} < d(x, \, K_\epsilon) < \frac{1}{2^{i-1}} \right. \right\}. \end{equation*}
+Clearly $\{A_i\}_{i \in \Z}$ is a covering of $A$; hence there exists a smooth partition of unity $\{\sigma_i\}_{i \in \Z}$ subordinated to it, with the additional property
+\begin{equation*} | \nabla \sigma_i | \leq 2^{i + 3}. \end{equation*}
+Let $\rho$ be a regularizing kernel with support contained in the unitary ball, and assume also that $\int \rho = 1$ and $\int x \rho = 0$. If we let $\rho_i := \rho_{ \frac{1}{2^{i+1}}}$ be the rescaling, then we can set
+\begin{equation*} g(x) := \begin{cases} f(x) & \text{if $x \in K_\epsilon$}, \\[0.4em] \displaystyle\sum_{i \in \Z} \left(f(x) \sigma_i(x) \right) \ast \rho_i(x) & \text{if $x \notin K_\epsilon$}. \end{cases}\end{equation*}
+To conclude the proof the reader may check that
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $f \equiv g$ on $K_\epsilon$;
+\item $g$ is smooth on $A$;
+\item $g$ is differentiable at every $x \in K_\epsilon$ and $\nabla g = \nabla f$ on $A$.
+\end{enumerate}
+\end{proof}
+
+\section{Area Formula for Lipschitz Maps}
+\label{sec:aflm}
+
+The main result of this section is the following theorem.
+
+\begin{theorem} \label{th:areaformula} Let $\Sigma$ be a $d$-dimensional surface of class $C^1$, and let $f : \Omega \longrightarrow \Sigma$ be a Lipschitz function defined on an open subset $\Omega \subseteq \R^d$. Then for every $E \subseteq \Omega$ Borel it turns out that
+\begin{equation} \label{areaformula} \int_{\Sigma} m_{f, \, E}(y) \, \mathrm{d} \mathcal{H}^d(y) = \int_{E} Jf(x) \, \mathrm{d}\mathcal{L}^d(x), \end{equation}
+where $m_{f, \, E}(y) := \symbol{35} \, \left(f^{-1}(y) \cap E \right)$ and $Jf(x)$ denotes the Jacobian\footnote{The Jacobian, in this abstract setting, will be defined below in \hyperref[def:jac]{Definition \ref{def:jac}}.} of $f$ at $x$. \end{theorem}
+
+\begin{remark} If $f$ is an injective Lipschitz function, the area formula \eqref{areaformula} reduces to an expression we are more familiar with (the substitution of variables in integral calculus):
+\begin{equation} \label{areaformula2} \mathcal{H}^d \left(f(E) \right) = \int_{E} Jf(x) \, \mathrm{d}\mathcal{H}^d(x). \end{equation} \end{remark}
+
+\begin{remark}The codomain $\Sigma$ does not need to be a $d$-dimensional surface, but it is enough to require $\Sigma$ Riemannian manifold since a scalar product is all we need to define orthonormal basis. \end{remark}
+
+\begin{remark}[Jacobian, I] If $\Sigma$ is a $d$-dimensional surface embedded in $\R^n$ for some $n$ and $f$ is differentiable at $x$, then the Jacobian of $f$ at $x$ can be easily computed using the standard formula
+\begin{equation} \label{jac} Jf(x) = \sqrt{ \mathrm{det} \left(\nabla_t f(x) \right)^T \, \left(\nabla_t f(x) \right)}, \end{equation}
+where $\nabla_t$ denotes \textit{tangent gradient}. More precisely, if we look at $f$ as a function from $\Omega$ to $\R^n$, then the differential at $x$ is a linear map
+\begin{equation*} \mathrm{d}f_x : T_x \Omega \cong \R^d \longrightarrow \R^{n}. \end{equation*}
+By choosing orthonormal bases of both $\R^d$ and $\R^n$, we obtain a matrix that represents the linear map $ \mathrm{d}f_x$, which is also the matrix representing $\nabla_t f(x)$.
+
+\paragraph{Proof.} We notice that the adjoint map $\left(\mathrm{d}f_x\right)^\ast$ sends $T_{f(x)} \Sigma \cong \R^n$ to $\R^d$ since the scalar product canonically identifies a vector space with its dual. The linear map
+\begin{equation*} \left(\mathrm{d}f_x\right)^\ast \circ \mathrm{d}f_x : T_x \Sigma \longrightarrow T_x \Sigma \end{equation*}
+is represented by the square matrix $\left(\nabla_t f(x) \right)^T \left(\nabla_t f(x) \right)$ by construction, and thus we infer that the formula \eqref{jac} holds. \end{remark}
+
+% DEF JAC Here the Jacobian , that is, the absolute value of the determinant of the application $\mathrm{grad} \, f : \R^d \to T_{f(x)} \, \Sigma$ - once two orthonormal basis of the tangents have been chosen.
+
+\begin{remark} The main result of this section \eqref{areaformula} is right as it is stated, but the reader may notice that the proof we present completely ignores the measurability issues\footnote{A nice exercise would be to clean up the proof and make it rigorous.}. \end{remark}
+
+A weaker statement, which can be proved as an exercise, with no measurability issue to check, is given by the following theorem.
+
+\begin{theorem}\label{th:areaformulaweak} Let $f : \Omega \subseteq \R^d \longrightarrow \R^n$ be a Lipschitz function defined on an open subset $\Omega \subseteq \R^d$. Then for every $F \subset \R^n$ Borel set it turns out that
+\begin{equation} \label{areaformulaw} \int_{F} \symbol{35} \left(f^{-1}(y) \right) \, \mathrm{d} \mathcal{H}^d(y) = \int_{f^{-1}(F)} Jf(x) \, \mathrm{d}x. \end{equation} \end{theorem}
+
+A stronger (more general) statement, which requires a lot of work to be proved rigorously, is given by the following theorem.
+
+\begin{theorem}\label{th:areaformulastr} Let $\Sigma$ be a $d$-dimensional surface of class $C^1$, and let $f : \Omega \longrightarrow \Sigma$ be a Lipschitz function defined on an open subset $\Omega \subseteq \R^d$.For every positive Borel function $h : \Omega \longrightarrow [0, \, + \infty]$, it turns out that
+\begin{equation} \label{areaformulas} \int_{\Sigma} [ \sum_{s \in f(x)} h(s)] \, \mathrm{d} \mathcal{H}^d(x) = \int_{\Omega} h(x) Jf(x) \, \mathrm{d}x. \end{equation} \end{theorem}
+
+\paragraph{Area Formula.} In this final paragraph, the main goal is to sketch the proof of \eqref{areaformula}. The first step is, as promised, to give meaning to the Jacobian of a Lipschitz function.
+
+\begin{definition}[Jacobian] \label{def:jac} Let $f : \Omega \subseteq \R^d \longrightarrow \R^n$ be a function differentiable at $x$, and $d \leq n$. The $d$-dimensional Jacobian of $f$ at $x$, denoted by $J_d f(x)$, is defined by setting
+\begin{equation*} J_d f(x) = \sup \left\{ \frac{ \mathcal{H}^d \left( \nabla_t f(x)(P) \right)}{\mathcal{H}^d[P]} \: \left| \: \begin{gathered} \text{$P$ is a $d$-dimensional} \\[0.4em] \text{parallelepiped contained in $\R^d$} \end{gathered} \right. \right\}. \end{equation*} \end{definition}
+
+We are now ready to prove the area formula \eqref{areaformula}. We shall see soon that it is an immediate consequence of two technical lemmas.
+
+\begin{lemma} \label{areaforma1} Let $A \subseteq \Omega$ be an open set such that the restriction $f \, \big|_A$ is a diffeomorphism, that is, injective and with maximal rank:
+\begin{equation*} \mathrm{rank}\left(\mathrm{d}f(s)\right) = d. \end{equation*}
+Then the push-forward measure
+\begin{equation*} \mu := f_\symbol{35} \left( \mathbbm{1}_A(x) Jf(x) \cdot \mathcal{L}^d \right) \end{equation*}
+is equal to the measure
+\begin{equation*} \mathbbm{1}_{f(A)} \cdot \mathcal{H}^d. \end{equation*}
+In particular, given the subset $F = f(A) \subseteq \Sigma$ as in \eqref{areaformulaw}, it turns out that
+\begin{equation*} \mathcal{H}^d \left(F \right) = \int_{A} Jf(s) \, \mathrm{d}s, \end{equation*}
+that is, the area formula \eqref{areaformula} holds if $F = f(E)$ for every $E$ Borel. \end{lemma}
+
+\begin{lemma}  \label{areaforma2} Let $E \subseteq \Omega$ be a Borel set such that $Jf(s) = 0$ for every $s \in E$ (i.e., the rank of the differential map is not maximal). Then
+\begin{equation*}\mathcal{H}^d \left(f(E) \right) = 0\end{equation*}
+and the area formula \eqref{areaformula} holds for every such $E$. \end{lemma}
+
+Suppose, for now, that both lemmas hold true. Then, for every Borel set $E \subset \Omega$, it is enough to split it into countably many pieces $E_i$ satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{\roman*)}]
+\item The restriction $f \, \big|_{E_i}$ is a diffeomorphism for every $i \in I$.
+\item The complement set
+\begin{equation*}E \setminus \bigcup_{i \in I} E_i \end{equation*}
+is the set of all points $s \in E$ such that the differential of $f$ at $s$ has rank strictly less than $d$.
+\end{enumerate}
+
+\begin{proof}[Proof of Lemma \ref{areaforma1}] First, we notice that the thesis follows easily if we can prove that the Radon-Nikodym density
+\begin{equation} \label{eq.0} \frac{\mathrm{d}\mu}{\mathrm{d} \left( \mathbbm{1}_{f(A)} \cdot \mathcal{H}^d \right) }(s) = 1 \end{equation}
+for \textbf{every} $s \in f(A)$.
+
+\paragraph{Step 0.} Suppose that \eqref{eq.0} holds. The measure $\mu$ is supported, by definition, in the set $f(A)$ and it has no singular part\footnote{Indeed, if $\mu$ has a singular part, then there exists a point $s \in f(A)$ such that \eqref{eq.0} is $+ \infty$, against our assumption.}; hence
+\begin{equation*}f_\symbol{35} \left( \mathbbm{1}_A \, Jf \cdot \mathcal{L}^d \right) = \mathbbm{1}_{f(A)} \cdot \mathcal{H}^d. \end{equation*}
+
+\paragraph{Step 1.} Recall that
+\begin{equation*} \frac{\mathrm{d}\mu}{\mathrm{d} \left( \mathbbm{1}_{f(A)} \cdot \mathcal{H}^d \right)}(s) = 1 \iff \frac{\mu \left(B(s, \, r) \right)}{\mathcal{H}^d \left( \left(B(s, \, r) \right) \cap \Sigma \right)} \xrightarrow{r \to 0^+} 1, \end{equation*}
+and thus it is enough to find an asymptotic estimate of both the numerator and the denominator.
+
+\paragraph{Step 2.} If $\pi_s : \R^n \longrightarrow T_s \Sigma$ is the orthogonal projection onto $T_s \Sigma$, then it turns out that
+\begin{equation*} \left(1 - o(1) \right) \cdot |x - y| \leq \left| \pi(x) - \pi(y) \right| \leq |x - y| \end{equation*}
+that is, the projection is an almost-isometry. It follows that
+\begin{equation*} \mathcal{H}^d \left( B(s, \, r) \cap \Sigma \right) \sim \mathcal{H}^d \left( \pi \left( B(s, \, r) \cap \Sigma \right) \right) \sim \alpha_d r^d. \end{equation*}
+
+\paragraph{Step 3.} In a similar fashion, given a ball $B_r := B(0, \, r) \subseteq T_s \Sigma$, one can consider the ellipsoid\footnote{The preimage of a ball via the differential is an ellipsoid because the rank is maximal.}
+\begin{equation*} E_r := \mathrm{d}f^{-1} \left(B_r \right). \end{equation*}
+The image of $E_r$ according to $f$ has measure
+\begin{equation*} \mu \left( f(s + E_r) \right) \sim \mu \left( B(s, \, r) \right), \end{equation*}
+and, on the other hand, it is easy to show that
+\begin{equation*} \mu \left( f(s + E_r) \right) = \int_{s + E_r} Jf(x) \, \mathrm{d}x = Jf(s) \, |s + E_r| = Jf(s) \, \frac{|B_r|}{Jf(s)} = |B_r|. \end{equation*}
+In particular, it turns out that
+\begin{equation*} \mu \left( B(s, \, r) \right) \sim \mu \left( f(s + E_r) \right) \sim |B_r| = \alpha_d r^d, \end{equation*}
+which is exactly what we wanted to prove.
+\end{proof}
+
+\begin{proof}[Proof of Lemma \ref{areaforma2}] By assumption, for every point $s \in E$ and positive real number $r > 0$ small enough, it turns out that
+\begin{equation*} f \left(B(s, \, r) \right) \subseteq B^{k < d}\left(f(s), \, \mathcal{O}(r) \right) \times B \left(f(s), \, o(r) \right), \end{equation*}
+where $\mathcal{O}(-)$ and $o(-)$ are, respectively, the Landau's symbols. It follows that
+\begin{equation*} \mathcal{H}^d \left(f(B(s, \, r)) \right) \simeq \mathcal{O}(r)^k \cdot o(r)^{d - k} \sim o(r^d), \end{equation*}
+and this is enough to conclude since we can cover the ellipsoid with a countable union of balls satisfying the estimate above, that is,
+\begin{equation*} \sum_i \mathrm{diam}\left( (B_i) \right)^d \sim \left( \frac{\mathcal{O}(r)}{o(r)} \right)^k \cdot o(r)^d \sim o(r^d), \end{equation*}
+which is exactly what we wanted to prove.
+\end{proof}
+
+\section{Coarea Formula for Lipschitz Maps} %%%%MOD.
+\label{sec:coafor}
+
+\paragraph{Coarea.} Let $f : \Omega \subseteq \R^n \longrightarrow \R^m$ be a map of class $C^1$, and assume that $m < n$. If $h : \Omega \longrightarrow [0, \, + \infty]$ is a positive function, then the coarea formula is given by
+\begin{equation} \label{coarea} \int_{\R^n} \left[ \int_{f^{-1}(y) \cap \Omega} h(x) \, \mathrm{d} \mathcal{H}^{n - m}(x) \right] \mathrm{d}y = \int_{\Omega} h(x) J(f)(x) \, \mathrm{d}x, \end{equation}
+where
+\begin{equation*} J(f)(x) = \sqrt{ \mathrm{det}\left( (\nabla f(x)) \left(\nabla f(x) \right)^t \right)} \: \in \: M(n \times n, \, \R) \end{equation*}
+is a suitable notion of Jacobian. The proof of formula \eqref{coarea} is simple, and it is left to the reader to fill in the details in what follows.
+
+\paragraph{Sketch of the Proof.} \mbox{}
+
+\paragraph{Particular Case.} If $f : \R^2 \longrightarrow \R$ is the projection over the first coordinate, then the formula reduces to the Fubini-Tonelli theorem.
+
+\paragraph{General Case.} In the general case, the main idea is to split the set $\Omega$ as
+\begin{equation*} \Omega = \Omega_s \sqcup \Omega_n, \end{equation*}
+where $\Omega_s$ is the set of all singular points (i.e., all the $x \in \Omega$ such that the Jacobian at $x$ has non-maximal rank), and $\Omega_n$ is the set of all points such that the Jacobian is a matrix of maximal rank.
+
+The formula \eqref{coarea} clearly holds at every point of the first kind since the Jacobian is not invertible (i.e., $J(f)(x) = 0$), while the set $f^{-1}(x) \cap \Omega$ is $\mathcal{H}^{n - m}$-null as expected.
+
+The formula for regular points, on the other hand, can be easily deduced from the particular case discussed above ($f : \R^2 \longrightarrow \R$ projection) via a simple change of variables.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=12cm, height=8cm]{images/TGMPSP1.png}
+\caption{Idea of the coarea formula: integrate first along the blue lines, and then integrate the result along the violet lines}
+\end{figure}
+
+%\begin{theorem} Let $L : V \to W$ be a linear map between $d$-dimensional vector spaces (both endowed with a scalar product). Then
+%\begin{equation*} \mathcal{H}^d(L(E)) = \left| \mathrm{det}(M) \right| \cdot \mathcal{H}^d(E), \end{equation*}
+%where $M$ is the square matrix representing $L$ with respect to two orthonormal basis. \end{theorem}
+%In order to reduce to this basic case, one can either prove it through the $\epsilon$-$\delta$ proof (i.e. almost affinity maps), or through the blow-up of measures.
+
+%Let $\mu = \mathbbm{1}_{A} \cdot Jf \cdot \mathcal{H}^d$, and let $\mu^\prime$ be the push-forward according to $f$ of $\mu$. The identity \eqref{areaformula} is equivalent to proving that
+%\begin{equation*} f_\symbol{35} \, \mu = \mathcal{H}^d \cdot m_{f, \, E}, \end{equation*}
+%but we shall show only the easier case ($f$ injective) since it is enough to solve the general case as well. Therefore, the thesis is now equivalent to proving that
+%\begin{equation*} \frac{\mathrm{d} \, \mu^\prime}{\mathcal{H}^d \, \mathbbm{1}_E} = 1 \qquad \text{at a.e. $y \in f(E)$}, \end{equation*}
+%which is also equivalent to proving that the blow-up of $\mu^\prime$ at $y \in f(E)$ is equal to $\mathcal{H}^d$, at least for almost every $y$.
+
+%DEF BLOW UP
+
+%At this point one can show that \mbox{}
+%\begin{enumerate}[label=\textbf{(\alph*)}]
+%\item The blowup at $x$ of $\mu$ is equal to $\mathcal{H}^d \, Jf \, \mathbbm{1}_{B \cap T_x \, \Sigma}$, and
+%\item the blowup at $y$ of $\mu^\prime$ is equal to $\mathcal{H}^d \, \mathbbm{1}_{B \cap T_y \, \Sigma^\prime}$.
+%\end{enumerate}
+%But this immediately implies the equality for linear maps, and thus it proves the area formula.

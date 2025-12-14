@@ -1,0 +1,120 @@
+\title{Metodi Topologici in Analisi Globali - Lecture Notes}
+\author{Francesco Paolo Maiale}
+
+
+\documentclass[a4paper,10 pt]{report}
+
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage[pass]{geometry}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage{tikz-cd}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{accents}
+\usepackage{mathrsfs}  
+\usepackage{pifont}
+\usepackage{xcolor}
+\usepackage{xparse}
+\usepackage{hyperref}
+
+\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cadmiumgreen,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\pagestyle{plain}
+\setlength{\topmargin}{0.0in}
+\setlength{\headheight}{0.2in}
+\setlength{\headsep}{0.0in}
+\setlength{\footskip}{0.5in}
+\setlength{\textheight}{8.3in}
+\setlength{\textwidth}{6.0in}
+\setlength{\oddsidemargin}{0.5in}
+\setlength{\evensidemargin}{0.5in}
+\setlength{\parindent}{0.2 in}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{scolium}{Problem}
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem*{notation}{Notation}
+\newtheorem{exercise}{Exercise}[chapter]
+
+
+\numberwithin{equation}{chapter}
+
+\newcommand{\smallO}[1]{\scriptstyle\mathcal{O}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand*\conj[1]{\overline{#1}}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\F}{\mathcal F}
+\newcommand{\N}{\mathbb N}
+\newcommand{\sgn}{\mathrm{sgn}}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\parallelsum}{\mathbin{\!/\mkern-5mu/\!}}
+
+\newcommand*{\double}[2][.1ex]{%
+  \mathrel{\vcenter{\offinterlineskip%
+  \hbox{$#2$}\vskip#1\hbox{$#2$}}}}
+\newcommand*{\doublerightarrow}{\double{\longrightarrow}}
+
+\newenvironment{steps}[1]
+{ \begin{enumerate}[label = #1 \arabic*] }
+{\end{enumerate}}
+
+\makeatletter
+\def\step{ 
+\@ifnextchar [ \@step{\@noitemargtrue\@step[\@\itemlabel]}}
+\def\@step[#1] {\item[#1] \mbox{} \\ \hspace*{\dimexpr-\labelwidth-\labelsep}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   The first thanks indicates your affiliation
+% %
+% %  Just the name here.
+% %
+% % Your mailing address goes at the end.
+% %
+% % \thanks is also how you indicate grant support
+% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\newpage
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% abstract, keywords and Subject classification are optional.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\Huge \textbf{Disclaimer}\par}
+
+\vspace{0.4in} % if you wish
+
+These notes arise from the \textbf{Topological Methods in Global Analysis} course, held by Professor Antonio Marino in the second semester of the academic year 2016/2017.
+
+They have not been properly reviewed yet, hence to report oversights, mistakes, etc., one can send an email to frank094 (at) hotmail (dot) it.
+
+\tableofcontents
+\newpage
+\include{Introduction}
+\include{TopologDegree}
+\include{TopDegree}
+\include{Ulam}
+\include{Sublevels}
+\include{Genus}
+\include{Jordan}
+\end{document}

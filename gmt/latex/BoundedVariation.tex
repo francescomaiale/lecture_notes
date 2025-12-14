@@ -1,0 +1,292 @@
+\chapter{Bounded Variation Functions}
+
+In this brief chapter, we introduce the notion of \textit{bounded variation} functions, and we investigate some of the main properties (extension, approximation, compactness, trace, etc.)
+
+\begin{notation}In this chapter, we denote by $| \cdot |$ the Lebesgue measure $\mathcal{L}^n(\cdot)$, and we denote by $\mathrm{d}x$ the differential $\mathcal{d}\mathcal{L}^n(x)$, unless it is necessary to indicate the dimension. \end{notation}
+
+\section{Definition and Elementary Properties}
+
+\begin{definition}[Bounded Variation]\index{bounded variation}Let $\Omega \subseteq \R^n$ be an open set. A function $u : \Omega \longrightarrow \R$ is of bounded variation on $\Omega$, and we denote it by $u \in \mathrm{BV}(\Omega)$, if and only if the following properties hold:\mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item The function $u$ belongs to $L^1(\Omega)$.
+\item There exists a vector-valued measure $\mu =(\mu_1, \, \dots, \, \mu_n) \in \mathcal{M} \left( \Omega; \; \R^n \right)$ such that
+\begin{equation} \label{bv:def1} \int_{\Omega} \frac{\partial \varphi}{\partial x_i}(x) u(x) \, \mathrm{d}x = - \int_{\Omega} \varphi(x) \, \mathrm{d}\mu_i(x), \qquad \forall \, \varphi \in C_c^\infty(\Omega)\end{equation}
+for every $i = 1, \, \dots, \, n$.
+\end{enumerate}  \end{definition}
+
+\begin{remark}Let $u \in L^1(\Omega)$ be a summable function, and let us denote by $Du$ the weak derivative (in the sense of distributions). Then the condition \eqref{bv:def1} is equivalent to requiring that $u$ is weakly differentiable and $Du$ is $\R^n$-valued measure. \end{remark}
+
+\begin{remark}In a similar fashion, the condition \eqref{bv:def1} is equivalent to the existence of a positive real-valued measure $\lambda$ and a vector-valued function $\tau : \Omega \longrightarrow \R^n$ such that
+\begin{equation} \label{bv:def2} \int_{\Omega} \frac{\partial \varphi}{\partial x_i}(x) u(x) \, \mathrm{d}x = - \int_{\Omega} \varphi(x) \tau_i(x) \, \mathrm{d}\lambda(x), \qquad \forall \, \varphi \in C_c^\infty(\Omega)\end{equation}
+for every $i = 1, \, \dots, \, n$.\end{remark}
+
+There is an equivalent definition of the set $\mathrm{BV}(\Omega)$ that relies more on the vector-valued structure of $\R^n$ (that is, it is not equivalent in a generic metric space.)
+
+\begin{definition}[Bounded Variation]\index{bounded variation}Let $\Omega \subseteq \R^n$ be an open set. A function $u : \Omega \longrightarrow \R$ is of bounded variation on $\Omega$, and we denote it by $u \in \mathrm{BV}(\Omega)$, if and only if the following properties hold:\mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item The function $u$ belongs to $L^1(\Omega)$.
+\item There exists a vector-valued measure $\mu \in \mathcal{M} \left( \Omega; \; \R^n \right)$ such that
+\begin{equation} \label{bv:def3} \int_{\Omega} \mathrm{div} \left( \varphi \right)(x) u(x) \, \mathrm{d}x = - \int_{\Omega} \varphi(x) \, \mathrm{d}\mu(x), \qquad \forall \, \varphi \in C_c^\infty(\Omega)\end{equation}
+for every $i = 1, \, \dots, \, n$.
+\end{enumerate}  \end{definition}
+
+\begin{remark}In a similar fashion, the condition \eqref{bv:def3} is equivalent to the existence of a positive real-valued measure $\lambda$ and a vector-valued function $\tau : \Omega \longrightarrow \R^n$ such that
+\begin{equation} \label{bv:def4} \int_{\Omega} \mathrm{div} \left( \varphi \right) (x) u(x) \, \mathrm{d}x = - \int_{\Omega} \varphi(x) \cdot \tau(x) \, \mathrm{d} \lambda(x), \qquad \forall \, \varphi \in C_c^\infty(\Omega)\end{equation}
+for every $i = 1, \, \dots, \, n$, where $\cdot$ denotes the scalar product between two $\R^n$ vectors.\end{remark}
+
+\begin{exercise}Let $\Omega \subseteq \R^n$. A function $u$ satisfies \eqref{bv:def1} if and only if it satisfies \eqref{bv:def3}, i.e., the given definitions are actually equivalent.\end{exercise}
+
+\begin{remark}The space $\mathrm{BV}(\Omega)$, endowed with the norm
+\begin{equation} \label{bv:norm} \| u \|_{\mathrm{BV}(\Omega)} = \| u \|_{L^1(\Omega)} + \left|Du \right|(\Omega), \end{equation}
+is a non-separable Banach space. \end{remark}
+
+\begin{proof}The space $\left(\mathrm{BV}(\Omega), \, \| \cdot \|_{\mathrm{BV}(\Omega)} \right)$ is clearly a Banach space, as it can be checked quickly by the reader; thus it is enough to prove that it is not separable.
+
+We prove that $\mathrm{BV}\left( [0, \, 1] \right)$ is not separable since the general case follows from a similar argument. For every $\alpha \in (0, \, 1)$ let us consider the characteristic function
+\begin{equation*} \mathbbm{1}_\alpha := \mathbbm{1}_{[\alpha, \, 1]}. \end{equation*}
+For every choice $\alpha \neq \beta \in [0, \, 1]$, it turns out that
+\begin{equation*}\| \mathbbm{1}_\alpha - \mathbbm{1}_\beta \|_{\mathrm{BV}([0, \, 1])} = 2 + |\alpha - \beta|,  \end{equation*}
+and hence we can consider the family of balls
+\begin{equation*}B_\alpha := \left\{ \psi \in \mathrm{BV}\left( [0, \, 1] \right) \: \left| \: \| \psi - \mathbbm{1}_\alpha \|_{\mathrm{BV}\left( [0, \, 1] \right)} \leq 1 \right. \right\}. \end{equation*}
+This collection of balls is indexed by the interval $[0, \, 1]$, which means that it is a family with the cardinality of the continuum. Therefore we can infer that $\mathrm{BV}\left( [0, \, 1] \right)$ is not separable since each dense subset must intersect every ball $B_\alpha$ in at least one point, which means that any dense subset has a cardinality bigger or equal than the continuum. \end{proof}
+
+\begin{remark} The measure $\mu$ given by \eqref{bv:def1} is unique (since the weak derivative in the sense of distribution is unique, up to set of measure zero). We shall denote it by $Du$ through the entire chapter since the symbol $\nabla u$ is reserved for the classical/pointwise gradient. \end{remark}
+
+\begin{lemma}Let $u \in L^1(\Omega)$ be a summable function. Then $u$ belongs to $\mathrm{BV}(\Omega)$ if and only if the induced linear functional, defined by
+\begin{equation*} \Lambda_u : C_c^\infty(\Omega) \longrightarrow \R, \qquad \varphi \longmapsto \int_\Omega \mathrm{div} \left( \varphi \right)(x) u(x) \, \mathrm{d}x, \end{equation*}
+is bounded with respect to the uniform norm $\| \cdot \|_\infty$. \end{lemma}
+
+\begin{proof} \mbox{}
+
+\paragraph{$"\implies"$} Assume that $u \in \mathrm{BV}(\Omega)$. The absolute value of the functional can be easily estimated using the identity \eqref{bv:def3} as follows:
+\begin{equation*} \left| \int_\Omega \mathrm{div}\left(\varphi \right)(x) \, u(x) \, \mathrm{d}x \right| = \left| - \int_\Omega \varphi(x) \, \mathrm{d} \mu(x) \right| \leq \| \varphi \|_{\infty} |\mu|(\Omega), \end{equation*}
+where $|\mu|(\Omega)$ denotes the total variation. In particular, the linear functional $\Lambda_u$ is bounded with respect to the uniform norm, and thus it can be extended up to the closure of the domain, that is,
+\begin{equation*} \Lambda_u : \overline{C_c^\infty(\Omega)} = C_0^0(\Omega) \longrightarrow \R, \end{equation*}
+where $C_0^0(\Omega)$ denotes the set of all continuous functions on $\Omega$ that are infinitesimal on the boundary $\partial \Omega$. Notice that the identity \eqref{bv:def3} holds for every function $\varphi \in C_0^1(\Omega)$ since the divergence operator is not defined on the set of all continuous functions.
+
+\paragraph{$"\impliedby"$} Vice versa, assume that $u \in L^1(\Omega)$ and $\Lambda_u$ is a bounded functional with respect to the uniform norm. From the \hyperref[RieszTheorem]{Riesz Representation Theorem \ref{RieszTheorem}} one can find a measure $\mu \in \mathcal{M}\left(\Omega; \; \R^n \right)$ such that
+\begin{equation*}\int_{\Omega} \mathrm{div}(\varphi)(x) \, u(x) \, \mathrm{d}x =: \Lambda_u(\varphi) = \int_{\Omega} \varphi(x) \, \mathrm{d}\mu(x). \end{equation*}
+In particular, the function $u$ satisfies the property \eqref{bv:def3}, that is $u$ is weakly differentiable (in the sense of distributions) and its weak derivative is equal to $- \mathrm{d}\mu$, accordingly with the definition of bounded variation functions.
+\end{proof}
+
+\begin{example} \label{ex:bvfps} \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item The Sobolev space $W^{1, \, 1}(\Omega)$ is contained in $\mathrm{BV}(\Omega)$ for every bounded set $\Omega \subset \R^n$.
+
+Indeed, let $f \in W^{1, \, 1}(\Omega)$ be a Sobolev function, and denote by $g \in L^1(\Omega)$ its weak derivative. It suffices to show that the distribution associated with $g$ is a vector-valued measure in $\mathcal{M} \left( \Omega; \; \R^n \right)$ satisfying \eqref{bv:def3} holds. By definition of weak derivative
+\begin{equation*} \int_{\Omega} \mathrm{div} \left( \varphi \right)(x) u(x) \, \mathrm{d}  \mathcal{L}^n(x) = - \int_{\Omega} \varphi(x) g(x) \, \mathrm{d}\mathcal{L}^n(x), \qquad \forall \, \varphi \in C_c^\infty(\Omega),\end{equation*}
+thus it is enough to set $\mu := g \cdot \mathcal{L}^n$, which is well defined because $g$ is a summable function.
+
+\item If $E \subseteq \Omega$ is an open bounded set with differentiable ($C^1$ is enough) boundary, then the characteristic function $\mathbbm{1}_E$ belongs to $\mathrm{BV}\left( \R^n \right)$.
+
+The distributional derivative is zero on both $\mathrm{Int}(E)$ and $\Omega \setminus \overline{E}$; hence it is a measure supported on the boundary $\partial E$. More precisely, one can check that
+\begin{equation*} D \mathbbm{1}_E = \nu_{i} \, \mathbbm{1}_{\partial E} \cdot \mathcal{H}^{n-1}, \end{equation*}
+where $\nu_{i}$ denotes the inner normal vector. Indeed, for any $\varphi \in C_c^\infty\left(\R^n; \; \R^n \right)$ it turns out that
+\begin{equation*} \int_{\R^n} \mathrm{div}(\varphi)(x) \mathbbm{1}_E(x) \, \mathrm{d}x = \int_{E} \mathrm{div}(\varphi)(x) \, \mathrm{d}x \: {\color{red}=} \: - \int_{\partial E} \varphi(x) \nu_i(x) \, \mathrm{d}\mathcal{H}^{n-1}(x), \end{equation*}
+where the {\color{red}red} identity follows from the divergence theorem.
+\end{enumerate}
+\end{example}
+
+\begin{remark} The characteristic $\mathbbm{1}_E$ introduced above is the first example of a function of bounded variation on $\R^n$ which is not also Sobolev function. Moreover, it turns out that
+\begin{equation*}\sup_{\|\varphi\| \leq 1} \left| \Lambda_{\mathbbm{1}_E}(\varphi) \right| \leq \mathcal{H}^{n-1}(\partial E). \end{equation*}
+We will see (in the next chapter) that the inequality above is, for every smooth set $E$, an equality:
+\begin{equation*} \left\| \Lambda_{\mathbbm{1}_E}(\varphi) \right\|_{\ast} = \mathcal{H}^{n-1}(\partial E). \end{equation*}
+\end{remark}
+
+\section{Alternative Definitions: Bounded Variation on the Real Line}
+
+In this brief section, we want to discuss a different definition of the space $\mathrm{BV}\left([a, \, b]; \; \R \right)$, which is still used in some fields of mathematics (as partial differential equations evolution theory).
+
+\begin{definition}[Bounded Variation, II] \index{bounded variation!alternative definition} A function $u$ is of bounded variation on $[a, \, b] \subseteq \R$ if and only if the \textit{total variation} is finite, i.e.
+\begin{equation} \label{bv:defvar} T_v(u) := \sup_{P \in \mathcal{P}} \sum_{i = 0}^{n-1} \left| u(x_{i+1}) - u(x_i) \right| < + \infty, \end{equation} 
+where $\mathcal{P}$ is the set of all finite partitions of the interval $[a, \, b]$.\end{definition}
+
+\begin{definition}[Essential Variation] A function $u$ is of bounded essential variation on $[a, \, b]$, and we denote it by $u \in \mathrm{BV}_{\mathrm{ess}}\left([a, \, b] \right)$, if and only if 
+\begin{equation} \label{bv:defvar2} T_{v_{ess}}(u) := \sup_{P \in \mathcal{P}_{ess}} \sum_{i = 0}^{n-1} \left| u(x_{i+1}) - u(x_i) \right| < + \infty, \end{equation} 
+where $\mathcal{P}_{ess}$ is the set of all finite partitions of the interval $[a, \, b]$ with extremal points $x_i$ such that $u$ is $L^1$-approximate continuous at $x_i$ for every $i$.\end{definition}
+
+\begin{remark}The essential total variation \eqref{bv:defvar2} is closely related to the total variation introduced in \eqref{bv:defvar} since, as one can easily check, it turns out that
+\begin{equation*} T_{v_{ess}} (u) = \inf_{ \text{$w(x) = u(x)$ a.e.}} T_v(w). \end{equation*} \end{remark}
+
+The next result shows that the definition of bounded variation introduced in this section is related to the one we will be dealing with in this course through the finiteness of the essential variation.
+
+\begin{theorem}\label{th:bridge}A function $u$ belongs to $\mathrm{BV}\left((a, \, b) \right)$ (in the sense of definition \eqref{bv:def1}) if and only if $u \in L^1( (a, \, b) )$ and $T_{v_{ess}}(u) < + \infty$. \end{theorem}
+
+\begin{lemma}\label{lemma:bridge} Let $u \in \mathrm{BV}\left((a, \, b) \right)$. There exists a constant\footnote{In the proof of \hyperref[th:bridge]{Theorem \ref{th:bridge}} is not necessary to know the exact value of $c$, but the reader may try to prove that it is equal to the trace.} $c \in \R$ such that
+\begin{equation} \label{eq:charbv} u(x) = c + \int_{a}^{x} \, \mathrm{d}\mu(x) = c + \mu \left( (a, \, x) \right) \end{equation}
+for $\mathcal{L}^1$-almost every $x \in (a, \, b)$.\end{lemma}
+
+\begin{proof}It is enough to notice that the identity \eqref{eq:charbv} is equivalent to the following identity:
+\begin{equation} \label{eq:charbveq} \left( u(x) - \int_{a}^{x} \, \mathrm{d}\mu(x) \right)^\prime = 0. \end{equation} \end{proof}
+
+\begin{proof}[Proof of Theorem \ref{th:bridge}] \mbox{}
+
+\paragraph{$"\implies"$} Assume that $u \in \mathrm{BV}\left((a, \, b) \right)$. By \eqref{eq:charbv} there exists a constant $c \in \R$ such that
+\begin{equation*}u(x) = c + \mu \left( (a, \, x) \right). \end{equation*}
+The function $u$ is summable by definition; thus it is enough to prove that the total essential variation is finite. The explicit expression for $u$ immediately yields to
+\begin{equation*} T_{v_{ess}}(u) := \sup_{P \in \mathcal{P}_{ess}} \sum_{i = 0}^{n-1} \left| \mu\left( (a, \, x_{i + 1}) \right) - \mu\left( (a, \, x_{i}) \right) \right| = \sup_{P \in \mathcal{P}_{ess}} \sum_{i = 0}^{n-1} \left| \mu\left( (x_i, \, x_{i + 1}) \right) \right|.\end{equation*} 
+In particular, we notice that the total essential variation is bounded by the mass of $\mu$, and thus it is finite by assumption:
+\begin{equation*} T_{v_{ess}}(u) = \sup_{P \in \mathcal{P}_{ess}} \sum_{i = 0}^{n-1} \left| \mu\left( (x_i, \, x_{i + 1}) \right) \right| \leq \left| Du \right|\left( (a, \, b) \right) < + \infty.\end{equation*} 
+
+\paragraph{$"\impliedby"$} This assertion is left as an exercise for the reader.
+
+\end{proof}
+
+\section{Functional Properties}
+
+In this final section, we investigate some of the main functional properties of bounded variation functions (extension operator, trace operator, approximation results, etc.) which will be extensively used when we introduce the notion of finite perimeter set.
+
+\begin{definition}[Lipschitz Boundary] \index{Lipschitz boundary} A domain $\Omega \subset \R^n$ with Lipschitz boundary is an open subset, which is locally the graph of a Lipschitz map with respect to some choice of orthogonal bases.\end{definition}
+
+\begin{theorem}[Extension]\label{extendBV} Let $\Omega \subset \R^n$ be a bounded set with Lipschitz boundary $\partial \Omega$. Then there exists\footnote{The operator $E$ is, in general, not unique in any sense.} an extension operator
+\begin{equation*}E : \mathrm{BV}(\Omega) \longrightarrow \mathrm{BV}(\R^n). \end{equation*} \end{theorem}
+
+\begin{theorem}[Approximation, I]  \label{th:density1} The immersion
+\begin{equation*}C^\infty \left(\R^n \right) \hookrightarrow \mathrm{BV}\left(\R^n\right) \end{equation*}
+is dense, that is, for every $u \in \mathrm{BV}\left(\R^n\right)$ there exists a sequence $(u_n)_{n \in \N} \subset C^\infty \left( \R^n \right)$ such that
+\begin{equation*} \begin{cases} u_n \longrightarrow u & \text{in $L^1(\R^n)$}, \\[0.5em] \nabla \, u_n \cdot \mathcal{L}^n \rightharpoonup Du & \text{weakly (in the sense of distributions)}, \\[0.5em] \| \nabla \, u_n \|_{L^1(\R^n)} \longrightarrow \left\| D u \right\|.\end{cases} \end{equation*} \end{theorem}
+
+\begin{proof} \mbox{}
+
+\paragraph{Step 1.} Let $\rho \in C_c^\infty(\R^n)$ be a mollifier and, for any $\epsilon > 0$, consider the scaling
+\begin{equation*} \rho_\epsilon(x) := \frac{1}{\epsilon^n} \rho \left( \frac{x}{\epsilon} \right). \end{equation*}
+The function $u_\epsilon := \rho_\epsilon \ast u$ belongs to $C_c^\infty(\R^n)$ and a standard approximation argument is enough to infer that
+\begin{equation*}u_\epsilon \to u \quad \text{in $L^1(\R^n).$} \end{equation*}
+
+\paragraph{Step 2.} The key point of the proof is the following inequality (from which the last two properties will follow immediately):
+\begin{equation}\label{key:approx} \left\| \rho_\epsilon \ast Du \right\|_{L^1(\R^n)} = \left\| \nabla u_\epsilon \right\|_{L^1(\R^n)} \stackrel{?}{\leq} \left\| Du \right\|.\end{equation}
+If we give this inequality for granted, then we can easily conclude that the family of functions $\left(\nabla u_\epsilon \right)_{\epsilon > 0}$ is uniformly bounded in $L^1(\R^n)$. In particular, $\left(\nabla u_\epsilon \cdot \mathcal{L}^d \right)_{\epsilon > 0}$ is a uniformly bounded sequence of measures, and therefore (by an Ascoli-Arzelà compactness theorem) it converges in sense of measures to a vector-valued measure $\mu \in \mathcal{M}(\R^n; \; \R^n)$.  For every $\varphi \in C_c^\infty(\R^n)$ it turns out that
+\begin{equation*} \int_{\R^n} \nabla u_\epsilon(x) \varphi(x) \, \mathrm{d}x = - \int_{\R^n} u_\epsilon(x) \mathrm{div}(\varphi)(x) \, \mathrm{d}x, \end{equation*}
+and the left-hand side converges to 
+\begin{equation*} \int_{\R^n} \varphi(x) \, \mathrm{d} \mu(x), \end{equation*}
+while the right-hand side converges to
+\begin{equation*} - \int_{\R^n} u(x) \mathrm{div}(\varphi)(x) \, \mathrm{d}x \end{equation*}
+as $\epsilon \to 0^+$. In particular, we obtain the identity
+\begin{equation*} \int_{\R^n} \varphi(x) \, \mathrm{d}\mu(x) = - \int_{\R^n} u(x) \mathrm{div}(\varphi)(x) \, \mathrm{d}x  = \int_{\R^n} \varphi(x) \, \mathrm{d} (Du)(x), \, \qquad \forall \, \varphi \in C_c^\infty(\R^n), \end{equation*}
+which implies that $\mu = Du$ (e.g., using the fundamental lemma in Calculus of Variations).
+
+\paragraph{Step 3.} The third property follows easily from the fact that $\| \cdot \|_{L^1(\R^n)}$ is a lower semi-continuous function. Indeed, we have that
+\begin{equation*}\liminf_{\epsilon \to 0^+} \left\| \nabla u_\epsilon \right\|_{L^1(\R^n)} \geq \left\| Du \right\|,\end{equation*}
+which gives the sought convergence of the masses, as the opposite inequality holds by \eqref{key:approx}.
+\end{proof}
+
+\begin{theorem}[Approximation, II]\label{bv:th:approx2} Let $\Omega \subset \R^n$ be a bounded set with Lipschitz boundary $\partial \Omega$. The immersion
+\begin{equation*}C^\infty \left( \overline{\Omega} \right) \hookrightarrow \mathrm{BV}\left(\Omega\right) \end{equation*}
+is dense, that is, for every $u \in \mathrm{BV}\left(\Omega\right)$ there exists a sequence $(u_n)_{n \in \N} \subset C^\infty \left( \Omega \right)$ such that
+\begin{equation*} \begin{cases} u_n \longrightarrow u & \text{in $L^1(\Omega)$}, \\[0.5em] \nabla \, u_n \cdot \mathcal{L}^n \rightharpoonup Du & \text{in the weak sense of distributions}, \\[0.5em] \| \nabla u_n \|_{L^1(\R^n)} \longrightarrow \left| D u \right|(\Omega).\end{cases} \end{equation*} \end{theorem}
+
+\begin{proof} The key idea is to extend $u$ to $\R^n$ via an extension operator
+\begin{equation*}E : \mathrm{BV}(\Omega) \longrightarrow \mathrm{BV}(\R^n),\end{equation*}
+which exists as a consequence of \hyperref[extendBV]{Theorem \ref{extendBV}}, and apply the first approximation result to the function $E(u)$ (see \hyperref[th:density1]{Theorem \ref{th:density1}}).
+
+We need to be careful though: It is in general false that every extension operator $E$ can be used here since, e.g., the sequence $\widetilde{u_\epsilon}$, which approximates $E(u)$, does not satisfy the third property (see \hyperref[fig:bv1]{Figure \ref{fig:bv1}}). More precisely, the norm is lower semi-continuous and hence
+\begin{equation*}\liminf_{\epsilon \to 0^+} \left\| \nabla u_\epsilon \right\|_{L^1(\R^n)} \geq \left\| Du \right\|,\end{equation*}
+but the opposite inequality needs not to hold. Indeed, we need to ask $E$ to be an extension operator satisfying the following key property:
+\begin{equation}\label{key:approx2} \left| D E(u) \right|(\partial \Omega) = 0.\end{equation}
+Such an extension operator exists, but it needs to be chosen carefully (we will not discuss this further, but the reader may try to do it as an exercise).
+\end{proof}
+
+\begin{remark}The immersion
+\begin{equation*}C^\infty \left( \overline{\Omega} \right) \hookrightarrow \mathrm{BV}\left(\Omega\right) \end{equation*}
+is not dense with respect to the norm \eqref{bv:norm}.\end{remark} 
+
+\begin{exercise}Let $\Omega$ be a bounded set with Lipschitz boundary $\partial \Omega$, and let $u \in \mathrm{BV}(\Omega)$. Prove that the following is an extension operator
+\begin{equation*} E : \mathrm{BV}(\Omega) \longrightarrow \mathrm{BV}(\R^n), \qquad u \longmapsto \widetilde{u}(x) := \begin{cases} u(x) & x \in \Omega \\[0.5em] 0 & x \notin \Omega, \end{cases} \end{equation*}
+and prove also that it is not the right one for the proof of \hyperref[bv:th:approx2]{Theorem \ref{bv:th:approx2}}.\end{exercise}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=12cm, height=8cm]{images/TGMFPS2.png}
+\caption{What could go wrong in the proof?}
+\label{fig:bv1}
+\end{figure}
+
+\begin{remark}\index{Sobolev critical exponent} Recall that the Sobolev critical exponent in $\R^n$ is defined by setting
+\begin{equation*} 1^\ast := \frac{n}{n-1}. \end{equation*}\end{remark} 
+
+\begin{theorem}[Sobolev Embedding] \index{Sobolev Embedding Theorem} \label{sobemb} Let $\Omega \subset \R^n$ be a bounded set with Lipschitz boundary $\partial \Omega$. The immersion
+\begin{equation*} \mathrm{BV}\left(\Omega\right) \hookrightarrow L^p(\Omega) \end{equation*}
+is continuous for every $1 \leq p \leq 1^\ast$ and compact for every $1 \leq p < 1^\ast$. \end{theorem}
+
+\paragraph{Characterization of $\mathrm{BV}(\R^n)$.} In this brief paragraph, we want to state and prove a useful characterization of $\mathrm{BV}(\R^n)$, which is exactly the one that does not work for $L^1(\R^n)$.
+
+\begin{proposition}Let $u \in L^1(\R^n)$. The following assertions are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The function $u$ belongs to $\mathrm{BV}(\R^n)$.
+\item There is a constant $C > 0$ such that
+\begin{equation*} \left\| \tau_h u - u \right\|_{L^1(\R^n)} \leq C |h|. \end{equation*}
+\end{enumerate} \end{proposition}
+
+\begin{proof} \mbox{} 
+
+\paragraph{$"\implies"$} Assume that $u \in C^\infty(\R^n)$ in such a way that
+\begin{equation*} \frac{u(x + h e_i) - u(x)}{h} \xrightarrow{h \to 0^+} \frac{\partial u}{\partial x_i}. \end{equation*}
+First, we notice that it suffices to prove the thesis for an orthonormal basis of directions, e.g. $\{e_1, \, \dots, \, e_n\}$. A simple computation yields to
+\begin{equation*} \begin{aligned} \left\| \tau_i u - u \right\|_{L^1(\R^n)} & = \int_{\R^n} \left| u(x + h e_i ) - u(x) \right| \, \mathrm{d}x \leq \\[1em] & \leq \left\| \frac{\partial u}{\partial x_i} \right\|_{L^1(\R^n)} |h|, \end{aligned} \end{equation*}
+which is enough to conclude using the density of $C^\infty(\R^n)$ in $\mathrm{BV}(\R^n)$.
+
+\paragraph{$"\impliedby"$} Vice versa, it suffices to prove that for every weakly differentiable summable function $u$ it turns out that
+\begin{equation*} \frac{u(x + h e_i) - u(x)}{h} \xrightarrow{h \to 0^+} D_i u \end{equation*}
+in the sense of distributions.
+\end{proof}
+
+\begin{theorem}Let $\Omega$ be either $\R^n$ or a bounded subset of $\R^n$ with Lipschitz boundary $\partial \Omega$. If $(u_n)_{n \in \N} \subset \mathrm{BV}(\Omega)$ is a bounded sequence, then there exists a subsequence $(n_k)_{k \in \N}$ such that
+\begin{equation*} \begin{aligned} & u_{n_k} \to u \in \mathrm{BV}(\Omega) & \text{in $L^1(\Omega)$}, \\[1em] & D u_{n_k} \rightharpoonup D u & \text{weakly-$\ast$ (in the sense of measures)}. \end{aligned}\end{equation*} \end{theorem}
+
+\begin{proof}The sequence of measures $\left( D u_n \right)_{n \in \N}$ is bounded by assumption; hence, up to subsequences, it converges in the weak sense of measures to a measure $\mu$ in $\mathcal{M}\left(\Omega; \; \R^n\right)$. By \hyperref[sobemb]{Sobolev Embedding Theorem \ref{sobemb}} the immersion
+\begin{equation*} \mathrm{BV}(\Omega) \hookrightarrow L^1(\Omega) \end{equation*}
+is compact, and thus the sequence $(u_n)_{n \in \N} \subset L^1(\Omega)$ is relatively compact, which means that - up to subsequences - it converges strongly (with respect to the $L^1$ norm) to an element $u$. To conclude the proof, it remains to prove that
+\begin{equation*} \mu = D u. \end{equation*}
+The same argument used in the proof of \hyperref[th:density1]{Theorem \ref{th:density1}} works here; therefore it is left to the reader to fill in the details. \end{proof}
+
+\paragraph{Trace Operator.} In the last paragraph of this section, we investigate the trace operator, and we state the main theorem (which is somewhat equivalent to the one valid for Sobolev spaces), and we briefly explain why in the finite perimeter setting, we cannot introduce boundary condition using the trace operator.
+
+\begin{theorem}[Trace Operator] \index{trace theorem} The trace operator, defined by
+\begin{equation*} T : C^1\left( \overline{\Omega} \right) \longrightarrow L^1 \left( \partial \Omega \right), \qquad u \longmapsto u \, \big|_{\partial \Omega}, \end{equation*}
+is bounded with respect to the $\| \cdot \|_{\mathrm{BV}(\Omega)}$ norm, and it can be uniquely extended to a linear operator
+\begin{equation*} T : \mathrm{BV}(\Omega) \longrightarrow L^1 \left( \partial \Omega \right). \end{equation*}
+\end{theorem}
+
+\begin{remark}Recall that the space $C^1\left( \overline{\Omega} \right)$ is dense in $\mathrm{BV}(\Omega)$ in the weak sense (see \hyperref[th:density1]{Theorem \ref{th:density1}}). This embedding is the main difference with the Sobolev spaces setting we mentioned above and, as we will see later, it is also the reason why the trace operator is not used to assign boundary conditions. \end{remark}
+
+\begin{remark}Recall that the trace operator defined on $W^{1, \, p}(\Omega)$ can be used to assign boundary conditions as follows. Let $(u_n)_{n \in \N} \subset W^{1, \, p}(\Omega)$ be a minimizing sequence for a functional $F(u) : W^{1, \, p}(\Omega) \longrightarrow \R$, and assume that
+\begin{equation*} T u_n = g. \end{equation*} 
+If $u_n \rightharpoonup u$ weakly in $W^{1, \, p}(\Omega)$, then the \textit{Sobolev trace theorem} implies that $T u = g$, which is exactly what we would like to happen when trying to find a solution for a minimum problem.
+
+On the other hand, if $(u_n)_{n \in \N}$ is a bounded sequence in $\mathrm{BV}(\Omega)$, then - up to subsequences - $u_n$ converges to $u$ strongly in $L^1(\Omega)$. However, in general, it is not true that $T u_n$ converges (in any reasonable sense) to $T u$ (as we shall prove in the following examples).\end{remark}
+
+\begin{example}Let $\Omega := (0, \, 1)$. Consider the sequence $(u_n)_{n \in \N} \subset \mathrm{BV}\left( (0, \, 1) \right)$ that is defined as it is portrayed in \hyperref[fig:ex1]{Figure \ref{fig:ex1}}. Clearly, for every $n \in \N$, it turns out that
+\begin{equation*} T u_n(0) = 0 \qquad \text{and} \qquad T u_n(1) = 1, \end{equation*}
+but $u_n$ converges pointwise to $u(x) \equiv 1$ on $\Omega$, which means that a boundary condition is not preserved under the limit ($T u(0) = 1$). The reader may check by herself that
+\begin{equation*} u_n \rightharpoonup 1 \qquad \text{in $\mathrm{BV}(\Omega)$}, \end{equation*}
+that is,
+\begin{equation*} \begin{cases} u_n \to u & \text{in $L^1(\Omega)$}, \\[0.5em] \|u_n\|_{\mathrm{BV}(\Omega)} \leq M & \forall \, n \in \N.\end{cases}\end{equation*} \end{example}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=12cm, height=9cm]{images/TGMFPS3.png}
+\caption{First Counterexample}
+\label{fig:ex1}
+\end{figure}
+
+\begin{example}Let $\Omega \subseteq \R^n$, and consider the sequence of subsets $(E_k)_{k \in \N} \subset \mathcal{P}\left( \Omega \right)$ defined as it is portrayed in \hyperref[fig:ex12]{Figure \ref{fig:ex12}}. Moreover, assume that for any $n \in \N$ \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $E_k$ is smooth,
+\item $\overline{E_k} \subset \Omega$, and
+\item the measure $\mathcal{H}^{n-1}(\partial E_k)$ is of the same order of $\mathcal{H}^{n-1}(\partial \Omega)$.
+\end{enumerate}
+The sequence given by the characteristic functions $u_k := \mathbbm{1}_{E_k} \in \mathrm{BV}(\Omega)$ is uniformly bounded since the following properties hold:
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $\| u_k \|_{L^1(\Omega)} \leq \mathcal{H}^n(\Omega)$;
+\item $ \|D u_k \| = \mathcal{H}^{n-1} \left( \partial E_k \right) \to \mathcal{H}^{n-1}(\partial \Omega)$ as $n$ goes to $+ \infty$.
+\end{enumerate}
+Clearly, the limit of the sequence $u_k$ is the characteristic function of $\Omega$, that is, the constant function $1 \in \mathrm{BV}(\Omega)$. The reader may easily prove that
+\begin{equation*} T u_n = 0 \qquad \text{but} \qquad T u = 1, \end{equation*}
+which means that $T u_n$ does not converge in any reasonable sense to $T u$. \end{example}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=9cm]{images/TGMFPS4.png}
+\caption{Second Counterexample}
+\label{fig:ex12}
+\end{figure}

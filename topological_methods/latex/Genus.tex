@@ -1,0 +1,704 @@
+\chapter{Genus}
+
+In this section we say that a subset $\Omega \subset E$ is \textit{symmetric} if it is symmetric with respect to the origin of $E$, that is,
+\begin{equation*} u \in \Omega \implies - u \in \Omega. \end{equation*}
+
+\paragraph{Definition and Main Properties.} Let $E$ be a normed space, and let us denote by $\Gamma$ the class of all the symmetric subsets $A \subseteq E \setminus \{0\}$ such that $A$ is closed in $E \setminus \{0\}$.
+
+\begin{definition}[Genus] Let $A \in \Gamma$. The \textit{genus} of $A$ is defined by
+\begin{equation*} \gamma(A) := \min \left\{k \in \N \: \left| \: \text{$\exists \, \Phi : A \to \R^k \setminus \{0\}$ continuous and odd} \right. \right\}, \end{equation*}
+and $+ \infty$ if such a natural number $k$ does not exist. \end{definition}
+
+\begin{notation} If $A = \emptyset$, then we set $\gamma(A) := 0$.\end{notation}
+
+\begin{remark}The request that $0$ does not belong to the codomain of $\Phi$ is crucial. Otherwise, the genus would not be an attractive notion since one could take the null map
+\begin{equation*} \Phi : A \to \R^k, \qquad \Phi \equiv 0 \end{equation*}
+for any $k \in \N$, and for every element $A \in \Gamma$. \end{remark}
+
+\begin{remark}\label{rmk:genussphere}The definition of genus does not change if we require $\Phi$ to be a function with values in the sphere $S^{k-1}$ instead of $\R^{k} \setminus \{0\}$ since one may always compose it with the projection
+\begin{equation*} \pi : \R^k \setminus \{0\} \to S^{k-1}, \qquad x \longmapsto \frac{x}{|x|}. \end{equation*}\end{remark}
+
+\begin{example}If $E = L^2(\R^N)$ and $A = S_E(0, \, 1)$ is the sphere (with respect to the $L^2$-norm), then the genus of $A$ is $\infty$.
+
+\paragraph{Proof.} If there exists $k \in \N$ such that there is a continuous odd map $\Phi : A \to \R^k \setminus \{0\}$, then we can apply \hyperref[b]{Borsuk Theorem} and obtain a contradiction (since $A$ contains the spheres of every $\R^m$ for $m > k$). \end{example}
+
+\begin{lemma} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $A \in \Gamma$ is finite and nonempty, then $\gamma(A) = 1$.
+\item If $A \subseteq \R^N$ and $0 \notin A$, then $\gamma(A) \leq N$.
+\item If $0 \in A$, then $\gamma(A) = + \infty$.
+\end{enumerate} \end{lemma}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item By assumption $A$ is a set of the form
+\begin{equation*} A = \left\{ u_1, \, - u_1, \, \dots, \, u_n, \, - u_n \right\}.\end{equation*}
+The map $\Phi : A \to \R \setminus \{0\}$ sending $u_i$ to $+ 1$ and $- u_i$ to $- 1$ for every $i \in \{1, \, \dots, \, n\}$ is well defined, continuous and odd.
+\item The identity map $\mathrm{id}_{\R^N}$ is continuous and odd, therefore $\gamma(A) \leq N$.
+\item Every odd map sends $0$ to $0$, hence for every $k \in \N$ a map $\Phi : A \to \R^{k} \setminus \{0\}$ cannot be odd and continuous (i.e., the minimum $k$ is not attained and, by definition, the genus is infinite).
+\end{enumerate} \end{proof}
+
+\begin{proposition} \label{propgenus}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let $A \in \Gamma$. Then $\gamma(A) = 0$ if and only if $A = \emptyset$.
+\item Let $A, \, B \in \Gamma$. If $\Phi : A \to B$ is a continuous odd map, then $\gamma(A) \leq \gamma(B)$. In particular
+\begin{equation*} A \subseteq B \implies \gamma(A) \leq \gamma(B). \end{equation*}
+\item Let $A, \, B \in \Gamma$. The genus is subadditive, that is,
+\begin{equation} \label{genussub} \gamma (A \cup B) \leq \gamma(A) + \gamma(B). \end{equation}
+\item Let $A \in \Gamma$. There exists an open neighborhood $U$ of $A$ such that
+\begin{equation*}u \in U \implies - u \in U, \qquad 0 \notin \overline{U} \qquad \text{and} \qquad \gamma \left( \overline{U} \right) = \gamma(A). \end{equation*}
+\end{enumerate} \end{proposition}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Obvious.
+\item If there exists $k \in \N$ such that there is a continuous odd function $\Psi : B \to \R^k \setminus \{0\}$, then the composition
+\begin{equation*}\Psi \circ \Phi : A \to \R^k \setminus \{0\}\end{equation*}
+is a continuous odd map, and thus $\gamma(A) \leq \gamma(B)$.
+\item Let $k, \, h \in \N$ be natural numbers such that there are $\Phi_1 : A \to \R^k \setminus \{0\}$ and $\Phi_2 : B \to \R^h \setminus \{0\}$ continuous odd maps.
+
+Let us denote by $\tilde{\Phi}_1 : A \cup B \to \R^k$ and $\tilde{\Phi}_2 : A \cup B \to \R^h$ the continuous odd extensions of $\Phi_1$ and $\Phi_2$. More precisely, take the odd parts of the continuous extensions given by \hyperref[tiet]{Tietze Theorem} (since $A$ and $B$ are closed subsets of the union $A \cup B$).
+
+Let us consider the map
+\begin{equation*} \Psi(u, \, v) := \left(\tilde{\Phi}_1(u), \, \tilde{\Phi}_2(v) \right) : A \cup B \to \R^k \times \R^h.\end{equation*}
+It is straightforward to check that $\Psi$ is a continuous odd map, such that no point $u \in A \cup B$ goes to the origin $(0, \, 0) \in \R^{k + h}$ via $\Psi$.
+\item Let $k := \gamma(A)$. By \hyperref[rmk:genussphere]{Remark \ref{rmk:genussphere}} there exists a continous  odd map
+\begin{equation*} \Phi :A \to S^{k-1}. \end{equation*}
+The sphere is closed in $E$, hence there exists a continuous odd function $\tilde{\Phi} : E \to \R^k$, extending $\Phi$, but a priori $0$ may belong to its image. If we define
+\begin{equation*} U := \left\{ u \in E \: \left| \: \left| \tilde{\Phi}(u) \right| > \frac{1}{2} \right. \right\} \end{equation*}
+then one can easily check that it satisfies the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $U$ is open and symmetric.
+\item $0 \notin \overline{U}$.
+\item $A \subseteq U$ and $\overline{U} \in \Gamma$.
+\end{enumerate}
+\end{enumerate} \end{proof}
+
+\begin{theorem}[Genus of the Sphere]\label{gen:sph} Let $\Omega \subseteq \R^N$ be an open, bounded, symmetric (with respect to the origin) subset containing $0$. Then
+\begin{equation*}\gamma \left( \partial \, \Omega \right) = N. \end{equation*}\end{theorem}
+
+\begin{proof}On the one hand, we have already proved that $\gamma \left( \partial \, \Omega \right) \leq N$. On the other hand, if
+\begin{equation*}\Phi : \partial \, \Omega \subseteq \R^N \to \R^k\end{equation*}
+is a continuous odd map, then \hyperref[b]{Borsuk Theorem} implies that $0 \in \Phi \left( \partial \, \Omega \right)$ for every $k < N$  \end{proof}
+
+\begin{corollary} If $S^{N-1} \subseteq \R^N$ is the sphere centered at $0$, then $\gamma(S) = N$. \end{corollary}
+
+\begin{corollary} If $E$ is an infinite-dimensional normed space, then $\Omega$ has infinite genus.\end{corollary}
+
+\section{Genus in Calculus of Variations}
+
+Let $H$ be a Hilbert space, and let $X \subseteq E$ be a complete submanifold without boundary of class $C^2$ and symmetric with respect to the origin, i.e.,
+\begin{equation*} u \in X \implies - u \in X. \end{equation*}
+In this section, the functional $f : X \to \R$ will always be assumed to be \textbf{even} and of class $C^1(X)$.
+
+\begin{proposition}Let $a, \, b \in \R$ be real numbers such that $a < b$, and assume that $f$ satisfies the $\left( \mathrm{PS} \right)_c$ condition at every level $c \in [a, \, b]$. If $\gamma(f^{(a)}) < \gamma(f^{(b)})$, then there exists a critical level $c \in [a, \, b]$ for $f$. \end{proposition}
+
+\begin{proof}We argue by contradiction. Suppose that there is no critical point $c\in [a, \, b]$; then there is an odd retraction $r: f^{(b)} \to f^{(a)}$ given by the symmetric \hyperref[deflemmasym]{Deformation Lemma \ref{deflemmasym}}. But this is absurd since \hyperref[propgenus]{Proposition \ref{propgenus}} implies that 
+\begin{equation*}\gamma(f^{(a)}) \geq \gamma(f^{(b)}), \end{equation*}
+which is in contradiction with the assumption. \end{proof}
+
+\begin{notation}Let $k \in \N$ be a natural number such that $1 \leq k \leq \gamma(X)$. We denote by $\gamma_k$ the infimum of all the sublevels such that the genus is at least $k$, that is,
+\begin{equation*} \gamma_k := \inf \left\{ c \in \R \: \left| \: \gamma \left( f^{(c)} \right) \geq k \right. \right\}. \end{equation*}
+Moreover, it is possible that $\gamma \left( f^{(c)} \right) \geq k$ is not satisfied for any real number $c \in \R$. In this case, we set $\gamma_k := + \infty$ and, clearly, the supremum of $f$ must be $+ \infty$. \end{notation}
+
+\begin{lemma}[Fundamental Lemma] \label{gen:fl}Let $k \in \N$ be a natural number such that $1 \leq k \leq \gamma(X)$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $\inf_{x \in X} f(x) = \gamma_1 \leq \gamma_2 \leq \dots \leq \gamma_k \leq \sup_{x \in X} f(x)$.
+\item If $\gamma_k \in \R$ and $f$ satisfies the $\left( \mathrm{PS} \right)_{\gamma_k}$ condition, then $\gamma_k$ is a critical level for the functional $f$. In particular, if $\gamma_1 \in \R$, then $\gamma_1 = \min_{x \in X} f(x)$.
+\item If $\gamma_k = \gamma_{k+1} = \dots = \gamma_{k + h} \in \R$ and $f$ satisfies the $\left( \mathrm{PS} \right)_{\gamma_k}$ condition, then for the set of all the critical points of $f$, denoted by $Z_{\gamma_k}$, it results
+\begin{equation*} \gamma \left( Z_{\gamma_k} \right) \geq h + 1. \end{equation*}
+In particular, if $0 \in Z_{\gamma_k}$, then it turns out that it is an infinite set.
+\end{enumerate} \end{lemma}
+
+\begin{proof}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The first identity follows from the fact that
+\begin{equation*} \gamma_1 := \inf \left\{ c \in \R \: \left| \: \gamma \left( f^{(c)} \right) \geq 1 \right. \right\} = \inf \left\{ c \in \R \: \left| \:f^{(c)} \neq \emptyset \right. \right\} = \inf_{x \in X} f(x).\end{equation*}
+For any $k \geq 1$ it turns out that
+\begin{equation*}\left\{ c \in \R \: \left| \: \gamma \left( f^{(c)} \right) \geq k \right. \right\} \supseteq \left\{ c \in \R \: \left| \: \gamma \left( f^{(c)} \right) \geq k+1 \right. \right\},\end{equation*}
+hence $\gamma_k \leq \gamma_{k+1}$ by taking the infimum of both the left-hand and the right-hand sides.
+\item If $\gamma_k$ is not a critical level for $f$, then the first \hyperref[deflemmasym]{Deformation Lemma} for symmetric maps implies that there exist $\epsilon > 0$ and an odd retraction
+\begin{equation*} r : f^{(\gamma_k + \epsilon)} \to f^{(\gamma_k - \epsilon)}. \end{equation*}
+But $r$ is odd, hence \hyperref[propgenus]{Proposition \ref{propgenus}} asserts that %INC + RET
+\begin{equation*} \gamma \left( f^{(\gamma_k + \epsilon)} \right) = \gamma \left( f^{(\gamma_k - \epsilon)} \right), \end{equation*}
+and this is absurd since
+\begin{equation*} \gamma \left( f^{(\gamma_k - \epsilon)} \right) \leq k -1 < k \leq \gamma \left( f^{(\gamma_k + \epsilon)} \right). \end{equation*}
+\item The set of all critical levels is an element of $\Gamma$, hence by \hyperref[propgenus]{Proposition \ref{propgenus}} there exists a symmetric open neighborhood $U$ of $Z_{\gamma_k}$ such that
+\begin{equation*} \overline{U} \in \Gamma \qquad \text{and} \qquad \gamma(U) = \gamma( Z_{\gamma_k} ). \end{equation*}
+From the second symmetric \hyperref[deflemma2sym]{Deformation Lemma} it follows that there exist $\epsilon > 0$ and an odd retraction
+\begin{equation*} r : f^{(\gamma_k + \epsilon)} \setminus U \to f^{(\gamma_k - \epsilon)}. \end{equation*}
+Clearly $f^{(\gamma_k + \epsilon)} \setminus U$ is closed and it belongs to $\Gamma$, hence
+\begin{equation} \label{123123} f^{(\gamma_k + \epsilon)} \subseteq \left(f^{(\gamma_k + \epsilon)} \setminus U \right) \cup \overline{U}. \end{equation}
+Then $k + h \leq \gamma \left( f^{(c + \epsilon)} \right)$ and by the subadditivity of the genus (see \hyperref[propgenus]{Proposition \ref{propgenus}}), from \eqref{123123} it follows that
+\begin{equation*} \begin{aligned} \gamma \left( f^{(c + \epsilon)} \right) & \leq \gamma \left( f^{(c + \epsilon)} \setminus U \right) + \gamma \left( \overline{U} \right) \leq \gamma \left( f^{(c - \epsilon)} \right) \gamma \left( \overline{U} \right) \leq \\ \\& \leq k - 1 + h, \end{aligned} \end{equation*}
+and this is clearly absurd.
+\end{enumerate} \end{proof}
+
+\paragraph{Consequences.} We are finally ready to state and prove an exceptional result due to the two mathematicians who introduced first the notion of the genus.
+
+\begin{theorem}[Lusternik-Schnirelman] \label{lussch}Let $f : S_\rho^{N-1} \subset \R^N \to \R$ be an even functional of class $C^1$. Then there are at least $n$ couples of critical points for $f$ of the form
+\begin{equation*} (-u_i, \, u_i) \in S_\rho^{N-1} \times S_\rho^{N-1} \qquad i = 1, \, \dots, \, n. \end{equation*}
+\end{theorem} 
+ 
+\begin{proof}The sphere $S_\rho^{N-1}$ is a compact set, hence $f$ satisfies the Palais-Smale $\left( \mathrm{PS} \right)_c$ condition at every level $c \in \R$. Since $g \left(S^{N-1}\right) = N$ (see \hyperref[gen:sph]{Theorem \ref{gen:sph}}) it follows from \hyperref[gen:fl]{Lemma \ref{gen:fl}} that $\gamma_1 \leq \dots \leq \gamma_N$ are critical levels for the functional $f$, and this concludes the proof.\end{proof}
+ 
+\begin{remark} If $W \supset S_\rho^{N-1}$ is an open set of $\R^N$, then
+\begin{equation*}\text{$u \in W$ is a critical point for $f : W \to \R$} \iff \exists \, \lambda \in \R \setminus \{0\} \: : \: \mathrm{grad} \, f(u) = \lambda \, u. \end{equation*} \end{remark}
+
+\begin{definition}[Regular] A subset $\Omega \subseteq \R^N$ is \textit{regular} (see \hyperref[regset]{Figure \ref{regset}}) if for every $x \in \partial \, \Omega$ there is a neighborhood $U \subseteq \R^N$ of $x$ and a diffeomorphism $\varphi : U \xrightarrow{\sim} \R^N$ such that \mbox{}
+\begin{enumerate}[label=(\arabic*)]
+\item $\varphi(x) = 0$, and
+\item $\varphi \left( \partial \, \Omega \cap U \right) \subseteq \R^{N-1}$.
+\end{enumerate}\end{definition}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=11cm, height=6cm]{Images/MTINAG1.png}
+\caption{Regular subset}
+\label{regset}
+\end{figure}
+
+\begin{theorem}[Lusternik-Schnirelman, II] Let $f : \partial \, \Omega \to \R$ be an even functional of class $C^1$, and assume that $\Omega \subset \R^N$ is an open bounded $C^2$-regular set such that
+\begin{equation*} 0 \in \Omega \qquad \text{and} \qquad u \in \Omega \implies - u \in \Omega. \end{equation*}
+Then $\gamma(\partial \, \Omega) = N$, and $f$ has (at least) $n$ couples of critical points of the form
+\begin{equation*} (-u_i, \, u_i) \in \partial \, \Omega \times \partial \, \Omega \qquad i = 1, \, \dots, \, n. \end{equation*}
+\end{theorem}
+
+\begin{proof}The argument is similar to the one used to prove \hyperref[lussch]{Theorem \ref{lussch}}. \end{proof}
+
+\begin{proposition}\label{prop:genus3} Let $X$ be a complete $C^2$-submanifold without boundary of a Hilbert space, and let $f : X \to \R$ be an even functional of class $C^1(X)$.
+
+Assume that there are real numbers $a < b$ such that $f$ satisfies the Palais-Smale condition $\left( \mathrm{PS}\right)_c$ at every level $c \in [a, \, b]$, and $0 \notin f^{-1} \left([a, \, b] \right)$. Then
+\begin{equation} \label{eq:gnusld} \gamma\left(f^{(b)} \right)\leq \gamma\left(f^{(a)} \right) + \symbol{35} \left(Z_f \cap f^{-1} \left( [a, \,b] \right) \right). \end{equation} \end{proposition}
+
+\begin{proof} Let $k \in \N$ be any integer number satisfying the estimate
+\begin{equation*} \gamma\left(f^{(a)} \right)< k \leq \gamma\left(f^{(b)} \right). \end{equation*}
+It follows from \hyperref[gen:fl]{Lemma \ref{gen:fl}} that $\gamma_k$ is a critical value for the functional $f$, and this is enough to infer that \eqref{eq:gnusld} holds true.
+\end{proof}
+
+\begin{proposition}Under the same assumptions of \hyperref[prop:genus3]{Proposition \ref{prop:genus3}} it turns out that
+\begin{equation*} \text{$\gamma \left(f^{(a)} \right)$ is finite} \implies \text{$\gamma \left(f^{(b)} \right)$ is finite}. \end{equation*}\end{proposition}
+
+\begin{proof} We do not prove this result now, but we may come back to it in the future. \end{proof}
+
+\begin{proposition} Let $X$ be a Hilbert space, and let $f \in C^1 \left(X; \; \R \right)$ be an even functional. Suppose that there are $X_0, \, X_1 \subset X$ subspaces such that $X$ is equal to their direct sum, that is,
+\begin{equation*} X = X_0 \oplus X_1. \end{equation*}
+Assume that $f$ is bounded from below, that is,
+\begin{equation*} \inf_{x \in X} f(x) := M > - \infty, \end{equation*}
+and assume also that there exists $\rho_0 > 0$ such that, if we set $S_0 := S_X(0, \, \rho_0) \cap X_0$, then
+\begin{equation} \label{eq:sup} \sup_{x \in S_0} f(x) < \inf_{x \in X_1} f(x). \end{equation}
+Let $a \in \R$ be any real number such that $a < M$, and assume that $f$ satisfies the Palais-Smale condition $\left( \mathrm{PS} \right)_c$ at every level $c \in [a, \, b]$, where
+\begin{equation*} b := \sup_{x \in S_0} f(x). \end{equation*}
+Then it turns out that
+\begin{equation*} \gamma \left( f^{(a)} \right) = 0 \qquad \text{and} \qquad  \gamma \left( f^{(b)} \right) \geq \gamma \left(S_0 \right) = \mathrm{dim} \, X_0. \end{equation*} \end{proposition}
+
+\begin{proof} The reader may check by herself that for any $k \in \N$ such that $1 \leq k \leq \gamma \left( f^{(b)} \right)$, it turns out that
+\begin{equation*} \gamma_k \leq b. \end{equation*}
+Moreover, $0$ does not belong to $f^{(b)}$ by definition, and thus $f$ admits at least $\gamma \left( f^{(b)} \right)$ critical points in the sublevel $f^{(b)}$.\end{proof}
+
+\begin{lemma} \label{gen:equiv} Let $E$ be a normed space, and let $A \in \Gamma$. Then
+\begin{equation}\label{eq:equiv} \gamma(A) = \min \left\{ k \in \N \: \left| \: \begin{gathered} \text{$\exists \, A_1, \, \dots, \, A_k \subset E$ closed,} \\ \text{$\left(A_i \cap (-A_i) \right) = \emptyset$ and $A \subseteq \bigcup_{i =1}^k \left(A_i \cup (-A_i) \right)$}  \end{gathered} \right. \right\}. \end{equation} \end{lemma}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=6cm, height=6cm]{Images/MTINAG2.png}
+\caption{Example: the genus of $S^1$ is equal to $2$.}
+\end{figure}
+
+\begin{proof}Let $A_1, \, \dots, \, A_k$ be closed subspaces of $E$ such that
+\begin{equation*}\left(A_i \cap (-A_i) \right) = \emptyset \quad \text{and} \quad A \subseteq \bigcup_{i =1}^k \left(A_i \cup (-A_i) \right). \end{equation*}
+For every $i = 1, \, \dots, \, k$ we can define a continuous odd map by considering the function
+\begin{equation*} \varphi_i(x) := \begin{cases} 1 & x \in A_i \\ - 1 & x \in - A_i \end{cases} \end{equation*}
+and then extend it to a continuous odd map $\psi_i : A \to \R$. Then
+\begin{equation*} \Psi := (\psi_1, \, \dots, \, \psi_k) : A \to \R^k \setminus \{0\} \end{equation*}
+is a well defined map since $0$ does not belong to the image (by assumption the family $\{A_i, \, -A_i\}_{i = 1, \, \dots, \, n}$ forms a covering of $A$), and it is easy to check that $\psi$ is continuous and odd, that is,
+\begin{equation*}\gamma(A) \leq k. \end{equation*}
+Vice versa, let $\Phi : A \to \R^{k} \setminus \{0\}$ be a continuous odd map. Up to composing with a projection, we may always assume (see \hyperref[rmk:genussphere]{Remark \ref{rmk:genussphere}}) that $\Phi$ sends $A$ to the sphere $S^{k -1} \subset \R^k$. Clearly for every $u \in A$ it turns out that
+\begin{equation*} \Phi(u) \in S^{k -1} \implies \sum_{i = 1}^k \Phi_i(u)^2 = 1 \implies \exists \, i \in \{1, \, \dots, \, n\} \: : \: |\Phi_i(u)| \geq \frac{1}{\sqrt{k}}, \end{equation*}
+and thus we can define
+\begin{equation*} A_i := \left\{u \in A \: \left| \: \Phi_i(u) \geq \frac{1}{\sqrt{k}} \right. \right\} \implies - A_i = \left\{u \in A \: \left| \: \Phi_i(u) \leq -\frac{1}{\sqrt{k}} \right. \right\}.\end{equation*}
+The reader may check by herself that the family $\{A_i, \, - A_i\}_{i = 1, \, \dots, \, n}$ satisfies the required properties, and thus we can conclude that \eqref{eq:equiv} holds true.\end{proof}
+
+\begin{corollary}Let $K$ be a compact subset of $E$ such that $0 \notin K$ and $K \in \Gamma$. Then the genus of $K$ is finite, that is,
+\begin{equation*} \gamma(K) < + \infty. \end{equation*} \end{corollary}
+
+\begin{proof}It is a straightforward consequence of \hyperref[gen:equiv]{Lemma \ref{gen:equiv}}. Indeed, for every $u \in K$ there exists an open neighborhood $V_u \ni u$ such that
+\begin{equation*} \overline{V_u} \cap \left( \overline{- V_u} \right) = \emptyset. \end{equation*}
+The family
+\begin{equation*} \left\{ V_u, \, - V_u \right\}_{u \in K} \end{equation*}
+is an open covering of $K$, hence there exists a finite subfamily 
+\begin{equation*} \left\{ V_{u_i}, \, - V_{u_i} \right\}_{i = 1, \, \dots, \, M} \end{equation*}
+that still covers $K$.
+\end{proof}
+
+\section{Relative Genus}
+
+\paragraph{Definition and Main Properties.} Let $E$ be a normed space, and let us denote by $\Gamma$ the class of all the symmetric subsets $A \subseteq E \setminus \{0\}$ such that $A$ is closed in $E \setminus \{0\}$.
+
+\begin{definition}[Genus] Let $A, \, B \in \Gamma$ such that $A \subseteq B$. The \textit{relative genus} of $B$ with respect to $A$ is defined by
+\begin{equation*} \gamma(B, \, A) := \min \left\{k \in \N \: \left| \: \begin{gathered} 
+\text{$\exists \, F_0, \, F \in \Gamma$ closed subsets such that} \\ \text{$A \subseteq F_0$, $A$ is a deformation retract of $F_0$,} \\ \text{$B = F_0 \cup F$ and $\gamma(F) \geq k$} \end{gathered} \right. \right\}, \end{equation*}
+and $+ \infty$ if such a natural number $k$ does not exist. \end{definition}
+
+\begin{remark} If $A = \emptyset$, then it turns out that $\gamma(B, \, A) = \gamma(B)$.\end{remark}
+
+\begin{proposition} \label{propgenusrel}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $\gamma(\emptyset,  \, \emptyset) = 0$.
+\item Let $A, \, B, \, C \in \Gamma$. If $A \subseteq B, \, C$ and there exists a continuous odd map $\Phi : B \to C$ such that $\Phi \, \big|_A = \mathrm{id}_A$, then
+\begin{equation*}\gamma(C, \, A) \geq \gamma(B, \, A). \end{equation*}
+\item Let $A, \, B, \, C \in \Gamma$. If $A \subseteq B, \, C$, then
+\begin{equation*}\gamma\left( B \cup C, \, A \right) \leq \gamma(B, \, A) + \gamma(C). \end{equation*}
+\end{enumerate} \end{proposition}
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\setcounter{enumi}{1}
+\item Let $F, \, F_0 \in \Gamma$ be the closed subsets given by the definition of $\gamma(C, \, A)$. Clearly
+\begin{equation*} F^\prime := \Phi^{-1}(F) \qquad \text{and} \qquad F_0^\prime := \Phi^{-1}(F_0) \end{equation*}
+belong to $\Gamma$, and their union is equal to $B$. Moreover, the map $\Phi$ is the identity on $A$, hence
+\begin{equation*} A \subseteq F_0 \implies A = \Phi^{-1}(A) \subseteq \Phi^{-1}(F_0) = F_0^\prime.   \end{equation*}
+Let $r : F_0 \to A$ be the deformation retraction; then
+\begin{equation*} r \circ \Phi : F_0^\prime \to A \end{equation*}
+is also a deformation retraction, and hence it follows from the definitions that
+\begin{equation*}\gamma(C, \, A) \geq \gamma(B, \, A). \end{equation*}
+\item Let $F, \, F_0 \in \Gamma$ be the closed subsets given by the definition of $\gamma(B, \, A)$. Hence
+\begin{equation*} B \cup C = F_0 \cup F \cup C, \end{equation*}
+and $A \subseteq F_0$ is still a deformation retract of $F_0$. Moreover, it turns out that
+\begin{equation*} \gamma \left(F \cup C \right) \leq \gamma(F) + \gamma(C) = \gamma(B, \, A) + \gamma(C), \end{equation*}
+and the latter term is independent of $F$, hence we infer that
+\begin{equation*}\gamma\left( B \cup C, \, A \right) \leq \gamma(B, \, A) + \gamma(C). \end{equation*}
+\end{enumerate} \end{proof}
+
+\section{Relative Genus in Calculus of Variations}
+
+Let $H$ be a Hilbert space, and let $X \subseteq E$ be a complete submanifold without boundary of class $C^2$ symmetric with respect to the origin, i.e.,
+\begin{equation*} u \in X \implies - u \in X. \end{equation*}
+In this section, the functional $f : X \to \R$ will always be assumed to be \textbf{even} and of class $C^1(X)$.
+
+\begin{notation}Let $a_0 \in \R$ be a real number, and let $k \in \N$ be a natural number such that
+\begin{equation*} 1 \leq k \leq \gamma \left(X, \, f^{(a_0)} \right). \end{equation*}
+We denote by $\gamma(a_0)_k$ the infimum of all the sublevels such that the relative genus is at least $k$, that is,
+\begin{equation*} \gamma(a_0)_k := \inf \left\{ c \in \R_{\geq a_0} \: \left| \: \gamma \left( f^{(c)}, \, f^{(a_0)} \right) \geq k \right. \right\}. \end{equation*}
+Moreover, it is possible that $\gamma \left( f^{(c)}, \, f^{(a_0)} \right) \geq k$ is not satisfied for any real number $c \in \R$. In this case, we set $\gamma(a_0)_k := + \infty$ and, clearly, the supremum of $f$ must be $+ \infty$. \end{notation}
+
+\begin{lemma}[Fundamental Lemma] \label{genrel:fl}Let $a_0 \in \R$ be a real number, and let $k \in \N$ be a natural number such that $1 \leq k \leq \gamma\left(X, \, f^{(a_0)} \right)$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $a_0 \leq \gamma(a_0)_1 \leq \gamma(a_0)_2 \leq \dots \leq \gamma(a_0)_k \leq \sup \, f$.
+\item If $\gamma(a_0)_k \in \R$ and $f$ satisfies the $\left( \mathrm{PS} \right)_{\gamma(a_0)_k}$ condition, then $\gamma(a_0)_k$ is a critical level for the functional $f$.
+\item If $1 \leq k \leq k + h \leq \gamma \left(X, \, f^{(a_0)} \right)$ are natural numbers such that $\gamma(a_0)_k = \gamma(a_0)_{k+1} = \dots = \gamma(a_0)_{k + h} \in \R$, and $f$ satisfies the $\left( \mathrm{PS} \right)_{\gamma(a_0)_k}$ condition, then for the set of all the critical points of $f$, denoted by $Z_{\gamma(a_0)_k}$, it results
+\begin{equation*} \gamma \left( Z_{\gamma(a_0)_k} \right) \geq h + 1. \end{equation*}
+\end{enumerate} \end{lemma}
+
+The proof of this fundamental result relies on a more precise formulation of the deformation lemma (i.e., we do not require $\epsilon$ and $\delta$ to be equal).
+
+\begin{lemma}[Deformation Lemma, Variant II] \label{deflemma2symrel}Let $f : X \to \R$ be a functional, and let $c$ be a critical value of $f$. If we set
+\begin{equation*} \mathcal{Z}_c := \left\{ u \in X \: \left| \: \mathrm{grad} \, f(u) = 0, \, f(u) = c \right. \right\} \end{equation*}
+to be the set of critical points, and we assume that the Palais-Smale condition at the level $c$ holds true and that there exists $V$ open neighborhood of $\mathcal{Z}_c$, then there exist $\epsilon_0 > 0$ such that for any $\epsilon, \, \delta \in [0, \, \epsilon_0]$ there is an homotopy
+\begin{equation*} H : [0, \, 1] \times \left( \left( f^{(c+\epsilon)} \setminus V \right) \cup f^{(c - \delta)} \right) \to f^{(c+\epsilon)} \end{equation*}
+satisfying the following properties:
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $H(0, \, u) = u$.
+\item $H(1, \, u) \in f^{(c - \epsilon)}$.
+\item $H(t, \, u) = u$ for every $u \in f^{(c - \delta)} \setminus V$ and every $t \in [0, \, 1]$.
+\end{enumerate}
+Moreover, if $f$ is an even functional, then the homotopy is odd at every level (i.e., $H_t$ is odd for every $t \in [0, \, 1]$). \end{lemma}
+
+\begin{proof}[Proof of Lemma \ref{genrel:fl}] We observe that it suffices to prove \textbf{(c)}. Indeed, the first assertion is obvious by definition, while the second immediately follows from the third one.
+
+\paragraph{Step 0.} By \hyperref[gen:fl]{Lemma \ref{gen:fl}} one can always find an open symmetric neighborhood $V$ of $Z_c$ such that
+\begin{equation*} \gamma \left( \overline{V} \right) = \gamma(Z_c). \end{equation*}
+
+\paragraph{Case 1 ($c > a_0$).} There exists $\epsilon > 0$ such that $c - \epsilon > a_0$, and there exists a $\gamma$-retraction
+\begin{equation*} r : \left( f^{(c+ \epsilon)} \setminus V \right) \cup f^{(c - \epsilon)} \to f^{(c - \epsilon)} \end{equation*}
+such that $r \, \big|_{f^{(a_0)}} \equiv \mathrm{id}_{f^{(a_0)}}$. It follows that
+\begin{equation*} \begin{aligned} k + h & \leq \gamma \left(f^{(c+ \epsilon)}, \, f^{(a_0)} \right) \, {\color{red}\leq} \, \gamma \left( \left( f^{(c+\epsilon)} \setminus V \right) \cup \overline{V}, \, f^{(a_0)} \right) \, {\color{blue}\leq} \\ & \, {\color{blue}\leq} \, \gamma \left( \left( f^{(c+\epsilon)} \setminus V \right) \cup f^{(c-\epsilon)}, \, f^{(a_0)} \right) + \gamma \left( \overline{V} \right) \, {\color{green}\leq} \\ & \, {\color{green}\leq} \, \gamma \left( f^{(c-\epsilon)}, \, f^{(a_0)} \right) + \gamma \left( \overline{V} \right), \end{aligned}\end{equation*}
+where the {\color{red}red} inequality is the monotony of the genus, the {\color{blue}blue} inequality is the subadditivity of the genus and the {\color{green}green} inequality is given by the fact that $c - \epsilon > a_0$. Finally, since $c = \gamma(a_0)_k$, then it turns out that
+\begin{equation*}\gamma \left( f^{(c-\epsilon)}, \, f^{(a_0)} \right) + \gamma \left( \overline{V} \right) \leq k + \gamma(Z_c),\end{equation*}
+which is exactly what we wanted to prove.
+
+\paragraph{Case 2 ($c = a_0$).} It is easy to prove that $k = 1$ and
+\begin{equation*} \gamma(a_0)_1 = \dots = \gamma(a_0)_{1 + h} = c. \end{equation*}
+Hence there exists a symmetric open neighborhood $V$ of $Z_c$ such that
+\begin{equation*} \gamma \left( \overline{V} \right) = \gamma(Z_c), \end{equation*}
+and by \hyperref[deflemma2symrel]{Deformation Lemma Variant \ref{deflemma2symrel}} it turns out that
+\begin{equation*} \begin{aligned} 1 + h & \leq \gamma \left( f^{(c+\epsilon)}, \, f^{(a_0)} \right) \leq \\ & \leq \gamma \left( \left( f^{(c+\epsilon)}\setminus V \right) \cup f^{(c)}, \, f^{(a_0)} \right) + \gamma \left( \overline{V} \right) \, {\color{blue}=} \\ & \, {\color{blue}=}\,  \gamma \left( \overline{V} \right) = \gamma(Z_c), \end{aligned}  \end{equation*} 
+where the {\color{blue}blue} equality is given by the fact that
+\begin{equation*}\left( f^{(c+\epsilon)}\setminus V \right) \cup f^{(c)} = \emptyset. \end{equation*}
+\end{proof}
+
+%TEOREMA FALSO
+
+\paragraph{Motivational Example.} Let $E$ be a Hilbert space, and let $f : E \to \R$ be an even functional of class $C^2(X)$ such that $f(0) = 0$. Suppose that there is a decomposition
+\begin{equation*} E = X_0 \oplus X_1 \oplus X_2, \end{equation*}
+and let us denote by $S_\rho$ the sphere in $X_2 \oplus X_3$ of radius $\rho$, and by $S_R$ the sphere in $X_1\oplus X_2$ of radius $R$. Let $0 < \rho < R$, and assume that
+\begin{equation} \label{sdrrrd} \sup_{x \in S_R} f(x) \leq 0 = f(0) \leq \inf_{x \in S_\rho} f(x). \end{equation}
+The functional $f$ is even, hence the gradient $\mathrm{grad} \, f$ is odd and $\mathrm{grad} \, f(0) = 0$. Let us denote by $f^{\prime \prime}(0) \, |h|^2$ the Hessian matrix associated to $f$, that is,
+\begin{equation*} f^{\prime \prime}(0) \, |h|^2 = \left( Hf(0) \, h, \, h \right). \end{equation*}
+The direct sum $X_2 \otimes X_3$ is the space of eigenvectors associated to positive eigenvalues, i.e.,
+\begin{equation} \label{sdrrrd2} \forall \, h \in X_2 \otimes X_3 \leadsto f^{\prime\prime}(0) \, |h|^2 \geq k \, |h|^2, \end{equation}
+and it follows from \eqref{sdrrrd} that
+\begin{equation*} \lim_{|r| \to + \infty} f(r) = - \infty. \end{equation*}
+
+\begin{theorem}\label{thhhhtt}Let
+\begin{equation*} b := \sup_{x \in B_R} \, f(x) \qquad \text{and} \qquad a := \inf_{x \in S_\rho} \, f(x), \end{equation*}
+and assume that $b \in \R$ (i.e., $b$ is finite). Then
+\begin{equation*} \gamma \left( f^{(b)}, \, f^{(a)} \right) \geq \mathrm{dim} \, X_2. \end{equation*}\end{theorem}
+
+To prove this theorem, we first need to state and prove some technical results.
+
+\begin{remark} If $A \in \Gamma$ and $\varphi : A \to \R^k$ is a continuous odd map, then the genus of $A_0 := \varphi^{-1} \left( \{0\} \right)$ is bounded from below by
+\begin{equation} \label{belowesd} \gamma(A_0) \geq \gamma(A) - k. \end{equation} \end{remark}
+
+\begin{proof}By \hyperref[propgenus]{Proposition \ref{propgenus}} there exists an open neighborhood $V_0$ of $A_0$ such that
+\begin{equation*} A_0 \subseteq \accentset{\circ}{V_0} \qquad \text{and} \qquad \gamma\left( \overline{V_0} \right) = \gamma(A_0). \end{equation*} %RIC.
+The map $\varphi$ sends $A \setminus \accentset{\circ}{V_0}$ in $\R^k \setminus \{0\}$, hence
+\begin{equation*} \gamma \left( A \setminus \accentset{\circ}{V_0} \right) \leq k. \end{equation*}
+On the other hand, it turns out that
+\begin{equation*} A = \left( A \setminus \accentset{\circ}{V_0} \right) \cup \overline{V_0}, \end{equation*}
+hence by the subadditivity of the genus
+\begin{equation*} \gamma(A) \leq \gamma \left( A \setminus \accentset{\circ}{V_0} \right) + \underbrace{\gamma \left( \overline{V_0} \right)}_{= \gamma(A_0)} \leq k + \gamma(A_0),\end{equation*}
+which is exactly \eqref{belowesd}.
+\end{proof}
+
+\begin{lemma} Let $h : B_R \to E$ be a continuous odd map such that $h \, \big|_{S_R} \equiv \mathrm{id}_{S_R}$. Then
+\begin{equation} \label{belowesd1} \gamma \left( h^{-1}(S_{\rho}) \right) \geq \mathrm{dim} \, X_2. \end{equation} \end{lemma}
+
+\begin{proof} Let us define the set
+\begin{equation*} U:= \left\{ u \in \overline{B_R} \: \left| \: \| h(u) \| < \rho \right. \right\}. \end{equation*}
+Clearly, $U$ is an open symmetric set containing the origin $0$. On the other hand, if $u \in S_R$, then by assumption
+\begin{equation*} h(u) = u \implies \|h(u)\| = R > \rho, \end{equation*}
+and this implies that
+\begin{equation*} \overline{U} \subseteq B_R \qquad \text{and} \qquad \|h(u)\| = \rho \quad \forall \, u \in \partial \, U, \end{equation*}
+where $\partial \, U$ denotes the boundary in $X_1 \oplus X_2$. Let $P : E \to X_1$ be the projection onto $X_1$ such that $\mathrm{ker}(P) = X_2 \oplus X_3$; then
+\begin{equation*}h^{-1} (S_\rho) \supseteq \left\{ u \in \partial \, U \: \left| \: P \circ h (u) = 0 \right. \right\}. \end{equation*}
+But $P \circ h$ is an odd map, hence, if we assume $\mathrm{dim} \, X_1 = k <+ \infty$ and $\mathrm{dim} \, X_2, \, \mathrm{dim} \, X_3 < + \infty$, then
+\begin{equation} \label{eq12233} \gamma \left(  \left\{ u \in \partial \, U \: \left| \: P \circ h (u) = 0 \right. \right\} \right) \geq \gamma( \partial \, U ) - k. \end{equation}
+By \hyperref[b]{Borsuk Theorem \ref{b}} it turns out that
+\begin{equation*} \gamma(\partial \, U) = \mathrm{dim} \, X_1 +\mathrm{dim} \, X_2 \end{equation*}
+since $U$ is a neighborhood of $0$ in $X_1 \oplus X_2$, and thus \eqref{eq12233} concludes the proof.
+\end{proof}
+
+\begin{proposition} Let $A, \, B \in \Gamma$ be sets such that $A \subseteq B$, $\overline{B_R} \subseteq B$, and let $A := f^{(a - \epsilon)}$. Then
+\begin{equation*} A \cap S_\rho = \emptyset \qquad \text{and} \qquad A \supseteq S_R \quad \text{if $a - \epsilon > 0$}, \end{equation*}
+and it turns out that
+\begin{equation} \label{ths.dd} \gamma(B, \, A) \geq \mathrm{dim} \, X_2. \end{equation} \end{proposition}
+
+\begin{proof} Let $F, \, F_0 \in \Gamma$ be such that $B = F_0 \cup F$. Suppose that $A \subseteq F_0$, and let $r :F_0 \to A$ be a $\gamma$-retraction. The thesis \eqref{ths.dd} is equivalent to proving that
+\begin{equation*}\gamma(F) \geq \mathrm{dim} \, X_2. \end{equation*}
+In particular, there exists a odd deformation $r^\ast : \overline{B_R} \to E$ which is the identity on the sphere $S_R$; more precisely, $r^\ast$ is a retraction of $F_0 \cap \overline{B_R}$ to $A$. Then
+\begin{equation*} F \subseteq (r^\ast)^{-1}(S_\rho) \end{equation*}
+since if $u$ is an element such that $r^\ast(u) \in S_\rho$, then $u \notin F_0$ ($F_0 \supseteq A$) since $r^\ast$ is fixed on $A$ and $S_\rho \cap A = \emptyset$.
+Then it follows from \hyperref[belowesd1]{Lemma \ref{belowesd1}} that
+\begin{equation*} \gamma(F) \geq \gamma \left( h^{-1} (S_\rho) \right) \geq \mathrm{dim} \, X_2, \end{equation*}
+and this concludes the proof.\end{proof}
+
+We proved that, if $a - \epsilon >0$, then
+\begin{equation*} \gamma \left( f^{(b)}, \, f^{(a - \epsilon)} \right) \geq \mathrm{dim} \, X_2, \end{equation*}
+that is, the statement of \hyperref[thhhhtt]{Theorem \ref{thhhhtt}} is proved.
+
+\paragraph{Conclusion.} To conclude this section, we introduce some fundamental results without proving them; the reader may do it as an exercise since they quickly follow from the tools we have introduced so far.
+
+\begin{proposition}Let $a < b$ be real numbers, and assume that $f(0) \notin [a, \, b]$ and $f$ satisfies the Palais-Smale condition $(\mathrm{PS})_c$ for every $c \in [a, \, b]$. The following assertion hold true: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item  If $\gamma \left( f^{(a)} \right)$ is finite, then $\gamma \left( f^{(b)} \right)$ is also finite.
+\item The relative genus is finite, i.e.,
+\begin{equation*} \gamma \left( f^{(b)}, \, f^{(a)} \right) < + \infty. \end{equation*}
+\item Assume that $f$ is bounded from below on $X$, $0 \notin f^{(b)}$, and assume also that $f$ satisfies the Palais-Smale condition $(\mathrm{PS})_c$ for every $c \leq b$. Then
+\begin{equation*} \gamma \left( f^{(b)}\right) < + \infty. \end{equation*}
+\end{enumerate}\end{proposition}
+
+\begin{theorem}Assume that $f$ is a functional bounded from below on $X$, and assume also that $f$ satisfies the  Palais-Smale condition $(\mathrm{PS})_c$ for every $c$. If $\gamma(X) = + \infty$, then
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item there are infinitely many critical points, i.e.,
+\begin{equation*} \symbol{35} \, Z_f = + \infty; \end{equation*}
+\item the supremum is infinite, i.e.
+\begin{equation*} \sup_{x \in X} f(x) = \sup \left(Z_f \right) = + \infty. \end{equation*}
+\end{enumerate}
+\end{theorem}
+
+\section{Lusternik-Schnirelman Category}
+
+Let $X$ be a topological space. We will introduce the notion of the \textit{Lusternik-Schnirelman category} using the class of closed set, but this is by no means necessary (though, it is the most used in literature), and one could make a different choice.
+
+\begin{definition}[Category] Let $A \subseteq X$ be a closed and nonempty set. The category of $A$ in $X$ is given by
+\begin{equation*} \mathrm{cat}_X(A) := \min \left\{k \in \N \setminus \{0\} \: \left| \: \begin{gathered}\text{$\exists \, F_1, \, \dots, \, F_k \subset X$ closed contractible} \\ \text{subsets such that $A \subset \bigcup_{i = 1}^{k} F_i$} \end{gathered} \right. \right\} \end{equation*}
+and, if no such $k$ exists, then we set $ \mathrm{cat}_X(A) := + \infty$. Moreover,
+\begin{equation*} \mathrm{cat}_X(\emptyset) = 0. \end{equation*}\end{definition}
+
+\begin{example}Let $X = \R^N \setminus \{0\}$, and let $S$ be the sphere $S^{N-1} \subset \R^N$. It turns out that
+\begin{equation*} \mathrm{cat}_X(S) = 2 \end{equation*}
+since the sphere is not contractible in $X$. Indeed, by \hyperref[43203o3]{Theorem \ref{43203o3}} the homotopy would cover the whole ball $B^{N-1}$, but this is not possible since $0$ doesn't belong to the space. In a similar fashion one can argue that, if $\Omega \subseteq \R^N$ and $p_0 \in \Omega$, then
+\begin{equation*} \mathrm{cat}_{\R^N \setminus \{p_0\}}( \partial \, \Omega) \geq 2. \end{equation*}\end{example}
+
+\begin{example}The category of the torus $T = S^1 \times S^1$ in itself is equal to $3$, i.e.,
+\begin{equation*}\mathrm{cat}_T(T) = 3, \end{equation*}
+but this is a highly nontrivial result. %REF
+\end{example}
+
+\begin{remark} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $X$ is connected and $A$ is a finite set, then
+\begin{equation*}\mathrm{cat}_X(A) = 1. \end{equation*}
+\item If for all $p \in X$ there exists a closed and contractible neighborhood $U_p$ of $p$, then a compact set $A \subseteq X$ has finite category, i.e.,
+\begin{equation*}\mathrm{cat}_X(A) < + \infty. \end{equation*}
+\end{enumerate}\end{remark}
+
+\begin{proposition} \label{propcat}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let $A \subseteq X$ be a closed set. Then $\mathrm{cat}_X(A) = 0$ if and only if $A = \emptyset$.
+\item Let $A \subseteq B \subseteq X$ be closed sets. The category is monotone, i.e.,
+\begin{equation*} \mathrm{cat}_X(A) \leq \mathrm{cat}_X(B). \end{equation*}
+Moreover, if $B$ contains a deformation of $A$, then
+\begin{equation*} \mathrm{cat}_X(A) \leq \mathrm{cat}_X(B). \end{equation*}
+\item Let $A, \, B \subseteq X$ be closed sets. The category is subadditive, i.e.,
+\begin{equation*} \mathrm{cat}_X(A \cup B) \leq \mathrm{cat}_X(A) + \mathrm{cat}_X(B). \end{equation*}
+\item If $X$ is a complete Banach manifold of class $C^1$, then for any $A \subseteq X$ closed there is a neighborhood $V$ of $A$ whose closure has the same category as $A$, i.e.,
+\begin{equation*} \mathrm{cat}_X\left( \overline{V} \right) = \mathrm{cat}_X(A). \end{equation*}
+\end{enumerate} \end{proposition}
+
+\begin{proof}We only prove the second assertion of \textbf{(b)}. Let
+\begin{equation*} H : [0, \, 1] \times A \to B \end{equation*}
+be the deformation of $A$, and let $F_0, \, \dots, \, F_k$ be the closed sets given by the definition of category associated with $B$, i.e.,
+\begin{equation*} B \subset \bigcup_{i = 1}^k F_i. \end{equation*}
+For every $i = 1, \, \dots, \, k$ it turns out that
+\begin{equation*} F_i^\prime := \left\{ u \in A \: \left| \: H(1, \, u) \in F_i \right. \right\} \end{equation*}
+is a closed set, and it is easy to check that
+\begin{equation*} A \subset \bigcup_{i=1}^k F_i^\prime. \end{equation*}
+Let $H_i : [0, \, 1] \times F_i \to X$ be the homotopy between $\mathrm{id}_{F_i}$ and the constant map $u_{0, \, i} \in F_i$. Then we can easily define a deformation retraction of $F_i^\prime$ onto a point as follows:
+\begin{equation*} H_i^\prime : [0, \, 1] \times F_i^\prime \to X, \qquad H_i^\prime(t, \, u) := \begin{cases} H(2t, \, u) & t \in \left[0, \, \frac{1}{2} \right] \\[1em] H_i(2t - 1, \, u) & t \in \left[ \frac{1}{2}, \, 1 \right].  \end{cases} \end{equation*}
+The reader may check by herself that $H_i^\prime$ is well defined at $t = 1/2$ for every $i = 1, \, \dots, \, k$. \end{proof}
+
+\begin{remark}Let $A \subseteq Y \subseteq X$. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item If $Y$ is closed in $X$ and $A$ is closed in $Y$, then
+\begin{equation*} \mathrm{cat}_X \, A \leq \mathrm{cat}_X \, B. \end{equation*}
+\item If $Y$ is a deformation retract of $X$, then
+\begin{equation*} \mathrm{cat}_X \, A = \mathrm{cat}_X \, B. \end{equation*}
+\item If $F \subseteq X$ is contractible in $X$, then $F \cap Y$ is contractible in $Y$.
+\end{enumerate}\end{remark}
+
+\begin{remark}Let $X$ be a Riemannian manifold, i.e., a complete manifold of class $C^2$ without boundary.
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item If $X$ is locally contractible (that is, for every $x \in X$ there is a neighborhood $U_x \ni x$ contractible in $X$), then the category of a compact subset $K \subseteq X$ is finite.
+\item If $X$ is connected and $A \subset X$ is finite, then $\mathrm{cat}_X \, A = 1$.
+\end{enumerate}\end{remark}
+
+\begin{remark}The main issue of the category is that it highly depends on the ambient space. For example, if $X = \R^2 \setminus \{0\}$, $A = [0, \, 1]$ and $B = S^1$, then one can check that
+\begin{equation*} \mathrm{cat}_X \, A < \mathrm{cat}_X \, B. \end{equation*} \end{remark}
+
+\section{Category in Calculus of Variations}
+
+Let $X$ be a Hilbert space (or, more generally, a complete Riemannian manifold of class $C^2$ without border), and let $f : X \to \R$ be a functional of class $C^1(X)$.
+
+\begin{definition} Let $k$ be an integer such that $1 \leq k \leq \mathrm{cat}_X(X)$. The $k$-th essential critical level of $f$ is defined by setting
+\begin{equation*} c_k = \inf \left\{ c \in \R \: \left| \: \mathrm{cat}_X \, f^{(c)} \geq k \right. \right\}, \end{equation*}
+and, if no such $c$ exists, we set $c_k = + \infty$.
+\end{definition}
+
+\begin{lemma}\label{cat:fl} Let $k \in \N$ be a natural number such that $1 \leq k \leq \mathrm{cat}_X(X)$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The sequence is bounded and increasing, i.e.,
+\begin{equation*} \inf_{x \in X} f(x) = c_1 \leq c_2 \leq \dots \leq c_k \leq \sup_{x \in X} f(x). \end{equation*}
+\item If $c_k \in \R$ and $f$ satisfies the $\left( \mathrm{PS} \right)_{c_k}$ condition, then $c_k$ is a critical level for the functional $f$.
+\item Let $1 \leq k \leq k + h \leq \mathrm{cat}_X(X)$. If $c_k = c_{k+1} = \dots = c_{k + h} \in \R$ and $f$ satisfies the $\left( \mathrm{PS} \right)_{c_k}$ condition, then for the set of all the critical points of $f$, denoted by $Z_{c_k}$, it results
+\begin{equation*} \mathrm{cat}_X \, Z_{c_k}  \geq h + 1. \end{equation*}
+\end{enumerate} \end{lemma}
+
+\begin{proof} We observe that it suffices to prove \textbf{(c)}. Indeed, the first assertion is obvious by definition, while the second immediately follows from the third one.
+
+\paragraph{Step 0.} By \hyperref[propcat]{Proposition \ref{propcat}} one can always find an open neighborhood $V$ of $Z_c$ such that
+\begin{equation*} \mathrm{cat}_X \, \overline{V} =\mathrm{cat}_X \, Z_c. \end{equation*}
+
+\paragraph{Step 1.} By \hyperref[deflemma2]{Deformation Lemma \ref{deflemma2}} there is a real number $\epsilon > 0$ and there is a deformation retraction
+\begin{equation*} H : [0, \, 1] \times \left( f^{(c+ \epsilon)} \setminus V \right) \to f^{(c - \epsilon)}. \end{equation*}
+It follows that
+\begin{equation*} \begin{aligned} k + h & \leq \mathrm{cat}_X \, f^{(c+ \epsilon)} \, {\color{blue}\leq} \\ & \, {\color{blue}\leq} \,  \mathrm{cat}_X \, \left( f^{(c+\epsilon)} \setminus V \right) +  \mathrm{cat}_X \, \left( \overline{V} \right) \, {\color{green}\leq} \\ & \, {\color{green}\leq} \,  \mathrm{cat}_X \, f^{(c-\epsilon)} +  \mathrm{cat}_X \, Z_c, \end{aligned}\end{equation*}
+where the {\color{blue}blue} inequality is the subadditivity of the genus and the {\color{green}green} inequality is given by the fact that $f^{(c - \epsilon)}$ is a retraction by deformation of $ f^{(c+\epsilon)} \setminus V$ (see \hyperref[propcat]{Proposition \ref{propcat}}, \textbf{(b)}). It turns out that
+\begin{equation*} k + h \leq \mathrm{cat}_X \, f^{(c-\epsilon)} + \mathrm{cat}_X \, Z_c < k + \mathrm{cat}_X \, _c \implies k + h \leq k - 1 + \mathrm{cat}_X \, Z_c, \end{equation*}
+which is the thesis.
+\end{proof}
+
+\begin{theorem}Assume that $X$ is compact. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item There are at least $\mathrm{cat}_X \, X$ critical points, i.e.,
+\begin{equation*} \symbol{35} \, Z_f \geq \mathrm{cat}_X \, X. \end{equation*}
+\item Assume that $X$ is connected. If $ \symbol{35} \, Z_f  < + \infty$, then there are exactly $\mathrm{cat}_X \, X$ distinct critical levels.
+\end{enumerate} \end{theorem}
+
+\begin{theorem}Assume that $a, \, b \in \R$ are two real numbers such that $a < b$, and assume that $f$ satisfies the Palais-Smale condition $\left( \mathrm{PS} \right)_c$ condition at every level $c \in \R$. Then
+\begin{equation*} \mathrm{cat}_X \, f^{(b)} \leq \mathrm{cat}_X \, f^{(a)} + \symbol{35} \left\{ u \in Z_f \: \left| \: f(u) \in [a, \, b] \right. \right\}. \end{equation*} \end{theorem}
+
+\begin{theorem}Let $X$ be a Hilbert space, and assume that there are two subspaces $X_0$ and $X_1$ such that
+\begin{equation*} X = X_0 \oplus X_1 \qquad \text{and} \qquad \mathrm{dim} \, X_0 = N < + \infty. \end{equation*}
+Let $f \in C^1(X; \; \R)$ be a differentiable functional, and let $W$ be an open subspace of $X_0$ containing the origin. If
+\begin{equation*} \sup_{x \in \partial \, W} f(x) < \inf_{x \in X_1} f(x) \qquad \text{and} \qquad \inf_{x \in X} f(x) > - \infty \end{equation*}
+and the Palais-Smale condition $(\mathrm{PS})_c$ holds for every $c <\sup_{x \in \partial \, W} f(x)$, then $f$ admits (at least) two critical points $u_1$ and $u_2$ such that $f(u_i) \leq \sup_{x \in \partial \, W} f(x) $. \end{theorem}
+
+\begin{proof}Let us consider any real number
+\begin{equation*} b \in \left( \sup_{x \in \partial \, W} f(x) , \, \inf_{x \in X_1} f(x) \right). \end{equation*}
+By assumption it turns out that
+\begin{equation*} f^{(b)} \supseteq \partial \, W \qquad \text{and} \qquad f^{(b)} \cap X_1 = \emptyset, \end{equation*}
+hence the category $\mathrm{cat}_{f^{(b)}} \, f^{(b)}$ is bigger or equal than $\mathrm{cat}_{f^{(b)}} \, \partial \, W \geq 2$, since $\partial \, W$ is not contractible in $X \setminus X_1$.
+
+By assumption the Palais-Smale condition holds at the level $b$; thus the number of critical points in $f^{(b)}$ is at least two. \end{proof} 
+
+\begin{theorem}Assume that $f$ is bounded from below, i.e.,
+\begin{equation*} \inf_{x \in X} f(x) > - \infty, \end{equation*}
+and assume that $f$ satisfies the Palais-Smale condition $\left( \mathrm{PS} \right)_c$ at every level $c \in \R$. If $\mathrm{cat}_X \, X = + \infty$, then there are infinitely many critical points and the supremum of $f$ is $+ \infty$, that is,
+\begin{equation*} \symbol{35} \, Z_f = \sup_{x \in Z_f} f(x) = + \infty. \end{equation*}\end{theorem}
+
+\paragraph{Strict Sublevels.} Let $\bar{b}$ be any real number, and set
+\begin{equation*} X_{\bar{b}} := \left\{u \in X \: \left| \: f(u) < \bar{b} \right. \right\}.\end{equation*}
+Let $k \in \N$ be a natural number such that $1 \leq k \leq \mathrm{cat}_{X_{\bar{b}}} \, X_{\bar{b}}$, and let us denote by $\bar{c}_k$ the real number defined by
+\begin{equation*} \bar{c}_k := \inf \left\{ c < \bar{b} \: \left| \: \mathrm{cat}_{X_{\bar{b}}} \, f^{(c)} \geq k \right. \right\}.\end{equation*}
+
+\begin{lemma}\label{cat:flstrict} Let $\bar{b}$ be a real number grater or equal than $\inf_{x \in X}f(x)$, and let $k \in \N$ be a natural number such that $1 \leq k \leq \mathrm{cat}_{X_{\bar{b}}} \, X_{\bar{b}}$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The sequence is bounded and increasing, i.e.,
+\begin{equation*} \inf_{x \in X} f(x) = \bar{c}_1 \leq \bar{c}_2 \leq \dots \leq \bar{c}_k \leq \sup_{x \in X} f(x). \end{equation*}
+\item If $\bar{c}_k \in \R$ and $f$ satisfies the $\left( \mathrm{PS} \right)_{\bar{c}_k}$ condition, then $\bar{c}_k$ is a critical level for the functional $f$.
+\item Let $1 \leq k \leq k + h \leq \mathrm{cat}_{X_{\bar{b}}} \, X_{\bar{b}}$. If $\bar{c}_k = \bar{c}_{k+1} = \dots = \bar{c}_{k + h} \in \R$ and $f$ satisfies the $\left( \mathrm{PS} \right)_{\bar{c}_k}$ condition, then for the set of all the critical points of $f$, denoted by $Z_{\bar{c}_k}$, it results
+\begin{equation*} \mathrm{cat}_{X_{\bar{b}}} \, Z_{\bar{c}_k}  \geq h + 1. \end{equation*}
+In particular, even if $X_{\bar{b}}$ is not connected, it turns out that
+\begin{equation*} \symbol{35} \, Z_{\bar{c}_k}  \geq h + 1. \end{equation*}
+\end{enumerate} \end{lemma}
+
+\begin{proof} The argument is similar to the one used in \hyperref[cat:fl]{Lemma \ref{cat:fl}}, provided that there exists an open neighborhood $V \supset Z_{\bar{c}_k}$ in $X_{\bar{b}}$ such that
+\begin{equation*} \mathrm{cat}_{X_{\bar{b}}} \, Z_{\bar{c}_k} =  \mathrm{cat}_{X_{\bar{b}}} \, \overline{V}. \end{equation*}
+The existence of $V$ is a straightforward consequence of the fact that $X_{\bar{b}}$ is a regular ($C^2$) manifold without border (here requiring that every $u \in X_{\bar{b}}$ satisfies the strict inequality $f(u) < \bar{b}$ is actually necessary: with this definition $X_{\bar{b}}$ is an open subset of $X$). \end{proof}
+
+\begin{theorem}Assume that $a, \, b \in \R$ are two real numbers such that $a < b$, and assume that $f$ satisfies the Palais-Smale condition $\left( \mathrm{PS} \right)_c$ condition at every level $c \in \R$. If $\bar{b}$ is a real number strictly greater than $b$, then
+\begin{equation} \label{usefulformula} \mathrm{cat}_{X_{\bar{b}}} \, f^{(b)} \leq \mathrm{cat}_{X_{\bar{b}}} \, f^{(a)} + \symbol{35} \left\{ u \in Z_f \: \left| \: f(u) \in [a, \, b] \right. \right\}. \end{equation} \end{theorem}
+
+\begin{theorem}Let $X$ be a Hilbert space, and assume that there are two subspaces $X_0$ and $X_1$ such that
+\begin{equation*} X = X_0 \oplus X_1 \qquad \text{and} \qquad \mathrm{dim} \, X_0 = N < + \infty. \end{equation*}
+Let $f \in C^1(X; \; \R)$ be a differentiable functional, and assume that $f$ is bounded from belows and satisfies the saddle-point inequality, i.e.,
+\begin{equation*} \sup_{x \in S_0} f(x) < \inf_{x \in X_1} f(x) \qquad \text{and} \qquad \inf_{x \in X} f(x) > - \infty. \end{equation*}
+Let $\bar{b} \in \left( \sup_{x \in S_0} f(x), \, \inf_{x \in X_1} f(x) \right)$. Assume that the Palais-Smale condition $(\mathrm{PS})_c$ holds for every $c \in \left[\inf_{x \in X} f(x), \, \bar{b} \right]$. Then $f$ admits (at least) two critical points $u_1$ and $u_2$ such that
+\begin{equation*} f(u_i) \leq \sup_{x \in S_0} f(x). \end{equation*} \end{theorem}
+
+\begin{proof}Set
+\begin{equation*} b := \sup_{x \in S_0} f(x), \qquad \text{and} \qquad a < \inf_{x \in X} f(x). \end{equation*}
+By construction
+\begin{equation*} S_0 \subseteq f^{(b)} \subseteq f^{\bar{b}} \qquad \text{and} \qquad f^{(\bar{b})} \cap X_1 = \emptyset, \end{equation*}
+which implies that $f^{(b)}$ is not contractible in $X_{\bar{b}}$ (here we need the assumption on the dimension of $X_0$, otherwise $S_0$ would be an infinite-dimensional sphere $\leadsto$ contractible), and hence the category $\mathrm{cat}_{X_{\bar{b}}} \, f^{(b)}$ is bigger or equal than $2$.
+
+Moreover, $f^{(a)} = \emptyset$ and consequently the category is equal to $0$. In conclusion, if we apply formula \eqref{usefulformula}, then it turns out that
+\begin{equation*} \underbrace{\mathrm{cat}_{X_{\bar{b}}} \, f^{(b)}}_{=2} \leq \underbrace{\mathrm{cat}_{X_{\bar{b}}} \, f^{(a)}}_{=0} + \symbol{35} \left\{ u \in Z_f \: \left| \: f(u) \in [a, \, b] \right. \right\} \implies \symbol{35} \left\{ u \in Z_f \: \left| \: f(u) \in [a, \, b] \right. \right\} \geq 2, \end{equation*}
+which is exactly what we wanted to prove.\end{proof} %RIUSA PER ES. SOPRA
+
+\begin{remark}In the previous theorem, one can equivalently consider the subspaces X and X + v, for some vector $v \in X$. In this case, we take the sphere centered at $v$, but the assertion still holds true (since the $f$ need not be symmetric in the category setting, oppositely to what would happen in the genus setting). \end{remark}
+
+\begin{exercise}Let $X$ be a Hilbert space, and assume that there are two subspaces $X_0$ and $X_1$ such that
+\begin{equation*} X = X_0 \oplus X_1. \end{equation*}
+Let $f \in C^1(X; \; \R)$ be an \textbf{even} differentiable functional, and assume that $f$ is bounded from belows and satisfies the saddle-point inequality, i.e.,
+\begin{equation*} \sup_{x \in S_0} f(x) < \inf_{x \in X_1} f(x) \qquad \text{and} \qquad \inf_{x \in X} f(x) > - \infty. \end{equation*}
+Let $\bar{b} \in \left( \sup_{x \in S_0} f(x), \, \inf_{x \in X_1} f(x) \right)$. Assume that the Palais-Smale condition $(\mathrm{PS})_c$ holds for every $c \in \left[\inf_{x \in X} f(x), \, \bar{b} \right]$. Then $f$ admits (at least) two critical points $u_1$ and $u_2$ such that
+\begin{equation*} f(u_i) \leq \sup_{x \in S_0} f(x). \end{equation*} \end{exercise}
+
+\section{Linking Theorem}
+
+In this final section, we introduce a result, extending the mountain pass theorem, which deals with a more complex topological setting.
+
+\begin{notation}Let $X$ be a Hilbert space, and assume that there are two subspaces $X_0$ and $X_1$ such that
+\begin{equation*} X = X_0 \oplus X_1. \end{equation*}
+Given $\rho_0, \, \rho_1 > 0$ and $e \in X_0$ a nonzero element, we can introduce the notation used in this section: 
+\begin{equation*} \begin{aligned} & B_0 = \mathrm{Int}\left( B(0, \, {\rho_0}) \right) \cap X_0, \\[1em] & S_0 = \partial \, B(0, \, \rho_0) \cap X_0, \\[1em] & B_1 = \mathrm{Span}<e> \oplus \left(\mathrm{Int}\left( B(0, \, {\rho_1}) \right) \cap X_1\right), \\[1em] & S_1 = \mathrm{Span}<e> \oplus \left( \partial \, B(0, \, {\rho_1}) \cap X_1\right).\end{aligned} \end{equation*}\end{notation}
+
+\begin{lemma}\label{lemma:linking} Assume that \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $X_0$ is finite-dimensional, and
+\item the spheres $S_0$ and $S_1$ link, i.e.,
+\begin{equation} \label{eq:link} - \rho_0 < \| e \| - \rho_1 < \rho_0 < \|e\| + \rho_1. \end{equation}
+\end{enumerate}
+Then the following assertions hold true: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item For every continuous map $\Phi : \overline{B_0} \to X$ such that $\Phi \, \big|_{S_0} = \mathrm{id}_{S_0}$, it turns out that
+\begin{equation*} \Phi(B_0) \cap S_1 \neq \emptyset. \end{equation*}
+\item For every (continuous) homotopy $H : [0, \, 1] \times S_0 \to X$ such that
+\begin{equation*} H(0, \, u) = u \qquad \text{and} \qquad H(t, \, u) \notin S_1\end{equation*}
+for any $u \in S_0$ and $t \in [0, \, 1]$, it turns out that
+\begin{equation*} H(1, \, S_0) \cap B_1 \neq \emptyset. \end{equation*}
+\end{enumerate}\end{lemma}
+
+\begin{remark}\label{remark:linking}Let $X^\prime$ be a topological space together with a homeomorphism $\Phi : X \to X^\prime$. The reader may check as a simple exercise that the assertions of \hyperref[lemma:linking]{Lemma \ref{lemma:linking}} hold true for $X^\prime$, where
+\begin{equation*} \begin{aligned} & B_0^\prime = \Phi(B_0), \\[1em] & S_0^\prime = \Phi(S_0), \\[1em] & B_1^\prime = \Phi(B_1), \\[1em] & S_1^\prime = \Phi(S_1). \end{aligned} \end{equation*}
+\end{remark}
+
+\begin{proof}[Proof of Lemma \ref{lemma:linking}] We divide the argument into three steps.
+
+\paragraph{Step 1.} As a consequence of \hyperref[remark:linking]{Remark \ref{remark:linking}}, we may always consider without loss of generality that $X_0 \perp X_1$ and $\|e\| \geq \rho_0$. Let $Q$ be the orthogonal projection onto $\mathrm{Span}<e> \oplus X_1$, and let us set
+\begin{equation*} P := \mathrm{id}_X - Q : X \to P(X). \end{equation*}
+Clearly $P(X) = \mathrm{Ker}(Q)$, hence $P$ is the orthogonal projection to a subspace $P(X)$ of $X_0$ which is orthogonal to the vector $e$, i.e,
+\begin{equation*} X_0 = P(X) \oplus \mathrm{Span}<e>.\end{equation*}
+Let us consider the map $\Psi : X \to X_0$ defined by setting
+\begin{equation*} \Psi(u) = P(u) + \left( \|e\| - \| Q(u) - e \| \right) \, \frac{e}{\|e\|},\end{equation*}
+and set $y_0 := \left( \|e\| - \rho_1 \right) \, \frac{e}{\|e\|}$. Notice that the condition \eqref{eq:link} implies that $y_0 \in B_0$. 
+
+\paragraph{Step 2.} The main goal of this brief step is to prove that $\Psi$ satisfies the following properties:
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item If $u \in S_0$, then $\Psi(u) = u$.
+\item If $u \in X$ and $\Psi(u) = \lambda \, \frac{e}{\|e\|}$, then $P(u) = 0$ and $\|u - e\| = \|e\| - \lambda$. In particular:
+\begin{equation*}\begin{aligned} & u \in X \: : \: \Psi(u) = \lambda \, \frac{e}{\|e\|} \implies \lambda \leq \|e\|, \\[1em] & u \in X \: : \: \Psi(u) = y_0 \implies u \in S_1. \end{aligned} \end{equation*}
+\end{enumerate}
+Let $u \in S_0$. There exists $\lambda \in \R$ such that $Q(u) = \lambda \, \frac{e}{\|e\|}$ with $|\lambda| \leq \|e\|$. Moreover, it turns out that
+\begin{equation*} \left\| Q(u) - e \right\| = \|e\| \, \left( \frac{\lambda}{\|e\|} - 1 \right) = \|e\| - \lambda, \end{equation*}
+and thus
+\begin{equation*}\Psi(u) = P(u) + \left( \|e\| - \|e\| + \lambda \right) \, \frac{e}{\|e\|} = P(u) + Q(u) = u. \end{equation*}
+We now check the second assertion. Let $u \in X$ be a point such that
+\begin{equation*}\Psi(u) = \lambda \, \frac{e}{\|e\|}. \end{equation*}
+The projection $P$ is orthogonal to the linear span of $e$, hence $P(u) = 0$; thus
+\begin{equation*}\lambda \, \frac{e}{\|e\|} = \Psi(u) = \left( \|e\| - \|e\| + \lambda \right) \, \frac{e}{\|e\|} \implies \lambda \leq \|e\|. \end{equation*}
+Let $u \in X$ be a point such that $\Psi(u) = y_0 = \left( \|e\| - \rho_1 \right) \, \frac{e}{\|e\|}$. As before $P(u) = 0$ and $Q(u) = u$, hence
+\begin{equation*} \left( \|e\| - \rho_1 \right) \, \frac{e}{\|e\|}= \Psi(u) = \left( \|e\| - \left\| u - e \right\| \right) \, \frac{e}{\|e\|} \implies \| u - e \| = \rho_1. \end{equation*}
+
+\paragraph{Step 3.} We consider the map $\tilde{\Phi} := \Psi \circ \Phi : \overline{B_0} \to X_0$ (since we only developed the topological degree in finite-dimensional spaces). Clearly, by property \textbf{(i)} it turns out that
+\begin{equation*}u \in S_0 \implies \Psi \circ \Phi(u) = \Psi(u) = u \implies \tilde{\Phi} \, \big|_{S_0} = \mathrm{id}_{S_0}, \end{equation*}
+hence $\mathrm{deg}\left(y_0, \, \tilde{\Phi}, \, B_0 \right) = 1$. The solution property (\hyperref[prop:1239]{Proposition \ref{prop:1239}}) implies that there exists $u \in B_0$ such that $\tilde{\Phi}(u) = y_0$. The second assertion of \textbf{(ii)} proves that $\Psi(\Phi(u)) =y \implies \Phi(u) \in S_1$.
+
+\vspace{1mm}
+To prove \textbf{(b)}, we consider the homotopy $\tilde{H} := \Psi \circ H : [0, \, 1] \times S_0 \to X_0$ (for the very same reason of above). Clearly, by property \textbf{(i)} it turns out that
+\begin{equation*}u \in S_0 \implies \Psi \circ H(u) = \Psi(u) = u \implies \tilde{H} \, \big|_{\{0\} \times S_0} = \mathrm{id}_{S_0}, \end{equation*}
+and $y_0 \notin \tilde{H}(t, \, u)$ for any $(t, \, u) \in [0, \, 1] \times S_0$, hence $\mathrm{deg}\left(y_0, \, \tilde{H}(1, \, \cdot), \, B_0 \right) = 1$. By assumption, the point
+\begin{equation*} y_1 := \left( \|e\| + \rho_1 \right) \, \frac{e}{\|e\|} \end{equation*}
+does not belong to $B_0$, and $y_1 \notin \tilde{H}(t, \, u)$ for any $(t, \, u) \in [0, \, 1] \times S_0$ since $y_1 \notin \Psi(X)$ as it follows easily by the first assertion of \textbf{(ii)}. In particular, it turns out that
+\begin{equation*}\mathrm{deg}\left(y_1, \, \tilde{H}(1, \, \cdot), \, B_0 \right) = 0. \end{equation*}
+Therefore $y_0$ and $y_1$ cannot belong to the same connected component, and thus there must be a real number $\alpha_0 \in (\|e\| - \rho_1, \, \|e\| + \rho_1)$ and a point $u \in S_0$ such that
+\begin{equation*} \tilde{H}(1, \, u) = \alpha_0 \, \frac{e}{\|e\|}. \end{equation*}
+The property \textbf{(ii)} now implies that $P \left( H(1, \, u) \right) = 0$ and $\| H(1, \, u) - e \| = \|e\| - \alpha_0 < \rho_1$, that is, $H(1, \, u) \in B_1$ which is exactly what we wanted to prove. \end{proof}
+
+\begin{theorem}[Linking] \label{theorem:linking} Assume that \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item $X_0$ is finite-dimensional,
+\item $\sup_{x \in S_0} f(x) < \inf_{x \in S_1} f(x)$, and
+\item the spheres $S_0$ and $S_1$ link, i.e.,
+\begin{equation} \label{eq:link} - \rho_0 < \| e \| - \rho_1 < \rho_0 < \|e\| + \rho_1. \end{equation}
+\end{enumerate}
+Then the following assertions hold true: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $f$ satisfies the Palais-Smale condition $\left( \mathrm{PS} \right)_c$ for every $c \in \left[ \inf \, f(S_1), \, \sup \, f(B_0) \right]$, then there exists (at least) a critical level in that interval.
+\item If $f$ is bounded from below on $B_1$, i.e.,
+\begin{equation*} \inf_{x \in B_1} \, f(x) > - \infty, \end{equation*}
+and $f$ satisfies the Palais-Smale condition $\left( \mathrm{PS} \right)_c$ for every $c \in \left[ \inf \, f(B_1), \, \sup \, f(S_0) \right]$, then there exists (at least) a critical level in that interval.
+\end{enumerate}\end{theorem}
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item We argue by contradiction. Let $a := \inf_{x \in S_0} \, f(x)$ and $b := \sup_{x \in B_0} \, f(x)$; by the \hyperref[deflemma]{Deformation Lemma \ref{deflemma}} it turns out that there exists $\epsilon > 0$ such that
+\begin{equation*} a < b - \epsilon \qquad \text{and} \qquad r : f^{(b)} \to f^{(a - \epsilon)} \end{equation*}
+is a deformation retraction. The reader may easily check that
+\begin{equation*}\overline{B_0} \subseteq f^{(b)}, \qquad S_0 \subseteq f^{(a-\epsilon)} \quad \text{and} \quad f^{(a-\epsilon)} \cap S_1 = \emptyset.\end{equation*}
+Thus the restriction $\Phi := r \, \big|_{\overline{B_0}}$ is a continuous map which is the identity on $S_0$; but
+\begin{equation*}\Phi(B_0) \cap S_1 = \emptyset, \end{equation*}
+and this is in contradiction with \textbf{(a)} of \hyperref[lemma:linking]{Lemma \ref{lemma:linking}}.
+\item We argue by contradiction. Let $a := \inf_{x \in S_0} \, f(x)$ and $b := \sup_{x \in S_0} \, f(x)$; by the \hyperref[deflemma]{Deformation Lemma \ref{deflemma}} it turns out that there exists $\epsilon > 0$ and a homotopy $H : [0, \, 1] \times f^{(b)} \to f^{(b)}$ with the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item $H(0, \, u) = u$ for every $u \in f^{(b)}$.
+\item $H(1, \, u) \in f^{(a - \epsilon)}$ for every $u \in f^{(b)}$.
+\item $H(1, \, u) = u$ for every $u \in f^{(a - \epsilon)}$.
+\end{enumerate}
+On the other hand, the reader may check that
+\begin{equation*}S_0 \subseteq f^{(b)}, \qquad S_1 \cap f^{(b)} = \emptyset \quad \text{and} \quad f^{(a-\epsilon)} \cap \overline{B_1} = \emptyset.\end{equation*}
+Therefore the restriction $\tilde{H} := H \, \big|_{[0, \, 1] \times S_0}$ satisfies the assumptions of the assertion \textbf{(b)} in \hyperref[lemma:linking]{Lemma \ref{lemma:linking}}, but $\tilde{H}(1, \, u) \notin B_1$ for any $u \in S_0$ (in contradiction with the conclusion of the mentioned Lemma).
+\end{enumerate} \end{proof}

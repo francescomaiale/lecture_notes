@@ -1,0 +1,181 @@
+\chapter{Borsuk Theorem}
+
+\section{Introduction}
+
+In this brief chapter, we want to prove the Borsuk theorem, the Borsuk-Ulam theorem and then show some of the primary applications of these results.
+
+\begin{theorem}[Borsuk] \label{b} Let $\Omega \subset \R^N$ be an open bounded subset and suppose that $0 \in \Omega$ and $\Omega$ symmetric with respect to the origin. Let $\Phi : \overline{\Omega} \to \R^N$ be a continuous and odd map such that $0 \notin \Phi(\partial \, \Omega)$. Then it turns out that
+\begin{equation*} \text{$\mathrm{deg}(0, \, \Phi, \, \Omega)$ is odd.} \end{equation*}\end{theorem}
+
+\begin{theorem}[Borsuk-Ulam] \label{b_u} Let $\Omega \subset \R^N$ be an open bounded subset and suppose that $0 \in \Omega$ and $\Omega$ symmetric with respect to the origin. If $X$ is a subspace of dimension strictly less than $N$ and $\Phi : \partial \, \Omega \to X$ is continuous, then there exists $x \in \partial \, \Omega$ such that
+\begin{equation*} \Phi(x) = \Phi(-x). \end{equation*} \end{theorem}
+
+We now prove that the Borsuk theorem implies the Borsuk-Ulam theorem. In the next section we introduce the technical results needed for the Borsuk theorem, and then we prove it.
+
+\begin{proof} We argue by contradiction. Suppose that there is no point $x \in \partial \, \Omega$ such that $\Phi(x) = \Phi(-x)$, and let
+\begin{equation*} \Phi_d(x) := \Phi(x) - \Phi(-x) : \partial \, \Omega \to X \end{equation*}
+be the odd part of $\Phi$. Since $0 \notin \Phi_d(\partial \, \Omega)$ the \hyperref[b]{Borsuk Theorem \ref{b}} immediately implies that $\mathrm{deg}(0, \, \Phi, \, \Omega)$ is odd and, in particular, different from zero.
+
+By \hyperref[lemma:imagjejj]{Lemma \ref{lemma:imagjejj}} it turns out that $0$ is an internal point of $\Phi_d\left(\overline{\Omega} \right)$ - for a suitable extension $\Phi$ - and this is absurd since the image of $\Phi_d$ is contained in a subspace $X$ of dimension strictly less than $N$, i.e., the image is contained in a set whose internal part is empty.\end{proof}
+
+\section{Proof of Borsuk Theorem}
+
+In the first part of this section, we state and prove three technical lemmas which can be combined to give a relatively straightforward proof of the Borsuk theorem.
+
+\begin{lemma} \label{lemmab1} Let $K \subset \R^M$ be a compact set, let $\Phi : K \to \R^N$ be a continuous map and assume that $N > M$ and $y_0 \in \R^N \setminus \Phi(K)$. Then there exists $\Psi : \R^M \to \R^N$ continuous such that
+\begin{equation*} \Psi \, \big|_{K} \equiv \Phi \quad \text{and} \quad y_0 \notin \Psi(\R^M). \end{equation*}
+\end{lemma}
+
+\begin{remark}The assumption on the dimensions $N > M$ is necessary. Indeed, it suffices to consider the identity map between a compact set contained in a ring of $\R^N$ and $\R^N$ itself (see \hyperref[fig:c111]{Figure \ref{fig:c111}}). \end{remark} 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=12cm, height=6cm]{Images/MTDP1.png}
+\caption{Counterexample}
+\label{fig:c111}
+\end{figure}
+
+\begin{proof}This requires a rather technical argument. Therefore we divide it into many small steps to make it easier to understand.
+
+\paragraph{Step 1.} Since $K$ is compact, the image $\Phi(K)$ is also compact, and thus it is closed in $\R^N$. Therefore there exists $\rho > 0$ such that
+\begin{equation*} B(y_0, \, \rho) \cap \Phi(K) = \emptyset,\end{equation*}
+and there exists an extension $\tilde{\Phi} : \R^M \to \R^N$ such that $\tilde{\Phi} \, \big|_K \equiv \Phi$ (but it is not the sought extension since, a priori, it may contain $y_0$ in the image).
+
+\paragraph{Step 2.} Let $0 < \epsilon < \frac{\rho}{2}$ and let $\tilde{\Psi} \in C^\infty \left(\R^M; \; \R^N \right)$ be a function arbitrarily near to $\tilde{\Phi}$, that is, $\| \tilde{\Phi} - \tilde{\Psi} \|_{\infty} \leq \epsilon$. It follows that
+\begin{equation*} \tilde{\Psi}(K) \cap B(y_0, \, \rho - \epsilon) = \emptyset, \end{equation*}
+and by \hyperref[lemma:sard]{Sard's Lemma} the image of $\tilde{\Psi}$ is a null-set in $\R^N$ (since the differential sends $\R^M$ to $\R^N$, thus it cannot be surjective). Consequently there is a point $\bar{y}$, arbitrarily close to $y_0$, such that it does not belong to the image of $\tilde{\Psi}$ (while $y_0$ may still be there).
+
+\paragraph{Step 3.} There is a retraction
+\begin{equation*} r : \R^N \setminus \{\bar{y}\} \to \R^N \setminus B(y_0, \, \rho - \epsilon), \end{equation*}
+so that we can consider the composition with $\tilde{\Psi}$
+\begin{equation*} r \circ \tilde{\Psi} : \R^M \to \R^N \setminus B(y_0, \, \rho - \epsilon), \end{equation*}
+which is clearly well defined. We conclude the proof by defining
+\begin{equation*} \Psi := r \circ \tilde{\Psi} + \left( \tilde{\Phi} - \tilde{\Psi} \right) \end{equation*}
+which is the sought function since it satisfies the following properties: \mbox{}
+\begin{enumerate}[label = \textbf{(\arabic*)}]
+\item $\Psi \, \big|_K = \tilde{\Phi} \, \big|_K = \Phi$;
+\item $\Psi(\R^M) \subseteq U_\epsilon \left( r \circ \tilde{\Psi}(\R^M) \right) \implies \Psi(\R^M) \cap B(y_0, \, \rho - 2 \, \epsilon) = \emptyset$.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma} \label{lemmab2} Let $K$ and $K_0$ be compact sets in $\R^M$, both symmetrical with respect to the origin and such that $K \subseteq K_0 \not \ni 0$. Let $\Phi : K \to \R^N$ be a continuous odd function such that $0 \notin \Phi(K)$, and let $M < N$. Then there exists $\Psi : K_0 \to \R^M$ continuous odd function such that
+\begin{equation*} \Psi \, \big|_{K} \equiv \Phi \quad \text{and} \quad 0 \notin \Psi(K_0). \end{equation*}
+\end{lemma}
+
+\begin{proof}We argue by induction on the dimension of the starting space , that is, $M = 1, \, \dots, \, N - 1$.
+
+\paragraph{Base Step.} Suppose that $M = 1$. The function $\Phi : K \to \R^N$ is continuous and odd, thus by \hyperref[lemmab1]{Lemma \ref{lemmab1}} there exists a continuous function $\tilde{\Phi} : \R \to \R^N$ which extends $\Phi$ such that $0 \notin \tilde{\Phi}(\R)$. If we set
+\begin{equation*} \Psi(x) := \begin{cases} \tilde{\Phi}(x) & \text{if $x \in K_0$ and $x > 0$} \\ -\tilde{\Phi}(-x) & \text{if $x \in K_0$ and $x < 0$} \end{cases}\end{equation*}
+then it is easy to prove that $\Psi$ has the sought properties.
+
+\paragraph{Inductive Step.} Suppose that the thesis is true for $M - 1$, and let $M \leq N - 1$. There exists a function  $\tilde{\Phi} : K_0 \cap \R^{M - 1} \to \R^N$ such that $\tilde{\Phi}$ is continuous, odd, and
+\begin{equation*} \tilde{\Phi} \, \big|_{K \cap \R^{M - 1}} \equiv \Phi \, \big|_{K \cap \R^{M-1}} \quad \text{and} \quad 0 \notin \tilde{\Phi}\left(K_0 \cap \R^{M - 1} \right). \end{equation*}
+The function
+\begin{equation*} \tilde{\Psi}(x) := \begin{cases} \tilde{\Phi}(x) & \text{if $x \in K_0 \cap \R^{M - 1}$} \\ \Phi(x) & \text{if $x \in K$}, \end{cases}\end{equation*}
+is continuous, odd and well-defined. We can now extend $\tilde{\Psi}$ to $\R^M$ in such a way that $0 \notin \tilde{\Psi}(\R^M)$ (as a consequence of \hyperref[lemmab1]{Lemma \ref{lemmab1}}). We conclude by setting
+\begin{equation*} \Psi(x) := \begin{cases} \tilde{\Psi}(x) & \text{if $x \in K_0$ and $x_M > 0$} \\ -\tilde{\Psi}(-x) & \text{if $x \in K_0$ and $x_M < 0$}, \end{cases}\end{equation*}
+which is clearly the function with the required properties.
+\end{proof}
+
+\begin{remark} Let $\Omega \subset \R^N$ be an open bounded subset, and let $\Phi \in C^0 \left( \Omega; \; \R^N \right)$ be a continuous map. If $A$ is a linear isomorphism of $\R^N$ and $y \notin \Phi(\partial \, \Omega)$, it turns out that 
+\begin{equation*} \mathrm{deg} \left( A \,y, \, A \circ \Phi, \, \Omega \right) = \mathrm{sgn} \left( \mathrm{det}(A) \right) \cdot \mathrm{deg}(y, \, \Phi, \, \Omega). \end{equation*}
+If $W$ is an open set of $\R^N$ such that $\Omega = A \, W$, then
+\begin{equation*} \mathrm{deg} \left( y, \, \Phi, \, \Omega \right) = \mathrm{sgn} \left( \mathrm{det}(A) \right) \cdot \mathrm{deg}(y, \, \Phi \circ A, \, W). \end{equation*}\end{remark}
+ 
+\begin{lemma} \label{lemmab3} Let $\Omega \subset \R^N$ be an open bounded subset and suppose that $0 \notin \overline{\Omega}$ and $\Omega$ symmetric with respect to the origin. Let $\Phi : \overline{\Omega} \to \R^n$ be a continuous and odd map such that $0 \notin \Phi(\partial \, \Omega)$. Then it turns out that
+\begin{equation*} \text{$\mathrm{deg}(0, \, \Phi, \, \Omega)$ is even.} \end{equation*}
+\end{lemma}
+
+\begin{proof} Let $\R^{N - 1} = \left\{ x \in \R^N \: \left| \: x_N = 0 \right. \right\}$, and let us set
+\begin{equation*} K := \R^{N - 1} \cap \partial \, \Omega \quad \text{and} \quad K_0 := \R^{N - 1} \cap \overline{\Omega}. \end{equation*}
+By \hyperref[lemmab2]{Lemma \ref{lemmab2}} there exists $\tilde{\Phi} : K_0 \to \R^N$ such that $\tilde{\Phi} \, \big|_K \equiv \Phi$ and $0 \notin \tilde{\Phi}(K_0)$. Therefore, there exists a continuous map, defined on $\partial \, \Omega \cup \left( \overline{\Omega} \cap \R^{N - 1} \right)$, which coincides with $\Phi$ on $\partial \, \Omega$ such that the origin does not belong to its image.
+
+By \hyperref[tiet]{Tietze Extension Theorem \ref{tiet}} there exists $\tilde{\Psi} : \R^N \to \R^N$ continuous, which extends the previous map. Let us set $\Psi := \tilde{\Psi}_d \, \big|_{\overline{\Omega}}$ (i.e., the odd part) and observe that it is odd and
+\begin{equation*}\Psi \, \big|_{\partial \, \Omega} \equiv \Phi \, \big|_{\partial \, \Omega}, \qquad \Psi \, \big|_{K_0} \equiv \tilde{\Phi} \, \big|_{K_0}. \end{equation*}
+Let us consider
+\begin{equation*} \Omega^+ := \left\{ x \in \Omega \: \left| \: x_N > 0 \right. \right\} \quad \text{and} \quad \Omega^- := \left\{ x \in \Omega \: \left| \: x_N < 0 \right. \right\}, \end{equation*}
+and notice that $0 \notin \Psi( \partial \, \Omega \cup \partial \, \Omega^+ \cup \partial \, \Omega^{-} )$. If we set $\Psi^+$ and $\Psi^-$ to be the restrictions to $\overline{\Omega}^{\pm}$, it turns out
+\begin{equation*} \mathrm{deg}(0, \, \Phi, \, \Omega) = \mathrm{deg}(0, \, \Psi, \, \Omega) = \mathrm{deg}(0, \, \Psi^+, \, \Omega^+) + \mathrm{deg}(0, \, \Psi^-, \, \Omega^-), \end{equation*}
+and this concludes the proof as a consequence of the previous Remark (using the isomorphism $\alpha(x) := -x$). Indeed, the two topological degrees are equal and thus $ \mathrm{deg}(0, \, \Phi, \, \Omega)$ is even.
+\end{proof}
+
+We are finally ready to prove the Borsuk theorem, using the technical lemmas above.
+
+\begin{proof}By assumption there exists $\rho > 0$ such that 
+\begin{equation*} \overline{B(0, \, \rho)} \subseteq \Omega. \end{equation*}
+Let $\Psi : \overline{\Omega} \to \R^N$ be a continuous odd map, such that
+\begin{equation*} \Psi \, \big|_{\partial \, \Omega} \equiv \Phi \qquad \text{and} \qquad \Psi \, \big|_{\overline{B(0, \, \rho)}} \equiv \mathrm{id}_{\overline{B(0, \, \rho)}}. \end{equation*}
+By the additivity property of the topological degree (see \hyperref[locality]{Theorem \ref{locality}}), it turns out that
+\begin{equation*}\mathrm{deg} \left(0, \, \Phi, \, \Omega \right) = \mathrm{deg} \left(0, \, \Psi, \, \Omega \right) = \mathrm{deg} \left(0, \, \Psi, \, \Omega \setminus \overline{B(0, \, \rho)} \right) + \mathrm{deg} \left(0, \, \Psi, \, B(0, \, \rho) \right), \end{equation*}
+and by \hyperref[lemmab3]{Lemma \ref{lemmab3}} the first addendum is even, while the second is equal to $1$ (because it is the identity, and $0$ belongs to $B(0, \, \rho)$), hence the total topological degree is odd.
+\end{proof}
+
+\section{Applications of Borsuk Theorem}
+
+\begin{corollary}Let $\Phi : S^{N-1} \to S^{N-1}$ be an odd function. Then $\Phi$ is surjective. \end{corollary}
+
+\begin{proof}Argue by contradiction. Suppose that $\Phi$ is not surjective, and let $y_0 \in S \setminus \Phi(S)$ be a point not in the image (the sphere is symmetric, so $- y_0 \in S \setminus \Phi(s)$).
+
+\vspace{2mm}
+\noindent The stereographic projection
+\begin{equation*} P : S^{N - 1} \setminus\{y_0, \, - y_0\} \to S^{N-2}\end{equation*}
+is and odd function. Therefore its composition with $\Phi$, that is, $P \circ \Phi : S^{N - 1} \to S^{N - 2}$, is odd. By \hyperref[b_u]{Borsuk-Ulam Theorem \ref{b_u}} it turns out that
+\begin{equation*} P \circ \Phi(x) = P \circ \Phi(-x) = - P \circ \Phi(x) \implies P \circ \Phi(x) = 0, \end{equation*} 
+and this is absurd since $P \circ \Phi(x)$ is an element of the sphere. \end{proof}
+
+\begin{corollary} Let $\Omega \subseteq \R^N$ be an open bounded subset, which is symmetrical with respect to the origin, and let $\Phi : \partial \, \Omega \to \partial \, \Omega$ be an odd continuous function. Assume also that: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The boundary is regular, i.e., $\partial \, \Omega = \partial \, \overline{\Omega}$.
+\item The origin is contained in $\Omega$.
+\item $\Omega$ is connected.
+\item The complement of $\Omega$ is connected.
+\end{enumerate}
+Prove that, under these assumptions, $\Phi$ is a surjective map. Discuss the validity of the conclusion when one of the above assumption is not satisfied.\end{corollary}
+
+\begin{proof} We argue by contradiction. Suppose that there exists $y \in \partial \, \Omega$ such that $y \notin \Phi \left( \partial \, \Omega \right)$. 
+
+The border of $\Omega$ is compact, hence the image through $\Phi$ is closed. In particular, there is $\rho > 0$ such that
+\begin{equation*}B(y_0, \, \rho) \cap \Phi \left( \partial \, \Omega \right) = \emptyset, \end{equation*}
+and the assumption on the boundary allows us to find two points $y_1 \in B(y_0, \, \rho) \cap \Omega$ and $y_2 \in B(y_0, \, \rho) \setminus \Omega$. The ball $B(y_0, \, \rho)$ is connected and it does not intersect the image of the boundary (by construction), therefore
+\begin{equation*} \mathrm{deg}\left(y_1, \, \Phi, \, \Omega \right) = \mathrm{deg}\left(y_2, \, \Phi, \, \Omega \right). \end{equation*}
+By the Borsuk Theorem \ref{b}, the topological degree $\mathrm{deg}\left(0, \, \Phi, \, \Omega \right)$ is nonzero (since it is odd) and, by the connectedness of $\Omega$, it turns out that
+\begin{equation*}\mathrm{deg}\left(0, \, \Phi, \, \Omega \right) = \mathrm{deg}\left(y_1, \, \Phi, \, \Omega \right) \neq 0 \implies \mathrm{deg}\left(y_2, \, \Phi, \, \Omega \right) \neq 0. \end{equation*}
+We are now ready to derive the contradiction. The complement of $\Omega$ is connected, therefore the topological degree of $\Phi$ in the point $y_2$ is necessarily $0$ (since it does not belong to the image).
+
+\vspace{2.5mm}
+The proof of the corollary is complete, but we want to discuss briefly the assumptions and show that there is a counterexample if only $3$ out of $4$ hold true (at least for $N \geq 3$). \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Suppose that \textbf{(a)} is the only false assumption. Then Figure \ref{fig:cex1} shows a counterexample in both the plane and in the space.
+\item Suppose that \textbf{(b)} is the only false assumption. Then Figure \ref{fig:cex2} shows a counterexample in the space (since in the plane this assumption is implied by the others).
+\item Suppose that \textbf{(c)} is the only false assumption. Then Figure \ref{fig:cex3} shows a counterexample in both the plane and in the space.
+\item Suppose that \textbf{(d)} is the only false assumption. Then Figure \ref{fig:cex4} shows a counterexample in both the plane and in the space.
+\end{enumerate}
+\end{proof}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=12cm, height=8cm]{Images/Cex1.png}
+\label{fig:cex1}
+\caption{Counterexample \textbf{(a)}}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=12cm, height=8cm]{Images/Cex2.png}
+\label{fig:cex2}
+\caption{Counterexample\textbf{(b)}}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=12cm, height=8cm]{Images/Cex3.png}
+\label{fig:cex3}
+\caption{Counterexample \textbf{(c)}}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=12cm, height=8cm]{Images/Cex4.png}
+\label{fig:cex4}
+\caption{Counterexample \textbf{(d)}}
+\end{figure}

@@ -1,0 +1,516 @@
+\chapter{Rectifiable Sets}
+
+In this chapter, we shall be mainly concerned with the notions of $d$-dimensional \textit{rectifiable} and \textit{purely unrectifiable} sets in metric spaces.
+
+In the first section, we furnish the definitions of rectifiable (and purely unrectifiable) set through Lipschitz maps, and we state some of the main criteria in $\R^n$.
+
+In the second section, we work towards a (suitably weak) definition of the tangent bundle for rectifiable sets, and, in the next section, we end up proving that any Borel set $E$ with an approximate tangent cone and $d$-dimensional lower density bounded from below is $d$-rectifiable.
+
+In the last section, we prove the area formula for rectifiable sets using the characterization as the union of the graphs of Lipschitz maps.
+
+\section{Introduction and Elementary Properties}
+
+\begin{definition}[Rectifiable Set] \index{rectifiable set} Let $X$ be a metric space. A Borel set $E \subseteq X$ is a $d$-dimensional \textit{rectifiable set} if and only if there exists a collection of Borel sets $\{E_i\}_{i \in \N}$ such that
+\begin{equation*} E = \bigcup_{i = 0}^{+ \infty} E_i, \end{equation*}
+satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\arabic*)]
+\item $E_0$ is a $\mathcal{H}^d$-null set, and
+\item $E_i \subset f_i(\R^d)$, where $f_i : \R^d \longrightarrow X$ is a Lipschitz function for every $i \geq 1$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark} Let $X$ be a metric space, and let $E \subset X$ be a $d$-dimensional rectifiable set. Then the Hausdorff dimension of $E$ is less than or equal to $d$, i.e.,
+\begin{equation*} \mathrm{dim}_{\mathcal{H}} E \leq d \end{equation*} \end{remark}
+
+\begin{proof} Let $\{E_i\}_{i \in \N}$ be the collection given by the definition of $d$-rectifiable set. The assumption that $E_0$ is a $\mathcal{H}^d$-null set immediately implies that
+\begin{equation*}\mathrm{dim}_{\mathcal{H}} E_0 \leq d. \end{equation*}
+On the other hand, by \hyperref[lemma:hausdorffprop]{Lemma \ref{lemma:hausdorffprop}} it follows that a Lipschitz map does not increase the Hausdorff dimension, that is,
+\begin{equation*}\mathrm{dim}_{\mathcal{H}} \R^d = d \implies \mathrm{dim}_{\mathcal{H}} f_i(\R^d) \leq d, \end{equation*}
+which is enough to infer (as a consequence of \hyperref[rmk:2o1dokk1]{Remark \ref{rmk:2o1dokk1}}) that 
+\begin{equation*}E = \bigcup_{i \in \N} E_i \implies \mathrm{dim}_{\mathcal{H}} E = \sup_{i \in \N} \mathrm{dim}_{\mathcal{H}} E_i \leq d. \end{equation*}\end{proof}
+
+\begin{exercise}Prove that $\mathcal{H}^d(E) = 0$ does not imply that $E$ is contained in a countable union of Lipschitz images of $\R^d$, that is,
+\begin{equation*}E \not \subseteq \bigcup_{n \in \N} f_n(\R^d). \end{equation*} \end{exercise}
+
+\begin{exercise}Prove that there exists a Borel set $E_0 \subseteq \R^2$ such that $\mathcal{H}^d(E_0) = 0$ which cannot be covered by a rectifiable curve (hint: self-similar sets). \end{exercise}
+
+\begin{proposition}[Criteria of Rectifiability] \label{prop:equivdlsd}Let $X := \R^n$, and let $E \subset X$ be a Borel set. The following assertions are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The set $E$ is $d$-rectifiable.
+\item There exists a collection of Borel sets $\{E_i\}_{i \in \N}$ such that
+\begin{equation*} E = \bigcup_{i = 0}^{+ \infty} E_i, \end{equation*}
+satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item $E_0$ is a $\mathcal{H}^d$-null set.
+\item $E_i \subset f_i(A_i)$, where $A_i \subseteq \R^d$ is an open subset and $f_i : A_i \longrightarrow \R^n$ is a differentiable function.
+\end{enumerate}
+\item There exists a collection of Borel sets $\{E_i\}_{i \in \N}$ such that
+\begin{equation*} E = \bigcup_{i = 0}^{+ \infty} E_i, \end{equation*}
+satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item $E_0$ is a $\mathcal{H}^d$-null set.
+\item $E_i \subset f_i(A_i)$, where $A_i \subseteq \R^d$ is an open subset and $f_i : A_i \longrightarrow \R^n$ is a diffeomorphism.
+\end{enumerate}
+\item There exists a collection of Borel sets $\{E_i\}_{i \in \N}$ such that
+\begin{equation*} E = \bigcup_{i = 0}^{+ \infty} E_i, \end{equation*}
+satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item $E_0$ is a $\mathcal{H}^d$-null set.
+\item $E_i \subset \Sigma_i$, where $\Sigma_i$ is a $d$-dimensional surface of class $C^1$ contained in $\R^n$.
+\end{enumerate}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}By definition (differentiable maps are Lipschitz) \textbf{(b)} $\implies$ \textbf{(a)}, while the opposite implications is a straightforward consequence of the following result.
+
+\vspace{2.5mm}
+\begin{center}
+\noindent\fbox{ 
+\parbox{15cm}{ \begin{lemma}Let $f : \R^d \longrightarrow \R^n$ be a Lipschitz map. Then there is a collection $\{f_i\}_{i \in \N}$ of functions of class $C^1$ and a $\mathcal{H}^d$-null Borel set $A_0$ such that 
+\begin{equation*}f(\R^d) \subseteq \bigcup_{i \in \N} f_i(\R^d) \cup A_0.  \end{equation*} \end{lemma}
+\begin{proof} By \hyperref[diff:lip]{Theorem \ref{diff:lip}}, Lipschitz maps have the Lusin property in the class of differentiable maps $C^1$; hence, for every $i \in \N$, there exists a differentiable map $f_i : \R^d \longrightarrow \R^n$ such that
+\begin{equation*} | E_i | := \left| \left\{ x \in \R^d \: \left| \: f_i(x) \neq f(x) \right. \right\} \right| \leq \frac{1}{i}. \end{equation*}
+The reader may easily prove that, by construction, it turns out that
+\begin{equation*} f(\R^d) \subset \left( \, \bigcup_{i \in \N} f_i(\R^d) \right) \cup \left( f \left( \, \bigcap_{i \in \N} E_i \right) \right).\end{equation*}
+In particular, the image of the intersection is a $\mathcal{H}^d$-null set since
+\begin{equation*} \mathcal{L}^d \left( \, \bigcap_{i \in \N} E_i \right) = 0 \implies \mathcal{H}^d \left( \, \bigcap_{i \in \N} E_i \right) = 0, \end{equation*}
+and $f$ is a Lipschitz map (see \hyperref[lemma:hausdorffprop]{Lemma \ref{lemma:hausdorffprop}}). \end{proof} }}
+\end{center}
+
+\vspace{2.5mm}
+\noindent Clearly \textbf{(c)} $\implies$ \textbf{(b)} (since diffeomorphisms are also differentiable maps); thus we only need to prove the opposite implication.
+
+\noindent Suppose \textbf{(b)} holds, and let $\{E_i\}_{i \in \N}$ be the collection of Borel sets satisfying the definition, i.e,,
+\begin{equation*} E = \bigcup_{i = 0}^{+ \infty} E_i, \end{equation*}
+where $E_0$ is a $\mathcal{H}^d$-null set and $E_i \subset f_i(A_i)$ for differentiable maps $f_i : A_i \longrightarrow \R^n$. For every $i \geq 1$ we consider a partition of $A_i$
+\begin{equation*} A_i = A_i^{max} \sqcup A_i^{min}, \end{equation*}
+where
+\begin{equation*} A_i^{max} := \left\{ x \in A_i \: \left| \: \text{$\mathrm{d}f_x$ has maximal rank} \right. \right\} \end{equation*}
+and
+\begin{equation*} A_i^{min} := \left\{ x \in A_i \: \left| \: \text{$\mathrm{d}f_x$ has NOT maximal rank} \right. \right\}. \end{equation*}
+Recall that $A_i^{min}$ is a $\mathcal{H}^d$-null set for every differentiable map $f_i$. Hence, we can consider the collection of Borel sets given by
+\begin{equation*}\widetilde{E_0} := E_0 \cup \left( \, \bigcup_{i \geq 1} f \left( A_i^{min} \right) \right) \qquad \text{and} \qquad \widetilde{E_i} := f_i \left(A_i^{max} \right) \end{equation*}
+together with the diffeomorphisms $f_i \, \big|_{A_i^{max}}$.
+
+In conclusion, it remains to prove the equivalence \textbf{(c)} $\implies$ \textbf{(d)}. The "only if" part is immediate from the definitions, while the "if" part is left to the reader as a simple exercise (in the same spirit of the implications we have already proved here).
+\end{proof}
+ 
+\begin{remark}If $X := \R^n$, we just proved that Lipschitz maps may be replaced by $C^1$ maps in the definition of $d$-rectifiable set. On the other hand, it is not possible to replace $C^1$ by a more regular space $C^{k \geq 2}$ since $C^1$ does not have the Lusin property in $C^2$. \end{remark} 
+
+\begin{definition}[Purely Unrectifiable]  \index{purely unrectifiable set} Let $X$ be a metric space. A Borel set $E \subseteq X$ is a $d$-dimensional \textit{unrectifiable set} if and only if 
+\begin{equation*} \mathcal{H}^d \left( E \cap f \left(\R^d \right) \right) = 0 \quad \text{for every Lipschitz map $f : \R^d \longrightarrow X$.} \end{equation*}\end{definition}
+
+\begin{proposition}[Criteria of Unrectifiability] \label{prop:pequivdlsd} Let $X := \R^n$, and let $E \subset X$ be a Borel set. The following assertions are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item $E$ is purely $d$-unrectifiable. 
+\item For every $C^1$ map $f : \R^d \longrightarrow \R^n$ it turns out that
+\begin{equation*} \mathcal{H}^d \left( E \cap f \left(\R^d \right) \right) = 0. \end{equation*}
+\item For every diffeomorphism $f : A \subseteq \R^d \longrightarrow \R^n$ defined on an open subset $A$, it turns out that
+\begin{equation*} \mathcal{H}^d \left( E \cap f \left(A \right) \right) = 0. \end{equation*}
+\item For every $d$-dimensional surface $\Sigma \subseteq \R^n$ of class $C^1$ it turns out that
+\begin{equation*} \mathcal{H}^d \left( E \cap \Sigma \right) = 0. \end{equation*}
+\end{enumerate}
+\end{proposition}
+
+\begin{notation} From now on, we will use purely unrectifiable and $1$-purely unrectifiable as synonyms. \end{notation}
+
+\begin{proposition}Let $X = \R^2$. For every $d \in (0, \, 2]$ there exists a compact set $K_d \subset \R^2$ such that $\mathrm{dim}_{\mathcal{H}} \, K = d$ and $K$ purely unrectifiable. \end{proposition}
+
+\begin{proof}Here we present the proof of the assertion for $d \in (0, \, 2)$. The reader may extend the construction to dimension $2$ as an exercise.
+
+\paragraph{Step 1.} First, we claim that if $K = K_1 \times K_2$ is a product of compact subsets of $\R$, then
+\begin{equation*} \mathcal{L}^1 \left(K_1 \right) = \mathcal{L}^1 \left(K_2 \right) = 0 \implies \text{$K$ purely unrectifiable}. \end{equation*}
+Indeed, let $\mathcal{C}$ be a curve of class $C^1$ (a submanifold of $\R^2$). Since $\mathcal{C}$ is locally the graph of a function, we may assume, without loss of generality, that
+\begin{equation*} \mathcal{C} = \left\{ \left(x_1, \, g(x_1) \right) \: \left| \: g \in C^1\left(\R; \; \R \right) \right. \right\}.\end{equation*}
+The $1$-dimensional Hausdorff measure of the intersection $K \cap \mathcal{C}$ may be computed by parts, and thus we can use the assumption on the Lebesgue measure to obtain
+\begin{equation*}\mathcal{H}^1 \left( K \cap \mathcal{C} \right) \leq \mathcal{H}^1 \left( (K_1 \times \R) \cap \mathcal{C} \right) = \int_{K_1} \sqrt{1 + \dot{g}^2} \, \mathrm{d}t = 0. \end{equation*}
+Therefore, we conclude that $K$ is purely $1$-unrectifiable as a consequence of \hyperref[prop:pequivdlsd]{Proposition \ref{prop:pequivdlsd}}.
+
+\paragraph{Step 2.} If $K_1 = K_2$ are self-similar fractals (in Hutchinson sense) of dimension $d^\prime$, then the product $K = K_1 \times K_2$ has Hausdorff dimension $2 d^\prime$.
+
+Indeed, the reader may prove that for any two separable metric spaces $X$ and $Y$ with $Y$ totally bounded that
+\begin{equation*}\mathrm{dim}_{\mathcal{H}} \, X + \mathrm{dim}_{\mathcal{H}} \, Y \leq \mathrm{dim}_{\mathcal{H}} \left(X \times Y \right) \leq \mathrm{dim}_{\mathcal{H}} \, X + \mathrm{dim}_{\mathcal{B}} \, Y, \end{equation*}
+where $\mathrm{dim}_{\mathcal{B}} \, Y$ denotes the upper box counting dimension of $Y$ (see, e.g. \cite{manilla}).   In particular, if $Y$ has equal Hausdorff and upper box counting dimension (which holds if $Y$ is a compact interval) then
+\begin{equation*}\mathrm{dim}_{\mathcal{H}} \, X + \mathrm{dim}_{\mathcal{H}} \, Y = \mathrm{dim}_{\mathcal{H}} \left(X \times Y \right). \end{equation*}
+
+\paragraph{Step 3.} In conclusion, in \hyperref[sec:cts]{Section \ref{sec:cts}} we have proved that there is a Cantor-type set of every dimension $d \in (0, \, 1)$. Hence, for every $d \in (0, \, 1)$, the product $\mathcal{C}_d \times \mathcal{C}_d$ is a purely unrectifiable set of dimension $2d \in (0, \, 2)$, which is exactly what we wanted to exhibit. \end{proof}
+
+\begin{proposition}Let $E \subset X$ be a Borel set with finite Hausdorff measure $\mathcal{H}^d(E) < + \infty$. Then $E$ is the union of a $d$-rectifiable part and a purely $d$-unrectifiable part, that is,
+\begin{equation*} E = E_r \cup E_{pu}. \end{equation*}\end{proposition}
+
+\begin{proof}Let us consider the family
+\begin{equation*} \mathcal{F} = \left\{ F \subset E \: \left| \: \text{$F$ is a $d$-rectifiable subset} \right. \right\}. \end{equation*}
+Let $m := \sup \left\{ \mathcal{H}^d(F) \: \left| \: F \in \mathcal{F} \right. \right\}$, and let $(F_n)_{n \in \N} \subset \mathcal{F}$ be a maximizing sequence, that is,
+\begin{equation*} \mathcal{H}^d(F_n) \nearrow m. \end{equation*}
+If we set
+\begin{equation*} E_r := \bigcup_{n \in \N} F_n, \end{equation*}
+then it turns out that $E_r \in \mathcal{F}$ (being rectifiable is closed under countable unions), and the Hausdorff dimension of $E_r$ is exactly $m$. In conclusion, we set
+\begin{equation*} E_{pu} := E \setminus E_r, \end{equation*}
+and we prove\footnote{The reader may prove this assertion as an exercise.}, by contradiction, that $E_{pu}$ is purely $d$-unrectifiable.
+
+Indeed, suppose that $E^\prime := E \setminus E_r$ is not purely $d$-unrectifiable. Let us consider the family
+\begin{equation*} \mathcal{F}^\prime = \left\{ F \subset E^\prime \: \left| \: \text{$F$ is a $d$-rectifiable subset} \right. \right\}, \end{equation*}
+which is not empty by assumption. Let $m^\prime := \sup \left\{ \mathrm{dim}_{\mathcal{H}} \, F \: \left| \: F \in \mathcal{F}^\prime \right. \right\}$, and let $(F_n)_{n \in \N} \subset \mathcal{F}$ be a maximizing sequence, that is,
+\begin{equation*} \mathcal{H}^d(F_n) \nearrow m^\prime. \end{equation*}
+If we set
+\begin{equation*} E_r^\prime := \bigcup_{n \in \N} F_n, \end{equation*}
+then it turns out that $E_r \in \mathcal{F}^\prime$, and the Hausdorff dimension of $E_r^\prime$ is exactly $m^\prime$. In particular, it turns out that
+\begin{equation*} \widetilde{E_r} := E_r \cup E_r^\prime \end{equation*}
+is a $d$-rectifiable set with Hausdorff dimension $\geq m$; thus we have derived a contradiction with the maximality of $E_r$.\end{proof}
+
+\paragraph{Characterization of $d$-rectifiable sets in $\R^n$.} In this final paragraph, we state two fundamental criteria for rectifiable sets (but we do not give the proof of them).
+
+\begin{theorem}[Marstrand-Preiss] Let $E \subseteq \R^n$ be a Borel set. If $\mathcal{H}^d(E) < + \infty$ and
+\begin{equation*} \lim_{r \to 0} \frac{ \mathcal{H}^d \left( E \cap B(x, \, r) \right)}{\alpha_d r^d} \neq 0, \, \infty\end{equation*}
+exists for $\mathcal{H}^d$-almost every $x \in E$, then $d$ is an integer, and $E$ is a $d$-rectifiable set. \end{theorem}
+
+\begin{remark} If $E \subseteq \R^n$ is a $d$-rectifiable set with positive Hausdorff measure $\mathcal{H}^d(E) > 0$, then for almost every $V \in G(n, \, d)$ it turns out that
+\begin{equation*} \mathcal{H}^d \left( P_V(E) \right) > 0. \end{equation*} \end{remark}
+
+\begin{theorem}[Besicovitch-Federer] Let $E \subseteq \R^n$ be a Borel set. If $E$ is purely $d$-unrectifiable, then
+\begin{equation*} \mathcal{H}^d \left( P_V(E) \right) = 0\end{equation*}
+for $\gamma_{n, \, d}$-almost every $V \in G(n, \, d)$. \end{theorem}
+
+\begin{proof} This result is the main topic of my seminary. I will try to upload some written notes about it after the exam. \end{proof}
+
+\section{Tangent Bundle}
+
+In this section, we want to introduce a weaker notion of the tangent bundle for rectifiable sets. From now on, we will denote by $E$ a $d$-rectifiable set in $\R^n$ unless stated otherwise.
+
+\begin{proposition}Let $\Sigma$ and $\Sigma^\prime$ be $d$-dimensional surfaces of class $C^1$. Then the tangent planes are equal at almost every point in the intersection $x \in \Sigma \cap \Sigma^\prime$, that is,
+\begin{equation*} T_x \, \Sigma = T_x \, \Sigma^\prime. \end{equation*} \end{proposition}
+
+The proof of this assertion is a mere consequence of the following Lemma since the set of all points $x \in \Sigma \cap \Sigma^\prime$ such that $\Sigma$ is transversal to $\Sigma^\prime$ (i.e., where the tangent planes do not coincide) is negligible for the Hausdorff/Lebesgue measure.
+
+\begin{lemma}\label{lemma:sok1kdosd}Let $f, \, \widetilde{f} : \R^d \longrightarrow \R$ be functions of class $C^1(\R^d)$. Then
+\begin{equation*} \nabla f(x) = \nabla \widetilde{f}(x) \end{equation*}
+for $\mathcal{L}^d$-almost every point $x \in \R^d$ such that $f(x) = \widetilde{f}(x)$. \end{lemma}
+
+\begin{proof} We may always assume without loss of generality that $\widetilde{f} \equiv 0$. Let $K$ denote the set of the zeros of $f$, and let $x \in K$ be a density point, that is,
+\begin{equation*} \lim_{r \to 0} \frac{ \mathcal{H}^d \left(K \cap B(x, \, r) \right)}{\alpha_d \, r^d} = 1. \end{equation*}
+Suppose that $\nabla f(x) \geq \epsilon > 0$. By continuity, there exist a positive constant $\delta_i > 0$ and a point $y_i \in \R^n$ such that $f(y_i) \neq 0$ and $y_i \in B(x, \, \delta_i)$. In particular, by choosing a suitable sequence $\delta_i \searrow 0$, it turns out that
+\begin{equation*} B \left(y_i, \, \frac{\delta_i}{2} \right) \cap K = \varnothing. \end{equation*}
+We are now ready to derive a contradiction. The Hausdorff density of $K$ at $x$ cannot be equal to one because there is a sequence of balls shrinking down to $x$ that does not intersect $K$. More precisely, it turns out that
+\begin{equation*} \lim_{i \to + \infty} \frac{ \mathcal{H}^d \left(K^c \cap B(y_i, \, r_i) \right)}{\alpha_d \, r_i^d} > 0 \implies \lim_{r \to 0} \frac{ \mathcal{H}^d \left(K \cap B(x, \, r) \right)}{\alpha_d \, r^d} < 1. \end{equation*}
+\end{proof}
+
+\begin{definition}[Tangent Bundle] \index{tangent bundle} Let $E$ be a Borel $d$-rectifiable set. A map $T$ from $E$ to the Grassmannian manifold $G(n, \, d)$ that sends $x$ to $T(x)$ is a \textit{weak tangent bundle} for the set $E$ if and only if for every $\Sigma$ $d$-dimensional surface of class $C^1$ it turns out that
+\begin{equation*} T_x \, \Sigma = T(x) \end{equation*}
+for $\mathcal{H}^d$-almost every $x \in \Sigma \cap E$.\end{definition}
+
+\begin{proposition} A $d$-rectifiable Borel set $E \subset \R^n$ admits a "unique" - up to $\mathcal{H}^d$ negligible sets - weak tangent bundle. \end{proposition}
+
+\begin{proof}By \hyperref[prop:equivdlsd]{Proposition \ref{prop:equivdlsd}} there exists a collection of Borel subsets $\{E_i\}_{i \in \N}$ such that
+\begin{equation*} E = \bigcup_{i = 0}^{+ \infty} E_i, \end{equation*}
+satisfying the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The set $E_0$ is $\mathcal{H}^d$-null.
+\item For every $i \geq 1$ there is a $d$-dimensional surface $\Sigma_i \subset \R^n$ of class $C^1$ such that $E_i \subset \Sigma_i$.
+\end{enumerate}
+Therefore, we set
+\begin{equation*} T(x) := \begin{cases} T_x \, \Sigma_1 & x \in E_1, \\ T_x \, \Sigma_2 & x \in E_2 \setminus E_1, \\ \dots, \end{cases} \end{equation*}
+and, for every point
+\begin{equation*} x \notin \bigcup_{i \geq 1} E_i, \end{equation*}
+we set $T(x)$ to be equal to any $d$-dimensional vector space. The reader may easily check that $T$ is the sought map since it is unique up to the negligible set $\left(\bigcup_{i \geq 1} E_i \right)^c$. \end{proof}
+
+\paragraph{Approximate Tangent.} In this brief paragraph, we introduce an even weaker notion called \textit{approximate tangent plane}. From now on, we shall assume that $E$ is a $d$-rectifiable Borel set, which is locally $\mathcal{H}^d$-finite, that is for every $p \in E$ there is an open neighborhood $U_p \ni p$ such that
+\begin{equation*}\mathcal{H}^d(U_p) < + \infty. \end{equation*}
+
+\begin{definition}[Cone] \index{cone} Let $\alpha$ be a fixed angle, let $x \in \R^n$ be a point and let $V$ be a $d$-dimensional plane in $\R^n$. The cone of angle $\alpha$ around $V$ centered at $x$ is defined by setting
+\begin{equation*} \con := \left\{ x^\prime \in \R^n \: : \: |x^\prime - x| \cdot \sin(\alpha) \geq d(x - x^\prime, \, V) \right\}. \end{equation*}\end{definition}
+
+\begin{definition}[Strong Tangent Plane] \index{strong tangent plane} Let $V \in G(n, \, d)$ be a $d$-dimensional plane. If $E$ is a Borel set and $x \in E$ a point, then $V$ is a \textit{strong tangent plane} to $E$ at $x$ if and only if for every $\alpha > 0$ there exists a positive radius $r_0 > 0$ such that
+\begin{equation*}E \cap B(x, \, r) \subseteq \con \quad \text{for every $r \leq r_0$.} \end{equation*} \end{definition}
+
+\begin{definition}[Approximate Tangent Plane] \index{approximate tangent plane} \label{def:tp1} Let $V \in G(n, \, d)$ be a $d$-dimensional plane. If $E$ is a Borel set and $x \in E$ a point, then $V$ is an \textit{approximate tangent plane} to $E$ at $x$ if and only if for every $\alpha > 0$ it turns out that
+\begin{equation}\label{apt:eq1}\mathcal{H}^d \left( \left( E \cap B(x, \, r) \right) \setminus \con \right) = o(r^d),\end{equation}
+and
+\begin{equation}\label{apt:eq2} \mathcal{H}^d \left( \left( E \cap B(x, \, r) \right) \cap \con \right) \sim \alpha_d r^d. \end{equation}
+\end{definition}
+
+\begin{theorem}\label{th:dksdks} Let $E \subseteq \R^n$ be a Borel set. If $E$ is a $d$-rectifiable $\mathcal{H}^d$-locally finite set, then the weak tangent bundle $T(x)$ is the approximate tangent plane to $E$ at $x$ for $\mathcal{H}^d$-almost every $x \in E$. 
+\end{theorem}
+
+\begin{proof}We divide the argument into different steps to highlight what we are doing here.
+
+\paragraph{Step 1.} First, observe that the thesis is equivalent to the following assertion: \textit{For every $i \geq 1$ the vector space $T_x \, \Sigma_i$ is the approximate tangent plane to $E$ at $x$ for $\mathcal{H}^d$-almost every $x \in E \cap \Sigma_i$}.
+
+\paragraph{Step 2.} Let us define the measures
+\begin{equation*} \begin{aligned} & \lambda := \mathbbm{1}_{\Sigma_i} \cdot \mathcal{H}^d, \\[1em]
+& \mu^\prime := \mathbbm{1}_{\Sigma_i \setminus E} \cdot \mathcal{H}^d, \\[1em]
+& \mu^{\prime\prime} := \mathbbm{1}_{E \setminus \Sigma_i} \cdot \mathcal{H}^d. \end{aligned} \end{equation*}
+Fix $\alpha > 0$ and $x \in \Sigma_i$, and let $V := T_x \, \Sigma_i$ be the $d$-dimensional tangent plane. By construction, it turns out that
+\begin{equation} \label{dcsdd} \begin{aligned}\mathcal{H}^d \left( \left( E \cap B(x, \, r) \right) \cap \con \right) & = \lambda \left(B(x, \, r) \cap \con \right) - \mu^\prime \left(B(x, \, r) \cap \con \right) +  \\[1em] & \dots + \mu^{\prime \prime} \left(B(x, \, r) \cap \con \right) \end{aligned} \end{equation}
+since the restriction $\mathcal{H}^d \restr E$ is equal to $\lambda - \mu^\prime + \mu^{\prime \prime}$.
+
+\paragraph{Step 3.} By definition, as $r$ goes to $0$
+\begin{equation*} \lambda \left( B(x, \, r) \cap \con \right) \sim \mathcal{H}^d \left(E \cap B(x, \, r) \right), \end{equation*} 
+and thus
+\begin{equation*} \lambda \left( B(x, \, r) \cap \con \right) \sim \alpha_d r^d \quad \text{for $r$ sufficiently small}. \end{equation*}
+
+\paragraph{Step 4.} We now claim that
+\begin{equation*} \mu^\prime \left( B(x, \, r) \cap \con \right) = o(r^d) \end{equation*}
+for $\mathcal{H}^d$-almost every $x \in E \cap \Sigma_i$. Indeed, we observe that
+\begin{equation*} \mu^\prime \left( B(x, \, r) \cap \con \right) \leq \mathcal{H}^d \left( B(x, \, r) \cap \left(\Sigma_i \setminus E \right) \right),  \end{equation*}
+and thus it suffices to show\footnote{This assertion is left as a simple exercise for the reader.} that the density of $\Sigma_i \setminus E$ is $0$ at almost every point of $E$ with respect to the measure $\lambda$ (which is, by the way, rather intuitive). Indeed, if
+\begin{equation*} \Theta \left( \Sigma_i \setminus E, \, \lambda, \, x \right) = \frac{ \mathcal{H}^d \left( B(x, \, r) \cap \left(\Sigma_i \setminus E \right) \right)}{ \mathcal{H}^d \left( \Sigma_i \cap B(x, \, r) \right) } = 0, \end{equation*}
+then the numerator must be an element of the class $o(r^d)$ since the denominator is $\sim \alpha_d r^d$.
+
+\paragraph{Step 5.} In a similar fashion, we claim that
+\begin{equation*} \mu^{\prime \prime} \left( B(x, \, r) \cap \con \right) = o(r^d) \end{equation*}
+for $\mathcal{H}^d$-almost every $x \in E \cap \Sigma_i$. This is an easy consequence of the inequality
+\begin{equation*} \mu^{\prime \prime} \left( B(x, \, r) \cap \con \right) \leq \mu^{\prime \prime} \left( B(x, \, r) \right). \end{equation*}
+Indeed, the right-hand side is an element of the class $o(r^d)$ since $\mu^{\prime \prime}$ is orthogonal to $\lambda$ by construction, and thus the density with respect to $\lambda$ is zero for $\lambda$-almost every $x$. More precisely,
+\begin{equation*} \frac{\mathrm{d} \mu^{\prime \prime}}{\mathrm{d} \lambda}(x) = \lim_{r \to 0} \frac{ \mathcal{H}^d \left( B(x, \, r) \right)}{ \lambda \left( B(x, \, r) \right) } = 0, \end{equation*}
+and the denominator is $\sim \alpha_d r^d$ as in the previous step.
+
+\paragraph{Step 6.} In the same spirit, the reader may prove that
+\begin{equation*} \mathcal{H}^d \left( \left( E \cap B(x, \, r) \right) \setminus \con \right) = o(r^d) \end{equation*}
+using the same decomposition introduced in \eqref{dcsdd}.
+\end{proof}
+
+\begin{exercise} Let $\Sigma$ be a line in $\R^2$, and let
+\begin{equation*} E:= \Sigma \cup \left( \, \bigcup_{n \in \N} \partial B(x_n, \, r_n) \right), \end{equation*}
+where $\{x_n\}_{n \in \N}$ is a dense countable collection of points in $\R^2$ and $(r_n)_{n \in \N}$ is a summable family of positive real numbers. Prove that: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item The set $E$ is $d$-rectifiable.
+\item The set $E$ is locally $\mathcal{H}^1$-finite.
+\item For almost every $x \in \Sigma$ it turns out that
+\begin{equation*} \mathcal{H}^1 \left( (E \setminus \Sigma) \cap B(x, \, r) \right) = o(r). \end{equation*}
+\end{enumerate}
+\end{exercise}
+
+\begin{remark}According to the statement of \hyperref[th:dksdks]{Theorem \ref{th:dksdks}}, it might happen that the mass is distributed only on one side of the tangent plane (see \hyperref[fig:rec11]{Figure \ref{fig:rec11}}).
+
+To prove that the statement can be improved (i.e., the situation described above cannot happen), we need to introduce a different definition of \textit{approximate tangent plane}, which is easier to deal with, and then prove that it is stronger than \hyperref[def:tp1]{Definition \ref{def:tp1}}.\end{remark}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=13cm, height=10cm]{images/atpTGM1.png}
+\caption{The mass is distributed only on one side of the approximate tangent plane.}
+\label{fig:rec11}
+\end{figure}
+
+\begin{definition}[Approximate Tangent Plane] \label{def:tp2} Let $\psi_{x, \, r} : B(x, \, r) \longrightarrow B(0, \, 1)$ be the magnifying glass map, that is,
+\begin{equation*} \psi_{x, \, r}(x^\prime) := \frac{x^\prime - x}{r}, \end{equation*}
+and let $E_{x, \, r}$ be the image of $E$ via $\psi_{x, \, r}$. An element $V$ of the Grassmannian manifold $G(n, \, d)$ is an \textit{approximate tangent plane} to the set $E$ at the point $x$ if and only if
+\begin{equation*} \mathbbm{1}_{E_{x, \, r}} \cdot \mathcal{H}^d \rightharpoonup \mathbbm{1}_V \cdot \mathcal{H}^d \end{equation*}
+locally weakly-$\ast$, that is, 
+\begin{equation*} \int_{E_{x, \, r}} \varphi(t) \, \mathrm{d}\mathcal{H}^d(t) \: \xrightarrow{r \to 0} \:  \int_{V}  \varphi(t) \, \mathrm{d} \mathcal{H}^d(t), \qquad \forall \, \varphi \in C_c^0(\R^d). \end{equation*}\end{definition}
+
+\begin{remark} If $V$ is an approximate tangent plane to $E$ at $x$ in the sense of \hyperref[def:tp2]{Definition \ref{def:tp2}}, then $V$ is an approximate tangent plane to $E$ at $x$ in the sense of \hyperref[def:tp1]{Definition \ref{def:tp1}}. \end{remark}
+
+\begin{proof} Let us consider the following measures:
+\begin{equation*} \mu_{x, \, r} := \mathbbm{1}_{E_{x, \, r}} \cdot \mathcal{H}^d \qquad \text{and} \qquad \mu_x := \mathbbm{1}_{V} \cdot \mathcal{H}^d. \end{equation*}
+The $d$-dimensional Hausdorff measure of $\partial B(0, \, 1) \cap V$ is equal to zero since $B(0, \, 1) \cap V$ is a $d$-dimensional set (which means that the boundary has dimension $d - 1$); hence
+\begin{equation*} \mu_{x, \, r} \rightharpoonup \mu_x \implies \mu_{x, \, r} \left(B(0, \, 1) \right) \: \xrightarrow{r \to 0} \: \mu_x \left( B(0, \, 1) \right), \end{equation*} 
+as a consequence of \hyperref[proposition:posme]{Proposition \ref{proposition:posme}}. By definition, we have $\mu_x \left(B(0, \, 1) \right) = \alpha_d$ and
+\begin{equation*}\mu_{x, \, r} \left(B(0, \, 1) \right) = \mathcal{H}^d \left( E_{x, \, r} \cap B(0, \, 1) \right) = \frac{1}{r^d} \, \mathcal{H}^d \left(E \cap B(x, \, r) \right), \end{equation*}
+which implies a condition weaker than \textbf{(b)}, that is
+\begin{equation*}\mathcal{H}^d \left(E \cap B(x, \, r) \right) \sim \alpha_d r^d \quad \text{as $r \to 0^+$}. \end{equation*}
+In a similar fashion, it turns out that
+\begin{equation*}\mu_{x, \, r} \left(B(0, \, 1) \cap \mathcal{C}(0, \, V, \, \alpha) \right) \: \xrightarrow{r \to 0} \: \mu \left( B(0, \, 1) \cap \mathcal{C}(0, \, V, \, \alpha) \right) = \alpha_d, \end{equation*}
+from which it follows that
+\begin{equation*}\mathcal{H}^d \left(E \cap B(x, \, r) \cap \mathcal{C}(0, \, V, \, \alpha) \right) \sim \alpha_d r^d \quad \text{as $r \to 0^+$}, \end{equation*}
+that is, the condition \textbf{(b)} holds. The reader may prove, in a similar way, that the condition \textbf{(a)} also holds true.
+\end{proof}
+
+\begin{theorem}\label{th:dksdks2} Let $E \subseteq \R^n$ be a Borel set. If $E$ is $d$-rectifiable and locally $\mathcal{H}^d$-finite, then $T(x)$ is the approximate tangent plane (\hyperref[def:tp2]{Definition \ref{def:tp2}}) to $E$ at $x$ for $\mathcal{H}^d$-almost every $x \in E$. 
+\end{theorem}
+
+\begin{proof}[Sketch of the Proof] We divide the argument into different steps to ease the notation.
+
+\paragraph{Step 1.} First, observe that the thesis is equivalent to the following assertion: \textit{For every $i \geq 1$ the vector space $T_x \, \Sigma_i$ is the approximate tangent plane to $E$ at $x$ for $\mathcal{H}^d$-almost every $x \in E \cap \Sigma_i$}.
+
+\paragraph{Step 2.} Fix $i \geq 1$ and let $\Sigma_{x, \, r}$ be the image of $\Sigma_i$ via $\psi_{x, \, r}$. We consider the measures
+\begin{equation*} \begin{aligned} & \lambda_{x, \, r} := \mathbbm{1}_{\Sigma_{x, \, r}} \cdot \mathcal{H}^d, \\[1em]
+& \mu_{x, \, r}^\prime := \mathbbm{1}_{\Sigma_{x, \, r} \setminus E_{x, \, r}} \cdot \mathcal{H}^d, \\[1em]
+& \mu_{x, \, r}^{\prime\prime} := \mathbbm{1}_{E_{x, \, r} \setminus \Sigma_{x, \, r}} \cdot \mathcal{H}^d, \end{aligned} \end{equation*}
+in such a way that the following decomposition holds:
+\begin{equation*} \mu_{x, \, r} = \lambda_{x, \, r} - \mu_{x, \, r}^\prime + \mu_{x, \, r}^{\prime \prime}. \end{equation*}
+
+\paragraph{Step 3.} The reader may prove that
+\begin{equation*} \lambda_{x, \, r} \rightharpoonup \mathbbm{1}_V \cdot \mathcal{H}^d, \end{equation*}
+locally weakly-$\ast$, using the fact that the projection $\pi_{x, \, r} : \sigma_{x, \, r} \longrightarrow V$ is an almost-isometry.
+
+\paragraph{Step 4.} In a similar way to what we have done in the proof of \hyperref[th:dksdks]{Theorem \ref{th:dksdks}}, one can check that
+\begin{equation*} \mu_{x, \, r}^\prime \rightharpoonup 0 \iff \mu_{x, \, r}^\prime \left (B_R \right) \xrightarrow{r \to 0} 0 \quad \text{for any fixed radius $R > 0$} \end{equation*}
+as a consequence of \hyperref[proposition:posme]{Proposition \ref{proposition:posme}}. We now observe that
+\begin{equation*} \mu_{x, \, r}^\prime \left( B(0, \, 1) \right) = \mathcal{H}^d \left( B(0, \,1) \cap \left( \Sigma_{x, \, r} \setminus E_{x, \, r} \right) \right) = \frac{1}{r^d} \mathcal{H}^d \left( B(x, \, r) \cap \left( \Sigma_i \setminus E \right) \right) \xrightarrow{ r \to 0} 0 \end{equation*}
+since $ \mathcal{H}^d \left( B(x, \, r) \cap \left( \Sigma_i \setminus E \right) \right)$ is an element of the class $o(r^d)$, as proved in \hyperref[th:dksdks]{Theorem \ref{th:dksdks}}.
+
+\paragraph{Step 5.} Similarly, by \hyperref[proposition:posme]{Proposition \ref{proposition:posme}} it follows that
+\begin{equation*} \mu_{x, \, r}^{\prime \prime} \rightharpoonup 0 \iff \mu_{x, \, r}^{\prime \prime} \left (B_R \right) \xrightarrow{r \to 0} 0 \quad \text{for any fixed radius $R > 0$}. \end{equation*}
+We now observe that
+\begin{equation*} \mu_{x, \, r}^{\prime \prime} \left( B(0, \, 1) \right) = \mathcal{H}^d \left( B(0, \,1) \cap \left( E_{x, \, r} \setminus \Sigma_{x, \, r} \right) \right) = \frac{1}{r^d} \mathcal{H}^d \left( B(x, \, r) \cap \left( E\setminus \Sigma_i \right) \right), \end{equation*}
+thus it suffices to prove that the right-hand side goes to zero as $r \to 0^+$. Indeed, the limit of the ratio is the Radon-Nikodym density, which is zero as a consequence of the fact that the two measures are orthogonal:
+\begin{equation*} \frac{1}{r^d} \mathcal{H}^d \left( B(x, \, r) \cap \left( E\setminus \Sigma_i \right) \right) \xrightarrow{r \to 0} \frac{\mathrm{d} \left( \mathbbm{1}_{E \setminus \Sigma} \cdot \mathcal{H}^d \right)}{\mathrm{d} \left( \mathbbm{1}_{\Sigma} \cdot \mathcal{H}^d \right)} = 0. \end{equation*}
+\end{proof}
+
+\section{Rectifiability Criteria}
+
+The primary goal of this section is to relate $d$-rectifiable set with properties of the approximate tangent plane. More precisely, in this section we denote by $V \in G(n, \, d)$ a $d$-dimensional plane, by $E \subseteq \R^n$ a Borel set, and we fix a point $x \in \R^n$.
+
+\begin{definition}[Tangent Cone] \index{tangent cone} Fix $\alpha \in \left(0, \, \pi/2 \right)$. The cone $\mathcal{C}(x, \, V, \, \alpha)$ is \textit{tangent} to a set $E$ at $x$ if there exists a positive constant $r_0 > 0$ such that
+\begin{equation*} B(x, \, r) \cap E \subseteq \mathcal{C}(x, \, V, \, \alpha), \qquad \forall \, r \leq r_0. \end{equation*} \end{definition}
+
+\begin{theorem}Assume that $E$ admits a tangent cone at every point $x \in E$. Then there are (at most) countably many Lipschitz functions $f_i : \R^d \longrightarrow \R^n$ such that
+\begin{equation*}E \subseteq \bigcup_{i \geq 1} f_i(\R^d).  \end{equation*}
+In particular, the set $E$ is $d$-rectifiable. \end{theorem} %STEP 1
+
+\begin{proof}We first prove a particular case, and then we reduce the general case to it using a standard argument.
+
+\paragraph{Step 1.} Let us assume\footnote{We will get rid of these extra assumptions later. It is important to understand that the argument presented in the first step only proves a particular case.} that: \mbox{}
+\begin{enumerate}[label=\alph*)]
+\item The $d$-dimensional plane $V$, the angle $\alpha$ and the radius $r_0$ do not depend on the point $x \in E$.
+\item The linear space $V$ is a straight $d$-dimensional plane.
+\end{enumerate}
+We divide the ambient space in strips of thickness $r_0 \sin \alpha$, that is,
+\begin{equation*} \R^n = \bigcup_{i \in \Z} S_i, \quad \text{with $|S_i| = r_0 \sin \alpha$}. \end{equation*}
+The set $E$ is thus given by the union
+\begin{equation*}E = \bigcup_{i \in \Z} \left(E \cap S_i \right),\end{equation*}
+which means that it is enough to prove that the intersection of $E$ with each strip $S_i$ is contained in the graph of a Lipschitz map, that is,
+\begin{equation*} E \cap S_i \subset \Gamma(g_i),\end{equation*}
+where $g_i : V \longrightarrow V^\perp$ is Lipschitz\footnote{The graph of the function $g_i$ is a subset of $\R^n$ since $g_i$ sends $V$ to its orthogonal, and $V \oplus V^\perp = \R^n$.}. By assumption, it turns out that (see \hyperref[fig:12222]{Figure \ref{fig:12222}}) the intersection of $E$ with each strip is contained in the cone centered at any $x \in E \cap S_i$, that is,
+\begin{equation*} E \cap S_i \subset \mathcal{C}(x, \, V, \, \alpha) \qquad \forall \, x \in E \cap S_i. \end{equation*}
+Therefore, if we denote by $(x, \, y)$ the coordinates associated with the decomposition $V \oplus V^\perp = \R^n$, then one can prove that
+\begin{equation*} |y^\prime - y| \leq \tan (\alpha) \cdot |x^\prime - x|, \end{equation*}
+which means that the $y$ coordinate furnishes a Lipschitz map (see \hyperref[fig:133]{Figure \ref{fig:133}}).
+
+\paragraph{Step 2.} We are now ready to get rid of the extra assumptions, one by one. \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item Assume that $\alpha$ and $r_0$ do not depend on the point $x \in E$, and fix an angle $\alpha^\prime > \alpha$.
+
+The cones of the form $\mathcal{C}(0, \, V, \, \alpha)$, as $V$ ranges in the set of all admissible $d$-dimensional planes, are contained in a finite family $C(0, \, V_i, \, \alpha^\prime)$ of slightly ampler cones. We can reduce to the first step by splitting $E$ in the finite union associated to the family above, that is,
+\begin{equation*} E = \bigcup_{i = 1}^{N} E_i, \end{equation*}
+with $V_i$ fixed $d$-dimensional straight plane for each $i = 1, \, \dots, \, N$.
+\item Assume that the radius $r_0$ does not depend on the point $x \in E$.
+
+For every $\alpha \in \Q$ there exists $\alpha^\prime(\alpha) > \alpha$ such that the cones of the form $\mathcal{C}(0, \, V, \, \alpha)$, as $V$ ranges in the set of all admissible $d$-dimensional planes, are contained in a given finite family $C(0, \, V_i, \, \alpha^\prime(\alpha))$ of slightly ampler cones. We can reduce to the first step by splitting $E$ in the (at most) countable union
+\begin{equation*} E = \bigcup_{\alpha \in \Q} \left[ \, \bigcup_{i = 1}^{N_{\alpha^\prime(\alpha)}} E_i \right]. \end{equation*}
+\item Finally, if no extra assumption holds, then it suffices to consider the collection
+\begin{equation*} E_r := \left\{ x \in E \: \left| \: r_0(x) < r \right. \right\} \end{equation*}
+and split $E$ as follows
+\begin{equation*} E = \bigcup_{r, \, \alpha \in \Q} \left[ \, \bigcup_{i = 1}^{N_{r, \, \alpha^\prime(\alpha)}} E_{r, \, i} \right]. \end{equation*}
+\end{enumerate}
+\end{proof}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=16cm, height=9cm]{images/atpTGM2.png}
+\caption{Sketch of the first step.}
+\label{fig:12222}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=16cm, height=9cm]{images/atpTGM3.png}
+\label{fig:133}
+\caption{The coordinates give a Lipschitz map.}
+\end{figure}
+
+\begin{definition}[Approximate Tangent Cone] \index{approximate tangent cone} Fix $\alpha \in \left(0, \, \pi/2 \right)$. The cone $\mathcal{C}(x, \, V, \, \alpha)$ is a \textit{approximately tangent} to a set $E$ at $x$ if and only if
+\begin{equation*} \mathcal{H}^d \left( \left( B(x, \, r) \cap E \right) \setminus \mathcal{C}(x, \, V, \, \alpha) \right) = o(r^d). \end{equation*} \end{definition}
+
+\begin{theorem}\label{th:91dsl,2peld}Assume that $E$ admits an approximate tangent cone at every point $x \in E$, and assume also that the lower density is bounded from below, that is,
+\begin{equation*} \Theta_\ast(E, \, x) > 0 \qquad \forall \, x \in E. \end{equation*}
+Then there are (at most) countably many Lipschitz functions $f_i : \R^d \longrightarrow \R^n$ such that
+\begin{equation*}E \subseteq \bigcup_{i \geq 1} f_i(\R^d).  \end{equation*}
+In particular, the set $E$ is $d$-rectifiable. \end{theorem}
+
+\begin{corollary} \label{crthasjdkso} If $E$ admits an approximate tangent cone at $\mathcal{H}^d$-almost every point $x \in E$, and the lower density is bounded from below, i.e.,
+\begin{equation*} \Theta_\ast(E, \, x) > 0 \qquad \text{for $\mathcal{H}^d$-almost every point $x \in E$}, \end{equation*}
+then the set $E$ is $d$-rectifiable. \end{corollary}
+
+\begin{proof}[Proof of Theorem \ref{th:91dsl,2peld}] We first prove a particular case, and then we reduce the general case to it using a standard argument.
+
+\paragraph{Step 1.1.} Let us assume that: \mbox{}
+\begin{enumerate}[label=\alph*)]
+\item The $d$-dimensional plane $V$ and the angle $\alpha$ are the same for every points $x \in E$.
+\item There exist $r_0 > 0$ and $\delta > 0$ such that for every $x \in E$ it turns out that
+\begin{equation}\label{sc:1} \mathcal{H}^d \left(E \cap B(x, \, r) \right) \geq \delta \cdot r^d, \end{equation} 
+for every $r \leq r_0$.
+\end{enumerate}
+First, we notice that the existence of an approximate tangent plane implies that for every $r \leq r_0$ it turns out that
+\begin{equation} \label{sc:2}\mathcal{H}^d \left( \left(E \cap B(x, \, r) \right) \setminus \con \right) \leq \delta^\prime \cdot r^d, \end{equation}
+where $\delta^\prime$ is a positive constant that can be chosen arbitrarily. To prove the particular case, we first need to show that there exists a radius $\overline{r} > 0$ such that
+\begin{equation*} E \cap \left( V \times B\left(x_0, \, \overline{r} \right) \right) \subset \Gamma(g), \end{equation*}
+where $x_0 \in V^\perp$ and $\Gamma(g)$ is the graph of a Lipschitz function $g : V \longrightarrow V^\perp$.
+
+\paragraph{Step 1.2.} Fix an angle $\alpha^\prime \in (\alpha, \, \pi/2)$, and fix a point $x \in E$. We claim that
+\begin{equation*} E \cap B\left(x_0, \, \frac{r_0}{2} \right) \subseteq \mathcal{C} \left(x, \, V, \, \alpha^\prime \right). \end{equation*}
+We argue by contradiction. Suppose that there exists a point
+\begin{equation*} x^\prime \in \left( E \cap B\left(x_0, \, \frac{r_0}{2} \right) \right) \setminus \mathcal{C} \left(x, \, V, \, \alpha^\prime \right), \end{equation*}
+and let $r, \, r^\prime > 0$ be positive real numbers such that
+\begin{equation*}B(x^\prime, \, r^\prime) \subset B(x, \, r) \qquad \text{and} \qquad B(x^\prime, \, r^\prime) \cap \mathcal{C}(x, \, V, \, \alpha) = \varnothing. \end{equation*}
+More precisely, let us consider the following radii:
+\begin{equation*} r := 2 \, |x - x^\prime| \qquad \text{and} \qquad r^\prime := |x - x^\prime| \, \sin(\alpha^\prime - \alpha). \end{equation*}
+The assumptions \eqref{sc:1} and \eqref{sc:2} proves that
+\begin{equation*} \delta^\prime \cdot r^d \geq \mathcal{H}^d \left( \left(E \cap B(x, \, r) \right) \setminus \con \right) \geq \mathcal{H}^d \left( E \cap B(x^\prime, \, r^\prime) \right) \geq \delta \cdot (r^\prime)^d, \end{equation*}
+from which we can derive a contradiction by fixing $\delta^\prime$ such that
+\begin{equation*} \delta^\prime < \delta \cdot \left( \frac{\sin(\alpha^\prime - \alpha)}{2} \right)^d. \end{equation*}
+
+\paragraph{Step 1.3.} In this final step, the goal is to clean the proof of the particular case by fixing the values of $\delta^\prime$ and $\alpha^\prime$ in such a way that the contradiction above holds. In particular, let us consider
+\begin{equation*} \alpha^\prime = \frac{2 \, \alpha + \pi}{4}, \end{equation*}
+and
+\begin{equation*} \delta^\prime = \frac{\delta}{2} \cdot \left( \frac{1}{2} \sin \left( \frac{\pi - 2 \, \alpha}{4} \right) \right)^d. \end{equation*}
+In the previous step, we proved that
+\begin{equation*} E \cap B\left(x_0, \, \frac{r_0}{2} \right) \subseteq \mathcal{C} \left(x, \, V, \, \alpha^\prime \right), \end{equation*}
+and this is enough to infer that
+\begin{equation*} E \cap \left(V \times B\left(x_0, \, \overline{r} \right)\right) \subseteq \Gamma(g),\end{equation*}
+where $g : V \longrightarrow V^\perp$ is a Lipschitz function of constant $\tan (\alpha^\prime)$, provided that the thickness of the cylinder strips $2 \overline{r}$ is less or equal than $(r_0/2) \cdot \sin(\alpha^\prime)$, that is,
+\begin{equation*} \overline{r} \leq \frac{r_0}{4} \sin \left( \frac{\pi + 2 \alpha}{4} \right). \end{equation*}
+
+\paragraph{Step 2.} In the general case, it is enough to consider the countable covering of $E$ defined by setting
+\begin{equation*} E_n := \left\{ x \in E \: \left| \: \text{\eqref{sc:1} and \eqref{sc:2} holds for $r = \delta = \frac{1}{n}$} \right. \right\}. \end{equation*}
+
+\end{proof}
+
+\begin{corollary}If $E$ admits a tangent plane at every point $x \in E$, then the set $E$ is $d$-rectifiable. \end{corollary}
+
+\section{Area Formula for Rectifiable Sets}
+
+\paragraph{Summary.} Let $\Sigma$ be a $d$-dimensional surface of class $C^1$, and let $f : \Omega \longrightarrow \Sigma$ be a Lipschitz function defined on an open subset $\Omega \subseteq \R^d$. In \hyperref[sec:aflm]{Section \ref{sec:aflm}} we proved that for every Borel set $E \subseteq \Omega$ it turns out that
+\begin{equation} \label{areaformula:s1} \int_{y \in \Sigma} m_{f, \, E}(y) \, \mathrm{d} \mathcal{H}^d(y) = \int_{E} Jf(x) \, \mathrm{d}\mathcal{L}^d(x), \end{equation}
+where $m_{f, \, E}(y) := \symbol{35} \left(f^{-1}(y) \cap E \right)$ and $Jf(x)$ is the Jacobian of $f$ at $x$.
+
+The formula presented here may be extend with little efforts to a more general setting. More precisely, let $\Sigma^\prime$ be a $d$-dimensional surface of class $C^1$, and let $f : \Sigma^\prime \longrightarrow \Sigma$ be a Lipschitz function. The (area) formula
+\begin{equation} \label{areaformula:s2}  \int_{\Sigma} \left[ \sum_{s \in f^{-1}(x)} h(s)\right] \, \mathrm{d} \mathcal{H}^d(x) = \int_{\Sigma^\prime} h(x) Jf(x) \, \mathrm{d}\mathcal{L}^d \end{equation}
+holds, and the proof is very similar\footnote{The reader may try to fill in the details as an exercise. Indeed, it is enough to take a compatible atlas for the surface $\Sigma^\prime$ and use the previous result \eqref{areaformula:s1} on each chart $\varphi : U \xrightarrow{\: \sim \:} V$. To conclude, the reader may use a suitable partition of unity and prove that the formula glues as expected.} to the one presented in \hyperref[sec:aflm]{Section \ref{sec:aflm}}.
+
+\paragraph{Rectifiable Sets.} Let $E \subset \R^n$ be a $d$-rectifiable set, and let $f : E \longrightarrow f(E)$ be a Lipschitz function\footnote{The codomain is not important since the image of $E$ via $f$ is always a $d$-rectifiable set.}. In this paragraph, we want to prove that for every Borel set $F \subseteq f(E)$ it turns out that
+\begin{equation} \label{areaformula:rec} \int_{y \in F} m_{f, \, E}(y) \, \mathrm{d} \mathcal{H}^d(y) = \int_{f^{-1}(F)} Jf(x) \, \mathrm{d}\mathcal{L}^d(x), \end{equation}
+where $Jf(x)$ denotes the Jacobian of $f$ at $x$, that is
+\begin{equation} \label{jac:rec} Jf(x) := \sqrt{ \mathrm{det} \left(\nabla_t f(x) \right)^T \left(\nabla_t f(x) \right)}. \end{equation}
+
+\begin{definition}[Tangent Differential] The function $f : E \longrightarrow X \subseteq \R^m$ is tangentially differentiable at $\mathcal{H}^d$-almost every $x \in E$ if and only if there exists a linear map $L : T_x E \longrightarrow \R^m$ such that
+\begin{equation*} f(x^\prime) = f(x) + L \left( \pi (x - x^\prime) \right) + o(|x - x^\prime|) \end{equation*}
+for every $x^\prime \in E$, where $\pi$ is the projection onto the tangent space $T_x E$.
+\end{definition} 
+
+\begin{remark}If we consider a Lipschitz extension $\widetilde{f} : \R^n \longrightarrow \R^m$ of $f$, then $f$ is tangentially differentiable at $x \in E$ if and only if there exists a linear map $L : \R^n \longrightarrow \R^m$ such that
+\begin{equation*} \widetilde{f}(x + h) = f(x) + Lh + o(|h|) \qquad \forall \, h \in T_x E. \end{equation*}  \end{remark}
+
+\paragraph{Proof of Area Formula.} Let $\{E_i\}_{i \geq 0}$ be given by the equivalent definition of rectifiable set (see \hyperref[prop:equivdlsd]{Proposition \ref{prop:equivdlsd}}), that is
+\begin{equation*} E = \bigcup_{i = 0}^{+ \infty} E_i, \end{equation*}
+and the collection satisfies the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The $d$-dimensional Hausdorff measure of $E_0$ is zero.
+\item The set $E_i$ is contained in a surface of class $C^1$, denoted by $\Sigma_i$, for every $i \geq 1$.
+\item The restriction $f \, \big|_{E_i}$ may be extended to a differentiable function $F_i : \Sigma_i \longrightarrow \R^m$.
+\item The set $E_i$ is equal to the disjoint union of $E_i^\prime$ and $E_i^{\prime \prime}$, where $E_i^\prime$ is the set of points $x \in E_i$ where the rank of $\mathrm{d}f_x$ is not maximal, and $E_i^{\prime \prime}$ is the set of points where it is maximal.
+\end{enumerate}
+For every $i \geq 1$, the function $F_i : \Sigma_i \longrightarrow \Sigma_i^\prime$ is differentiable, and thus the area formula holds for every $x \in F_i^{-1}\left( \Sigma_i^\prime \right) \cap E_i^{\prime \prime}$:
+\begin{equation} \label{areaformula:recs2}  \int_{\Sigma_i^\prime} \left[ \sum_{s \in F_i^{-1}(x) \cap S_i^{\prime \prime}} h(s)\right] \, \mathrm{d} \mathcal{H}^d(x) = \int_{S_i^{\prime\prime}} h(x)  Jf(x) \, \mathrm{d}\mathcal{L}^d(x). \end{equation}
+In a similar fashion, the area formula also holds for every $x \in F_i^{-1}\left( \Sigma_i^\prime \right) \cap E_i^\prime$ since the Jacobian is zero at every point, and the image of a $\mathcal{H}^d$-null set via a differentiable function is also $\mathcal{H}^d$-null.
+
+\begin{remark}Recall that, if two Lipschitz functions agree on a subset, then they have the same tangential gradient at almost every $x$ in the intersection (see \hyperref[lemma:sok1kdosd]{Lemma \ref{lemma:sok1kdosd}}).  \end{remark}
+
+The area formula introduced in this final section can be slightly improved. Indeed, we do not need to consider a Lipschitz function $f$, but it is enough to require the following properties: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item The function $f$ is differentiable almost everywhere.
+\item The function $f$ sends $\mathcal{H}^d$-null sets into $\mathcal{H}^d$-null sets.
+\end{enumerate}
+
+\begin{exercise}Prove that for every $d \in (0, \, + \infty)$ there exists a set $E$ such that $\mathcal{H}^d(E)$ is finite and nonzero, but the lower density is zero:
+\begin{equation*} \Theta_\ast(E, \, x)= 0 \qquad \text{for $\mathcal{H}^d$-almost every $x \in E$}. \end{equation*} \end{exercise}

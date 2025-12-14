@@ -1,0 +1,525 @@
+\chapter{Topological Degree Modulo $2$}
+
+The primary goal of this chapter is to introduce the notion of topological degree modulo two, prove some of  its leading properties and apply it to global analysis problems.
+
+\section{Topological Preliminaries}
+
+In this section, $X$ and $Y$ will be metric spaces, unless stated otherwise.
+
+\begin{definition}[Proper map] Let $A \subseteq X$ be a subset of $X$, and let $\Phi : A \to Y$ be a continuous map.  We say that $\Phi$ is \textit{proper} if, for any sequence $(x_n)_{n \in \N} \subset A$ such that $\left(\Phi(x_n) \right)_{n \in \N}$ converges to some $y \in Y$, there exists a converging subsequence $(x_{n_k})_{k \in \N}$ in $X$. \end{definition}
+
+\begin{lemma} \label{lemma:cpt} Let $\Phi : A \subset X \to Y$ be a proper map. \mbox{}
+\begin{enumerate}[label=\textbf{ (\alph*)}]
+\item If $A$ is closed as a subset of $X$, then $\Phi$ is a closed map.
+\item If $A$ is closed as a subset of $X$ and $K \subset Y$ is compact, then $\Phi^{-1}(K)$ is compact in $X$.
+\end{enumerate} \end{lemma}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{ (\alph*)}]
+\item Let $F$ be any closed subset of $A$: we need to prove that $\Phi(F)$ is closed.
+
+Let $(y_n)_{n \in \N} \subset \Phi(F)$ be any converging sequence in $Y$, let $y$ be its limit and let $(x_n)_{n \in \N} \subset F$ be any sequence such that $\Phi(x_n) = y_n$.
+
+Since $\Phi$ is proper, there exists a subsequence $(x_{n_k})_{k \in \N} \subset F$ such that $x_{n_k} \to x \in F$ (since $F$ is closed). Consequently, by continuity of $\Phi$, we conclude that $y = \Phi(x) \implies y \in F$.
+\item Let $(x_n)_{n \in \N} \subset \Phi^{-1}(K)$ be any sequence. The image sequence $(\Phi(x_n))_{n \in \N} \subset K$ is contained in $K$, and thus, by compactness, there exists a subsequence $(\Phi(x_{n_k}))_{k \in \N}$ which converges to $y \in K$.
+
+Since $\Phi$ is proper, there exists a subsequence $(x_{n_{k_h}})_{h \in \N} \subset \Phi^{-1}(K)$ such that it converges to $x \in X$. But $A$ is closed, thus $x \in A$ and, by continuity of $\Phi$, it turns out that $\Phi(x) = y$ and $x \in \Phi^{-1}(K)$.
+\end{enumerate}
+\end{proof}
+
+\section{Cardinality of the Preimage }
+
+\begin{definition}[Critical point/values] Let $\Omega \subset \R^N$ be an open subset and let $\Phi \in C^1 \left( \Omega, \, \R^M \right)$ be a differentiable map. A point $x_0 \in \Omega$ is a \textit{critical point} if the differential at $x_0$, denoted by $\mathrm{d}\,\Phi(x_0)$, is not surjective. If we define
+\begin{equation} \label{eq:locus} Z_\Phi := \left\{ x \in \Omega \, \left| \, \mathrm{d} \, \Phi(x) \, \, \, \text{not surjective} \right. \right\}, \end{equation}
+then $y \in \R^M$ is a \textit{critical value} if $\Phi^{-1}(y) \cap Z_{\Phi} \neq \emptyset$.
+ \end{definition}
+
+\begin{lemma} \label{lemma:fond} Let $\Omega \subset \R^N$ and let $\Phi : \overline{\Omega} \to \R^N$ be a proper map of class $C^1(\Omega) \cap C^0(\overline{\Omega})$. If $y$ is a regular value not in the image of the border of $\Omega$, that is,
+\begin{equation*} y \in \R^N \setminus \Phi \left( \partial \, \Omega \cup Z_\Phi \right), \end{equation*}
+then it turns out that \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item the cardinality of the fiber is finite, i.e., $| \Phi^{-1}(y) | < \infty$;
+\item if $y \in \Phi(\Omega)$ and $\Phi^{-1}(y) = \{x_1, \, \dots, \, x_k\}$, then there is a neighborhood $V$ of $y$ and there are neighborhoods $U_1, \, \dots, \, U_k$ of $x_1, \, \dots, \, x_k$ such that
+\begin{equation*}U_1, \, \dots, \, U_k \subset \Omega \quad \text{and} \quad V \cap \Phi \left( \partial \, \Omega \cup Z_\Phi \right) = \emptyset. \end{equation*}
+Moreover, the restriction $\Phi \, \big|_{U_i} : U_i \to V$ is a diffeomorphism for all $i = 1, \, \dots, \, k$ and 
+\begin{equation*} \Phi^{-1}(V) \subset \bigcup_{i = 1}^k U_i . \end{equation*}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item By \hyperref[lemma:cpt]{Lemma \ref{lemma:cpt}}, the subset $\Phi^{-1}(y)$ is compact and, by the local invertibility theorem, it is also discrete. Since a compact and discrete set is finite, we conclude that the cardinality of the fiber of $y$ is finite, i.e., $| \Phi^{-1}(y) | < \infty$.
+\item Let us assume that $\Phi^{-1}(y) = \{x_1, \, \dots, \, x_k\}$. By the local invertibility theorem, there are $U_i$ open neighborhoods of $x_i$ and $V_i$ open neighborhoods of $y$ such that $\Phi \, \big|_{U_i} : U_i \to V_i$ is a diffeomorphism for all $i = 1, \, \dots, \, k$. We claim that there exists a neighborhood $V$ of $y$ such that
+\begin{equation*} \Phi^{-1} (V) \subset \bigcup_{i = 1}^{k} U_i. \end{equation*}
+Suppose that the claim is not true. Then there exist a converging sequence $(y_n)_{n \in \N}$ (to $y$) and a sequence $(z_n)_{n \in \N} \subset \Omega$ such that $\Phi(z_n) = y_n$ for any $n \in \mathbb{N}$, and
+\begin{equation*} z_n \notin \bigcup_{i=1}^{k} U_i\end{equation*}
+for any $n \geq N$. Since $\Phi$ is proper there is a subsequence $(z_{n_k})_{k \in \N}$ such that $z_{n_k} \to x$ and $\Phi(x) = y$, but this is absurd since
+\begin{equation*} \Phi^{-1}(y) = \{ x_1, \, \dots, \, x_k \} \subset \bigcup_{i=1}^k U_i. \end{equation*}
+In conclusion, we just need to consider the following new neighborhoods for the $x_i$'s
+\begin{equation*} U_i \mapsto U_i^\prime := U_i \cap \Phi^{-1}(V). \end{equation*}
+\end{enumerate}
+\end{proof}
+
+\begin{corollary} \label{corollary:same} If the same assumption as of \hyperref[lemma:fond]{Lemma \ref{lemma:fond}} are met, then the cardinality function
+\begin{equation*} \symbol{35} \, \Phi^{-1} : \R^N \setminus \Phi \left( \partial \, \Omega \cup Z_\Phi \right) \to \mathbb{N},\end{equation*} is continuous. In particular, it is constant on the connected component $\mathcal{C}$ of the domain. \end{corollary}
+
+\begin{theorem} \label{theorem:surj} Let $N \geq 2$ and let $\Phi \in C^1 \left(\R^N; \; \R^N\right)$ be a proper map such that $Z_\Phi$ is a finite set. Then $\Phi$ is surjective, i.e.
+\begin{equation*} \forall \, y \in \R^N, \, \, \exists \, x \in \R^N \: : \: \Phi(x) = y. \end{equation*}\end{theorem}
+
+\begin{proof}For any $N \geq 2$, the set $\R^N \setminus \Phi(Z_\Phi)$ is connected, hence \hyperref[corollary:same]{Corollary \ref{corollary:same}} implies that the map $\symbol{35} \, \Phi^{-1} $ is globally constant, that is, the fiber of all the regular values have the same cardinality.
+
+Assume, by contradiction, that it is equal to $0$. Then the image of $\Phi$ is a discrete subset of $\R^N$, i.e., $\Phi(\R^N) = \Phi(Z_\Phi) = \{ y_1, \, \dots, \, y_k\}$. On the other hand, $\Phi$ is continuous and $\R^N$ is connected, hence $k = 1$. Therefore $\Phi$ is a constant map, and this is absurd since we assumed $\Phi$ to be proper.
+\end{proof}
+
+\begin{lemma} Let $\Phi : \R^N \to \R^N$ be any function. Then
+\begin{equation*}\text{$\Phi$ is proper} \iff \lim_{|x| \to + \infty} |\Phi(x)| = + \infty. \end{equation*} \end{lemma}
+
+\begin{theorem}[Fundamental Theorem of Algebra] Let $p(z) := a_n \, z^n + \dots + a_0$ be a nonconstant complex polynomial from $\C$ to $\C$. Then $p$ is surjective. \end{theorem}
+
+\begin{proof}Clearly $p$ is a function of class $C^\infty(\C; \; \C)$ and there is a characterization of critical points in terms of the derivative, that is,
+\begin{equation*}z \in Z_p \iff p^\prime(z) = 0. \end{equation*}
+By the long division algorithm, there are only finitely many such points. Therefore we conclude the proof by noticing that
+\begin{equation*} \lim_{|z| \to + \infty} |p(z)| = + \infty, \end{equation*}
+that is, $p$ is a proper map and \hyperref[theorem:surj]{Theorem \ref{theorem:surj}} applies.\end{proof}
+
+\begin{remark} The function $p : \C \to \C$ is clearly differentiable (it follows easily from the definition) and the differential is given by
+\begin{equation*} \mathrm{d} \, p(z)[h] := p^\prime(z) \, h, \qquad \forall z, \, h \in \C. \end{equation*} \end{remark}
+
+\begin{proposition} Let $N \geq 2$ and let $\Phi:\Omega \to \R^N$ be a function of class $C^1 \left(\Omega; \; \R^N \right)$. If $x_0 \in \Omega$ is an isolated critical point, then $\Phi(x_0)$ is an internal point of $\mathrm{Ran}(\Phi)$. \end{proposition}
+
+\begin{proof}This proposition requires many steps to be proved. To clarify the method to the reader, we divide the proof into five little steps.
+
+\paragraph{Step 1.} By assumption $x_0$ is an isolated critical point. Therefore there exists $\rho_0 > 0$ such that
+\begin{equation*} \overline{B(x_0, \, \rho)} \cap Z_\Phi = \{x_0\}. \end{equation*}
+
+\paragraph{Step 2.} We claim that there exists $r \in (0, \, \rho_0]$ such that $\Phi(x_0) \notin \Phi\left(\partial \, B(x_0, \, r)\right)$. We argue by contradiction. If $r$ does not exist, then for all $\rho \in (0, \, \rho]$ there is a point $x_\rho \in \partial \, B(x_0, \, \rho)$ such that $\Phi(x_\rho) = \Phi(x_0)$.
+
+\paragraph{Step 3.} For any $\rho \in [1/2 \, \rho_0, \, \rho_0]$ we can always find $x_\rho \in \partial \, B(x_0, \, \rho)$ with the same image as $x_0$. Consequently, there exists a sequence $(x_{\rho_n})_{n \in \N}$ such that $x_{\rho_n} \to \tilde{x}$ and $\Phi(x_{\rho_n}) \to \Phi(x_0)$ (since it is the constant sequence).
+
+The limit $\tilde{x}$ is an accumulation point by definition, and its image is equal to $\Phi(x_0)$. Thus $\tilde{x} \in Z_\Phi$ and $\tilde{x} \in \partial \, B(x_0, \, 1/2 \, \rho_0)$. But we chose $\rho > 0$ in such a way that
+\begin{equation*}\overline{B(x_0, \, \rho)} \cap Z_\Phi = \{x_0\},\end{equation*}
+thus we have finally derived a contradiction, and the claim is now proved.
+
+\paragraph{Step 4.} The restriction
+\begin{equation*} \Psi := \Phi \, \big|_{\overline{B(x_0, \, r)}} : \overline{B(x_0, \, r)} \to \R^N\end{equation*}
+is a map of class $C^1$, which is proper and such that the set of critical points is finite ($Z_\Psi = \{x_0\}$).
+
+Since $\Phi(x_0) \notin \Phi(\partial \, B(x_0, \, r))$, it follows from \hyperref[corollary:same]{Corollary \ref{corollary:same}} that $\symbol{35} \, \Phi^{-1} $ is constant in a neighborhood $\mathcal{U}$ of $\Phi(x_0)$ deprived of that point.
+
+\paragraph{Step 5.} Up to a rescaling, we may always assume that $\mathcal{U} \cap \Phi(\partial \, B(x_0, \, r)) = \emptyset$. If the cardinality is constantly zero, i.e., $\symbol{35} \, \Phi^{-1}(z) = 0$ for any $z \in \mathcal{U} \setminus \{ \Phi(x_0)\}$, then $\Phi$ is a constant map which is defined on the subset $\Phi^{-1}(\mathcal{U})$. Hence $\Phi^{-1}(\mathcal{U}) \subset Z_\Phi$ and this is impossible, since $x_0$ is the only point of $Z_\Phi$.
+\end{proof}
+
+\begin{corollary} \label{corollary:openmap} Let $N \geq 2$ and let $\Phi:\Omega \to \R^N$ be a function of class $C^1 \left(\Omega; \; \R^N \right)$. If every critical point of $\Phi$ is isolated, then $\Phi(\Omega)$ is open (that is, $\Phi$ is an open map). \end{corollary}
+
+\begin{corollary} Let $\Phi :\R^N \to \R^N$ be a function of class $C^1\left(\R^N; \; \R^N \right)$. Assume that every point of the set $Z_\Phi$ is isolated, and also assume that
+\begin{equation*}\lim_{|x| \to + \infty} |\Phi(x)| = + \infty. \end{equation*}
+Then $\Phi$ is a surjective map. \end{corollary}
+
+\begin{proof}It follows from \hyperref[corollary:openmap]{Corollary \ref{corollary:openmap}} that $\Phi$ is an open map. On the other hand $\Phi$ is proper, thus it is also a closed map.
+
+Since $\R^N$ is connected and $\Phi \neq 0$, it turns out that $\Phi(\R^N)$ is open and closed, hence it is necessarily equal to the whole $\R^N$. \end{proof}
+
+\begin{exercise}Prove that from \hyperref[lemma:fond]{Lemma \ref{lemma:fond}} it follows that, for any connected component $\mathcal{C}$ of $\R^N \, \setminus \, \Phi \left( \partial \, \Omega \cup Z_\Phi \right)$, there exist $k \in \mathbb{N} \setminus \{0\}$ and $\varphi_1, \, \dots, \, \varphi_k : \mathcal{C} \to \Omega$ continuous functions such that $\Phi^{-1}(y) = \left\{\varphi_1(y), \, \dots, \, \varphi_k(y) \right\}$. \end{exercise}
+
+\begin{proof}[\textbf{Solution}] If $y \notin \Phi(\Omega)$, then the thesis is obvious since $\Phi^{-1}(y) = \emptyset$. If $y \in \Phi(\Omega)$, then the second assertion of Lemma \ref{lemma:fond} holds true, that is there exist $k \in \mathbb{N}$, a neighborhood $V$ of $y$ and neighborhoods $U_1, \, \dots, \, U_k$ of $x_1, \, \dots, \, x_k$ such that $U_i \subseteq \Omega$, $V \cap \Phi(\partial \, \Omega \cup Z_\Phi) = \emptyset$ and $\Phi:U_i \to V$ is a diffeomorphism such that $\Phi^{-1}(V) \subseteq \cup_{i = 1}^n U_i$.
+
+\vspace{2.5mm}
+\noindent Moreover, since $y \in \mathcal{C}$ and $\mathcal{C}$ is a connected component, the same assertion holds true for any $z \in \mathcal{C}$ with a uniform $k$. Clearly, for any $z \in \mathcal{C}$, we have
+\begin{equation*}\Phi^{-1}(z) = \left\{ \varphi_{1, \, z}(z), \, \dots, \, \varphi_{k, \, z}(z) \right\}, \end{equation*}
+where $\varphi_{i, \, z} := \Phi \, \big|_{U_{i, \, z}}$ is a diffeomorphism for any $i = 1, \, \dots, \, k$. If we set
+\begin{equation*} \varphi_i \stackrel{\mathrm{def}}{=} \bigcup_{z \in \mathcal{C}} \varphi_{i, \, z}, \end{equation*}
+the proof is complete, if we are able to prove that $\varphi_{i, \, z}$ coincides in nonempty intersections. But this is immediate from the definition, since they are all restriction of $\Phi$ to appropriate sets. \end{proof} 
+
+\begin{remark}It's not necessary to work with functions in $\R^N$, since it's more than enough to work in a Banach space with a local invertibility theorem or in a $C^1$ variety. \end{remark}
+
+\section{Sard's Lemma}
+
+In this section, we want to state and prove a fundamental result, which is widely used in this course, in differential geometry, in global analysis, etc.
+
+On the other hand, in this course, we will need only a particular case of Sard's lemma (which is easier to prove as a standalone), which is when $M \geq N$.
+
+The proof in the general case is rather involved. We will include in an optional subsection the proof in any dimension, provided that the map is $C^\infty(\Omega)$.
+
+\begin{lemma}[Sard's Lemma] \label{lemma:sard} Let $\Phi : \Omega \subseteq \R^N \to \R^M$ be a function of class $C^k(\Omega)$, where $k \geq \min \, \{N - M + 1, \, 1\}$. Then the Lebesgue measure of the set $\Phi(Z_\Phi)$ is zero.   \end{lemma}
+
+\begin{proposition} Let $M \geq N$ and assume that $\Phi \in C^1(\Omega)$. Then $\Phi(Z_\Phi)$ is a null set in $\R^M$. \end{proposition}
+
+\begin{proof}Let $Q$ be a closed cube, and let $\ell$ be the length of its edge. Assume that $\ell$ is small enough so that $Q \subseteq \Omega$, and also assume that $Q \cap Z_\Phi \supseteq \{x\}$. Let $X$ be a $(M-1)$-dimensional linear subspace of $\R^M$ such that
+\begin{equation*} \mathrm{d} \, \Phi(x) \left[\R^N\right] \subseteq X, \end{equation*}
+which exists because $\mathrm{d}\phi_x$ is not surjective, and let $P : \R^n \to X$ be the orthogonal projection onto $X$ and $P_\perp : \R^n \to X^\perp$ the orthogonal projection defined by setting $P_\perp := \mathrm{Id} - P$. For any $y \in Q$, it turns out that
+\begin{equation*} \phi(y) - \phi(x) = \int_{0}^{1} \mathrm{d} \, \Phi \left(x + t \, (y - x) \right)[y - x] \, \mathrm{d}t. \end{equation*}
+Then the projection along $X$ is given by
+\begin{equation*} P\left(\phi(y) - \phi(x) \right) = \int_{0}^{1} P \left( \mathrm{d} \, \Phi \left(x + t \, (y - x) \right)[y - x] \right) \, \mathrm{d}t, \end{equation*}
+while the perpendicular projection is given by
+\begin{equation*} P_\perp \left(\phi(y) - \phi(x) \right) = \int_{0}^{1} P_\perp \left( \mathrm{d} \, \Phi \left(x + t \, (y - x) \right)[y - x] \right) \, \mathrm{d}t, \end{equation*}
+which is also equal to
+\begin{equation*} \int_{0}^{1} P_\perp \left( \mathrm{d} \, \Phi \left(x + t \, (y - x) \right)[y - x] - \mathrm{d} \, \Phi(x) [y - x] \right) \, \mathrm{d}t  \end{equation*}
+since $P_\perp \left( \mathrm{d} \, \Phi(x) \right) = 0$ by definition. Therefore
+\begin{equation*} \left| P \left( \Phi(y) - \Phi(x) \right) \right| \leq H_Q \cdot \left| y - x \right| \leq H_Q \cdot \sqrt{N} \cdot \ell, \end{equation*}
+where $H_Q := \sup \left\{ \|\mathrm{d} \, \Phi(z)  \| \: \left| \: z \in Q \right. \right\}$, and
+\begin{equation*} \left| P_\perp \left( \Phi(y) - \Phi(x)\right) \right| \leq \sigma_Q \cdot \left| y - x \right| \leq \sigma_Q \cdot \sqrt{N} \cdot \ell, \end{equation*}
+where $\sigma_Q := \sup \left\{ \| \mathrm{d} \, \Phi(z) -  \mathrm{d} \, \Phi(x)  \| \: \left| \: z \in Q  \right.\right\}$.
+
+\vspace{2.5mm}
+Consequently $\Phi(Q)$ is contained in the product between a ball in $X$ of radius $H_Q \cdot \sqrt{N} \cdot \ell$ and an interval of the $1$-dimensional subspace $\mathrm{Ker} \, (P)$ of amplitude $\sigma_Q \cdot \sqrt{N} \cdot \ell$. If we let $\mathcal{L}$ be the Lebesgue measure, then
+\begin{equation*}\mathcal{L} \left( \Phi(Q) \right) \leq c_Q \, \sigma_Q \, \ell^M, \qquad c_Q := 2 \, \omega_{M - 1} \, H_{Q}^{M - 1} \, N^{\frac{M}{2}}, \end{equation*}
+where $\omega_{M-1}$ denotes the volume of the unity ball in $\R^{M-1}$.
+
+Let us divide the cube $Q$ in $n^N$ cubes whose edges' length is $\frac{\ell}{n}$, and let us consider only the little cubes whose intersection with $Z_\Phi$ is nonempty. Then
+\begin{equation*}\begin{aligned} \mathcal{L} \left( \Phi(Q \cap Z_\Phi) \right) & \leq \sum_{i}\mathcal{L} \left( \Phi(Q_i) \right) \leq \sum_i C_{Q_i} \, \sigma_{Q_i} \, \left(\frac{\ell}{n}\right)^M \leq \\& \leq C_Q \, \sigma(n) \, \left( \frac{\ell}{n} \right)^M \, n^N, \end{aligned}\end{equation*}
+where
+\begin{equation*} \sigma(n) := \sup \left\{ \| \mathrm{d}\,\Phi(z) - \mathrm{d} \, \Phi(z^\prime) \| \: \left| \: z, \, z^\prime \in Q, \, \, |z - z^\prime| \leq \sqrt{N} \, \frac{\ell}{n} \right. \right\}. \end{equation*}
+Therefore, for any $n \in \mathbb{N}$, it turns out that
+\begin{equation*} \mathcal{L} \left( \Phi(Q \cap Z_\Phi) \right) \leq c_Q \, \ell^M \, \frac{1}{n^{M-N}} \, \sigma(n),\end{equation*}
+thus, if we take the limit for $n \to + \infty$, the function $\sigma(n)$ goes to zero (since $\mathrm{d} \, \Phi$ is uniformly continuous in the cube).
+
+Finally, $M \geq N$ implies that $\mathcal{L} \left( \Phi(Z_\Phi \cap Q) \right) = 0$ for any cube $Q$ contained in $\Omega$. But $Z_\Phi$ can be easily covered using countable many cubes, thus what we proved is enough to conclude that the image of the set of critical points is a null set, that is, $\mathcal{L}\left( \Phi(Z_\Phi )\right) = 0$.
+\end{proof}
+
+\begin{corollary} Let $\Phi : \Omega \subset \R^N \to \R^M$ be a function of class $C^k(\Omega)$, where $k \geq \min \, \{N - M + 1, \, 1\}$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $M > N$, then the Lebesgue measure of $\mathrm{Ran}(\Phi) = \Phi(\Omega)$ is zero.
+\item If $M \leq N$, then $\Phi(\Omega)$ is the union of an open set and a null set. \end{enumerate}\end{corollary}
+
+\section{Topological Degree for $C^2$ Maps}
+
+In this section $\Omega$ denotes an open bounded subset of $\R^N$, $I$ an open interval in $\R$ containing both $0$ and $1$, and we assume that
+\begin{equation*}F : I \times \overline{\Omega} \to \R^N \end{equation*}
+is a function of class $C^2$ such that $\Phi_0(x) := F(0, \, x)$,  $\Phi_1(x) := F(1, \, x)$.
+
+\begin{lemma} \label{lemma:fundmod2}Let $y \in F\left(I \times \overline{\Omega} \right) \setminus F \left(Z_F \cup \left(I \times \partial \, \Omega \right) \right)$, and assume that $y \notin \Phi_0(Z_{\Phi_0}) \cup \Phi_1(Z_{\Phi_1})$. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The subset $F^{-1}(y) \subseteq \Omega$ is a $1$-manifold of class $C^2$ with no border.
+\item If $(0, \, x) \in F^{-1}(y)$, then the tangent line to $F^{-1}(y)$ at $(0, \, x)$ does not lie on the border $\{0, \, 1\} \times \R^N$. Similarly if we replace $(0, \, x)$ with $(1, \, x)$.
+\item Let $\Gamma$ be a connected component of $F^{-1}(y) \cap \left([0, \, 1] \times \Omega\right)$. If 
+\begin{equation*}\Gamma \cap \left( \{0, \, 1\} \times \Omega \right) \neq \emptyset, \end{equation*}
+then there exists a curve $\gamma : [a, \, b] \to [0, \, 1] \times \Omega$ of class $C^2$, such that $\alpha([a, \, b]) = \Gamma$, $\alpha^\prime(\tau) \neq 0$ for any $\tau \in [a, \, b]$ and 
+\begin{equation*} \{ \alpha(a), \, \alpha(b) \} = \Gamma \cap \left( \{ 0, \, 1 \} \times \Omega \right). \end{equation*}
+\item If $\alpha$ is the curve given in the previous point, then $\alpha^\prime(a)$ and $\alpha^\prime(b)$ do not belong to $\{0, \, 1\} \times \R^N$.
+\end{enumerate}  \end{lemma}
+
+\begin{proof}  \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item From the implicit function theorem it follows easily that, for any point $(t, \, x) \in F^{-1}(y)$, there exists a neighborhood $U_{(t, \, x)}$ such that $F^{-1}(y) \cap U_{(t, \, x)}$ is a $1$-manifold.
+
+In fact, since $\mathrm{d}F_{(t, \, x)}$ is surjective there exist charts such that the composition with $F$ is locally the projection over the last $N$ coordinates (i.e., it is locally the graph of a real function).
+
+Since $F^{-1}(y)$ is locally a $1$-manifold for any point $(t, \,x) \in F^{-1}(y)$, then it is globally a $1$-manifold. Moreover, for any $p := (t, \,x) \in F^{-1}(y)$, it turns out that
+\begin{equation*} T_p \, \left(F^{-1}(y) \right) = \mathrm{Ker} \left(\mathrm{d} \, F_p \right). \end{equation*}
+\item We want to prove that the manifold $F^{-1}(y)$ is not tangent to the manifolds $\{0\} \times \Omega$ and $\{1\} \times \Omega$. Let $x_0 \in \Omega$ be a point such that $(0, \, x_0) \in F^{-1}(y)$. Then $\Phi_0(x_0) = y$ and the tangent line to $F^{-1}(y)$ at $(0, \, x_0)$ is given by the unidimensional kernel of $\mathrm{d} \, F(0, \, x_0)$:
+\begin{equation*} \left\{ (h, \, k) \in \R \times \R^N \: : \: \mathrm{d} \, F(0, \, x_0)[h, \, k] = 0 \right\}. \end{equation*}
+Recall that the differential is a linear map, thus for any $(h, \, k) \in \R \times \R^N$
+\begin{equation*}\mathrm{d} \, F (0, \, x) [h, \, k] = \mathrm{d} \, F(0, \, x)[h, \, 0] + \mathrm{d} \, F(0, \, x)[0, \, k]. \end{equation*}
+Let $h = 0$: we want to prove that $k = 0$. By linearity this implies that
+\begin{equation*}0 = \mathrm{d} \, F(0, \, x)[h, \, 0] + \mathrm{d} \, F(0, \, x)[0, \, k] \implies  \mathrm{d} \, F(0, \, x)[0, \, k] = 0, \end{equation*}
+but $ \mathrm{d} \, F(0, \, x)[0, \, k] = \mathrm{d} \, \Phi_0(x)[k]$ and $\mathrm{d} \, \Phi_0$ is an isomorphism, thus we infer that $k = 0$.
+\item If we set $V := F^{-1}(y) \cap \left([0, \, 1] \times \Omega\right)$, then it is easy to prove that $V$ is a compact $1$-manifold. Also, it is not tangent to $\{0\} \times \Omega$ or $\{1\} \times \Omega$, and its border, if any, is given by the intersection with $\{0, \, 1\} \times \Omega$.
+
+We are interested in the connected components of $V$ whose intersection with $\{0, \, 1\} \times \Omega$ is nontrivial. If there are none, then $\Phi_0^{-1}(y) = \Phi_1^{-1}(y) = \emptyset$ and the thesis is trivial. 
+
+Assume that $\Gamma$ is a compact connected component of $V$, whose intersection is nonempty. The classification theorem for compact connected $1$-manifolds implies that $\Gamma$ is either homeomorphic to a closed interval or to $S^1$. Since the intersection with the border is nontrivial, it cannot be $S^1$, and so $\Gamma \cong [a, \, b]$ (i.e., it is diffeomorphic to the interval $[a, \, b]$).
+
+\noindent In particular, there exists $\alpha : [a, \, b] \to \Gamma \subseteq [0, \, 1] \times \Omega$ such that $\alpha([a, \, b]) = \Gamma$ and $\alpha$ diffeomorphism (and this implies point \textbf{(d)} as well). Notice that
+\begin{equation*} \{ \alpha(a), \, \alpha(b) \} = \Gamma \cap \left( \{ 0, \, 1 \} \times \Omega \right), \end{equation*}
+and there are only two possibility: two point belong to $\{0\} \times \Omega$ or to $\{1\} \times \Omega$ (i.e. $\Gamma$ diffeomorphic to a bended interval) or one point in $\{0\} \times \Omega$ and one point in $\{1\} \times \Omega$.
+\end{enumerate}  \end{proof}
+
+What happens can be visualized in a simple way using smooth maps between manifolds (with dimension $n+1$ and $n$ respectively). The example in \hyperref[fig:c1]{Figure \ref{fig:c1}} is the standard one in the degree theory of manifolds with no boundary.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=12cm, height=8cm]{Images/MTGPA1.png}
+\caption{Topological degree modulo $2$}
+\label{fig:c1}
+\end{figure}
+
+\begin{lemma}\label{lemma:grad2} Let $y \in F\left(I \times \overline{\Omega} \right) \setminus F \left(Z_F \cup \left(I \times \partial \, \Omega \right) \right)$, and assume that $y \notin \Phi_0(Z_{\Phi_0}) \cup \Phi_1(Z_{\Phi_1})$. Then the topological degree is equal modulo $2$, that is,
+\begin{equation} \label{eq:grado} \symbol{35} \, \Phi_0^{-1}(y) = \symbol{35} \, \Phi_1^{-1}(y) \quad \text{(mod 2)}. \end{equation}\end{lemma}
+
+\begin{proof} It is a straightforward corollary of \hyperref[lemma:fundmod2]{Lemma \ref{lemma:fundmod2}}. In fact, each connected component $\Gamma$ whose intersection with the boundary is nontrivial is diffeomorphic to a compact interval:
+\begin{equation*} \Gamma \cong [a, \, b] \implies \left| \partial \, \Gamma \right| = 2. \end{equation*}
+Since each $\Gamma$ contributes with\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item two points to $\{0\} \times \Omega$; or
+\item two points to $\{1\} \times \Omega$; or
+\item one point to $\{0\} \times \Omega$ and one point to $\{1\} \times \Omega$,
+\end{enumerate}
+then the thesis follows easily, as in \hyperref[fig:c1]{Figure \ref{fig:c1}}.
+\end{proof}
+
+\begin{proposition}\label{prop:tg2} Let $\Omega \subset \R^N$ be an open and bounded subset and let $\Phi : \overline{\Omega} \to \R^N$ be a function of class $C^2$. Assume that $y_0, \, y_1 \in \mathcal{C} \subseteq \R^N \setminus \Phi(\partial \, \Omega)$, where $\mathcal{C}$ is a connected component, and assume also that $y_0, \, y_1 \notin \Phi(Z_\Phi)$. Then
+\begin{equation*} \symbol{35} \, \Phi^{-1}(y_0) = \symbol{35} \, \Phi^{-1}(y_1) \quad \text{(mod 2)}. \end{equation*}\end{proposition}
+
+\begin{remark} Let $\Phi \in C^2 \left(\overline{\Omega}; \; \R^N \right)$ be a function, and let $y \in \R^N \setminus \Phi(Z_\Phi \cup \partial \, \Omega)$. If we let
+\begin{equation*} \Psi(x) := \Phi(x) - y, \end{equation*}
+then $\Psi \in C^2 \left(\overline{\Omega}; \; \R^N \right)$, $Z_\Psi = Z_\Phi$, $\Phi^{-1}(y) = \Psi^{-1}(0)$ and $0 \in \R^N \setminus \Psi(Z_\Psi \cup \partial \, \Omega)$.\end{remark}
+
+\begin{proof}We divide the argument into three steps to make it more clear to the reader.
+
+\paragraph{Step 1.} Let $\pi \subset \mathcal{C}$ be a polygonal curve linking $y_0$ and $y_1$. By \hyperref[lemma:sard]{Sard's Lemma} $\Phi(Z_\Phi)$ is a null set, thus we can slightly move the vertexes of $\pi$, if necessary, to coincide with regular points.
+
+In particular we find a sequence of regular points $p_0 := y_0, \, \dots, \, p_s := y_1$ linked through segments, thus we can assume without loss of generality that the segment $y_0 \, y_1$ is entirely contained in $\mathcal{C}$.
+
+\paragraph{Step 2.} Let us set
+\begin{equation*} F(t, \, x) := \Phi(x) - \gamma(t), \qquad \text{where} \quad \gamma(t) = (1 - t) \, y_0 + t \, y_1. \end{equation*}
+We may always assume that there exists an open bounded interval $I \supset [0, \, 1]$ such that $\gamma(t) \in \mathcal{C}$ for any $t \in \bar{I}$.
+
+Let $\Phi_0(x) := F(0, \, x) = \Phi(x) - y_0$ and $\Phi_1(x) := F(1, \, x) = \Phi(x) - y_1$. The previous Remark proves that $0$ is a regular value for both. Clearly $0 \notin F(\bar{I} \times \partial \, \Omega)$, thus in order to apply \hyperref[lemma:grad2]{Lemma \ref{lemma:grad2}} we need to prove that $0$ is not a critical value for $F$ (i.e., it doesn't belong to $F(Z_F)$).  
+
+\paragraph{Step 3.} In general, however, this is not true. Thus we cannot direct apply the previous lemma. On the other hand, by \hyperref[lemma:sard]{Sard's Lemma} there exists $z$ arbitrarily near to $0$ such that
+\begin{equation*} z \notin F \left( Z_F \cup (\bar{I} \times \partial \, \Omega) \right) \end{equation*}
+since $F(Z_F)$ is a thin set and $F(\bar{I} \times \partial \, \Omega)$ is compact. For the same reason we can choose $z$ so that it is not a critical value for $\Phi_0$ and $\Phi_1$ and
+\begin{equation*}  \symbol{35} \, \Phi_0^{-1}(0) =  \symbol{35} \, \Phi_0^{-1}(z), \qquad \symbol{35} \, \Phi_1^{-1}(0) =  \symbol{35} \, \Phi_1^{-1}(z). \end{equation*}
+We can now apply \hyperref[lemma:grad2]{Lemma \ref{lemma:grad2}} to $z$ and it turns out that
+\begin{equation*}  \symbol{35} \, \Phi_0^{-1}(0) =  \symbol{35} \, \Phi_0^{-1}(z) = \symbol{35} \, \Phi_1^{-1}(z) =  \symbol{35} \, \Phi_1^{-1}(0), \end{equation*}
+which, in turn, implies the thesis:
+\begin{equation*} \symbol{35} \, \Phi^{-1}(y_0) = \symbol{35} \, \Phi^{-1}(y_1) \quad \text{(mod 2)}. \end{equation*}
+ \end{proof}
+ 
+\begin{definition}[Topological Degree] Let $\Omega \subset \R^N$ be an open and bounded subset, let $\Phi : \overline{\Omega} \to \R^N$ be a function of class $C^2$ and let $y \notin \Phi(\partial \, \Omega)$. The topological degree modulo $2$ is defined as
+\begin{equation*} \mathrm{deg}_2\left(y, \, \Phi, \, \overline{\Omega}\right) \stackrel{\mathrm{def}}{=} \begin{cases} 1 & \text{if odd cardinality and  } y \notin \Phi(Z_\Phi) \\ 0 & \text{if even cardinality and  } y \notin \Phi(Z_\Phi) \\ \mathrm{deg}_2\left(\tilde{y}, \, \Phi, \, \overline{\Omega}\right) & y \in \Phi(Z_\Phi), \, \, \tilde{y} \in \mathcal{U}_y \, \text{regular}. \end{cases} \end{equation*} \end{definition}
+
+\begin{remark}\label{rmk:propregls}The topological degree modulo $2$ is a function
+\begin{equation*} \mathrm{deg}_2\left(y, \, \Phi, \, \overline{\Omega}\right) : \R^N \setminus \Phi(\partial \, \Omega) \to \{0, \, 1\} \end{equation*} 
+continuous and well defined. Moreover, if $y \notin \Phi(\partial \, \Omega)$, then
+\begin{equation*} \mathrm{deg}_2\left(y, \, \Phi, \, \overline{\Omega}\right) = 1 \implies y \in \accentset{\circ} \Phi(\Omega).\end{equation*} 
+In fact, if $y \notin \Phi(\Omega)$, then $y \notin \Phi \left(\overline{\Omega} \right)$ and this clearly implies that $y$ is a regular value whose topological degree is equal to $0$.
+
+On the other hand, if $y \in \Phi(\Omega)$, then there exists a neighborhood $U \ni y$ such that, for any $y^\prime \in U$, we have $y^\prime \notin \Phi \left( \partial \, \Omega \right)$ and $\mathrm{deg}_2\left(y^\prime, \, \Phi, \, \overline{\Omega}\right) = 1$ (i.e., $y$ is an interior point).\end{remark}
+
+\section{Topological Degree for Continuous Maps}
+
+In this section we denote by $\Omega$ an open subset of $\R^N$ and by $\Phi : \Omega \to \R^N$ a continuous map, unless we need it to be more regular (in which case, we will specify it).
+
+\begin{definition}Let $y \in \R^N$ be any point. The set of all the continuous maps with the property that $y$ does not belong to the image of the border of $\Omega$ is denoted by
+\begin{equation*} \mathcal{F}_y = \left\{ \Phi \in C^0 \left(\overline{\Omega}; \; \R^N \right) \: \left| \: y \notin \Phi \left(\partial \, \Omega \right) \right. \right\}. \end{equation*}
+Similarly, for any $k \in \N$, the subset of all the functions of class $C^k$ is denoted by
+\begin{equation*} \mathcal{F}_{y}^{k} = \left\{ \Phi \in C^0\left(\overline{\Omega}; \; \R^N \right) \: \left| \: y \notin \Phi \left(\partial \, \Omega \right) \right. \right\} \cap C^k \left( \overline{\Omega}; \; \R^N \right). \end{equation*}
+\end{definition}
+
+\begin{remark}Clearly $\F_y$ is a subset of $C^0 \left(\overline{\Omega}; \; \R^N \right)$, which is a normed space with the uniform norm. Therefore we can equip $\F_y$ with the topology $\tau$ induced by taking the restriction of the uniform norm. It turns out that $\mathcal{F}_y$ is an open subset of $C^0 \left(\overline{\Omega}, \, \R^N \right)$. \end{remark}
+
+\begin{proof} If $d(y, \, \Phi(\partial \, \Omega)) = \delta > 0$, then
+\begin{equation*} B\left(\Phi, \, \delta \right) \subset \mathcal{F}_y.\end{equation*}
+Indeed, if $\Psi \in \mathcal{F}_y$ is a function arbitrarily near $\Phi$, that is, a function such that $\| \Phi - \Psi \|_\infty < \delta$, then it follows from the reverse triangular inequality that
+\begin{equation*}\left| \Psi(x) - y \right| \geq \left| \left| \Phi(x) - y \right| - \| \Psi - \Phi \|_\infty \right| > \delta - \delta = 0.\end{equation*} \end{proof}
+
+\begin{remark}For any $k \geq 1$, the subset $\mathcal{F}_y^k$ is dense in $\mathcal{F}_y$. \end{remark}
+
+\begin{lemma}Fix $y \in \R^N$. The map
+\begin{equation*} \mathcal{F}_y^2 \ni \Phi \mapsto \mathrm{deg}_2 \left(y, \, \Phi, \, \Omega \right) \in \{0, \, 1\}\end{equation*}
+is continuous and constant on the connected components of $\mathcal{F}_y^2$. \end{lemma}
+
+\begin{proof}Let $\Phi \in \mathcal{F}_y^2$ be any function, let $\delta = d(y, \, \Phi(\partial \, \Omega)) > 0$ and let $\Psi \in \mathcal{F}_y^2$ be a function such that
+\begin{equation*}\|\Phi - \Psi\|_\infty < \delta. \end{equation*}
+Let $I$ be an open interval containing $[0, \, 1]$. The map
+\begin{equation*} F(t, \, x) := (1 - t) \, \Phi(x) + t \, \Psi(x) : \bar{I}\times\overline{\Omega} \to \R^N \end{equation*}
+is well defined, with the additional property that $F(t, \, \cdot) \in \mathcal{F}_y^2$ for any $t \in \bar{I}$. By definition it follows that $y \notin F \left(\bar{I} \times \partial \, \Omega \right)$, but a priori it is not clear if $y$ is either a regular value for $F$, $\Psi$ and $\Phi$ or not.
+
+On the other hand, by \hyperref[lemma:sard]{Sard's Lemma \ref{lemma:sard}} there exists $\tilde{y}$ arbitrarily close to $y$, such that $\tilde{y}$ is regular for $F$, $\Psi$ and $\Phi$. The \hyperref[lemma:grad2]{Homotopy Lemma \ref{lemma:grad2}}, along with the definition of topological degree modulo $2$, implies that
+\begin{equation*} \mathrm{deg}_2(y, \, \Phi, \, \Omega) = \mathrm{deg}_2(\tilde{y}, \, \Phi, \, \Omega) = \mathrm{deg}_2(\tilde{y}, \, \Psi, \, \Omega) = \mathrm{deg}_2(y, \, \Psi, \, \Omega), \end{equation*}
+which is exactly what we wanted to prove.\end{proof}
+
+\begin{corollary} \label{corololr23} If $\mathcal{C}$ is a connected component of $\mathcal{F}_y$, then $\mathrm{deg}_2 \left(\cdot, \, \Phi, \, \Omega \right)$ is constant on the intersection
+\begin{equation*} \mathcal{C} \cap C^2 \left(\overline{\Omega}, \, \R^N \right) = \mathcal{C} \cap \F_y^2. \end{equation*} \end{corollary}
+
+\begin{proof}This is an easy consequence of the fact that $\mathcal{C}\cap C^2\left(\overline{\Omega}, \, \R^N \right)$ is path-connected, and thus it is connected.
+
+To prove that it is path-connected, it suffices to demonstrate that one can find a polygonal path between any two points (with a finite number of vertexes).
+
+A priori we cannot guarantee that the path lies in the intersection (and this is generally false), but using \hyperref[lemma:sard]{Sard's Lemma} we may always assume that, at least the vertexes, are in $\mathcal{C}\cap C^2\left(\overline{\Omega}, \, \R^N \right)$.
+
+If the number of the vertexes gets bigger, it's easier to find segments (entirely contained in the intersection) linking two of them.\end{proof} 
+
+\begin{definition}[Topological Degree Modulo $2$] Let $\Phi \in C^0\left( \overline{\Omega}, \, \R^N \right)$, let $y \in \R^N \setminus \Phi(\partial \, \Omega)$ and let $\mathcal{C}$ be the connected component of $\mathcal{F}_y$ containing $\Phi$. The topological degree modulo $2$ of $\Phi$ is
+\begin{equation*} \mathrm{deg}_2(y, \, \Phi, \, \Omega) = \mathrm{deg}_2(y, \, \Psi, \, \Omega),\end{equation*}
+where $\Psi \in \mathcal{C} \cap C^2 \left(\overline{\Omega}, \, \R^N \right)$ is any function of class $C^2$ in the same connected component. \end{definition}
+
+\section{Properties of the Topological Degree}
+
+In this section, we state and prove some of the main properties of the topological degree modulo 2, which, in part, explain the reason why we did so much work to introduce this (powerful) tool.
+
+\begin{lemma}[Homotopy Invariance] \label{lemma:ivs} Let $H : [0, \, 1] \times \overline{\Omega} \to \R^N$ be a homotopy, and denote $\Phi(\cdot) := F(0, \, \cdot)$ and $\Psi(\cdot) := F(1, \, \cdot)$. If $y \notin H \left([0, \, 1] \times \partial \, \Omega \right)$, then
+\begin{equation*} \mathrm{deg}_2 \left(y, \, \Phi, \, \Omega \right) = \mathrm{deg}_2 \left(y, \, \Psi, \, \Omega \right).\end{equation*} \end{lemma}
+
+\begin{proof}The curve
+\begin{equation*} [0, \, 1] \ni t \longmapsto F(t, \, \cdot) \end{equation*}
+belongs to $\F_y$, since it does not intersect the image of the border of $\Omega$ as $t$ ranges in $[0, \, 1]$. Besides, it is continuous with respect to the uniform norm, and thus $\Phi$ and $\Psi$ belong to the same connected component of $\mathcal{F}_y$. Finally, \hyperref[corololr23]{Corollary \ref{corololr23}} concludes the proof. \end{proof}
+
+\begin{lemma}[Solution Property] \label{lemma:imagje} Let $\Phi \in C^0 \left(\overline{\Omega}, \, \R^N \right)$ and let $y \in \R^N \setminus \Phi(\partial \, \Omega)$ be any point such that
+\begin{equation*} \mathrm{deg}_2(y, \, \Phi, \, \Omega) \neq 0. \end{equation*}
+Then the equation $\Phi(x) = y$ admits (at least) one solution, that is, $y \in \Phi(\Omega)$. \end{lemma}
+
+\begin{proof}We argue by contradiction. If $y\notin \Phi(\Omega)$, it turns out that $y \notin \Phi \left(\overline{\Omega} \right)$ and this means that there exists $\rho > 0$ such that
+\begin{equation*} B(y, \, \rho) \cap \Phi \left(\overline{\Omega} \right) = \emptyset. \end{equation*}
+By density, there exists $\Psi$ of class $C^2 \left(\overline{\Omega}, \, \R^N \right)$ in the same connected component of $\Phi$ such that $\| \Psi - \Phi \|_{\infty} < \rho$. Therefore \hyperref[rmk:propregls]{Remark \ref{rmk:propregls}} concludes the proof.
+\end{proof}
+
+\begin{proposition}\label{prop:1239}Let $\Phi, \, \Psi \in C^0 \left(\overline{\Omega}, \, \R^N \right)$ and let $y \in \R^N \setminus \Phi(\partial \, \Omega) = \Psi(\partial \, \Omega)$. Assume also that $\Phi \, \big|_{\partial \Omega} \equiv \Psi \, \big|_{\partial \Omega}$. Then the topological degree modulo $2$ depends only on the value on the border, that is,
+\begin{equation*} \mathrm{deg}_2 \left(y, \, \Phi, \, \Omega \right) =  \mathrm{deg}_2 \left(y, \, \Psi, \, \Omega \right). \end{equation*} \end{proposition}
+
+\begin{proof}The reader can easily check that the map
+\begin{equation*} H(t, \, x) = t \, \Phi(x) + (1 - t) \, \Psi (x)\end{equation*}
+is an homotopy with the additional property that, for any $x \in \partial \Omega$ and any $t \in [0, \, 1]$, $H(t, \, x) = \Phi(x)$.
+
+Thus $y \notin H_t (\partial \, \Omega)$ for any $t \in [0, \, 1]$, and thus we can apply the homotopy invariance property (see \hyperref[lemma:ivs]{Lemma \ref{lemma:ivs}}). \end{proof}
+
+\begin{corollary}Let $\Phi \in C^0 \left(\overline{\Omega}, \, \R^N \right)$ be a function such that $\Phi(x) = x$ for any $x \in \partial \, \Omega$. Then
+\begin{equation*}\Omega \subseteq \Phi(\Omega). \end{equation*} \end{corollary}
+
+\begin{theorem}[Brouwer Fixed Point] \label{th:brouwer}Let $K$ be a compact subset of $\R^N$, and assume that $K$ is homeomorphic to the closed ball $D := \overline{B}$. If $\Phi: K \to K$ is continuous, then there exists (at least) a fixed point. \end{theorem}
+
+\begin{proof}Let us consider the map $H(t, \, x) := t \, \Phi(x) - x$. Clearly 
+\begin{equation*}0 \notin H \left([0, \, 1) \times \partial \, D \right), \end{equation*}
+since $\|x\| = 1$ and $\|t \, \Phi(x)\| = |t| \, \|\Phi(x)\| < 1$, hence it cannot vanish for any $x \in \partial \, D$. Consequently only two alternatives are possible: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item There exists $x \in \partial \, D$ such that $\Phi(x) = x$, that is, there exists a fixed point on the boundary.
+\item There is no point $x \in \partial \, D$ such that $\Phi(x) = x$, that is,
+\begin{equation*}0 \notin H([0, \, 1] \times \partial \, B). \end{equation*}
+Therefore by \hyperref[lemma:ivs]{Lemma \ref{lemma:ivs}} (homotopy invariance property) we conclude that
+\begin{equation*} \mathrm{deg}_2(0, \, \Phi - \mathrm{Id}, \, B) = \mathrm{deg}_2(0,  \,- \mathrm{Id}, \, B) = 1,\end{equation*} 
+that is, there exists an internal fixed point.
+\end{enumerate} \end{proof}
+
+\begin{theorem} Let $\Phi \in C^0\left(\overline{\Omega}; \; \R^N \right)$ be a continuous map, and let $y_1, \, y_2 \in \mathcal{C} \subset \R^N \setminus \Phi(\partial \, \Omega)$ be points in the same connected component. Then
+\begin{equation*} \mathrm{deg}_2\left(y_1, \, \Phi, \, \Omega\right) = \mathrm{deg}_2\left(y_2, \, \Phi, \, \Omega\right).\end{equation*}  \end{theorem}
+
+\begin{proof} Let $H : [0, \, 1] \times \overline{\Omega} \to \R^N$ be the homotopy (it should be checked) defined as
+\begin{equation*} H(t, \, x) = \Phi(x) - \gamma(t), \end{equation*}
+where $\gamma(\cdot)$ is a continuous function from $[0, \, 1]$ to $\R^N$, such that $\gamma(0) = y_1$ and $\gamma(1) = y_2$. Then $0 \notin H([0, \, 1] \times \partial \, \Omega)$ since $\gamma(t) \notin \Phi(\partial \, \Omega)$ for any $t \in [0, \, 1]$ and thus \hyperref[lemma:ivs]{Lemma \ref{lemma:ivs}} implies that
+\begin{equation*} \mathrm{deg}_2\left(0, \, \Phi - y_1, \, \Omega\right) = \mathrm{deg}_2\left(0, \, \Phi - y_2, \, \Omega\right).\end{equation*}  
+We conclude by noticing that the topological degree of $\Psi := \Phi - y_1$ at the point $0$ is equal to the topological degree of $\Phi$ at the point $y_1$.\end{proof}
+
+\begin{theorem}[Tietze] \label{tiet}Let $X$ be a metric space and let $F \subset X$ be a closed subset. If $f : F \to \R$ is a continuous function, then there exists an extension of $f$ to the whole space, that is, a function $\tilde{f}: X \to \R$ such that
+\begin{equation*} f \equiv \tilde{f} \, \big|_{F}. \end{equation*} \end{theorem}
+
+\begin{example}Let $E = S^1$ and let $D = B^1$. If $f : S^1 \to S^1$ is the identity map, then no extension to a continuous function $\tilde{f} : S^1 \to B^1$ is possible (in fact, there's no retraction by deformation). \end{example}
+
+\begin{definition} Let $\Phi \in C^0\left(\partial \, \Omega; \; \R^N\right)$ be a continuous function. For any $y \in \R^N \setminus \Phi(\partial \, \Omega)$ we define the topological degree modulo $2$ as
+\begin{equation*} \mathrm{deg}_2\left(y, \, \Phi, \, \Omega \right) := \mathrm{deg}_2\left(y, \, \Psi, \, \Omega \right), \end{equation*}
+where $\Psi \in C^0(\overline{\Omega})$ is a continuous extension of $\Phi$. \end{definition}
+
+\begin{theorem} Let $\Omega \subset \R^N$ be an open bounded subset. Then its border $\partial \, \Omega$ is not contractile in itself, i.e., no homotopy between the identity and a constant map $x_0$ exists. \end{theorem}
+
+\begin{proof} We argue by contradiction. Suppose that such an homotopy $H(t, \, x) : [0, \, 1] \times \partial \, \Omega \to \R^N$ exists and let $y \in \Omega$ be a point such that $y \notin H([0, \, 1] \times \partial \, \Omega)$. The topological degree modulo $2$ of $y$ is well defined and the homotopy invariance property implies that
+\begin{equation*} \mathrm{deg}_2\left(y, \, \mathrm{Id}, \, \Omega\right) = 1.\end{equation*}
+On the other hand, $y \notin \Phi(\partial \, \Omega)$ and $y \neq x_0$, thus for any $\Psi$ extension of $\Phi$ such that $\Psi(x) = x_0$ for any $x \in \overline{\Omega}$, it turns out that
+\begin{equation*} \mathrm{deg}_2\left(y, \, \Psi, \, \Omega\right) = 0\end{equation*} 
+and this yields to a contradiction:
+\begin{equation*} 0 =  \mathrm{deg}_2\left(y, \, \Phi, \, \Omega\right) = \mathrm{deg}_2\left(y, \, \mathrm{Id}, \, \Omega\right) = 1.\end{equation*}\end{proof}
+
+\section{Applications}
+
+Let $X$ and $Y$ be Banach spaces, and let us denote by $\mathcal{L}(X, \, Y)$ the space of continuous linear forms. Recall that it is a complete space endowed with the operators norm, defined by
+\begin{equation*} \| L \|  := \sup_{x \neq 0} \frac{ \|L \, x\| }{ \|x\| } = \sup_{\|x\| \leq 1} \| L \, x \|. \end{equation*}
+
+We are particularly interested in the case $X = Y$ since it is a \textbf{Banach algebra}. Indeed, the composition $\circ$ between linear continuous operators is the product operation in the algebra $\mathcal{L}(X)$, and it satisfies the inequality
+\begin{equation*} \| A \circ B \| \leq \|A \|\, \|B\|, \qquad \forall \, A, \, B \in \mathcal{L}(X). \end{equation*}
+Let us denote the subspace of invertible continuous linear forms by
+\begin{equation*} \mathrm{G}_L(X) := \left\{ L \in \mathcal{L}(X) \: \left| \: \text{$L$ is an isomorphism} \right. \right\}.\end{equation*}
+
+\begin{lemma} Let $A \in \mathrm{G}_L(X)$ and let $B \in \mathcal{L}(X, \, X)$ be linear continuous forms. If
+\begin{equation*} \|B-A\| < \frac{1}{\|A^{-1}\|}, \end{equation*}
+then also $B$ is invertible (i.e. $B \in \mathrm{G}_L(X)$). \end{lemma}
+
+\begin{proof}Recall that, if $(Y, \, \|\cdot\|_Y)$ is a Banach space, then for any $(y_n)_{n \in \N} \subset Y$ such that
+\begin{equation*} \sum_{n \in \N} \|y_n\|_Y < \infty, \end{equation*}
+it turns out that
+\begin{equation*} \sum_{n \in \N} y_n < \infty. \end{equation*}
+
+\paragraph{Step 1.} We may always assume, without loss of generality, that $A = \mathrm{Id}_X$. Indeed, if
+\begin{equation*} \|B-I\| < 1 \implies B \in \mathrm{G}_L(X),\end{equation*}
+then, for any isomorphism $A \in \mathrm{G}_L(X)$, it turns out that
+\begin{equation*} \| B - A \| < \frac{1}{\|A^{-1}\|} \implies \|A^{-1} B - \mathrm{Id}_X \| < 1 \implies A^{-1}B \in \mathrm{G}_L(X), \end{equation*}
+which, in turn, implies that $B \in \mathrm{G}_L(X)$ since $A$ is invertible.
+
+\paragraph{Step 2.} Let us define the series
+\begin{equation*} C := \sum_{n \geq 0} \left(\mathrm{Id}_X - B\right)^n.\end{equation*}
+It is straightforward to prove that it converges in norm (it is the geometric series of ratio $\| \mathrm{Id}_X - B \| < 1$) , hence it also converges in $\mathcal{L}(X)$. It remains to prove that $C$ is the inverse of $B$, i.e.,
+\begin{equation*} BC = CB = \mathrm{Id}_X. \end{equation*}
+If we consider the finite sums, it turns out that
+\begin{equation*}\left(\mathrm{Id}_X - B \right)\cdot \sum_{n \leq N} \left(\mathrm{Id}_X - B \right)^n - \sum_{n \leq N} \left(\mathrm{Id}_X - B \right)^n = \left(\mathrm{Id}_X - B \right)^N - \mathrm{Id}_X, \end{equation*}
+and thus, by passing to the limit as $N \to + \infty$, we obtain
+\begin{equation*}\left(\mathrm{Id}_X - B \right)\cdot C - \mathrm{Id}_X \cdot C = - \mathrm{Id}_X \implies BC = \mathrm{Id}_X. \end{equation*}
+The opposite relation ($CB = \mathrm{Id}_X$) follows in a similar fashion, thus we leave the details to the reader.
+\end{proof}
+
+\begin{theorem} Let $\Phi : \R^N \to \R^N$ be a continuous function such that
+\begin{equation}\label{eq:suplim} \limsup_{|x| \to + \infty} \frac{|\Phi(x) - x|}{|x|} < 1. \end{equation}
+Then $\Phi$ is a surjective mapping. Moreover, for any linear isomorphism $A \in \mathrm{G}_L(\R^N)$, the same conclusion holds true if
+\begin{equation*} \limsup_{|x| \to + \infty} \frac{|\Phi(x) - A \, x|}{|x|} < \frac{1}{\|A^{-1}\|}. \end{equation*} \end{theorem}
+
+\begin{proof}We may always assume, without loss of generality, that $A = \mathrm{Id}_X$ (the same argument we have already used in the previous proof, works also here).
+
+\paragraph{Step 1.} Let $y \in \R^N$ be any point, and let us consider the homotopy
+\begin{equation*} H : [0, \, 1] \times \R^N \to \R^N, \qquad (t, \, x) \mapsto x + t \, \left(\Phi(x) - x \right). \end{equation*}
+We can easily estimate its absolute value, i.e.,
+\begin{equation*}\left| H(t, \, x) \right| \geq \|x\| - \|\Phi(x) - x\| = \|x\| \, \left(1 - \frac{\|\Phi(x) - x\|}{\|x\|}\right), \end{equation*}
+and thus, by the assumption on the superior limit \eqref{eq:suplim}, we infer that there exist $\delta \in (0, \, 1)$ and $r > 0$ such that $\|x\| \geq r$ implies $\left| H(t, \, x) \right| \geq (1 - \delta) \, r$.
+
+\paragraph{Step 2.} Let us take $r$ such that
+\begin{equation*}r > \frac{\|y\|}{1 - \delta}, \end{equation*}
+so that the homotopy may be restricted to $H : [0, \, 1] \times \overline{B(0, \, r)} \to \R^N$, with the additional property $y \notin H([0, \, 1] \times \partial \, \overline{B})$. The \hyperref[lemma:ivs]{Homotopy Invariance Lemma \ref{lemma:ivs}} concludes the proof since
+\begin{equation*} \mathrm{deg}_2\left(y, \, \Phi, \, B(0, \, r)\right) = \mathrm{deg}_2\left(y, \, \mathrm{Id}_X, \, B(0, \, r)\right) = 1.\end{equation*}\end{proof}
+
+\begin{exercise} Let $\Phi : \R^N \to \R^N$ be a continuous function such that
+\begin{equation*} \lim_{|x| \to + \infty} |\Phi(x)| = + \infty, \end{equation*}
+and let $A : \R^N \to \R^N$ be a linear isomorphism. If
+\begin{equation*} \inf_{x \in \R^N} \left\{ (\Phi(x), \, Ax) \right\} < \infty, \end{equation*}
+then $\Phi$ is a surjective mapping. \end{exercise}
+
+\paragraph{Fixed-Point Theorems.} Recall that, if $H : [0, \, 1] \times S^n \to S^n$ is an homotopy such that $H(0, \, x) = x$ for any $x \in S^n$, then $H(1, \, \cdot)$ is a surjective map. Surprisingly a similar result holds, under few assumptions, for a generic set $\Omega \subset \R^N$.
+
+\begin{lemma}\label{lemma:dkoskd} Let $\Omega \subset \R^N$ be an open bounded subset such that $\partial \, \Omega = \partial \, \overline{\Omega}$. If $H : [0, \, 1] \times \partial \, \Omega \to \partial \, \Omega$ is a homotopy such that $H(0, \, x) = x$ for any $x \in \partial \, \Omega$, then $H(1, \, \cdot)$ is a surjective map. \end{lemma}
+
+\begin{remark}This assertion is not true if we drop the hypothesis on the boundary of $\Omega$, even in dimension $2$. Indeed, let $B^1(0, \, 1) \subset \R^2$ be the unitary ball, and let
+\begin{equation*} s = \{ (x, \, 0) \in \R^2 \: \left| \: 0 \leq x \leq 1 \right. \} \end{equation*}
+be a segment. If we set $\Omega = B^1(0, \, 1) \setminus s$, then the boundary is given by
+\begin{equation*}\partial \, \Omega = S^1 \cup s\end{equation*}
+and it is straightforward to prove that $s$ can be retracted to a point with $H$, in such a way that $ \partial \, \Omega \mapsto S^1$. Consequently $H(1, \, \cdot)$ is equal to a constant on the whole segment $s$, and thus it cannot be surjective (see \hyperref[fig:dkkds]{Figure \ref{fig:dkkds}}). \end{remark} 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm, height=6cm]{Images/MTDG1.png}
+\caption{Counterexample to \hyperref[lemma:dkoskd]{Lemma \ref{lemma:dkoskd}}}
+\label{fig:dkkds}
+\end{figure}
+
+\begin{proof}Assume by contradiction that there exists $y_0 \in \partial \, \Omega$ such that $y_0 \notin H(1, \, \partial \, \Omega)$. The homotopy $H$ is continuous and the boundary $\partial \, \Omega$ is compact, therefore $H(1, \, \partial \, \Omega)$ is compact, and thus there exist a positive $\delta$ and a ball $B(y_0, \, \delta)$ such that
+\begin{equation*} y^\prime \in B(y_0, \, \delta) \cap \partial \, \Omega \implies y^\prime \notin H(1, \, \partial \, \Omega). \end{equation*}
+The assumption on the boundary of $\Omega$ allows us to find two points $y_1, \, y_2 \in B(y_0, \, \delta)$ such that $y_1 \in \Omega$ and $y_2 \notin \overline{\Omega}$ (see \hyperref[fig:2dsads]{Figure \ref{fig:2dsads}}). Therefore $y_i \notin H(t, \, \partial \, \Omega)$ for any $t \in [0, \, 1]$ and thus the topological degree modulo $2$ is well defined; in particular, it turns out that
+\begin{equation*} \begin{cases} \mathrm{deg}_2\left(y_1, \, H(1, \, \cdot), \, \Omega \right) = \mathrm{deg}_2\left(y_1, \, H(0, \, \cdot), \, \Omega \right) = 1 \\ \mathrm{deg}_2\left(y_2, \, H(1, \, \cdot), \, \Omega \right) = \mathrm{deg}_2\left(y_2, \, H(0, \, \cdot), \, \Omega \right) = 0. \end{cases} \end{equation*}
+On the other hand, the ball $B(y_0, \, \delta)$ is contained in a connected component of $\R^N \setminus H(1, \, \partial \, \Omega)$ and therefore the topological degree should be constant. \end{proof}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=8cm, height=6cm]{Images/OGKE.png}
+\caption{Idea of the Proof}
+\label{fig:2dsads}
+\end{figure}
+
+\begin{remark}If $H$ is an infinite-dimensional space, the fixed-point theorem does not hold true. Indeed, suppose that $H$ is an Hilbert space and define the map
+\begin{equation*} \Phi : \bar{B}(0, \, 1) \longrightarrow \bar{B}(0, \, 1), \qquad \sqrt{1 - \|x\|^2} \, e_0 + \sum_{i = 0}^{+\infty} \langle x, \, e_i \rangle \, e_{i+1}. \end{equation*}
+It is well defined since $\|\Phi(x) \| = 1$ for any $x \in  \bar{B}(0, \, 1)$, and it does not have any fixed point.
+
+To prove the latter assertion, it suffices to argue by contradiction that $\Phi(x) = x$, and then notice that
+\begin{equation*} x_0 = \sqrt{1 - x_0^2}, \qquad x_i = 0 \quad \forall \, i \in \N. \end{equation*}\end{remark}
+
+\begin{theorem}[Schauder Fixed-Point] Let $K$ be a closed convex subset of a Banach reflexive space $B$, and let $\Phi : K \to K$ be a compact continuous operator. Then there exists a fixed point $x \in K$, that is, a point such that $\Phi(x) = x$. \end{theorem}
+
+\begin{lemma}Let $K \subset \R^N$ be a convex bounded closed subset and let $\Phi : K \to K$ be a continuous map. Then $\Phi$ admits a fixed point. \end{lemma}
+
+\begin{proof}Let $P : \R^N \to K$ be the projection and let $P_B$ be its restriction to any closed ball containing $K$. The map $\Phi \circ P_B : \overline{B} \to \overline{B}$ admits a fixed point (by \hyperref[th:brouwer]{Brouwer Fixed Point Theorem \ref{th:brouwer}}) $x \in \overline{B}$, therefore
+\begin{equation*} \Phi(P(x)) = x \implies x \in K \implies P(x) = x \implies \Phi(x) = x. \end{equation*} \end{proof}
+
+\begin{theorem} Let $K \subset \R^N$ be a compact subset contractible in itself. Assume that there exists $U \supset K$ such that $K$ is a deformation retracted of $U$ (that is, there exists a retraction $r : U \to K$). Then any $\Phi : K \to K$ admits a fixed point. \end{theorem}
+
+\begin{proof}Let $H : [0, \, 1] \times K \to K$ be the homotopy between the identity and the constant map $x_0$, and let $\tilde{H}(t, \, x) := - H\left(t, \, \Phi \circ r(x) \right) + x$.
+
+We may always assume without loss of generality that $r : \bar{U} \to K$, therefore $\tilde{H} : [0, \, 1] \times U \to \R^N$ is a well defined map such that $\tilde{H}(0, \, x) = x - \Phi(r(x))$ and $\tilde{H}(1, \, x) = x - x_0$.
+
+Clearly $0 \notin \tilde{H}(t, \, \partial \, U)$, since $x$ belongs to $\partial \, U$ and $H(t, \, \Phi(r(x)))$ belongs to $K$ and they do not intersect in any point. Therefore the topological degree is well defined and it turns out that
+\begin{equation*} \mathrm{deg}_2\left(0, \, \tilde{H}(1, \, \cdot), \, U \right) = \mathrm{deg}_2\left(0, \, \tilde{H}(0, \, \cdot), \, U \right) = 1.\end{equation*}
+Hence there exists $x \in U$ such that
+\begin{equation*} x = \Phi (r(x)) \implies x \in K \implies r(x) = x \implies x = \Phi(x). \end{equation*}\end{proof}
+

@@ -1,0 +1,435 @@
+\chapter{Density of Measures}
+
+In this brief chapter, we investigate the notion of \textit{density} associated with a measure $\mu$. In particular, we first study the upper density related to the $d$-dimensional Hausdorff measure, and then we show that some of its essential properties may be generalized to other measures satisfying certain assumptions.
+
+\section{Density of Doubling Locally Finite Measures}
+
+In this section, we prove that the density of a doubling\footnote{This assumption is necessary if $X$ is a general metric space, but we can drop it if $X = \R^n$.} locally finite measure $\mu$ is a well-defined quantity.
+
+\begin{definition}[Density] \index{measure!density} Let $E \subseteq X$ be a Borel subset of a metric space. The \textit{density} of a measure $\mu$ of the set $E$ is given, at the point $x \in X$, by the following limit:
+\begin{equation*} \Theta(\mu, \, E, \, x) := \lim_{r \to 0} \frac{\mu \left( E \cap B(x, \, r) \right)}{\mu \left( B(x, \, r) \right)} . \end{equation*}
+\end{definition}
+
+\begin{theorem}Let $\mu$ be a (doubling) locally finite measure defined on a metric space $X$, and let $E \subseteq X$ be a Borel subset. Then the density is either $1$ or $0$, that is,
+\begin{equation*} \Theta(\mu, \, E, \, x) := \lim_{r \to 0} \frac{\mu \left( E \cap B(x, \, r) \right)}{\mu \left( B(x, \, r) \right)} = \begin{cases} 1 & \text{for $\mu$-almost every $x \in E$}, \\[0.4em] 0 & \text{for $\mu$-almost every $x \notin E$}. \end{cases} \end{equation*} \end{theorem}
+
+\begin{remark}The theorem holds true even if $\mu$ is not a doubling measure. Indeed, one can require $\mu$ to be  \textit{asymptotically} doubling\index{measure!asymptotically doubling}, that is
+\begin{equation*} \lim_{r \to 0} \frac{\mu \left(  B(x, \, 2r) \right)}{\mu \left( B(x, \, r) \right)} < + \infty \end{equation*}for $\mu$-almost every $x \in X$.\end{remark}
+
+\begin{proof}Here we only prove that the density is $1$ for $\mu$-almost every $x \in E$. The reader may either prove the other case with a similar argument or obtain it automatically by taking the complement.
+
+\paragraph{Step 1.} Fix $\lambda \in (0, \, 1)$, and let us consider the set
+\begin{equation*} E_\lambda := \left\{ x \in E \: \left| \: \liminf_{r \to 0} \frac{\mu \left( E \cap B(x, \, r) \right)}{\mu \left( B(x, \, r) \right)} < \lambda \right. \right\}. \end{equation*}
+It is easy to see that we may equivalently prove that measure\footnote{Here, we would need to check carefully that the set $E_\lambda$ is actually Borel! The intuitive idea behind this goes as follows: The density ratio is increasing with respect to $r$, and thus it is a Borel function. The inferior limit for $r \to 0$, on the other hand, can be computed using rational sequences for the radii; thus it is Borel, and so is the set $E_\lambda$. The reader may try to fill in the details here as an exercise.} of $E_\lambda$ is zero for any $\lambda$, that is
+\begin{equation*} \mu(E_\lambda) = 0, \qquad \forall \, \lambda \in (0, \, 1). \end{equation*}
+
+\paragraph{Step 2.} Let $\mathcal{F}$ be the family of all the closed balls $B(x, \, r)$ with center $x \in E_\lambda$ and radius satisfying the inequality
+\begin{equation*} \frac{\mu \left( E \cap B(x, \, r) \right)}{\mu \left( B(x, \, r) \right)} \leq \lambda, \end{equation*}
+which is possible because the inferior limit of the ratio is estimated by $\lambda$ in $E_\lambda$. Then $\mathcal{F}$ is a fine cover of $E_\lambda$, and thus by \hyperref[theorem:vct]{Vitali's Covering Theorem \ref{theorem:vct}} there exists a disjoint subfamily $\mathcal{F}^\prime$, covering $\mu$-almost all of $E_\lambda$, such that
+\begin{equation*} \sum_{B \in \mathcal{F}^\prime} \mu(B) \leq \mu(E_\lambda) + \epsilon. \end{equation*}
+An easy estimate for the measure of $E_\lambda$ follows:
+\begin{equation*} \mu(E_\lambda) \leq \sum_{B \in \mathcal{F}^\prime} \mu\left(E \cap B \right) \leq \lambda \sum_{B \in \mathcal{F}^\prime} \mu\left( B \right) \leq \lambda (\mu(E_\lambda) + \epsilon). \end{equation*}
+In conclusion, if we take the limit as $\epsilon \to 0^+$, then we obtain the estimate
+\begin{equation*} \mu(E_\lambda) \leq \lambda \mu(E_\lambda), \end{equation*}
+and this the sought contradiction since we assumed $\lambda$ to be strictly less than $1$.
+\end{proof}
+
+\section{Upper Density of the Hausdorff Measure}
+
+In this section, we focus our efforts on the upper density of the $d$-dimensional Hausdorff measure since we can find a lower bound and an upper bound explicitly.
+
+\begin{definition}[Upper Density] \index{Hausdorff measure!upper density} Let $E$ be a Borel subset of a metric space $X$. The \textit{upper $d$-dimensional density} (with respect to $\mathcal{H}^d$) of $E$ at the point $x$ is defined by setting
+\begin{equation} \Theta_d^\ast(E, \, x) := \limsup_{r \to 0^+} \frac{ \mathcal{H}^d \left(E \cap B(x, \, r)\right)}{\alpha_d r^d}, \label{eq:density} \end{equation}
+where $\alpha_d 2^{-d}$ is the renormalization constant introduced the definition of the Hausdorff measure, and $B(x, \, r)$ denotes the closed ball of center $x$ and radius $r$. \end{definition}
+
+\begin{theorem} \label{theorem:densityhasudd}Let $E$ be a Borel subset of a metric space $X$, and assume that $E$ is locally $\mathcal{H}^d$-finite. Then the following properties hold true: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The upper density of external points (outer density) is almost everywhere zero, that is,
+\begin{equation*} \Theta_d^\ast(E, \, x) = 0, \qquad \text{for $\mathcal{H}^d$-almost every $x \notin E$.} \end{equation*}
+\item The upper density is bounded from below, that is,
+\begin{equation*} \frac{1}{2^d} \leq \Theta_d^\ast(E, \, x), \qquad \text{for $\mathcal{H}^d$-almost every $x \in E$.} \end{equation*}
+\item If $X \cong \R^n$, then the upper density is bounded from above by $1$, that is,
+\begin{equation*}\Theta_d^\ast(E, \, x) \leq 1, \qquad \text{for $\mathcal{H}^d$-almost every $x \in E$.} \end{equation*}
+\item If $X$ is a generic metric space, then the upper density is bounded from above by a slightly different constant, that is,
+\begin{equation*}\Theta_d^\ast(E, \, x) \leq 5^d, \qquad \text{for $\mathcal{H}^d$-almost every $x \in E$.} \end{equation*}
+\end{enumerate}\end{theorem}
+
+\begin{remark} The reason we are only concerned with upper density is the following: There exists $E \subseteq \R$ with finite and positive Hausdorff measure such that the lower density is $0$ for $\mathcal{H}^d$-almost every $x \in E$.
+
+On the other hand, there is a dual concept of the Hausdorff dimension, called the \textbf{packing dimension}. Similar statements hold for this kind of measure, but the lower density replaces the upper one (see, e.g., \cite[pp. 81--86]{manilla}.)  \end{remark}
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Fix $m > 0$ and let us consider the set
+\begin{equation*} E_m := \left\{ x \notin E \: \left| \: \Theta_d^\ast(E, \, x) > m \right. \right\}. \end{equation*}
+The thesis follows easily if we can prove that the $d$-dimensional Hausdorff measure of $E_m$ is equal to zero for any fixed $m$.
+
+Let $\mu := \mathcal{H}^d \restr E$ the restriction to $E$ of the $d$-dimensional Hausdorff measure, and notice that $\mu$ is locally finite by construction. Let $A$ be an open neighborhood of $E_m$, and let us consider the family of balls
+\begin{equation*} \mathcal{F} = \left\{ \overline{B(x, \, r)} \: \left| \: \text{$\overline{B(x, \, r)} \subset A$, $x \in E_m$ and $\mathcal{H}^d\left(E \cap \overline{B(x, \, r)} \right) > m \cdot \alpha_d r^d$ } \right. \right\}. \end{equation*}
+The reader may easily prove that $\mathcal{F}$ is a fine cover of $E_m$. Thus, by \hyperref[lemma:vcl]{Vitali's Covering Lemma \ref{lemma:vcl}} it follows that there exists a disjoint subfamily $\mathcal{F}^\prime \subset \mathcal{F}$ such that $\widehat{\mathcal{F}}^\prime$ is also a covering of $E_m$. A straightforward computation proves that
+\begin{equation*} \begin{aligned} \mu(A) & \geq \sum_{B \in \mathcal{F}^\prime} \mu(B) \geq m \cdot \alpha_d \sum_{B \in \mathcal{F}^\prime} r(B)^d = \\[1em] & = \frac{m}{5^d} \frac{\alpha_d}{2^d} \sum_{B \in \mathcal{F}^\prime}\left( \mathrm{diam}(\widehat{B}) \right)^d \geq \\[1em] & \geq \frac{m}{5^d} \mathcal{H}_\infty^d(E_m), \end{aligned} \end{equation*}
+since $E_m \subseteq \cup_{B \in \mathcal{F}^\prime} \widehat{B}$. By definition, the set $E_m$ is disjoint from $E$, and thus $\mu(E_m) = 0$ (as $\mu$ is the restriction to $E$), and, by regularity (of the measure $\mu$), we can always choose $A$ in such a way that $\mu(A)$ is as small as we want. It turns out that
+\begin{equation*} \epsilon \geq  \frac{m}{5^d} \mathcal{H}_\infty^d(E_m), \quad \forall \, \epsilon > 0 \implies \mathcal{H}^d(E_m) = 0  \end{equation*}
+since $\mathcal{H}^d(E) = 0$ is equivalent to $\mathcal{H}_\infty^d(E) = 0$.
+\item We divide the proof into three steps: we prove it in a very particular case, and then we reduce it to the general case using a simple trick.
+
+Fix $m < 2^{-d}$ and let us consider the set
+\begin{equation*} E_m := \left\{ x \in E \: \left| \: \Theta_d^\ast(E, \, x) < m \right. \right\}. \end{equation*}
+Let $\mu := \mathcal{H}^d \restr E$ the restriction to $E$ of the $d$-dimensional Hausdorff measure, and notice that $\mu$ is locally finite by construction. By assumption, for every $x \in E_m$ there is a real number $r_0(x) := r_0 > 0$ such that
+\begin{equation} \label{eq:sosakoowe22d} \mathcal{H}^d \left( E \cap \overline{B(x, \, r_0)} \right) < m \cdot \alpha_d r_0^d. \end{equation}
+
+\paragraph{Step 1.} Assume that\footnote{We will get rid of this assumption in the next step using a simple trick.} the inequality above holds for every $r > 0$, uniformly with respect to $x$. Let $\mathcal{F} := \left\{ F_i \: \left| \: i \in I \right. \right\}$ be a covering of $E_m$ made up of balls, and consider the family of balls $\mathcal{F}^\prime := \{B_i \: \left| \: i \in I \right. \}$ defined in the following way: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item The radius of $B_i$ is equal to the radius of $F_i$ for any $i \in I$.
+\item The center of $B_i$ is a point of $E_m$ for any $i \in I$.
+\item The collection of balls $\mathcal{F}^\prime$ covers $E_m$.
+\end{enumerate}
+We can easily estimate the Hausdorff measure of $E_m$ as follows:
+\begin{equation*}2^d \mathcal{H}^d(E_m) \geq \alpha_d \sum_{F_i \in \mathcal{F}} \mu(F_i) \geq \alpha_d  \sum_{B_i \in I}\left( \mathrm{diam}(B_i) \right)^d \geq \frac{1}{m} \sum_{i \in I} \mathcal{H}^d \left(E \cap B_i \right), \end{equation*}
+from which it follows that
+\begin{equation*}2^d \mathcal{H}^d(E_m) \geq \frac{1}{m} \mathcal{H}^d(E_m) \implies \mathcal{H}^d(E_m) = 0\end{equation*}
+since $m < 2^{-d}$ by assumption.
+
+\paragraph{Step 2.} Assume now that the inequality \eqref{eq:sosakoowe22d} does not hold uniformly for every $r > 0$, but there is a uniform constant $r_0 > 0$ such that \eqref{eq:sosakoowe22d} holds true for every $x \in E$ and every $r \leq r_0$.
+
+In a similar fashion, we can estimate the outer measure $\mathcal{H}_\delta^d$ for $\delta < r_0/2$ - up to an arbitrarily small error $\epsilon > 0$ -, that is, for every $\epsilon > 0$ we obtain the inequality
+\begin{equation*}2^d \mathcal{H}^d(E_m)  + \epsilon \geq \frac{1}{m} \, \mathcal{H}_\delta^d(E_m),\end{equation*}
+which immediately implies
+\begin{equation*} \mathcal{H}^d(E_m) = 0, \end{equation*}
+since $m < 2^{-d}$ by assumption.
+
+\paragraph{Step 3.} Finally, assume that the inequality \eqref{eq:sosakoowe22d} is not uniform with respect to $x$, that is, for any $x \in E_m$, it holds for $r_0 := r_0(x) > 0$. We consider the set
+\begin{equation*} E_{m, \, r_0} := \left\{ x \in E \: \left| \: \mathcal{H}^d\left(E \cap \overline{B(x, \, r)} \right) < m \cdot \alpha_d r^d, \, \, \, \forall \, r \leq r_0 \right. \right\} \end{equation*}
+and we prove, using the previous step, that this set has measure zero for any choice of $r_0 > 0$ and $m < 2^{-d}$.
+
+\item We first give a rough idea of the proof of this assertion and then we formalize it correctly. 
+
+\paragraph{Step 0.} Fix $m > 1$ and let us consider the set
+\begin{equation*} E_m := \left\{ x \in E \: \left| \: \Theta_d^\ast(E, \, x) > m \right. \right\}. \end{equation*}
+Let $\mu := \mathcal{H}^d \restr E$ the restriction to $E$ of the $d$-dimensional Hausdorff measure, and notice that $\mu$ is locally finite by construction. By assumption, there are infinitely many balls such that
+\begin{equation*} \mu \left( \overline{B(x, \, r)} \right) = \mathcal{H}^d \left( \overline{B(x, \, r)} \cap E \right) > m \cdot \alpha_d r^d, \end{equation*}
+and thus
+\begin{equation*} \mu(E_m) \simeq \sum_i \mu(B_i) \geq m \cdot \frac{\alpha_d}{2^d} \sum_i \left(2 r_i \right)^d \geq m \cdot \mathcal{H}^d(E_m).\end{equation*}
+In conclusion, since $\mu$ is the restriction of $\mathcal{H}^d$ to $E$, it suffices to notice that $E_m \subset E$ to infer that
+\begin{equation*} \mathcal{H}^d(E_m) = \mu(E_m) \geq m \cdot \mathcal{H}^d(E_m), \end{equation*}
+which is absurd since $m > 1$.
+
+\paragraph{Step 1.} Fix $\delta > 0$ and let us consider the collection of balls
+\begin{equation*}\mathcal{F} := \left\{ \overline{B(x, \, r)} \: \left| \: \text{$x \in E_m$, $r \leq \frac{\delta}{2}$ and $\mathcal{H}^d \left( \overline{B(x, \, r)} \cap E \right) > m \cdot \alpha_d r^d$} \right. \right\}. \end{equation*}
+It is easy to prove that $\mathcal{F}$ is a fine cover of $E_m$. By \hyperref[lemma:bcl]{Besicovitch Covering Lemma \ref{lemma:bcl}}, for every $\epsilon > 0$ we can extract a subfamily $\mathcal{F}^\prime \subset \mathcal{F}$ such that $\mathcal{F}^\prime$ is a covering of $E_m$ and
+\begin{equation*}\mu(E_m) + \epsilon \geq \sum_{B \in \mathcal{F}^\prime} \mu(B).\end{equation*}
+A straightforward computation proves that
+\begin{equation*} \begin{aligned} \mu(E_m) + \epsilon \geq & \sum_{B \in \mathcal{F}^\prime} \mu(B) \geq \\[1em] & \geq m \sum_{B \in \mathcal{F}^\prime}\alpha_d r(B)^d = \\[1em] & = m \cdot \frac{\alpha_d}{2^d} \sum_{B \in \mathcal{F}^\prime} (2 r(B))^d \geq \\[1em] & \geq m \mathcal{H}_\delta^d(E_m). \end{aligned}\end{equation*}
+Therefore, if we take the limit as $\delta$ and $\epsilon$ goes to $0^+$, then it turns out that
+\begin{equation*}\mathcal{H}^d(E_m) + \epsilon = \mu(E_m) + \epsilon \geq  m \, \mathcal{H}_\delta^d(E_m) \implies \mathcal{H}^d(E_m) \geq m \, \mathcal{H}^d(E_m),\end{equation*}
+which is absurd since $m > 1$.
+
+\item Let $\mu:= \mathcal{H}^d \restr E$ the restriction to $E$ of the $d$-dimensional Hausdorff measure, and notice that $\mu$ is locally finite by construction. Unfortunately, the measure $\mu$ does not have the doubling property (or the asymptotic one); therefore we need to rely on a different covering theorem.
+
+Fix $m > 5^d$, fix $\delta > 0$, let $A$ be an open neighborhood of $E_m$, and let us consider the family of closed balls
+\begin{equation*}\mathcal{F} := \left\{ \overline{B(x, \, r)} \subset A \: \left| \: \text{$x \in E_m$, $r \leq \delta$ and $\mathcal{H}^d \left( \overline{B(x, \, r)} \cap E \right) > m \cdot \alpha_d r^d$} \right. \right\}. \end{equation*}
+The cover $\mathcal{F}$ is fine, and thus there exists a disjoint subfamily $\mathcal{F}^\prime \subset \mathcal{F}$ such that $\widehat{\mathcal{F}}^\prime$ covers $E_m$. Then
+\begin{equation*} \begin{aligned} \mu(A) & \geq \sum_{B \in \mathcal{F}^\prime} \mu(B) \geq \\[1em] & \geq  m \sum_{B \in \mathcal{F}^\prime}\alpha_d \, r(B)^d = \\[1em] & =  \frac{m}{5^d}\, \frac{\alpha_d}{2^d} \sum_{B \in \mathcal{F}^\prime} \left( 2 r\left(\widehat{B} \right) \right)^d \geq \\[1em] & \geq \frac{m}{5^d} \mathcal{H}_{\delta^\prime}^d(E_m), \end{aligned}\end{equation*}
+where $\delta^\prime = 10 \delta$. We conclude the proof by noticing that, since $\mu$ is a regular measure (both inner and outer regular), we have
+\begin{equation*} \mathcal{H}^d(E_m) = \mu(E_m) = \inf_{A \supset E_m} \mu(A) \end{equation*}
+and hence, by taking the limit as $\delta, \, \epsilon \to 0^+$, it turns out that
+\begin{equation*}\mathcal{H}^d(E_m) \geq \frac{m}{5^d} \mathcal{H}_{\delta^\prime}^d(E_m) \implies \mathcal{H}^d(E_m) = 0.\end{equation*}
+\end{enumerate} \end{proof}
+
+\begin{remark} In the previous results, we used the covering theorems assuming either that $X = \R^n$ or $\mu$ doubling, but for the applications we need them to be true for a larger class of measures. More precisely, the two statements \mbox{}
+\begin{enumerate}[label=\textbf{A\arabic*})]
+\item If $E \subset X$ is a Borel subset and $\mathcal{F}$ is a fine cover of $E$, then for any $\epsilon > 0$ there exists a disjoint subfamily $\mathcal{F}^\prime \subset \mathcal{F}$, covering $E$ $\mu$-almost everywhere, such that
+\begin{equation*} \sum_{B \in \mathcal{F}^\prime} \mu(B) \leq \mu(E) + \epsilon. \end{equation*}
+\item If $E \subset X$ is a Borel subset and $\mathcal{F}$ is a fine cover of $E$, then for any $\epsilon > 0$ there exists a subfamily $\mathcal{F}^\prime \subset \mathcal{F}$, covering $E$, such that
+\begin{equation*} \sum_{B \in \mathcal{F}^\prime} \mu(B) \leq \mu(E) + \epsilon.\end{equation*}
+\end{enumerate}
+hold true even for a measure $\mu = \mu^\prime\restr F$, where $\mu^\prime$ is doubling and $F$ is arbitrary (actually, it is enough to ask $\mu \ll \mu^\prime \restr F$.)
+\end{remark}
+
+\section{Upper $d$-Dimensional Density}
+
+\paragraph{Support.}\index{measure!support} Let $\mu$ be a measure defined on a metric space $X$. The \textit{support} of $\mu$ is the smallest closed subset $F \subset X$ such that the complement $F^c$ is a null set, that is, 
+\begin{equation*} \mathrm{spt}(\mu) = \inf \left\{ F \subset X \: \left| \: \text{$F$ is closed and $\mu(F^c) = 0$} \right. \right\}. \end{equation*}
+The measure $\mu$ is \textit{supported} on a Borel set $E \subset X$ if the complement of $E$ is a null set for $\mu$. In particular, the set $E$ contains the support of $\mu$, that is,
+\begin{equation*} \mathrm{spt}(\mu) \subseteq E. \end{equation*}
+
+\begin{definition}\index{measure!orthogonal} Let $\mu$ and $\lambda$ be two measures defined on the same metric space $X$. We say that $\mu$ is \textit{orthogonal} to $\lambda$, and we denote it by $\mu \perp \lambda$, if and only if they are supported on disjoint Borel sets. \end{definition}
+
+\begin{remark} The support of a measure $\mu$ is a well-defined notion, but it is not the optimal one concerning the orthogonality. Indeed, the reader may prove, as an exercise, that there exists a measure $\mu$ orthogonal to a measure $\lambda$ such that
+\begin{equation*} \mathrm{spt}(\mu) \cap \mathrm{spt}(\lambda) \neq \varnothing . \end{equation*}
+\textit{Hint.} Consider the Lebesgue measure and the Dirac measure on the real line. \end{remark}
+
+\begin{lemma}\label{lemma:kdaso} Let $\lambda$ and $\mu$ be locally finite measures defined on a metric space $X$. Assume that $\lambda$ is orthogonal to $\mu$ and $\lambda$ satisfies the assumption \textbf{A2)}. Then the Radon-Nikodym derivative is zero, that is,
+\begin{equation*} \frac{\mathrm{d} \lambda}{\mathrm{d} \mu}(x) := \lim_{r \to 0} \frac{\lambda \left( \overline{B(x, \, r)} \right)}{\mu \left( \overline{B(x, \, r)} \right)} = 0, \end{equation*}
+for $\mu$-almost every $x \in X$.  \end{lemma}
+
+\begin{proof} Fix $m > 0$, let $F \subset X$ be a Borel set satisfying
+\begin{equation*} \lambda\left( F^c \right) = 0 \qquad \text{and} \qquad \mu(F) = 0, \end{equation*}
+and let
+\begin{equation*}E_m := \left\{ x \notin F \: \left| \: \limsup_{r \to 0^+} \frac{\mathrm{d}\lambda}{\mathrm{d}\mu}(x) > m \right. \right\}. \end{equation*}
+Since $F$ is a $\mu$-null set, we may equivalently prove that $\mu(E_m) = 0$ for every fixed $m > 0$. Consider the family of closed balls
+\begin{equation*}\mathcal{F} := \left\{ \overline{B(x, \, r)} \: \left| \: \text{$x \in E_m$, $\lambda\left( \overline{B(x, \, r)} \right) \geq m \mu \left( \overline{B(x, \, r)} \right)$} \right. \right\}. \end{equation*}
+The reader may check that $\mathcal{F}$ is a fine cover of $E_m$; hence, by assumption \textbf{A2)} it follows that for every $\epsilon > 0$ there exists a subfamily $\mathcal{F}^\prime \subset \mathcal{F}$ such that
+\begin{equation*} E_m \subseteq \bigcup_{B \in \mathcal{F}^\prime} B \qquad \text{and} \qquad \sum_{B \in \mathcal{F}^\prime} \lambda(B) \leq \lambda(E_m) + \epsilon. \end{equation*}
+The complement of $F$ is a $\lambda$-null set, and thus we finally infer that
+\begin{equation*} \underbrace{\lambda(E_m)}_{=0} + \epsilon \geq m \sum_{B \in \mathcal{F}^\prime} \mu(B) \geq m  \mu(E_m) \implies \mu(E_m) = 0.\end{equation*}
+\end{proof}
+
+\begin{corollary}Let $\lambda$ and $\mu$ be locally finite measures defined on a metric space $X$. Assume that $\lambda$ is orthogonal to $\mu$ and $\lambda$ satisfies the assumption \textbf{A2)}. Then the Radon-Nikodym derivative is infinite, that is,
+\begin{equation*} \frac{\mathrm{d} \mu}{\mathrm{d} \lambda}(x) = + \infty, \end{equation*}
+for $\mu$-almost every $x \in X$. \end{corollary}
+
+\begin{theorem} \label{theorem:lusdnas} Let $\mu$ be locally finite measures defined on a metric space $X$ satisfying the assumption \textbf{A2)}, and let $f \in L_{\mathrm{loc}}^p(X, \, \mu)$ be a function. Then
+\begin{equation*} \dashint_{\overline{B(x, \, r)}} \left| f(y) - f(x) \right|^p \, \mathrm{d}\mu(y) \xrightarrow{r \to 0} 0, \end{equation*}
+for $\mu$-almost every $x \in X$.  \end{theorem}
+
+\begin{proof}Fix $\epsilon > 0$. By Lusin's Theorem\footnote{\textbf{Lusin's Theorem:} Let $(X, \, \Sigma, \, \mu)$ be a Radon measure space and let $Y$ be a second-countable topological space. If $f : X \to Y$ is a measurable function and $\epsilon > 0$, then for any $A \in \Sigma$ there is a closed set $E$ with $\mu(A \setminus E) < \epsilon$ such that $f \, \big|_{E}$ is continuous.} we can always find a continuous function $\widetilde{f} : X \longrightarrow \R$ and a subset $E \subset X$ such that
+\begin{equation*} f \, \big|_E = \widetilde{f} \, \big|_E \qquad \text{and} \qquad \mu\left(X \setminus E \right) < \epsilon. \end{equation*}
+The complement of $E$ can be taken arbitrarily small; thus it suffices to prove the theorem for $\mu$-almost every $x \in E$. In particular, given $x \in E$ it turns out that
+\begin{equation*} \begin{aligned} \dashint_{\overline{B(x, \, r)}} \left| f(y) - f(x) \right|^p \, \mathrm{d}\mu(y) & =  \dashint_{\overline{B(x, \, r)} \cap E}\left| f(y) - f(x) \right|^p \, \mathrm{d}\mu(y) + \dashint_{\overline{B(x, \, r)} \setminus E}\left| f(y) - f(x) \right|^p \, \mathrm{d}\mu(y) =
+\\[1em] & = \frac{1}{\mu\left(\overline{B_r} \right)} \left[ \int_{\overline{B_r} \cap E}\left| \widetilde{f}(y) - \widetilde{f}(x) \right|^p \, \mathrm{d}\mu(y) + \int_{\overline{B_r} \setminus E}\left| f(y) - f(x) \right|^p \, \mathrm{d}\mu(y) \right] \stackrel{(\ast)}{\leq}
+\\[1em] & \stackrel{(\ast)}{\leq} \left[ \omega\left(\widetilde{f} \right) \right]^p + \frac{2^{p-1}}{\mu\left(\overline{B_r}\right)} \int_{\overline{B(x, \, r)} \setminus E} \left[ \left| f(x) \right|^p + \left| f(y) \right|^p \right] \, \mathrm{d}\mu(y),
+\end{aligned}\end{equation*}
+where $\omega \left( \widetilde{f} \right)$ denotes the oscillation of $\widetilde{f}$, and the inequality $(\ast)$ follows from the following trivial fact: If $p \geq 1$, then for any real numbers $a$ and $b$ it turns out that
+\begin{equation*}|a - b|^p \leq 2^{p-1} (|a|^p + |b|^p). \end{equation*}
+Let us consider the measures
+\begin{equation*} \lambda_1 := \left[ \left| f \right|^p \, \mathbbm{1}_{X \setminus E} \right] \cdot \mu \qquad \text{and} \qquad \lambda_2 := \mathbbm{1}_{X \setminus E} \cdot \mu, \end{equation*}
+and let $\widetilde{\mu}$ be the restriction of $\mu$ to the set $E$. Then
+\begin{equation*} \dashint_{\overline{B(x, \, r)}} \left| f(y) - f(x) \right|^p \, \mathrm{d}\mu(y) \leq \left[ \omega\left(\widetilde{f} \right) \right]^p + 2^{p-1} \frac{\lambda_1\left(\overline{B(x, \, r)} \right)}{\widetilde{\mu}\left(\overline{B(x, \, r)} \right)} + 2^{p-1} \left| f(x) \right|^p \frac{\lambda_2\left(\overline{B(x, \, r)}\right)}{\widetilde{\mu}\left(\overline{B(x, \, r)}\right)},\end{equation*}
+from which it easily follows that: \mbox{}
+\begin{enumerate}[label=\textbf{\arabic*})]
+\item The oscillation $\omega \left( \widetilde{f} \right)$ goes to $0$ as $r \to 0^+$ for \textbf{every} $x \in E$, as a consequence of the continuity of $\widetilde{f}$.
+\item The measures $\lambda_1$ and $\lambda_2$ are both orthogonal to $\widetilde{\mu}$; hence both the ratios go to 0 as $r \to 0^+$, for $\widetilde{\mu}$-almost every $x \in X$, which means for $\mu$-almost every $x$ in $E$.
+\end{enumerate} \end{proof}
+
+\begin{definition}\index{approximately continuous function} The function $f: X \longrightarrow \R$ is \textit{$L^p$-approximately continuous} if and only if
+\begin{equation*} \dashint_{\overline{B(x, \, r)}} \left| f(y) - f(x) \right|^p \, \mathrm{d}\mu(y) \xrightarrow{r \to 0^+} 0 \end{equation*}
+for $\mu$-almost every $x \in X$.\end{definition}
+
+\begin{corollary} \label{cor:lploc}Let $\mu$ be locally finite measures defined on a metric space $X$ satisfying the assumption \textbf{A2)}, and let $f \in L_{\mathrm{loc}}^p(X, \, \mu)$ be a function. Then
+\begin{equation*} \dashint_{\overline{B(x, \, r)}} f(y) \, \mathrm{d}\mu(y) \xrightarrow{r \to 0^+} f(x), \end{equation*}
+for $\mu$-almost every $x \in X$. \end{corollary}
+
+\begin{proof}By Jensen's inequality\footnote{Let $(\Omega, \, \mathcal{G}, \, \mu)$ be a probability space. If $g : \Omega \longrightarrow \R$ is a $\mu$-summable function, and if $\varphi : \R \longrightarrow \R$ is a convex function, then
+\begin{equation*}\varphi \left( \int_\Omega g(x) \, \mathrm{d}\mu(x) \right) \leq \int_\Omega \varphi \circ g(x) \, \mathrm{d}\mu(x).\end{equation*}  }, it turns out that
+\begin{equation*} L_{\mathrm{loc}}^q(\Omega) \subset L_{\mathrm{loc}}^p(\Omega), \qquad \forall \, q < p, \end{equation*}
+and thus we can apply \hyperref[theorem:lusdnas]{Theorem \ref{theorem:lusdnas}} with $p = 1$. \end{proof}
+
+\begin{theorem} Let $\mu$ and $\lambda$ be locally finite measures satisfying the assumption \textbf{A2)}. Assume that there is a decomposition
+\begin{equation*} \lambda = f \cdot \mu + \lambda_s, \end{equation*}
+where $\lambda_s$ denotes the singular part of the measure $\lambda$. Then the density of $\lambda$ with respect to $\mu$ can be computed pointwise, and it is equal to
+\begin{equation*} \frac{\mathrm{d} \lambda}{\mathrm{d} \mu}(x) = f(x), \end{equation*}
+for $\mu$-almost every $x \in X$.  \end{theorem}
+
+\begin{proof} By \hyperref[lemma:kdaso]{Lemma \ref{lemma:kdaso}} it turns out that
+\begin{equation*} \frac{ \mathrm{d} \lambda_s}{\mathrm{d}\mu}(x) = 0 \end{equation*}
+for $\mu$-almost every $x \in X$. On the other hand, by \hyperref[theorem:lusdnas]{Theorem \ref{theorem:lusdnas}} it follows that
+\begin{equation*} \frac{ \mathrm{d} \lambda_{ac}}{\mathrm{d}\mu}(x) = f(x), \end{equation*}
+where $\lambda_{ac}$ denotes the part of $\lambda$ which is absolutely continuous with respect to $\mu$, that is,
+\begin{equation*} \lambda_{ac} = f \cdot \mu. \end{equation*}
+\end{proof}
+
+\paragraph{Upper Density.} Let $\mu$ be a locally finite measure defined on a metric space $X$, and let $d > 0$ be a positive real number. The \textit{$d$-dimensional upper density} at the point $x$ with respect to $\mu$ is defined by setting
+\begin{equation} \Theta_d^\ast(\mu, \, x) := \limsup_{r \to 0^+} \frac{\mu \left(\overline{B(x, \, r)}\right)}{\alpha_d  r^d}, \label{eq:density2} \end{equation}
+where $\frac{\alpha_d}{2^d}$ is the renormalization constant used in the definition of the Hausdorff measure.
+
+\begin{theorem} \label{theorem:densidut} Let $\mu$ be a locally finite measure defined on a metric space $X$, and let $d > 0$ be a positive real number. The following properties are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The upper density is finite and nonzero, that is,
+\begin{equation*} 0 < \Theta_d^\ast(\mu, \, x) < + \infty, \end{equation*}
+for $\mu$-almost every $x \in X$.
+\item There is a locally summable function $f \in L_{\mathrm{loc}}^1 \left( X, \, \mathcal{H}^d \right)$ such that
+\begin{equation*}\mu = f \cdot \mathcal{H}^d. \end{equation*}
+\end{enumerate} \end{theorem}
+
+The proof of this theorem is rather involved. Hence, we split it into different propositions and lemmas and, at the end of the section, we get much more than the statement above.
+
+%\begin{proof} The proof of the implication \textbf{(2)} $\implies$ \textbf{(1)} is made up of three steps.
+
+%\vspace{2.5mm}
+%\textbf{Step 1.} Suppose that $f = \mathbbm{1}_E$ is the characteristic function of a set. Then the thesis follows easily from Theorem \ref{theorem:densityhasudd}.
+
+%\vspace{2.5mm}
+%\textbf{Step 2.} Suppose that there exists $E \subset X$ of arbitrarily large measure such that $0 < m \leq f(x) \leq M < + \infty$ for $\mu$-almost any $x \in E$. Then it turns out that
+%\begin{equation*} 0 < m \cdot \Theta_d^\ast(\mathcal{H}^d \, \big|_E, \, x) \leq \Theta_d^\ast(\mu, \, x) \leq M \cdot \Theta_d^\ast(\mathcal{H}^d \, \big|_E, \, x) < + \infty,\end{equation*}
+%since both terms are finite for $\mu$-almost every $x \in E$ by Step 1.
+
+%\vspace{2.5mm}
+%\textbf{Step 3.} Suppose that $f$ is any locally summable function. For any natural number $n \in \N$ there exists $E_n$ such that 
+%\begin{equation*}0 < \frac{1}{n} \leq f_1(x) \leq n < + \infty, \end{equation*}
+%for $\mu$-almost every $x \in E_n$, where $f(x) = f_1(x) + f_2(x)$ and $f_2$ is small with respect to the $\mathcal{H}^d$ measure. Notice also that $(E_n)$ is an increasing sequence of sets and
+%\begin{equation*}\bigcup_{n \in \N} E_n = X.\end{equation*}
+%By assumption $\mu = f_1 \cdot \mathcal{H}^d + f_2 \cdot \mathcal{H}^d$, therefore
+%\begin{equation*} \Theta_d^\ast(\mu, \, x) = \Theta_d^\ast(f_1 \cdot \mathcal{H}^d, \, x) + \Theta_d^\ast(f_2 \cdot \mathcal{H}^d, \, x)\end{equation*}
+%and it is clearly enough to prove that it is finite for $\mu_1$-almost everywhere and, at the same time, that the second term is zero for $\mu_1$-almost every $x$. But it's easy to see that
+%\begin{equation*}  \Theta_d^\ast(f_2 \cdot \mathcal{H}^d, \, x) = \frac{\mu_2(\bar{B})}{\mu_1(\bar{B})} \cdot\frac{\mu_1(\bar{B})}{\alpha_d \, r^d}, \end{equation*}
+%and the first factor goes to zero by orthogonality, while the second is finite by Step 2. This remark concludes the proof since the thesis holds for $\mu_1$-almost every $x \in E_n$, thus by taking the limit for $n \to + \infty$ it turns out that it holds for $\mu$-almost every $x$. \end{proof}
+
+\begin{proposition} Let $\mu$ be a locally finite measure on $X$ and let $d > 0$. Suppose that there is $f \in L_{\mathrm{loc}}^1\left(\mathcal{H}^d \right)$ such that $\mu = f \cdot \mathcal{H}^d$. Then
+\begin{equation*} 2^{-d} \, f(x) \leq \Theta_d^\ast(\mu, \, x) \leq 5^d \, f(x) \quad \text{for $\mathcal{H}^d$-almost every $x \in X$}. \end{equation*}
+In particular the upper-density of $\mu$ is finite and nonzero ($0 < \Theta_d^\ast(\mu, \, x) < + \infty$) for $\mu$-almost any $x \in X$.\end{proposition}
+
+
+\begin{proof} We first prove the result in some particular cases, and then we generalize it using a simple trick. 
+
+\paragraph{Step 1.} Assume that $X = \R^n$ and assume that there are constants $m < M \in \R$ such that
+\begin{equation*} 0 < m < f(x) \leq M < + \infty \quad \text{for $\mathcal{H}^d$-almost every $x \in X$ s.t. $f(x)\neq0$}.\end{equation*}
+Set $E := \left\{ x \in X \: \left| \: f(x) \neq 0 \right. \right\}$ and consider the measure $\lambda := \mathbbm{1}_{E} \cdot \mathcal{H}^d$. Clearly $\lambda$ is locally finite, and thus we can easily compute the density ratio, that is,
+\begin{equation*} \begin{aligned} \frac{\mu \left(\overline{B(x, \, r)}\right)}{\alpha_d r^d} & = \frac{1}{\alpha_d r^d} \int_{\overline{B(x, \, r)}} f(y) \, \mathrm{d}\mathcal{H}^d(y) = \\[1em] & = \frac{1}{\alpha_d r^d} \int_{\overline{B(x, \, r)}} f(y) \, \mathrm{d}\lambda(y) = \\[1em] & = \frac{\lambda \left( \overline{B(x, \, r)} \right)}{\alpha_d \, r^d} \dashint_{\overline{B(x, \, r)}} f(y) \, \mathrm{d}\lambda(y).  \end{aligned} \end{equation*}
+Since $\lambda$ is equal to the restriction to $E$ of the $d$-dimensional Hausdorff measure, it follows from \hyperref[theorem:densityhasudd]{Theorem \ref{theorem:densityhasudd}} that
+\begin{equation*}\limsup_{r \to 0} \frac{\lambda \left( \overline{B(x, \, r)} \right)}{\alpha_d r^d}  \in \left[\frac{1}{2^d}, \, 5^d \right] \end{equation*}
+for $\mathcal{H}^d$-almost every $x \in E$. On the other hand, the Lebesgue result (see \hyperref[cor:lploc]{Corollary \ref{cor:lploc}}) implies that
+\begin{equation*} \dashint_{\overline{B(x, \, r)}} f(y) \, \mathrm{d}\lambda(y) \xrightarrow{r \to 0} f(x), \end{equation*}
+for $\mathcal{H}^d$-almost every $x \in E$, which is exactly what we wanted to prove.
+
+\paragraph{Step 2.} Let $X$ be any reasonable\footnote{Here we do not specify what kind of assumptions are needed on $X$, but any space that "looks like" $\R^n$ will do. The reader may try, as an exercise, to find the minimal assumptions that can make the argument of the second step work.} space and assume that there are constants $m < M \in \R$ such that
+\begin{equation*} 0 < m < f(x) \leq M < + \infty\end{equation*}
+for $\mathcal{H}^d$-almost every $x \in X$ such that $f(x)\neq0$. Let $f_1$ and $f_2$ be finite sums of step functions in such a way that
+\begin{equation*} f_1(x) \leq f(x) \leq f_2(x). \end{equation*}
+We claim that
+\begin{equation*} 2^{-d} f_1(x) \leq \Theta_d^\ast(\mu, \, x) \leq 5^d  f_2(x)\end{equation*}
+for $\mathcal{H}^d$-almost every $x \in X$ such that $f(x)\neq0$. 
+
+\paragraph{Step 2.1.} Let $\alpha_1, \, \dots, \, \alpha_m \in \R$ and $A_1, \, \dots, \, A_m \subset X$, and assume that
+\begin{equation*} f_1(x) = \sum_{i = 1}^{m} \alpha_i  \mathbbm{1}_{E_i},\end{equation*}
+where $E_i = E \cap A_i$ for every $i = 1, \, \dots, \, m$. The following inequality of measures is tirvial
+\begin{equation*} \mu \geq \sum_{i = 1}^{m} \alpha_i \,  \mathbbm{1}_{E_i} \cdot \mathcal{H}^d,\end{equation*}
+and hence 
+\begin{equation*} \Theta_d^\ast(E_i, \, x) \geq \alpha_i 2^{-d} \stackrel{(x \in E_i)}{=} f_1(x) \, 2^{-d}\end{equation*}
+for $\mathcal{H}^d$-almost every $x \in E_i$. The union of the $E_i$s is almost all of $E$, and thus it turns out that 
+\begin{equation*} 2^{-d} f_1(x) \leq \Theta_d^\ast(\mu, \, x) \end{equation*}
+for $\mathcal{H}^d$-almost every $x \in E$.
+
+\paragraph{Step 2.2.} Let us consider the function
+\begin{equation*} f_2(x) = \sum_{i = 1}^{m} \beta_i  \mathbbm{1}_{E_i},\end{equation*}
+where the family $\{E_i := A_i \cap E \}_{i = 1, \, \dots, \, m}$ is disjoint. Since $E = \bigsqcup_{i = 1, \, \dots, \, m} E_i$, it turns out that $\Theta_d^\ast(\mu, \, x) = 0$ for $\mathcal{H}^d$-almost every $x \notin E$. If $x \in E_j$, then
+\begin{equation*}  \Theta_d^\ast(\mu, \, x) \leq \sum_{i = 1}^m \beta_i \Theta_d^\ast \left(E_i, \, x \right) = \beta_j \Theta_d^\ast(E_j, \, x) \leq 5^d f_2(x)\end{equation*} 
+for $\mathcal{H}^d$-almost every $x \in E_j$, as a consequence of \hyperref[theorem:densityhasudd]{Theorem \ref{theorem:densityhasudd}}.
+
+\paragraph{Step 3.} Assume $f \in L_{\mathrm{loc}}^1\left(\R^n, \, \mathcal{H}^d \right)$. Fix $m > 1$, set
+\begin{equation*} E_m := \left\{ x \in E \: \left| \: \frac{1}{m} \leq f(x) \leq m \right. \right\}, \end{equation*}
+and let $\mu = \mu_m + \widetilde{\mu_m}$ be the Radon-Nikodym decomposition of $\mu$ associated to $E_m$. More precisely, we consider the decomposition
+\begin{equation*} \mu_m = f \, \mathbbm{1}_{E_m} \cdot \mathcal{H}^d \qquad \text{and} \qquad \widetilde{\mu_m} = f \, \mathbbm{1}_{E \setminus E_m} \cdot \mathcal{H}^d, \end{equation*}
+in such a way that
+\begin{equation*} \frac{\mu \left( \overline{ B(x, \, r) } \right)}{\mu_m\left( \overline{ B(x, \, r) } \right)} \xrightarrow{r \to 0} 1 \quad \text{for $\mu_m$-almost every $x \in E$.} \end{equation*}
+Since $\widetilde{\mu_m}$ is singular, it turns out that
+\begin{equation*} \Theta_d^\ast(\mu, \, x) = \Theta_d^\ast(\mu_m, \, x) \leq 5^d f(x)\end{equation*}
+for $\mu_m$-almost every $x \in E$, i.e., for $\mathcal{H}^d$-almost every $x \in E_m$
+The union of the $E_m$s covers almost all of $E$; thus
+\begin{equation*} \Theta_d^\ast(\mu, \, x) \leq 5^d f(x) \end{equation*}
+for $\mu$-almost every $x \in E$. If, on the other hand, $x \notin E$, then we can prove\footnote{The reader may prove this assertion in a similar fashion to \hyperref[theorem:densityhasudd]{Theorem \ref{theorem:densityhasudd}}.} that the $d$-dimensional upper density is equal to $0$ for $\mathcal{H}^d$-almost every $x \notin E$.
+
+\paragraph{Step 4.} Let $X$ be a reasonable metric space and let $f$ be a function in $L_{\mathrm{loc}}^1\left(X, \, \mathcal{H}^d \right)$. This step follows from the previous ones since for a locally summable function, for every $\epsilon > 0$, there are constants $m, \, M > 0$ and $E_{m, \, M} \subseteq X$ such that
+\begin{equation*} 0 < m < f(x) \leq M < + \infty\end{equation*}
+for $\mathcal{H}^d$-almost every $x \in E$ such that $f(x)\neq0$ and $\mathcal{H}^d(E_{m, \, M}) < \epsilon$.
+\end{proof}
+
+\begin{lemma} \label{lemma32} Let $\mu$ be a locally finite measure with finite $d$-dimensional upper density, that is, 
+\begin{equation*}\Theta_d^\ast(\mu, \, x) < + \infty \end{equation*}
+for $\mu$-almost every $x \in X$. Then $\mu$ is absolutely continuous with respect to the Hausdorff measure $\mathcal{H}^d$, that is,
+\begin{equation*} \mathcal{H}^d(E) = 0 \implies \mu(E) = 0. \end{equation*} \end{lemma}
+
+\begin{proof}[Sketch of the Proof] By assumption, if $r > 0$ is small enough, it turns out that
+\begin{equation*} \frac{ \mu\left( \overline{B(x, \, r)} \right)}{\alpha_d r^d} \leq m. \end{equation*}
+Let $E$ be a $\mathcal{H}^d$-null subset of $X$, that is $\mathcal{H}^d(E) = 0$. For any $m, \, \rho > 0$ let us consider the collection of sets
+\begin{equation*} E_{m, \, \rho} = \left\{ x \in E \: \left| \: \text{$\frac{ \mu\left( \overline{B(x, \, r)} \right)}{\alpha_d  r^d} \leq m$ for every $r < \rho$} \right. \right\}. \end{equation*}
+The countable union over the rational numbers covers almost every point of $E$, that is,
+\begin{equation*} \bigcup_{(m, \, \rho) \in \Q^2} E_{m, \, \rho} = \text{$\mu$-almost all of $E$},\end{equation*}
+since there may be $A \subset X$ null set such that
+\begin{equation*} x \in A \implies \Theta_d^\ast(\mu, \, x) = + \infty.\end{equation*}
+It is clearly enough to prove that the measure of $E_{m, \, \rho}$ is equal to $0$ for every fixed couple $(m, \, \rho) \in \Q^2$. 
+
+By assumption $\mathcal{H}^d(E_{m, \, \rho}) = 0$, and thus $\mathcal{H}_\delta^d(E_{m, \, \rho}) = 0$. In particular, for every $\epsilon > 0$ there exists a covering $\{ E_i\}_{i \in I_{m, \, \rho}}$ for $E_{m, \, \rho}$ satisfying the additional property
+\begin{equation*} \mathrm{diam}(E_i) < \delta \quad \text{and} \quad \sum_i \left(\mathrm{diam}(E_i) \right)^d \leq \epsilon. \end{equation*}
+Let us consider the closed ball $B_i := \overline{B(x_i, \, r_i)}$, centered at $x_i \in E_i \cap E$ with radius $r_i = \mathrm{diam}(E_i)$, for every $i \in I_{m, \, \rho}$. The collection of balls $\{B_i\}_{i \in I_{m, \, \rho}}$ covers $E_{m, \, \rho}$, and thus
+\begin{equation*}\mu(E_{m, \, \rho}) \leq \sum_{i \in I_{m, \, \rho}} \mu(B_i) \leq m \alpha_d \sum_{i \in I_{m, \, \rho}} r_i^d \leq m \alpha_d \sum_{i \in I_{m, \, \rho}} \left(\mathrm{diam}(E_i)\right)^d \leq m \alpha_d \cdot \epsilon, \end{equation*}
+which is exactly what we wanted to prove.
+\end{proof}
+
+\begin{lemma} \label{lemma33} Let $\mu$ be a locally finite measure defined on a metric space $X$. Fix $m > 0$ and let
+\begin{equation*}E_m := \left\{ x \in E \: \left| \: \Theta_d^\ast(\mu, \, x) > m \right. \right\}. \end{equation*}
+The $d$-dimensional Hausdorff measure of $E_m$ is bounded from above, that is,
+\begin{equation*}\mathcal{H}^d(E_m) \leq \frac{5^d}{m} \mu(E_m). \end{equation*}\end{lemma}
+
+\begin{proof}Let $A$ be an open neighborhood of $E_m$, and let us consider the collection of closed balls
+\begin{equation*}\mathcal{F} := \left\{ \overline{B(x, \, r)} \: \left| \: \text{$\overline{B(x,\, r)} \subseteq A$ and $\frac{\mu \left( \overline{B(x, \, r)} \right)}{\alpha_d r^d} > m$} \right. \right\}. \end{equation*}
+The reader may prove that $\mathcal{F}$ is a fine cover of $E_m$; thus by \hyperref[lemma:vcl]{Vitali's covering Lemma \ref{lemma:vcl}} there exists a disjoint subfamily $\mathcal{F}^\prime \subset \mathcal{F}$ such that $\widehat{\mathcal{F}^\prime}$ covers $E_m$. It follows that
+\begin{equation*} \begin{aligned} \mu(A) & \geq \sum_{B \in \mathcal{F}^\prime} \mu(B) \geq
+\\[1em] & \geq m \sum_{B \in \mathcal{F}^\prime} \alpha_d r^d = \\[1em] & = \frac{m}{5^d} \frac{\alpha_d}{2^d} \sum_{B \in \mathcal{F}^\prime} (10 r)^d \geq \\[1em] & \geq \frac{m \alpha_d}{10^d} \sum_{B \in \mathcal{F}^\prime} \left( \mathrm{diam}(\hat{B}) \right)^d \geq \frac{m}{5^d} \mathcal{H}_\infty^d(E_m).\end{aligned} \end{equation*}
+In particular, to estimate $\mathcal{H}_\delta^d$ it is enough to consider a cover made up of balls whose diameter is less than $\delta/10$. If we take the infimum with respect to $A$ and the supremum with respect to $\delta > 0$, then it turns out that
+\begin{equation*}\mathcal{H}^d(E_m) \leq \frac{5^d}{m} \mu(E_m). \end{equation*}
+\end{proof}
+
+\begin{corollary}Let $\mu$ be a locally finite measure defined on a metric space $X$ and assume that
+\begin{equation*}\Theta_d^\ast(\mu, \, x) > 0 \end{equation*}
+for $\mu$-almost every $x \in X$. Then $\mu$ is supported on the set
+\begin{equation*}E := \left\{ x \in X \: \left| \: \Theta_d^\ast(\mu, \, x) > 0 \right. \right\}, \end{equation*}
+which is $\sigma$-finite with respect to $\mathcal{H}^d$. \end{corollary}
+
+\begin{proof}It follows immediately from the previous theorem since
+\begin{equation*} E = \bigcup_{n \in \N} E_{\frac{1}{n}} \end{equation*}
+and we have, for every $n \in \N$, the estimate
+\begin{equation*} \mathcal{H}^d ( E_{\frac{1}{n}} ) \leq \frac{5^d}{m}\mu( E_{\frac{1}{n}} ) < + \infty. \end{equation*}
+\end{proof}
+
+\begin{proposition} Let $\mu$ be a locally finite measure defined on a metric space $X$ and assume that
+\begin{equation*} 0 \leq \Theta_d^\ast(\mu, \, x) < + \infty \end{equation*}
+for $\mu$-almost every $x \in X$. Then
+\begin{equation*} \mu = f \cdot \mathcal{H}^d \end{equation*}
+for some locally summable function $f \in L_{\mathrm{loc}}^1(\mathcal{H}^d)$. \end{proposition}
+
+\begin{proof}By \hyperref[lemma32]{Lemma \ref{lemma32}}, the measure $\mu$ is absolutely continuous with respect to the $d$-dimensional Hausdorff measure $\mathcal{H}^d$, while the previous corollary implies that $\mu$ is supported on the set $E$ defined above. Therefore
+\begin{equation*} \mu \ll \lambda := \mathbbm{1}_E \cdot \mathcal{H}^d, \end{equation*}
+and $\lambda$ is $\sigma$-finite; thus the Radon-Nikodym theorem implies that $\mu = f \cdot \lambda$.
+\end{proof}
+
+\begin{remark} Notice that the Radon-Nikodym theorem cannot be applied directly to $\mathcal{H}^d$ since the Hausdorff measure is not $\sigma$-finite (which is a necessary assumption for the result to hold true.) \end{remark}
+
+\section{Applications}
+
+In this final brief section, we investigate some of the main applications of the theory developed so far (especially to Cantor sets.)
+
+\begin{corollary} Let $E$ be a Borel set contained in a metric space $X$, and let $d \geq 0$ be a positive real number. Assume that there exists a finite measure $\mu$, defined on $X$, such that: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The $d$-dimensional upper density is finite, that is, $\Theta_d^\ast(\mu, \, x) < + \infty$ for $\mu$-almost every $x \in E$.
+\item The set $E$ is not null with respect to $\mu$, that is, $\mu(E) > 0$.
+\end{enumerate}
+Then the $d$-dimensional Hausdorff measure of $E$ is strictly bigger than zero. \end{corollary}
+
+\begin{proof} By \hyperref[theorem:densidut]{Theorem \ref{theorem:densidut}}, the measure $\lambda := \mathbbm{1}_E \cdot \mu$ is absolutely continuous with respect to $\mathcal{H}^d$; therefore the Hausdorff measure of the set $E$ cannot be zero (otherwise also $\mu(E)$ would be equal to zero).\end{proof}
+
+\paragraph{Cantor Set.} We have proved in the previous chapter that
+\begin{equation*}d := \frac{\log 2}{\log 3}, \end{equation*}
+is the Hausdorff dimension of the Cantor set $\mathcal{C}$, and recall that $\mathcal{H}^d(\mathcal{C}) > 0$.
+
+\begin{remark}The Cantor set is defined by setting
+\begin{equation*}\mathcal{C} := \bigcap_{i = 0}^{+ \infty} C_i, \end{equation*}
+where $C_0 = [0, \, 1]$, $C_1 = [0, \, 1/3] \cup [2/3, \, 1]$ and $C_k$ is the disjoint union of $2^k$ intervals, whose length is equal to $3^{-k}$. \end{remark}
+
+\begin{proposition}\label{prop:210kdso02} Let
+\begin{equation*} \Phi( I_{i, \, j} ) = \Phi( I_{i + 1, \, k} ) + \Phi( I_{i + 1, \, k+1}) \end{equation*}
+be a set function (that preserves the mass). Then $\Phi$ can be uniquely extended to a finite measure $\nu$ on $\R$, which is supported on the Cantor set $\mathcal{C}$. \end{proposition}
+
+\begin{proof} Let $\mathcal{F} = \{ I_{i, \, j} \}_{i, \, j \in \N} \cup \varnothing$ and let $\mu$ be the outer measure on $\mathcal{C}$ given by the Carathéodory construction. We claim that the following properties are satisfied: \mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item For every $i, \, j \in \N$ it turns out that $\mu(I_{i, \, j}) = \Phi(I_{i, \, j})$.
+\item The outer measure $\mu$ is additive on distant sets (and thus the restriction to the Borel $\sigma$-algebra is a $\sigma$-additive measure.)
+\end{enumerate}
+As a consequence of the second claim, the restriction of $\mu$ to the Borel $\sigma$-algebra, denoted by $\nu$, is exactly the sought measure. The reader may prove, as an exercise, that the measure defined in this way is \textbf{unique}. \mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item Let us consider the outer measure
+\begin{equation*}\mu \left(I_{i, \, j} \right) := \inf \left\{ \Phi(E_k) \: \left| \: \text{$E_k \in \mathcal{F}$ and $I_{i, \, j} \subseteq E_k$} \right. \right\}. \end{equation*}
+Notice that $\left( E_k \right)_{k \in \N}$ is an open covering of $\mathcal{C}$ and, for every $i, \, j \in \N$, the interval $I_{i, \, j}$ is compact. It follows that there exists a finite subfamily $E_{i_1}, \, \dots, \, E_{i_k}$ such that
+\begin{equation*}\mu \left(I_{i, \, j} \right) = \inf_{\ell = 1, \, \dots, \, k} \Phi(E_{i_\ell}). \end{equation*}
+This proves that $\mu(I_{i, \, j}) = \Phi(I_{i, \, j})$ for every $i, \, j$ since $\Phi$ is additive on distant sets\footnote{It follows easily from the definition of $\Phi$ and of $\mathcal{C}$.}.
+\item We consider the outer measure
+\begin{equation*}\mu_\delta \left(I_{i, \, j} \right) := \inf \left\{ \Phi(E_k) \: \left| \: \text{$E_k \in \mathcal{F}$, $\mathrm{diam}(E_k) \leq \delta$ and $I_{i, \, j} \subseteq E_k$} \right. \right\}. \end{equation*}
+Then $\mu_\delta$ coincides with $\mu$ on a suitable class of sets, and it is larger on where the distance is bigger than $\delta$. This concludes the proof. \end{enumerate} \end{proof}
+
+\paragraph{Canonical Measure on $\mathcal{C}$.} Let $\mu$ be the measure given by \hyperref[prop:210kdso02]{Proposition \ref{prop:210kdso02}} associated to the set function
+\begin{equation*} \Phi(I_{i, \, j}) = 2^{-i}. \end{equation*}
+It is enough to prove that $\Theta_d^\ast(\mu, \, x) < + \infty$ for $\mu$-almost every $x \in \mathcal{C}$. First, we notice that for every $x \in \mathcal{C}$, it turns out that
+\begin{equation*} \widetilde{\Theta_d^\ast}(\mu, \, x) := \lim_{ \mathrm{diam}(I_{i, \, j}) \to 0, \, x \in I_{i, \, j}} \frac{\mu(I_{i, \, j})}{ \left( \mathrm{diam}(I_{i, \, j}) \right)^d} = \frac{2^{-i}}{3^{-id}} = 1. \end{equation*}
+Then
+\begin{equation*} \Theta_d^\ast(\mu, \, x) \in \left[c_1 \widetilde{\Theta_d^\ast}(\mu, \, x), \, c_2 \widetilde{\Theta_d^\ast}(\mu, \, x) \right], \end{equation*}
+and this is exactly what we wanted to prove. Indeed, the closed ball $\overline{B(x, \, r)}$ satisfies the inequality $3^{-i-1} < r \leq 3^{-i}$, and thus $\overline{B(x, \, r)} \cap \mathcal{C} \subseteq I_{i, \, j}$ for some $j \in \N$. 
