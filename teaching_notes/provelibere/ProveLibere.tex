@@ -1,0 +1,2334 @@
+
+\documentclass[a4paper,10 pt]{report}
+
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage[pass]{geometry}
+\usepackage{amsthm}
+\usepackage{amsmath, amssymb}
+\usepackage{setspace}
+\usepackage[english]{babel}
+\usepackage{tikz-cd}
+\usepackage{makeidx}         % permette di generare l'indice
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{accents}
+\usepackage[labelfont=bf]{caption}
+\usepackage{faktor}
+\usepackage{mathrsfs}  
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{plotmarks}
+\usepackage{mdframed}
+\usepackage{pifont}
+\usepackage{mwe}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{scalerel}[2014/03/10]
+\usepackage[usestackEOL]{stackengine}
+\usepackage{bbm}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+
+
+\usepackage{titlesec}
+
+% Change chapter numbering to use "Prova Libera" instead of "Chapter"
+\titleformat{\chapter}
+  {\normalfont\huge\bfseries}    % format
+  {Prova Libera \thechapter}     % label
+  {20pt}                         % sep (spacing between label and title)
+  {}                             % before-code
+
+% Optional: Modify the table of contents to match
+\renewcommand{\chaptername}{Prova Libera}
+
+\makeindex %DDD
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\definecolor{amaranth}{rgb}{0.9, 0.17, 0.31}
+
+\DeclareRobustCommand\longtwoheadrightarrow
+     {\relbar\joinrel\twoheadrightarrow}
+
+\newcommand{\notimplies}{%
+  \mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
+  
+  \newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=blue!30!black,
+    colback=blue!30, boxrule=1pt,
+    #1}
+  
+\pagestyle{plain}
+\setlength{\topmargin}{0.0in}
+\setlength{\headheight}{0.2in}
+\setlength{\headsep}{0.0in}
+\setlength{\footskip}{0.5in}
+\setlength{\textheight}{8.3in}
+\setlength{\textwidth}{6.0in}
+\setlength{\oddsidemargin}{0.5in}
+\setlength{\evensidemargin}{0.5in}
+\setlength{\parindent}{0.2 in}
+
+\tcbset{highlight math style={boxsep=5mm,colback=blue!30!red!30!white}}
+
+\tcbuselibrary{skins, breakable, theorems}
+
+% Define custom environments
+\newmdenv[
+  linewidth=1pt,
+  innertopmargin=10pt,
+  innerbottommargin=10pt,
+  innerrightmargin=10pt,
+  innerleftmargin=10pt,
+  backgroundcolor=gray!10,
+  roundcorner=5pt
+]{exerciseBox}
+
+\newtcolorbox{solutionBox}{
+  enhanced,
+  breakable,
+  colback=white,
+  colframe=gray!50,
+  arc=5pt,
+  outer arc=5pt,
+  leftrule=1pt,
+  rightrule=1pt,
+  toprule=1pt,
+  bottomrule=1pt,
+  fonttitle=\bfseries,
+  title=Solution,
+  attach boxed title to top left={xshift=0mm, yshift=-\tcboxedtitleheight/2},
+  boxed title style={
+    colback=gray!50,
+    size=small,
+    sharp corners
+  }
+}
+
+\newtcolorbox{finalAnswer}[1][]{
+    enhanced,
+    colback=blue!5,
+    colframe=blue!75!black,
+    arc=0pt,
+    boxrule=1pt,
+    title=Final Answer,
+    fonttitle=\bfseries,
+    attach boxed title to top left={xshift=0mm, yshift=-\tcboxedtitleheight/2},
+    boxed title style={
+        colback=blue!75!black,
+        coltext=white
+    },
+    #1  % allows for optional parameter overrides
+}
+
+\newcommand{\finalanswer}[1]{%
+    \begin{finalAnswer}
+    \[
+        #1
+    \]
+    \end{finalAnswer}
+}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+\newtheorem{exercise}{Exercise}[chapter]
+
+\newcommand{\smallO}[1]{\scriptstyle\mathcal{O}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand*\conj[1]{\overline{#1}}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\N}{\mathbb N}
+\newcommand{\G}{\mathcal G}
+\newcommand{\Ha}{\mathcal H}
+\newcommand{\Na}{\mathcal N}
+\newcommand{\g}{\mathfrak g}
+\newcommand{\h}{\mathfrak h}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\con}{\mathcal{C}\left(x, \, V, \, \alpha \right)}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\p}{\mathbb P}
+\newcommand{\Le}{\mathcal{L}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\can}{\symbol{35}}
+\newcommand*{\double}[2][.1ex]{%
+  \mathrel{\vcenter{\offinterlineskip%
+  \hbox{$#2$}\vskip#1\hbox{$#2$}}}}
+\newcommand*{\doublerightarrow}{\double{\longrightarrow}}
+
+\newcommand{\xmark}{\text{\sffamily X}} % For x-mark
+
+\newcommand{\restr}{%
+  \,\raisebox{-.127ex}{\reflectbox{\rotatebox[origin=br]{-90}{$\lnot$}}}\,%
+}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\newcommand{\bsquare}{\item[\color{magenta}\ding{110}]} 
+\newcommand{\barrow}{\item[\color{blue}\ding{228}]}
+\newcommand{\bwarrow}{\item[\color{gray}\ding{227}]}
+
+\def\dashint{\,\ThisStyle{\ensurestackMath{%
+  \stackinset{c}{.2\LMpt}{c}{.5\LMpt}{\SavedStyle-}{\SavedStyle\phantom{\int}}}%
+  \setbox0=\hbox{$\SavedStyle\int\,$}\kern-\wd0}\int}
+\def\ddashint{\,\ThisStyle{\ensurestackMath{%
+  \stackinset{c}{.2\LMpt}{c}{.5\LMpt+.2\LMex}{\SavedStyle-}{%
+    \stackinset{c}{.2\LMpt}{c}{.5\LMpt-.2\LMex}{\SavedStyle-}{%
+      \SavedStyle\phantom{\int}}}}\setbox0=\hbox{$\SavedStyle\int\,$}\kern-\wd0}\int}
+
+
+\begin{document}
+\newpage
+
+\begin{titlepage}
+\begin{center}
+
+% Add some vertical space at the top
+\vspace*{2cm}
+
+% Title section
+{\Large Collection of Exercises}\\\vspace{1.5cm}
+{\Huge\bfseries Calculus I\\Collection of Exercises\par}\vspace{2cm}
+
+% Create a decorative line
+\rule{\linewidth}{0.5mm}\vspace{1cm}
+
+% Instructor and Author section with better spacing and alignment
+\begin{minipage}{0.45\textwidth}
+    \begin{center}
+        \textit{Course held by}\\[0.5cm]
+        {\Large\bfseries Prof. Giuseppe Buttazzo}
+    \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+    \begin{center}
+        \textit{Collection written by}\\[0.5cm]
+        {\Large\bfseries Francesco Paolo Maiale}
+    \end{center}
+\end{minipage}
+
+\vfill
+
+% Bottom section with department info
+\begin{center}
+    {\large
+    Department of Civil and Industrial Engineering\\[0.4em]
+    Pisa University\\[0.4em]
+    \today
+    }
+\end{center}
+
+\end{center}
+\end{titlepage}
+
+% Disclaimer page
+\newpage
+{\Huge\bfseries Disclaimer}\par
+\vspace{1cm}
+\begin{quotation}
+\noindent
+This collection of exercises (still in progress) comes out of the \textit{Calculus I} course 2017/2018, held by Professor Giuseppe Buttazzo, and contains the detailed solutions of all the homework assignments (Prove Libere) assigned so far.
+
+\vspace{0.5cm}
+\noindent
+Students are encouraged to report mistakes, typos, and any other issues by email to:
+\begin{center}
+    \texttt{francescopaolo.maiale@gmail.com}
+\end{center}
+\end{quotation}
+
+% Table of Contents
+%\newpage
+%tableofcontents
+
+
+\chapter{Complex numbers}
+
+\begin{exerciseBox}
+\textbf{Exercise.} Write the following complex number in its algebraic form:
+\[
+    z = \frac{1}{4 + 3i}
+\]
+\end{exerciseBox}
+
+\begin{solutionBox}
+Let's solve this step by step:
+
+\begin{enumerate}[leftmargin=*]
+    \item To convert this into algebraic form, we multiply both numerator and denominator by the complex conjugate of the denominator:
+    \[
+        z = \frac{1}{4 + 3i} \cdot \frac{4 - 3i}{4 - 3i}.
+    \]
+
+    \item This works because $\frac{4 - 3i}{4 - 3i} = 1$, and multiplication by 1 does not change the value.
+
+    \item In the denominator, we get:
+    \[
+        (4 + 3i)(4 - 3i) = 16 - 9i^2 = 16 + 9 = 25,
+    \]
+    while, in the numerator:
+    \[
+        1 \cdot (4 - 3i) = 4 - 3i
+    \]
+
+    \item Therefore:
+    \[
+        z = \frac{4 - 3i}{25}
+    \]
+\end{enumerate}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=blue!5,
+    colframe=blue!75!black,
+    arc=0pt,
+    boxrule=1pt,
+    title=Final Answer,
+    fonttitle=\bfseries,
+    attach boxed title to top left={xshift=0mm, yshift=-\tcboxedtitleheight/2},
+    boxed title style={
+        colback=blue!75!black,
+        coltext=white
+    }
+]
+\[
+    z = \frac{4}{25} - \frac{3}{25}i
+\]
+\end{tcolorbox}
+\end{solutionBox}
+
+
+
+
+\begin{exerciseBox}
+\textbf{Exercise.} Compute the supremum of the following set:
+\begin{equation*} A = \left\{ \frac{1}{2 + x} \: : \: x \in [1, \, + \infty) \right\}. \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} Consider the function 
+\[
+f(x) := \frac{1}{2 + x}.
+\]
+If we can prove that $f$ is a monotone decreasing function in the interval $\mathcal{I} := [1, + \infty)$, then we can infer that the supremum is given by the value at $x=1$:
+\[
+\sup A = f(1) = 1/3.
+\]
+To prove this, let $x_1 < x_2$ be any two points in $\mathcal{I}$. Then,
+\begin{equation*} \frac{1}{2 + x_1} > \frac{1}{2 + x_2} \implies \text{$f$ monotone decreasing},  \end{equation*}
+which means that:
+\begin{tcolorbox}[
+    enhanced,
+    colback=blue!5,
+    colframe=blue!75!black,
+    arc=0pt,
+    boxrule=1pt,
+    title=Final Answer,
+    fonttitle=\bfseries,
+    attach boxed title to top left={xshift=0mm, yshift=-\tcboxedtitleheight/2},
+    boxed title style={
+        colback=blue!75!black,
+        coltext=white
+    }
+]
+\[
+    \sup A = \frac{1}{3}
+\]
+\end{tcolorbox}
+\end{solutionBox}
+
+\begin{exerciseBox}
+
+\textbf{Exercise.} Compute
+\[
+\log(\mathrm{e}^4) + \log(\mathrm{e}^5).
+\]
+
+\end{exerciseBox}
+
+\begin{solutionBox}
+	Recall that the logarithm function satisfies $\log(a^b) = b \log(a)$ and $\log(e) = 1$. Therefore,
+	\[
+	\log(e^4) = 4 \log e \quad \text{and} \quad \log(e^5) = 5,
+	\]
+	from which it follows that:
+\finalanswer{\log(\mathrm{e}^4) + \log(\mathrm{e}^5) = 4 \log(\mathrm{e}) + 5 \log(\mathrm{e}) = 9}
+\end{solutionBox}
+
+
+\begin{exerciseBox}
+\textbf{Exercise.} Write down the remainder of the division between $x^5 + 1$ and $x^3 + 1$.
+\end{exerciseBox}
+
+
+\begin{solutionBox}
+	To find the remainder, we need to perform polynomial long division. We can write:
+\[
+    x^5 + 1 = (x^3 + 1)q(x) + r(x)
+\]
+where $q(x)$ is the quotient and $r(x)$ is the remainder. Note that the degree of $r(x)$ must be less than the degree of the divisor $(x^3 + 1)$, i.e. $\le 2$.
+
+
+Let us perform the division step by step:
+\[
+\begin{array}{rcl}
+x^5 + 0x^4 + 0x^3 + 0x^2 + 0x + 1 & = & (x^3 + 1)x^2 + (1-x^2)
+\end{array}
+\]
+as shown from the table below:
+\begin{center}
+\begin{tabular}{r|ccccc}
+    & $x^5$ & $0x^4$ & $0x^3$ & $0x^2$ & $0x + 1$ \\
+\hline
+$x^2$ & $x^5$ & $0$ & $0$ & $x^2$ & $0$ \\
+\hline
+    & $0$ & $0$ & $0$ & $x^2$ & $1$ \\
+    & $0$ & $0$ & $0$ & $0$ & $0$ \\
+\hline
+    & $0$ & $0$ & $0$ & $-x^2$ & $1$ \\
+\end{tabular}
+\end{center}
+Therefore:
+\begin{itemize}
+    \item Quotient: $q(x) = x^2$
+    \item Remainder: $r(x) = 1-x^2$
+\end{itemize}
+
+To verify our result, we can check that:
+\[
+    (x^3 + 1)x^2 + (1-x^2) = x^5 + 1
+\]
+
+\finalanswer{r(x) = 1-x^2}
+\end{solutionBox}
+
+
+\begin{exerciseBox}
+\textbf{Exercise.} Determine the solutions of the following inequality:
+\[
+2 \sin^2(x) \geq 1.
+\]	
+\end{exerciseBox}
+
+\begin{solutionBox}
+First, we notice that
+\begin{equation*}2 \sin^2(x) \geq 1 \iff \sin(x) \leq - \frac{1}{\sqrt{2}} \quad \text{or} \quad \sin(x) \geq \frac{1}{\sqrt{2}}, \end{equation*}
+which means that we can solve the two inequalities separately:
+
+\begin{itemize}
+	\item \textit{First case}: recall that $\sin x$ is odd and satisfies $\sin(- \frac{\pi}{4} ) = - \frac{1}{\sqrt{2}}$. If follows that
+\[\sin(x) \leq - \frac{1}{\sqrt{2}} \iff - \frac{3}{4} \pi + 2k \pi \leq x \leq - \frac{\pi}{4} + 2k \]
+	for all $k \in \Z$.
+	
+	\item \textit{Second case}: arguing as above and recalling that $\sin(\frac{\pi}{4} ) = \frac{1}{\sqrt{2}}$, it follows that:
+\[
+\sin(x) \geq \frac{1}{\sqrt{2}} \iff \frac{\pi}{4} + 2k \pi \leq x \leq \frac{3}{4}\pi + 2k \pi
+\]
+for all $k \in \Z$.
+\end{itemize}Putting these two cases together, it turns out that the initial inequality is satisfied if and only if $x$ belongs to the intervals:
+\finalanswer{I_k := \left[ \frac{\pi}{4} + k \pi, \, \frac{3}{4} \pi + k \pi \right] \qquad \text{for all $k \in \Z$}.}
+\end{solutionBox}
+
+
+
+\begin{exerciseBox}
+\textbf{Exercise.} Determine the solutions of the following system:
+\[
+\begin{cases}x + 2y = 4 \\ 2x - 3y = 1. \end{cases}
+\]
+\end{exerciseBox}
+
+\begin{solutionBox}
+	We can use the first equation to express $x$ as a function of $y$, namely:
+	\[
+	x = 4 - 2y.
+	\]
+	Substituting this value into the second equation yields
+	\[
+	1 = 2x - 3y = 2(4-2y) - 3y = 8 - 7y,
+	\]
+	which has solution $y=1$. Putting it back into the expression for $x$ gives $x = 4-2=2$, which means that the solution of the system is:
+\finalanswer{(x,y) = (2,1).}
+\end{solutionBox}
+
+
+\begin{exerciseBox}
+\textbf{Exercise.} Let $f(x) := \sin^2(x)$ and let $g(x) := x^3$. Write the correct expression for the composition $f \circ g(x)$.
+\end{exerciseBox}
+
+\begin{solutionBox}The solution follows from a pretty straightforward computation, and is given by
+\finalanswer{f \circ g(x) = \sin^2(x^3)}
+\end{solutionBox}
+
+\begin{exerciseBox}
+\textbf{Exercise.} Determine the domain of the function
+\[
+f(x) = \log |x^2 - x|
+\]
+\end{exerciseBox}
+
+\begin{solutionBox}
+The logarithm function $\log(y)$ is defined if the argument is strictly positive, which means that we require:
+\[
+x^2 - x \neq 0.
+\]
+It suffices to collect $x$ from the left-hand side to get
+\[
+x(x-1) \neq 0 \iff x \neq 0, x \neq 1.
+\]
+In particular, the domain of $f$ is given by:
+	\finalanswer{\mathrm{dom} (f) = \R \setminus \{0, 1\}}
+\end{solutionBox}
+
+
+\begin{exerciseBox}
+\textbf{Exercise.} Determine which ones of the following functions are odd:
+\begin{equation*}\sin(x), \qquad (x + 1)^3, \qquad (x^3 + x)^3, \qquad (\sin(x) + \cos(x))^3. \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} Recall that a function $f:\R \longrightarrow \R$ is odd if and only if
+\begin{equation*}
+    f(-x) = -f(x) \qquad \text{for all $x \in \R$}.
+\end{equation*}
+Let us examine each function separately:
+
+\begin{enumerate}
+    \item For $f(x) = \sin(x)$:
+    \begin{equation*}
+        \sin(-x) = -\sin(x) \quad \text{for all $x \in \R$}
+    \end{equation*}
+    \textbf{Conclusion:} $\sin(x)$ is odd. \checkmark
+    
+    \item For $f(x) = (x+1)^3$:
+    \begin{align*}
+        f(-x) &= (-x+1)^3 \\
+        &= -x^3 + 3x^2 - 3x + 1 \\
+        -f(x) &= -(x+1)^3 \\
+        &= -x^3 - 3x^2 - 3x - 1
+    \end{align*}
+    Since $f(-x) \neq -f(x)$, this function is \textbf{not odd}. \xmark
+    
+    \item For $f(x) = (x^3 + x)^3$:
+    \begin{align*}
+        f(-x) &= ((-x)^3 + (-x))^3 \\
+        &= (-x^3 - x)^3 \\
+        &= -(x^3 + x)^3 \\
+        &= -f(x)
+    \end{align*}
+    In conclusion, the function $(x^3 + x)^3$ is odd. \checkmark
+    
+    \item For $f(x) = (\sin(x) + \cos(x))^3$:
+    \begin{align*}
+        f(-x) &= (\sin(-x) + \cos(-x))^3 \\
+        &= (-\sin(x) + \cos(x))^3 \\
+        -f(x) &= -(\sin(x) + \cos(x))^3
+    \end{align*}
+    Since $(-\sin(x) + \cos(x))^3 \neq -(\sin(x) + \cos(x))^3$, this function is \textbf{not odd}. \xmark
+\end{enumerate}
+
+\begin{finalAnswer}
+The odd functions in the list are $\sin(x)$ and $(x^3 + x)^3$
+\end{finalAnswer}
+\end{solutionBox}
+
+\begin{exerciseBox}\textbf{Exercise.} Compute the number of the anagrams of the word \textbf{GROSSETO}. \end{exerciseBox}
+
+\begin{solutionBox}
+To find the number of anagrams of \textit{GROSSETO}, we start by analyzing the composition of this word:
+\begin{itemize}
+    \item Total length: $N = 8$ letters
+    \item Letter frequency:
+        \begin{center}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        Letter & G & R & O & S & S & E & T & O \\
+        \hline
+        Frequency & 1 & 1 & 2 & 2 & 2 & 1 & 1 & 2 \\
+        \hline
+        \end{tabular}
+        \end{center}
+\end{itemize}
+For a word with repeated letters, the number of unique anagrams is given by
+\[
+    \# \text{anagrams} = \frac{N!}{\beta_1! \cdot \beta_2! \cdot ... \cdot \beta_k!}
+\]
+where $N$ is the total numbers of letters and $\beta_i$ is the frequency of the $i$-th repeated letter. In our case, only the letters O and S are repeated (both twice), so we get:
+\begin{align*}
+    \# \text{anagrams} &= \frac{8!}{2!2!} = \frac{8 \cdot 7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}{2 \cdot 1 \cdot 2 \cdot 1} \\[1em]
+    &= \frac{40{}320}{4} = 10{}080
+\end{align*}
+
+\begin{finalAnswer}
+\text{The word "GROSSETO" has 10{}080 unique anagrams}
+\end{finalAnswer}
+\end{solutionBox}
+
+
+
+
+\chapter{Combinatorics, complex numbers and functions}
+
+\begin{exerciseBox}
+\textbf{Exercise.} In how many different ways can $N$ friends sit around a round table? Recall that, for such problems, two configurations are considered equal if everyone sits next to the same people, whether on the right or the left?
+\end{exerciseBox}
+
+\begin{solutionBox} 
+    First, notice that the table is indistinguishable, and therefore the first person sitting will be our point of reference. For example, if $N = 3$, then the following configurations are equal since one can always rotate the round table by $\frac{2}{3} \pi$:
+
+
+ \begin{center}
+        \begin{minipage}{.25\textwidth}
+            \begin{tikzpicture}
+                \draw (0,0) circle (1cm);
+                \draw (1, 0) circle (0.05cm);
+                \fill[blue] (1, 0) circle (0.05cm);
+                \draw (-1/2, -0.866) circle (0.05cm);
+                \fill[blue] (-1/2, -0.866) circle (0.05cm);
+                \draw (-1/2, 0.866) circle (0.05cm);
+                \fill[blue] (-1/2, 0.866) circle (0.05cm);
+                \node (A) at (1.3, 0.1) {$P_1$};
+            \end{tikzpicture}
+        \end{minipage}
+        \quad = \quad
+        \begin{minipage}{.25\textwidth}
+            \begin{tikzpicture}
+                \draw (0,0) circle (1cm);
+                \draw (1, 0) circle (0.05cm);
+                \fill[blue] (1, 0) circle (0.05cm);
+                \draw (-1/2, -0.866) circle (0.05cm);
+                \fill[blue] (-1/2, -0.866) circle (0.05cm);
+                \draw (-1/2, 0.866) circle (0.05cm);
+                \fill[blue] (-1/2, 0.866) circle (0.05cm);
+                \node (A) at (1, 0) {}; 
+                \node (C) at (-1/2, -0.866) {};
+                \node (B) at (-0.4, -0.6) {$P_1$};
+                \draw[->, blue] (C) to [bend right=90] (A);
+                \node[blue] (1) at (1/2, -1.4) {$R_{\frac{2\pi}{3}}$};
+            \end{tikzpicture}
+        \end{minipage}
+        \quad = \quad
+        \begin{minipage}{.25\textwidth}
+            \begin{tikzpicture}
+                \draw (0,0) circle (1cm);
+                \draw (1, 0) circle (0.05cm);
+                \fill[blue] (1, 0) circle (0.05cm);
+                \draw (-1/2, -0.866) circle (0.05cm);
+                \fill[blue] (-1/2, -0.866) circle (0.05cm);
+                \draw (-1/2, 0.866) circle (0.05cm);
+                \fill[blue] (-1/2, 0.866) circle (0.05cm);
+                \node (A) at (1, 0) {}; 
+                \node (C) at (-1/2, 0.866) {};
+                \node (B) at (-0.4, 0.6) {$P_1$};
+                \draw[->, blue] (C) to [bend left=90] (A);
+                \node[blue] (1) at (1/2, 1.4) {$R_{-\frac{2\pi}{3}}$};
+            \end{tikzpicture}
+        \end{minipage}
+    \end{center}
+
+    In particular, we can always assume that the first person is already sitting, hence we only need to compute the possible configurations of the remaining $N - 1$ people.
+
+\vspace{.5em}
+
+	It is easy to notice that the second friend ($P_2$) has $N - 1$ possible spots to sit at; the third friend ($P_3$) has $N - 2$, and so on. The $k$-th friend ($P_k$) has $N - k + 1$ possibilities. It turns out that the number of configurations obtained in this way is given by
+\[
+(N - 1)(N - 2) \dots 1 = (N - 1)!
+\]
+but this does not satisfy all the requirements of the problem. Indeed, since we consider two configurations equal if and only if everyone sits next to the same people, whether on the right or the left, then the number of configurations is
+\finalanswer{\frac{(N - 1)!}{2}}
+To prove this, we notice that, given a configuration, there exists one and only one equal configuration obtained by switching the person sitting on the right of $P_1$ with the person sitting on the left of $P_1$, and so on for everyone else (depending on $N$ being even or odd):
+
+	    \begin{center}
+        \begin{minipage}{.25\textwidth}
+            \begin{tikzpicture}
+                \draw (0,0) circle (1cm);
+                \draw (1, 0) circle (0.05cm) node[right] {$P_1$};
+                \fill[blue] (1, 0) circle (0.05cm);
+                \draw (0, 1) circle (0.05cm) node[above] {$P_2$};
+                \fill[blue] (0, 1) circle (0.05cm);
+                \draw (0, -1) circle (0.05cm) node[below] {$P_3$};
+                \fill[blue] (0, -1) circle (0.05cm);
+                \draw (-1, 0) circle (0.05cm) node[left] {$P_4$};
+                \fill[blue] (-1, 0) circle (0.05cm);
+            \end{tikzpicture}
+        \end{minipage}
+        \quad = \quad
+        \begin{minipage}{.25\textwidth}
+            \begin{tikzpicture}
+                \draw (0,0) circle (1cm);
+                \draw (1, 0) circle (0.05cm) node[right] {$P_1$};
+                \fill[blue] (1, 0) circle (0.05cm);
+                \draw (0, 1) circle (0.05cm) node[above] {$P_3$};
+                \fill[blue] (0, 1) circle (0.05cm);
+                \draw (0, -1) circle (0.05cm) node[below] {$P_2$};
+                \fill[blue] (0, -1) circle (0.05cm);
+                \draw (-1, 0) circle (0.05cm) node[left] {$P_4$};
+                \fill[blue] (-1, 0) circle (0.05cm);
+            \end{tikzpicture}
+        \end{minipage}
+    \end{center}
+    
+    \captionof{figure}{The unique equal configuration in the simple case of $N = 4$.}
+    
+    \begin{center}
+        \begin{minipage}{.40\textwidth}
+        \begin{tikzpicture}
+            \draw (0,0) circle (2cm);
+            \draw (2, 0) circle (0.05cm) node[right] {$P_1$};
+            \fill[blue] (2, 0) circle (0.05cm);
+            \draw (-1.8019, -0.8678) circle (0.05cm) node (B) {};
+            \fill[blue]  (-1.8019, -0.8678) circle (0.05cm);
+            \draw (-1.8019, 0.8678) circle (0.05cm) node (B2) {};
+            \fill[blue]  (-1.8019, 0.8678) circle (0.05cm);
+            \draw[->, blue] (B) to [bend left=40] (B2);
+            \draw[->, blue] (B2) to [bend left=20] (B);
+            \draw (1.2470, 1.5637)  circle (0.05cm) node (C) {};
+            \fill[blue]  (1.2470, 1.5637)  circle (0.05cm);
+            \draw (1.2470, -1.5637)  circle (0.05cm) node (D) {};
+            \fill[blue]  (1.2470, -1.5637)  circle (0.05cm);
+            \draw[->, red] (C) to [bend left=20] (D);
+            \draw[->, red] (D) to [bend left=20] (C);
+            \draw (-0.445, -1.9499)  circle (0.05cm) node (E) {};
+            \fill[blue] (-0.445, -1.9499) circle (0.05cm);
+            \draw (-0.445, 1.9499)  circle (0.05cm) node (F) {};
+            \fill[blue]  (-0.445, 1.9499)  circle (0.05cm);
+            \draw[->, cyan] (E) to [bend left=20] (F);
+            \draw[->, cyan] (F) to [bend left=20] (E);
+        \end{tikzpicture}
+    \end{minipage}
+    \quad
+    \begin{minipage}{.40\textwidth}
+        \begin{tikzpicture}
+            \draw (0,0) circle (2cm);
+            \draw (2, 0) circle (0.05cm) node[right] {$P_1$};
+            \fill[blue] (2, 0) circle (0.05cm);
+            \draw (-1, -1.7321) circle (0.05cm) node (B) {};
+            \fill[blue]  (-1, -1.7321) circle (0.05cm);
+            \draw (-1, 1.7321) circle (0.05cm) node (B2) {};
+            \fill[blue]  (-1, 1.7321) circle (0.05cm);
+            \draw[->, blue] (B) to [bend left=20] (B2);
+            \draw[->, blue] (B2) to [bend left=20] (B);
+            \draw (1, -1.7321) circle (0.05cm) node (C) {};
+            \fill[blue]  (1, -1.7321) circle (0.05cm);
+            \draw (1, 1.7321) circle (0.05cm) node (D) {};
+            \fill[blue]  (1, 1.7321) circle (0.05cm);
+            \draw[->, red] (C) to [bend left=20] (D);
+            \draw[->, red] (D) to [bend left=20] (C);
+            \draw (-2, 0)  circle (0.05cm) node (E) {};
+            \fill[blue] (-2, 0) circle (0.05cm);
+        \end{tikzpicture}
+    \end{minipage}
+    \end{center}
+    \captionof{figure}{On the left, the case $N$ odd. On the right, the case $N$ even.}
+
+\end{solutionBox}
+
+
+\begin{exerciseBox}
+\textbf{Exercise.} Find the solutions $z \in \C$ of the equation
+\[
+z^3 + |z|^2 - 12 = 0
+\]
+\end{exerciseBox}
+
+
+\begin{solutionBox} 
+Let $z = x + \imath y$ with $x, y \in \R$. Then
+\[
+z^3 + |z|^2 - 12 = 0 \iff (x + \imath y)^3 + (x^2 + y^2) - 12 = 0.
+\]
+The cubic term can be computed explicitly as follows:
+\[
+(x + \imath y)^3 = x^3 - 3 x y^2 + \imath( 3x^2y - y^3 ),
+\]
+and thus, taking the real and imaginary part separately, it suffices to solve the following system of real-valued equations:
+\begin{equation*} \begin{cases}x^3 - 3xy^2 + x^2 + y^2 - 12 = 0, \\ 3x^2 y - y^3 = 0. \end{cases}\end{equation*}
+The second equation is easier to deal with since $3x^2 y - y^3 = y(3x^2 - y^2)$. Hence, this leads us to two possible results: either $y = 0$ or $y^2 = 3x^2$.
+\begin{itemize}
+	\item If $y=0$, then the first equation becomes
+\[
+x^3 + x^2 - 12 = 0.
+\]
+A direct computation shows that $x = 2$ is a solution; thus, using the Ruffini's rule, we rewrite the polynomial as follows:
+\[
+x^3 + x^2 - 12 = (x - 2)(x^2 + 3x + 6). 
+\]
+As a consequence, we only need to study the \textbf{real} zeros of the second-order polynomial $x^2 + 3x + 6$. The determinant is given by
+\[
+\Delta = 3^2 - 4 \cdot 6 = 9 - 24 < 0, 
+\]
+which means that the equation $x^2 + 3x + 6 = 0$ does not admit any real solution. In conclusion, the unique solution is $(x, y) = (2, 0)$.
+
+\item If $y^2 = 3x^2$, then the first equation becomes
+\[
+- 8 x^3 + 4 x^2 - 12 = 0 \implies -2x^3 + x^2 - 3 = 0.
+\]
+Again, a direct computation shows that $x = -1$ is a solution; hence, using the Ruffini's rule, we obtain:
+\[
+-2x^3 + x^2 - 3 = (x + 1)(-2x^2 + 3x - 3).
+\]
+As a consequence, we only need to study the \textbf{real} zeros of the second-order polynomial $-2x^2 + 3x - 3$. The determinant is given by
+\[
+\Delta = 3^2 - 4 \cdot ((-2) \cdot (-6)) = 9 - 24 < 0,
+\]
+which means that the equation $-2x^2 + 3x - 3 = 0$ does not admit any real solution. In conclusion, the unique solutions here are $(x_{1,2}, y_{1,2}) = (-1, \pm \sqrt{3})$.
+\end{itemize}
+
+Putting everything together, we showed that the solutions of the complex equation are
+\finalanswer{z_1 = 2, \quad z_{2,3} = - 1 \pm \imath \sqrt3}
+
+In the Gauss plane, they represent a regular triangle inscribed into a circumference of radius $2$ and center the origin:
+
+\begin{center}
+        \mbox{%
+\begin{tikzpicture}
+\draw (0, 0) circle (2cm); 
+\draw[->,thin] (-3.3,0)--(3.3,0) node[right]{$\mathfrak{Re}(z)$};
+\draw[->,thin] (0, -2.3)--(0,2.3) node[right]{$\mathfrak{Im}(z)$};
+[anchor=mid west,
+  mark size=+2pt, mark color=red,  ball color=green]
+  \foreach \plm[count=\cnt] in {ball}
+    \draw[mark options={fill=red}]
+      plot[mark=\plm] coordinates {(2, 0) (-1, 1.732) (-1, -1.732) (2,0)} node{};
+      \node[above] at (2, 0) {$\mathbf{z_1}$};
+      \node[above] at (-1, 1.732) {$\mathbf{z_2}$};
+      \node[below] at (-1, -1.732) {$\mathbf{z_3}$};
+\end{tikzpicture}
+}
+\end{center}
+\end{solutionBox}
+
+
+
+\begin{exerciseBox}
+\textbf{Exercise.} Find the solutions $z \in \C$ of the equation
+\[
+2z^2 + 3 \sqrt{2}(1 - \imath)z - 4 \imath = 0
+\]
+\end{exerciseBox}
+
+\begin{solutionBox} 
+	Let $z = x + \imath y$ for $x, y \in \R$. Then
+\[
+2z^2 + 3 \sqrt{2}(1 - \imath)z - 4 \imath = 0 \iff 2(x + \imath y)^2 + 3 \sqrt{2}(1 - \imath)(x + \imath y) - 4\imath = 0.
+\]
+A simple computation yields to
+\[
+2x^2 - 2y^2 + 4\imath xy + 3 \sqrt{2}(x + y) + 3 \sqrt{2} \imath(y - x) - 4\imath = 0,
+\]	
+which, taking the real and imaginary part separately, is equivalent to solving the following system:
+\[
+\begin{cases}2(x^2 - y^2) + 3 \sqrt{2}(x + y) = 0, \\ 4xy + 3 \sqrt{2}(y - x) - 4 = 0. \end{cases}
+\]
+The first equation is easier to deal with because we can apply the decomposition $a^2 - b^2 = (a + b)(a - b)$ and factor out $(x + y)$ as follows:
+\begin{equation*}2(x^2 - y^2) + 3 \sqrt{2}(x + y) = (x + y)\left[ 2(x - y) + 3 \sqrt{2} \right] = 0 \iff \begin{cases} x = - y, \\ x = y - \frac{3 \sqrt{2}}{2}.\end{cases} \end{equation*}
+
+\begin{itemize}
+	\item If $x=-y$, then the second equation becomes
+\begin{equation*}-4x^2 - 6 \sqrt{2}x - 4 = 0 \implies 2x^2 + 3 \sqrt{2}x + 2 = 0, \end{equation*}
+and it is easy to see that the determinant is given by
+\begin{equation*}\Delta = (3 \sqrt{2})^2 - 4 \cdot 4 = 2. \end{equation*}
+The equation admits two distinct real solutions, namely:
+\begin{equation*}x_{1, 2} = \frac{- 3 \sqrt{2} \pm \sqrt{\Delta}}{4} = \frac{-3 \sqrt{2} \pm \sqrt{2}}{4}, \end{equation*}
+which means that the solutions to the system are:
+\begin{equation*} (x_1, y_1) = ( - \sqrt{2}, \sqrt{2} ) \quad \text{and} \quad  (x_2, y_2) = ( - \frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2} ). \end{equation*}
+
+\item If $x = y + 3/\sqrt 2$, then the second equation becomes
+\begin{equation*}4y^2 - 6 \sqrt{2} y + 5 = 0. \end{equation*}
+However, the determinant is strictly negative:
+\begin{equation*}\Delta = (6 \sqrt{2})^2 - 4 \cdot 20 = 72 - 80 < 0, \end{equation*}
+hence the equation does not admit any real solution.
+\end{itemize}
+
+In conclusion, the solutions to the complex equation are
+\finalanswer{z_1 = \sqrt{2}(-1 + \imath) \quad \text{and} \quad z_2 = \frac{\sqrt{2}}{2} ( - 1 + \imath )}
+  \end{solutionBox}
+
+
+\begin{exerciseBox}
+\textbf{Exercise.} Find the solutions $(z, w) \in \mathbb{C}^2$ of the complex system:
+\[
+\begin{cases} 
+    z \bar{w} = \imath, \\
+    |z|^2 w + z = 1. 
+\end{cases}
+\]
+\end{exerciseBox}
+
+\begin{solutionBox}
+To solve the system, we make use of some fundamental properties of complex numbers: the modulus $|z|^2$ is $z \bar{z}$, and the conjugate of a product is the product of conjugates, i.e., $\overline{z_1 z_2} = \bar{z}_1 \bar{z}_2$. Starting from the second equation:
+\[
+|z|^2 w + z = 1 \implies z \bar{z} w + z = 1.
+\]
+Next, consider the conjugate of the first equation:
+\[
+z \bar{w} = \imath \implies \bar{z} w = -\imath.
+\]
+Substituting this into the modified second equation:
+\[
+1 = z \underbrace{\bar{z} w}_{= -\imath} + z = z(1 - \imath).
+\]
+From this, we can solve for $z$:
+\[
+z = \frac{1}{1 - \imath}.
+\]
+To express $z$ in the form $a + \imath b$, we multiply both the numerator and denominator by the conjugate of the denominator, $1 + \imath$:
+\[
+z = \frac{1}{1 - \imath} \cdot \frac{1 + \imath}{1 + \imath} = \frac{1 + \imath}{1 - (-1)} = \frac{1 + \imath}{2} = \frac{1}{2}(1 + \imath).
+\]
+Using the conjugated version of the first equation, $\bar{z} w = -\imath$, we find:
+\[
+w = -\imath (\bar{z})^{-1}.
+\]
+Now we need to compute the inverse of $\bar{z}$:
+\[
+\bar{z} = \frac{1}{2}(1 - \imath) \implies \frac{1}{\bar{z}} = \frac{2}{1 - \imath} = \frac{2(1 + \imath)}{(1 - \imath)(1 + \imath)} = 1 + \imath.
+\]
+Thus:
+\[
+w = -\imath (1 + \imath).
+\]
+Simplifying the expression for $w$:
+\[
+w = -\imath^2 - \imath = 1 - \imath.
+\]
+The solution to the system is:
+\finalanswer{(z, w) = \left( \frac{1}{2}(1 + \imath), \, 1 - \imath \right) \in \mathbb{C}^2.}
+\end{solutionBox}
+
+
+\begin{exerciseBox}
+\textbf{Exercise.} Compute the supremum
+\[
+\sup \left\{ \frac{n!}{n^n} \: : \: n \in \mathbb{N}_{\geq 1} \right\}.
+\]
+\end{exerciseBox}
+
+\begin{solutionBox}
+Denote by $a_n$ the $n$-th term of the set above:
+\[
+a_n := \frac{n!}{n^n} \quad \text{for $n \geq 1$ and $n \in \mathbb{N}$}.
+\]
+To understand the behavior of the sequence $a_n$ as $n \to + \infty$, we will explore two methods. 
+
+\begin{itemize}
+\item Recall the Stirling's approximation:
+\[
+n! \sim \sqrt{2 \pi n} \left( \frac{n}{\mathrm{e}} \right)^n \quad \text{as $n \to + \infty$}.
+\]
+Using this approximation, we find:
+\[
+\lim_{n \to + \infty} a_n = \lim_{n \to + \infty} \frac{n!}{n^n} = \lim_{n \to + \infty} \frac{\sqrt{2 \pi n} \left( \frac{n}{\mathrm{e}} \right)^n}{n^n} = \sqrt{2 \pi} \lim_{n \to + \infty} n^{\frac{1}{2}} \mathrm{e}^{-n} = 0.
+\]
+\item Using the definition of the factorial:
+\[
+a_n = \frac{n!}{n^n} = \frac{n(n-1)(n-2) \dots 1}{n \cdot n \cdots n} = 1 \cdot \frac{n-1}{n} \cdot \frac{n-2}{n} \dots \frac{1}{n} \leq \frac{1}{n}.
+\]
+Thus:
+\[
+\lim_{n \to + \infty} a_n \leq \lim_{n \to + \infty} \frac{1}{n} = 0 \implies \lim_{n \to + \infty} a_n = 0.
+\]
+
+\end{itemize}
+Since the limit as $n \to + \infty$ is zero, we check if the sequence $a_n$ is decreasing:
+\[
+\text{$a_n$ decreasing for $n \in \mathbb{N}$} \implies \sup \{ a_n \: : \: n \geq 1, \, n \in \mathbb{N} \} = a_1.
+\]
+Calculating the ratio between consecutive terms:
+\[
+\frac{a_{n+1}}{a_n} = \frac{(n + 1)!}{(n + 1)^{n + 1}} \frac{n^n}{n!} = \left( \frac{n}{n + 1} \right)^n < 1.
+\]
+Thus, $a_n$ is decreasing, and the supremum is:
+\finalanswer{\sup \left\{ \frac{n!}{n^n} \: : \: n \in \mathbb{N}_{\geq 1} \right\} = a_1 = 1}
+\end{solutionBox}
+
+\begin{exerciseBox}
+\textbf{Exercise.} Find the domain of the function:
+\[
+f(x) := \left| 1 - \log \left| \log | \sin(x) | \right| \right|.
+\]
+\end{exerciseBox}
+
+\begin{solutionBox}
+The function:
+\[
+x \longmapsto | \sin(x) |
+\]
+takes values in $[0, 1]$, and the logarithm $\log(y)$ is defined for $y > 0$. Thus, we must avoid points where $\sin(x) = 0$:
+\[
+\sin(x) = 0 \iff x = k \pi \quad \text{for every $k \in \mathbb{Z}$}.
+\]
+Therefore, the function:
+\[
+g(x) := \log \left| \sin(x) \right|
+\]
+is defined on $\mathbb{R} \setminus \{ k \pi : k \in \mathbb{Z} \}$. For:
+\[
+x \longmapsto \log \left| g(x) \right|
+\]
+to be well-defined, $g(x) \neq 0$, implying:
+\[
+|\sin(x)| \neq 1 \iff x \neq \frac{\pi}{2} + k \pi.
+\]
+Thus:
+\[
+h(x) := \log \left| g(x) \right|
+\]
+is defined on $\mathbb{R} \setminus \{ k \frac{\pi}{2} : k \in \mathbb{Z} \}$. The domain of $f(x)$ is:
+\finalanswer{\mathrm{dom}(f) = \mathbb{R} \setminus \left\{ k \frac{\pi}{2} : k \in \mathbb{Z} \right\}}
+\end{solutionBox}
+
+\begin{exerciseBox}
+\textbf{Exercise.} Compute the limit:
+\[
+\lim_{x \to + \infty} \left( \log(x+3) - \log(x + 2) \right)^\frac{4}{\log(x)}.
+\]
+\end{exerciseBox}
+
+\begin{solutionBox}
+Recall that the exponential is the inverse of the logarithm, and:
+\[
+\lim_{y \to 0} \frac{\log(1 + y)}{y} = 1.
+\]
+Thus:
+\[
+\lim_{x \to + \infty} \left( \log(x+3) - \log(x + 2) \right)^\frac{4}{\log(x)} = \mathrm{e}^{\lim_{x \to + \infty} \frac{4}{\log(x)} \log \left[ \log(x+3) - \log(x + 2) \right]}.
+\]
+It suffices to compute the limit of the exponent:
+\[
+\Diamond := 4 \lim_{x \to + \infty} \frac{\log \left[ \log(x+3) - \log(x + 2) \right]}{\log(x)}.
+\]
+Simplifying, we find:
+\[
+\Diamond = -4.
+\]
+Thus:
+\finalanswer{\lim_{x \to + \infty} \left( \log(x+3) - \log(x + 2) \right)^\frac{4}{\log(x)} = \mathrm{e}^{-4}}
+\end{solutionBox}
+
+
+\begin{exerciseBox}
+\textbf{Exercise.} Find the order of infinitesimal as $x \to 0$ of the function
+\[
+f(x) := \tan(x) \left(1 - \cos^3(x^2) \right)^2
+\]
+\end{exerciseBox}
+
+\begin{solutionBox} 
+The idea is to exploit the simple known limits 
+\[ \begin{aligned} & \mathbf{(A)} \: : \: \lim_{y \to 0} \left[ \frac{\sin(y)}{y} \right]^2 = 1,
+\\[1em] &\mathbf{(B)} \: : \: \lim_{y \to 0} \frac{\tan(y)}{y} = 1,
+\\[1em] &\mathbf{(C)} \: : \: \lim_{y \to 0} \frac{1 - \cos(y)}{y^2} = \frac{1}{2}. \end{aligned}
+\]
+In fact, from the fundamental trigonometric identity it follows that
+\[
+1 - \cos^3(x^2) = 1 - \cos(x^2)(1 - \sin^2(x^2)) = 1 - \cos(x^2) + \cos(x^2) \sin^2(x^2),
+\]
+and therefore
+\[
+\lim_{x \to 0} \frac{1 - \cos^3(x^2)}{x^4} = \lim_{x \to 0}  \frac{1 - \cos(x^2)}{x^4} + \lim_{x \to 0} \cos(x^2) \frac{\sin^2(x^2)}{x^4}.
+\]
+The first limit can be computed using $\mathbf{(C)}$ with $y := x^2$, while the second limit follows from $\mathbf{(A)}$ with $y := x^2$ and the fact that $\cos(0) = 1$. Then
+\begin{equation*}\lim_{x \to 0} \frac{1 - \cos^3(x^2)}{x^4} = \frac{3}{2}, \end{equation*}
+which means that
+\begin{equation*}\lim_{x \to 0} \frac{f(x)}{x^9} =\lim_{x \to 0} \frac{\tan(x)}{x} \cdot \lim_{x \to 0} \left(\frac{1 - \cos^3(x^2)}{x^4} \right)^2 = 1 \cdot \frac{9}{4} = \frac{9}{4}.\end{equation*}
+We conclude that
+\finalanswer{\mathrm{ord}_0(f) = 9.}
+\end{solutionBox}
+
+\begin{exerciseBox}
+\textbf{Exercise.} Order the following sequence
+\[
+a_n := n! \qquad b_n := n^n 5^{-n} \qquad c_n := \binom{2n}{n}
+\]
+according to their order of infinite.\end{exerciseBox}
+
+\begin{solutionBox}
+The first comparison follows immediately from Stirling's formula since
+\begin{equation*} \lim_{n \to + \infty} \frac{a_n}{b_n} =\lim_{n to + \infty} \frac{\sqrt{2 \pi n} \left( \frac{n}{\mathrm{e}} \right)^n}{n^n 5^{-n}} = \sqrt{2 \pi} \lim_{n \to + \infty} n^{\frac{1}{2}} \left( \frac{5}{e} \right)^n = + \infty, \end{equation*}
+which means that $\mathrm{ord}_\infty(a_n) > \mathrm{ord}_\infty(b_n)$. Note that in the last equality we used the limit
+\begin{equation*} \lim_{n \to + \infty}  \left( \frac{a}{b} \right)^n = \begin{cases} 0 & \text{if $0 \leq \frac{a}{b} < 1$}, \\[0.5em] 1 & \text{if $\frac{a}{b} = 1$}, \\[0.5em] + \infty & \text{if $\frac{a}{b} > 1$}. \end{cases} \end{equation*}
+Recall now that the binomial is defined as
+\begin{equation*} \binom{n}{k} := \frac{n!}{(n - k)! k!},\end{equation*}
+and, together with Stirling's formula, this implies that
+\begin{equation*} \binom{2n}{n} = \frac{2n(2n - 1) \dots (n + 1)}{n!} \sim \frac{1}{\sqrt{\pi n}} (2n)^{n} \mathrm{e}^n.\end{equation*}
+It follows that
+\begin{equation*} \lim_{n \to + \infty} \frac{b_n}{c_n} =\lim_{n \to + \infty} \frac{n^n}{5^n} \frac{\sqrt{\pi n}}{(2n)^{n} \mathrm{e}^n} = \sqrt{\pi} \lim_{n\to + \infty} \left( \frac{n}{10 \mathrm{e}}\right)^n = + \infty,\end{equation*}
+which means that $\mathrm{ord}_\infty(b_n) > \mathrm{ord}_\infty(c_n)$. We conclude that
+\finalanswer{\mathrm{ord}_\infty(a_n) > \mathrm{ord}_\infty(b_n) > \mathrm{ord}_\infty(c_n)}
+\end{solutionBox}
+
+
+\begin{exerciseBox}Compute the limit
+\[
+\lim_{x \to 0^+} \frac{\log(x^x + 1 - \cos(x))}{x \log(x)}
+\]
+\end{exerciseBox}
+
+\begin{solutionBox}
+First, we factor out the $x^x$ term in the logarithm and apply the usual property $\log(ab) = \log(a) + \log(b)$. Namely, we have
+\begin{equation*}\log(x^x + 1 - \cos(x)) =  \log\left( x^x(1 + \frac{1 - \cos(x)}{x^x}) \right) = \log(x^x) + \log \left( \frac{1 - \cos(x)}{x^x} + 1 \right),\end{equation*}
+which implies that
+\begin{equation*}\lim_{x \to 0^+} \frac{\log(x^x + 1 - \cos(x))}{x \log(x)} = \lim_{x \to 0^+} \underbracket{\frac{\log(x^x)}{x \log(x)}}_{= 1} + \underbracket{\lim_{x \to 0^+} \frac{\log \left( \frac{1 - \cos(x)}{x^x} + 1 \right)}{x \log(x)}}_{=: \Diamond}. \end{equation*}
+Notice that
+\begin{equation*} \lim_{x \to 0^+} \frac{1 - \cos(x)}{x^x} = \lim_{x \to 0^+} \frac{1-\cos(x)}{x^2} \cdot \lim_{x \to 0^+} x^{2-x} = \frac{1}{2} \cdot 0,\end{equation*}
+therefore the numerator of the limit $\Diamond$ has the form $\log(1 + f(x))$ with $f(x) \to 0$. To compute it explicitly, we multiply and divide by $f(x)$ obtaining
+\begin{equation*}\begin{aligned} \Diamond & = \lim_{x \to 0^+} \frac{\log \left( \frac{1 - \cos(x)}{x^x} + 1 \right)}{x \log(x)} \frac{ \frac{1 - \cos(x)}{x^x} }{\frac{1 - \cos(x)}{x^x}} =
+\\[1em] & = \lim_{x \to 0^+} \frac{\log \left( \frac{1 - \cos(x)}{x^x} + 1 \right)}{\frac{1 - \cos(x)}{x^x}} \cdot \lim_{x \to 0^+} \frac{ \frac{1 - \cos(x)}{x^x} }{x \log(x)} =
+\\[1em] & = \lim_{x \to 0^+} \frac{\log \left( \frac{1 - \cos(x)}{x^x} + 1 \right)}{\frac{1 - \cos(x)}{x^x}} \cdot \lim_{x \to 0^+}  \frac{1 - \cos(x)}{x^2} \cdot \lim_{x \to 0^+} \frac{x^{1-x}}{ \log(x)} =
+\\[1em] & = 1 \cdot \frac{1}{2} \cdot \lim_{x \to 0^+} \frac{x^{1-x}}{\log(x)} = 0 \end{aligned} \end{equation*}
+since the third limit is not an indeterminate form, but $[0/\infty]$, which is equal to $0$. We conclude that the value of the limit is given by
+\finalanswer{\lim_{x \to 0^+} \frac{\log(x^x + 1 - \cos(x))}{x \log(x)} = 1 + \Diamond = 1}
+\end{solutionBox}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Limits of functions and recursive sequences}
+
+\begin{exerciseBox}\textbf{Exercise.} Compute the limit
+\begin{equation*} \lim_{x \to 0} \frac{\sin x - \tan x + x^2}{x^2 + \log(1 + x)}. \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} 
+We first find the value of the limit via algebraic manipulations only, and then we show how the same result can be obtained quickly using only Taylor's expansions.
+
+\paragraph{Main Method} First, factor out $x$ from both the numerator and the denominator so that
+\begin{equation*} \Diamond := \lim_{x \to 0} \frac{\sin x - \tan x + x^2}{x^2 + \log(1 + x)} = \lim_{x \to 0} \frac{\frac{\sin x - \tan x}{x} + x}{x + \frac{\log(1 + x)}{x}}. \end{equation*}
+Next, recall that the limit of a sum is equal to the sum of the limits (provided that, e.g., both exists and are finite). Therefore, we have
+\begin{equation*} \Diamond =  \lim_{x \to 0} \frac{\frac{\sin x}{x}}{x + \frac{\log(1 + x)}{x}} + \lim_{x \to 0} \frac{x}{x + \frac{\log(1 + x)}{x}} -  \lim_{x \to 0} \frac{\frac{\tan x}{x}}{x + \frac{\log(1 + x)}{x}}=: \Diamond_1 + \Diamond_2 - \Diamond_3, \end{equation*}
+provided that $\Diamond_1 + \Diamond_2 - \Diamond_3$ is not an indeterminate form. Note that
+\begin{equation*} \Diamond_1 =  \lim_{x \to 0} \frac{\frac{\sin x}{x}}{x + \frac{\log(1 + x)}{x}} = 1 = \Diamond_3, \end{equation*}
+as a consequence of the known limits
+\begin{equation*} \lim_{x \to 0} \frac{\log(1 + x)}{x} = 1 \quad \text{and} \quad \lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{\tan x}{x} = 1. \end{equation*}
+On the other hand, we have
+\begin{equation*} \Diamond_2 =  \lim_{x \to 0} \frac{x}{x + \frac{\log(1 + x)}{x}} = \frac{0}{1} = 0, \end{equation*}
+which means that
+\finalanswer{\lim_{x \to 0} \frac{\sin x - \tan x + x^2}{x^2 + \log(1 + x)} = \Diamond_1 - \Diamond_3 = 0}
+
+\paragraph{Alternative Method} The Taylor expansions, up to the second order, of the functions inside the limit are the following ones:
+\begin{equation*}  \tan x \sim x, \qquad \sin x \sim x, \qquad  \log(1 + x) \sim x - \frac{x^2}{2}. \end{equation*}
+Then, it turns out that
+\begin{equation*}  \lim_{x \to 0} \frac{\sin x - \tan x + x^2}{x^2 + \log(1 + x)} = \lim_{x \to 0} \frac{x - x + x^2}{x^2 + x - \frac{x^2}{2}} = \lim_{x \to 0} \frac{x^2}{x(1 + \frac{x}{2})} = 0. \end{equation*}
+\end{solutionBox}
+
+
+\begin{exerciseBox}\textbf{Exercise.} Compute the limit
+\[
+\lim_{x \to \pi/2} \left( 1 + \frac{1}{\tan x} \right)^{ \frac{1}{x - \pi/2} }
+\]
+\end{exerciseBox}
+
+\begin{solutionBox} 
+The main idea here is to manipulate the expression, and end up with something that resembles the known limit
+\begin{equation*} \lim_{x \to 0} \left(1 + a x \right)^{\frac{b}{x}} = \mathrm{e}^{ab}.\end{equation*}
+First, recall that
+\begin{equation*} \tan \left( x - \frac{\pi}{2} \right) = \frac{\sin \left( x - \frac{\pi}{2} \right)}{\cos \left( x - \frac{\pi}{2} \right)} = \frac{\cos(x)}{-\sin(x)} = - \frac{1}{\tan(x)}.\end{equation*}
+Set $y := x - \pi/2$, and plug it into the limit. It turns out that
+\begin{equation*} \begin{aligned} \lim_{x \to \pi/2} \left( 1 + \frac{1}{\tan x} \right)^{ \frac{1}{x - \pi/2} } & =  \lim_{y \to 0} \left( 1 - \tan y \right)^{ \frac{1}{y} }
+\\ & =  \lim_{y \to 0}\left[ \left( 1 - \tan y \right)^{ \frac{1}{\tan y} } \right]^{\frac{\tan y}{y}}
+\\ & = \mathrm{e}^{ \lim_{y \to 0} \frac{\tan y}{y} \cdot \lim_{y \to 0} \log\left[ \left( 1 - \tan y \right)^{ \frac{1}{\tan y} } \right]}
+\\ & = \mathrm{e}^{ \lim_{y \to 0} \frac{\tan y}{y} \cdot \lim_{y \to 0} \frac{ \log \left( 1 - \tan y \right)}{\tan y}}  = \mathrm{e}^{-1}, \end{aligned} \end{equation*}
+as a consequence of the following known limits:
+\begin{equation*} \lim_{x \to 0} \frac{\log(1 - x)}{x} = - 1 \quad \text{and} \quad \lim_{x \to 0} \frac{\tan x}{x} = 1. \end{equation*}
+In conclusion, the value of the limit is given by
+\finalanswer{\lim_{x \to \pi/2} \left( 1 + \frac{1}{\tan x} \right)^{ \frac{1}{x - \pi/2} } = \mathrm{e}^{-1}}
+\end{solutionBox}
+
+\begin{exerciseBox}
+\textbf{Exercise.} Compute the limit
+\begin{equation*} \lim_{x \to 1}  \frac{\mathrm{e}^x - \mathrm{e}}{1 - \sqrt{x}}. \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} 
+The main idea here is to manipulate the expression, and next exploit a known limit:
+\begin{equation*} \lim_{x \to 0} \frac{\mathrm{e}^x - 1}{x}.\end{equation*}
+We first factor $\mathrm{e}$ out of the numerator, so that
+\begin{equation*} \lim_{x \to 1}  \frac{\mathrm{e}^x - \mathrm{e}}{1 - \sqrt{x}} = \mathrm{e} \cdot \lim_{x \to 1} \frac{\mathrm{e}^{x-1} - 1}{1 - \sqrt{x}}, \end{equation*}
+and then we rationalize by multiplying both the numerator and the denominator by $1 + \sqrt{x}$, obtaining the following expressions:
+\begin{equation*} \lim_{x \to 1}  \frac{\mathrm{e}^x - \mathrm{e}}{1 - \sqrt{x}} = \mathrm{e} \cdot \lim_{x \to 1} \frac{\mathrm{e}^{x-1} - 1}{1 - x} \left(1 + \sqrt{x} \right) = - \mathrm{e} \cdot \lim_{x \to 1} \frac{\mathrm{e}^{x-1} - 1}{x - 1} \left(1 + \sqrt{x} \right). \end{equation*}
+Recall now that the limit of a product is the product of the limits, provided that both exists and their product is not an indeterminate form. It turns out that
+\begin{equation*} \lim_{x \to 1}  \frac{\mathrm{e}^x - \mathrm{e}}{1 - \sqrt{x}} = - \mathrm{e} \cdot \lim_{x \to 1} \frac{\mathrm{e}^{x-1} - 1}{x - 1} \cdot \lim_{x \to 1} \left(1 + \sqrt{x} \right), \end{equation*}
+and we notice that the first limit can be easily computed by setting $y := x - 1$ since
+\begin{equation*} \lim_{y \to 0} \frac{\mathrm{e}^{y} - 1}{y} = 1. \end{equation*}
+Therefore, the value of the limit is given by:
+\finalanswer{\lim_{x \to 1}  \frac{\mathrm{e}^x - \mathrm{e}}{1 - \sqrt{x}} = - 2\mathrm{e}}
+\end{solutionBox}
+
+\begin{exerciseBox}\textbf{Exercise.} Compute the limit
+\begin{equation*} \lim_{x \to 0^+} \left( 1 + \frac{\sin x}{\sqrt{x}} \right)^{ \frac{1}{\tan x} } \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} The idea here is, once again, to manipulate the expression and end up with something that resembles a known limit such as:
+\begin{equation*} \lim_{x \to 0} \left(1 + a x \right)^{\frac{b}{x}} = \mathrm{e}^{ab}.\end{equation*}
+Notice that
+\begin{equation*} \lim_{x \to 0^+} \frac{\sin x}{\sqrt{x}} = \lim_{x \to 0^+} \frac{x}{\sqrt{x}} = 0, \end{equation*}
+which means that we only need to look at the exponent. More precisely, we multiply and divide the exponent by the same quantity $\frac{\sqrt{x}}{\sin x}$, obtaining:
+\begin{equation*} \lim_{x \to 0^+} \left( 1 + \frac{\sin x}{\sqrt{x}} \right)^{ \frac{1}{\tan x} } = \lim_{x \to 0^+} \left[\left( 1 + \frac{\sin x}{\sqrt{x}} \right)^{ \frac{\sqrt{x}}{\sin x} } \right]^{\frac{\sin x}{ \sqrt{x} \tan x}} \end{equation*}
+On the other hand, the limit of the exponent is given by
+\begin{equation*} \lim_{x \to 0^+} \frac{\sin x}{ \sqrt{x} \tan x} = \lim_{x \to 0^+} \frac{1}{\sqrt{x}} = + \infty, \end{equation*}
+which means that the value of the limit is
+\finalanswer{\lim_{x \to 0^+} \left( 1 + \frac{\sin x}{\sqrt{x}} \right)^{ \frac{1}{\tan x} } = \mathrm{e}^{+ \infty} = + \infty}
+\end{solutionBox}
+
+\begin{exerciseBox}\textbf{Exercise.} Study the behavior of the sequence defined by
+\begin{equation}\label{seq.1} \begin{cases} a_0 = \alpha \geq 0, \\ a_{n + 1} = (1+a_n^2)/2. \end{cases} \end{equation}
+\end{exerciseBox}
+
+\begin{solutionBox} The first property of the sequence \eqref{seq.1} is that, for all value of $\alpha \geq 0$, the terms are all positive, that is,
+\begin{equation*} a_n \geq 0 \quad \text{for all $n \in \N$}. \end{equation*}
+We now distinguish three possible ranges of values for the parameter $\alpha$ for which the behavior of the sequence is different and discuss them:
+
+\begin{itemize}
+	\item If $\alpha = 1$, the sequence is constant since
+\begin{equation*} a_1 = \frac{1 + 1^2}{2} = 1 \implies a_2 = 1 \implies \dots, \end{equation*}
+and therefore the limit of $a_n$ is equal to $1$.
+
+\item If $\alpha \in [0,1)$, then the sequence is increasing and bounded, that is,
+\begin{equation*} a_{n + 1} \geq a_n \quad \text{and} \quad a_n \leq \beta \quad \text{for all $n \in \N$}. \end{equation*}
+We argue by induction (the base case is trivially true). Suppose that the $n$-th term, $a_n$, is bounded by $1$; it turns out that:
+\begin{equation*}a_{n + 1} = \frac{1 + a_n^2}{2} = \frac{1}{2} + \underbracket{\frac{a_n^2}{2}}_{\leq 1/2} \implies a_{n + 1} \leq 1, \end{equation*}
+which proves that $\beta = 1$ suffices. Furthermore, if the limit $\ell_\alpha$ exists, it is equal to
+\begin{equation*}\ell_\alpha = \frac{1 + \ell_\alpha^2}{2} \implies (\ell_\alpha - 1)^2 = 0 \implies \ell_\alpha = 1. \end{equation*}
+To conclude that $\ell_\alpha$ is the actual limit, it remains to prove that for $\alpha \in [0, 1)$ the sequence is increasing. However, this is a simple check since:
+\begin{equation*}a_{n + 1} \geq a_n \iff a_n \leq \frac{1 + a_n^2}{2} \iff (a_n - 1)^2 \geq 0, \end{equation*}
+and the latter is trivially satisfied.
+
+\item If $\alpha > 1$, then the sequence is increasing and bounded from below, i.e.,
+\begin{equation*} a_{n + 1} \geq a_n \quad \text{and} \quad a_n \geq \gamma \quad \text{for all $n \in \N$}. \end{equation*}
+We argue by induction (the base case is trivially true). Suppose that the $n$-th term, $a_n$, is bounded from below by $1$; it turns out that:
+\begin{equation*}a_{n + 1} = \frac{1 + a_n^2}{2} = \frac{1}{2} + \underbracket{\frac{a_n^2}{2}}_{\geq 1/2} \implies a_{n + 1} \geq 1, \end{equation*}
+which proves that $\gamma = 1$ suffices. To conclude we must prove that for $\alpha >1$ the sequence is increasing; as above, we check that
+\begin{equation*}a_{n + 1} \leq a_n \iff a_n \leq \frac{1 + a_n^2}{2} \iff (a_n - 1)^2 \geq 0, \end{equation*}
+and the latter is always satisfied.
+\end{itemize}
+In conclusion, the sequence $a_n$ is nonnegative, increasing for $\alpha \neq 1$, and its limit is:
+\finalanswer{\lim_{n \to + \infty} a_n = \begin{cases} 1 & \text{if $0 \le \alpha \le 1$}, \\ + \infty & \text{if $\alpha >1$}\end{cases}}
+\end{solutionBox}
+
+\begin{exerciseBox}\textbf{Exercise.} Study the behavior of the sequence defined by
+\begin{equation}\label{seq.2} 
+\begin{cases} a_0 = \alpha \geq 0, \\ a_{n + 1} = (n^2 + a_n^2)/(1 + n^2). \end{cases} 
+\end{equation}
+\end{exerciseBox}
+
+\begin{solutionBox} Notice that the sequence defined by \eqref{seq.2} is positive for all $\alpha \geq 0$, i.e.
+\begin{equation*} a_n \geq 0 \quad \text{for all $n \in \N$}. \end{equation*}
+We now distinguish three possible ranges of values for the parameter $\alpha$ for which the behavior of the sequence is different:
+
+\begin{itemize}
+	\item If $\alpha = 1$, then the sequence is constant. Indeed, arguing by induction we note that $a_1=1$ and
+	 \begin{equation*} a_{n} = 1 \implies a_{n + 1} = \frac{n^2 + 1}{1 + n^2} = 1. \end{equation*}
+We conclude that, for $\alpha = 1$, the limit of the sequence $a_n$ is $1$.
+
+\item If $0 \le \alpha < 1$, then the sequence is increasing and bounded, that is,
+\begin{equation*} a_{n + 1} \geq a_n \quad \text{and} \quad a_n \leq \beta \quad \text{for all $n \in \N$}. \end{equation*}
+We argue by induction. The base case is trivial, so assume that the $n$-th term, $a_n$, is bounded by $1$; it turns out that:
+\begin{equation*}a_{n + 1} = \frac{n^2 + a_n^2}{1 + n^2} \leq \frac{1 + n^2}{1 + n^2} = 1, \end{equation*}
+which means that $\beta = 1$ suffices. Furthermore, if the limit $\ell_\alpha$ exists, it satisfies
+\begin{equation*}\ell_\alpha = \lim_{n \to + \infty} \frac{n^2 + a_n^2}{1 + n^2} \leq \lim_{n \to + \infty} \frac{n^2 + 1}{1 + n^2} = 1. \end{equation*}
+Therefore, we only need to show that the sequence is increasing. First, we notice that
+\begin{equation*}a_{n + 1} \geq a_n \iff a_n^2 - (1 + n^2) a_n + n^2 \geq 0.\end{equation*}
+The determinant of the second-order polynomial (w.r.t. $a_n$) is given by
+\begin{equation*}(1 + n^2)^2 - 4n^2 = (1 - n^2)^2 \geq 0 \quad \text{for all $n \in \N$},\end{equation*}
+which means that the inequality above is satisfied for
+\begin{equation*}a_n \leq 1 \quad \text{or} \quad a_n \geq n^2.\end{equation*}
+This is enough because, as shown above, the sequence satisfies $a_n \le 1$.
+
+\item If $\alpha > 1$, then the sequence is decreasing and bounded from both below and above, i.e.,
+\begin{equation*} a_{n + 1} \leq a_n \quad \text{and} \quad \delta \geq a_n \geq \gamma \quad \text{for all $n \in \N$}. \end{equation*}
+We argue by induction. Suppose that the $n$-th term, $a_n$, is bounded from below by $1$ and above by $2$; it turns out that
+\begin{equation*}2 \geq \frac{n^2 + 4}{1 + n^2} \geq a_{n + 1} = \frac{n^2 + a_n^2}{1 + n^2} \geq \frac{n^2 + 1}{1 + n^2} = 1 \quad \text{for all $n \in \N$}, \end{equation*}
+which means that $\gamma = 1$ and $\delta = 2$. Therefore, the argument used in the previous step proves that, for $\alpha > 1$, the sequence is decreasing because
+\begin{equation*}n \geq 2 \implies a_n \leq 2 \implies a_n \in (1, \, n^2) \implies a_n^2 - (1 + n^2) a_n + n^2 \leq 0. \end{equation*}
+Therefore, the limit $\ell_\alpha$ exists, and it is equal to
+\begin{equation*}\ell_\alpha = \lim_{n \to + \infty} \frac{n^2 + a_n^2}{1 + n^2} \leq \lim_{n \to + \infty} \frac{n^2 + 1}{1 + n^2} = 1. \end{equation*}
+\end{itemize}
+
+In conclusion, the sequence $a_n$ is nonnegative, increasing for $\alpha \in (0, \, 1)$ and decreasing for $\alpha \in (1, \, + \infty)$, and its limit is given by
+ \finalanswer{\lim_{n \to + \infty} a_n =1}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Study the behavior of the sequence defined by
+\begin{equation}\label{seq.3} \begin{cases} a_0 = \alpha \geq 0, \\ a_{n + 1} = a_n/(1+a_n). \end{cases} \end{equation}
+\end{exerciseBox}
+
+\begin{solutionBox}
+The sequence \eqref{seq.3}, for every $\alpha \geq 0$, is non-negative, that is,
+\begin{equation*} a_n \geq 0 \quad \text{for all $n \in \N$}. \end{equation*}
+We now distinguish two possible ranges of values for the parameter $\alpha$ for which the behavior of the sequence is different:
+
+\begin{itemize}
+	\item If $\alpha = 0$, then the sequence is constantly equal to zero since
+\begin{equation*} a_{n} = 0 \implies a_{n + 1} = \frac{0}{1 + 0} = 0. \end{equation*}
+Therefore, we conclude that, for $\alpha = 0$, the limit of the sequence $a_n$ is $0$.
+
+\item If $\alpha > 0$, then the sequence is decreasing and bounded from below, i.e.,
+\begin{equation*} a_{n + 1} \leq a_n \quad \text{and} \quad a_n \geq \beta \quad \text{for all $n \in \N$}. \end{equation*}
+We noted above that the sequence is nonnegative, and therefore the sequence is bounded from below by $\beta = 0$. Furthermore, if the limit $\ell_\alpha$ exists, it is given by
+\begin{equation*}\ell_\alpha = \frac{\ell_\alpha}{\ell_\alpha + 1} \iff \ell_\alpha = 0. \end{equation*}
+Thus, we only need to show that the sequence is decreasing to establish that $\ell_\alpha$ is its actual limit. However, this is a immediate consequence of the following inequality:
+\begin{equation*}a_{n + 1} \leq a_n \iff \frac{a_n}{1 + a_n} \leq a_n \iff a_n^2 \geq 0,\end{equation*}
+and this is always satisfied.
+\end{itemize}
+
+In conclusion, the sequence $a_n$ is nonnegative, decreasing for $\alpha > 0$, and its limit is given by
+\finalanswer{\lim_{n \to + \infty} a_n =0}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Study the behavior of the sequence defined by
+\begin{equation}\label{seq.4} \begin{cases} a_0 = \alpha \in [0, 2], \\ a_{n + 1} =\sqrt{2a_n - a_n^2}. \end{cases} \end{equation}
+\end{exerciseBox}
+
+\begin{solutionBox} As in the previous exercises, the sequence \eqref{seq.4} is non-negative. Additionally, it is well-defined if and only if the argument of $\sqrt{\cdot}$ is positive; in other words:
+\begin{equation*} 2 a_n \geq a_n^2 \quad \text{for all $n \in \N$}. \end{equation*}
+This inequality is satisfied if and only if $a_n \in [0, 2]$ for all $n \in \N$, which is why we require $\alpha$ to be in the same interval. We now distinguish and analyze different ranges of values:
+
+\begin{itemize}
+	\item If $\alpha \in \{0,2\}$, then the sequence is constant (equal to zero). Indeed, we have
+\begin{equation*} a_{n} = 0 \implies a_{n + 1} = \sqrt{0 - 0} = 0 \quad \text{and} \quad a_n = 2 \implies a_{n + 1} = \sqrt{4 - 4} = 0. \end{equation*}
+Therefore, in both cases the limit of the sequence is $0$.
+
+\item If $\alpha = 1$, then the sequence is constant as above, although equal to one. Hence, in this case the limit is $1$.
+
+\item If $0 < \alpha < 1$, we claim that the sequence is increasing and bounded from below by $0$ and above by $1$:
+\begin{equation*}1 \geq a_n \geq 0 \quad \text{for all $n \in \N$}. \end{equation*}
+We already know that $a_n \ge 0$, so we only focus on the upper bound which follows immediately from the trivial inequality:
+\begin{equation*} 2 x - x^2 \geq 1 \iff 0 \geq (x - 1)^2 \iff x = 1. \end{equation*}
+Furthermore, if the limit $\ell_\alpha$ exists, it is given by
+\begin{equation*}\ell_\alpha = \sqrt{2 \ell_\alpha - \ell_\alpha^2} \iff \ell_\alpha = 0 \quad \text{or} \quad \ell_\alpha = 1. \end{equation*}
+Hence, if we can show that the sequence is increasing, then $\ell_\alpha = 1$ will be its actual limit. Indeed, notice that
+\begin{equation*}a_{n + 1} \geq a_n \iff a_n \geq a_n^2,\end{equation*}
+and this is always satisfied if $a_n \in [0, 1]$, as we proved above.
+
+\item If $1 < \alpha < 2$, we claim that, after a single iteration, we fall in the previous case. Indeed, notice that
+\begin{equation*}2 \alpha - \alpha^2 \leq 1 \quad \text{for all $\alpha \in [0,  2]$} \implies a_1 \in [0, 1], \end{equation*}
+and therefore the argument above holds here as well, starting from $a_1$ instead of $a_0$.
+\end{itemize}
+
+In conclusion, the limit of the sequence $a_n$ is given by
+\finalanswer{
+ \lim_{n \to + \infty} a_n = \begin{cases} 0 & \text{if $\alpha \in \{0\} \cup \{2\}$}, \\ 1 & \text{if $\alpha \in (0, 2)$}. \end{cases}}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Order the following sequence
+\begin{equation*}a_n := \binom{2n}{n} \qquad b_n := \binom{3n}{2n} \qquad c_n := (n!)^2\end{equation*}
+according to their order of infinite.\end{exerciseBox}
+
+\begin{solutionBox} Note that the third sequence $c_n$, using Stirling's approximation, is asymptotically equal to
+\begin{equation*} (n!)^2 \sim 2 \pi n \left( \frac{n}{\mathrm{e}} \right)^{2n}. \end{equation*}
+We can also estimate the asymptotic behavior of the binomials using Stirling's approximation since
+\begin{equation*} a_n = \binom{2n}{n} = \frac{(2n)!}{(n!)^2} \stackrel{n \to + \infty}{\sim} \frac{1}{\sqrt{\pi n}} 2^{2n}, \end{equation*}
+and
+\begin{equation*} b_n = \binom{3n}{2n} = \frac{(3n)!}{(2n)! n!} \stackrel{n \to + \infty}{\sim} \frac{1}{\sqrt{\pi n}} \left( \frac{3}{2} \right)^{2n} 3^n. \end{equation*}
+In particular, it turns out that
+\begin{equation*} \lim_{n \to + \infty} \frac{a_n}{b_n} = \lim_{n \to + \infty} \frac{2^{2n}}{\left( \frac{3}{2} \right)^{2n} 3^n} = \lim_{n \to + \infty} \frac{2^{2n+1}}{3^{3n}} = 0,  \end{equation*}
+which means that $\mathrm{ord}_\infty(a_n) < \mathrm{ord}_\infty(b_n)$. Similarly, we see that
+\begin{equation*} \lim_{n \to + \infty} \frac{c_n}{b_n} = \lim_{n \to + \infty} \frac{n^{2n}}{\left( \frac{3}{2} \mathrm{e} \right)^{2n} 3^n} = + \infty,  \end{equation*}
+and therefore $\mathrm{ord}_\infty(c_n) > \mathrm{ord}_\infty(b_n)$. We conclude that
+\finalanswer{\mathrm{ord}_\infty(c_n) > \mathrm{ord}_\infty(b_n) > \mathrm{ord}_\infty(a_n)}
+
+\paragraph{Alternative Approach} We can solve the problem without relying on the Stirling's formula. Indeed, a direct computation proves that
+\begin{equation*} \lim_{n \to + \infty} \frac{c_n}{b_n} = \lim_{n\to+\infty} \frac{ (n!)^2 }{ \frac{(3n)!}{(2n!)n!} } = \lim_{n \to + \infty} \frac{ (n!)^3 (2n)! }{(3n)!} = + \infty. \end{equation*}
+In a similar fashion, employing the definition of the binomial, we can prove that
+\begin{equation*} \lim_{n \to + \infty} \frac{a_n}{b_n} = \lim_{n\to+\infty} \frac{ (2n!)^2 }{ (3n)!n! } = \lim_{n \to + \infty} \frac{ 2n(2n - 1) \dots (2n - n + 1)}{3n(3n - 1) \dots (3n - 2n + 1)} = \lim_{n \to + \infty} \left(\frac{2}{3} \right)^n = 0. \end{equation*}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Order the following sequence according to their order of infinite:
+\begin{equation*}a_n := \begin{cases} a_0 = 1 \\[0.7em] a_{n + 1} = 1 + a_n^2 \end{cases} \qquad b_n := \begin{cases} b_0 = 2 \\[0.7em] b_{n + 1} = \sqrt{2 + b_n^3} \end{cases} \qquad c_n := \begin{cases} c_0 = 1 \\[0.7em] c_{n + 1} = c_n \sqrt{1 + n^2} \end{cases}\end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} 
+The strategy is simple, but requires a little bit of intuition. More precisely, we will prove (using induction principle) that these sequences are asymptotically equivalent to three other sequences which limit we can easily determine.
+
+\begin{itemize}
+	\item Let $\alpha > 1$ be a fixed real number. We can easily prove that
+\begin{equation*} a_n \geq \alpha^{2^{n-N}} \quad \text{for all $n > N(\alpha)$}, \end{equation*}
+where $N$ is a positive natural number that depends on $\alpha$. The idea behind this estimate is that $a_n$ is increasing, so
+\begin{equation*} a_{n + 1} = 1 + a_n^2 \approx a_n^2 \quad \text{for $a_n$ (and thus $n$) sufficiently big}. \end{equation*}
+Note also that, up to relabeling the first terms of the sequence, we can prove that
+\begin{equation*} a_n \geq \alpha^{2^{n}} \quad \text{for all $n > N(\alpha)$}, \end{equation*}
+which follows easily by induction:
+\begin{equation*} a_{n + 1} = 1 + \left( \alpha^{2^{n}} \right)^2  = 1 + \alpha^{2^{n + 1}} \approx \alpha^{2^{n + 1}}. \end{equation*}
+
+\item Let $\beta > 1$ be a fixed real number. We can easily prove that
+\begin{equation*} \beta^{\left(\frac{7}{4}\right)^{n-N}} \geq b_n \geq \beta^{\left(\frac{3}{2}\right)^{n-N}} \quad \text{for all $n > N(\beta)$}, \end{equation*}
+where $N$ is a positive integer that depends on $\beta$. The idea behind this estimate is that $b_n$ is also increasing sequence, so
+\begin{equation*} b_{n + 1} = \sqrt{1 + b_n^3} \approx \sqrt{b_n^3} = b_n^{\frac{3}{2}} \quad \text{for $b_n$ (and thus $n$) sufficiently big}. \end{equation*}
+Notice also that, up to relabeling the first terms of the sequence, we can prove that
+\begin{equation*} \beta^{\left(\frac{7}{4}\right)^{n}} \geq b_n \geq \beta^{\left(\frac{3}{2}\right)^{n}} \quad \text{for all $n > N(\beta)$}, \end{equation*}
+which, once again, follows immediately by induction since
+\[
+\begin{aligned} 
+& b_{n + 1} \geq \sqrt{1 + \left(\beta^{\left(\frac{3}{2}\right)^{n}} \right)^3}  \approx \beta^{\left(\frac{3}{2}\right)^{n + 1}}
+\\ & b_{n + 1} \leq \sqrt{1 + \left(\beta^{\left(\frac{7}{4}\right)^{n}} \right)^3} \approx \beta^{\left(\frac{7}{4}\right)^{n} \frac{3}{2}}  \leq \beta^{\left(\frac{7}{4}\right)^{n + 1}}
+\end{aligned}
+\]
+
+\item We claim that
+\begin{equation*} c_n \leq n^n \quad \text{for all $n \geq 3$}.\end{equation*}
+The idea behind this estimate is that $c_n$ is also increasing, so
+\begin{equation*} c_{n + 1} = c_n \sqrt{1 + n^2} \approx n c_n \quad \text{for $n$ sufficiently big}. \end{equation*}
+Notice also that, up to relabeling the first terms of the sequence, we have
+\begin{equation*} c_n \leq n^n \quad \text{for all $n > N$}, \end{equation*}
+which follows once again by induction:
+\begin{equation*} c_{n + 1} = c_n \left( 1 + n^2 \right)  \leq n^n \sqrt{1 + n^2} \approx n^{n + 1} \leq (n + 1)^{n + 1}. \end{equation*}
+\end{itemize}
+
+In conclusion, a simple computation shows that
+\begin{equation*} \begin{aligned}
+& \lim_{n \to + \infty} \frac{a_n}{b_n} = \lim_{n \to + \infty} \frac{\alpha^{2^n}}{\alpha^{\left( \frac{7}{4} \right)^n}} = + \infty, 
+\\ & \lim_{n \to + \infty} \frac{b_n}{c_n} = \lim_{n \to + \infty} \frac{\alpha^{\left( \frac{3}{2} \right)^n}}{n^n} = + \infty. 
+\end{aligned}\end{equation*}
+We finally infer that
+\finalanswer{\mathrm{ord}_\infty(a_n) > \mathrm{ord}_\infty(b_n) > \mathrm{ord}_\infty(c_n)}
+\end{solutionBox}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\chapter{Derivatives and convexity}
+
+\begin{exerciseBox} \textbf{Exercise.} Order the following three numbers increasingly:
+\begin{equation*}1000!, \qquad 2^{1000}, \qquad 10^{300}. \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} To solve this exercise, we simply need to estimate the ratio between these numbers (although, there is a more mechanical procedure). First, notice that
+\begin{equation*} \frac{1000!}{2^{1000}} = \frac{1000}{2} \frac{999}{2} \dots \frac{2}{2} \frac{1}{2} > 1, \end{equation*}
+which means that $1000! > 2^{1000}$. Similarly, we have that
+\begin{equation*} \frac{2^{1000}}{10^{300}} = \frac{2^{300}}{2^{300}} \frac{2^{700}}{5^{300}} = \frac{2^{700}}{5^{300}} = \left( \frac{2^7}{5^3}\right)^{100} = \left( \frac{128}{125}\right)^100 > 1,\end{equation*}
+which means that $2^{1000} > 10^{300}$. We infer that
+\finalanswer{
+  1000! > 2^{1000} > 10^{300}}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Find all the complex solutions of the equation
+\begin{equation*} z^2 - z = |z|^2 - |z|. \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox}
+ First, we notice that every positive real number $a \in \R_+$ satisfies the equation since
+\begin{equation*}a \geq 0 \implies |a|^2 - |a| = a^2 - a. \end{equation*}
+We now want to show that there are no other solutions. Let $z = a + \imath b$, for $a, \, b \in \R$, and notice that
+\begin{equation*} z^2 - z = |z|^2 - |z| \iff a^2 - b^2 + 2\imath a b - a - \imath b = |a + \imath b|^2 - |a + \imath b|,  \end{equation*}
+which implies that $a^2 - b^2 + 2\imath a b - a - \imath b$ must be a real number. In particular, the imaginary part must be equal to zero, which means that
+\begin{equation*} \mathfrak{Im}(a^2 - b^2 + 2\imath a b - a - \imath b) = 0 \iff b(2a - 1) = 0. \end{equation*}
+If $b = 0$, then $z = a$ is a real number, and the argument above applies (i.e., $a$ is a solution if and only if $a \geq 0$). If $b \neq 0$, then we have $a = \frac{1}{2}$, and therefore
+\begin{equation*} z^2 - z = |z|^2 - |z| \iff - \frac{1}{4} - b^2 = \frac{1}{4} + b^2 - \sqrt{ \frac{1}{4} + b^2 } = 0. \end{equation*}
+A straightforward computation shows that
+\begin{equation*} (1 + 4b^2)^2 = 1 + 4b^2 \iff 1 + 4b^2 = 1 \iff b = 0, \end{equation*}
+which is in contradiction with the fact that $b \neq 0$. It follows that the solutions are all of the form $z = a$, for some positive $a$, that is,
+\finalanswer{z^2 - z = |z|^2 - |z| \iff\text{ $\mathfrak{Re}(z) \geq 0$ and $\mathfrak{Im}(z) = 0$}.}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Determine which ones of the following functions are injective:
+\begin{equation*} x \mathrm{e}^x, \qquad \log(1 + x^2), \qquad \arctan(x). \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} For each function of the list, we need to determine whether or not it is injective, and we also need to be able to formally prove it.
+
+\paragraph{Step 1.} The function $f(x) := x \mathrm{e}^x$ is clearly continuous, and it is easy to prove that
+\begin{equation*} \lim_{x \to - \infty} f(x) = 0 \end{equation*}
+since the exponential goes to infinity faster than any polynomial. On the other hand, we have that
+\begin{equation*} f(0) = 0 \quad \text{and} \quad f(-1) = - \frac{1}{\mathrm{e}} < 0, \end{equation*}
+which means that (as a consequence of the Bolzano's theorem) the function $f$ cannot be injective since there are $x_1 \in (- \infty, \, -1)$ and $x_2 \in (-1, \, 0)$ such that
+\begin{equation*} f(x_1) = f(x_2) = - \frac{1}{2\mathrm{e}}. \end{equation*}
+
+\paragraph{Step 2.} The function $g(x) := \log(1 + x^2)$ is clearly not injective since it is even, which means that
+\begin{equation*} g(x) = g(-x) \quad \text{for all $x \in \R$}.\end{equation*}
+
+\paragraph{Step 3.} The function $h(x) := \arctan(x)$ is clearly continuous and differentiable. Furthermore, we know that its derivative is given by
+\begin{equation*} h^\prime(x) = \frac{1}{1 + x^2}. \end{equation*}
+We can easily check that $h^\prime(x) > 0$ strictly for all $x \in \R$, and this implies that the function $h$ is \textit{strictly increasing}, that is,
+\begin{equation*}x_1 > x_2 \iff h(x_1) > h(x_2). \end{equation*}
+The reader can easily check that a strictly monotone function is necessarily injective. In conclusion, we infer that
+\finalanswer{
+  \text{$h(x) = \arctan(x)$ is the unique injective function of the list.}
+} \end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Compute the derivative of the function
+\begin{equation*}h(x) = (2x)^x. \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} First, we want to prove the following general formula that could also be useful for more complex functions:
+\begin{equation}\label{derexp} \frac{\mathrm{d}}{\mathrm{d}x} [f(x)^{g(x)}] = f(x)^{g(x) - 1} \left[g(x) f^\prime(x) + f(x) \log( f(x) ) g^\prime(x) \right]. \end{equation}
+
+\paragraph{Step 1.} The idea to prove formula \eqref{derexp} is to use the known derivatives of the exponential and logarithm functions. More precisely, we have
+\begin{equation*}f(x)^{g(x)} = \mathrm{e}^{ \log(f(x)) g(x)}, \end{equation*}
+and therefore
+\begin{equation*} \begin{aligned} \frac{\mathrm{d}}{\mathrm{d}x} [f(x)^{g(x)}] & = \frac{\mathrm{d}}{\mathrm{d}x}[\mathrm{e}^{ \log(f(x)) g(x) }]  =
+\\[1em] & = \mathrm{e}^{ \log(f(x)) g(x)} \frac{\mathrm{d}}{\mathrm{d}x} \left[ \log(f(x)) g(x) \right] =
+\\[1em] & =\mathrm{e}^{ \log(f(x)) g(x)} \left[ \log (f(x)) g(x) + \frac{1}{f(x)} f^\prime(x) g(x)  \right] =
+\\[1em] & = f(x)^{g(x) - 1} \left[g(x) f^\prime(x) + f(x) \log( f(x) ) g^\prime(x) \right], \end{aligned} \end{equation*}
+which is exactly what we wanted to prove.
+
+\paragraph{Step 2.} We now apply formula \eqref{derexp} to compute the derivative of the function $h(x)$. We can easily infer that
+\finalanswer{
+h^\prime(x) = (2x)^{x-1} \left[ 2x + 2x \log(2x) \right].
+} \end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Let
+\begin{equation*} f(x) := \log(1 + x) + \left| \log|x - 3| \right|. \end{equation*}
+Find the equation describing the tangent line to $f(x)$ at $x = 0$.
+\end{exerciseBox}
+
+\begin{solutionBox} Recall that, if $f$ is differentiable at $x_0 \in \mathrm{dom} \, f$, then $f^\prime(x_0)$ is the slope (=coefficiente angolare) of the tangent line at $x_0$. Therefore, the equation of the tangent line is
+\begin{equation*} y - f(x_0) = m(x - x_0). \end{equation*}
+
+\paragraph{Step 1.} We want to compute the derivative of $f(x)$ at $x_0 = 0$. The idea is that the derivative is a local notion, and therefore we are only interested in the behavior of the function $f$ on the interval $[- \epsilon, \, \epsilon]$, for some $\epsilon > 0$. Clearly, if $\epsilon > 0$ is small enough, we have that
+\begin{equation*} f(x) = \log(1 + x) + \log(3 - x), \end{equation*}
+since $x \in [- \epsilon, \, \epsilon]$ is smaller than $3$, and $\log(3 - x)$ is clearly bigger than $\log(2)$, which is positive. The derivative is now easy to compute since
+\begin{equation*} f^\prime(x) = \frac{1}{1 + x} - \frac{1}{3 - x} \quad \text{for  $x \in [- \epsilon, \, \epsilon]$}, \end{equation*}
+and, in particular, we obtain
+\begin{equation*} f^\prime(0) = 1 - \frac{1}{3} = \frac{2}{3}. \end{equation*}
+
+\paragraph{Step 2.} The argument above immediately implies that the equation of the tangent line to $f(x)$ at $x = 0$ is given by
+\finalanswer{
+y - \log(3) = \frac{2}{3} x.
+} \end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Determine which ones of the following functions are monotone increasing:
+\begin{equation*} x \mathrm{e}^x, \qquad x^3|x|, \qquad (-x)^3, \qquad  x - \arctan(x). \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} Recall that a function $f$ is monotone increasing if and only if it is always increasing (i.e., never constant or decreasing), which means that
+\begin{equation*}x_1 > x_2 \in \mathrm{dom} \, f \implies f(x_1) > f(x_2). \end{equation*}
+We shall use here the first derivative criterion for differentiable functions, which asserts that
+\begin{equation*}\text{"$f^\prime(x) > 0$ for all $x \in (a, \, b)$} \implies \text{$f$ is monotone increasing in $[a, \, b]$"}. \end{equation*}
+
+\paragraph{Case 1.} The function $f_1(x) := x \mathrm{e}^x$ is \textbf{not} monotone increasing, and we can either prove it by computing the first derivative, or by a simple continuity argument. Indeed, we proved in Exercise 5.23 that there exists $x_1 \in (- \infty, \, -1)$ such that
+\begin{equation*} f(x_1) = - \frac{1}{2\mathrm{e}}, \end{equation*}
+and therefore
+\begin{equation*} f(x_1) = - \frac{1}{2\mathrm{e}} > - \frac{1}{\mathrm{e}} = f(-1) \quad \text{and} \quad x_1 < -1, \end{equation*}
+which means that $f$ is not monotone increasing. Similarly, one can compute the first derivative
+\begin{equation*} f^\prime(x) = (x + 1) \mathrm{e}^x, \end{equation*}
+and notice that $f^\prime(x) < 0$ for all $x < - 1$, which means that $f$ is monotone decreasing on $(- \infty, \, -1)$.
+
+\paragraph{Case 2.} The function $f_2(x) := x^3 |x|$ \textbf{is} monotone increasing. To prove it, we first notice that $f_2$ is an odd function, that is,
+\begin{equation*} f_2(x) = - f_2(-x), \end{equation*}
+such that
+\begin{equation*} \lim_{x \to - \infty} f_2(x) = - \infty \quad \text{and} \quad f(0)=0.\end{equation*}
+Therefore, it is enough to prove that $f_2$ is monotone increasing in the interval $(- \infty, \, 0]$, to infer the same property for the whole real line $(- \infty, \, + \infty)$. The derivative is now easier to compute since
+\begin{equation*} f_2(x) = - x^4 \quad \text{for all $x \leq 0$} \implies f_2^\prime(x) = - 4x^3 \quad \text{for all $x \leq 0$}.\end{equation*}
+The derivative of $f_2$ is strictly negative for all $x \in (- \infty, \, 0)$, and therefore the criterion above is enough to conclude that $f_2$ is monotone increasing in $(- \infty, \, 0]$. 
+
+\paragraph{Case 3.} The function $f_3(x) := (-x)^3 = - x^3$ is \textbf{not} monotone increasing, but it is still monotone. Indeed, we have that
+ \begin{equation*} f_3^\prime(x) = - 3x^2 < 0 \quad \text{for all $x \neq 0$}, \end{equation*}
+ which means that $f_3$ is a monotone decreasing function.
+ 
+\paragraph{Case 4.} The function $f_4(x) := x - \arctan(x)$ \textbf{is} monotone increasing. To prove it, we simply compute the first derivative:
+\begin{equation*} f_4^\prime(x) = 1 - \frac{1}{1 + x^2} = \frac{x^2}{1 + x^2}. \end{equation*}
+It follow that $f_4^\prime(x) > 0$ for all $x \neq 0$, which is enough to infer that $f_4$ is a monotone increasing function. In conclusion, we have proved that
+\finalanswer{
+  \text{$f_2(x) = x^3 |x|$ and $f_4(x) = x - \arctan(x)$ are the monotone increasing functions.}
+} \end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Determine the convexity intervals of the function
+\begin{equation*}f(x) := \frac{x^3}{x - 1}. \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} First, recall that there is a fundamental result (that you should have seen in one of the last lectures) that will help us to find the answer to this problem via a simple computation.
+
+\begin{theorem} A differentiable function of one variable is convex on an interval if and only if its derivative is monotonically non-decreasing on that interval. \end{theorem}
+
+The function $f$ is well-defined everywhere except at $x = 1$, where the denominator is equal to zero. Therefore, we are only interested in convexity intervals contained in
+\begin{equation*}\mathrm{dom} \, f = \R \setminus \{1\}. \end{equation*}
+
+\paragraph{Step 1.} We now compute the first derivative of $f$ at $x$ (for $x \neq 1$). We shall apply the usual formula
+\begin{equation*}\left( \frac{f}{g} \right)^\prime(x) = \frac{f^\prime(x) g(x) - f(x) g^\prime(x)}{g^2(x)}. \end{equation*}A simple computation shows that
+\begin{equation*}f^\prime(x) = \frac{3x^2(x - 1) - x^3}{(x - 1)^2} = \frac{2x^3 - 3x^2}{(x - 1)^2} = 2 \frac{x^2}{x - 1} - \frac{x^2}{(x - 1)^2}.\end{equation*}
+Note that $x \neq 1$, and thus we can divide by $(x - 1)$ whenever we want (and this is how we achieve the last equality).
+
+\paragraph{Step 2.} We now compute the second derivative of $f$ at $x$ (for $x \neq 1$). We have that
+\begin{equation*}\begin{aligned} f^{\prime\prime}(x) & = 2 \frac{2x(x - 1) - x^2}{(x - 1)^2} - \frac{2x(x - 1)^2 - x^2(2x - 2)}{(x - 1)^4} =
+\\[1em] & = \frac{3x^2 - 4x}{(x - 1)^2} - \frac{ - 2x^2 + 2x }{(x - 1)^4} =
+\\[1em] & = \frac{3x}{x - 1} - \frac{x}{(x - 1)^2} + \frac{2x}{(x - 1)^3} =
+\\[1em] & = \frac{2x(x^2 - 3x + 3)}{(x - 1)^3}. \end{aligned} \end{equation*}
+The second derivative $f^{\prime\prime}(x)$ is bigger than or equal to zero for all $x \neq 1$ such that the sign of the numerator and the sign of the denominator coincide (i.e., both positive or both negative).
+
+\paragraph{Case 1.} The denominator is positive whenever $x > 1$; hence we simply need to study the sign of the numerator. Clearly, 
+\begin{equation*} 2x(x^2 - 3x + 3) \geq 0 \iff \begin{cases} x \geq 0, \\ x^2 - 3x + 3 \geq 0, \end{cases} \: \text{or} \quad \begin{cases} x \leq 0, \\ x^2 - 3x + 3 \leq 0. \end{cases} \end{equation*}
+The discriminant of the second-order polynomial $x^2 - 3x + 3$ is negative, which means that $x^2 - 3x + 3$ is positive for all $x \in \R$. Therefore, we infer that
+\begin{equation*} 2x(x^2 - 3x + 3) \geq 0 \iff x \geq 0\end{equation*}
+since the second system does not admit any solution. It follows that the numerator and the denominator are both positive if and only if $x > 1$.
+
+\paragraph{Case 2.} The denominator is negative whenever $x < 1$; hence we simply need to study the sign of the numerator. Clearly, 
+\begin{equation*} 2x(x^2 - 3x + 3) \leq 0 \iff \begin{cases} x \geq 0, \\ x^2 - 3x + 3 \leq 0, \end{cases} \: \text{or} \quad \begin{cases} x \leq 0, \\ x^2 - 3x + 3 \geq 0. \end{cases} \end{equation*}
+In particular, the argument used above shows that
+\begin{equation*} 2x(x^2 - 3x + 3) \leq 0 \iff x \leq 0,\end{equation*}
+which means that the numerator and the denominator are both negative if and only if $x \leq 0$.
+
+\paragraph{Conclusion.} The function $f$ is convex on
+\finalanswer{
+  I = (- \infty, \, 0] \cup (1, \, + \infty).
+} 
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Determine the maximal convexity interval containing the origin of the function
+\begin{equation*}f(x) := \frac{\mathrm{e}^x - 3}{\mathrm{e}^x + 3}. \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} The function $f$ is well-defined everywhere, and hence we are only interested in convexity intervals $I \subseteq \R$ such that $0 \in I$.
+
+\paragraph{Step 1.} We now compute the first derivative of $f$ at $x$. We shall apply the usual formula
+\begin{equation*}\left( \frac{f}{g} \right)^\prime(x) = \frac{f^\prime(x) g(x) - f(x) g^\prime(x)}{g^2(x)}. \end{equation*}A simple computation shows that
+\begin{equation*}f^\prime(x) = \frac{\mathrm{e}^x(\mathrm{e}^x + 3) - \mathrm{e}^x(\mathrm{e}^x - 3)}{(\mathrm{e}^x + 3)^2} = \frac{6 \mathrm{e}^x}{(\mathrm{e}^x + 3)^2}. \end{equation*}
+
+\paragraph{Step 2.} We now compute the second derivative of $f$ at $x$. We have that
+\begin{equation*}\begin{aligned} f^{\prime\prime}(x) & = \frac{6\mathrm{e}^x(\mathrm{e}^x + 3)^2 - 6 \mathrm{e}^x (2 \mathrm{e}^{2x} + 6 \mathrm{e}^x)}{(\mathrm{e}^x + 3)^4} =
+\\[1em] & = - \frac{6\mathrm{e}^x(\mathrm{e}^x - 3)}{(\mathrm{e}^x + 3)^3}. \end{aligned} \end{equation*}
+The denominator is always positive, and so is $\mathrm{e}^x$. Hence, it is enough to notice that
+\begin{equation*} \mathrm{e}^x \leq 3 \iff x \leq \log(3), \end{equation*}
+and therefore the maximal convexity interval containing the origin is given by
+\finalanswer{
+  I = (- \infty, \, \log(3)].
+} 
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Determine, up to the order $4$, the Taylor expansion of the function
+\begin{equation*}f(x) := (1 + \cos(x))^2 \sin(x).\end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} The expansion of the sine function is well-known, and it is given by
+\begin{equation*} \sin(x) = x - \frac{x^3}{6} + o(x^4). \end{equation*}
+It follows that it is enough to find the Taylor expansion of $(1 + \cos(x))^2$ up to the order $3$. We have the well-known Taylor expansion of the cosine function
+\begin{equation*} 1 + \cos(x) = 2 - \frac{x^2}{2} + o(x^3), \end{equation*}
+and this easily implies that
+\begin{equation*} (1 + \cos(x))^2 = 4 - 2 x^2 + o(x^3).\end{equation*}
+In conclusion, the Taylor expansion of the product up to the order $4$ is given by
+\begin{equation*} \left(x - \frac{x^3}{6}\right) \left(4 - 2x^2 \right) + o(x^4) = 4x - 2x^3 - \frac{4}{6}x^3 + o(x^4) = 4x - \frac{8}{3}x^3 + o(x^4), \end{equation*}
+which means that the solution to this exercise is
+\finalanswer{
+f(x) = 4x - \frac{8}{3}x^3 + o(x^4).
+} 
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Determine the first two significant terms of the Taylor expansion of the function
+\begin{equation*}f_a(x) := \frac{\sin(x) + a x \mathrm{e}^x}{\cos(x)},\end{equation*}
+as $a$ ranges in the real line $\R$.
+\end{exerciseBox}
+
+\begin{solutionBox} First, we notice that for $a = 0$, the function $f_a$ is nothing more than $\tan (x)$. The Taylor expansion of the tangent function is well-known, and given by
+\begin{equation*}f_0(x) = x + \frac{1}{3}x^3 + o(x^3).\end{equation*}
+Suppose now that $a \neq 0$. Then,
+\begin{equation*}f_a^\prime(x) = \frac{\cos^2(x) + a (x + 1) \mathrm{e}^x \cos(x) + \sin(x)\left[\sin(x) + a x \mathrm{e}^x \right] }{\cos^2(x)},\end{equation*}
+and therefore
+\begin{equation*}f_a^\prime(0) = 1 + a.\end{equation*}
+In a similar fashion, one can compute explicitly the second-order derivative and find that
+\begin{equation*}f_a^{\prime\prime}(0) = a,\end{equation*}
+and this implies that
+\begin{equation*}f_a(x) = (a + 1)x + ax^2 + o(x^2) \quad \text{for all $a \neq 0$}.\end{equation*}
+In conclusion, with a little bit more of work (compute the third-order derivative), one could find that there is a formula that holds for all $a \in \R$, that is,
+\finalanswer{
+f_a(x) = (a + 1)x + ax^2 + \left(a + \frac{1}{3} \right)x^3 + o(x^3).
+} 
+\end{solutionBox}
+
+\chapter{Indefinite and definite integrals}
+
+\begin{exerciseBox} \textbf{Exercise.} \label{ex51} Find a primitive of the function
+\begin{equation*} h(x) = 2x \arctan x. \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} The idea here is to apply the integration by parts formula
+\begin{equation} \label{byparts} \int f(x) g^\prime(x) \, \mathrm{d}x = f(x) g(x) - \int f^\prime(x) g(x) \, \mathrm{d}x, \end{equation}
+where $g$ is a primitive of $g^\prime$. We choose $g^\prime(x) := 2x$ and $f(x) = \arctan x$, in such a way that
+\begin{equation*} g(x) = x^2 \quad \text{and} \quad f^\prime(x) = \frac{1}{1 + x^2}. \end{equation*}
+It turns out that
+\begin{equation*} \begin{aligned} \int 2x \arctan x \, \mathrm{d}x &  = x^2 \arctan x - \int \frac{x^2}{1 + x^2} \, \mathrm{d}x =
+\\[1em] & = x^2 \arctan x - \int \frac{1 + x^2}{1 + x^2} \, \mathrm{d}x + \int \frac{1}{1 + x^2} \, \mathrm{d}x =
+\\[1em] & = x^2 \arctan x - x + \arctan x \end{aligned} \end{equation*}
+is a primitive of $h(x)$. The solution is thus given by (for any $C \in \R$)
+\finalanswer{
+ H(x) = x^2 \arctan x - x + \arctan x + C.
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Compute the improper integral
+\begin{equation*} \int_1^\infty \frac{ \cos(\log x) }{x^2} \, \mathrm{d}x. \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} We make the change of variables $y = \log x$, with differential $\mathrm{d}y = x^{-1} \mathrm{d}x$, and obtain
+\begin{equation*} \int_1^\infty \frac{ \cos(\log x) }{x^2} \, \mathrm{d}x = \int_0^\infty \mathrm{e}^{-y} \cos(y) \, \mathrm{d}y.\end{equation*}
+To compute this integral we employ the formula \eqref{byparts} twice, which makes sense as the cosine is a solution of the ode $u^{\prime \prime} = - u$. We have
+\begin{equation*} \int_0^\infty \mathrm{e}^{-y} \cos(y) \, \mathrm{d}y = \left[ - \mathrm{e}^{-y} \cos(y) \right]_{y = 0}^{\infty} - \int_0^\infty \mathrm{e}^{-y} \sin(y) \, \mathrm{d}y, \end{equation*}
+and
+\begin{equation*} \int_0^\infty \mathrm{e}^{-y} \sin(y) \, \mathrm{d}y = \left[ - \mathrm{e}^{-y} \sin(y) \right]_{y = 0}^{\infty} + \int_0^\infty \mathrm{e}^{-y} \cos(y) \, \mathrm{d}y. \end{equation*}
+We plug the second identity into the first one, and we move the integral with $\cos(y)$ on the right-hand side; it turns out that
+\begin{equation*} \int_0^\infty \mathrm{e}^{-y} \cos(y) \, \mathrm{d}y = \frac{1}{2} \left[ - \mathrm{e}^{-y} \cos(y) \right]_{y = 0}^{\infty} - \frac{1}{2} \left[ - \mathrm{e}^{-y} \sin(y) \right]_{y = 0}^{\infty}. \end{equation*}
+A straightforward computation ($\cos(0) = 1$) shows that the solution is given by
+\finalanswer{
+ \int_1^\infty \frac{ \cos(\log x) }{x^2} \, \mathrm{d}x = \frac{1}{2} \cos(0) = \frac{1}{2}.
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Compute the integral
+\begin{equation*} \int_0^1 \frac{x}{\sqrt{1 + x}} \, \mathrm{d}x.\end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} We make the change of variables $y = x + 1$, with differential $\mathrm{d}y = \mathrm{d}x$, and we find that 
+\begin{equation*} \int_0^1 \frac{x}{\sqrt{1 + x}} \, \mathrm{d}x = \int_1^2 \frac{y - 1}{\sqrt{y}} \, \mathrm{d}y = \int_1^2 \left[ y^{\frac{1}{2}} - y^{-\frac{1}{2}} \right] \, \mathrm{d}y = \frac{2}{3} \sqrt[3]{y} \, \big|_{1}^2 - 2 \sqrt{y} \, \big|_{1}^2.\end{equation*}
+The solution is thus given by
+\finalanswer{
+\int_0^1 \frac{x}{\sqrt{1 + x}} \, \mathrm{d}x = -\frac{2}{3}(\sqrt{2} - 2).
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Determine, up to the order $4$, the Taylor expansion of the function
+\begin{equation*}f(x) := (1 + \sin(x))^2 \cos(x).\end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} The expansion of the cosine function is well-known, and it is given by
+\begin{equation*} \cos(x) = 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^4) . \end{equation*}
+It follows that we need to find the Taylor expansion of $(1 + \sin(x))^2$ up to the order $3$ - as the translation of the sine is an odd function. We have
+\begin{equation*} 1 + \sin(x) = 1 + x - \frac{x^3}{6} + o(x^4) , \end{equation*}
+and this easily implies that
+\begin{equation*} (1 + \sin(x))^2 = 1 + 2x + x^2 - \frac{x^3}{3} - \frac{x^4}{3} + o(x^4). \end{equation*}
+In conclusion, the Taylor expansion of the product up to the order $4$ is given by
+\begin{equation*} \left(1 - \frac{x^2}{2} + \frac{x^4}{24} \right) \left(1 + 2x + x^2 - \frac{x^3}{3} - \frac{x^4}{3} \right) + o(x^4) = 1 + 2x + \frac{x^2}{2} - \frac{4}{3}x^3 - \frac{19}{24}x^4 + o(x^4), \end{equation*}
+which means that the solution to this exercise is
+\finalanswer{
+f(x) = 1 + 2x + \frac{x^2}{2} - \frac{4}{3}x^3 - \frac{19}{24}x^4 + o(x^4).
+} 
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Determine, up to the order $3$, the Taylor expansion of the function
+\begin{equation*}f(x) := (x - 2) \tan(\sin(x)).\end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} The expansions of the sine and the tangent are both well-known, and they are given by
+\begin{equation*} \sin(x) = x - \frac{x^3}{6} + o(x^3) \quad \text{and} \quad \tan(x) = x + \frac{x^3}{3} + o(x^3). \end{equation*}
+It follows that the Taylor expansion of $\tan(\sin x )$ - up to the order $3$ - is given by
+\begin{equation*} \tan(\sin x ) = \left(x - \frac{x^3}{6} \right) + \frac{1}{3} \left(x - \frac{x^3}{6} \right)^3 + o(x^3) = x + \frac{x^3}{6} + o(x^3). \end{equation*}
+The solution to the exercise is thus given by
+\finalanswer{
+f(x) = (x - 2) \left(x + \frac{x^3}{6} \right) + o(x^3) = - 2x + x^2 - \frac{x^3}{3} + o(x^3).
+} 
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Find a primitive of the function
+\begin{equation*} h(x) = x \log \left( \frac{1-x}{1+x} \right). \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} The idea here is to apply the integration by parts formula \eqref{byparts} with $g^\prime(x) := x$ and $f(x) = \log \left( \frac{1-x}{1+x} \right)$. It is easy to check that
+\begin{equation*} g(x) = \frac{x^2}{2} \quad \text{and} \quad f^\prime(x) = \frac{2}{x^2 - 1}. \end{equation*}
+It turns out that
+\begin{equation*} \begin{aligned} \int x \log \left( \frac{1-x}{1+x} \right) \, \mathrm{d}x & = \frac{x^2}{2} \log \left( \frac{1-x}{1+x} \right) - \int \frac{x^2}{x^2 - 1} \, \mathrm{d}x =
+\\[1em] & = \frac{x^2}{2} \log \left( \frac{1-x}{1+x} \right) - x + \int \frac{1}{(1-x)(1+x)} \, \mathrm{d}x. \end{aligned} \end{equation*}
+Now
+\begin{equation*}  \frac{1}{(1-x)(1+x)} = \frac{A}{1-x} + \frac{B}{1 + x} \iff 1 = A(1 + x) + B(1 -x) \iff A = B = \frac{1}{2}, \end{equation*}
+which means that
+\begin{equation*}\begin{aligned} \int \frac{1}{(1-x)(1+x)} \, \mathrm{d}x & = \frac{1}{2} \int \frac{1}{1-x} \, \mathrm{d}x + \frac{1}{2} \int \frac{1}{1+x} \, \mathrm{d}x =
+\\[1em] & = - \frac{1}{2} \log(1 - x) + \frac{1}{2} \log(1 + x). \end{aligned} \end{equation*}
+In conclusion, a primitive of $h$ is given by
+\finalanswer{
+ H(x) = \frac{x^2}{2} \log \left( \frac{1-x}{1+x} \right) - x - \frac{1}{2} \log(1 - x) + \frac{1}{2} \log(1 + x) + C. 
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Compute the area delimited by the region
+\begin{equation*} A = \left\{ (x, \, y) \in \R^2 \: : \: 1 \leq x \leq 2, \, 0 \leq y \leq \frac{\sqrt{x} - 1}{x(\sqrt{x} + 1)} \right\}.\end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} The function $f(x) := \frac{\sqrt{x} - 1}{x(\sqrt{x} + 1)}$ is positive for $x \geq 1$, so to compute the area of $A$ it suffices to compute the value of the integral
+\begin{equation*} \int_1^2 \frac{\sqrt{x} - 1}{x(\sqrt{x} + 1)} \, \mathrm{d}x. \end{equation*}
+Let $y = \sqrt{x}$ with differential $\mathrm{d}y = \frac{1}{2 \sqrt{x}} \, \mathrm{d}x$. We find that
+\begin{equation*} \int_1^2 \frac{\sqrt{x} - 1}{x(\sqrt{x} + 1)} \, \mathrm{d}x =2 \int_1^{\sqrt{2}} \frac{y - 1}{y(y+1)} \, \mathrm{d}y.  \end{equation*}
+Now notice that
+\begin{equation*}  \frac{y - 1}{y(y+1)} = \frac{2}{y + 1} - \frac{1}{y}.  \end{equation*}
+It turns out that
+\begin{equation*}\begin{aligned} \int_1^2 \frac{\sqrt{x} - 1}{x(\sqrt{x} + 1)} \, \mathrm{d}x & =2 \int_1^{\sqrt{2}} \frac{y - 1}{y(y+1)} \, \mathrm{d}y =
+\\[1em] & = 4 \int_1^{\sqrt{2}} \frac{1}{y+1} \, \mathrm{d}y - 2 \int_1^{\sqrt{2}} \frac{1}{y} \, \mathrm{d}y =
+\\[1em] & = 4 \log(y + 1) \, \big|_{y = 1}^{\sqrt{2}} - 2 \log(y)\, \big|_{y = 1}^{\sqrt{2}},
+\end{aligned} \end{equation*}
+and therefore the solution of this exercise is given by
+\finalanswer{
+\mathrm{Area}(A) = 4 \log(1 + \sqrt{2}) - 5 \log(2).
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Find a primitive of the function
+\begin{equation*} h(x) = \frac{x^5 - x + 1}{x^4 + x^2}. \end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} We first rewrite the function using the decomposition $x^4 + x^2 = x^2(x^2 + 1)$. It is easy to check - doing a long division - that
+\begin{equation*} h(x) = -\frac{1}{x^2 + 1} + \frac{1}{x^2} + x - \frac{1}{x}. \end{equation*}
+The integral is thus given by
+\begin{equation*} \int h(x) \, \mathrm{d}x = - \int \frac{1}{x^2 + 1} \, \mathrm{d}x + \int x^{-2} \, \mathrm{d}x +\int x \, \mathrm{d}x - \int x^{-1} \, \mathrm{d}x,\end{equation*}
+and a primitive of $h$ is
+\finalanswer{
+ H(x) = - \arctan x - \frac{1}{x} + \frac{x^2}{2} - \log x + C.
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Compute the area delimited by the graph of $f(x) = - \mathrm{e}^x$ and the line passing through $(1, \, - \mathrm{e})$ and $(0, \, - 1)$.
+\end{exerciseBox}
+
+\begin{solutionBox} The line passing through $(1, \, - \mathrm{e})$ and $(0, \, -1)$ is simply given by
+\begin{equation*}\ell(x) = (1 - \mathrm{e})x - 1. \end{equation*}
+The line intersects the graph of $f(x)$ at the points $(x_0, \, y_0)$ and $(x_1, \, y_1)$ given by $(1, \, - \mathrm{e})$ and $(0, \, -1)$, as the reader may prove by a direct computation. The function
+\begin{equation*}- \mathrm{e}^x - \ell(x) \end{equation*}
+is easily seen to be positive in the interval $(0, \, 1)$, zero at $0$ and $1$, and negative everywhere else; therefore
+\begin{equation*} \mathrm{Area} = \int_0^1 \left[- \mathrm{e}^x - (1 - \mathrm{e})x + 1 \right] \, \mathrm{d}x. \end{equation*}
+The integral is easy to compute, and it turns out that
+\begin{equation*} \mathrm{Area} = - \mathrm{e}^x \, \big|_0^1 - \frac{1}{2} (1 - \mathrm{e})x^2 \, \big|_0^1 + x \, \big|_0^1. \end{equation*}
+A straightforward computation shows that
+\finalanswer{
+\mathrm{Area} = - \mathrm{e} + 1 - \frac{1}{2}(1 - \mathrm{e}) + 1 = \frac{3 - \mathrm{e}}{2}.
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Compute the integral
+\begin{equation*} \int_0^{\sqrt{3}} |x - 1| \arctan x \, \mathrm{d}x.\end{equation*}
+\end{exerciseBox}
+
+\begin{solutionBox} We first divide the integral using the fact that $|x - 1|$ equals $1-x$ for all $x \in (0, \, 1)$ and equals $x-1$ for all $x \in (1, \, \sqrt{3})$. In particular, we have
+\begin{equation*} \int_0^{\sqrt{3}} |x - 1| \arctan x \, \mathrm{d}x = \int_0^1 (1-x) \arctan x \, \mathrm{d}x + \int_1^{\sqrt{3}} (x-1) \arctan x \, \mathrm{d}x.\end{equation*}
+The integral of the arctangent is well-known, so we only need to compute a primitive of $x \arctan x$. In the \hyperref[ex51]{Exercise \ref{ex51}} we prove that $x^2 \arctan x - x + \arctan x$ is a primitive of $x \arctan x$, so
+\begin{equation*} \begin{aligned}  \int_0^1 (1-x) \arctan x \, \mathrm{d}x & = - \left[x^2 \arctan x - x + \arctan x \right]_0^1 + \left[ \frac{1}{x^2 + 1} \right]_{0}^1 =
+\\[1em]  & = -(2 \arctan 1 - 1) + \frac{1}{2} - 1 =  \frac{1}{2} - 2 \arctan 1 , \end{aligned} \end{equation*}
+and
+\begin{equation*} \begin{aligned}  \int_1^{\sqrt{3}} (x - 1) \arctan x \, \mathrm{d}x & = \left[x^2 \arctan x - x + \arctan x \right]_1^{\sqrt{3}} - \left[ \frac{1}{x^2 + 1} \right]_1^{\sqrt{3}} =
+\\[1em]  & = (4 \arctan \sqrt{3} - \sqrt{3}) - (2 \arctan 1 - 1) - \frac{1}{4} + \frac{1}{2}. \end{aligned} \end{equation*}
+The solution is thus given by
+\finalanswer{
+\int_0^{\sqrt{3}} |x - 1| \arctan x \, \mathrm{d}x = -\frac{1}{6}(-2 + \sqrt{3}) (3 + 2 \pi).
+}\end{solutionBox}
+
+\chapter{Definite integrals}
+
+\begin{exerciseBox} \textbf{Exercise.}  Compute a primitive of the function
+\begin{equation*} f(x) = x (x^2 + 5)^{- \frac{3}{2}}. \end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} The idea is to use the change of variable formula with $u := x^2 + 5$, whose differential is given by $\mathrm{d}u = 2x \mathrm{d}x$. Then, a straightforward computation shows that
+\begin{equation*}\begin{aligned} \int x (x^2 + 5)^{- \frac{3}{2}} \, \mathrm{d}x & = \frac{1}{2} \int u^{- \frac{3}{2}} \, \mathrm{d}u =
+\\[1em] & = \frac{1}{2} \left( - \frac{2}{\sqrt{u}} \right) =
+\\[1em] & = - \frac{1}{\sqrt{u}} = - \frac{1}{\sqrt{x^2 + 5}}.  \end{aligned} \end{equation*} 
+It follows that a primitive of $f$ is given by the function
+\finalanswer{
+F(x) := - \frac{1}{\sqrt{x^2 + 5}}.
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Compute a primitive of the function
+\begin{equation*} f(x) = \frac{1}{x (\log x)^{\frac{2}{3}}}. \end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} In a similar way, we solve this exercise introducing the new variable $u := \log x$, whose differential is given by $\mathrm{d}u = x^{-1} \mathrm{d}x$. Then, a straightforward computation shows that
+\begin{equation*}\begin{aligned} \int \frac{1}{x (\log x)^{\frac{2}{3}}} \, \mathrm{d}x & = \int u^{- \frac{2}{3}} \, \mathrm{d}u =
+\\[1em] & = 3 \sqrt[3]{u} =3 \sqrt[3]{\log x}. \end{aligned} \end{equation*} 
+It follows that a primitive of $f$ is given by the function
+\finalanswer{
+F(x) := 3 \sqrt[3]{\log x}.
+} \end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Let $a, \, b \in \R$ be real parameters. Compute a primitive of the function
+\begin{equation*} f(x) = \frac{1}{a \sin x + b \cos x}. \end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} The integral is rather involved and several steps are necessary to obtain the solution.
+
+\paragraph{Step 1.} First, we use the change of variables formula with
+\begin{equation*} u = \tan \frac{x}{2} \quad \text{and} \quad \mathrm{d}u = \frac{1}{2} \sec^2 \frac{x}{2}\, \mathrm{d}x. \end{equation*}
+Recall now that both $\sin(x)$ and $\cos(x)$ can be easily expressed in terms of the new variable $u$ as
+\begin{equation*} \sin(x) = \frac{2u}{u^2+1} \quad \text{and} \quad \cos(x) = \frac{1 - u^2}{1 + u^2}. \end{equation*}
+It turns out that
+\begin{equation*}(\star) := \int  \frac{1}{a \sin x + b \cos x} \, \mathrm{d}x = \int \frac{2}{(1+ u^2) \left( \frac{2au}{u^2 + 1} + \frac{b(1 - u^2)}{1 + u^2} \right)} \, \mathrm{d}u. \end{equation*}
+
+\paragraph{Step 2.} We can simplify the denominator multiplying everything by $1 + u^2$, obtaining
+\begin{equation*}(\star) = 2 \int \frac{1}{- bu^2 + 2au + b} \, \mathrm{d}u. \end{equation*}
+Suppose now that both $a$ and $b$ are positive. Complete the square on the denominator:
+\begin{equation*}(\star) = 2 \int \frac{1}{ - \left( \sqrt{b}u - \frac{a}{\sqrt{b}} \right)^2 + \frac{4a^2 + 4b^2}{4b}} \, \mathrm{d}u. \end{equation*}
+
+\paragraph{Step 3.} Now the integral can be reduced easily to a known one (the inverse function of $\arctan$ to be precise) by the standard method. The final answer is
+\finalanswer{
+\int \frac{1}{a \sin x + b \cos x} \, \mathrm{d}x = \frac{2 \tanh^{-1}\left( \frac{-a + b \tan \frac{x}{2}}{\sqrt{a^2 + b^2}} \right)}{\sqrt{a^2 + b^2}} + C.
+}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Compute a primitive of the function
+\begin{equation*} f(x) = \frac{\sqrt{x} - 1}{2x + 2 \sqrt{x} + 1}. \end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} The goal is to compute the integral
+\begin{equation*} \star := \int \frac{\sqrt{x} - 1}{2x + 2 \sqrt{x} + 1} \, \mathrm{d}x. \end{equation*}
+
+\paragraph{Step 1.} Let us introduce a new variable. Set $y := \sqrt{x}$, with differential $\mathrm{d}y = (2 \sqrt{x})^{-1} \, \mathrm{d}x$. Then
+\begin{equation*} \star = \int \frac{ 2(y - 1)y }{2y^2 + 2y + 1} \, \mathrm{d}y. \end{equation*}
+The two polynomials (numerator and denominator) have the same degree, and therefore we sum and subtract enough terms to simplify. More precisely, we have
+\begin{equation*} \int \frac{ 2(y - 1)y }{2y^2 + 2y + 1} \, \mathrm{d}y = \int \frac{ 2y^2 - 2y \pm 4y \pm 1 }{2y^2 + 2y + 1} \, \mathrm{d}y = y - \int \frac{4y + 1}{2y^2 + 2y + 1} \, \mathrm{d}y. \end{equation*}
+
+\paragraph{Step 2.} We now focus on the remaining integral. The denominator has a negative $\Delta$, and therefore we rewrite it as follows:
+\begin{equation*}   \frac{4y + 1}{2y^2 + 2y + 1} = \frac{4y + 2}{2y^2 + 2y + 1} - \frac{1}{2y^2 + 2y + 1}. \end{equation*}
+The first term is easy to integrate since the numerator is the derivative of the denominator. It turns out that
+\begin{equation*}\int \frac{4y + 2}{2y^2 + 2y + 1} \, \mathrm{d}y = \int \frac{1}{s} \, \mathrm{d}s = \log(s) = \log(2y^2 + 2y + 1). \end{equation*}
+The second integral, on the other hand, requires a little bit of work. Start by completing the square on the denominator:
+\begin{equation*} \int \frac{1}{2y^2 + 2y + 1} \, \mathrm{d}y = \int \frac{1}{\left( \sqrt{2}y + \frac{1}{\sqrt{2}} \right)^2 + \frac{1}{2}} \, \mathrm{d}y \end{equation*}
+
+\paragraph{Step 3.} We use the well-known integral of $\tan^{-1}$ to conclude that
+\begin{equation*} \int \frac{1}{\left( \sqrt{2}y + \frac{1}{\sqrt{2}} \right)^2 + \frac{1}{2}} \, \mathrm{d}y = \tan^{-1} \left(2y + 1 \right). \end{equation*}
+We combine all these equalities to obtain the sought answer:
+\finalanswer{
+\int \frac{\sqrt{x} - 1}{2x + 2 \sqrt{x} + 1} \, \mathrm{d}x=  \sqrt{x} - \log(2x + 2 \sqrt{x} + 1) + \tan^{-1}(2 \sqrt{x} + 1) + C.
+}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Compute the primitive of
+\begin{equation*} f(x) = x \log(1 + x^2) \end{equation*}
+satisfying the constraint $F(1) = \log 2$. \end{exerciseBox}
+
+\begin{solutionBox} Recall that
+\begin{equation*} \int \log s \, \mathrm{d}s = s ( \log s - 1). \end{equation*}
+Now to deal with our integral we change variable and set $s := 1 + x^2$. It turns out that
+\begin{equation*} \int x \log(1 + x^2) \, \mathrm{d}x = \frac{1}{2} \int \log s \, \mathrm{d}s = \frac{1}{2}s ( \log s - 1) + C. \end{equation*}
+The primitive $F_C$, depending on the choice of the constant $C$, is thus given by
+\begin{equation*}F_C(x) = \frac{1}{2}(x^2 + 1) ( \log (x^2 +1) - 1) + C. \end{equation*}
+To conclude the exercise, we require $F_C(1)$ to be equal to $\log 2$. We have
+\begin{equation*}F_C(1) =  \log 2 - 1 + C = \log 2 \iff C = 1, \end{equation*}
+which means that the correct answer is
+\finalanswer{
+F(x) = \frac{1}{2}(x^2 + 1) ( \log (x^2 +1) - 1) + 1.
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Compute the area of the region between the $x$-axis and the graph of the function
+\begin{equation*} f(x) = (x + 1) \log(x^2 + 4) \end{equation*}
+with $|x| \leq 1$. \end{exerciseBox}
+
+\begin{solutionBox} Notice that $f$ is nonnegative for all $|x| \leq 1$; thus the area of the region between the $x$-axis and the graph of $f$ is nothing but its integral:
+\begin{equation*}A = \int_{-1}^1 (x + 1) \log(x^2 + 4) \, \mathrm{d}x. \end{equation*}
+
+\paragraph{Step 1.} Integrate by parts with $f = \log(x^2 + 4)$ and $g = x + 1$. It turns out that
+\begin{equation*}A = \log(25) - \int_{-1}^1 \frac{x(x+1)^2}{x^2 + 4} \, \mathrm{d}x. \end{equation*}
+The numerator polynomial has a higher degree than the denominator polynomial. The long division algorithm shows that
+\begin{equation*}\frac{x(x+1)^2}{x^2 + 4} = x + 2 - \frac{3x + 8}{x^2 + 4}, \end{equation*}
+which means that
+\begin{equation*}A = \log(25) - \left( \frac{x^2}{2} + 2x \right)_{-1}^1 + \int_{-1}^1 \frac{3x + 8}{x^2 + 4} \, \mathrm{d}x. \end{equation*}
+
+\paragraph{Step 2.} We will now deal with the remaining integral. First notice that
+\begin{equation*}\int_{-1}^1 \frac{3x + 8}{x^2 + 4} \, \mathrm{d}x = \int_{-1}^1 \frac{3x}{x^2 + 4} \, \mathrm{d}x +  \int_{-1}^1 \frac{8}{x^2 + 4} \, \mathrm{d}x. \end{equation*}
+The function $\frac{x}{x^2+4}$ is odd; hence its integral on $[-1, \, 1]$ is zero by symmetry. The second term, on the other hand, can be easily evaluated using the well-known identity
+\begin{equation*}\int \frac{1}{1+x^2} \, \mathrm{d}x = \tan^{-1}(x). \end{equation*}
+It turns out that the correct answer is
+\finalanswer{
+A = \log(25) - 4 + 8 \tan^{-1} \frac{1}{2}.
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Determine for which values of the real parameter $\alpha$ the following improper integral converges:
+\begin{equation*} \int_1^{+ \infty} \left( x^4 \cosh x + 1 \right)^{-\alpha} \, \mathrm{d}x. \end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} We claim that the integral converges if and only if $\alpha > 0$.
+
+\paragraph{Case $\alpha = 0$.} The integral of the constant $1$ over an infinite interval is obviously infinite, i.e.,
+\begin{equation*} \int_1^{+ \infty} 1 \, \mathrm{d}x = + \infty. \end{equation*}
+
+\paragraph{Case $\alpha > 0$.} The naive idea is that the integral converges because the denominator $(x^4 \cosh x + 1)^\alpha$ goes to infinity fast enough. Recall that
+\begin{equation*}\cosh x = \frac{1}{2} ( \mathrm{e}^x + \mathrm{e}^{-x} ), \end{equation*}
+and thus it is easy to prove that
+\begin{equation*} \cosh x \geq x \quad \text{for all $x \in \R$}. \end{equation*}
+Indeed, we have
+\begin{equation*} (x-1)^2 \geq 0 \implies x \leq \frac{1}{2} + \frac{1}{2} x^2 \implies x + \frac{1}{2} \leq 1 + \frac{1}{2}x^2, \end{equation*}
+and now 
+\begin{equation*} \cosh x \geq 1 + \frac{x^2}{2} \geq \frac{1}{2} +x \geq x \end{equation*}
+for all $x \in \R$. The integral may be decomposed as the sum
+\begin{equation*} \int_1^{+ \infty} \left( x^4 \cosh x + 1 \right)^{-\alpha} \, \mathrm{d}x = \int_1^M \left( x^4 \cosh x + 1 \right)^{-\alpha} \, \mathrm{d}x + \int_M^{+ \infty} \left( x^4 \cosh x + 1 \right)^{-\alpha} \, \mathrm{d}x \end{equation*}
+for any $M > 0$, and the integral
+\begin{equation*} \int_1^{M} \left( x^4 \cosh x + 1 \right)^{-\alpha} \, \mathrm{d}x \end{equation*}
+is finite for all $\alpha > 0$ since $[0, \, M]$ is a compact set and the function is continuous. Therefore, we only need to estimate from above the integral
+\begin{equation*} \int_M^{+ \infty} \left( x^4 \cosh x + 1 \right)^{-\alpha} \, \mathrm{d}x. \end{equation*}
+For $M$ big enough, using the definition of $\cosh x$ in terms of the exponential function, we obtain
+\begin{equation*} \int_M^{+ \infty} \left( x^4 \cosh x + 1 \right)^{-\alpha} \, \mathrm{d}x \simeq \int_M^{+ \infty} \left(\frac{1}{x^4 \mathrm{e}^x}\right)^\alpha \, \mathrm{d}x \simeq \int_M^{+ \infty} \mathrm{e}^{- \alpha x} \, \mathrm{d}x, \end{equation*}
+and this integral is obviously finite for all $\alpha > 0$.
+
+\paragraph{Case $\alpha < 0$.} First, we notice that
+\begin{equation*}\begin{aligned} \int_1^{+ \infty} \left( x^4 \cosh x + 1 \right)^{-\alpha} \, \mathrm{d}x & \geq \int_1^{+ \infty} (x^4 \cosh x)^{-\alpha} \, \mathrm{d}x \geq
+\\[1em] & \geq \int_1^{+ \infty} x^{- 5 \alpha} \, \mathrm{d}x. \end{aligned} \end{equation*}
+The last integral is divergent for all $\alpha < 0$ since it is nothing but the area under a nonconstant polynomial. We conclude that
+\finalanswer{
+\int_1^{+ \infty} \left( x^4 \cosh x + 1 \right)^{-\alpha} \, \mathrm{d}x < + \infty \iff \alpha > 0.
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Determine for which values of the real parameter $\alpha$ the following improper integral converges:
+\begin{equation*} \int_1^{+ \infty} \left( \frac{x \arctan x}{x^7 + \sin( \mathrm{e}^x )} \right)^{\alpha} \, \mathrm{d}x. \end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} Similarly to the previous exercise, we only have to deal with the behaviour of the integral in a neighbourhood of infinity.
+
+\paragraph{Case $\alpha > \frac{1}{6}$.} We know that
+\begin{equation*} \sin(y) \in [-1, \, 1] \quad \text{and} \quad \arctan y \in [- \frac{\pi}{2}, \, \frac{\pi}{2}] \end{equation*}
+for all $y \in \R$, and therefore both functions are bounded. It follows that
+\begin{equation*} x^7 + 1 \geq x^7 + \sin( \mathrm{e}^x ) \geq x^7 - 1 \implies \frac{1}{x^7 + \sin(\mathrm{e}^x)} \leq \frac{1}{x^7 - 1} \end{equation*}
+for all $x$ big enough (e.g., bigger than $2$), and, similarly,
+\begin{equation*} x \arctan x \leq \frac{\pi}{2} x.\end{equation*}
+The integral may be decomposed as the sum
+\begin{equation*} \int_1^{+ \infty} \left( \frac{x \arctan x}{x^7 + \sin( \mathrm{e}^x )} \right)^{\alpha} \, \mathrm{d}x = \int_1^M \left( \frac{x \arctan x}{x^7 + \sin( \mathrm{e}^x )} \right)^{\alpha} \, \mathrm{d}x + \int_2^{+ \infty} \left( \frac{x \arctan x}{x^7 + \sin( \mathrm{e}^x )} \right)^{\alpha} \, \mathrm{d}x \end{equation*}
+for any $M > 1$. The first term is obviously finite; we now employ the estimates above to deal with the second term. A straightforward computation shows that
+\begin{equation*}\int_M^{+ \infty} \left( \frac{x \arctan x}{x^7 + \sin( \mathrm{e}^x )} \right)^{\alpha} \, \mathrm{d}x \leq \left(\frac{\pi}{2} \right)^\alpha \int_M^{+ \infty} \left( \frac{x}{x^7 - 1} \right)^\alpha \, \mathrm{d}x \simeq \int_M^{+ \infty} x^{-6 \alpha} \, \mathrm{d}x, \end{equation*}
+and this last integral is finite for all $\alpha > 1/6$.
+
+\paragraph{Case $\alpha \leq \frac{1}{6}$.} The integral may be decomposed as the sum
+\begin{equation*} \int_1^{+ \infty} \left( \frac{x \arctan x}{x^7 + \sin( \mathrm{e}^x )} \right)^{\alpha} \, \mathrm{d}x = \int_1^M \left( \frac{x \arctan x}{x^7 + \sin( \mathrm{e}^x )} \right)^{\alpha} \, \mathrm{d}x + \int_M^{+ \infty} \left( \frac{x \arctan x}{x^7 + \sin( \mathrm{e}^x )} \right)^{\alpha} \, \mathrm{d}x \end{equation*}
+for any $M > 1$. The first term is obviously finite; we now employ the estimates above to deal with the second term. A straightforward computation shows that
+\begin{equation*}\int_2^{+ \infty} \left( \frac{x \arctan x}{x^7 + \sin( \mathrm{e}^x )} \right)^{\alpha} \, \mathrm{d}x \geq \left(- \frac{\pi}{2} \right)^\alpha \int_2^{+ \infty} \left( \frac{x}{x^7 + 1} \right)^\alpha \, \mathrm{d}x \simeq \int_2^{+ \infty} x^{-6 \alpha} \, \mathrm{d}x, \end{equation*}
+and this last integral is divergent for all $\alpha \leq 1/6$. We conclude that
+\finalanswer{
+\int_1^{+ \infty} \left( \frac{x \arctan x}{x^7 + \sin( \mathrm{e}^x )} \right)^{\alpha} \, \mathrm{d}x < + \infty \iff \alpha > \frac{1}{6}.
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Indicate which ones of the following improper integrals are convergent:
+\begin{equation*}I_1 := \int_1^{+ \infty} \frac{ \sqrt{x}(1 - \sqrt[2]{x^3})}{x^3 \log(1 + x)} \, \mathrm{d}x, \quad I_2 := \int_1^{+ \infty} \frac{ \sqrt{x}(1 + \sqrt[2]{x^3})}{x^4 \log(1 + x)} \, \mathrm{d}x, \quad I_3 := \int_0^1 \frac{ \sqrt{x}(\sqrt{x} - 1)}{ \log(1 + \sqrt[4]{x^3})} \, \mathrm{d}x.\end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} We study the improper integrals separately.
+
+\paragraph{First Integral.} The integral may be decomposed as the sum
+\begin{equation*}I_1 = \int_1^{+ \infty} \frac{ \sqrt{x}(1 - \sqrt[2]{x^3})}{x^3 \log(1 + x)} \, \mathrm{d}x = \int_1^R \frac{ \sqrt{x}(1 - \sqrt[2]{x^3})}{x^3 \log(1 + x)} \, \mathrm{d}x + \int_R^{+ \infty} \frac{ \sqrt{x}(1 - \sqrt[2]{x^3})}{x^3 \log(1 + x)} \, \mathrm{d}x , \end{equation*} 
+and it is easy to check that the first integral is finite. For $R$ big enough, we have that
+\begin{equation*} \int_R^{+ \infty} \frac{ \sqrt{x}(1 - \sqrt[2]{x^3})}{x^3 \log(1 + x)} \, \mathrm{d}x \simeq \int_R^{+ \infty} \frac{- x^2}{x^3 \log(1 + x)} \, \mathrm{d}x \simeq - \int_R^{+ \infty} \frac{1}{x \log(x)} \, \mathrm{d}x, \end{equation*} 
+and we know that the last integral is divergent, and therefore $I_1$ is not a convergent integral.
+
+\paragraph{Second Integral.} The integral may be decomposed as the sum
+\begin{equation*}I_2 = \int_1^{+ \infty} \frac{ \sqrt{x}(1 + \sqrt[2]{x^3})}{x^4 \log(1 + x)} \, \mathrm{d}x = \int_1^R \frac{ \sqrt{x}(1 + \sqrt[2]{x^3})}{x^4 \log(1 + x)} \, \mathrm{d}x + \int_R^{+ \infty} \frac{ \sqrt{x}(1 + \sqrt[2]{x^3})}{x^4 \log(1 + x)} \, \mathrm{d}x, \end{equation*} 
+and it is easy to check that the first integral is finite. For $R$ big enough, we have that
+\begin{equation*} \int_R^{+ \infty} \frac{ \sqrt{x}(1 + \sqrt[2]{x^3})}{x^4 \log(1 + x)} \, \mathrm{d}x \simeq \int_R^{+ \infty} \frac{- x^2}{x^4 \log(x)} \, \mathrm{d}x \simeq - \int_R^{+ \infty} \frac{1}{x^2 \log(x)} \, \mathrm{d}x, \end{equation*} 
+and we know that the last integral is convergent, and thus so is $I_2$.
+
+\paragraph{Third Integral.} In this case, we need to analyse the behaviour of the integral function in a neighbourhood of the origin. We consider the decomposition
+\begin{equation*}I_3 = \int_0^{1} \frac{ \sqrt{x}(\sqrt{x} - 1)}{\log(1 + x^{\frac{3}{4}}) } \, \mathrm{d}x = \int_0^\epsilon \frac{ \sqrt{x}(\sqrt{x} - 1)}{\log(1 + x^{\frac{3}{4}}) } \, \mathrm{d}x + \int_\epsilon^1 \frac{ \sqrt{x}(\sqrt{x} - 1)}{\log(1 + x^{\frac{3}{4}}) } \, \mathrm{d}x, \end{equation*} 
+and it is easy to check that the second integral is finite. For $\epsilon$ small enough, using the Taylor expansion of $\log(1 + y)$ at $y = 0$, we obtain
+\begin{equation*} \int_0^\epsilon \frac{ \sqrt{x}(\sqrt{x} - 1)}{\log(1 + x^{\frac{3}{4}}) } \, \mathrm{d}x \simeq - \int_0^\epsilon \frac{x^{\frac{1}{2}}}{x^{\frac{3}{4}}} \, \mathrm{d}x = \int_0^\epsilon x^{- \frac{1}{4}} \, \mathrm{d}x < + \infty, \end{equation*} 
+and hence $I_3$ converges. We conclude that
+\finalanswer{
+\text{$I_1$ diverges, while both $I_2$ and $I_3$ converge}.
+}\end{solutionBox}
+
+
+\chapter{Series convergence}
+
+\begin{exerciseBox} \textbf{Exercise.} Compute the sum of the series
+\begin{equation*}\sum_{n = 1}^\infty \frac{1}{n^2 + 3n}.\end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} The idea is to rewrite the $n$th term in a different way. More precisely, notice that
+\begin{equation*} \frac{1}{n^2 + 3n} = \frac{A}{n} + \frac{B}{n + 3},\end{equation*}
+where $A$ and $B$ are constants satisfying the system
+\begin{equation*} \begin{cases} A + B = 0, \\[0.6em] 3A = 1 \end{cases} \implies A = \frac{1}{3} = - B.\end{equation*}
+In particular, we have that
+\begin{equation*} \frac{1}{n^2 + 3n} = \frac{1}{3} \left[ \frac{1}{n} - \frac{1}{n + 3} \right].\end{equation*}
+The sum is telescopic and only the first three terms survive (since at infinity it goes to zero); it turns out that
+\finalanswer{
+\sum_{n = 1}^\infty \frac{1}{n^2 + 3n} =\frac{a_1 + a_2 + a_3}{3} = \frac{1}{3} \left[ 1 + \frac{1}{2} + \frac{1}{3} \right] = \frac{11}{18}. 
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.} Compute the sum of the series
+\begin{equation*}\sum_{n = 1}^\infty \frac{\sqrt{2 + n} - \sqrt{n}}{\sqrt{n^2 + 2n}}.\end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} The idea is to rewrite the $n$th term in a different way. More precisely, notice that
+\begin{equation*}\frac{\sqrt{2 + n} - \sqrt{n}}{\sqrt{n^2 + 2n}} = \frac{1}{\sqrt{n}} - \frac{1}{\sqrt{n + 2}}.\end{equation*}
+The sum is telescopic and only the first two terms survive (since at infinity it goes to zero); it turns out that
+\finalanswer{
+\sum_{n = 1}^\infty \frac{\sqrt{2 + n} - \sqrt{n}}{\sqrt{n^2 + 2n}} = a_1 + a_2 = 1 + \frac{1}{\sqrt{2}} = \frac{1 + \sqrt{2}}{\sqrt{2}}.
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Indicate which ones of the following series are convergent:
+\begin{equation*}\sum_{n \geq 1} \frac{(2n)!}{(n!)^2}, \quad \sum_{n \geq 1} \frac{(n!)^2}{2^{n^2}}, \quad \sum_{n \geq 1} \left( 1 - \frac{1}{n} \right)^{n^2}.\end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} We study the series separately. Recall that the ratio test asserts that a series
+\begin{equation*}\sum_{n \geq 1} a_n,\end{equation*}
+$a_n \geq 0$ for all $n \in \N$, converges whenever
+\begin{equation*}\lim_{n \to + \infty} \frac{a_{n + 1}}{a_n} < 1\end{equation*}
+and diverges whenever
+\begin{equation*}\lim_{n \to + \infty} \frac{a_{n + 1}}{a_n} > 1.\end{equation*}
+
+\paragraph{Step 1.} A necessary condition for $\sum_{n \geq 1} a_n$ to converge is that $a_n$ is an infinitesimal sequence, which means that $\lim_{n\to + \infty} a_n = 0$. In our particular case, we have that
+\begin{equation*} \lim_{n \to + \infty} \frac{(2n)!}{(n!)^2} = \lim_{n \to + \infty} \frac{ 2n(2n - 1) \dots (n + 1) }{n!} = \infty, \end{equation*}
+and therefore the first series diverges.
+
+\paragraph{Step 2.} The ratio is given by
+\begin{equation*}\begin{aligned} \frac{a_{n + 1}}{a_n} & = \frac{[(n + 1)!]^2}{2^{(n + 1)^2}} \frac{2^{n^2}}{(n!)^2} =
+\\[1em] & = (n + 1)^2 2^{- 2n - 1},
+\end{aligned} \end{equation*}
+and thus
+\begin{equation*}\lim_{n \to + \infty} \frac{a_{n + 1}}{a_n} = \lim_{n \to + \infty} \frac{(n+1)^2}{2^{2n + 1}} = 0.\end{equation*}
+We conclude that, by the ratio test, the series 
+\begin{equation*} \sum_{n \geq 1} \frac{(n!)^2}{2^{n^2}}\end{equation*}
+converges.
+
+\paragraph{Step 3.} To deal with the third series, we simply need to employ the ratio test. Indeed, it is easy to see that
+\begin{equation*} \limsup_{n \to + \infty} \sqrt[n]{a_n} = \lim_{n \to + \infty} \left( 1 - \frac{1}{n} \right)^{n} = \mathrm{e}^{-1}, \end{equation*}
+and this is less than $1$, which means that the series converges absolutely. We conclude that
+\finalanswer{
+\text{$S_1$ diverges, while both $S_2$ and $S_3$ converge}.
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Indicate which ones of the following series are convergent:
+\begin{equation*}\sum_{n \geq 1} (-1)^n \left(1 - n \sin \frac{1}{n} \right), \quad \sum_{n \geq 1} (-1)^n(2^{\frac{1}{n}} - 1), \quad \sum_{n \geq 1} \frac{n \cos(n \pi)}{1 + n}.\end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} We study the series separately.
+
+\paragraph{Step 1.} The idea is to apply the Leibniz criterion, which asserts that the series
+\begin{equation*}\sum_{n \geq 1} (-1)^n \left(1 - n \sin \frac{1}{n} \right)\end{equation*}
+converges if the sequence
+\begin{equation*}a_n := \left(1 - n \sin \frac{1}{n} \right) \end{equation*}
+is infinitesimal, and definitively decreasing. To prove that it is infinitesimal, note that
+\begin{equation*}\lim_{n \to + \infty} \left(1 - n \sin \frac{1}{n} \right) = \lim_{n \to + \infty} \left(1 - n \frac{1}{n} \right) = 0, \end{equation*}
+as a consequence of the Taylor expansion at $y = 0$ of the function $\sin y$. Now consider the function
+\begin{equation*} f(x) = - \frac{1}{x} \sin x \end{equation*}
+for $x \in (0, \, 1]$. It is easy to prove that $f$ is strictly increasing in the interval $(0, \, 1]$. It follows immediately that the function
+\begin{equation*} x \longmapsto f( \frac{1}{x} ) \end{equation*}
+is strictly decreasing for $x \geq 1$. In particular, the first series satisfies the Leibniz criterion, and thus converges.
+
+\paragraph{Step 2.} We use the Leibniz criterion. The sequence
+\begin{equation*}b_n := (2^{\frac{1}{n}} - 1)\end{equation*}
+is clearly decreasing because the function
+\begin{equation*} f(x) := 2^x - 1 \end{equation*}
+is strictly increasing in the interval $[0, \, 1]$. Furthermore, we have that
+\begin{equation*} \lim_{n \to + \infty} 2^{\frac{1}{n}} = 1 \implies \lim_{n \to + \infty} (2^{\frac{1}{n}} - 1) = 0, \end{equation*}
+which means that $b_n$ is also infinitesimal. A simple application of the criterion mentioned above proves that this series is convergent.
+
+\paragraph{Step 3.} The series can be rewritten as
+\begin{equation*}\sum_{n \geq 1} \frac{n \cos(n \pi)}{1 + n} = \sum_{n \geq 1} (-1)^n \frac{n}{n + 1}.\end{equation*}
+We cannot apply the Leibniz criterion because $\frac{n}{n+1}$ is not infinitesimal (its limit as $n \to \infty$ equals one.) To prove that it does not converge, we need to evaluate the limit
+\begin{equation*} \lim_{n \to + \infty} (-1)^n \frac{n}{n+1}. \end{equation*}
+It is easy to see that this limit does not exist. In fact, if we consider the subsequence $n = 2k$, we find that
+\begin{equation*} \lim_{k \to + \infty} \frac{2k}{2k+1} = 1, \end{equation*}
+while, if we consider the subsequence $n = 2k + 1$, we obtain
+\begin{equation*} \lim_{k \to + \infty} - \frac{2k + 1}{2k+2} = -1. \end{equation*}
+The necessary condition does not hold, and thus the series diverges. We conclude that
+\finalanswer{
+\text{$S_3$ diverges, while both $S_1$ and $S_2$ converge}.
+}\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Determine for which values of the real parameter $x$ the following series converges:
+\begin{equation*} \sum_{n \geq 1} \frac{1}{n} \left( \frac{x}{2} \right)^n. \end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} We need to discuss a few cases, but the main ingredient is the convergence/divergence of the geometric sum.
+
+\paragraph{Case $x > 0$.} The ratio is given by
+\begin{equation*}\begin{aligned} \frac{a_{n + 1}}{a_n} & = \frac{x^{n+1}}{(n+1)2^{n+1}} \frac{n 2^n}{x^n} =
+\\[1em] & = \frac{x}{2} \frac{n}{n+1},
+\end{aligned} \end{equation*}
+and therefore the limit is given by
+\begin{equation*}\lim_{n \to + \infty} \frac{a_{n+1}}{a_n} = \frac{x}{2}, \end{equation*}
+which means that the series converges for $0 \leq x < 2$ and diverges for $x > 2$.
+
+\paragraph{Subcase $x = 2$.} The series is given by the harmonic one
+\begin{equation*} \sum_{n \geq 1} \frac{1}{n} , \end{equation*}
+which is known to be divergent.
+
+\paragraph{Case $x < 0$.} The seris can be rewritten as
+\begin{equation*} \sum_{n \geq 1} (-1)^n \frac{1}{n} \left( \frac{-x}{2} \right)^n. \end{equation*}
+We notice that $a_n$ is infinitesimal if and only if
+\begin{equation*} \lim_{n \to + \infty}  \frac{1}{n} \left( \frac{-x}{2} \right)^n = 0, \end{equation*}
+and this happens if and only if $0 < -x \leq 2$. We also notice that for $0 < - x < 2$ the sequence $a_n$ is decreasing, and thus the Leibniz criterion implies that
+\begin{equation*} \sum_{n \geq 1} (-1)^n \frac{1}{n} \left( \frac{-x}{2} \right)^n \end{equation*}
+converges for $-2 < x < 0$. To prove that it diverges for $x < - 2$, we need to evaluate the limit
+\begin{equation*} \lim_{n \to + \infty} (-1)^n \frac{1}{n} \left( \frac{-x}{2} \right)^n. \end{equation*}
+As above, we consider the subsequence $n = 2k$ and obtain
+\begin{equation*} \lim_{k \to + \infty} \frac{1}{2k} \left( \frac{-x}{2} \right)^{2k} = + \infty, \end{equation*}
+while, if we consider $n = 2k + 1$, we find that
+\begin{equation*} \lim_{k \to + \infty}- \frac{1}{2k + 1} \left( \frac{-x}{2} \right)^{2k + 1} = - \infty. \end{equation*}
+In particular, the limit does not exist, and thus the series is divergent for $x < -2$.
+
+\paragraph{Subcase $x = - 2$.} The series is given by the harmonic oscillating one
+\begin{equation*} \sum_{n \geq 1} (-1)^n \frac{1}{n} , \end{equation*}
+which is known to be convergent by the usual Leibniz criterion.
+
+\paragraph{Conclusion.} We have that
+\finalanswer{
+ \sum_{n \geq 1} \frac{1}{n} \left( \frac{x}{2} \right)^n < \infty \iff x \in [-2, \, 2).
+}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Determine for which values of the real parameter $x$ the following series converges:
+\begin{equation*} \sum_{n \geq 1} n^x x^n. \end{equation*} \end{exerciseBox}
+
+\begin{solutionBox} We need to discuss a few cases, but the main ingredient is the convergence/divergence of the geometric sum.
+
+\paragraph{Case $x > 0$.} The ratio is given by
+\begin{equation*}\begin{aligned} \frac{a_{n + 1}}{a_n} & = \frac{(n + 1)^x x^{n + 1}}{n^x x^n}
+\\[1em] & = x  \frac{(n + 1)^x}{n^x}
+\\[1em] & = x \left( 1 + \frac{1}{n} \right)^x = x,
+\end{aligned} \end{equation*}
+and therefore the limit is given by
+\begin{equation*}\lim_{n \to + \infty} \frac{a_{n+1}}{a_n} =x, \end{equation*}
+which means that the series converges for $0 \leq x < 1$ and diverges for $1 > 2$.
+
+\paragraph{Subcase $x = 1$.} The series is given by
+\begin{equation*} \sum_{n \geq 1} n, \end{equation*}
+which is clearly divergent (e.g., by the comparison test.)
+
+\paragraph{Case $x < 0$.} The seris can be rewritten as
+\begin{equation*} \sum_{n \geq 1} (-1)^n n^x (-x)^n. \end{equation*}
+We notice that $a_n$ is infinitesimal if and only if
+\begin{equation*} \lim_{n \to + \infty}  n^x (-x)^n = 0, \end{equation*}
+and this happens if and only if $0 < -x \leq 1$. We also notice that for $0 < - x < 1$ the sequence $a_n$ is decreasing, and thus the Leibniz criterion implies that
+\begin{equation*} \sum_{n \geq 1} (-1)^n n^x (-x)^n\end{equation*}
+converges for $- 1 < x < 0$. To prove that it diverges for $x < - 1$, we need to evaluate the limit
+\begin{equation*} \lim_{n \to + \infty} (-1)^n n^x (-x)^n. \end{equation*}
+As above, we consider the subsequence $n = 2k$ and obtain
+\begin{equation*} \lim_{k \to + \infty}(2k)^x x^{2k} = + \infty, \end{equation*}
+while, if we consider $n = 2k + 1$, we find that
+\begin{equation*} \lim_{k \to + \infty}- (2k + 1)^x x^{2k + 1} = - \infty. \end{equation*}
+In particular, the limit does not exist, and thus the series is divergent for $x < -1$.
+
+\paragraph{Subcase $x = -1$.} The series is given by
+\begin{equation*} \sum_{n \geq 1} (-1)^n n^{-1}, \end{equation*}
+which is clearly convergent by the Leibniz criterion.
+
+\paragraph{Conclusion.} We have that
+\finalanswer{
+ \sum_{n \geq 1} n^x x^n < \infty \iff x \in [-1, \, 1).
+}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Consider the sequence inductively defined as $a_0 = 1$ and $a_{n + 1} = \frac{1}{2}a_n + 2^{-n}$. Determine whether or not the series $\sum_{n \geq 0} a_n$ is convergent and find the value of the sum. \end{exerciseBox}
+
+\begin{solutionBox} We have that
+\begin{equation*} \begin{aligned} \sum_{n \geq 0} a_n & = 1 + \sum_{n \geq 1} \left[ 2^{-n} a_0 + n 2^{-(n - 1)} \right]
+\\[1em] & = 1 + \sum_{n \geq 1} (1 + 2n) 2^{-n}
+\\[1em] & = 1 + \sum_{n \geq 1} 2^{-n} + 2 \sum_{n \geq 1} n 2^{-n}.
+\end{aligned}\end{equation*}
+The sum of the first series is easy to compute as the partial sum of the geometric series is well-known:
+\begin{equation*} \sum_{n = 1}^N 2^{-n} = \frac{2^N - 1}{2^N} \implies \lim_{N \to + \infty} \sum_{n = 1}^N 2^{-n}  = 1. \end{equation*}
+The partial sum of the second series is given (check using the induction principle!) by
+\begin{equation*} \sum_{n = 1}^N n 2^{-n} = \frac{2^{N + 1} - 2 - N}{2^N}, \end{equation*}
+and therefore
+\begin{equation*} \lim_{N \to + \infty} \sum_{n = 1}^N n 2^{-n} =2. \end{equation*}
+We conclude that, putting everything together, the sum is given by
+\finalanswer{
+\sum_{n \geq 0} a_n = 1 + 1 + 2 \cdot 2 = 6.
+}
+
+\paragraph{Alternative Solution.} The recursive formula shows that
+\begin{equation*} a_n = 2^{1 - n}(c + n) = 2^{1 - n} \left( \frac{1}{2} + n \right). \end{equation*}
+\end{solutionBox}
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+\chapter{Ordinary differential equations and Cauchy problems}
+
+\begin{exerciseBox} \textbf{Exercise.}  Find a solution to the linear ODE
+\begin{equation} \label{9.1} y^{\prime \prime} - 2y^\prime + y = \mathrm{e}^x + \mathrm{e}^{2x}. \end{equation} \end{exerciseBox}
+
+\begin{solutionBox} The homogeneous equation associated to \eqref{9.1} is
+\begin{equation} \label{9.1.1} y^{\prime \prime} - 2y^\prime + y = 0. \end{equation}
+The characteristic polynomial $\lambda^2 - 2\lambda + 1 = (\lambda - 1)^2$ has a unique root of multiplicity two. The homogeneous solution is thus given by
+\begin{equation*} y_o(x) = A \mathrm{e}^x + Bx \mathrm{e}^{x}. \end{equation*}
+We now deal with the right-hand side $\mathrm{e}^x + \mathrm{e}^{2x}$ using the linearity property. First, we look for a particular solution of the equation
+\begin{equation*} y^{\prime \prime} - 2y^\prime + y =  \mathrm{e}^{2x}. \end{equation*}
+There is no resonance, and thus the particular solution has the form $y_p(x) = C \mathrm{e}^{2x}$. We plug it into the equation to find that $C = 1$. On the other hand,
+\begin{equation*} y^{\prime \prime} - 2y^\prime + y =  \mathrm{e}^{x} \end{equation*}
+has resonance, and thus we look for a solution of the form $y_p(x) = D x^2 \mathrm{e}^x$. A straightforward computation shows that $D = \frac{1}{2}$, which means that the total solution is
+\finalanswer{
+y(x) = A \mathrm{e}^x + Bx \mathrm{e}^{x} + \mathrm{e}^{2x} + \frac{x^2}{2} \mathrm{e}^x.
+}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Find a solution to the linear ODE
+\begin{equation} \label{9.2} y^{\prime \prime} + 4y = \sin(x) \cos(x). \end{equation} \end{exerciseBox}
+
+\begin{solutionBox} The homogeneous equation associated to \eqref{9.2} is
+\begin{equation} \label{9.2.1} y^{\prime \prime} + 4y = 0. \end{equation}
+The characteristic polynomial $\lambda^2 + 4$ has two roots of multiplicity one, namely $\pm 2 \imath$. The homogeneous solution is thus given by
+\begin{equation*} y_o(x) = A \cos(2x) + B \sin(2x). \end{equation*}
+We now deal with the right-hand side $\cos(x) \sin(x)$. We first rewrite it using the doubling property of the sine:
+\begin{equation*} y^{\prime \prime} + 4y =  \frac{1}{2} \sin(2x). \end{equation*}
+There is resonance; hence we look for a particular solution of the form $y_p(x) = A x \sin(2x) + B x \cos(2x)$. Notice that
+\begin{equation*}\begin{aligned} & y_p^\prime(x) = (A - 2Bx) \sin(2x) + (B + 2Ax) \cos(2x),
+\\[1em] & y_p^{\prime \prime}(x) = (-4B + 4Ax) \sin(2x) + (4A - 4Bx) \cos(2x). \end{aligned} \end{equation*}
+We have that
+\begin{equation*} y_p^{\prime \prime} + 4y_p = (-4B + 4Ax + 4Ax) \sin(2x) + (4A - 4Bx + 4Bx) \cos(x) = \frac{1}{2} \sin(2x), \end{equation*}
+which gives $ A = 0$ and $B = - \frac{1}{8}$. We conclude that
+\finalanswer{
+y(x) = A \cos(2x) + B \sin(2x) - \frac{1}{8} x \cos(2x).
+}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Find a solution to the linear ODE
+\begin{equation} \label{9.3} y^{\prime \prime} + 3y^\prime + 2y = \mathrm{e}^{-x}. \end{equation} \end{exerciseBox}
+
+\begin{solutionBox} The homogeneous equation associated to \eqref{9.3} is
+\begin{equation} \label{9.3.1} y^{\prime \prime} + 3y^\prime + 2y = 0. \end{equation}
+The characteristic polynomial $\lambda^2 + 3 \lambda + 2$ has two roots of multiplicity one, namely $-1$ and $-2$. The homogeneous solution is thus given by
+\begin{equation*} y_o(x) = A \mathrm{e}^{-x} + B \mathrm{e}^{-2x}. \end{equation*}
+We now look for a particular solution. There is resonance of order one, and thus the idea is to determine the constants of $y_p(x) = Cx \mathrm{e}^{-x}$. Notice that
+\begin{equation*}\begin{aligned} & y_p^\prime(x) = C \mathrm{e}^{-x} - C x \mathrm{e}^{-x},
+\\[1em] & y_p^{\prime \prime}(x) = - 2C \mathrm{e}^{-x} + C x \mathrm{e}^{-x}. \end{aligned} \end{equation*}
+We have that
+\begin{equation*} y_p^{\prime \prime} + 3y_p^\prime + 2y_p = (- 2C + 3C) \mathrm{e}^{-x} =  \mathrm{e}^{-x}, \end{equation*}
+which gives $C = 1$. We conclude that
+\finalanswer{
+y(x) = A \mathrm{e}^{-x} + B \mathrm{e}^{-2x} + \mathrm{e}^{-x}.
+}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Solve the Cauchy problem
+\[
+\begin{cases} y' = y^2 x^{-2}\\ y(1) = 1\end{cases}\]
+\end{exerciseBox}
+
+\begin{solutionBox} The differential equation can be easily solved by separation of variables. More precisely, we have that
+\begin{equation*}y^\prime = y^2 x^{-2} \implies \frac{y^\prime}{y^2} = \frac{1}{x^2}. \end{equation*}
+Now integrate both sides with respect to $x$ on $[1, \, x]$ to obtain
+\begin{equation*}\int_1^{y(x)}  \frac{1}{u^2} \, \mathrm{d}u = \int_1^x \frac{1}{x^2} \, \mathrm{d}x, \end{equation*}
+which leads to
+\begin{equation*}- \frac{2}{u^3} \big|_{1}^{y(x)} = - \frac{2}{x^3} \big|_{1}^{x} \iff y(x) = x.\end{equation*}
+In particular, the solution to this Cauchy problem is
+\finalanswer{
+y(x) = x.
+}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Solve the Cauchy problem
+\[
+\begin{cases} y' = - x y^{-2}\\ y(0) = 1\end{cases}\]
+ \end{exerciseBox}
+
+\begin{solutionBox} The differential equation can be easily solved by separation of variables. More precisely, we have that
+\begin{equation*}y^\prime = - x y^{-2} \implies y^\prime y^2 = -x. \end{equation*}
+Now integrate both sides with respect to $x$ on $[1, \, x]$ to obtain
+\begin{equation*}\int_1^{y(x)} u^2 \, \mathrm{d}u = - \int_0^x x \, \mathrm{d}x, \end{equation*}
+which leads to
+\begin{equation*}\frac{u^3}{3} \big|_{1}^{y(x)} = -\frac{x^2}{2} \big|_{0}^{x} \iff \frac{y^3(x)}{3} - \frac{1}{3} = - \frac{x^2}{2}.\end{equation*}
+In particular, the solution to this Cauchy problem is
+\finalanswer{
+y(x) = \sqrt[3]{1 - \frac{3}{2}x^2}.
+}
+\end{solutionBox}
+
+\begin{exerciseBox} \textbf{Exercise.}  Solve the Cauchy problem
+\[
+\begin{cases}
+y''' - 2y'' + y' = 0 \\ y(0)=0, y'(0)=1, y''(0)=-1	
+\end{cases}
+\] \end{exerciseBox}
+
+\begin{solutionBox} The differential equation can be easily solved by usual methods for homogeneous equations with constant coefficients. The characteristic polynomial is
+\begin{equation*}\lambda^3 - 2 \lambda^2 + \lambda = 0, \end{equation*}
+and the roots are $0$ and $1$ with respective multiplicity one and two. Therefore, the general solution is
+\begin{equation*}y(x) = A + B\mathrm{e}^x + C x \mathrm{e}^x. \end{equation*}
+We now need to exploit the initial condition to determine the value of the constants. First, let us compute the first and second derivative of the solution, that is,
+\begin{equation*}y^\prime(x) = (B + C)\mathrm{e}^x + C x \mathrm{e}^x, \end{equation*}
+and
+\begin{equation*}y^{\prime \prime}(x) = (B + 2C) \mathrm{e}^x + C x \mathrm{e}^x. \end{equation*}
+It turns out that
+\begin{equation*} \begin{cases} y(0) = 0 \\ y^\prime(0) = 1 \\ y^{\prime \prime}(0) = - 1 \end{cases} \iff \begin{cases} A + B = 0 \\ B + C = 1 \\ B + 2C = - 1 \end{cases} \iff \begin{cases} A = -3 \\ B = 3 \\ C = - 2. \end{cases} \end{equation*}
+In particular, the solution to this Cauchy problem is
+\finalanswer{
+y(x) = - 3 + 3 \mathrm{e}^x - 2x \mathrm{e}^x.
+}
+\end{solutionBox}
+
+\nocite{*}
+
+\bibliography{bibliography.bib} % BIBLIOGRAFIA
+\bibliographystyle{plain}
+\end{document}
