@@ -1,0 +1,163 @@
+\chapter{Poincaré Group} \thispagestyle{empty}
+
+The Poincaré group, usually denoted\footnote{We shall explain the meaning of this particular notation soon. For the time being, one could think of it as a simple notation and nothing more.} by $\R^{1, \, 3} \rtimes \mathrm{SO}^+(1, \, 3)$, is the group of all the isometries of the Minkowski space-time. More precisely, the transformations are all of the form
+\begin{equation} \label{eq.21.1} p^\mu \longmapsto \Lambda_\nu^\mu\,  p^\nu + b^\mu, \end{equation}
+where $\Lambda$ denotes a matrix in $\mathrm{SO}^+(1, \, 3) = \mathfrak{T}_+$ - the proper orthochronous Lorentz group -, and $b^\mu \in \R^4$ is a space-time translation vector.
+
+\section{Introduction}
+
+We first want to give meaning to the notation $\R^{1, \, 3} \rtimes \mathrm{SO}^+(1, \, 3)$, and explain why it coincides with the Poincarè group. To achieve this, we first need to introduce the notion of \textit{semidirect product}\index{group!semidirect product} between two groups.
+
+\begin{definition}[Semidirect Product] Let $\G$ and $\G^\prime$ be two groups, and let $\varphi : \G^\prime \longrightarrow \mathrm{Aut}(\G)$ be a group homomorphism. The (outer) \textit{semidirect product} of $\G$ and $\G^\prime$ with respect to $\varphi$ is a new group, denoted by $\G \rtimes_\varphi \G^\prime$, is defined as follows.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The underlying set is the Cartesian product $\G \times \G^\prime$.
+\item The group operation $\cdot$ is defined by means of $\varphi$. Namely, we set
+\begin{equation*} (g, \, g^\prime) \cdot (h, \, h^\prime) := (g \varphi_{g^\prime}(h), \, g^\prime h^\prime),\end{equation*}
+where $\varphi_{g^\prime} := \varphi(g^\prime) \in \mathrm{Aut}(\G)$. \end{enumerate} \end{definition}
+
+\begin{exercise}Let $\G$ and $\G^\prime$ be two groups, and let $\varphi : \G^\prime \longrightarrow \mathrm{Aut}(\G)$ be a group homomorphism. Find, explicitly, the identity and the inverse of the group $\G \rtimes_\varphi \G^\prime$. \end{exercise}
+
+\begin{remark} The direct product (introduced in \hyperref[sec.first]{Section \ref{sec.first}}) is nothing but a particular case of semidirect product, which is achieved when $\varphi$ sends each element of $\G^\prime$ to the identity $\mathrm{id}_{\G} \in \mathrm{Aut}(\G)$. \end{remark}
+
+\begin{theorem}[Semidirect Decomposition] Let $\G$ be a group, and let $\Ha, \, \mathcal{K} \subgroup \G$. Suppose that the following properties hold true: \mbox{}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item The subgroup $\Ha$ is normal, that is, $\Ha \trianglelefteq \G$.
+\item The intersection between $\Ha$ and $\mathcal{K}$ is trivial, that is, $\Ha \cap \mathcal{K} = \varnothing$.
+\item Every element $g \in \G$ can be written as the product of an element $h \in \Ha$ and an element $k \in \mathcal{K}$, that is, $\G = \Ha \mathcal{K}$.
+\end{enumerate}
+Then $\G$ is isomorphic to the semidirect product $\Ha \rtimes_\varphi \mathcal{K}$, where $\varphi(k) \in \mathrm{Aut}(\Ha)$ is the conjugation map, which is defined by
+\begin{equation*} \varphi(k) := \varphi_k : \Ha \longrightarrow \Ha, \qquad h \longmapsto k h k^{-1}. \end{equation*}\end{theorem}
+
+The transformations of the form \eqref{eq.21.1} are usually denoted by $g(\mathbf{b}, \, \Lambda)$, in such a way that the elements of the form $g(\mathbf{0}, \, \Lambda) = \Lambda$ generate the Lorentz group $\mathfrak{T}_+$, while the elements of the form $g(\mathbf{b}, \, 0) = T(\mathbf{b})$ generate the translation group $\mathscr{T} := \R^{1, \, 3}$.
+
+We shall prove this later, but the abelian group of translation $\mathscr{T}$ is normal, while the proper orthochronous Lorentz group $\mathrm{SO}^+(1, \, 3)$ is a subgroup acting on the Minkowski vector space $\mathscr{T} := \R^{1, \, 3}$ as follows:
+\begin{equation*} g(\mathbf{a}, \, \Lambda)\mathbf{v} = \mathbf{a} + \Lambda \mathbf{v}. \end{equation*}
+It follows that the Poincarè group is isomorphic to the semidirect product $\R^{1, \, 3} \rtimes \mathrm{SO}^+(1, \, 3)$ with respect to the group homomorphism $\varphi : \mathrm{SO}^+(1, \, 3) \longrightarrow \mathrm{Aut}(\R^{1, \, 3})$ defined by setting
+\begin{equation*} \varphi(\Lambda)(\mathbf{v}) :=  \Lambda \mathbf{v}. \end{equation*}
+
+\section{Irreducible Representations of $\mathrm{P}(1, \, 3)$}
+
+In this section, we investigate the irreducible representations of the Poincaré group $\R^{1, \, 3} \rtimes \mathrm{SO}^+(1, \, 3)$, and we take a closer look to its Lie algebra, and the connection with the Lorentz Lie algebra.
+
+\subsection{Generators}
+
+Let $J_{\mu \nu}$ denote the generators of the Lie algebra associated to $\mathfrak{T}_+$, and let $P_\mu$ be the generators of the translations, that is, we require that
+\begin{equation} \label{eq.21.2} T(\mathbf{b}) = \mathrm{e}^{- \imath b^\mu P_\mu}, \end{equation}
+where $T(\mathbf{b})$ denotes the space-time translation given by the vector $\mathbf{b}$. Notice that $P_\mu = - \imath \partial_{x^\mu}$, and therefore we may equivalently denote the generators of the translation subgroup as follows:
+\begin{equation*} P_\mu = - \imath \frac{\partial}{\partial x^\mu} \leadsto \begin{cases} H^0 = \imath \frac{\partial}{\partial t}, \\[0.8em] P^i = - \imath \frac{\partial}{\partial x^i}.\end{cases} \end{equation*}
+Furthermore, the set of generators $\{P_\mu\}_{\mu = 0, \, \dots, \, 3}$ generates an \underline{normal and abelian} subalgebra $\mathfrak{P}$ of $\mathrm{p}(1, \, 3)$, and this implies that the Lie algebra of the Poincaré group is not semisimple. In particular, we have the following commutator identites:
+\begin{equation*}\begin{aligned} & [P_\mu, \, P_\nu] = 0,
+\\[1em] & [P_\mu, \, J_{\lambda \sigma}] = \imath (P_\lambda g_{\mu \sigma} - P_\sigma g_{\mu \lambda}),
+\\[1em] & [J_{\mu \nu}, \, J_{\sigma \lambda}]_{\gamma}^\alpha = \imath \left[ (J_{\mu \nu})_\lambda^\alpha g_{\sigma \gamma} - (J_{\mu \nu})_\sigma^\alpha g_{\lambda \gamma} - (J_{\sigma \lambda})_\nu^\alpha g_{\mu \gamma} + (J_{\sigma \lambda})_\mu^\alpha g_{\nu \gamma} \right].  \end{aligned} \end{equation*}
+The Poincarè transformation $g(\mathbf{b}, \, \Lambda)$ is also equal to the composition between a translation and a Lorentz transformation, that is, $T(\mathbf{b}) \Lambda$, as a consequence of formula \eqref{eq.21.1}. It follows that
+\begin{equation} \label{eq.21.3} \Lambda T( \mathbf{b} )\Lambda^{-1} = T(\Lambda \mathbf{b}), \end{equation}
+and this implies that the translation subgroup $\mathscr{T}$ (which is associated to the subalgebra $\mathfrak{P}$) is also a normal abelian subgroup of $\R^{1, \, 3} \rtimes \mathrm{SO}^+(1, \, 3)$, as we claimed in the previous section. 
+
+The proof of \eqref{eq.21.3} follows immediately from the multiplicative rule given by the isomorphism with the semidirect product, i.e.,
+\begin{equation} \label{eq.21.4} g(\mathbf{b}, \, \Lambda) g(\mathbf{c}, \, \Gamma) = g( \Lambda \mathbf{c} + \mathbf{b}, \, \Lambda \Gamma). \end{equation}
+
+Now, recall that in the previous chapter we proved that the generators $J_{\mu \nu}$ of the Lorentz group $\mathfrak{T}_+$ can be replaced by the following ones
+\begin{equation*} K_m := J_{m, \, 0} \quad \text{and} \quad J_k := \frac{1}{2} \epsilon^{kmn} J_{m, \, n}, \end{equation*}
+for $m, \, k \in \{1, \, 2, \, 3\}$. Therefore, the set of generators $\{ P^\mu, \, J_{\mu \nu} \}$ may be replaced by the equivalent set of generators
+\begin{equation*} \{ H^0, \, P^i, \, J_m, \, K_m \}_{i, \, m = 1, \, 2, \, 3}. \end{equation*}
+The Lie algebra generated by this new set of generators is characterized by the following commutator identities, whose proof is left to the reader:
+\begin{equation*}\begin{aligned} & [P^i, \, J_m] = 0,
+\\[1em] & [P^m, \, J_n] = \imath \epsilon^{mnk} P_k,
+\\[1em] & [P^m, \, K_n] = \imath \epsilon^{mn} P^0,
+\\[1em] &  [P^0, \, K_n] = \imath P_n,
+\\[1em] & [J_m, \, J_n] = \imath \epsilon^{mnk} J_k,
+\\[1em] & [K_m, \, J_n] = \imath \epsilon^{mnk} K_k,
+\\[1em] & [K_m, \, K_n] = - \imath \epsilon^{mnk} J_k.\end{aligned} \end{equation*}
+Note that the third and the fourth ones are \textbf{nontrivial}, as they contain the boost component of the Lorentz group $\mathfrak{T}_+$.
+
+{\centering \subsection*{The Casimir Operators}}
+
+\noindent The Casimir invariants of this Lie algebra are
+\begin{equation*} c_1 := P^\mu P_\mu = (H^0)^2 - (P^i)^2, \end{equation*}
+and
+\begin{equation*} c_2 = W^\mu W_\mu = (W^0)^2 - (W^i)^2, \end{equation*}
+where
+\begin{equation*} W^\mu := \frac{1}{2} \epsilon^{\mu \nu \lambda k} K_{\nu \lambda} P_k \end{equation*}
+is the so-called \textit{Pauli–Lubanski pseudovector}\index{Pauli-Wbanski pseudovector}, which is used to describe the spin states of moving particles. In any case, the operator $W^\mu$ is orthogonal to $P_\nu$ and they also commute, that is,
+\begin{equation*} W^\mu P_\mu = 0 \quad \text{and} \quad [W^\mu, \, P_\nu] = 0. \end{equation*}
+Similarly, the reader can easily prove that
+\begin{equation*} [W^\lambda, \, J_{\mu \nu}] = \imath ( W^\mu g^{\lambda \nu} - W^\nu g^{\lambda \mu} ) \quad \text{and} \quad [W^\lambda, \, W^\nu] = \imath \epsilon^{\lambda \nu \rho \sigma} W_\rho P_\sigma. \end{equation*}
+
+Recall that, if the system is given by a unique particle, then $c_1$ gives us the mass of that particle (otherwise, it is the square of the total momentum.) Both $c_1$ and $c_2$ induce irreducible representations of the Poincaré group $\R^{1, \, 3} \rtimes \mathrm{SO}^+(1, \, 3)$, and they commute with the generators, that is,
+\begin{equation*}\begin{aligned} & [c_1, \, J_{\mu \nu}] = 0,
+\\[1em] & [c_1, \, P^\mu] = 0, \end{aligned} \qquad \text{and} \qquad
+\begin{aligned} & [c_2, \, J_{\mu \nu}] = 0,
+\\[1em] & [c_2, \, P^\mu] = 0.\end{aligned} \end{equation*}
+We shall investigate more in-depth the main differences between the following possibilities for the Casimir operator value: $c_1 > 0$, $c_1 = 0$ or $c_1 < 0$.  If, for example, we have $p^\mu = (M, \, \mathbf{0})$, then $c_1 = M^2 > 0$, and therefore the Pauli-Wbanski operator is given by
+\begin{equation*} W^i := - M J_i \in \mathrm{so}(3, \, \C), \end{equation*}
+which means that it is the generator (along the $i$th axis) of the angular momentum. 
+
+\section{Little Group}
+\label{little group}
+
+In this final section, our goal is to introduce the so-called \textit{little group} associated to the Poincarè group $\R^{1, \, 3} \rtimes \mathrm{SO}^+(1, \, 3)$ and the space-time vector $\mathbf{b} \in \R^{1, \, 3}$.
+
+\begin{definition}Let $\G$ be a group, let $X$ be a set, and let $\varphi : \G \times X \longrightarrow X$ be a group action. The \textit{little group} of $x \in X$, denoted by $\G(x)$, is the set of all the elements of $g \in \G$ such that
+\begin{equation*}\varphi(g, \, x) = x. \end{equation*}  \end{definition}
+
+\begin{theorem}Let $P^\mu \equiv p^\mu$ be the impulse $4$-vector. Then, the operators $W^\mu$ generate the stability group (=little group) $G(p^\mu)$ that stabilizes $p^\mu$. \end{theorem}
+
+\begin{example}In $\mathrm{SO}(3, \, \R)$, the little group associated to $\begin{pmatrix} 0 & 0 & 1 \end{pmatrix}^T$ is isomorphic to the group $\mathrm{SO}(2, \, \R)$, acting on the first two components only. \end{example}
+
+\begin{theorem}Let $P^\mu \equiv p^\mu$ be the impulse $4$-vector. The irreducible representations of the Poincaré group $\R^{1, \, 3} \rtimes \mathrm{SO}^+(1, \, 3)$ are in correspondence with the irreducible representations of $G(p^\mu)$ via the action of the Lorentz group $\mathfrak{T}_+$. \end{theorem}
+
+\begin{remark} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $p^\mu = \mathbf{0}$, then the little group is $G(\mathbf{0}) = \mathfrak{T}_+$.
+\item If $c_1 := p^\mu p_\mu > 0$, then we can always assume\footnote{It suffices to consider the frame of reference where the particle is not moving or, if there are more than a single particle, the center of mass.} that the $4$-impulse is given by $p^\mu = (M, \, \mathbf{0})$ for some positive constant $M > 0$. In this case, we have
+\begin{equation*} W^\mu = \frac{1}{2} \epsilon^{\mu \nu \lambda \sigma} J_{\nu \lambda} P_\sigma, \end{equation*}
+and a straightforward computation shows that
+\begin{equation*} W^0 = 0 \qquad \text{and} \qquad \text{$W^i = M J_i$} \quad \text{for $i = 1, \, 2, \, 3$}. \end{equation*}
+It follows that the little group $G(p^\mu)$ is given by $\mathrm{SO}(3, \, \R)$, whose generators are the rotations $J_1, \, J_2$ and $J_3$.
+
+The irreducible representations of $\mathrm{SO}(3, \, \R)$ correspond to the irreducible representations of $\mathrm{SU}(2, \, \C)$, and therefore we consider the eigenstates basis $\{ | \, j, \, m \rangle\}$. If we denote by $J_z$ the simultaneously diagonalizable generator, then it is easy to check that
+\begin{equation*}\begin{aligned} & P^\mu \, | \, 0, \, m \rangle = p^\mu \, | \, 0, \, m \rangle,
+\\[1em] & \mathbb{J}^2 \, | \, 0, \, m \rangle = j(j+1) \, | \, 0, \, m \rangle,
+\\[1em] & J_z \, | \, 0, \, m \rangle = m \, | \, 0, \, m \rangle, \end{aligned} \end{equation*}
+where $\mathbb{J}^2$ is the Casimir operator. Now set $| \, p, \, m \rangle \equiv H(p) \, | \, 0, \, m \rangle$, and notice that
+\begin{equation*}| \, p, \, m \rangle \equiv H(p) \, | \, 0, \, m \rangle = R(\alpha, \, \beta, \, 0) L_z(\xi) \, | \, 0, \, m \rangle,  \end{equation*}
+where $R(\alpha, \, \beta, \, 0)$ is the space-rotation w.r.t. the $z$-axis, and $L_z(\xi)$ is the Lorentz boost in the $\hat{z}$ direction, i.e.,
+\begin{equation*}L_z(\xi) = \begin{pmatrix} \cosh(\xi) & 0 & 0 & \sinh(\xi) \\ 0 & 1 & 0 &0  \\ 0 & 0 & 1 & 0 \\ \sinh(\xi) & 0 & 0 & \cosh(\xi) \end{pmatrix} \end{equation*}
+We now claim that $\{ | \, p, \, m \rangle\}$ is a basis for the irreducible representation of the Poincaré group induced by the one of $\mathrm{SO}(3, \, \R)$. Indeed, it is easy to check that
+\begin{equation*}\begin{aligned} & T(\mathbf{b}) \, | \, p, \, m \rangle = \mathrm{e}^{-\imath b_\mu p^\mu} \, | \, p, \, m \rangle,
+\\[1em] & \Lambda \, | \, p, \, m \rangle = | \, p^\prime, \, m^\prime \rangle = D_{m, \, m^\prime}^j( R(\Lambda, \, p) ), \end{aligned} \end{equation*}
+where $D_{m, \, m^\prime}^j$ is the rotation matrix in $\mathrm{SU}(2, \, \C)$. More precisely, we have
+\begin{equation*} D_{m,\, m^\prime}^j(R^z(\theta)) = \mathrm{e}^{\imath \frac{\theta}{2} \tau_3} = \begin{pmatrix} \mathrm{e}^{\imath \frac{\theta}{2}} & 0 \\ 0 & \mathrm{e}^{- \imath \frac{\theta}{2}} \end{pmatrix}, \end{equation*}
+and
+\begin{equation*} D_{m,\, m^\prime}^j(R^\lambda(\theta)) = \mathrm{e}^{\imath \frac{\theta}{2} \tau_2} = \begin{pmatrix}\cos \frac{\theta}{2} & \sin \frac{\theta}{2} \\ \\ - \sin \frac{\theta}{2} & \cos \frac{\theta}{2} \end{pmatrix}. \end{equation*}
+The reader may prove, as an exercise, that in general we have
+\begin{equation*} R(\Lambda, \, p) = H^{-1}(p^\prime) \Lambda H(p). \end{equation*}
+\item If $c_1 := p^\mu p_\mu = 0$, then we can always assume that the $4$-impulse is given by $p^\mu = (\omega_0, \, 0, \, 0, \, \omega_0)$ for a constant $\omega_0$. In this case, we have
+\begin{equation*} \begin{aligned} & W^0 = - W^3 = \omega_0 J_{12} = \omega_0 J_3,
+\\[1em] & W^1 = \omega_0 (J_{23} + J_{20}) = \omega_0(- J_1 + K_2),
+\\[1em] & W^2 = \omega_0 (J_{31} - J_{10}) = \omega_0(- J_2 - K_1).\end{aligned} \end{equation*}
+It follows that $c_2 := W^\mu W_\mu = - (W_1)^2 - (W_2)^2$, and we also have that the associated Lie algebra is
+\begin{equation*} \begin{aligned} & [W^1, \, W^2] = 0,
+\\[1em] & [W_2, \, J_3] = \imath W^1,
+\\[1em] & [W^1, \, J_3] = - \imath W^2, \end{aligned} \end{equation*}
+and clearly it is isomorphic to the Lie algebra of the Euclidean group $E_2$.
+
+More precisely, the generators $W^1$ and $W^2$ act like translations (i.e., like $P^1$ and $P^2$ in the Euclidean group) in the $xy$ plane, while $J_3$ generates the rotations.
+
+Let $| \, p, \, \lambda \rangle$ be a basis of eigenstates for which $P^\mu$ and $J_3$ are simultaneously diagonalizable, and let $\lambda$ represent the eigenvalues of $J_3$, that is,
+\begin{equation*} \lambda = 0, \, \pm \frac{1}{2}, \, \dots \end{equation*}
+By definition, we have that $|\, p, \, \lambda \rangle$ is an eigenstate for both $P^\mu$ and $J_3$, which means that
+\begin{equation*}\begin{aligned} & P^\mu \, | \, p, \, \lambda \rangle = P_1^\mu \, | \, p, \, \lambda \rangle,
+\\[1em] & J_3 \, | \, p, \, \lambda \rangle = \lambda \, | \, p, \, \lambda \rangle, \end{aligned} \end{equation*}
+and therefore
+\begin{equation*}| \, p, \, \lambda \rangle \equiv H(p) \, | \, p, \, \lambda \rangle = R(\theta, \, \varphi, \, 0) L_z(\xi) \, | \, p, \, \lambda \rangle = R(\theta, \, \varphi, \, 0) \, | \, p\hat{z}, \, \lambda \rangle.  \end{equation*}
+Denote by $p_1$ the $4$-vector $(\omega_0, \, 0, \, 0, \, \omega_0)$. Then the identity above yields to
+\begin{equation*}| \, p, \, \lambda \rangle \equiv H(p) \, | \, p_1, \, \lambda \rangle. \end{equation*}
+Furthermore, the reader may check that
+\begin{equation*}\begin{aligned} & T(\mathbf{b}) \, | \, p, \, \lambda \rangle = \mathrm{e}^{- \imath b_\mu p^\mu} \, | \, p, \, \lambda \rangle,
+\\[1em] & \Lambda \, | \, p, \, \lambda \rangle = \mathrm{e}^{-\imath \lambda R(\Lambda, \, p)} \, | \, \Lambda p, \, \lambda \rangle = \langle p, \, \lambda \, | \, H^{-1}(\Lambda p) \Lambda H(p) \, | \, p_1, \, \lambda \rangle, \end{aligned} \end{equation*}
+from which it follows that the helicity\index{helicity} - invariant under Lorentz transformations if the mass of the particle is zero - is given by
+\begin{equation*} \lambda \sim \frac{\mathbf{p} \cdot \mathbf{s}}{|\mathbf{p} \cdot \mathbf{s}|}, \end{equation*} 
+where $\mathbf{s}$ denotes the spin vector and $\mathbf{p}$ is the $4$-impulse mentioned above.
+\end{enumerate}
+\end{remark}

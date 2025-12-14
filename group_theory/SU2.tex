@@ -1,0 +1,344 @@
+\chapter{Special Unitary Group $\mathrm{SU}(2, \, \C)$} \thispagestyle{empty}
+\label{su2ch}
+
+In this chapter, we study more in-depth the special unitary (Lie) group $\mathrm{SU}(2, \, \C)$ and the associated Lie algebra $\mathrm{su}(2, \, \C)$. Recall that the set of all unitary matrices
+\begin{equation*} \mathrm{U}(N, \, \C) := \left\{ U \in \mathrm{GL}(N, \, \C) \: : \: U^\dag U = U U^\dag = \mathrm{Id}_{N \times N} \right\} \end{equation*}
+is a group with respect to the matrix product. Similarly,
+\begin{equation*} \mathrm{SU}(N, \, \C) := \left\{ U \in \mathrm{GL}(N, \, \C) \: : \: U^\dag U = U U^\dag = \mathrm{Id}_{N \times N}, \: \mathrm{det}(U) = 1 \right\} \end{equation*}
+is also a group, and it is called \textit{special unitary group}. Moreover, we proved that
+\begin{equation*} \mathrm{SU}(2, \, \C) \cong S^3, \end{equation*}
+where $S^3$ is the $3$-dimensional sphere in $\R^4$ (or $\C^2$). The three generators of the special unitary group in the fundamental representation (=smallest nontrivial) are
+\begin{equation*} J^a = \frac{1}{2} \tau^a,\end{equation*}
+where $\tau^a$ denotes the $a$th Pauli matrix, that is,
+\begin{equation*} \tau^1 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \qquad \tau^2 = \begin{pmatrix} 0 & - \imath \\ \imath & 0 \end{pmatrix}, \qquad \tau^3 = \begin{pmatrix} 1 & 0 \\ 0 & - 1 \end{pmatrix}.\end{equation*}
+Moreover, we also proved that $f^{abc}$ is equal to the Levi-Civita tensor $\epsilon^{abc}$, that is,
+\begin{equation*} f^{abc} = \epsilon^{abc} := \begin{cases} 1 & \text{if $(a b c)$ is an even permutation,} \\ - 1 & \text{if $(a b c)$ is an odd permutation,} \\ 0 & \text{otherwise}. \end{cases}\end{equation*}
+
+\begin{remark} Let $A, \, B, \, C$ be arbitrary operators (e.g., $n \times n$ matrices). The reader can easily show that the following identity for the commutator of a product holds:
+\begin{equation} \label{eq.6.1} [AB, \, C] = A[B, \, C] + [A, \, C]B.\end{equation}   \end{remark}
+
+\paragraph{Casimir.} Recall that the Casimir operator\index{quadratic Casimir operator} of this representation is
+\begin{equation*} \mathbb{J}^2 := (J^1)^2 + (J^2)^2 + (J^3)^2. \end{equation*}
+We can apply \eqref{eq.6.1} to show that $\mathbb{J}^2$ commutes with all the generators $J^i$. Indeed, a straightforward computation proves that
+\begin{equation*}\begin{aligned} [ \mathbb{J}^2, \, J^1 ] & = \underbrace{[ (J^1)^2, \, J^1 ]}_{=0} + [ (J^2)^2, \, J^1 ] + [ (J^3)^2, \, J^1 ] =
+\\[1em] & = J^2[J^2, \, J^1] + [J^2, \, J^1] J^2 + J^3[J^3, \, J^1] + [J^3, \, J^1] J^3 =
+\\[1em] & = - \imath J^2 J^3 - \imath J^3 J^2 + \imath J^3 J^2 + \imath J^2 J^3 = 0.  \end{aligned} \end{equation*}
+In a similar way, one can prove that $[ \mathbb{J}^2, \, J^2 ] = [ \mathbb{J}^2, \, J^3 ] = 0$. 
+
+\begin{remark} The unitary group preserves the complex scalar product
+\begin{equation*}\langle z, \, w \rangle_{\C} = z^\dag \cdot w := z_1^\ast w_1^\ast + \dots + z_N^\ast w_N^\ast \quad \text{for all $z, \, w \in V$}. \end{equation*}
+In fact, it is enough to notice that $U^\dag U = \mathrm{Id}_{N \times N}$, and plug it into the scalar product:
+\begin{equation*} \langle z, \, w\rangle_{\C} = z^\dag \cdot w = z^\dag (U^\dag U) w = \underbrace{(z^\dag U^\dag)}_{= (Uz)^\dag} (U  w) = \langle Uz, \, Uw \rangle_{\C} \quad \text{for all $z, \, w \in V$}. \end{equation*} \end{remark}
+
+\section{Finite Irreducible Representations}
+
+The primary goal is to find all the irreducible representations of $\mathrm{SU}(2, \, \C)$ and $\mathrm{su}(2, \, \C)$, starting here with the finite-dimensional\footnote{A representation\index{representation!finite-dimensional} is finite dimensional if and only if the carrying vector space $V$ has finite dimension.} ones.
+
+\subsection{Introduction}
+
+From \cite{wiki}: "\textit{In quantum mechanics, when a Hamiltonian has a symmetry, that symmetry manifest itself via a set of states at the same energy, i.e. degenerate states.}
+
+\textit{In particle physics, the near mass-degeneracy of the neutron and proton points to an approximate symmetry of the Hamiltonian describing the strong interactions. The neutron does have a slightly higher mass due to isospin breaking; this is due to the difference in the masses of the up and down quarks and the effects of the electromagnetic interaction.}
+
+\textit{It was Heisenberg, the scientist who noticed that the mathematical formulation of this symmetry was in certain respects similar to the mathematical formulation of spin, whence the name "isospin" derives. To be precise, the isospin symmetry is given by the invariance of the Hamiltonian of the strong interactions under the action of the Lie group $\mathrm{SU}(2, \, \C)$. The neutron and the proton are assigned to the doublet (the spin $- 1/2$, $2$, or fundamental representation) of $\mathrm{SU}(2, \, \C)$, which is described above in terms of Pauli's matrices.}" Namely, the nucleon transforms as follows:
+\begin{equation*}\begin{pmatrix}p \\ n \end{pmatrix} \longmapsto U(\alpha) \begin{pmatrix}p \\ n \end{pmatrix} \quad \text{where $U(\alpha) = \mathrm{e}^{\imath \frac{\tau^a}{2} \alpha_a} \in \mathrm{SU}(2, \, \C)$}.  \end{equation*}
+
+The pions, on the other hand, are assigned to the adjoint representation of $\mathrm{SU}(2, \, \C)$. Recall that the adjoint representation is defined by setting
+\begin{equation*} \left( \mathbb{T}^a \right)_{b, \, c} := \imath f^{bac}, \end{equation*}
+where $a, \, b, \, c = 1, \, \dots, \, 3$. It follows that we can also represent the elements of the special unitary group as $3 \times 3$ matrices
+\begin{equation*}\mathbb{U}(\alpha) = \mathrm{e}^{\imath \mathbb{T}^a \alpha_a} \in \mathrm{SU}(2, \, \C) \end{equation*}
+in such a way that the pions triplet transforms as follows:
+\begin{equation} \label{eq.6.2} \begin{pmatrix}\pi^1 \\ \pi^2 \\ \pi^3 \end{pmatrix} \longmapsto \mathbb{U}(\alpha) \begin{pmatrix}\pi^1 \\ \pi^2 \\ \pi^3 \end{pmatrix}.  \end{equation}
+
+\begin{remark}The adjoint representation of $\mathrm{SU}(2, \, \C)$ has dimension $3$. A straightforward computation shows that the generators of $\mathrm{SO}(3, \, \R)$
+\begin{equation*} T^1 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & - \imath \\ 0 & \imath & 0 \end{pmatrix}, \qquad T^2 = \begin{pmatrix} 0 & 0 & \imath \\ 0 & 0 & 0 \\ -\imath & 0 & 0 \end{pmatrix}, \qquad T^3 = \begin{pmatrix} 0 & -\imath & 0 \\ \imath & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix},\end{equation*}
+are equal to the generators of the adjoint representation of $\mathrm{SU}(2, \, \C)$. For example, we have
+\begin{equation*} \left( \mathbb{T}^1 \right)_{b, \, c} = \imath f^{b1c} = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & - \imath \\ 0 & \imath & 0 \end{pmatrix} = T^1, \end{equation*}
+and, similarly, for the other generators.\end{remark}
+
+Recall that the triplet of pions $\pi^i$ for $i = 1, \, 2, \, 3$, is connected to the observable triplet $\pi^0$ and $\pi^{\pm}$, by the following relations:
+\begin{equation*}\pi^3 := \pi^0, \qquad \pi^+ := \frac{\pi^1 - \imath \pi^2}{\sqrt{2}}, \qquad \pi^- := \frac{\pi^1 + \imath \pi^2}{\sqrt{2}}.\end{equation*}
+There is a different transformation for the triplet of pions through the ($2$-dimensional) fundamental representation, defined in the following way:
+\begin{equation} \label{eq.6.3} \pi^a \frac{\tau^a}{2} \longmapsto U(\alpha)\pi^a \frac{\tau^a}{2} U(\alpha)^{-1} =: (\pi^\prime)^a \frac{\tau^a}{2}. \end{equation}
+
+\begin{proposition} The transformation \eqref{eq.6.2} is equivalent to the transformation \eqref{eq.6.3}. \end{proposition}
+
+\begin{proof}[Hint] It is enough to use Taylor's formula (w.r.t. $\alpha$) up to order one of both, i.e.,
+\begin{equation*}\mathbb{U}(\alpha) = \mathrm{id}_{3 \times 3} + \imath \mathbb{T}^a \alpha_a + \dots,  \end{equation*}
+and
+\begin{equation*}U(\alpha) = \mathrm{id}_{2 \times 2} + \imath \frac{\tau^a}{2} \alpha_a + \dots \quad \text{and} \quad U(\alpha)^{-1} = \mathrm{id}_{2 \times 2} - \imath \frac{\tau^a}{2} \alpha_a + \dots. \end{equation*} \end{proof}
+
+As a consequence, we find a simple formula for the \textit{Yukawa interaction}\index{Yukawa interaction}
+\begin{equation*} \begin{aligned} V_Y & := g_Y \begin{pmatrix} \tilde{p} & \tilde{n} \end{pmatrix} \pi^a \frac{\tau^a}{2} \begin{pmatrix} p \\ n \end{pmatrix} =
+\\[1em] & = \left( \tilde{p} p - \tilde{n} n \right) \pi^0 + \sqrt{2} \left( \tilde{p}n \pi^+ + \tilde{n}p \pi^{-} \right), \end{aligned}\end{equation*}
+which describes the nuclear force between nucleons, mediated by pions.
+
+\subsection{Admissible Dimensions of Finite Representations}
+\label{sdaosdwkd}
+
+In this section, we assume that $J^1, \, J^2$ and $J^3$ are the generators of a finite-dimensional representation $\mathfrak{R}$ of $\mathrm{SU}(2, \, \C)$, whose dimension is unknown at the moment. Let $\mathbb{J}^2$ be the quadratic Casimir operator, and set
+\begin{equation*} J_{\pm} := J^1 \pm \imath J^2 \quad \text{and} \quad J_3 := J^3. \end{equation*}
+Note that $\{J_+, \, J_-, \, J_3\}$ is also a generator basis, called \textit{Cartan basis}\index{Cartan basis}, satisfying the following commutators relations:
+\begin{equation*}[J_3, \, J_+] = J_+, \qquad [J_3, \, J_-] = - J_- \quad \text{and} \quad [J_+, \, J_-] = 2 J_3.  \end{equation*}
+The Casimir quadratic operator $\mathbb{J}^2$ commutes with the generator $J_3$, which means that they are simultaneously diagonalizable and $\mathbb{J}^2 = c \cdot \mathrm{Id}_{N \times N}$ as a consequence of Schur's Lemma.
+
+From now on, we shall denote by $\{ | \, c, \, m \rangle \}$ the common basis of eigenstates for both $J_3$ and $\mathbb{J}^2$, that is, we require that
+\begin{equation*}J_3 \, | \, c, \, m \rangle = m \, | \, c, \, m \rangle \qquad \text{and} \qquad \mathbb{J}^2 \, | \, c, \, m \rangle = c \, | \, c, \, m \rangle. \end{equation*}
+Let $j := \max \{m \: : \: J_3 \, | \, c, \, m \rangle = m \, | \, c, \, m \rangle \}$ be the maximum eigenstate\footnote{The maximum is well-defined because the representation $\mathfrak{R}$ is finite-dimensional by assumption! } in the representation $\mathfrak{R}$ w.r.t. the operator $J_3$. A straightforward computation shows that
+\begin{equation*} \begin{aligned} J_3 \left( J_+ \, | \, c, \, m \rangle \right) & \stackrel{(*)}{=} J_+ \left( J_3 \, | \, c, \, m \rangle \right) + J_+ \, | \, c, \, m \rangle  =
+\\[1em] & = m \, J_+ \, | \, c, \, m \rangle + J_+ \, | \, c, \, m \rangle =
+\\[1em] & = (m + 1) \,J_+ \, | \, c, \, m \rangle, \end{aligned} \end{equation*}
+where $(\ast)$ follows from the commutator identity $[J_3, \, J_+] = J_+$. Similarly, we find that
+\begin{equation*} \begin{aligned} J_3 \left( J_- \, | \, c, \, m \rangle \right) & \stackrel{(*)}{=} J_- \left( J_3 \, | \, c, \, m \rangle \right) - J_- \, | \, c, \, m \rangle=
+\\[1em] & = m \, J_- \, | \, c, \, m \rangle - J_- \, | \, c, \, m \rangle =
+\\[1em] & = (m - 1) \,J_- \, | \, c, \, m \rangle, \end{aligned} \end{equation*}
+which means that
+\begin{equation*} \begin{aligned} & J_- \, | \, c, \, m \rangle \quad \propto \quad | \, c, \, m -1 \rangle,
+\\[1em] & J_+ \, | \, c, \, m \rangle \quad \propto \quad  | \, c, \, m + 1 \rangle. \end{aligned} \end{equation*}
+In particular, since $j$ is the maximum eigenstate, we have that $J_+ \, | \, c, \, j \rangle = 0$.
+
+\vspace{1.2mm}
+The goal is now to find the relation between $c$ and $j$, and use it to derive an upper bound (resp. lower bound) to the number of "jumps" via $J_+$ (resp. $J_-$).
+
+\begin{remark} The quadratic Casimir operator can be easily rewritten in terms of $J_+ J_-$ as
+\begin{equation} \label{eq.6.4} \mathbb{J}^2 = J_+ J_- + J_3^2 - J_3, \end{equation}
+\caution{Here $J_3^2$ denotes the square of the operator $J_3$.}and, similarly, in terms of $J_- J_+$ as
+\begin{equation} \label{eq.6.5}  \mathbb{J}^2 = J_- J_+ + J_3^2 + J_3.\end{equation}
+The proof does not require any idea, but it suffices to evaluate the right-hand side of both identities plugging in the formulas defining $J_+$ and $J_-$.
+\end{remark}
+
+Recall that a linear algebra result shows that the eigenstates $\{ | \, c, \, m \rangle \}$ are orthogonal; thus, we can always assume without loss of generality that $\{ | c, \, m \rangle \}$ is a orthonormal basis, which means that
+\begin{equation*}\langle c, \, m \, | \, c, \, m \rangle = 1 \qquad \text{and} \qquad \langle c, \, m \, | \, c, \, m^\prime \rangle = 0 \quad \text{for all $m \neq m^\prime$}.\end{equation*}
+As a consequence of the normalization, we find that
+\begin{equation*}\begin{aligned} c = \langle c, \, j \, | \, \mathbb{J}^2 \, | \, c, \, j \rangle &  \stackrel{(*)}{=} \langle c, \, j \, | \, J_- J_+ + J_3^2 + J_3 \, | \, c, \, j \rangle =
+\\[1em] & = \langle c, \, j \, | \, J_- J_+ \, | \, c, \, j \rangle + \langle c, \, j \, | \, J_3^2 \, | \, c, \, j \rangle + \langle c, \, j \, | \, J_3 \, | \, c, \, j \rangle =
+\\[1em] & = 0 + j^2 \, \underbrace{\langle c, \, j \, | \, c, \, j \rangle}_{=1} + j \, \underbrace{\langle c, \, j \, | \, c, \, j \rangle}_{=1} = j(j+1),\end{aligned} \end{equation*}
+where $(\ast)$ follows from a direct application of formula \eqref{eq.6.5}.
+
+In particular, $c$ depends on $j$, and thus, from now on, we shall denote by $| \, j, \, m\rangle$ the eigenstate $| \,c, \, m\rangle$. The representation $\mathfrak{R}$ is finite-dimensional, which means that also $J_-$ cannot go all the way down; let $n$ be the minimum eigenstate, that is,
+\begin{equation*} J_- \, | \, j, \, j - n+ 1 \rangle = | \, j, \, j - n \rangle \quad \text{and} \quad J_- \, | \, j, \, j - n \rangle = 0. \end{equation*}
+If we plug \eqref{eq.6.4} into the previous computation, we find that
+\begin{equation*}\begin{aligned} c & = \langle j, \, j-n \, | \, \mathbb{J}^2 \, | \, j, \, j - n \rangle 
+\\[1em] & = \langle j, \, j  - n\, | \, J_- J_+ + J_3^2 - J_3 \, | \, j, \, j-n \rangle =
+\\[1em] & = \langle j, \, j - n \, | \, J_+ J_- \, | \, j, \, j-n \rangle + \langle j, \, j-n \, | \, J_3^2 \, | \, j, \, j-n \rangle - \langle j, \, j-n \, | \, J_3 \, | \, j, \, j-n \rangle =
+\\[1em] & = 0 + (j - n) \, \underbrace{\langle j, \, j-n \, | \, j, \, j-n \rangle}_{=1} + (j - n - 1) \,  \underbrace{\langle j, \, j-n \, | \, j, \, j-n \rangle}_{=1} = j(j+1),\end{aligned} \end{equation*}
+from which we infer that
+\begin{equation*} c = j(j + 1) = (j - n)(j - n - 1) \implies n = 2j. \end{equation*}
+In particular, it turns out that the dimension of an irreducible representation $\mathfrak{R}$ is $N := 2j + 1$ (since the eigenvalues range from $- j$ to $+ j$), where
+\begin{equation*} j \in \frac{\N}{2} := \left\{ \frac{n}{2}\: : \: n \in \N \right\}. \end{equation*}
+Recall that the nucleon corresponds to the fundamental representation of $\mathrm{SU}(2, \, \C)$, which means that $j = 1/2$ and $N = 2$. It turns out that
+\begin{equation*}\begin{pmatrix} p \\ n \end{pmatrix} \sim | \, \frac{1}{2}, \, \pm \frac{1}{2}\rangle. \end{equation*}
+In a similar fashion, the triplet of pions is associated with the fundamental representation ($j = 1$), and therefore we have
+\begin{equation*}\begin{pmatrix} \pi^+ \\ \pi^0 \\ \pi^- \end{pmatrix} \sim \begin{aligned} & | \, 1, \, 1\rangle, \\ & | \, 1, \, 0\rangle, \\ & | \, 1, \, -1\rangle, \end{aligned}\end{equation*}
+where the right-hand side vectors correspond to $\pi^1, \, \pi^2$ and $\pi^3$ respectively. The $\pi N$ scattering shows a strong resonance at the kinetic energy about $200$ MeV; it occurs in the $P$-wave ($\ell = 1$) with total angular momentum $J = 3$, which means $j = 3/2$. In this case, we have
+\begin{equation*}\begin{pmatrix} \Delta^{++} \\  \Delta^{+} \\ \Delta^{0} \\ \Delta^{-} \end{pmatrix} \sim \begin{aligned} & | \, \frac{3}{2}, \, \frac{3}{2}\rangle, \\ & | \, \frac{3}{2}, \, \frac{1}{2}\rangle, \\ & | \, \frac{3}{2}, \, - \frac{1}{2}\rangle, \\ & | \, \frac{3}{2}, \, - \frac{3}{2}\rangle. \end{aligned} \end{equation*}
+
+
+\section{Fundamental Representation of $\mathrm{SU}(2, \, \C)$}
+
+Recall that the generators of the fundamental representation $\mathfrak{R} := \{ \rho, \, V \}$ of $\mathrm{SU}(2, \, \C)$ are given by
+\begin{equation*} T^a = \frac{1}{2} \tau^a \quad \text{for $a = 1, \, 2, \, 3$},\end{equation*}
+where $\tau^a$ denotes the $a$th Pauli matrix\index{Pauli matrices}, that is,
+\begin{equation*} \tau^1 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \qquad \tau^2 = \begin{pmatrix} 0 & - \imath \\ \imath & 0 \end{pmatrix}, \qquad \tau^3 = \begin{pmatrix} 1 & 0 \\ 0 & - 1 \end{pmatrix}.\end{equation*}
+Note that Pauli matrices are Hermitian matrices ($(\tau^a)^\dag = \tau^a$) with null-trace. Furthermore, a straightforward computation proves that $f^{abc}$ is equal to the Levi-Civita tensor\index{Levi-Civita tensor}, i.e.,
+\begin{equation*} f^{abc} = \epsilon^{abc} := \begin{cases} 1 & \text{if $(a b c)$ is an even permutation,} \\ - 1 & \text{if $(a b c)$ is an odd permutation,} \\ 0 & \text{otherwise}, \end{cases}\end{equation*}
+which means that
+\begin{equation*}[T^a, \, T^b] = \imath \epsilon^{abc} T^c \implies \begin{aligned} & [T^1, \, T^2] = - [T^2, \, T^1] = \imath T^3, \\[0.8em] & [T^2, \, T^3] = - [T^3, \, T^2] = \imath T^1, \\[0.8em] & [T^3, \, T^1] = - [T^1, \, T^3] = \imath T^2. \end{aligned} \end{equation*}
+
+\begin{definition}[Quaternion Group] \index{quaternion group} The \textit{quaternion group} $Q_8$ is one of the two non-commutative group of order $8$. More precisely, it is given by
+\begin{equation*} Q_8 := \left\{  \pm 1, \, \pm i, \,  \pm j, \, \pm k \right\},  \end{equation*}
+endowed with a product satisfying the following rules, known as Hamilton's rules\index{Hamilton's rules}:
+\begin{equation*}i^2 = j^2 = k^2 = ijk = - 1 \quad \text{and} \quad \begin{cases} ij = - ji = k, \\ jk = - kj = i, \\ ki = - ik = j. \end{cases} \end{equation*} \end{definition}
+
+We now prove that the Pauli matrices form a quaternion group, that is, we show that
+\begin{equation*} \left\{ \pm \mathrm{id}_{2 \times 2}, \, \pm \imath \tau^1, \,\pm \imath \tau^2, \, \pm \imath \tau^3 \right\},  \end{equation*}
+endowed with the matrix product, is isomorphic to $Q_8$. Recall that the anticommutator\index{anticommutator} is denoted by $\{ \cdot, \, \cdot \}$, and is defined by setting
+\begin{equation*} \{A, \, B\} := AB + BA. \end{equation*}
+A direct computation proves that
+\begin{equation*}(\tau^a)^2 = \mathrm{id}_{2 \times 2} \implies (\imath \tau^a)^2 = - \mathrm{id}_{2 \times 2} \quad \text{for all $a = 1, \, 2, \, 3$}, \end{equation*}
+and also that
+\begin{equation*}\{ \tau^a, \, \tau^b \} = 0 \quad \text{for all $a \neq b \in \{ 1, \, 2, \, 3 \}$}. \end{equation*}
+It follows that, using the generator formula $[T^a, \, T^b] = \imath \epsilon^{abc} T^c$, we have
+\begin{equation*}(\imath \tau^a)(\imath \tau^b) = - \tau^a \tau^b = \frac{1}{2}(\tau^b \tau^a - \tau^a \tau^b) = \imath \tau^c, \end{equation*}
+which means that $\left\{ \pm \mathrm{id}_{2 \times 2}, \, \pm \imath \tau^1, \,\pm \imath \tau^2, \, \pm \imath \tau^3 \right\}$ is, actually, a quaternion group.
+
+\subsection{Elements in the Fundamental Representation}
+
+In this section, we want to compute the element $U(\alpha)$ in the fundamental representation, where $\alpha$ is a (real) parameter in $\R^3$. Let $\beta_a := \frac{\alpha_a}{2}$ and $\beta := (\beta_1, \, \beta_2, \, \beta_3)$, and notice that
+\begin{equation*}U(\alpha) = \mathrm{e}^{\imath T^a \alpha_a} = \mathrm{e}^{\sum_{a =1}^3 \imath \tau^a \beta_a} \neq \prod_{a = 1}^3 \mathrm{e}^{\imath \tau^a \beta_a} \end{equation*}
+because, as we proved earlier, the Pauli matrices do not commute between themselves.
+
+The idea is thus to apply the quaternion rules and the definition, as a series, of the exponential function. Namely, let us denote by $\tau \cdot \beta$ the scalar product $\tau^a \beta_a$. By definition
+\begin{equation} \label{eq.7.1} \begin{aligned} \mathrm{e}^{\imath \tau \cdot \beta} & = \sum_{n \in \N} \frac{1}{n!} \imath^n (\tau \cdot \beta)^n = \\[1em] & = \sum_{m \in \N} \frac{1}{(2m)!} (-1)^m \left[ (\tau \cdot \beta)^2 \right]^m + \sum_{m \in \N} \frac{1}{(2m + 1)!} (-1)^m \left[ (\tau \cdot \beta)^2 \right]^m (\tau \cdot \beta), \end{aligned} \end{equation}
+and using the anticommutative property of the quaternion algebra, we also have that
+\begin{equation*}\begin{aligned} (\tau \cdot \beta)^2 & = \beta_a \beta_b \tau^a \tau^b = 
+\\[1em] & = \frac{1}{2} \beta_a \beta_b \left( \tau^a \tau^b + \tau^b \tau^a \right) =
+\\[1em] & = \beta_a^2 (\tau^a)^2 = |\beta|^2, \end{aligned} \end{equation*}
+since $(\tau^a)^2 = \mathrm{id}_{2 \times 2}$ for all $a = 1, \, 2, \, 3$. Plugging this identity into \eqref{eq.7.1} we find that
+\begin{equation} \label{eq.7.2} \begin{aligned} \mathrm{e}^{\imath \tau \cdot \beta} & = \sum_{m \in \N} \frac{1}{(2m)!} (-1)^m |\beta|^{2m} + \sum_{m \in \N} \frac{1}{(2m + 1)!} (-1)^m \frac{|\beta|^{2m+1}}{|\beta|} (\tau \cdot \beta) =
+\\[1em] & = \cos |\beta| \cdot \mathrm{id}_{2 \times 2} + \frac{\imath \sin |\beta|}{|\beta|} (\tau \cdot \beta). \end{aligned} \end{equation}
+We can easily compute the matrix $\tau \cdot \beta$ explicitly as
+\begin{equation*} \tau \cdot \beta = \begin{pmatrix} 0 & \beta_1 \\ \beta_1 & 0 \end{pmatrix} + \begin{pmatrix} 0 & - \imath \beta_2 \\ \imath \beta_2 & 0 \end{pmatrix} + \begin{pmatrix} \beta_3 & 0 \\0 & - \beta_3 \end{pmatrix} = \begin{pmatrix} \beta_3 & \beta_1 - \imath \beta_2 \\ \beta_1 + \imath \beta_2 & - \beta_3 \end{pmatrix}, \end{equation*}
+and thus we obtain from \eqref{eq.7.2} that the element of parameter $\alpha$ in the fundamental representation is given by
+\begin{equation*}\begin{aligned} U(\alpha) & = \mathrm{e}^{\imath \tau \cdot \beta} = \begin{pmatrix} \cos |\beta| & 0 \\ 0 & \cos |\beta| \end{pmatrix} + \frac{\imath \sin |\beta|}{|\beta|} \begin{pmatrix} \beta_3 & \beta_1 - \imath \beta_2 \\ \beta_1 + \imath \beta_2 & - \beta_3 \end{pmatrix} =
+\\[1em] & =\mathrm{e}^{\imath \tau \cdot \frac{\alpha}{2}} = \begin{pmatrix} \cos \frac{|\alpha|}{2} & 0 \\ 0 & \cos\frac{|\alpha|}{2} \end{pmatrix} + \frac{ \imath \sin \frac{|\alpha|}{2}}{|\alpha|} \begin{pmatrix} \frac{\alpha_3}{\sqrt{2}} & \frac{\alpha_1 - \imath \alpha_2}{\sqrt{2}} \\ \\ \frac{\alpha_1+ \imath \alpha_2}{\sqrt{2}} & - \frac{\alpha_3}{\sqrt{2}} \end{pmatrix}.
+\end{aligned} \end{equation*}
+
+\subsection{Pseudo-Real (Fundamental) Representation}
+
+In this section, we introduce a refinement of the notion of \textit{real representation}, and we prove that the fundamental representation of $\mathrm{SU}(2, \, \C)$ is, actually, pseudo-real (or quaternionic).
+
+\begin{definition}[Real Representation]\index{representation!real} A representation $\mathfrak{R} = \{\rho, \, V\}$ of a group $\G$ is \textit{real} if it is equivalent via a unitary matrix $S$ to the representation $\{ \rho^\ast, \, V^\ast\}$, that is,
+\begin{equation*}S \rho(g) S^{-1} = \rho(g)^\ast \quad \text{for every $g \in \G$}.\end{equation*}\end{definition}
+
+\begin{definition}[Pseudo-Real Representation]\index{representation!pseudo-real} A representation $\mathfrak{R} = \{\rho, \, V\}$ of a group $\G$ is said to be \textit{pseudo-real} if it is equivalent via an antisymmetric unitary matrix $S$ to the complex conjugate representation $\{ \rho^\ast, \, V^\ast\}$, that is,
+\begin{equation*}S \rho(g) S^{-1} = \rho(g)^\ast \quad \text{for every $g \in \G$}.\end{equation*}\end{definition}
+
+Let $\mathfrak{R} := \{ U(\alpha), \, V \}$ denote the fundamental representation of $\mathrm{SU}(2, \, \C)$. We know that the Pauli matrices $\tau^a$ are Hermitian, and hence
+\begin{equation*}(\tau^a)^\dagger = \tau^a \implies (\tau^a)^\ast = (\tau^a)^T \quad \text{for all $a \in \{1, \, 2, \, 3\}$}.\end{equation*}
+Therefore
+\begin{equation*}U(\alpha)^\ast = S U(\alpha) S^{-1} \iff \mathrm{e}^{- \imath (t^a)^\ast \alpha_a } = S \mathrm{e}^{ \imath t^a \alpha_a } S^{-1} = \mathrm{e}^{\imath S t^a \alpha_a S^{-1} },\end{equation*}
+which means that the fundamental representation is real if and only if one can find a regular matrix $S$ such that
+\begin{equation} \label{eq.7.3} S t^a S^{-1} = - (t^a)^\ast \quad \text{for all $a \in \{1, \, 2, \, 3\}$}.\end{equation}
+The reader can quickly check that $S := \tau^2$ is the sought unitary matrix since
+\begin{equation*}\begin{aligned} & \tau^2 \frac{\tau^1}{2} (\tau^2)^{-1} = \frac{1}{2} \tau^2 \tau^1 \tau^2 = - \frac{1}{2} \underbrace{(\tau^2)^2}_{= \mathrm{id}_{2 \times 2}} \tau^1 = - \frac{1}{2} \underbrace{\tau^1}_{= (\tau^1)^\ast }
+\\[1em] & \tau^2 \frac{\tau^2}{2} (\tau^2)^{-1} = \frac{1}{2} \tau^2 = - \frac{1}{2} (\tau^2)^\ast,
+\\[1em] & \tau^2 \frac{\tau^3}{2} (\tau^2)^{-1} = \frac{1}{2} \tau^2 \tau^3 \tau^2 = - \frac{1}{2} \underbrace{(\tau^2)^2}_{= \mathrm{id}_{2 \times 2}} \tau^3 = - \frac{1}{2} \underbrace{\tau^3}_{= (\tau^3)^\ast}.\end{aligned}\end{equation*}
+The matrix $\tau^2$ is antisymmetric since $(\tau^2)^T = (\tau^2)^\ast = - \tau^2$, therefore the fundamental representation is pseudo-real.
+
+Note that it is not necessary to know that $S = \tau^2$ to prove that the representation is pseudo real since we can use \eqref{eq.7.3} and the fact that $\tau^a$ is Hermitian for every $a$. Namely, we have that
+\begin{equation*} \eqref{eq.7.3} \implies S t^a S^{-1} = - (t^a)^\ast = - (t^a)^T \implies t^a = - (S^{-1})^T (t^a)^T S^T, \end{equation*}
+and therefore
+\begin{equation*} t^a = (S^{-1})^T S t^a S^{-1} S^T \implies S^{-1} S^{T} t^a = t^a S^{-1} S^T.\end{equation*}
+In particular, the matrix $S^{-1} S^T$ commutes with each element of the Lie group $\mathrm{SU}(2, \, \C)$, and thus by \hyperref[schur1]{Schur Lemma} it follows that
+\begin{equation*}\exists \, \lambda \in \R \: : \: S^{-1} S^T = \lambda. \end{equation*}
+In particular, we have that $S^T = \lambda S$ and, by taking the square of the identity, we also find that $\lambda^2 = 1$, i.e. $S = S^T$ is symmetric or $S = - S^T$ is antisymmetric, which is exactly what we wanted to prove (i.e., the representation is either real or pseudo real, depending on the matrix $S$.)
+
+\subsection{Simpleness of $\mathrm{SU}(2, \, \C)$}
+
+In the fundamental representation, the Lie algebra $\mathrm{su}(2, \, \C)$ has three subalgebras, which are nothing but the ones generated by $\tau^a$ for each $a \in \{1, \, 2, \, 3\}$. If $\h := \{ \tau^3 \}$, then one can check that
+\begin{equation*}[\tau^3, \, \tau^3] = 0 \quad \text{and} \quad [\tau^3, \, \tau^1] = \imath \tau^2 \notin \h, \end{equation*}
+and similarly with any subalgebra $\h \subset \mathrm{su}(2, \, \C)$.
+
+In particular, the Lie algebra $\mathrm{su}(2, \, \C)$ has no nontrivial invariant subalgebras, which means that the only normal subgroups $\mathcal{H}$ of $\mathrm{SU}(2, \, \C)$ that are abelian, are the trivial ones.
+
+\begin{theorem} The Lie group $\mathrm{SU}(2, \, \C)$ is simple. \end{theorem}
+
+\begin{proof}The reader can consult \cite{thskda} for a formal proof of this fact. \end{proof}
+
+\section{Elements in Irreducible Representations}
+\label{sec:oqweofdks}
+
+Let $J_1, \, J_2$ and $J_3$ be the generators of a $N = 2j + 1$ dimensional irreducible representation of $\mathrm{SU}(2, \, \C)$. Recall that by \eqref{eq.6.4} we have
+\begin{equation*}\begin{aligned} c = \langle j, \, m \, | \, \mathbb{J}^2 \, | \, j, \, m \rangle & = \langle j, \, m \, | \, J_+ J_- + J_3^2 - J_3 \, | \, j, \, m \rangle =
+\\[1em] & = \langle j, \, m \, | \, J_+ J_- \, | \, j, \, m \rangle + m(m - 1).\end{aligned} \end{equation*}
+
+\begin{remark}Let $\{ v^{(m)} \}_{m = j, \, j-1, \, \dots, \, -j}$ be an orthonormal basis of eigenstates for $J_3$. The eigenvalues $\lambda^{(m)}$ are real, and it is easy to see that
+\begin{equation*} J_3 v^{(m)} = \lambda^{(m)} v^{(m)} \implies (v^{(m)})^\dag J_3^\dag = \lambda^{(m)} (v^{(m)})^\dag, \end{equation*}
+which yields to the so-called \textit{completeness identity}\index{completeness identity}
+\begin{equation} \label{eq.7.4} \sum_{m}  v^{(m)} \cdot (v^{(m)})^\dag= \mathrm{id}_{N \times N}. \end{equation}  \end{remark}
+
+\noindent It follows from \eqref{eq.7.4} that
+\begin{equation*}\begin{aligned} c & = \langle j, \, m \, | \, J_+ J_- \, | \, j, \, m \rangle + m(m - 1) =
+\\[1em] & = \sum_{m^\prime} \langle j, \, m \, | \, J_+ \, | \, j, \, m^\prime \rangle\langle j, \, m^\prime \, | \, J_- \, | \, j, \, m \rangle + m(m-1) =
+\\[1em] & = \langle j, \, m \, | \, J_+ \, | \, j, \, m - 1 \rangle\langle j, \, m - 1 \, | \, J_- \, | \, j, \, m \rangle + m(m-1) =
+\\[1em] & = \left| \langle j, \, m-1 \, | \, J_- \, | \, j, \, m \rangle \right|^2 + m(m - 1).\end{aligned} \end{equation*}
+
+In a similar fashion, one can employ formula \eqref{eq.6.5} to prove the equivalent identity for $J_+$, which yields immediately to a complete characterization of the matrices $J_+$ and $J_-$ as follows:
+\begin{equation*}\begin{aligned} & \langle j, \, m - 1 \, | \, J_- \, | \, j, \, m \rangle = \sqrt{ (j + m)(j - m + 1) },
+\\[1em] & \langle j, \, m+1 \, | \, J_+ \, | \, j, \, m \rangle = \sqrt{ (j - m)(j + m + 1) }.\end{aligned} \end{equation*}
+In particular, the matrices $J_+$ and $J_-$ have a peculiar form as the only nonzero elements are the supdiagonal and the subdiagonal respectively, that is,
+\begin{equation*} J_- = \begin{pmatrix}0       &0 &\ldots  &0\\
+\ast & 0      &\ddots  &\vdots\\
+\vdots  &\ddots  &0       &0\\
+0 &\ldots  &\ast &0 \end{pmatrix} \quad \text{and} \quad J_+ = \begin{pmatrix}0       &\ast &\ldots  &0\\
+0 & 0      &\ddots  &\vdots\\
+\vdots  &\ddots  &0       &\ast\\
+0 &\ldots  &0 &0 \end{pmatrix}. \end{equation*}
+It follows that
+\begin{equation*} J_1 = \frac{1}{2}(J_+ + J_-) = \begin{pmatrix}0       &\ast &\ldots  &0\\
+\ast & 0      &\ddots  &\vdots\\
+\vdots  &\ddots  &0       &*\\
+0 &\ldots  &\ast &0 \end{pmatrix} \quad \text{and} \quad J_2 = \frac{1}{2\imath}(J_+ - J_-) = \begin{pmatrix}0       &\ast &\ldots  &0\\
+\ast & 0      &\ddots  &\vdots\\
+\vdots  &\ddots  &0       &*\\
+0 &\ldots  &\ast &0 \end{pmatrix},\end{equation*}
+and $J_3$ is the diagonal $(2j+1)\times(2j+1)$ matrix $\mathrm{diag}(j, \, j - 1, \, \dots, \, - j)$.
+
+\paragraph{Adjoint Representation.} One can easily apply the general formulas provided above to compute the generators of the adjoint representation ($j = 1$), and the exponentials $\mathbb{U}(\alpha)$ for $\alpha \in \R^3$.
+
+\section{Tensor Product of Representations}
+
+The content of this section is mostly a summary of \cite[Chapter 24.8]{hassani}. The reader interested in a better understanding of this topic may start by consulting that book.
+
+\vspace{1.2mm}
+A quantum mechanical system possessing a group of symmetry is described by vectors that transform according to an irreducible representation $\mathfrak{R}$. For example, a rotationally invariant system can be characterized by an eigenstate of angular momentum, the generator of the rotation.
+
+Often irreducible states are combined to form new states. For example, the state of two noninteracting particles is described by a two-particle state, labeled by the combined eigenvalues of the two sets of operators that define each particle separately.
+
+In the case of the angular momentum, the single-particle states may be labeled as $| \, j_1, \, m_1 \rangle$ and $| \, j_2, \, m_2 \rangle$. Then the combined state is labeled by
+\begin{equation*} \text{$| \, j_1, \, m_1 \rangle | \, j_2, \, m_2 \rangle$ or $| \, j_1, \, m_1; \; j_2, \, m_2 \rangle$},\end{equation*}
+and one can define an action of the rotation group on the vector space spanned bu these combined states to construct the so-called \textit{tensor product representation}\index{tensor product representation}. We now recall the way in which one can construct such a representation.
+
+\paragraph{Kronecker Product.} Let $\mathfrak{R} := \{ \rho, \, V \}$ and $\mathfrak{S} := \{ \rho^\prime, \, W \}$ be two representations of a group $\G$. We can easily define an action of the group $\G$ on the tensor product $V \otimes W$ via the representation $\rho \otimes \rho^\prime : \G \longrightarrow \mathrm{GL}(V \otimes W)$ given by
+\begin{equation}\label{eq.8.1} (\rho \otimes \rho^\prime)(g)( |v\rangle, \, |w\rangle ) := \left( \rho(g) |v\rangle, \, \rho^\prime(g) |w\rangle \right). \end{equation}
+The reader can easily check that \eqref{eq.8.1} gives a representation on the tensor product since the associativity is an immediate consequence of the associativity of both $\mathfrak{R}$ and $\mathfrak{S}$.
+
+\begin{notation}In this course, we shall often denote the direct product element $( |v\rangle, \, |w\rangle )$ by $|v, \, w\rangle$, or simply $ | vw \rangle$. Similarly, if $\{ |v_i\rangle\}$ is an orthonormal basis for $V$ and $\{ |w_a\rangle \}$ is an orthonormal basis for $W$, we define an inner product on $V \otimes W$ by setting
+\begin{equation}\label{eq.8.2} \langle v, \, w \, | \, v^\prime, \, w^\prime \rangle := \langle v \, | \, v^\prime \rangle \langle w \, | \, w^\prime \rangle. \end{equation} \end{notation}
+
+An important special case is the tensor product of a representation with itself. For such a representation, the matrix elements satisfy the symmetry relation
+\begin{equation*} (\rho \otimes \rho)(g)_{i a, \, jb} = (\rho \otimes \rho)(g)_{ai, \, bj}. \end{equation*} 
+The symmetry can be used to decompose the tensor product space into two $\G$-invariant subspaces. To do this, take the span of all symmetric vectors $|v_i w_j\rangle + |v_j w_i \rangle$ and denote it by $(V \otimes V)_s$. Similarly, take the span of all antisymmetric vectors $|v_i w_j\rangle - |v_j w_i \rangle$ and denote it by $(V \otimes V)_a$. It is easy to see that every vector in $V \otimes V$ can be written as the sum of a symmetric and an antisymmetric vector, i.e.
+\begin{equation*}|v_i w_j \rangle = \frac{1}{2} ( |v_i w_j \rangle + |v_j w_i\rangle) + \frac{1}{2} ( |v_i w_j \rangle - |v_j w_i\rangle). \end{equation*} 
+It follows that
+\begin{equation*} V \otimes V = (V \otimes V)_s \oplus (V \otimes V)_a \end{equation*}
+since the unique common vector is the zero vector. It follows that the Kronecker product of a representation with itself is always reducible into two representations, the symmetric and the antisymmetric ones.
+
+\subsection{Clebsh-Gordan Decomposition}
+
+Let $j_1$ and $j_2$ be irreducible representations of $\mathrm{SU}(2, \, \C)$. The tensor product $j_1 \otimes j_2$ is, clearly, not irreducible anymore by definition. The idea is to decompose it as a sum of irreducible representations
+\begin{equation*}j_1 \otimes j_2 = (j_1 + j_2) \otimes (j_1 + j_2 - 1) \otimes \dots \otimes |j_1 - j_2| \end{equation*}
+in such a way that
+\begin{equation*}|j_1, \, m_1\rangle |j_2, \, m_2 \rangle = \sum_{M = j_1 + j_2}^{|j_1 - j_2|} |J, \, M\rangle \langle J, \, M| j_1, \, m_1; \; j_2, \, m_2 \rangle, \end{equation*}
+where $J = j_1 + j_2$. The coefficients of the sum $\langle J, \, M| j_1, \, m_1; \; j_2, \, m_2 \rangle$ are known as \textit{Clebsh-Gordan coefficients}\index{Clebsh-Gordan decomposition}.
+
+\section{Comparison: $\mathrm{SO}(3, \, \R)$ and $\mathrm{SU}(2, \, \C)$}
+
+In this final section, we discuss a little bit more about the relationship between the Lie groups $\mathrm{SO}(3, \, \R)$ and $\mathrm{SU}(2, \, \C)$. First, recall that
+\begin{equation*} \mathrm{SO}(2, \, \R) \cong \mathrm{U}(1, \, \C) \end{equation*}
+via the isomorphism
+\begin{equation*} \mathrm{SO}(2, \, \R) \ni \begin{pmatrix} \cos \theta & \sin \theta \\ - \sin \theta & \cos \theta \end{pmatrix} \longmapsto \mathrm{e}^{\imath \theta} \in \mathrm{U}(1, \, \C). \end{equation*}
+The irreducible unitary representations of $\mathrm{U}(1, \, \C)$ are all one-dimensional as a consequence of Schur's Lemma; namely, we have that
+\begin{equation*} \psi_m : U(1, \, \C) \longrightarrow \R, \qquad \mathrm{e}^{\imath m \theta} \longmapsto \theta \end{equation*}
+is a one-dimensional unitary irreducible representation for every $m \in \Z$. Consider the fundamental representation ($m = 1$), given by
+\begin{equation*} \mathrm{SO}(2, \, \R) \ni \begin{pmatrix} \cos \theta & \sin \theta \\ - \sin \theta & \cos \theta \end{pmatrix} \longmapsto \theta \in \R, \end{equation*}
+and consider the change of basis via a regular matrix
+\begin{equation*} S = \frac{1}{\sqrt{2}} \begin{pmatrix}1 & \imath \\ \imath & 1 \end{pmatrix} \quad \text{and} \quad S^{-1} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & -\imath \\ -\imath & 1\end{pmatrix}. \end{equation*}
+It turns out that
+\begin{equation*} S \begin{pmatrix} x \\ y \end{pmatrix} = \frac{1}{\sqrt{2}} \begin{pmatrix} x + \imath y \\ \imath x + y\end{pmatrix} =: \frac{1}{\sqrt{2}} \begin{pmatrix} z \\ \imath \bar{z} \end{pmatrix}, \end{equation*}
+and
+\begin{equation*} S R_\theta S^{-1} = \begin{pmatrix}\mathrm{e}^{- \imath \theta} & 0 \\ 0 & \mathrm{e}^{\imath \theta}\end{pmatrix}, \end{equation*}
+which means that the matrix $S$ transforms the fundamental representation $m = 1$ into the one-dimensional representation given by $m = - 1$ (since $\mathrm{e}^{-\imath \theta} z = - \imath \mathrm{e}^{\imath \theta}\bar{z}$).
+
+\paragraph{Subgroups.} We now show that $\mathrm{SO}(2, \, \R)$ is a subgroup of $\mathrm{SU}(2, \, \C)$, and we explain the intuitive reason behind the $2$-degree covering
+\begin{equation*}\mathrm{SU}(2, \, \C) \longrightarrow  \mathrm{SO}(3, \, \R). \end{equation*}
+Recall that the third Pauli matrix $\tau^3$ is diagonal, and therefore the computation of the exponential is extremely easy. In particular, we obtain that the subgroup generated by $\tau^3$ only is given by
+\begin{equation*}U((0, \, 0, \, \theta)) = \mathrm{e}^{\imath \frac{\tau^3}{2} \theta} = \begin{pmatrix}\mathrm{e}^{- \imath \frac{\theta}{2}} & 0 \\ 0 & \mathrm{e}^{\imath \frac{\theta}{2}}\end{pmatrix}, \end{equation*}
+which means that $\tau^3$ generates the $\mathrm{U}(1, \, \C)$ as a subgroup of $\mathrm{SU}(2, \, \C)$.
+
+Note that there is a factor $2$ on the rotation angle, and this is the main reason behind the existence of a $2$-degree covering. We shall not compute it directly, but one can prove that
+\begin{equation*}U((0, \, \theta, \, 0)) = \mathrm{e}^{\imath \frac{\tau^2}{2} \theta} = R_{ \frac{\theta}{2} }, \end{equation*}
+and similarly for the subgroup generated by the first Pauli matrix $\tau^1$. Intuitively, for any fixed axis of rotation $\vec{v}$, there is a subgroup isomorphic to $\mathrm{SO}(2, \, \R)$ that consist in all the rotations of the plane perpendicular to $\vec{v}$.
+
+\paragraph{Rotation Group.} Recall that the generators of the Lie group $\mathrm{SO}(3, \, \R)$ are given by
+\begin{equation*} T^1 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & - \imath \\ 0 & \imath & 0 \end{pmatrix}, \qquad T^2 = \begin{pmatrix} 0 & 0 & \imath \\ 0 & 0 & 0 \\ -\imath & 0 & 0 \end{pmatrix}, \qquad T^3 = \begin{pmatrix} 0 & -\imath & 0 \\ \imath & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix},\end{equation*}
+that are nothing else but the rotations on the coordinate planes $xy$, $yz$ and $xz$. Let $(\alpha, \, \beta, \, \gamma)$ be the Euler angle of rotation, so that a generic element of $\mathrm{SO}(3, \, \R)$ in this representation is given by
+\begin{equation*}U( (\alpha, \, \beta, \, \gamma) ) = U_3(\gamma) U_2(\beta) U_1(\alpha), \end{equation*}
+where $U_i(\theta)$ is a rotation around the $i$th coordinate axis of angle $\theta$. For example, we have
+\begin{equation*}U_1(\alpha) = \begin{pmatrix} \cos \alpha & \sin \alpha & 0 \\ - \sin \alpha & \cos \alpha & 0 \\ 0 & 0 & 1 \end{pmatrix} \end{equation*}
+as an element of $\mathrm{SO}(3, \, \R)$, and
+\begin{equation*}\tilde{U}_1(\alpha) = \begin{pmatrix}\mathrm{e}^{- \imath \frac{\alpha}{2}} & 0 \\ 0 & \mathrm{e}^{\imath \frac{\alpha}{2}}\end{pmatrix} \end{equation*}
+as an element of $\mathrm{SU}(2, \, \C)$. It is easy to check that
+\begin{equation*}U_1(2 \pi) = \mathrm{id}_{3 \times 3} \quad \text{and} \quad \tilde{U}_1(4\pi) = \mathrm{id}_{2 \times 2}, \end{equation*}
+which means that in $\mathrm{SU}(2, \, \C)$ we need to complete "two laps" to go back to the identity matrix, and this is to be expected as a consequence of the existence of the degree-two covering.

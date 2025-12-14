@@ -1,0 +1,135 @@
+\chapter{Representation Theory} \thispagestyle{empty}
+
+In this chapter, we develop the theory of representations we need later to investigate in-depth properties of $\mathrm{SU}(2, \, \C)$, $\mathrm{SU}(3, \, \C)$, $\mathrm{SO}(4, \, \R)$, the Euclidean groups, the Lorentz group, the Poincaré group, etc.
+
+\section{Introduction}
+
+First, we recall some definitions we have already introduced in the introductive chapter.
+
+\begin{definition}[Representation] \index{representation} A \textit{representation} of a group $\G$ on a $N$-dimensional vector space $V$ over a field $\mathbb{K}$ is a group homomorphism
+\begin{equation*} \rho : \G \longrightarrow \mathrm{GL}(N, \, \mathbb{K}; \; V), \end{equation*}
+that is, a mapping $\rho$ such that $\rho(g_1 g_2) = \rho(g_1) \cdot \rho(g_2)$ for every $g_1, \, g_2 \in \G$, where $\cdot$ denotes the matrices product. \end{definition}
+
+In particular, the identity element $e \in \G$ is represented by the identity matrix $\mathrm{Id}_{N \times N}$, while the inverse element $g^{-1}$ is represented by the inverse matrix $\rho(g)^{-1}$.
+
+Moreover, every group $\G$ admits a trivial $1$-dimensional representation\index{trivial representation}, which is defined in the following way:
+\begin{equation*}\rho(g) := (1)\quad\text{for all $g \in \G$}. \end{equation*}
+
+\begin{definition}[Similarity] \index{representation!equivalence} Let $\G$ be a group, and let $\{\rho, \, V\}$ and $\{\widetilde{\rho}, \, \widetilde{V} \}$ be two $N$-dimensional representations of $\G$. We say that they are \textit{similar} (or, equivalent) if and only if there exists a regular (=invertible) matrix $S$ such that
+\begin{equation*} \widetilde{\rho}(g) = S \rho(g) S^{-1} \quad \text{for every $g \in \G$}. \end{equation*}
+\end{definition}
+
+\begin{definition}[Unitary Representation] \index{representation!unitary} A $N$-dimensional representation $\{ \rho, \, V \}$ of a group $\G$ is \textit{unitary} if and only if $\rho(g) \in \mathrm{U}(N, \, \C)$ for every $g \in \G$. \end{definition}
+
+\begin{example}Recall that $\mathfrak{S}_3$ is the group of all permutations of $3$ elements, that is,
+\begin{equation*} \mathfrak{S}_3 = \left\{e, \, (123), \, (132), \, (12), \, (13), \, (23) \right\}. \end{equation*}
+There is an obvious three dimensional representation $\rho$ that acts as
+\begin{equation*} \rho( (123) ) \begin{pmatrix}a \\ b \\ c \end{pmatrix} = \begin{pmatrix} b \\ c \\ a \end{pmatrix}, \end{equation*}
+and does a similar work with any other element of $\mathfrak{S}_3$. They are explicitly given by the usual permutation matrices, that is,
+\begin{equation*} \begin{aligned} & \rho(e) = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}, \qquad  \rho((123)) = \begin{pmatrix} 0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix}, \qquad  \rho((132)) = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{pmatrix},
+\\[1.5em] & \rho((12)) = \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}, \qquad  \rho((13)) = \begin{pmatrix} 0 & 0  & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \end{pmatrix}, \qquad  \rho((23)) = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix}.\end{aligned} \end{equation*} \end{example}
+
+\begin{example}[Direct Product]\index{representation!direct product} Let $\{ \rho, \, V \}$ and $\{ \sigma, \, W \}$ be  representations of two groups $\G$ and $\G^\prime$ respectively. Recall that the direct product $\G \otimes \G^\prime$ is defined as the group with underlying set the Cartesian product $\G \times \G^\prime$ and component-wise multiplication, i.e.,
+\begin{equation*} (g, \, h) \oplus (g^\prime, \, h^\prime) = (g g^\prime, \, h h^\prime) \in \G \times \G^\prime. \end{equation*}
+There is an obvious representation of the direct product that is given by $\{ \rho \oplus \sigma, \, V \oplus W \}$, where $V \oplus V$ is the direct sum of vector spaces, and
+\begin{equation*}\rho \oplus \sigma(g, \, h) := \rho(g) \oplus \sigma(h). \end{equation*}
+The reader may quickly check that $\rho \oplus \sigma$ is a group homeomorphism, i.e. it preserves the group structure. \end{example}
+
+\section{Irreducible Representations}
+
+A \textit{diagonal block matrix}\index{diagonal block matrix} is a $n \times n$ matrix $M$ of the form
+\begin{equation*}M = \left( \begin{array}{c|c|c|c} M_1  & 0 & 0 & 0 \\ \hline 0 & M_2 & 0 & 0 \\ \hline 0 & 0 & \ddots & 0 \\ \hline0 & 0 & 0 & M_k \end{array} \right) \end{equation*}
+where $M_i$ is a $n_i \times n_i$ matrix for all $i \in \{1, \, \dots, \,k \}$ and $\sum_{i = 1}^k n_i = n$.
+
+\begin{definition}[Irreducible Representation] \index{representation!irreducible}\index{representation!reducible} A representation $\{ \rho, \, V\}$ of a group $\G$ is \textit{reducible} if it is equivalent (via a regular matrix $S$) to a diagonal representation, that is,
+\begin{equation*}S \rho(g) S^{-1} = M(g) = \left( \begin{array}{c|c|c|c} M_1(g)  & 0 & 0 & 0 \\ \hline 0 & M_2(g) & 0 & 0 \\ \hline 0 & 0 & \ddots & 0 \\ \hline0 & 0 & 0 & M_{k}(g) \end{array} \right) \quad \text{for every $g \in \G$}.\end{equation*}
+A non-reducible representation is usually referred to as \textit{irreducible representation}.\end{definition}
+
+\begin{definition}[$\G$-Invariant] \index{invariant $\G$-space} Let $\{ \rho, \, V \}$ be a representation of $\G$. A linear subspace $W \subset V$ is \textit{$\G$-invariant} if
+\begin{equation*} \rho(g)w \in W \quad \text{for every $g \in \G$ and $w \in W$}. \end{equation*}   \end{definition}
+
+\begin{definition}[Subrepresentation] \index{subrepresentation} Let $\{ \rho, \, V \}$ be a representation of $\G$, and let $W \subset V$ be a $\G$-invariant subspace. The representation $\{ \rho \, \big|_{W}, \, W \}$ is called \textit{subrepresentation} of $\{\rho, \, V\}$.\end{definition}
+
+\begin{remark}A representation $\{ \rho, \, V\}$ of a group $\G$ is reducible if and only if there are $\G$-invariant nontrivial subspaces $W_1, \, \dots, \, W_k \subset V$ such that
+\begin{equation*} W_1 \oplus \dots \oplus W_k = V. \end{equation*}\end{remark} 
+
+\begin{definition}[Complex Conjugate]\index{representation!complex conjugate} Let $\{ \rho, \, V\}$ be a representation of a group $\G$ over a complex vector space $V$. The \textit{complex conjugate representation} $\{ \rho^\ast, \, V^\ast\}$ is defined by
+\begin{equation*} g \longmapsto \rho^\ast(g) := - (\rho(g))^\ast, \end{equation*} 
+where $M^\ast$ is the complex conjugate of the matrix $M$.\end{definition}
+
+\begin{definition}[Complex/Real Representation] \index{representation!complex}\index{representation!real} A representation $\{\rho, \, V\}$ is \textit{real} if it is equivalent via a \textbf{unitary} matrix $S$ to the representation $\{ \rho^\ast, \, V^\ast\}$, that is,
+\begin{equation*}S \rho(g) S^{-1} = \rho^\ast(g) \quad \text{for every $g \in \G$}.\end{equation*}
+Furthermore, we say that a representation is \textit{complex} if it is not real.\end{definition}
+
+\subsection{Schur Lemmas}
+
+In this section, we prove the fundamental theorem due to Schur, known as \textit{Schur lemma}, for irreducible representations, and we use it to show interesting properties of irreducible (complex) representations of a group $\G$.
+
+\begin{lemma}[Schur] \label{schur1} Let $\{ \rho, \, V\}$ and $\{ \rho^\prime, \, W \}$ be two irreducible representations of a group $\G$. If there exists a linear mapping $A : V \longrightarrow W$ such that
+\begin{equation} \label{eq.5.1} A \rho(g) = \rho^\prime( Ag ) \quad \text{for every $g \in \G$}, \end{equation}
+then $A$ is either $0$ or an isomorphism of vector spaces. \end{lemma}
+
+\begin{proof}We assume that $A \neq 0$, and we show that $A$ is both injective and surjective.
+
+\paragraph{Injective.} The kernel $K := \mathrm{ker} A$ is clearly $\G$-invariant since
+\begin{equation*}x \in K \implies A \rho(x) = \rho^\prime(Ax) = \rho^\prime(0) = 0 \implies \rho(x) \in K. \end{equation*}
+The representation $\{ \rho, \, V\}$ is irreducibile; therefore $K$ is either $\{0\}$ or $V$. The linear application $A$ is not constantly zero, which means that $K$ cannot be equal to the whole vector space $V$, and hence $A$ is injective.
+
+\paragraph{Surjective.} The rank $R := \mathrm{ran} A = A(V)$ is clearly $\G$-invariant since
+\begin{equation*}x \in R \implies x = Ay \implies \rho^\prime(x) = A \rho(y) \implies \rho^\prime(x) \in R \end{equation*}
+The representation $\{ \rho^\prime, \, W\}$ is irreducibile; therefore $R$ is either $\{0\}$ or $W$. The linear application $A$ is not constantly zero, which means that $R$ cannot be equal to $\{0\}$, and hence $A$ is surjective.\end{proof}
+
+\begin{lemma} \label{schur2} Let $\{ \rho, \, V\}$ be an irreducible representation of a group $\G$ over a complex vector space $V$. If there exists a linear mapping $A : V \longrightarrow V$ such that
+\begin{equation} \label{eq.5.2} A \rho(g) = \rho( Ag ) \quad \text{for every $g \in \G$}, \end{equation}
+then there exists $\lambda \in \C$ such that $A = \lambda \cdot \mathrm{Id}_V= \lambda \cdot \mathrm{id}_{n \times n}$.  \end{lemma}
+
+\begin{proof} Let $\lambda \in \C$ be an eigenvalue of $A$. Then $B := A - \lambda \cdot \mathrm{id}_{n \times n}$ commutes with $\rho(g)$ for all $g \in \G$, and thus we infer from \hyperref[schur1]{Schur Lemma} that $A - \lambda \cdot \mathrm{id}_{n \times n} = 0$. \end{proof}
+
+\subsection{Representations of Finite and Compact Groups}
+
+As a consequence of Haar measures theory (see \hyperref[sec:haar]{Chapter \ref{sec:haar}}), we can easily show that every finite-dimensional representation of a compact group $\G$ is equivalent to some unitary representation.
+
+\begin{theorem} \label{thm.5.2} Every representation of a finite group $\G$ is equivalent to some unitary representation. \end{theorem}
+
+\caution{The proof we present here is taken, almost verbatim, from \cite{hassani}. }
+
+\begin{proof} Let $\{ \rho, \, V \}$ be a representation of $\G$. Consider the hermitian operator
+\begin{equation*}\mathbf{R} := \sum_{g \in \G} \rho(g)^\dagger \rho(g), \end{equation*}
+and notice that for every $h \in \G$ we have
+\begin{equation*}\begin{aligned} \rho(h)^\dagger \mathbf{R} \rho(h) &= \sum_{g \in \G} \rho(h)^\dagger \rho(g)^\dagger \rho(g) \rho(h) =
+\\[1em] & = \sum_{g \in \G} (\rho(g) \rho(h))^\dagger \rho(g) \rho(h) =
+\\[1em] & = \sum_{g \in \G} \rho(gh)^\dagger \rho(gh) =
+\\[1em] & = \sum_{x \in \G} \rho(x)^\dagger \rho(x) = \mathbf{R}, \end{aligned} \end{equation*} 
+where the equality $\stackrel{(*)}{=}$ follows from the fact that $\G$ is a finite group, and hence
+\begin{equation*} \{ gh \: : \: g \in \G \} = \G \quad \text{for every fixed $h\in \G$}. \end{equation*}
+Let $\mathbf{S} := \sqrt{ \mathbf{R} }$. Multiply the identity above by $\mathbf{S}^{-1}$ on the left and by $\rho(g)^{-1} \mathbf{S}^{-1}$ on the right to obtain
+\begin{equation*}\begin{aligned} \rho(g)^\dagger \mathbf{R} \rho(g) = \mathbf{R} & \implies \mathbf{S}^{-1} \rho(g)^\dagger \mathbf{S} = \mathbf{S} \rho(g)^{-1} \mathbf{S}^{-1}
+\\[1em] & \implies  \left( \mathbf{S} \rho(g) \mathbf{S}^{-1} \right)^\dagger = \left( \mathbf{S} \rho(g) \mathbf{S}^{-1} \right)^{-1} \quad \text{for every $g \in \G$}, \end{aligned} \end{equation*}
+which means that the representation $\rho^\prime(g) := \mathbf{S} \rho(g) \mathbf{S}^{-1}$ is unitary and equivalent to $\{ \rho, \, V \}$. \end{proof}
+
+\begin{theorem} \label{thm.5.3} Every finite-dimensional representation of a compact group $\G$ is equivalent to some unitary representation.  \end{theorem}
+
+\begin{proof}Let $\mu$ be the Haar probability measure given by \hyperref[theorem:1das]{Theorem \ref{theorem:1das}}, and let $\{ \rho, \, V \}$ be a representation of $\G$. Let $b : V \times V \longrightarrow \C$ be any inner product and define
+\begin{equation*} \langle u, \, v \rangle := \int_\G b( \rho(g)u, \, \rho(g)v) \, \mathrm{d}\mu(g) . \end{equation*}
+The reader may check by herself that $\langle \cdot, \, \cdot \rangle$ is a $\G$-invariant inner product, that is, a inner product such that $\langle \rho(g)u, \, \rho(g)v \rangle = \langle u, \, v \rangle$ for all $u, \, v \in V$ and $g \in \G$.
+
+Let $\mathcal{V} := \{v_1, \, \dots, \, v_n\}$ be a basis of the vector space $V$, and denote by $S$ the matrix associated to $\langle \cdot, \, \cdot \rangle$ with respect to $\mathcal{V}$. It turns out that
+\begin{equation*} \langle v_i, \, v_j \rangle = \langle \rho(g) v_i, \, \rho(g) v_j \rangle \implies  S^\dagger S = (S \rho(g))^\dagger S \rho(g) \quad \text{for every $g \in \G$},\end{equation*}
+and therefore the representation
+\begin{equation*} \G \ni g \longmapsto S \rho(g) S^{-1} \in \mathrm{GL}(V, \, \C)\end{equation*}
+is unitary because
+\begin{equation*}\begin{aligned} \left(S \rho(g) S^{-1}\right)^\dagger S \rho(g) S^{-1} & = (S^{-1})^\dagger \rho(g)^\dagger S^\dagger S \rho(g) S^{-1} =
+\\[1em] & = (S^{-1})^\ast \underbracket{\left( S \rho(g) \right)^\dagger \left( S \rho(g)\right)}_{= S^\dagger S} S^{-1} =
+\\[1em] & = (S^{-1})^\dagger S^\dagger S S^{-1} = \mathrm{id}_{n\times n}. \end{aligned}\end{equation*} \end{proof}
+
+\begin{proposition}Every irreducible representation of an abelian group $\G$ is one-dimensional. \end{proposition}
+
+\begin{proof}Let $\mathfrak{R} := \{ \rho, \, V\}$ be any representation of $\G$. The group is abelian, hence \eqref{eq.5.2} holds with $A := \rho(g)$ for every $g \in \G$. It follows from \hyperref[schur2]{Schur Lemma \ref{schur2}} that
+\begin{equation*} \forall g \in \G, \, \exists \lambda(g) \in \C \: : \: \rho(g) = \lambda(g) \cdot \mathrm{id}_{n \times n}, \end{equation*}
+which means that $\mathfrak{R}$ is a $1$-dimensional representation given by
+\begin{equation*} \G \ni g \longmapsto \lambda(g) \in \C. \end{equation*} \end{proof}
+
+\begin{example}[$\mathrm{SO}(2, \, \R)$] Fix $m \in \Z$. Every element of $\mathrm{SO}(2, \, \R)$ is a rotation that can be represented as a complex exponential
+\begin{equation*} \psi_m(\varphi) := \mathrm{e}^{\imath m \varphi} \end{equation*}
+for some $\varphi \in [0, \, 2 \pi)$. For every $m \in \Z$ we have a $1$-dimensional unitary representation given by the mapping
+\begin{equation*}\mathrm{SO}(2, \, \R) \ni \psi_m(\varphi) \longmapsto \varphi \in \R.  \end{equation*}\end{example}

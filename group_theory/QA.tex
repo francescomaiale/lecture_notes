@@ -1,0 +1,146 @@
+\chapter{Quantum Physics Applications} \thispagestyle{empty}
+
+In this final chapter, the primary goal is to show how we can apply the theory developed during the whole course to prove specific properties of physical systems in, for example, quantum mechanics.
+
+\section{Harmonic Oscillator $3$D}
+\label{sec:apsadk}
+The Hamiltonian of a $3$-dimensional harmonic oscillator\index{harmonic oscillator} is given by
+\begin{equation} \label{qa.1} H = \frac{\mathbf{p}^2}{2m} + \frac{m \omega^2 \mathbf{r}^2}{2}, \end{equation}
+where $\mathbf{p} := - \imath \hbar \nabla$ is the momentum operator, and $\mathbf{r}$ the position vector. Let $\mathbf{L} := \mathbf{r} \times \mathbf{p}$ be the angular moment. Then
+\begin{equation*} [\mathbf{L},\, H] = 0 \implies \text{$\mathbf{L}$ is preserved}. \end{equation*}
+Let us denote $| \, N \rangle$ by $| \, n_1, \, n_2, \, n_3 \rangle$, where $N = n_1 + n_2 + n_3$, the eigenvectors, and let us consider the respectively (energy) eigenvalues\index{energy eigenvalues}
+\begin{equation*} E_N := \omega \hbar \left( N + \frac{3}{2} \right) = \omega \hbar \left( 2k + \ell + \frac{3}{2} \right) . \end{equation*}
+Since $k$ is a non-negative integer, we have that
+\begin{equation*} \ell = \begin{cases}0, \, 2, \, 4, \, \dots & \text{if $N$ is even}, \\[0.8em] 1, \, 3, \, 5, \, \dots & \text{if $N$ is odd}. \end{cases} \end{equation*}
+The magnetic quantum number\index{magnetic quantum number} $m$ is an integer satisfying $-\ell \leq m \leq \ell$, so for every $N$ and $\ell$ there are $2 \ell + 1$ different quantum states, labeled by $m$. Thus, the degeneracy at level $N$ is
+\begin{equation*} \sum_{\substack{\ell=0 \\ \text{$\ell$ even}}}^{N} (2\ell + 1) = \sum_{k = 0}^{N/2} (4 k + 1) = \frac{(N + 1)(N + 2)}{2} \end{equation*}
+if $N$ is even, and
+\begin{equation*} \sum_{\substack{\ell=0 \\[0.1em] \text{$\ell$ odd}}}^{N} (2\ell + 1) = \sum_{k = 0}^{(N-1)/2} (4 k + 3) = \frac{(N + 1)(N + 2)}{2} \end{equation*}
+if $N$ is odd.
+
+In order to have a better understanding of why there always is degeneration at the $N$ level, we introduce the \textit{ladder operator}\index{ladder operator} formalism. Following this approach, we define the operators $a$ and its adjoint $a^\dag$,
+\begin{equation*}a := \sqrt{ \frac{m \omega}{2 \hbar} } \left( \mathbf{x}+\frac{\imath}{m\omega} \mathbf{p} \right) \quad \text{and} \quad a^\dag = \sqrt{ \frac{m \omega}{2 \hbar} } \left( \mathbf{x}-\frac{\imath}{m\omega} \mathbf{p} \right).\end{equation*}
+The Hamiltonian \eqref{qa.1} can be easily rewritten in terms of these new operators as
+\begin{equation} \label{qa.2} H = \omega \hbar \left( a_1^\dag a_1 + a_2^\dag a_2 + a_3^\dag a_3 + \frac{3}{2} \right), \end{equation}
+where $a_i$ and $a_j^\dag$ denote, respectively, the components of the ladder operators. The Hamiltonian \eqref{qa.2} is invariant both under the action of $\mathrm{SO}(3, \, \R)$ and $\mathrm{SU}(3, \, \C)$ since the latter preserves the complex scalar product. To prove this, we introduce the operators
+\begin{equation*} Q^a := a_i^\dag (\lambda^a)_{ij} a_j \quad \text{for $a = 1, \, \dots, \, 8$}, \end{equation*}
+where $\lambda^a$ denotes the $a$th generator of $\mathrm{SU}(3, \, \C)$. 
+
+\begin{lemma} The operators $Q^a$ commute with the Hamiltonian given by \eqref{qa.2}. \end{lemma}
+
+\begin{proof} A straightforward computation shows that
+\begin{equation*} [H, \, Q^a] = [a_i^\dag a_j, \, a_k^\dag a_k] = - a_i^\dag a_j + a_i^\dag a_j = 0.\end{equation*} \end{proof}
+
+In particular, the Hamiltonian \eqref{qa.2} is invariant under the action of $\mathrm{SU}(3, \, \C)$. Furthermore, if we denote by $\psi_N$ the eigenstate relative to the energy $E_N$, that is,
+\begin{equation*} H \, | \, \psi_N \rangle = E_N \, | \, \psi_N \rangle, \end{equation*}
+then $Q^a \psi_N \neq 0$ yields to degeneration\footnote{The dimension of the eigenspace is strictly bigger than one.}. Indeed, using the fact that $H$ and $Q^a$ commutes,
+\begin{equation*} H\left( Q^a \, | \, \psi_N \rangle \right) = Q^a \left( H \, | \, \psi_N \rangle \right) = E_N Q^a \, | \, \psi_N \rangle,\end{equation*}
+which means that $Q^a \, | \, \psi_N \rangle$ is also an eigenstate associated to the same eigenvalue. To find the degeneration order, it suffices to compute the number of $ | \, \psi_N \rangle$, and therefore it is given by
+\begin{equation*} \sum_{n_3 = 0}^N \sum_{n_2 = 0}^{N - n_3} 1 = \sum_{n_3 = 0}^N (N - n_3 + 1) = \frac{(N + 1)(N+2)}{2}, \end{equation*}
+which is the same result that we were able to show above by different means. Also, note that
+\begin{equation*} | \, N \rangle = (a_1^\dag)^{n_1}(a_2^\dag)^{n_2}(a_3^\dag)^{n_3} \, |  \,0 \rangle. \end{equation*}
+
+\section{Hydrogen Atom}
+\index{hydrogen atom}
+
+The Hamiltonian of the hydrogen atom is given by
+\begin{equation} \label{qa.3} H = \frac{\mathbf{p}^2}{2m} + \frac{e^2}{\mathbf{r}^2}, \end{equation}
+where $\mathbf{p} := - \imath \hbar \nabla$ is the momentum operator and $e$ the electronic charge. Let $\mathbf{L} := \mathbf{r} \times \mathbf{p}$ be the angular moment. Then
+\begin{equation*} [\mathbf{L},\, H] = 0 \implies \text{$\mathbf{L}$ is preserved}. \end{equation*}
+Also, the energy eigenvalue associated to the eigenvectors $\psi_{n \ell m}$ is given by
+\begin{equation*} E_n := - \frac{e^2}{2 r_B n^2} \quad \text{for $n = 1, \, 2, \, \dots$}\end{equation*}
+where $r_B$ is the Bohr radius\index{Bohr radius}. In this case $\ell$ can take all the possible values between $0$ and $n - 1$ so that the degeneracy at the level $n$ is given by
+\begin{equation*} \sum_{\ell = 0}^{n - 1} (2\ell + 1) = (n - 1)n + n = n^2. \end{equation*}
+This degeneration can be explained by the symmetries of the hydrogen atoms. Hence, we introduce the \textit{Lenz vector}\index{Lenz vector}, which is defined by
+\begin{equation} \label{qa.4} \mathbf{A} := \frac{e^2}{r} \mathbf{r} - \frac{1}{2m} \left( \mathbf{p}\times \mathbf{L} - \mathbf{L}\times \mathbf{p} \right), \end{equation}
+where $r$ denotes the length of the vector $\mathbf{r}$. We now notice that
+\begin{equation*} \begin{aligned} & [L_i, \, p_j] = \imath \epsilon_{ijk} \hbar p_k,
+\\[1em] & [L_i, \, L_j] = \imath\epsilon_{ijk} \hbar L_k, 
+\\[1em] & [L_i, \, x_j] = \imath \epsilon_{ijk} \hbar x_k, \end{aligned} \end{equation*}
+where $L_i$, $p_j$ and $x_k$ are respectively the components of the vectors $\mathbf{L}$, $\mathbf{p}$ and $\mathbf{r}$. Recall that, for all functions $F$, we have
+\begin{equation*} [p_i, \, F(\mathbf{r})] = - \imath \hbar \frac{\partial}{\partial x_i} F(\mathbf{r}), \end{equation*}
+and hence it is not hard to check that
+\begin{equation} \label{qa.5} [\mathbf{A}, \, H] = 0. \end{equation}
+\caution{From now on, we shall assume that $$\hbar = e = m = 1.$$}In a similar fashion, one can show that the following relations hold:
+\begin{equation*} \begin{aligned} & [L_i, \, A_j] = \imath \epsilon_{ijk} A_k,
+\\[1em] & [A_i, \, A_j] = - 2 H_i \epsilon_{ijk}  L_k, 
+\\[1em] & [L_i, \, L_j] = \imath \epsilon_{ijk} L_k. \end{aligned} \end{equation*}
+Fix $n$. Then $-2E := - 2 E_n > 0$, and therefore the operator of components
+\begin{equation*} u_i := \frac{A_i}{\sqrt{- 2E}} \end{equation*}
+is well-defined. The commutator identities proved above imply that
+\begin{equation*} \begin{aligned} & [L_i, \, u_j] = \imath \epsilon_{ijk} u_k,
+\\[1em] & [L_i, \, L_j] = \imath \epsilon_{ijk}  L_k, 
+\\[1em] & [u_i, \, u_j] = \imath \epsilon_{ijk} L_k. \end{aligned} \end{equation*}
+Therefore, if we introduce $\mathbf{j}_1 := \frac{\mathbf{L} + \mathbf{u}}{2}$ and $\mathbf{j}_2 := \frac{\mathbf{L} - \mathbf{u}}{2}$, then the commutator relations above yield to
+\begin{equation*} \begin{aligned} & [j_{1, \, i}, \, j_{2, \, j}] = 0,
+\\[1em] & [j_{1, \, i}, \, j_{1, \, j}] = \imath \epsilon_{ijk}  j_{1, \, k}, 
+\\[1em] & [j_{2, \, i}, \, j_{2, \, j}] = \imath \epsilon_{ijk}  j_{2, \, k},  \end{aligned} \end{equation*}
+which means that these are the generators of the $\mathrm{su}(2, \, \C) \times \mathrm{su}(2, \, \C) \sim \mathrm{so}(4, \, \R)$ Lie algebra.
+
+Furthermore, the angular moment $\mathbf{L}$ and the vector $\mathbf{u}$ both commute with the Hamiltonian $H$, but $[ \mathbf{L}, \, \mathbf{u} ] \neq 0$, and this is the reason why there is degeneracy at every level $n$. A simple computation shows (note that $\mathbf{r}$ and $\mathbf{p}$ do not commute) that
+\begin{equation*}\mathbf{A}^2 = 2 H \left( \mathbf{L}^2 + 1 \right) + 1, \end{equation*}
+and thus
+\begin{equation*}\mathbf{A}^2 = (- 2E) \mathbf{u}^2 \implies \mathbf{u}^2 + \mathbf{L}^2 = - 1 - \frac{1}{2E}. \end{equation*}
+Since
+\begin{equation*}\mathbf{L} \cdot \mathbf{u} = 0 \quad \text{and} \quad \mathbf{L} \cdot \mathbf{A} = L \cdot \left[ \frac{\mathbf{r}}{r} - \frac{1}{2} \left( \mathbf{p}\times \mathbf{L} - \mathbf{L}\times \mathbf{p} \right) \right], \end{equation*}
+we easily infer that
+\begin{equation*}\begin{aligned} & (\mathbf{j}_1)^2 = \frac{1}{4} (\mathbf{L}^2 + \mathbf{u}^2) = \frac{1}{4} \left(- 1 - \frac{1}{2E} \right) = j(j + 1),
+\\[1em] & (\mathbf{j}_2)^2 = \frac{1}{4} (\mathbf{L}^2 + \mathbf{u}^2) = \frac{1}{4} \left(- 1 - \frac{1}{2E} \right) = j(j + 1). \end{aligned}\end{equation*}
+In particular, the value of $j$ is given by
+\begin{equation*}(2j + 1)^2 = - \frac{1}{2E} > 0, \end{equation*}
+and therefore we have
+\begin{equation*}E = - \frac{1}{2n^2} = - \frac{e^2}{2 r_B n^2}, \end{equation*}
+and the degeneracy number is $(2j + 1)(2j + 1) = n^2$, as expected.
+
+\section{Wigner-Eckart Theorem in $\mathrm{SU}(2, \, \C)$ - $\mathrm{SO}(3, \, \R)$}
+
+The \textit{Wigner–Eckart theorem} is a fundamental result in quantum mechanics, which relies a lot on representation theory.
+
+It states that matrix elements of spherical tensor operators, on the basis of angular momentum eigenstates, can be expressed as the product of two factors, one of which is \underline{independent} of angular momentum orientation, and the other a \textit{Clebsch–Gordan coefficient}.
+
+Namely, let us consider a basis $\{ | \, j, \, m \rangle \}$ of eigenstates that simultaneously diagonalize the Casimir operator $\mathbb{J}^2$ and the $z$-rotation operator $J_z$, in such a way that
+\begin{equation*} \mathbb{J}^2 \, | \, j, \, m \rangle = j(j+1) \, | \, j, \, m \rangle \quad \text{and} \quad J_z \, | \, j, \, m \rangle = m \, | \, j, \, m \rangle. \end{equation*}
+We are mainly interested in transformations of the form
+\begin{equation*} | \, j, \, m \rangle \longmapsto U(\omega) \, | \, j, \, m \rangle := \sum_{m^\prime} D_{m^\prime, \, m}^j(\omega) \, | \, j, \, m^\prime \rangle, \end{equation*}
+where $D_{m^\prime, \, m}^j(\cdot)$ denotes the rotation matrix.
+
+\begin{example} For example, we have
+\begin{equation*} D_{m^\prime, \, m}^{1/2}(\phi, \, \hat{z}) := \begin{pmatrix} \mathrm{e}^{\imath \frac{\phi}{2} } & 0 \\ 0 & \mathrm{e}^{- \imath \frac{\phi}{2} } \end{pmatrix} \quad \text{and} \quad D_{m^\prime, \, m}^{1/2}(\psi, \, \hat{y}) := \begin{pmatrix} \cos \frac{\psi}{2} & \sin \frac{\psi}{2} \\ \\ - \sin \frac{\psi}{2} & \cos \frac{\psi}{2} \end{pmatrix}, \end{equation*}
+and, similarly, we have
+\begin{equation*} D_{m^\prime, \, m}^{1}(\phi, \, \hat{z}) := \begin{pmatrix} \cos \phi & \sin \phi & 0 \\ - \sin \phi & \cos \phi & 0 \\ 0 &0 & 1 \end{pmatrix}.  \end{equation*}\end{example}
+
+\begin{remark} We also consider the transformations of the form
+\begin{equation*} | \, j_1, \, m_1 \rangle | \, j_2, \, m_2 \rangle \longmapsto \mathbb{U}(\omega) \, | \, j_1, \, m_1 \rangle | \, j_2, \, m_2 \rangle := \mathrm{e}^{\imath j_1 \omega} \mathrm{e}^{\imath j_2 \omega} \, | \, j_1, \, m_1 \rangle | \, j_2, \, m_2 \rangle, \end{equation*}
+where
+\begin{equation*}\mathrm{e}^{\imath j_1 \omega} \mathrm{e}^{\imath j_2 \omega} \, | \, j_1, \, m_1 \rangle | \, j_2, \, m_2 \rangle = \sum_{m_1^\prime, \, m_2^\prime} D_{m_1^\prime, \, m_1}^{j_1} D_{m_2^\prime, \, m_2}^{j_2} \, | \, j_1, \, m_1^\prime \rangle | \, j_2, \, m_2^\prime \rangle. \end{equation*} \end{remark}
+
+{\centering \subsubsection*{Spherical Tensor Operators} }
+\noindent The idea now is to rearrange the operators
+\begin{equation*} \begin{aligned}& \mathbf{r} \longmapsto \mathrm{e}^{\imath \mathbf{L} \cdot \mathbf{\omega}} \, \mathbf{r} \, \mathrm{e}^{- \imath \mathbf{L} \cdot \mathbf{\omega}},
+\\[1em] & \mathbf{p} \longmapsto \mathrm{e}^{\imath \mathbf{L} \cdot \mathbf{\omega}} \, \mathbf{p} \, \mathrm{e}^{- \imath \mathbf{L} \cdot \mathbf{\omega}}, \end{aligned}  \end{equation*}
+in such a way to have spherical tensor operators\index{spherical tensor operators}. For example, for an operators of rank equal to one, i.e. $\mathbf{A} = (A_x, \, A_y, \, A_z)$, we may rearrange as follows:
+\begin{equation*} \begin{cases} T_0^1 := A_z, \\[0.8em] T_1^1 := - \frac{1}{\sqrt{2}} (A_x + \imath A_y), \\[0.8em] T_{-1}^1 := \frac{1}{\sqrt{2}} (A_x - \imath A_y). \end{cases} \end{equation*}
+For an operator of rank equal to two, we may rearrange as follows:
+\begin{equation*} \begin{cases} T_0^2 := \frac{1}{\sqrt{6}} (A_{xx} + A_{yy} - 2 A_{zz}), \\[0.8em] T_{\pm 1}^2 := \mp (A_{xz} \pm \imath A_{yz}), \\[0.8em] T_{\pm 2}^2 := - \frac{1}{2}(A_{xx} - A_{yy} \pm 2 \imath A_{xy}). \end{cases} \end{equation*}
+In general, though, spherical tensor operators can be defined using the Clebsch–Gordan coefficients as follows
+\begin{equation*}T_Q^P := \langle p_1, \, q_1; \; p_2, \, q_2 \, | \, P, \, Q \rangle \, T_{q_1}^{p_1}T_{q_2}^{p_2}, \end{equation*}
+and the transformations above are simply given by
+\begin{equation*} T_q^p \longmapsto U(\omega) T_q^p U(\omega)^{-1} = \sum_{q^\prime} D_{q^\prime, \, q}^p(\omega) \, T_{q^\prime}^p.\end{equation*}
+In particular, for spherical tensor operators, we have that
+\begin{equation*}\begin{aligned} T_q^p | \, j, \, m \rangle \longmapsto \mathrm{e}^{\imath j \omega} T_q^p \, | \, j, \, m \rangle & = \mathrm{e}^{\imath j \omega} T_q^p \mathrm{e}^{-\imath j \omega} \mathrm{e}^{\imath j \omega} \, | \, j, \, m \rangle =
+\\[1em] & = \sum_{q^\prime, \, m^\prime} D_{q^\prime, \, q}^p(\omega)D_{m^\prime, \, m}^j(\omega) \, T_{q^\prime}^p \, | \, j, \, m^\prime \rangle, \end{aligned} \end{equation*}
+which can be compactly rewritten as
+\begin{equation*}| \, p, \, q \rangle | \, j, \, m \rangle \longmapsto \sum_{q^\prime, \, m^\prime} D_{q^\prime, \, q}^p(\omega)D_{m^\prime, \, m}^j(\omega)  | \, p, \, q^\prime \rangle  | \, j, \, m^\prime \rangle. \end{equation*}
+Let us now multiply for an arbitrary eigenstate $| \, J, \, M \rangle$ on both the left and the right-hand side of the identity above. Then
+\begin{equation*}\langle J, \, M \, | \, \mathrm{e}^{\imath j \omega} T_q^p \, | \, j, \, m \rangle = \sum_{q^\prime, \, m^\prime} D_{q^\prime, \, q}^p(\omega)D_{m^\prime, \, m}^j(\omega) \langle J, \, M \, | \,  T_{q^\prime}^p \, | \, j, \, m^\prime \rangle,  \end{equation*}
+and, equivalently,
+\begin{equation*}\langle J, \, M \, | \, \mathrm{e}^{\imath j \omega} | \, p, \, q \rangle \, | \, j, \, m \rangle = \sum_{q^\prime, \, m^\prime} D_{q^\prime, \, q}^p(\omega)D_{m^\prime, \, m}^j(\omega) \langle J, \, M \, | \, p, \, q \rangle \, | \, j, \, m^\prime \rangle.  \end{equation*}
+It follows that
+\begin{equation*} \sum_{M^\prime} (D_{M, \, M^\prime}^J)^\ast \langle J, \, M^\prime \, | \, T_q^p \, | \, j, \, m \rangle  = \sum_{q^\prime, \, m^\prime} D_{q^\prime, \, q}^p(\omega)D_{m^\prime, \, m}^j(\omega) \langle J, \, M \, | \,  T_{q^\prime}^p \, | \, j, \, m^\prime \rangle, \end{equation*}
+and
+\begin{equation*} \sum_{M^\prime} (D_{M, \, M^\prime}^J)^\ast \langle J, \, M^\prime \, | \, | \, p, \, q \rangle \, | \, j, \, m \rangle  = \sum_{q^\prime, \, m^\prime} D_{q^\prime, \, q}^p(\omega)D_{m^\prime, \, m}^j(\omega) \langle J, \, M \, | \, | \, p, \, q \rangle \, | \, j, \, m^\prime \rangle.  \end{equation*}
+We now use the orthogonality relation
+\begin{equation*} \int D_{m, \, m^\prime}^j(\omega^\ast)D_{q, \, q^\prime}^p(\omega) \, \mathrm{d}\omega = \frac{4 \pi^2}{2j + 1} \delta_{jp} \delta_{m^\prime q^\prime} \delta_{m q} \end{equation*}
+to infer the thesis of the Wigner–Eckart theorem, that is,
+\begin{equation} \label{finale} \langle J, \, M_\alpha \, | \, T_q^p \, | \, j, \, m_\beta \rangle = \langle J, \, M \, | p, \, q \,\rangle \,| \, j, \, m \rangle \cdot \langle J_\alpha \| T^p \| j_\beta \rangle, \end{equation}
+where $\alpha$ and $\beta$ are quantum numbers, $\langle J, \, M \, | p, \, q \,\rangle \,| \, j, \, m \rangle$ is an universal object that does not depend on $\alpha$ and $\beta$ (the Clebsch–Gordan coefficient), and $\langle J_\alpha \| T^{(p)} \| j_\beta \rangle $ denotes some value that does not depend on $m$, $m^\prime$, nor $q$ and is referred to as the \textbf{reduced matrix element}\index{reduced matrix element}.

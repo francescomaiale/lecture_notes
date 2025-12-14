@@ -1,0 +1,111 @@
+\chapter{Haar Measures} \thispagestyle{empty}
+\label{sec:haar}
+
+In this chapter, we introduce the notion of \textit{invariant measure}\index{invariant measure} on a topological group $\G$ (or a manifold $M$), and we sketch the proof of existence and uniqueness for compact groups.
+
+\section{Invariant Measure on a Topological Group}
+
+In this section, we examine the assumptions needed for the existence and uniqueness of an invariant measure defined on a topological group $\G$.
+
+\begin{definition}[Push-Forward] \index{measure!push-forward} Let $\mu$ be a positive measure on $X$, and let $f : X \longrightarrow Y$ be a Borel function between topological spaces. The \textit{push-forward} measure of $\mu$ via $f$ is defined by setting
+\begin{equation*}f_{\can}\mu(E) := \mu \left( f^{-1}(E) \right) \quad \text{for all $E \in \mathcal{B}(Y)$},\end{equation*}
+where $\mathcal{B}(X)$ and $\mathcal{B}(Y)$ denote, respectively, the Borel algebra of $X$ and $Y$. \end{definition}
+
+\begin{lemma} Let $\left(X, \, \mathcal{B}(X) \right)$ and $\left(Y, \, \mathcal{B}(Y) \right)$ be measurable spaces, and let $\mu$ be a positive measure on $X$. Then the push-forward $f_\can \mu$ is a well-defined measure on the the Borel $\sigma$-algebra of $Y$. \end{lemma}
+
+\paragraph{Topological Groups.}\index{topological group} Let $\G$ be a topological group. For any $y \in \G$, we denote by $\tau_y$ the left-multiplication ($x \mapsto y \cdot x$) and by $\tau_y^\ast$ the right-multiplication ($x \mapsto x \cdot y$).
+
+\begin{definition}[Invariant Measure] \index{measure!invariant}\index{measure!left-invariant}\index{measure!right-invariant} Let $\mu$ be a measure defined on a topological group $\G$. The measure $\mu$ is left-invariant on $\G$ if and only if
+\begin{equation*} \left( \tau_y \right)_{\can} \mu = \mu\qquad \forall \, y \in \G. \end{equation*} 
+In a similar fashion, the measure $\mu$ is right-invariant if and only if
+\begin{equation*} \left( \tau_y^\ast \right)_{\can} \mu = \mu\qquad \forall \, y \in \G, \end{equation*} 
+and, clearly, $\mu$ is \textit{invariant} if and only if $\mu$ is both left-invariant and right-invariant.
+\end{definition}
+
+We are now ready to state the existence and uniqueness results. We only prove the theorem assuming that $\G$ is a compact abelian group, and we give the main idea behind the proof for an arbitrary compact Lie group.
+
+\begin{theorem}\label{theorem:1das} Let $\G$ be a compact group. Then there exists a unique invariant probability measure on $\G$, called Haar measure. \end{theorem}
+
+\begin{proof}[Sketch of the Proof] Let $\G$ be a $k$-dimensional compact Lie group. The idea is to define a left-invariant $k$-form $\omega$, that is, a $k$-form such that the pull-back according to $\tau_y$ is given by $\omega$ itself. Then it suffices to check that
+\begin{equation*} \mu(E) := \int_E \omega \end{equation*}
+is the sought invariant measure, and also that it is unique. \end{proof}
+
+\caution{The proof presented below works for compact abelian groups only. For the general case, the reader may consult \href{https://www.math.uchicago.edu/~may/VIGRE/VIGRE2010/REUPapers/Gleason.pdf}{this page}.}
+\begin{proof}Let $\G$ be a commutative group, and let $\mathcal{P}$ be the space of probability measures defined on $\G$. For any $g \in \G$, set
+\begin{equation*} \mathcal{P}_g := \left\{ \mu \in \mathcal{P} \: \left| \: \left(\tau_g\right)_{\can} \mu = \mu \right. \right\} \end{equation*}
+be the subset of $\mathcal{P}$ containing all the $g$-invariant probability measures defined on $X$.
+
+\paragraph{Step 1.} We want to prove that, for every $g \in \G$, the subset $\mathcal{P}_g$ is nonempty. Fix $\mu_0 \in \mathcal{P}$ and let us consider, for every $n \in \N$, the probability measure defined by setting
+\begin{equation*} \mu_n := \frac{\mu_0 + \left(\tau_{g} \right)_{\can} \mu_0 + \dots + \left(\tau_{g^n} \right)_{\can} \mu_0}{n+1} \in \mathcal{P}, \end{equation*}
+where $g^{n}$ denotes the product of $n$ copies of $g$.
+
+By compactness there exists a subsequence $\mu_{n_k}$ weakly-$\ast$ converging to a measure $\mu_\infty$. We now claim that $\mu_\infty$ is a $\tau_g$-invariant probability measure. Indeed, by definition of $\mu_n$, it follows that
+\begin{equation*} \left(\tau_g \right)_{\can} \mu_{n_k} \to \mu_\infty \implies \left(\tau_g\right)_{\can} \mu_\infty = \mu_\infty.  \end{equation*}
+
+\paragraph{Step 2.} We want to prove that the intersection of all the $\mathcal{P}_g$ is nonempty, which is clearly enough to infer the existence of an invariant measure.
+
+Let $g, \, h \in \G$ be two elements, let $\mu_0 \in \mathcal{P}_g$ be an invariant measure, and let $\mu_\infty$ be the weakly-$\ast$ limit of the sequence
+\begin{equation*} \mu_n := \frac{\mu_0 + \left(\tau_{h} \right)_{\can} \mu_0 + \dots + \left(\tau_{h^n} \right)_{\can} \mu_0}{n+1} \in \mathcal{P}. \end{equation*}
+The set $\mathcal{P}_g$ is weakly-$\ast$ closed; therefore $\mu_\infty \in \mathcal{P}_g \cap \mathcal{P}_h$. By induction we can prove that the family $\{\mathcal{P}_g\}_{g \in \G}$ has the finite intersection property, and thus, by compactness of $\G$, it immediately follows that
+\begin{equation*} \bigcap_{g \in \G} \mathcal{P}_g \neq \varnothing. \end{equation*}
+
+\paragraph{Step 3.} We want to prove that the intersection above contains only one element. In order to do that, we define the convolution product of two measures by setting
+\begin{equation*} \mu_1 \ast \mu_2 (E) := \left(\mu_1 \times \mu_2 \right) \left( \{ (x_1, \, x_2) \: \left| \: x_1 + x_2 \in E \right. \} \right), \end{equation*}
+where $+$ is the group operation and $E$ is a borelian set. The reader may prove that the convolution is commutative, and also that
+\begin{equation*} \mu_1 \ast \mu_2 = \mu_1,\end{equation*}
+if $\mu_1$ is an invariant measure.
+
+This is enough to infer that the invariant measure is unique. Indeed, if $\lambda, \, \mu \in \cap_{g \in \G} \mathcal{P}_g$ are two invariant measures, then the properties above of the convolution implies that
+\begin{equation*} \mu = \mu \ast \lambda = \lambda \ast \mu = \lambda \implies \mu = \lambda. \end{equation*}
+\end{proof}
+
+There is also a more general result of existence and almost-uniqueness concerning topological group that are only locally compact\footnote{A topological space $X$ is locally compact if every point $x \in X$ has a compact neighborhood $U_x \ni x$.} and separable.
+
+\begin{theorem}Let $\G$ be a locally compact and separable group. Then there exists a locally finite invariant measure on $\G$, which is unique up to a multiplicative constant. \end{theorem}
+
+\begin{remark}Recall that a topological group $\G$ is compact if the topology is compact. As a consequence of \hyperref[theorem:1das]{Theorem \ref{theorem:1das}}, we infer that a topological group $\G$ is compact if and only if there exists an invariant measure $\mu$ such that
+\begin{equation*} \int_\G \mathrm{d}\mu = 1. \end{equation*} \end{remark}
+
+\begin{proposition} \label{proposition.5.1} Let $\G$ be a compact group, and let $\mu$ be its Haar probability measure. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item For every function $f$ and every $y \in \G$ it turns out that
+\begin{equation*} \int_\G f( \tau_y(g)) \, \mathrm{d}\mu(g) = \int_\G f(g) \, \mathrm{d}\mu(g) = \int_\G f( \tau_y^\ast(g) ) \, \mathrm{d}\mu(g), \end{equation*}
+where $f( \tau_y(g)) = f(y \cdot g)$.
+\item The integral is homogeneous, that is, for every function $f$ and every $y \in \G$ it turns out that
+\begin{equation*} \int_\G \tau_y( f(g) ) \, \mathrm{d}\mu(g) = \tau_y \left( \int_\G f(g) \, \mathrm{d}\mu(g) \right)  = \int_\G  \tau_y^\ast( f(g))  \, \mathrm{d}\mu(g). \end{equation*}
+\item The integral is additive, that is, for any couple $(f, \, h)$ of functions it turns out that
+\begin{equation*} \int_\G ( f(g) + h(g) ) \, \mathrm{d}\mu(g) = \int_\G f(g) \,\mathrm{d}\mu(g) +\int_\G h(g) \,\mathrm{d}\mu(g).  \end{equation*}
+\item For every function $f$ it turns out that
+\begin{equation*} \int_\G f( g^{-1} ) \, \mathrm{d}\mu(g) = \int_\G f(g) \, \mathrm{d}\mu(g) . \end{equation*}
+\end{enumerate}
+\end{proposition}
+
+Moreover, one can use the Haar probability measure $\mu$ to define a scalar product for $\G$-valued functions as follows:
+\begin{equation*} \langle f, \, h \rangle := \int_\G f^\ast(g) h(g) \, \mathrm{d}\mu(g). \end{equation*}
+
+\subsection{Examples}
+
+In this brief section, we illustrate how to find an invariant measure both for compact and non-compact groups when the structure is particularly simple.
+
+\begin{example}The Lebesgue measure $\mathrm{d}x$ is an invariant measure for the non-compact additive group $(\R, \, +)$. In fact, a simple change of variables proves that
+\begin{equation*} \int_{\R} f(x + y) \, \mathrm{d}x = \int_\R f(x) \, \mathrm{d}x, \end{equation*}
+where $x + y$ corresponds to $\tau_y(x)$ in this case. On the other hand, the Lebesgue measure is not invariant for the non-compact multiplicative group $(\R_{> 0}, \, \cdot)$ since
+\begin{equation*} \int_{\R} f(y \cdot x) \, \mathrm{d}x = \frac{1}{y} \int_\R f(x) \, \mathrm{d}x. \end{equation*}
+We consider the logarithmic measure $\frac{\mathrm{d}x}{x}$, and we notice that
+\begin{equation*} \int_{\R} f(y \cdot x) \, \frac{\mathrm{d}x}{x} = \frac{1}{y} \int_\R f(x) \, \frac{y}{x} \mathrm{d}x = \int_\R f(x) \, \frac{\mathrm{d}x}{x}, \end{equation*}
+which means that it is an invariant measure on $(\R_{>0}, \, \cdot)$.\end{example}
+
+\begin{example}Recall that the $2 \times 2$ real upper-triangular matrices are defined by
+\begin{equation*} \mathrm{UT}(2, \, \R) := \left\{ \begin{pmatrix} a & c \\ 0 & b \end{pmatrix} \: : \: a, \, b > 0, \, c \in \R \right\} \subset \mathrm{GL}(2, \, \R), \end{equation*}
+and the product between two elements can be computed explicitly:
+\begin{equation*}\begin{pmatrix} a & c \\ 0 & b \end{pmatrix} \cdot \begin{pmatrix} x & z \\ 0 & y \end{pmatrix} = \begin{pmatrix} a x & a z + c y \\ 0 & b y \end{pmatrix} =: \begin{pmatrix} \tilde{x} & \tilde{z} \\ 0 & \tilde{y} \end{pmatrix} . \end{equation*}
+If we compute the Jacobian of the transformation (=multiplication), we find that an invariant measure is given by \begin{equation*} \mathrm{d}\mu = \frac{\mathrm{d}x \mathrm{d}y \mathrm{d}z}{x^2 y} = \frac{\mathrm{d}\tilde{x} \mathrm{d}\tilde{y} \mathrm{d}\tilde{z}}{\tilde{x}^2 \tilde{y}}, \end{equation*}
+where $\mathrm{d}x \mathrm{d}y \mathrm{d}z$ denotes the Lebesgue measure on the $3$-dimensional space, which is coherent with the fact that $\mathrm{UT}(2, \, \R)$ has dimension $3$. More precisely, we notice that
+\begin{equation*}\begin{aligned} \int_{\R_{+}^2 \times \R} \begin{pmatrix} a & c \\ 0 & b \end{pmatrix} \begin{pmatrix} x & z \\ 0 & y \end{pmatrix} \, \mathrm{d}x\mathrm{d}y\mathrm{d}z & = \int_{\R_{+}^2 \times \R} \begin{pmatrix} a x & a z + c y \\ 0 & b y \end{pmatrix} \, \mathrm{d}x\mathrm{d}y\mathrm{d}z =
+\\[1em] & = \frac{1}{a^2 b}  \int_{\R_{+}^2 \times \R} \begin{pmatrix} x & z \\ 0 & y \end{pmatrix} \, \mathrm{d}x\mathrm{d}y\mathrm{d}z. \end{aligned}\end{equation*}
+\end{example}
+
+\begin{example}Recall that the matrices of the special unitary group $\mathrm{SU}(2, \, \C)$ may be identified with elements on the complex circumference. Therefore
+\begin{equation*} \begin{pmatrix} z & w \\ - w^\ast & z^\ast \end{pmatrix} \quad \text{for $|z|^2 + |w|^2 = 1$}, \end{equation*}
+and by \hyperref[thm.5.2]{Theorem \ref{thm.5.2}} this gives a diffeomorphism with the unitary $3$-dimensional real sphere $S^3$. It follows easily that a Haar measure\footnote{The invariant measure here is not a probability measure, but it is finite (i.e., the surface of the $3$-ball), and thus it is enough to renormalize it.} is given by the volume form of $S^3$, that is,
+\begin{equation*} \mathrm{d}V = r^3\sin^2(\theta_1)\sin(\theta_2) \, \mathrm{d}r\mathrm{d}\theta_1\mathrm{d}\theta_2\mathrm{d}\theta_3. \end{equation*} \end{example}
