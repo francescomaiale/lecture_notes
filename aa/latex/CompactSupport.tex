@@ -1,0 +1,313 @@
+\chapter{Space of Compactly Supported Functions} \thispagestyle{empty}
+
+The primary goal of this chapter is to introduce the space of compactly supported functions on $\Omega$, denoted by $\mathcal{D}(\Omega)$, and endow it with a topology satisfying certain properties.
+
+\section{Locally Convex Topology of $C^0(\Omega)$}
+\index{space of continuous function}
+
+Let $\Omega \subseteq \R^n$ be an open set, and let us denote by $C^0(\Omega; \; \C)$ the set of all continuous functions taking values in $\C$.
+
+\begin{proposition} Let $K \subset \Omega$ be a compact subset. Then
+\begin{equation*}p_K(f) := \sup_{x \in K} |f(x)| \end{equation*}
+is a seminorm defined on $C^0(\Omega; \; \C)$.\end{proposition}
+
+It follows that we can always endow $C^0(\Omega; \; \C)$ with the topology $\tau$ induced by the family of seminorms $\mathcal{P}^\prime := \{p_K\}_{K \subset \Omega}$.
+
+\begin{remark} The topology $\tau$ is locally convex but, a priori, it may not be normable since the generating family $\mathcal{P}^\prime$ is uncountable. \end{remark}
+
+\begin{proposition} Let $\Omega \subseteq \R^n$ be an open set. There exists an exhaustion by compact sets\index{exhaustion by compact sets}, that is, an increasing sequence of compact sets $(K_n)_{n \in \mathbb{N}}$ such that $K_j \subsetneqq \mathrm{Int} \, K_{j+1}$ and
+\begin{equation*} \Omega \subseteq \bigcup_{n \in \mathbb{N}} K_n. \end{equation*} \end{proposition}
+
+The reader should verify that the family of seminorms $\mathcal{P} = \{p_{K_n}\}_{n \in \mathbb{N}} := \{p_n\}_{n \in \N}$ generates the same topology $\tau$ given by $\mathcal{P}^\prime$. Furthermore, the sequence $(K_n)_{n \in \N}$ is strictly increasing, and thus the finite intersections
+\begin{equation*}\bigcap_{i = 1}^{N} r_i \cdot B_{p_i}\end{equation*}
+contain, up to a scaling factor, the ball $r_N \cdot B_{p_N}$. In particular, the subbasis defined in \hyperref[theorem:convextopology]{Theorem \ref{theorem:convextopology}} is an actual basis for the topology $\tau$.
+
+Note that $\mathcal{P}$ is countable, and hence it follows from \hyperref[theorem:metrizable]{Theorem \ref{theorem:metrizable}} that the space $(C^0(\Omega; \; \C), \, \tau)$ is metrizable. The notion of convergence  given by $\mathcal{P}$ coincides with the uniform convergence on compact subsets since
+\begin{equation*}f_j \xrightarrow[\tau]{j \to + \infty} f \iff f_j\doublerightarrow_K f \quad \text{for all $K \subset \Omega$ compact.} \end{equation*}
+
+\begin{theorem} \label{thm.c0213} The metric space $(C^0(\Omega; \; \C), \, \tau)$ is complete. \end{theorem}
+
+\begin{proof} Let $(f_j )_{j \in \N}$ be a Cauchy sequence. We know that $f_j$ converges uniformly to a continuous function $f_K$ on each compact subset $K$ of $\Omega$, that is,
+\begin{equation*} f_j\doublerightarrow_K f_K. \end{equation*}
+Let $(K_n)_{n \in \N}$ be an exhaustion by compact sets of $\Omega$. The limit $f_{K_n}$ is defined on the whole compact set $K_n$ and coincides with $f_{K_{n-1}}$ on $K_{n - 1}$. Since $K_n \nearrow \Omega$ we infer that
+\begin{equation*} f_j \doublerightarrow_{K_n} f \quad \text{for all $n \in \N$} \end{equation*}
+for some $f \in C^0(\Omega; \; \C)$, and thus $f_j$ converges with respect to $\tau$. \end{proof}
+
+\begin{remark}The metric space $\left(C^0(\Omega; \; \C), \, \tau\right)$ is a Frechét space. Indeed, the function
+\begin{equation*} d(x, \, y) = \max_{k \in \mathbb{N}} \left[ 2^{-k} \, \frac{p_k(x - y)}{1 + p_k(x - y)} \right],\end{equation*}
+is a translation-invariant distance, inducing the topology $\tau$. \end{remark} 
+
+\section{Locally Convex Topology of $C^\infty(\Omega)$}
+
+\begin{notation}Let $\Omega \subseteq \R^n$ be an open subset, and let $\alpha \in \N^n$ be any \textit{multi-index}\index{multi-index}. The $\alpha$-th differential operator is defined by
+\begin{equation*} \mathrm{D}^\alpha := \sum_{i = 1}^{n} \left(\frac{\partial^{\alpha_i}}{\partial x_i^{\alpha_i}} \right), \end{equation*}
+where $\alpha = (\alpha_1, \, \dots, \, \alpha_n)$. The length\index{multi-index!length} of a multi-index is given by
+\begin{equation*} |\alpha| := \sum_{i = 1}^{n}| \alpha_i |. \end{equation*}\end{notation}
+
+Let $\Omega \subseteq \R^n$ be an open subset, and let us denote by $C^\infty(\Omega; \; \C)$ the space of all infinitely differentiable functions taking values in $\C$. The differential operator
+\begin{equation*} \mathrm{D}^\alpha : C^\infty(\Omega; \; \C) \longrightarrow C^\infty(\Omega; \; \C) \end{equation*}
+is well-defined for all multi-indices $\alpha \in \N^n$.
+
+\begin{proposition} Let $K \subset \Omega$ be a compact subset. Then
+\begin{equation*}p_{\alpha, \, K}(f) := \max_{x \in K} \left|\mathrm{D}^\alpha  f(x) \right| \end{equation*}
+is a seminorm defined on $C^\infty(\Omega; \; \C)$.\end{proposition}
+
+It follows that we can always endow $C^\infty(\Omega; \; \C)$ with the topology $\tau$ induced by the family of seminorms $\mathcal{P}^\prime := \{p_{\alpha, \, K} \}_{\alpha \in \N^n, \, K \subset \Omega}$. Note that $\mathcal{P}^\prime$ is a separated family since
+\begin{equation*} p_{0, \, \{x\}}(f) = 0 \quad \text{for all $x \in \Omega$} \iff f \equiv 0. \end{equation*}
+Similarly to $C^0(\Omega; \; \C)$, we can cover the domain $\Omega$ with an exhaustion by compact sets $(K_n)_{n \in \N}$ satisfying $K_n \subsetneqq \mathrm{Int} \, K_{n+1}$ and
+\begin{equation*} \Omega \subseteq \bigcup_{n \in \mathbb{N}} K_n. \end{equation*}
+The countable family of seminorms $\mathcal{P} := \{p_{\alpha, \, K_n}\}_{n \in \mathbb{N}, \, \alpha \in \mathbb{N}^n}= \{p_{\alpha, \, n}\}_{(\alpha, \, n) \in \N^n \times \N}$ generates the same topology $\tau$ as the family $\mathcal{P}^\prime$, and therefore $(C^\infty(\Omega; \; \C), \, \tau)$ is metrizable.
+
+\begin{remark} The notion of convergence given by $\mathcal{P}$ coincides with the uniform convergence of all derivatives on compact subsets of $\Omega$, that is,
+\begin{equation*}f_j \xrightarrow{j \to + \infty}_\tau f \iff \mathrm{D}^\alpha f_j\doublerightarrow_{K} \mathrm{D}^\alpha f \quad \text{for all $K \subset \Omega$ compact and all $\alpha \in \N^n$}. \end{equation*} \end{remark}
+
+\begin{theorem} The metric space $(C^\infty(\Omega; \; \C), \, \tau)$ is complete. \end{theorem}
+
+\begin{proof}Let $(f_j )_{j \in \mathbb{N}}$ be a Cauchy sequence. The idea is to repeat the argument used in \hyperref[thm.c0213]{Theorem \ref{thm.c0213}} to find the limit of the sequence $g_j^\alpha := D^\alpha f_j$, $\alpha \in \N^n$, and conclude by noticing that
+\begin{equation*} f_j \xrightarrow{\tau} f \implies \lim_{j \to \infty} g_j^\alpha =: g^\alpha = D^\alpha f \end{equation*}
+for all multi-indices $\alpha \in \N^n$. \end{proof}
+
+\begin{remark} The space $\left(C^\infty(\Omega; \; \C), \, \tau\right)$ has the Heine-Borel property. \end{remark}
+
+\begin{proof} Let $C$ be a bounded subset of $\Omega$, and let $(f_j)_{j \in \mathbb{N}} \subset C$ be a sequence of functions in $C$.
+
+\paragraph{Step 1.} It follows from \hyperref[theorem:bounded]{Theorem \ref{theorem:bounded}} that the seminorm $p_{\alpha, \, n}$ is bounded by a constant restricted to $C$, and thus
+\begin{equation*} p_{\alpha, \, n}(f_j) < c < \infty \quad \text{for all $j \in \N$}. \end{equation*}
+In particular, the sequence $f_j$ and all of their derivatives are uniformly bounded (the constant depends on $C$ only!) on any compact set $K_n$ of the exhaustion. A diagonal argument, together with the Ascoli-Arzelà theorem, allows us to extract a subsequence still denoted by $f_j$ that converges to some $f \in C^\infty(\Omega; \; \C)$.
+
+\paragraph{Step 2.} Suppose that $C$ is closed and bounded. Then every sequence in $C$ converges, up to subsequences, to some $f \in C$. Therefore, closed and bounded sets are compact.\end{proof}
+
+\begin{remark} The space $C^\infty(\Omega; \, \C)$ is not locally compact because it is not a finite-dimensional space - see \hyperref[theorem:lsl]{Theorem \ref{theorem:lsl}} -. \end{remark}
+
+\section{Locally Convex Topology of $\mathcal{D}_K(\Omega)$}
+
+The goal of this paragraph is to define a locally convex topology on the space of infinitely differentiable functions with support contained in a \textbf{fixed} compact subset $K \subset \Omega$.
+
+\begin{definition}[Support] \index{support} Let $f : \Omega \longrightarrow \C$ be a function. The \textit{support} of $f$ is defined as the smallest closed set outside of which the function vanishes, that is,
+\begin{equation*} \mathrm{spt} \, f := \overline{\left\{ x \in \Omega \: : \: f(x) \neq 0 \right\}}. \end{equation*} \end{definition}
+
+\begin{definition} Let $K$ be a compact subset of $\Omega$. The space denoted by $\mathcal{D}_K(\Omega)$ is defined as the set of all $C^\infty$ functions whose support is contained in $K$, that is,
+\begin{equation*}\mathcal{D}_K(\Omega) :=  \left\{ f \in C^\infty(\Omega) \: : \: \mathrm{spt} \, f \subseteq K \right\}. \end{equation*} \end{definition}
+
+\begin{remark} Note that $\mathcal{D}_K(\Omega)$ is a subset of $C^\infty(\Omega)$, and therefore we can endow it with the subspace topology. A straightforward computation shows that this topology may be equivalently generated by the seminorms $p_{\alpha, \, K}$ as $\alpha$ ranges in $\N^n$. Indeed, we have
+\begin{equation*} p_{\alpha, \, K}(f) = \max_{\Omega} |f(x)| \geq p_{\alpha, \, \widetilde{K}}(f) \end{equation*}
+for every $f \in \mathcal{D}_K(\Omega)$, and for every compact subset $\widetilde{K} \subset \Omega$. \end{remark}
+
+The notion of convergence in $(C^\infty(\Omega; \; \C), \, \tau)$ is nothing but the uniform convergence of all derivatives on compact subsets. Therefore, the limit of a sequence $(f_n)_{n \in \N} \subset \mathcal{D}_K(\Omega)$,  with respect to the $C^\infty(\Omega)$ topology, is a function $f$ with support contained in $K$, that is,
+\begin{equation*}f_n \xrightarrow{n \to \infty} f \in \mathcal{D}_K(\Omega). \end{equation*}
+
+\begin{corollary} The topological space $\left( \mathcal{D}_K(\Omega), \, \tau \, \big|_{\mathcal{D}_K(\Omega)} \right)$ is a closed linear subspace of $C^\infty(\Omega)$, and thus complete, metrizable and has the Heine-Borel property. \end{corollary}
+
+\begin{proposition}The metric space $\mathcal{D}_K(\Omega)$ is infinite-dimensional if and only if the interior of $K$ is nonempty. \end{proposition}
+
+\begin{proof} Suppose that $\mathrm{Int} \, K \neq \varnothing$, and let $B_\rho$ be a ball contained in $K$. It follows that
+\begin{equation*} B_{\frac{\rho}{n}} \subset K \quad \text{for all $n \in \N$}, \end{equation*}
+and thus $K$ contains a countable family of balls of decreasing radii. But \hyperref[the:dksd]{Theorem \ref{the:dksd}}) asserts that we can find for all $n \in \N$ a function
+\begin{equation*} f_n \in \mathcal{D}_{K}(\Omega) \end{equation*}
+with support contained in the ball of radius $\frac{\rho}{n}$. These functions cannot be linearly dependent (e.g., using the monotonicity of the radii), and thus the space is infinite-dimensional. \end{proof}
+
+\subsection{Existence of Test Functions}
+
+First we note that $\mathcal{D}_K(\Omega)$ does not depend (really) on the open set $\Omega$ (as long as it contains $K$), and thus, from now on, we will denote it by $\mathcal{D}_K$ to ease the notation.
+
+\begin{theorem}\label{the:dksd} Let $0 < r < R < \infty$. Then there exists a function $\varphi \in C^\infty(\R^n)$ satisfying
+\begin{equation*} \varphi(x) = \begin{cases} 1 & \text{if $\|x\| \leq r$}, \\[0.8em] 0 & \text{if $\|x\| \geq R$}, \end{cases} \end{equation*}
+and $\varphi(x) \in [0, \, 1]$ for all $x \in \R^n$. \end{theorem}
+
+\begin{proof} We divide the argument into three different steps.
+
+\paragraph{Step 1.} The goal is to find an infinitely differentiable function $f : \R \longrightarrow \R$ such that $0 \leq f(x) < 1$, and also that the set
+\begin{equation*} \left\{x \in \R \: : \: f(x) = 0  \right\} \end{equation*}
+is nonempty. The reader should check that the function
+\begin{equation*} f(x) := \begin{cases} 0 & \text{if $x < 0$}, \\[0.8em] \mathrm{e}^{-1/x} & \text{if $x > 0$} \end{cases} \end{equation*}
+has all the required properties.
+
+\paragraph{Step 2.} Let $f$ be the function above, and deifne
+\begin{equation*} g(x) := \frac{f(x)}{f(x) + f(1-x)} . \end{equation*}
+The reader should check that $g : \R \longrightarrow \R$ belongs to the class $C^\infty$, and satisfies the following requirements:
+\begin{equation*}g(x) = \begin{cases}0 & \text{if $x \leq 0$},
+\\[0.5em] 1 & \text{if $x \geq 1$},
+\\[0.5em] \in (0, \, 1) & \text{otherwise.}  \end{cases} \end{equation*}
+
+\paragraph{Step 3.} The function $\varphi$ can now be defined in terms of $g$ as follows:
+\begin{equation*} \varphi(x) := g \left( \frac{R - \|x\|}{R - r} \right) . \end{equation*}
+It is an easy exercise to check that this function has the desired properties, that is, it is a function of class $C^\infty$ with support contained in the ball $B_R$.\end{proof}
+
+\section{Locally Convex Topology of $\mathcal{D}(\Omega)$}
+
+Let $\Omega$ be an open nonempty subset of $\R^n$. The space of the test functions on $\Omega$ is the set of all the functions whose support is compactly included in $\Omega$, that is,
+\begin{equation*}\mathcal{D}(\Omega) := \bigcup_{K \subset \Omega} \mathcal{D}_K. \end{equation*}
+
+\begin{remark}The space of test functions $\mathcal{D}(\Omega)$, endowed with the subspace topology induced by the inclusion into $C^\infty(\Omega; \; \C)$, is not closed. \end{remark}
+
+\begin{proof}Let $(K_n)_{n \in \N}$ be an exhaustion by compact sets of $\Omega$, and let us consider the sequence of compactly supported function $\left(\chi_{K_n} \right)_{n \in \N}$ of the associated characteristic functions. Then
+\begin{equation*} \chi_{K_n} \xrightarrow{n \to + \infty} \chi_{\Omega}, \end{equation*}
+and thus the support of the limit is the whole $\Omega$, which means that $\D(\Omega)$ is not closed with the subspace topology.\end{proof}
+
+The idea is thus to see $\mathcal{D}(\Omega)$ as the inductive limit of the subsets $\mathcal{D}_K$, that is, we endow it with the finer topology that makes every inclusion map $\mathcal{D}_K \subset \mathcal{D}(\Omega)$ continuous.
+
+\begin{theorem}There exists a locally convex topology $\sigma$ on $\mathcal{D}(\Omega)$, which is finer than any other topology that makes the immersions
+\begin{equation*}\mathcal{D}_k \hookrightarrow \mathcal{D}(\Omega)\end{equation*}
+continuous. Furthermore, the subspace topology induced by the inclusion $\mathcal{D}_K \subset \left( \mathcal{D}(\Omega), \, \sigma \right)$ coincides with the subspace topology induced by the inclusion $\mathcal{D}_K \subset \left( C^\infty(\Omega; \; \C), \, \tau \right)$. \end{theorem}
+
+\begin{proof} We divide the proof into two steps.
+
+\paragraph{Step 1.} Let $\tau_K$ be the topology induced by $\tau$ on $\mathcal{D}_K$. Recall that the immersion
+\begin{equation*}\imath_K : \mathcal{D}_K \hookrightarrow \mathcal{D}(\Omega) \end{equation*}
+is continuous if and only if $A \cap \mathcal{D}_K$ belongs to $\tau_K$ for all open subset $A \subset \mathcal{D}(\Omega)$. Recall also that a locally convex topology is uniquely determined by a basis of open, convex and balanced neighbourhoods of the origin. Now define
+\begin{equation*} \mathcal{B} := \left\{ A \subset \mathcal{D}(\Omega) \: : \: \text{$A$ convex and balanced, $A \cap \mathcal{D}_K \in \tau_K$ for all $K \subset \Omega$ compact} \right\}.  \end{equation*} 
+Notice that all $B \in \mathcal{B}$ are absorbing since, given $f \in \mathcal{D}(\Omega)$, we have $f \in \mathcal{D}_K$ for some compact set $K \subset \Omega$, and the intersection $B \cap \mathcal{D}_K$ is absorbing in $\mathcal{D}_K$. It follows from \hyperref[theorem:lct1]{Theorem \ref{theorem:lct1}} that the topology $\sigma$ generated by the basis $\mathcal{B}$ is locally convex and such that
+\begin{equation*}\imath_K : \left(\mathcal{D}_K, \, \tau_K \right) \hookrightarrow \left(\mathcal{D}(\Omega), \, \sigma \right)\end{equation*}
+is continuous for all $K \subset \Omega$ compact.
+
+\paragraph{Step 2.1.} Let $A \in \sigma$ and $K \subset \Omega$ compact subset. By definition, the intersection $A \cap \mathcal{D}_K$ is given by the preimage of $A$ via the continuous inclusion $\imath_K$, and thus belongs to $\tau_K$.
+
+\paragraph{Step 2.2.} Vice versa, let $A \in \tau_K$. Recall that the topology $\tau_K$ is generated by the family of seminorms $\left\{ p_{\alpha, \, K} \right\}_{\alpha \in \N^n}$, and thus we have
+\begin{equation*}A = A^\prime \cap \mathcal{D}_K, \quad \text{where} \: \: A^\prime = \left\{ f \in \mathcal{D}(\Omega) \: \left| \: p_{\alpha}(f) < r_\alpha \right. \right\}. \end{equation*}
+ \end{proof}
+ 
+We are now ready to study some of the main properties of the locally convex topology $\sigma$ on $\mathcal{D}(\Omega)$, with a particular focus on the notion of convergence.
+ 
+\begin{theorem}\label{chartsdjsdl}Let $\Omega \subseteq \R^n$ be an open subset. Then the following assertions hold:\mbox{} 
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The seminorm
+\begin{equation*}p_{\alpha}(f) := \max_{x \in \Omega} \left| D^\alpha f \right| \end{equation*}
+is continuous on $\left(\mathcal{D}(\Omega), \, \sigma \right)$ for all multi-indices $\alpha \in \N^n$.
+\item A subset $E \subset \mathcal{D}(\Omega)$ is bounded if and only if there exists a compact subset $K \subset \Omega$ such that $E \subset \mathcal{D}_K$. Furthermore, for all $\alpha \in \N^n$ we have
+\begin{equation*}\sup_{f \in E} \max_{x \in K}  \left| D^\alpha f \right| < \infty.\end{equation*}
+\item The space $\mathcal{D}(\Omega)$ has the Heine-Borel property.
+\item A sequence $(f_n)_{n \in \N}\subset \mathcal{D}(\Omega)$ is a Cauchy sequence if and only if there exists a compact set $K \subset \Omega$ such that $(f_n)_{n \in \N} \subset \mathcal{D}_K$. Furthermore, for all multi-indices $\alpha \in \N^n$ we have
+\begin{equation*}\lim_{m, \, n \to \infty} \max_{x \in K}  \left| D^\alpha f_n - D^\alpha f_m \right| = 0. \end{equation*}
+\item A sequence $(f_n)_{n \in \N}\subset \mathcal{D}(\Omega)$ converges to zero if and only if there exists a compact set $K \subset \Omega$ such that $\mathrm{spt} \, f_n \subset K$  for all $n \in \N$. Furthermore, for all multi-indices $\alpha \in \N^n$ we have
+\begin{equation*} D^\alpha f_n \xrightarrow{n \to \infty} 0\quad \text{uniformly}. \end{equation*}
+\item The space $\mathcal{D}(\Omega)$ is sequentially complete, but it is not complete.
+\end{enumerate}
+ \end{theorem}
+ 
+\begin{proof}\mbox{}
+\begin{enumerate}[label= \textbf{(\alph*)}]
+\item Fix $K \subset \Omega$ compact subset. Then
+\begin{equation*} B_{p_\alpha} \cap \mathcal{D}_K = B_{p_{\alpha, \, K}}, \end{equation*}
+and hence $B_{p_\alpha}$ is open, which means that $p_\alpha$ is continuous (see \hyperref[proposition:equiv]{Proposition \ref{proposition:equiv}}.)
+\item We argue by contradiction. Let $E \subset \mathcal{D}(\Omega)$ be a bounded subset, and suppose that there exists $(K_j)_{j \in \N}$, exhaustion by compact sets of $\Omega$, such that
+\begin{equation*} \text{"for all $j \in \N$ there is $n(j) \in \N$ such that $\mathrm{spt} \, f_{n(j)} \notin K_j$"}. \end{equation*}
+In other words, for all $j \in \N$ we can find a point $x_j \notin K_j$ and a function $f_{n(j)} \in E$ such that $f_{n(j)}(x_j) \neq 0$. Set
+\begin{equation*} B := \left\{ f \in \mathcal{D}(\Omega) \: : \: |f(x_j)| < \frac{|f_{n(j)}(x_j)|}{2^j} \quad \text{for all $j \in \N$} \right\}. \end{equation*}
+The reader should verify that $B$ is convex and balanced. Furthermore, for all compact subsets $K$ of $\Omega$, only a finite number of points $x_j$ lie in $K$; hence $B \cap \mathcal{D}_K$ is open as a subset of $\mathcal{D}_K$ as it contains the ball $B_{p_{0, \, K}}(m)$, where
+\begin{equation*} m := \max_{x_j \in K} \frac{|f_{n(j)}(x_j)|}{2^j}. \end{equation*}
+Since $E$ is bounded there exists $r > 0$ such that $E \subset r \cdot B$, and this implies that
+\begin{equation*}|f_{n(j)}(x_j)| < \frac{r}{2^j} \cdot |f_{n(j)}(x_j)|. \end{equation*} 
+In particular, we must have that $r > 2^j$ for all $j \in \N$, and this is only possible if $r = \infty$, which gives the desired contradiction.
+
+Therefore, if $E$ is bounded in $\mathcal{D}(\Omega)$, then we can find a compact subset $K \subset \Omega$ such that $E \subset \mathcal{D}_K$. The space $\mathcal{D}_K$ is endowed with the subspace topology induced by the inclusion $\mathcal{D}_K \subset \mathcal{D}(\Omega)$, and thus $E$ is bounded also in $\mathcal{D}_K$, which, in turn, implies that the seminorms $p_\alpha$ are bounded on $E$.
+
+The vice versa is obvious, and thus left for the reader to fill in the missing details.
+\item Let $E$ be a closed and bounded set. By $\mathbf{(b)}$ we can find a compact subset $K \subset \Omega$ such that $E \subset \mathcal{D}_K$; thus $E$ is closed and bounded in $\mathcal{D}_K$. Then $E$ is compact in $\mathcal{D}_K$, and this is enough to infer that it is compact in $\mathcal{D}(\Omega)$ as a consequence of the continuity of the inclusion $\imath_K$.
+\item Let $(f_n)_{n \in \N} \subset \mathcal{D}(\Omega)$ be a Cauchy sequence. By \hyperref[theorem:cauchybounde]{Theorem \ref{theorem:cauchybounde}}, the subset $\{f_n\}_{n \in \N}$ is bounded, and thus, by point $\mathbf{(b)}$, we can find a compact subset $K \subset \Omega$ such that $(f_n)_{n \in \N} \subset \mathcal{D}_K$. In particular, $(f_n)_{n \in \N}$ is also a Cauchy sequence in $\mathcal{D}_K$, and this is enough to infer the thesis.
+
+The vice versa, as above, is obvious as a consequence of the continuity of the inclusion $\imath_K$.
+\item A sequence $(f_n)_{n \in \N} \subset \mathcal{D}(\Omega)$ converging to zero is, in particular, a Cauchy sequence; thus the first implication follows from $\mathbf{(d)}$.
+\item Direct consequence of $\mathbf{(d)}$, $\mathbf{(e)}$ and of the completeness of $\mathcal{D}_K$.
+\end{enumerate}\end{proof}
+
+\begin{theorem} \label{theorem:contid} Let $Y$ be a locally convex topological vector space and let $L : \mathcal{D}(\Omega) \longrightarrow Y$ be a linear\footnote{A \textit{linear} operator is an additive and homogeneous operator.}\index{linear operator} operator. Then the following properties are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The operator $L$ is continuous.
+\item The operator $L$ is bounded.
+\item For all compact subsets $K \subset \Omega$, the restriction $L \, \big|_{\mathcal{D}_K}$ is bounded.
+\item For all compact subsets $K \subset \Omega$, the restriction $L \, \big|_{\mathcal{D}_K}$ is sequentially continuous.
+\item The operator $L$ is sequentially continuous.
+\item For all compact subsets $K \subset \Omega$, the restriction $L \, \big|_{\mathcal{D}_K}$ is continuous.
+\end{enumerate}\end{theorem}
+ 
+\begin{proof} \mbox{}
+\begin{enumerate}
+\item[{\small $\mathbf{(a)} \implies \mathbf{(b)}$} ] This implication is a consequence of a more general fact.
+
+\vspace{2.5mm}
+\noindent\fbox{%
+    \parbox{\textwidth}{%
+       \begin{theorem} Let $L : X \longrightarrow Y$ be a continuous linear form between topological vector spaces $X$ and $Y$. Then $L$ is a bounded operator. \end{theorem}
+       \begin{proof}
+       Let $E \subset X$ be a bounded subset. Let $U$ and $V$ be neighbourhoods of the origin in $Y$ and $X$ respectively such that
+       \begin{equation*} L(V) \subseteq U. \end{equation*}
+       Since $E$ is bounded, we can find $r > 0$ such that $E \subset r \cdot V$. It follows that $L(E) \subset r \cdot U$, and hence the image $L(E)$ is also bounded.
+       \end{proof}
+    }%
+}\vspace{2.5mm}
+
+\item[{\small $\mathbf{(b)} \implies \mathbf{(c)}$} ] This implication is also a consequence of a more general fact.
+
+\vspace{2.5mm}
+\noindent\fbox{
+\parbox{\textwidth}{ 
+\begin{theorem}Let $X$ be a topological vector space, and let $Y \subset X$ endowed with the subspace topology. If $E \subset Y$ is bounded in $Y$, then $E$ is also bounded in $X$.\end{theorem}
+
+\begin{proof}Let $U$ be any neighbourhood of the origin in $X$, and let $V := U \cap Y$ be a neighbourhood of the origin in $Y$. If $E$ is bounded in $Y$, then there exists $r > 0$ such that
+\begin{equation*} E \subset r \cdot V. \end{equation*}
+It follows that $E \subset r \cdot U$, and thus $E$ is bounded as a subset of $X$. \end{proof}} }
+\vspace{2.5mm}
+
+\item[{\small $\mathbf{(c)} \implies \mathbf{(d)}$}] This implication is a consequence of a more general fact.
+
+\vspace{2.5mm}
+\noindent\fbox{ 
+\parbox{\textwidth}{ \begin{theorem}Let $X$ be a metrizable topological vector space, and let $Y$ be a topological vector space. Then any bounded operator $L : X \longrightarrow Y$ maps converging sequences to converging sequences.\end{theorem}
+
+\begin{proof}Let $(x_n)_{n \in \N} \subset X$ be a sequence converging to $0$, and assume that
+\begin{equation*} d(0, \, x_n) < \frac{1}{n^2} \end{equation*}
+for all $n \in \N$. Then, using the invariance of $d$, we obtain the inequality
+\begin{equation*} \begin{aligned} d(0, \, n \cdot x_n) & \leq \sum_{j = 1}^{n} d \left( (j-1) \cdot x_n, \, j \cdot x_n \right) = \\[1em] & = \sum_{j=1}^{n} d(x_n, \, 0) = n \cdot d(x_n, \, 0) \leq \\[1em] & \leq \frac{1}{n} \xrightarrow{n \to + \infty} 0. \end{aligned} \end{equation*}
+The sequence $(n \cdot x_n)_{n \in \N}$ is bounded, and thus its image $n \cdot L(x_n)$ is also bounded. If $V$ is a balanced neighbourhood of the origin in $Y$, we can find $r > 0$ such that $n \cdot L(x_n) \in r \cdot V$ for all $n \in \N$. But $r$ is finite and $L(x_n) \in r n^{-1} \cdot V \subset V$ when $r < n$, which shows that $L(x_n) \to 0$ also in $Y$. \end{proof}}}
+
+\vspace{2.5mm}
+\item[{\small $\mathbf{(d)} \iff \mathbf{(e)}$}] Let $(f_n)_{n \in \N} \subset \mathcal{D}(\Omega)$ be a converging sequence. Then we can find a compact subset $K \subset \Omega$ such that $(f_n)_{n \in \N} \subset \mathcal{D}_K$ and 
+\begin{equation*} f_n \xrightarrow{n \to \infty} f \in \mathcal{D}_K. \end{equation*}
+Since $L \, \big|_{\mathcal{D}_K}$ is sequentially continuous, the sequence $\left( L(f_n) \right)_{n \in \N}$ is also convergent in $\mathcal{D}_K$, and thus the operator $L$ is sequentially continuous.
+
+\item[{\small $\mathbf{(e)} \implies \mathbf{(f)}$} ] This is a consequence of the equivalence above and of a more general fact.
+
+\vspace{2.5mm}
+\noindent\fbox{ 
+\parbox{\textwidth}{ \begin{theorem} Let $X$ be a metric space, and let $Y$ be a topological space. If $L : X \longrightarrow Y$ is a sequentially continuous operator, then $L$ is continuous. \end{theorem}
+
+\begin{proof} We argue by contradiction. Let $x_0 \in X$, let $U \subset Y$ be a neighbourhood of $f(x_0)$, and suppose that $L$ does not send balls centered at $x_0$ in $U$. Namely, for all $k \in \N$ we can find a point
+\begin{equation*} x_k \in B\left(x_0, \, \frac{1}{k} \right) \quad \text{and} \quad L(x_k) \notin U. \end{equation*}
+The operator $L$ is sequentially continuous, and thus $x_k \to x_0$ implies $L(x_k) \to L(y) \in U$. The limit $L(y)$ must coincide with $L(x_0)$ as it follows using the usual argument
+\begin{equation*} (x_n^\prime) := (x_1, \, x_0, \, x_2, \, x_0, \, \dots). \end{equation*}\end{proof} }}
+
+\vspace{2.5mm}
+
+\item[{\small $\mathbf{(f)} \implies \mathbf{(a)}$ } ] First, notice that the composition map
+\begin{equation*} \mathcal{D}_K \stackrel{\imath_K}{\hookrightarrow} \mathcal{D}(\Omega) \stackrel{L}{\longrightarrow} Y \end{equation*}
+is continuous. We know that $\sigma$ is the finer topology that makes the inclusion maps $\imath_K$ continuous, while
+\begin{equation*} \widetilde{\sigma} := \left\{ L^{-1}(A) \: : \: \text{$A \subset Y$ and $A$ open in $Y$}\right\} \end{equation*}
+is the coarser topology that makes $L$ continuous. Note that $\widetilde{\sigma}$ is locally convex because $Y$ is a locally convex TVS. Now notice that
+\begin{equation*} \imath_K^{-1} \circ L^{-1} (A) \in \widetilde{\sigma} \end{equation*}
+by continuity of the composition, and thus $\widetilde{\sigma}$ is coarser than $\sigma$. Since $L$ is continuous with respect to $\widetilde{\sigma}$, it follows that it is continuous also with respect to $\tau$, which is exactly what we wanted to prove.
+\end{enumerate}\end{proof}
+
+\begin{definition}[Meager Set] \index{meager set} Let $(X, \, \tau)$ be a topological space, and let $S \subset X$. We say that $S$ is a \textit{meager} (or \textit{first-category}) set if and only if there exists a countable cover made up of nowhere dense subsets of $X$, that is,
+\begin{equation*} S = \bigcup_{n \in \N} X_n, \qquad \mathrm{Int} \, \overline{X}_n = \varnothing. \end{equation*}
+Furthermore, we say that $S$ is a \textit{second-category} set if it is not a first-category set. \end{definition}
+
+\begin{theorem}[Baire] \index{Baire Theorem} \label{bairetheorem}Let $X$ be either a complete metric space or a locally compact topological space. Then each open nonempty subset of $X$ is a second-category set. \end{theorem}
+
+\begin{theorem} Let $\Omega \subseteq \R^n$ be an open set, and let $K \subset \Omega$ be a compact subset. Then the following properties hold:\mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The topological space $\left(\mathcal{D}_K, \, \tau_K \right)$ is closed in $\left(\mathcal{D}(\Omega), \, \sigma \right)$.
+\item The interior part of $\left(\mathcal{D}_K, \, \tau_K \right)$ is empty.
+\item The topological space $\left(\mathcal{D}(\Omega), \, \sigma \right)$ is not metrizable.
+\end{enumerate}
+\end{theorem}
+ 
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Let $f \in \mathcal{D}(\Omega) \setminus \mathcal{D}_K$. There exists a point $x \notin K$ such that $|f(x)| = \epsilon$, and thus the open set
+\begin{equation*} U_f := \left\{ g \in \mathcal{D}(\Omega) \: \left| \: \left| g(x) - f(x) \right| < \frac{\epsilon}{2} \right. \right\} \end{equation*}
+is a neighbourhood of $f$ such that $U_f \cap \mathcal{D}_K = \varnothing$. Indeed, notice that
+\begin{equation*} g \in U_f \implies |g(x)| > |f(x)| - \frac{\epsilon}{2} \geq \frac{\epsilon}{2} > 0. \end{equation*}
+\item This assertion is a consequence of a more general fact. If $V$ is a subspace of a topological vector space $X$, then its interior is nonempty if and only if $V$ coincides with the whole $X$.
+\item Since $\mathcal{D}(\Omega)$ is the union of closed subsets with empty interior part, \hyperref[bairetheorem]{Baire's Theorem \ref{bairetheorem}} implies that $\mathrm{Int} \, \mathcal{D}(\Omega)$ is also empty, and thus it cannot be a metrizable space.
+\end{enumerate}
+\end{proof}

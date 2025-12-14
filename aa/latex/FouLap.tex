@@ -1,0 +1,177 @@
+\chapter{Fourier-Laplace Transform} \thispagestyle{empty}
+
+The primary goal of this section is to introduce the \textit{Fourier-Laplace transform} and study some properties which are closely related to the standard Fourier transform.
+
+\section{Introduction to Complex Analysis}
+
+We first recall some basic definitions in several variables complex analysis. We are mainly interested in the notion of \textbf{entire} function as it will be used extensively in the next chapter.
+
+\begin{definition}[Holomorphic/Entire] \index{holomorphic function}\index{entire function} Let $\Omega \subseteq \C^n$ be an open subset of the complex $n$-plane. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item A function $f : \Omega \longrightarrow \C$ is \textit{holomorphic} if it is continuous at every point of $\Omega$, and the functions
+\begin{equation*} \Omega_i \ni z_i \longmapsto f(z_1, \, \dots, \, z_i, \, \dots, \, z_n) \end{equation*}
+are holomorphic for all $i = 1, \, \dots, \, n$.
+\item A function $f : \C^n \longrightarrow \C$ is \textit{entire} if it is holomorphic at every point $z \in \C^n$.
+\end{enumerate}\end{definition}
+
+\begin{lemma}[Identity Principle] \label{lemma:ip} Let $f : \C^n \longrightarrow \C$ be an entire function which is identically zero on the real line, that is,
+\begin{equation*}f(z) = 0 \quad \text{for all $z = x + \imath y$ with $y = 0$}. \end{equation*}
+Then $f$ is the function identically zero on the whole $\C^n$.\end{lemma}
+
+\begin{proof} Consider the $k$-predicate
+\begin{equation*} P_k : \text{$f(z) = 0$ for every $z = (z_1, \, \dots, \, z_n) \in \C^n$ such that $z_1, \, \dots, \, z_k \in \R$}. \end{equation*}
+By assumption $P_n$ is true. Therefore, it is enough to prove that
+\begin{equation*} P_{k} \implies P_{k-1} \end{equation*}
+and conclude by the finiteness of $n$. To achieve this implication we simply notice that
+\begin{equation*} \C \ni z_k \longmapsto f(z_1, \, \dots, \, z_k, \, \dots, \, z_n) \in \C \end{equation*}
+is a complex function of a single variable, and hence we can apply the well-known identity theorem\footnote{\textbf{Identity Theorem.} Let $g, \, h : D \longrightarrow \C$ be complex functions defined on a connected open set $D \subseteq \C$. If $f(x) = g(x)$ for every $x \in S$, where $S$ is a nonempty open subset of $D$, then $f(x) = g(x)$ for every $x \in D$.}. \end{proof}
+
+\section{Paley-Wiener Theorem}
+
+We are now ready to state and prove the main result of this chapter (which will be followed by some kind of "inverse" result.)
+
+\begin{theorem}[Paley-Wiener] \index{Paley-Wiener Theorem}\label{pwtheroem}Let $\varphi \in \mathcal{D}$ be a function such that $\mathrm{spt}(\varphi) \subseteq \overline{B(0, \, r)}$. Then
+\begin{equation} \label{pw:eq} f(z) := \int_{\R^n} \varphi(t) \, \mathrm{e}^{- \imath \, (t, \, z)} \, \mathrm{d}t, \end{equation}
+is an entire function satisfying the estimate
+\begin{equation} \label{pw:es} \left| z^\alpha f(z) \right| \lesssim_\alpha \mathrm{e}^{ r |\mathfrak{Im}(z)|} \quad \text{for all $z \in \C^n$ and any $\alpha \in \N^n$.} \end{equation}
+Vice versa, if $f$ is an entire function satisfying the estimate \eqref{pw:es}, then we can find a smooth function $\varphi \in \mathcal{D}$ such that 
+\begin{equation*}\mathrm{spt}(\varphi) \subseteq \overline{B(0, \, r)}.\end{equation*}
+Furthermore, $f$ is exactly given by the formula \eqref{pw:eq}.
+\end{theorem}
+
+\begin{proof} The argument is rather involved. Hence we divide the proof into five steps, to ease the notation for the reader.
+
+\paragraph{Step 1.} The function given by \eqref{pw:eq} is well-defined and continuous, as a consequence of the dominated convergence theorem. The single-variable complex function
+\begin{equation*} f_k : z_k \longmapsto f(z_1, \, \dots, \, z_k, \, \dots, \, z_n) \end{equation*}
+is holomorphic for all $k = 1, \, \dots, \, n$ as a simple application of Moreira's Theorem.\footnote{\textbf{Theorem.} Let $f: \Omega \subseteq \C \longrightarrow \C$ be a continuous function defined on a open set of the complex plane satisfying
+\begin{equation*} \oint_\gamma f(z) \, \mathrm{d}z = 0 \end{equation*}
+for every closed piecewise $C^1$ curve $\gamma$ in $D$. Then $f$ is holomorphic on $D$. } Indeed, for every piecewise differentiable closed curve $\gamma$ it turns out that
+\begin{equation*}\oint_{\gamma} \left[z_k \mapsto  \int_{\R^n} \varphi(t) \, \mathrm{e}^{- \imath \, (t, \, z)} \, \mathrm{d}t \right] \, \mathrm{d}z_k = \int_{\R^n} \left[ \oint_{\gamma} \left( z_k \mapsto \mathrm{e}^{- \imath \, (t, \, z)}  \right) \, \mathrm{d}z_k \right] \, \mathrm{d}t = 0 \end{equation*}
+using the Fubini-Tonelli theorem together with the fact that the complex exponential is a holomorphic function.
+
+\paragraph{Step 2.} We now want to show that \eqref{pw:es} holds. First, notice that for any index $k = 1, \, \dots, \, n$ we have
+\begin{equation*} \begin{aligned} z_k f(z) & = \imath \int_{\R^n} \varphi(t) \frac{\partial}{\partial t_k} \mathrm{e}^{- \imath \langle t, \, z \rangle} \, \mathrm{d}t =
+\\[1em] & = - \imath \int_{\R^n} \frac{\partial}{\partial t_k} \varphi(t) \mathrm{e}^{- \imath \langle t, \, z \rangle} \, \mathrm{d}t, \end{aligned}\end{equation*}
+which can be easily generalized to a multi-index $\alpha \in \N^n$ as follows:
+\begin{equation} \label{eq:utile1} z^\alpha f(z) = (- \imath)^{|\alpha|} \int_{\mathrm{spt}(\varphi)} D^\alpha \left( \varphi \right)(t) \mathrm{e}^{- \imath \langle t, \, z \rangle} \, \mathrm{d}t. \end{equation}
+We now observe that $z$ can be rewritten as $\mathfrak{Re}(z) + \imath \mathfrak{Im}(z)$, and therefore
+\begin{equation*} \left| \mathrm{e}^{- \imath  \langle t, \, z \rangle} \right| = \mathrm{e}^{ \left\langle t, \, \mathfrak{Im}(z) \right\rangle}. \end{equation*}
+Therefore, if we take the absolute value of \eqref{eq:utile1}, it turns out that
+\begin{equation*} \begin{aligned} \left| z^\alpha f(z) \right| & \leq \left\| D^\alpha \varphi \right\|_0  \int_{\mathrm{spt}(\varphi)} \left| \mathrm{e}^{\imath \langle t, \, z \rangle} \right| \, \mathrm{d}t \leq
+\\[1em] & \leq \left\| D^\alpha \varphi \right\|_0 \int_{\overline{B(0, \, r)}} \mathrm{e}^{ \left\langle t, \, \mathfrak{Im}(z) \right\rangle} \, \mathrm{d}t \lesssim_\alpha
+\\[1em] & \lesssim_\alpha \mathrm{e}^{r \left| \mathfrak{Im}(z) \right|}, \end{aligned} \end{equation*}
+which is exactly what we wanted to prove.
+
+\paragraph{Step 3.} Vice versa, suppose that $f$ is an entire function satisfying \eqref{pw:es}. Denote by $F$ the restriction of $f$ to the real line, that is,
+\begin{equation*}F : \R^n \longrightarrow \C, \quad F( \mathfrak{Re}(z)) := f\left(\mathfrak{Re}(z)\right). \end{equation*}
+The estimate \eqref{pw:es}, applied to the function $F$, shows immediately that $F$ is rapidly decreasing, which means that $F \in \Sc$. The Fourier transform is an invertible operator on $\Sc$, and hence we have
+\begin{equation*} \F^2(F) = \check{F}. \end{equation*}
+More precisely, if $\varphi$ exists, then it is necessarily unique, and it is given by the formula
+\begin{equation} \label{varphi} F(x) = \F \circ \F \left( \check{F} \right) \implies \varphi = \frac{1}{(2 \pi)^{n/2}}  \F \left( \check{F} \right) \end{equation}
+since the Fourier transform is, up to a constant, the restriction to the real line of the Paley-Weiner transform \eqref{pw:eq}.
+
+\paragraph{Step 4.} We now want to show that the support of $\varphi$, defined in \eqref{varphi}, is contained in the closed ball of radius $r$. We claim that
+\begin{equation} \label{varphiclaim} \varphi(t) = \frac{1}{(2 \pi)^{n}} \int_{\R^n} f(x + \imath y) \mathrm{e}^{\imath \langle t, \, x + \imath y \rangle} \, \mathrm{d}x \end{equation}
+for all $y \in \R^n$. In particular, the function $\varphi$ can be extended to the whole complex $n$-plane $\C^n$ since it only depends on the values attained on the real line. 
+
+\noindent Now fix $k \in \{1, \, \dots, \, n\}$ and consider the curve $\gamma_N$ defined in \hyperref[fig:curva]{Figure \ref{fig:curva}}. The function is holomorphic, and therefore Cauchy theorem\footnote{\textbf{Cauchy Theorem.} Let $U$ be an open subset of $\C$ which is simply connected, let $f : U \longrightarrow \C$ be a holomorphic function and let $\gamma$ be a rectifiable closed path in $U$. Then
+\begin{equation*} \oint_{\gamma} f(z) \, \mathrm{d}z = 0. \end{equation*}} shows that
+\begin{equation*} \begin{aligned} 0 = \int_{\gamma_N} f(z) \mathrm{e}^{\imath \langle t, \, z \rangle} \, \mathrm{d}z_k & = \int_{-N}^{N} f(x, \, 0) \mathrm{e}^{\imath \langle t, \, x \rangle} \, \mathrm{d}x_k - \int_{-N}^{N} f(x, \, h) \mathrm{e}^{\imath \langle t, \, x+\imath h \rangle} \, \mathrm{d}x_k + \dots \\[1em] & \dots + \int_{0}^{h} f(N, \, y) \mathrm{e}^{\imath \langle t, \, N + \imath y \rangle} \, \mathrm{d}y_k - \int_{0}^{h} f(-N, \, y) \mathrm{e}^{\imath \langle t, \, - N + \imath y \rangle} \, \mathrm{d}y_k.\end{aligned} \end{equation*}
+The estimate \eqref{pw:es} immediately implies that the last two terms goes to zero as $N$ goes to $+ \infty$, and this is enough to conclude that the claim holds.
+
+\paragraph{Step 5.} We are finally ready to prove that the support of $\varphi$ is contained in $\overline{B(0, \, r)}$. Let $t$ be a real number such that $|t| > r$, and notice that
+\begin{equation*} \begin{aligned} \left| \varphi(t) \right| & \leq \frac{1}{(2 \pi)^n} \int_{\R^n} \left|f(x + \imath y) \right|  \left| \mathrm{e}^{\imath  \langle t, \, x + \imath y \rangle} \right| \, \mathrm{d}x \leq
+\\[1em] & \leq \frac{1}{(2 \pi)^n} \mathrm{e}^{- \langle t, \, y \rangle} \int_{\R^n} \left| f(x + \imath y) \right| \, \mathrm{d}x \lesssim_\alpha
+\\[1em] & \lesssim_\alpha \frac{1}{(2 \pi)^n} \mathrm{e}^{- \langle t, \, y \rangle} \int_{\R^n} \frac{\mathrm{e}^{r |y|}}{(1 + |z|^2)^n} \, \mathrm{d}x \lesssim_\alpha
+\\[1em] & \lesssim_\alpha \mathrm{e}^{r|y| - \langle t, \, y \rangle}.\end{aligned} \end{equation*}
+If we take $y_k := k \frac{t}{|t|}$, then
+\begin{equation*} r |y_k| - \langle t, \, y_k\rangle < 0 \implies  \left| \varphi(t) \right| \xrightarrow{k \to + \infty} 0, \end{equation*}
+which means that $\varphi(t) = 0$ for all $|t| > r$. In conclusion, it remains to prove that \eqref{pw:eq} holds true for any $z \in \C^n$, but this follows easily from \hyperref[lemma:ip]{Lemma \ref{lemma:ip}} since \eqref{pw:eq} holds for all $x \in \R^n$ by construction.
+\end{proof}
+
+%%Sostituire IPAD
+\begin{figure}[h]
+\centering
+\includegraphics[width = 10cm, height = 6cm]{Images/ASUP11.png}
+\caption{Path $\gamma$ used in the previous proof.}
+\label{fig:curva}
+\end{figure}
+%%
+
+\begin{lemma}\label{pwlemma}Let $g \in \mathcal{E}^\prime$ be a compactly supported distribution. Then the Fourier transform $\F(g)$ is a function of class $\mathcal{E}$ and
+\begin{equation} \label{th:hesis} \F(g)(x) = \frac{1}{(2 \pi)^{n/2}}  g\left(\mathrm{exp}_{- \imath x} \right), \end{equation}
+where
+\begin{equation*} \mathrm{exp}_{z} :  t \longmapsto \mathrm{e}^{\langle t, \, z\rangle} \in \mathcal{E}. \end{equation*}\end{lemma}
+
+\begin{proof}Let $r > 0$ be a real number such that
+\begin{equation*} \mathrm{spt}(g) \subseteq \overline{B(0, \, r)}. \end{equation*}
+Let $\Psi \in \mathcal{D}$ be a cutoff function satisfying
+\begin{equation*} \Psi \, \big|_{\overline{B(0, \, r + 1)}} \equiv 1, \end{equation*}
+so that (see \hyperref[theorem:support]{Theorem \ref{theorem:support}}) we have the distributional identity
+\begin{equation*} g = \Psi \cdot g. \end{equation*}
+We now apply the Fourier transform to both sides
+\begin{equation*} \F(g) = \underbrace{(2 \pi)^{n/2} \F(\Psi)}_{:= \varphi \in \Sc} \ast \F(g), \end{equation*}
+and we find that
+\begin{equation*} \F(g)(x) = \F(g) \left(\tau_x  \varphi \right) = g \left( \F(\tau_x \varphi) \right) = \frac{1}{(2 \\pi)^{n/2}}  g\left(\mathrm{exp}_{- \imath x} \right), \end{equation*}
+which is exactly what we wanted to prove.
+\end{proof}
+
+\begin{theorem}[Paley-Wiener, II] \index{Paley-Wiener Theorem}\label{pw:gen1} Let $g \in \mathcal{E}^\prime$ be a compactly supported distribution such that 
+\begin{equation*}\mathrm{spt}(g) \subseteq \overline{B(0, \, r)}. \end{equation*}
+Then the function
+\begin{equation} \label{pw2:eq} f(z) := g \left( \mathrm{e_{- \imath z}} \right), \end{equation}
+is entire and it satisfies the estimate
+\begin{equation} \label{pw2:es} \left| f(z) \right| \lesssim \left(1 + |z| \right)^N  \mathrm{e}^{ r |\mathfrak{Im}(z)|} \quad \text{for all $z \in \C^n$ and $\alpha \in \N^n$}, \end{equation}
+where $N$ is the order of the distribution $g$. Vice versa, if $f$ is an entire function that satisfies the estimate \eqref{pw2:es}, then we can always find a distribution $g \in \mathcal{E}^\prime$ such that 
+\begin{equation*}\mathrm{spt}(g) \subseteq \overline{B(0, \, r)},\end{equation*}
+and $f$ is exactly given by the formula \eqref{pw2:eq}.
+\end{theorem}
+
+\begin{proof} The argument is rather involved. Hence we divide the proof into five steps, to ease the notation for the reader.
+
+\paragraph{Step 1.} The function given by \eqref{pw2:eq} is well-defined and continuous since it is given by the composition of continuous maps:
+\begin{equation*} z \longmapsto \mathrm{exp}_{\imath z} \longmapsto g \left(\mathrm{exp}_{\imath z} \right). \end{equation*}
+Moreover, it is holomorphic with respect to each variable $z_i$ (again, Moreira Theorem). Indeed, for every piecewise differentiable closed curve $z : [a, \, b] \longrightarrow \C$ we have
+\begin{equation*} \int_{a}^{b} f \left(z(s) \right) \, \mathrm{d}s = \int_{a}^{b} g\left (t \mapsto \mathrm{exp}_{-\imath z(s)}(t) \right) \, \mathrm{d}s. \end{equation*}
+If we mimic the proof of \hyperref[associative1]{Theorem \ref{associative1}}, we find that
+\begin{equation*} \int_{a}^{b} f \left(z(s) \right) \, \mathrm{d}s = g \left( t \longmapsto \int_{a}^{b} \mathrm{exp}^{\imath \langle t, \, z(s) \rangle} \, \mathrm{d}s \right) = 0 \end{equation*}
+since the complex exponential is a holomorphic function.
+
+\paragraph{Step 2.}  We now want to show that \eqref{pw2:eq} holds. Let $h$ be the cutoff function defined by
+\begin{equation*} h(x) = \begin{cases} 1 & x \leq 1, \\[0.5em] \textit{linear interpolation} & x \in (1, \, 2), \\[0.5em]  0 & x \geq 2, \end{cases} \end{equation*}
+and let us consider the auxiliary function
+\begin{equation*} \varphi_z(t) := \mathrm{e}^{\imath \langle t, \, z \rangle} h \left( (|t| - r) |z| \right). \end{equation*}
+By definition $\varphi_z$ is identically equal to the exponential function $\mathrm{e}^{\imath \langle t, \, z\rangle}$ on the closed ball of radius $r + \frac{1}{|z|}$ and its support is contained in the bigger closed ball of radius $r + \frac{2}{|z|}$. Now \hyperref[theorem:support]{Theorem \ref{theorem:support}} shows that
+\begin{equation} \label{eq2222} \varphi_z \cdot g = g \implies f(z) = g \left( t \longmapsto \varphi_z(t) \right). \end{equation}
+Recall that $g$ is a compactly supported distribution, and thus the order of $g$ is necessarily finite and equal to some $N \in \N$. It follows from \eqref{eq2222} that
+\begin{equation*} |f(z)| \lesssim \|\varphi_z\|_N. \end{equation*}
+The Leibniz rule implies that
+\begin{equation*} \begin{aligned} D^\alpha \varphi_z & = \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} D^\beta \left( \mathrm{e}^{- \imath \langle t, \, z \rangle} \right) D^{\alpha - \beta} \left( h \left( (|t| - r) |z| \right) \right) =
+\\[1em] & =  \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} \left(- \imath z \right)^\beta \mathrm{e}^{- \imath \langle t, \, z \rangle} D^{|\alpha| - |\beta|} \left( h \left( (|t| - r) |z| \right) \right) \left( \frac{t}{|t|} z \right)^{|\alpha| - |\beta|},\end{aligned} \end{equation*}
+from which it follows that
+\begin{equation*} \begin{aligned} \left| D^\alpha \varphi_z \right| & \lesssim  \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} \mathrm{e}^{\langle \mathfrak{Im}(z), \, t \rangle}  z^{|\alpha|} \lesssim
+\\[1em] & \lesssim |z|^{\alpha} \mathrm{e}^{\left( r + \frac{2}{|z|} \right) |\mathfrak{Im}(z)|} \leq
+\\[1em] & \leq \underbrace{\mathrm{e}^2}_{:= C} |z|^{\alpha} \mathrm{e}^{r \left| \mathrm{Im}(z) \right|}.\end{aligned} \end{equation*}
+
+\paragraph{Step 3.} Vice versa, suppose that $f$ is an entire function satisfying \eqref{pw2:es}. Denote by $F$ the restriction of $f$ to the real line, that is,
+\begin{equation*}F : \R^n \longrightarrow \C, \quad F(\mathfrak{Re}(z)) := f\left(\mathfrak{Re}(z)\right). \end{equation*}
+Now \hyperref[pwlemma]{Lemma \ref{pwlemma}} shows that
+\begin{equation*} f(x) = g \left( \mathrm{exp}_{- \imath x} \right) = \left(2 \pi \right)^{n/2} \F(g)(x). \end{equation*}
+The estimate \eqref{pw2:es}, applied to the function $F$, shows immediately that $F$ is rapidly decreasing, which means that $F \in \Sc$. The Fourier transform is an invertible operator on $\Sc$, and hence we have
+\begin{equation*} \F^2(F) = \check{F}. \end{equation*}
+Consequently, if $g$ exists, it must be unique and, more precisely, given by the formula
+\begin{equation} \label{ggggg} F(x) = \F \circ \F \left( \check{F} \right) \implies g = \frac{1}{(2 \pi)^{n/2}} \F \left( \check{F} \right), \end{equation}
+since the Fourier transform is, up to a constant, the restriction to the real line of the Paley-Weiner transform \eqref{pw2:eq}.
+
+\paragraph{Step 4.} We will now show that the support of $g$, defined in \eqref{ggggg}, is contained in the closed ball of radius $r$. Let $\rho_\epsilon$ be a mollifier supported in $B_\epsilon$, and recall that
+\begin{equation*} \F( g \ast \rho_\epsilon) = (2 \pi)^{n/2} \F(g) \F(\rho_\epsilon) = f \F(\rho_\epsilon). \end{equation*}
+Using the first version of the \hyperref[pwtheroem]{Paley-Wiener Theorem \ref{pwtheroem}} we find that $\F(\rho_\epsilon)$ is an entire function, which satisfies the estimate \eqref{pw:eq}. In particular, we have
+\begin{equation*}|z|^\alpha \left| f \F(\rho_\epsilon)(z) \right| \lesssim \mathrm{e}^{(r + \epsilon) |\mathfrak{Im}(z)|}. \end{equation*}
+We can thus apply the second statement contained in the \hyperref[pwtheroem]{Paley-Wiener Theorem \ref{pwtheroem}}. It follows that
+\begin{equation*} f \F(\rho_\epsilon) = \F(g_\epsilon) \quad \text{and} \quad \mathrm{spt} g_\epsilon \subseteq \overline{B_{r + \epsilon}}. \end{equation*}
+To conclude observe that
+\begin{equation*}g(\psi) = \lim_{\epsilon \to 0^+} g_\epsilon(\psi) = 0 \end{equation*}
+for all $\psi \in \mathcal{D}$ such that the support of $\psi$ does not intersect the closed ball of radius $r$. Therefore, $\mathrm{spt} g$ is contained in $\overline{B_r}$.
+
+\paragraph{Step 5.} Finally, it remains to prove that \eqref{pw2:eq} holds true for any $z \in \C^n$, but this follows easily from \hyperref[lemma:ip]{Lemma \ref{lemma:ip}} since \eqref{pw2:eq} holds for any $x \in \R^n$ by definition.
+\end{proof}

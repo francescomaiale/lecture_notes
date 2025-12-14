@@ -1,0 +1,487 @@
+\chapter{Locally Convex Spaces} \thispagestyle{empty}
+
+In this chapter, we develop the general theory of topological vector space, and we focus our attention on the main properties of locally convex topologies.
+
+\section{Introduction to TVS}
+
+In this section, we introduce and study the concept of \textit{topological vector space}, which consists roughly speaking of a vector space $X$ endowed with a compatible topology $\tau$.
+
+\begin{definition}[Topological Vector Space] A couple $(X, \, \tau)$ is a \textit{topological vector space}\index{topological vector space} over $\C$ (resp. $\R$) if the following properties are satisfied: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item There are operations $+$ and $\cdot$ such that $X$ is a complex (resp. real) vector space.
+\item $\left(X, \, \tau\right)$ is a topological space.
+\item The vector sum $+$ and the scalar product $\cdot$ are $\tau$-continuous.
+\item The singlet $\{0\}$ is closed in $\tau$.
+\end{enumerate}\end{definition}
+
+\caution{The property \textbf{(d)} is often not included in the definition. Some authors prefer to add it because, as we shall prove later on, it implies that $(X, \, \tau)$ is $\mathrm{T}_2$ (=Hausdorff.)}
+
+\begin{remark}Fix $x \in X$. The translation is defined by
+\begin{equation*}T_x : X \ni y \longmapsto x +  y \in X. \end{equation*}
+If $(X, \, \tau)$ is a topological vector space, then a straight computation shows that $T_x$ is a homeomorphism. Therefore, the neighbourhoods of a point $p \in X$ are nothing but the translations of the origin neighbourhoods, which means that $\tau$ is $\mathcal{T}$-invariant, uniquely determined by a local basis of $0$, and $\mathrm{T_1}-regular$. \end{remark}
+
+\begin{remark} If $\alpha \in \mathbb{C} \setminus \{0\}$, then the $\alpha$-homothety $\lambda_\alpha(x) := \alpha  x$ is also a homeomorphism, and its inverse is given by $\lambda_{\frac{1}{\alpha}}$. \end{remark}
+
+\begin{example}Let $(X, \, \|\cdot\|)$ be a normed space. The scalings $\{ r \cdot B(0, \, 1) \}_{r > 0}$ form a local basis of the origin in the (strong) topology induced by the norm. \end{example}
+
+\subsection{Classification of TVS $(\star)$}
+
+In this brief section, we introduce several classes of function spaces and state some fundamental results connecting them with the notions introduced in this chapter.
+
+\begin{definition}[Locally Compact]\index{topological vector space!locally compact} A topological space $(X, \, \tau)$ is \textit{locally compact} if for every point $p \in X$ we can find a compact neighbourhood $U_p \ni p$. \end{definition}
+
+\begin{definition}[Locally Bounded]\index{topological vector space!locally bounded} A topological vector space $(X, \, \tau)$ is \textit{locally bounded} if there exists a bounded\footnote{See \hyperref[def:bou]{Definition \ref{def:bou}}. } neighbourhood $U$ of the origin. \end{definition}
+
+\begin{definition}[Locally Convex]\index{topological vector space!locally convex}\index{topological vector space!absolutely convex} A topological vector space $(X, \, \tau)$ is \textit{locally convex} if the origin has a local base of absolutely convex\footnote{In other words, balanced and convex sets. See \hyperref[def:bal]{Definition \ref{def:bal}}.} absorbent\footnote{See \hyperref[def:abs]{Definition \ref{def:abs}}. } sets.  \end{definition}
+
+\begin{definition}[F-Space]\index{topological vector space!$F$-space} A topological vector space $(X, \, \tau)$ is called \textit{$F$-space} if the following properties are satisfied:\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The topology $\tau$ is induced by a translation-invariant metric $d$.
+\item The metric space $(X, \, d)$ is complete.
+\end{enumerate} \end{definition}
+
+\begin{definition}[Fréchet Space] \index{Fréchet space} A topological vector space $(X, \, \tau)$ is called \textit{Fréchet space} if and only if $(X, \, \tau)$ is a locally convex $F$-space. \end{definition}
+
+\begin{definition}[Heine-Borel]\index{Heine-Borel} \label{def:hb} A topological vector space $(X, \, \tau)$ has the \textit{Heine-Borel property} if any bounded closed set is also compact. \end{definition}
+
+\begin{theorem}Let $X$ be a topological vector space. Then $X$ is finite-dimensional if and only if $X$ is locally compact if and only if $X$ is locally bounded and has the Heine-Borel property. \end{theorem}
+
+\begin{proof} See \hyperref[theorem:lsl]{Theorem \ref{theorem:lsl}} for a detailed proof. \end{proof}
+
+\begin{theorem} Let $X$ be a topological vector space. Then $X$ is normalizable if and only if $X$ is locally convex and locally bounded. \end{theorem}
+
+\begin{proof} It follows fairly easily from \hyperref[theorem:normable]{Theorem \ref{theorem:normable}}. \end{proof}
+
+\begin{theorem}A locally convex and locally bounded space $X$ is linearly metrizable. \end{theorem}
+
+\section{Separation Properties of TVS}
+
+In this section, we exploit the assumption \textbf{(d)} to show that a topological vector space $X$ is Hausdorff (=separable, $\mathrm{T_2}$) provided that it is $\mathrm{T_1}$. In addition, we show that closed and compact sets can be separated using only open neighbourhoods.
+
+
+\begin{definition}[Bounded Set]\index{topological vector space!bounded}\index{set}  \label{def:bou} A subset $A \subset X$ of a topological vector space is said to be \textit{bounded} if, for all $U$ neighbourhood of the origin, there exists $r := r(U) > 0$ such that
+\begin{equation*} A \subset r \cdot U. \end{equation*} \end{definition}
+
+\begin{lemma} \label{lemma:dist} Let $(X, \, d)$ be a metric space and let $\varphi : (0, + \infty) \longrightarrow (0, \, + \infty)$ be a strictly concave function such that $\varphi(0) = 0$. Then $d^\prime := \varphi \circ d$ is also a distance over $X$. \end{lemma}
+
+\begin{proof} A function $\varphi$ is strictly concave if and only if it satisfies
+\begin{equation*} \varphi\left( \alpha  a + (1 - \alpha) b \right)  >\alpha  \varphi(a) + (1 - \alpha) \varphi(b) \end{equation*}
+for all $a, \, b \in (0, \, +\infty)$ and all $\alpha \in (0, \, 1)$. The function $d^\prime$ is clearly symmetric as a consequence of the fact that $d$ is symmetric:
+\begin{equation*}d^\prime(x, \, y) = \varphi \circ d(x, \, y) = \varphi \circ d(y, \, x) = d^\prime(y, \, x). \end{equation*}
+
+\paragraph{Claim.} We have $\varphi(a) = 0$ if and only if $a = 0 $ as a consequence of the fact that the function $\varphi$ is strictly increasing in $(0, \, + \infty)$.
+
+\paragraph{Proof.} Suppose that $\varphi$ attains its unique global maximum at a finite time $\widetilde{x} < \infty$. Then the function becomes decreasing right after $\widetilde{x}$ and, eventually, becomes negative (as the concavity does not change), and this is absurd. Consequently, by definition, we have
+\begin{equation*}d^\prime(x, \, y) \geq 0, \end{equation*}
+and
+\begin{equation*}d^\prime(x, \, y) = 0 \iff \varphi(d(x, \, y)) = 0 \iff d(x, \, y) = 0 \iff x = y. \end{equation*}
+
+\paragraph{Triangular Inequality.} The function $\varphi$ is increasing and $d$ is a distance; thus
+\begin{equation*}d^\prime(x, \, y) \leq \varphi \circ d(x, \, z) + \varphi \circ d(z, \, y) = d^\prime(x, \, z) + d^\prime(z, \, y), \end{equation*}
+which means that $d^\prime$ is a distance defined on $X$.
+\end{proof}
+
+\begin{definition}[Cauchy sequence]\index{topological vector space!Cauchy sequence} Let $(X, \, \tau)$ be a topological vector space. A sequence $(x_n)_{n \in \N}$ is a \textit{Cauchy sequence} in $X$ if for every neighbourhood $U$ of the origin we can find a big enough natural number $N := N(U) \in \N$ such that
+\begin{equation*} x_k - x_j \in U \quad  \text{for every $k, \, j \geq N$.} \end{equation*} \end{definition} 
+
+\begin{definition}[Convergence] \index{topological vector space!convergence} We say that a sequence $(x_n)_{n \in \N} \subset X$ converges to some $x \in X$, and we denote it by $x_n \to_X x$, if for every neighbourhood $U$ of the origin we can find a natural number $N := N(U) \in \mathbb{N}$ such that
+\begin{equation*} x_n \in x + U \quad \text{for every $n \geq N$.} \end{equation*} \end{definition}
+
+\begin{definition}[$\sigma$-Complete] \index{topological vector space!sigma-completeness} A topological vector space $(X, \, \tau)$ is said to be \textit{$\sigma$-complete} if and only if every Cauchy sequence converges to some element of $X$.\end{definition}
+
+\subsection{Separation Theorem}
+
+In this brief section, we prove that closed and compact subsets of a topological vector space with empty intersection are still separated if we consider open neighbourhoods of them. 
+
+\begin{lemma}\label{prop:imp0} Let $(X, \, \tau)$ be a TVS, and let $W$ be a neighbourhood of the origin. Then there exists a neighbourhood $U$ of the origin satisfying the following properties:
+\begin{equation*} U = - U \quad \text{and} \quad U + U \subseteq W. \end{equation*}
+\end{lemma}
+
+\begin{proof}The vector sum in $X$ is $\tau$-continuous by definition, and therefore we can always find two neighbourhoods of the origin, $V_1$ and $V_2$, such that
+\begin{equation} \label{eq.2} (x, \, y) \in V_1 \times V_2 \implies x + y \in W. \end{equation}
+In particular, $V_1 + V_2 \subseteq W$ and, since the family of the neighbourhoods of a point is closed under intersection, we also have that $V := V_1 \cap V_2$ is a neighbourhood of $0$. Define
+\begin{equation*} U := V \cap (-V). \end{equation*}
+It is easy to prove that $U$ is also a neighbourhood of the origin, $U \subseteq W$, and
+\begin{equation*} u_1 + u_2 \in W \quad \text{for all $u_1, \, u_2 \in U$.} \end{equation*}\end{proof}
+
+\begin{lemma}\label{prop:imp} Let $(X, \, \tau)$ be a TVS, let $W$ be a neighbourhood of the origin, and let $n > 1$ be a natural number. Then there exists a neighbourhood $U$ of the origin satisfying the following properties:
+\begin{equation*} U = - U \quad \text{and} \quad \underbrace{U + \dots + U}_{n \mathrm{times}} \subseteq W. \end{equation*}
+\end{lemma}
+
+\begin{theorem}[Separation] \label{theorem:sep} Let $(X, \, \tau)$ be a TVS, $C \subseteq X$ a closed subset and $K \subseteq X$ a compact subset. Assume that $C \cap K = \varnothing$. Then there exists an open neighbourhood $U$ of the origin such that
+\begin{equation*} \left(K + U\right) \cap \left( C + U \right) = \varnothing. \end{equation*} \end{theorem}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 12cm, height = 7cm]{Images/ASUP1.png}
+\label{fig:ideaofproof1}
+\caption{Separation Theorem Idea}
+\end{figure} 
+
+\begin{proof}For any given $x \in K$, we can find an open neighbourhood $W_x$ of $0$ such that
+\begin{equation*} \left(x + W_x\right) \cap C = \varnothing \end{equation*} 
+since $K$ is contained in the complement of $C$, which is open by assumption. It follows from \hyperref[prop:imp]{Proposition \ref{prop:imp}} - with $n = 3$ - that, for any $x \in K$, we can find an open neighbourhood $V_x$ of the origin satisfying $V_x = - V_x$ and $V_x + V_x + V_x \subseteq W_x$. The symmetry of $V_x$ shows that 
+\begin{equation*}\left(x + V_x + V_x + V_x\right) \cap C = \varnothing \implies \left(x + V_x + V_x\right)\cap \left(C+ V_x\right) = \varnothing.\end{equation*}
+Now the collection of open sets $\{x + V_x\}_{x \in K}$ is a cover of $K$, and thus there exists a finite subcover $\{x_i + V_{i} \}_{i = 1, \, \dots, \, k}$ such that
+\begin{equation*} K \subset \bigcup_{i = 1}^k (x_i + V_i). \end{equation*}
+Consider the intersection, which is still a neighbourhood, and denote it by
+\begin{equation*} U := \bigcap_{i = 1}^{k} V_i. \end{equation*}
+It is easy to see that $U = - U$ and $U + U + U \subseteq W_{x_i}$ for all $i = 1, \, \dots, \, k$. The thesis now follows from the chain of inclusions
+\begin{equation*} \left(K + U \right) \subset \bigcup_{i=1}^{k} \left(x_i + V_{i} + U \right) \subset \bigcup_{i=1}^k \left(x_i + V_i + V_i \right) \end{equation*} 
+since no term in the latter union intersects $C + U$, as stated above. It finally follows that
+\begin{equation*} \left(K + U \right) \cap \left(C + U\right) = \varnothing.\end{equation*} 
+\end{proof}
+
+\begin{corollary} A topological vector space $(X, \, \tau)$ is a Hausdorff space. \end{corollary}
+
+\begin{proof} The singlet $\{ x\}$ is (always) compact, while the singlet $\{y\}$ is closed as we required $\{0\}$ to be closed in the definition of TVS. Finally, \hyperref[theorem:sep]{Theorem \ref{theorem:sep}} concludes that $x$ and $y$ are separated by open neighbourhoods. \end{proof}
+
+\begin{corollary} Let $U$ be a neighbourhood of the origin in a topological vector space. Then there exists a closed neighbourhood $V$ such that $U \supset V$. \end{corollary}
+
+\begin{proof} Let $W \subseteq U$ be an open neighbourhood of $0$. The complement $C := X \setminus W$ is closed, while $K := \{0\}$ is compact; thus we can find a neighbourhood $Z$ of $0$ such that
+\begin{equation*}Z \cap \left(C + Z\right) = \varnothing \implies \overline{Z} \cap \left(C + Z\right) = \varnothing. \end{equation*}
+We have the inclusions $Z \subseteq \overline{Z} \subseteq \left(C + Z\right)^c \subseteq C^c = W$, and this implies that $V := \overline{Z}$ is the sought closed neighbourhood of the origin.   \end{proof}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 10cm, height = 6cm]{Images/ASUP2.png}
+\label{fig:ideaofproof2}
+\caption{Idea of the proof}
+\end{figure} 
+
+\subsection{Balanced and Convex Basis}
+
+The main result of this short section is the following: Any topological vector space $(X, \, \tau)$, admits a balanced local basis (of neighbourhoods of the origin).
+
+\begin{definition}[Convex]\index{topological vector space!convex set} Let $X$ be a vector space. A subset $C \subseteq X$ is called \textit{convex} if
+\begin{equation*} x, \, y \in C \implies t x + (1-t) y \in C \quad \text{for all $t \in [0, \, 1]$}. \end{equation*} \end{definition}
+
+\begin{definition}[Balanced] \index{topological vector space!balanced set} \label{def:bal} Let $X$ be a vector space. A subset $B \subseteq X$ is called \textit{balanced} if
+\begin{equation*} \alpha \cdot B \subseteq B \quad \text{for all $|\alpha| \leq 1$}. \end{equation*} \end{definition}
+
+\begin{definition}[Absorbent Set]\label{def:abs} \index{topological vector space!absorbent set} Let $(X, \, \tau)$ be a topological vector space. A subset $C \subset X$ is called \textit{absorbent} if
+\begin{equation*}X \subseteq \bigcup_{t > 0} t \cdot C. \end{equation*}  \end{definition}
+
+\begin{remark}Every neighbourhood of the origin in $(X, \, \tau)$ is absorbent. \end{remark}
+
+\begin{proof}Fix $U$ neighbourhood of the origin and $x \in X$. By definition $0 \cdot x = 0 \in U$; therefore, the continuity of the scalar product implies that we can always find $\alpha > 0$ such that $\alpha \cdot x \in U$, that is,
+\begin{equation*} x \in \frac{1}{\alpha} \cdot U. \end{equation*} \end{proof}
+
+\begin{theorem}[Local Basis]\label{theorem:negiht}Let $(X, \, \tau)$ be a topological vector space, and let $\mathcal{U}_0(X)$ be the set of all neighbourhood of the origin. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item For all $U \in \mathcal{U}_0(X)$ there exists a balanced $V \in \mathcal{U}_0(X)$ such that $V \subseteq U$.
+\item For all convex $U \in \mathcal{U}_0(X)$ there exists a balanced convex $V \in \mathcal{U}_0(X)$ such that $V \subseteq U$. \end{enumerate}\end{theorem}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The continuity of the scalar product shows that there exists $\delta > 0$ and $W \in \mathcal{U}_0(X)$ such that
+\begin{equation*} \alpha \cdot W \subseteq U\quad \text{for all $\alpha$ such that $\left| \alpha \right| < \delta$}. \end{equation*}
+Let $V$ be the union of all these scaling $\alpha \cdot W$, i.e.,
+\begin{equation*} V := \bigcup_{|\alpha| < \delta} \alpha \cdot W. \end{equation*}
+Clearly, $V$ is a neighbourhood of the origin such that $V \subseteq U$. To show that $V$ is balanced, take any scalar $\beta$ such that $|\beta| \leq 1$, and observe that
+\begin{equation*} \beta \cdot V = \bigcup_{|\alpha| < \delta} (\beta \alpha) \cdot W. \end{equation*}
+Since $|\beta \alpha| < \delta$ for all $|\alpha| < \delta$, we infer from the definition above that $V$ is balanced.
+\item Consider the finite intersection
+\begin{equation*} A := \bigcap_{|\alpha| = 1} \alpha \cdot U, \end{equation*}
+and denote by $V$ the subset defined above, that is,
+\begin{equation*} V := \bigcup_{|\alpha| < \delta} \alpha \cdot W. \end{equation*}
+We proved that $V$ is balanced; therefore $\alpha^{-1} \cdot V = V$ for all $|\alpha| = 1$. It follows immediately that $V \subseteq \alpha \cdot U$ and $W \subset A$, which in turn implies that the interior part $\mathrm{Int} \, A$ belong to $\mathcal{U}_0(X)$ and satisfies the inclusion $\mathrm{Int} \,A \subseteq U$. Notice also that, since $A$ is an intersection of convex sets, it is necessarily convex and so is its interior part.
+
+To prove that $\mathrm{Int} \, A$ is the desired neighbourhood of the origin, we have to show that $A$ is balanced for the same will follow for its interior. Take $0 \leq r \leq 1$ and $|\beta| = 1$. Then
+\begin{equation*} (r \beta) \cdot A = \bigcap_{|\alpha| = 1} (r  \beta) \cdot \alpha \cdot U = \bigcap_{|\alpha| = 1} (r \alpha) \cdot U. \end{equation*}
+Since $\alpha \cdot U$ is a convex set that contains the origin, we have $(r \alpha) \cdot U \subset \alpha \cdot U$. Consequently, we have proved that $(r \beta) \cdot A \subset A$, and this is enough to conclude.
+\end{enumerate}\end{proof}
+
+\begin{corollary} \label{corollary:convexlocalbase}Let $(X, \, \tau)$ be a topological vector space.\mbox{} \begin{enumerate}[label=\textbf{(\alph*)}]
+\item There exists a balanced local basis, that is, a basis made up of balanced sets.
+\item If $X$ is also locally convex, then there exists a balanced convex local basis. \end{enumerate} \end{corollary}
+
+\begin{proof}Immediate consequence of the result above. The reader might fill in the details as a simple exercise to get acquainted with these new notions. \end{proof}
+
+We conclude the section by showing some of the main consequences of these assertions.
+
+\begin{theorem}[Heine-Borel] Let $(X, \, \tau)$ be a topological vector space, and let $K \subset X$ be a compact subset. Then $K$ is closed and bounded. \end{theorem}
+
+\begin{proof}Let $U \in \mathcal{U}_0(X)$ and fix $x \in X$. The sequence $\left( \frac{1}{k} \cdot x \right)_{k \in \N}$ obviously converges to $0$ as $k$ approaches $\infty$ - as the scalar multiplication is $\tau$-continuous -. 
+
+It follows that we can find $N \in \mathbb{N}$ big enough to have $\frac{x}{k} \in U$ for all $k \geq N$. Thus $\{ k \cdot U\}_{k \in \N}$ is a cover of $K$ and, by compactness, it admits a finite subcover $k_i \cdot U$ for $i = 1, \, \dots, \, J$. On the other hand, $k \cdot U$ is an increasing family of sets, and thus
+\begin{equation*} K \subseteq \max\{r_1, \, \cdot, \, r_J\} \cdot U \implies \text{$K$ is bounded}. \end{equation*}
+Since $X$ is Hausdorff, $K$ compact implies $K$ closed, and this concludes the proof. \end{proof}
+
+%\begin{remark}The opposite implication is generally not true, i.e., not every topological vector space has the Heine-Borel property. 
+
+%Let us consider the real line $\R$ equipped with the distance
+%\begin{equation*}d_b(x, \, y) := \min \left\{ d(x, \, y), \, 1 \right\}. \end{equation*}
+%Clearly $\left(\R, \, d_b\right)$ is a metric space (thus a topological vector space), but it follows from the definition that every subset of $\R$ is $d_b$-bounded. In particular the set of integer numbers $\Z$ is bounded, but it is \textbf{not compact} since it is discrete and infinite. \end{remark}
+
+\begin{theorem}Let $(X, \, \tau)$ be a locally bounded topological vector space. Then there exists a countable local basis. \end{theorem}
+
+\begin{proof}Let $V \subset X$ denote the bounded neighbourhood of the origin. We claim that
+\begin{equation*} \left\{ \frac{1}{n} \cdot V \right\}_{n \in \N} \end{equation*}
+is the desired local basis. To prove this, let us consider an open set $A \in \tau$ and a real number $\alpha > 0$ such that $V \subset \alpha \cdot A$. If we set $N := \floor{\alpha} + 1$, then
+\begin{equation*} \frac{1}{N} \cdot V \subset A \end{equation*}
+and this is clearly enough to conclude that the claim holds true. \end{proof}
+
+\begin{theorem} \label{linmetriz}Let $X$ be a topological vector space with a countable basis of neighbourhoods of $0$. Then $X$ is linearly metrizable. \end{theorem}
+
+\begin{proof}See \cite[Theorem 1.24]{rudin2}. \end{proof}
+
+\begin{theorem} Let $(X, \, \tau)$ be a topological vector space, and let $Y \subseteq X$ be an $F$-space that is also a vector subspace. Then $Y$ is closed in $X$.\end{theorem}
+
+\begin{theorem}Let $(X, \, \tau)$ be a topological vector space. Any Cauchy sequence $(x_n)_{n \in \N}$ forms a bounded subset $\{x_n\}_{n \in \N}$ of $X$. \label{theorem:cauchybounde}\end{theorem}
+
+\begin{proof}Let $U$ be a balanced neighbourhood of the origin. We know that we can always find $V \in \mathcal{U}_0(X)$ satisfying $V + V \subset U$ and $V \subseteq U$. Given a Cauchy sequence $(x_n)_{n \in \N} \subset X$, we can also find a natural number $N \in \N$ such that
+\begin{equation*} x_n - x_m \in V \quad \text{for all $n, \, m \geq N$.} \end{equation*}
+In particular, setting $m = N$, we have that
+\begin{equation*} x_n - x_N \in V \implies x_n \in x_N + V \end{equation*}
+for all $n \geq N$. Finally, since $V$ is an absorbing set, there exists $r_i > 0$ such that $x_i \in r_i \cdot V$ for all $i = 1, \, \dots, \, N$. If we set $r := \max_{0 \leq i \leq N} r_i$, then $x_i \in r \cdot U$ for all $i \leq N$, and therefore
+\begin{equation*} x_n \in x_N + V \implies x_n \in r \cdot V + V \subset r \cdot V + r \cdot V \subset r \cdot U. \end{equation*}
+\end{proof}
+
+\section{Locally Convex Spaces}
+
+The primary goal of this section is to deal with the characterisation of locally convex spaces in terms of either a balanced and convex local basis or collection of seminorms satisfying certain properties.
+
+\subsection{Characterization via Subbasis}
+
+Let $X$ be a topological space with topology $\tau$. We know already that a base of $\tau$ is nothing but a collection of sets such that $A \in \tau$ is given by the union of such elements.
+
+\begin{definition}[Subbasis] \index{topological vector space!subbasis} Let $X$ be a topological space with topology $\tau$. A \textit{subbase} of $T$ is a subcollection $\beta$ of $\tau$ satisfying one of the two following equivalent conditions: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The subcollection $\beta$ generates $\tau$. More precisely, $\tau$ is the coarser topology containing $\beta$.
+\item The collection of open sets of the form
+\begin{equation*} \bigcap_{i \in J} B_i, \end{equation*}
+where $B_i \in \beta$ and $J < \infty$, together with the set $X$, forms a basis for $\tau$. More precisely, every proper open set in $\tau$ can be written as a union of finite intersections of elements of $\beta$. 
+\end{enumerate} \end{definition}
+
+\begin{definition}[Separated] \index{topological vector space!separated family} Let $X$ be a vector space, and let $\mathcal{F} \subset \mathcal{P}(X)$ be a nonempty subset of the power set. We say that $\mathcal{F}$ is \textit{separated} if and only if for every $x \neq 0$ we can find a set $C := C(x) \in \mathcal{F}$ and a constant $r := r(x) > 0$ such that
+\begin{equation*}x \notin r \cdot C. \end{equation*} \end{definition}
+
+\begin{theorem} \label{theorem:lct1} Let $X$ be a vector space, and let $\mathcal{F}$ be a nonempty separated family of convex, balanced and absorbing subsets of $X$. Then $\mathcal{F}$ is a subbasis of a topology $\tau$, and
+\begin{equation*} \mathcal{B} := \left\{ \bigcap_{i = 1}^{N} r_i \cdot C_i \: : \: r_i > 0, \, \, C_i \in \mathcal{F} \right\} \end{equation*}
+is a neighbourhoods basis of the origin for $\tau$. Furthermore, the generated topology $\tau$ is given by
+\begin{equation*} \tau = \left\{ A \subseteq X \: : \: \text{for all $x \in A$ there is $C \in \mathcal{B}$ such that $x \in x + C \subseteq A$} \right\}, \end{equation*}
+and $(X, \, \tau)$ is a locally convex topological vector space.
+\end{theorem}
+
+\begin{proof} The first, tedious, step - which is left to the reader - consists of proving that $\mathcal{B}$ is a local basis of the origin and that $\tau$ is the generated topology.
+
+\paragraph{Step 1.} The topology $\tau$ is invariant under translation. In fact, given any $y \in A$, we know that there exists $C \in \mathcal{B}$ such that $y \in y + C \subseteq A$ and thus, if we let $x \in X$ be an arbitrary point, we have
+\begin{equation*} x + y \in x + y + C \subseteq x + A \iff x + A \in \tau. \end{equation*}
+
+\paragraph{Step 2.} To prove that $(X, \, \tau)$ is topological vector space, we only need to show that the vector space operations are $\tau$-continuous and $\{0\}$ is closed.
+
+\paragraph{Step 2.1.} First, we observe that any element of $\mathcal{B}$ is convex, balanced and absorbing. In fact, all these properties are preserved under finite intersection. To prove the continuity of the sum we want to find, given $U \in \mathcal{U}_0(X)$, a neighbourhood of the origin $V$ such that
+\begin{equation*} V + V \subseteq U. \end{equation*}
+To do this, let $W$ be a convex and balanced neighbourhood of the origin contained in $U$. Then, the convexity implies the identity
+\begin{equation*} \frac{W}{2} + \frac{W}{2} = W, \end{equation*}
+and thus it suffices to take $V := \frac{W}{2}$.
+
+\paragraph{Step 2.2.} Fix a point $(\alpha_0, \, x_0) \in \C \times X$. To prove the continuity of the scalar product at that point, given $U \in \mathcal{U}_0(X)$, we need to find $W \in \mathcal{U}_0(X)$ and $\epsilon > 0$ in such a way that
+\begin{equation*} \alpha x - \alpha_0 x_0 \in U \end{equation*}
+for all $|\alpha| < \epsilon$ and all $x \in W$. Let $V \in \mathcal{U}_0(X)$ be convex, balanced and absorbing such that
+\begin{equation*}V + V \subset U,\end{equation*}
+and let $r > 0$ be such that $x_0 \in r \cdot V$. Set $\epsilon := \frac{1}{r}$ and 
+\begin{equation*}W := \frac{V}{|\alpha_0|+\epsilon}. \end{equation*}
+It follows that, for $ |\alpha - \alpha_0| < \epsilon$ and $x \in x_0 + W$, we have
+\begin{equation*} \begin{aligned} \alpha x - \alpha_0  x_0  =  \alpha (x-x_0) + (\alpha - \alpha_0)  x_0 & \in \alpha \cdot W + (\alpha - \alpha_0) r \cdot V \subseteq \\[1em]
+& \subseteq |\alpha| \cdot W + |\alpha - \alpha_0| r \cdot V \subseteq \\[1em]
+& \subseteq (|\alpha_0| + \epsilon) \cdot W + \epsilon r \cdot V = \\[1em]
+& = V + V \subseteq U. \end{aligned}\end{equation*}
+
+\paragraph{Step 2.3.} Let $x \in X$ be an arbitrary point $x \neq 0$. Since $\mathcal{F}$ is a separated family, we can always find a subset $C \in \mathcal{F}$ and a constant $r > 0$ such that
+\begin{equation*} x \notin \frac{1}{r} \cdot C. \end{equation*}
+It follows that $0 = x - x \notin x - r^{-1} \cdot C$. But $r^{-1} \cdot C \in \mathcal{U}_0(X)$, and thus $x$ is an internal point of the complement of $\{0\}$, which means that $\{0\}$ is closed.\end{proof}
+
+\subsection{Characterization via Seminorms}
+
+In this section, we state and prove a similar result concerning the characterisation of a locally convex space, given a family $\mathcal{P}$ of seminorms satisfying certain properties.
+
+\begin{definition}[Seminorms] \index{seminorm} Let $X$ be a $\mathbb{K}$-vector space. We say that $p : X \longrightarrow \mathbb{K}$ is a \textit{seminorm} if the following properties hold true:\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item \textsf{Subadditivity.} For all $x, \, y \in X$ it turns out that
+\begin{equation*}p(x + y) \leq p(x) + p(y). \end{equation*}
+\item \textsf{Positive Homogeneity.} For every $\alpha \in \mathbb{K}$ and $x \in X$ it turns out that
+\begin{equation*}p(\alpha x) = |\alpha| \cdot p(x). \end{equation*}
+\end{enumerate} \end{definition}
+
+\begin{theorem}Let $X$ be a $\mathbb{K}$-vector space and $p$ a seminorm. Then the following hold:\mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item The function $p$ is positive ($p(x) \geq 0$ for all $x \in X$) and $p(0) = 0$.
+\item The function $p$ satisfies the following triangular-like inequality:
+\begin{equation*} \left|p(x) - p(y) \right| \leq p(x - y) \quad \text{for all $x, \, y \in X$}. \end{equation*}
+\item The zero set $\{ p(x) = 0 \} \subseteq X$ is a vector subspace with the induced operations.
+\item The open unit ball $B_p := \left\{ x \in X \: : \: p(x) < 1 \right\}$ is convex, balanced and absorbing.
+\end{enumerate} \end{theorem}
+ 
+\begin{proof}These properties follow immediately from the definition above; here we only show how to prove $\mathbf{(4)}$. The convexity of $B_p$ is an easy consequence of the subadditivity:
+\begin{equation*}\begin{aligned} x, \, y \in B_p & \implies p(t  x + (1-t)  y) \leq t  p(x) + (1 - t)  p(y) < 1 \implies
+\\[1em] & \implies  t  x + (1 - t) p(y) \in B_p \end{aligned}\end{equation*}
+for all $t \in (0, \, 1)$. The open unit ball $B_p$ is clearly balanced as a consequence of \textbf{(b)}, and hence we only need to prove that it is absorbing, i.e.,
+\begin{equation*} X \subseteq \bigcup_{t > 0} t \cdot B_p. \end{equation*}
+Fix $x \in X$. Given $r_x := p(x)$ and $t := 1 + r_x$, it is straightforward to prove that $x \in t \cdot B_p$. \end{proof}
+
+\begin{proposition} \label{proposition:equiv}Let $(X, \, \tau)$ be a topological vector space, and let $p$ be a seminorm defined on $X$. The following assertions are equivalent: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The function $p$ is continuous.
+\item The function $p$ is continuous at $x = 0$.
+\item The open unit ball $B_p$ is open with respect to $\tau$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} The only nontrivial implication is $\mathbf{(c)} \implies \mathbf{(a)}$. Let $x \in X$ be given, and let $\epsilon > 0$. We need to find a neighbourhood $U$ of $x$ with the property
+\begin{equation*} p \left(U \right) \subseteq \left(p(x) - \epsilon, \, p(x) + \epsilon \right) \subset \R. \end{equation*}
+Set $U := x + \epsilon \cdot B_p$. Any point $y \in U$ can be written in the form $x + \epsilon \cdot u$ for some $u \in B_p$ satisfying $p(u) < 1$. Then we have the equalities
+\begin{equation*} \begin{aligned}&  p(y) = p(x + \epsilon \cdot u) \leq p(x) + \epsilon,
+\\[1em] & p(y) = p(x + \epsilon \cdot u) \geq p(x) - \epsilon, \end{aligned} \end{equation*}
+and this is exactly what we wanted to prove.\end{proof}
+ 
+\begin{definition}[Separated] \index{separated seminorms} A family $\mathcal{P}$ of seminorms defined over $X$ is said to be \textit{separated} if, for any $x \in X \setminus \{0\}$, there exists $p \in \mathcal{P}$ such that $p(x) \neq 0$. \end{definition}
+
+\begin{theorem}\label{theorem:convextopology}Let $X$ be a vector space, and let $\mathcal{P}$ be a separated family of seminorms defined over $X$. The collection of open unit balls induced by $\mathcal{P}$,
+\begin{equation*} \mathcal{F} = \left\{ B_p \: : \: p \in \mathcal{P} \right\}, \end{equation*}
+is a subbasis for a locally convex topology $\tau$ defined on $X$. Moreover $\tau$ is the coarser locally convex topology such that each seminorm $p \in \mathcal{P}$ is continuous.\end{theorem}
+
+\begin{proof} The elements of the collection $\mathcal{F}$ are convex, balanced and absorbing. Furthermore, since $\mathcal{P}$ is a separated family, the same holds true for $\mathcal{F}$. Therefore, it follows from \hyperref[theorem:lct1]{Theorem \ref{theorem:lct1}} that $\mathcal{F}$ generates a topology $\tau$ that makes $(X, \, \tau)$ locally convex. Clearly,
+\begin{equation*}\text{ $B_p$ open } \implies \text{$p \in \mathcal{P}$ is $\tau$-continuous} \end{equation*}
+as a consequence of \hyperref[proposition:equiv]{Proposition \ref{proposition:equiv}}. Furthermore, a translation-invariant topology such that $p \in \mathcal{P}$ is $\tau$-continuous contains at least the open unit balls $B_p$ as neighbourhoods of the origin, and thus their scalings $r\cdot B_p$ and their finite intersection.\end{proof}
+
+\begin{remark}The topology $\tau$ defined in the previous theorem is called \textit{initial topology}\index{initial topology} relative to the collection of seminorms $\mathcal{P} \ni p$. \end{remark}
+
+\begin{definition}[Minkowski Functional/Gauge]\index{Minkowki gauge} Let $X$ be a vector space and let $B \subseteq X$ be an absorbing subset. The \textit{gauge functional} is defined by
+\begin{equation} \label{eq:gauge} \mu_B(x) := \inf \left\{ t > 0 \: \left| \: \frac{x}{t} \in B \right. \right\}. \end{equation} \end{definition}
+
+\begin{lemma} \label{lemma:pallesemi}Let $X$ be a vector space. Then the following assertions hold: \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If $p : X \longrightarrow [0, \, + \infty)$ is a seminorm, then $p$ coincides with $\mu_{B_p}$.
+\item If $B$ is a convex, balanced and absorbing set, then $\mu_B$ is a seminorm.
+\item If $B$ is convex and absorbing, then
+\begin{equation*} \left\{x \in X \: \left| \: \mu_B(x) < 1 \right. \right\} \subseteq B \subseteq \left\{x \in X \: \left| \: \mu_B(x) \leq 1 \right. \right\}. \end{equation*}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let $x \in X$ and $T := \mu_{B_p}(x)$. Then, for every $\epsilon > 0$, it turns out that
+\begin{equation*} \frac{x}{T + \epsilon} \in B_{p} \implies p(x) < T + \epsilon, \end{equation*}
+and thus, by taking the limit as $\epsilon \to 0^+$, we get the first inequality $p(x) \leq T$. In a similar fashion, a point $x \in X$ multiplied by a number smaller than $p(x)$ belongs to the ball, i.e.,
+\begin{equation*} \frac{x}{p(x) + \epsilon} \in B_{p} \quad \text{for all $\epsilon > 0$}. \end{equation*}
+By definition $\mu_{B_p}(x) < p(x) + \epsilon$ and, by taking the limit as $\epsilon \to 0^+$, we infer that $\mu_{B_p}(x) \leq p(x)$, which concludes the proof of the first assertion.
+\item First, we notice that $\mu_B$ is well-defined and finite at all $x \in X$. Indeed, the set $B$ is absorbing, and thus we can always find $r := r(x) > 0$ such that $x \in r \cdot B$. It follows that
+\begin{equation*} \frac{x}{r} \in B \implies \mu_B(x) \leq r. \end{equation*}
+We now prove that $\mu_B$ is a subadditive function. For $\epsilon > 0$ and $\lambda \in (0, \, 1)$ we know that
+\begin{equation*} \lambda  \frac{x}{\mu_B(x) + \epsilon} + (1 - \lambda) \frac{y}{\mu_B(y) + \epsilon} \in B, \end{equation*}
+and thus we can take
+\begin{equation*} \lambda := \frac{\mu_B(x) + \epsilon}{\mu_B(x) + \mu_B(y) + 2 \epsilon} \implies 1 - \lambda = \frac{\mu_B(y) + \epsilon}{\mu_B(x) + \mu_B(y) + 2 \epsilon}. \end{equation*}
+It follows that
+\begin{equation*}\frac{x + y}{\mu_B(x) + \mu_B(y) + 2 \, \epsilon} \in B, \end{equation*}
+and thus, by definition, we obtain the desired inequality
+\begin{equation*}\mu_B(x) + \mu_B(y) + 2 \epsilon \geq \mu_B(x + y) \end{equation*}
+since $\epsilon > 0$ was chosen as an arbitrary positive number.
+
+We now prove that $\mu_B$ is positively homogeneous. But this is a simple consequence of the definition, since we can take the limit as $\epsilon \to 0^+$ of the following chain of inequalities:
+\begin{equation*} \frac{\mu_B( \lambda x ) + \epsilon}{|\lambda|} \geq \mu_B(x) \geq \frac{\mu_B( \lambda x ) - \epsilon}{|\lambda|} \end{equation*}
+\item One of the inclusions is trivial
+\begin{equation*} \left\{x \in X \: \left| \: \mu_B(x) < 1 \right. \right\} \subseteq B.\end{equation*}
+Similarly, if $\mu_B(x) > 1$, it is straightforward to see that $x \notin B$. In fact, since $B$ is convex and absorbing, the set $\{t \: \left| \: x/t \in B \right.\}$ coincides either with $[\mu_B(x), \, + \infty)$ or with $(\mu_B(x), \, + \infty)$.
+\end{enumerate} \end{proof}
+
+\begin{corollary}Let $(X, \, \tau)$ be a locally convex topological vector space. Then there exists a family of seminorms $\mathcal{P}$ such that $\tau$ is equal to the topology of \hyperref[theorem:convextopology]{Theorem \ref{theorem:convextopology}}.\end{corollary}
+
+\begin{proof}The space $X$ is locally convex, and thus (see \hyperref[corollary:convexlocalbase]{Corollary \ref{corollary:convexlocalbase}}) we can always find a local basis $\mathcal{B} := \{B_i\}_{i \in I}$ made up of balanced, convex and absorbent sets\footnote{We can assume, without loss of generality, that $B_i$ is open for every $i \in I$ since because $B_i$ can be replaced with its interior part.}. By \hyperref[lemma:pallesemi]{Lemma \ref{lemma:pallesemi}}, it turns out that
+\begin{equation*}\mathcal{P} := \left\{ \mu_{B_i} \: \left| \: i \in I \right. \right\} \end{equation*}
+is a family of seminorms, generating the same topology $\tau$.\end{proof} 
+
+\begin{theorem} \label{theorem:slcconv} Let $(X, \, \tau)$ be a locally convex topological vector space. Assume that the topology $\tau$ is induced by a family of seminorms $\mathcal{P}$. Then
+\begin{equation*} y_n \xrightarrow{X} y  \iff  p(y_n - y) \xrightarrow{n \to + \infty} 0 \quad \text{for all $p \in \mathcal{P}$}. \end{equation*}
+\end{theorem}
+
+\begin{proof}The implication $\implies$ is a consequence of the fact that $p \in \mathcal{P}$ is $\tau$-continuous. Vice versa, assume that $\left(y_n\right)_{n \in \mathbb{N}} \subset X$ is a sequence such that $p(y_n) \xrightarrow{n \to +\infty} 0$ for every $p \in \mathcal{P}$. We may assume without loss of generality that
+\begin{equation*} y_n \xrightarrow{n \to \infty} 0. \end{equation*}
+Let $U$ be a neighbourhood of the origin. It follows from \hyperref[theorem:convextopology]{Theorem \ref{theorem:convextopology}} that there are $p_1, \, \dots, \, p_J \in \mathcal{P}$ and $r_1, \, \dots, \, r_J > 0$ such that
+\begin{equation*} \bigcap_{i = 1}^{J} r_i \cdot B_{p_i} \subseteq U. \end{equation*}
+We know that $p_i(y_n)$ goes to $0$ as $n$ goes to infinity, and thus there are $N_1, \, \dots, \, N_J \in \mathbb{N}$ such that
+\begin{equation*} p_i (y_n) < r_i \quad \text{for all $n \geq N_i$}. \end{equation*}
+Set $N := \max \, \{ N_1, \, \dots, \, N_J \}$. We conclude that
+\begin{equation*} y_n \in U \quad \text{for all $n \geq N$}, \end{equation*}
+which means that $y_n$ converges to zero.
+\end{proof}
+
+\begin{theorem} \label{theorem:metrizable} Let $(X, \, \tau)$ be a locally convex topological vector space. If $\tau$ is generated by a separated countable family of seminorms $\mathcal{P} := \{p_k\}_{k \in \mathbb{N}}$, then $X$ is metrizable. \end{theorem}
+
+\begin{proof} Let us set
+\begin{equation}\label{eq:disadosods} d(x, \, y) := \max_{k \in \mathbb{N}} \left[ 2^{-k} \, \frac{p_k(x - y)}{1 + p_k(x - y)} \right].\end{equation}
+The reader may check by herself that \eqref{eq:disadosods} is a distance. For example, it is easy to see that
+\begin{equation*} d(x, \, y) = 0 \implies p_k(x - y) = 0, \qquad \forall \, k \in \N,\end{equation*}
+and this is enough to infer that $x = y$ using the fact that the family is separated. The function $d$ is translation-invariant; therefore we only need to prove that open balls
+\begin{equation*} B_r(0) := \{x \in X \: \left| \: d(x, \, 0) < r \right. \} \end{equation*}
+are a local basis of neighborhoods of the origin, inducing the same topology $\tau$.
+
+\paragraph{Case 1.} The condition $d(x, \, 0) < r$ easily implies that
+\begin{equation*} \left(2^{-k} - r \right) p_k(x) < r, \end{equation*}
+and this inequality is satisfied for any $k > \log_2 (1/r)$. The finite number of remaining indices satisfy the inequality
+\begin{equation*} p_k(x) < \frac{r}{2^{-k}-r} =: r_k,\end{equation*}
+and thus $B_r$ contains the intersection of a finite number of $\mathcal{P}$-balls, that is,
+\begin{equation*} \bigcap_{k = 0}^{[\log_2(1/r)]} r_k \cdot B_{p_k} \subseteq B_r(0). \end{equation*}
+In particular, the metric ball $B_r(0)$ contains a $\tau$-neighborhood of the origin.
+
+\paragraph{Case 2.} Vice versa, given any $\tau$-neighborhood $V$ of $0$, it is easy to prove that there exist positive real numbers $r_j > 0$ and seminorms balls such that
+\begin{equation*} \bigcap_{j = 0}^{m} r_j \cdot B_{p_j} \subseteq U. \end{equation*}
+If we take $r$ such that
+\begin{equation*} 2 r < \max \, \left\{ 2^{-j} \cdot r_j \: \left| \: j = 1, \, \dots, \, m \right. \right\}, \end{equation*}
+then any $x \in B_r(0)$ satisfies the inequality
+\begin{equation*} d(x, \, 0) < r < \frac{2^{-j} \cdot r_j}{2}. \end{equation*}
+Hence $p_j(x) < r_j$ for any $j$, which means that $B_r(0) \subseteq W$.
+\end{proof}
+
+\begin{theorem} \label{theorem:normable} Let $(X, \, \tau)$ be a locally convex topological vector space. Then $X$ is normable if and only if there exists a convex bounded neighbourhood $U$ of $0$. \end{theorem}
+
+\begin{proof} If $X$ is normable, then $B := \{ x \in X \: \left| \: \|x\| < 1 \right. \}$ is a bounded convex neighbourhood of $0$ (since each neighbourhood $U$ of $0$ contains a rescaling of $B$, e.g. $r = \min_{x \in U \setminus\{0\}} \|x\|$).
+
+Vice versa, suppose that $B \subset X$ is a convex bounded neighbourhood of $0$. Then $B$ is absorbing, since $x/k \to 0$ for any $x \in X$ and the scalar product is a continuous operation. By \hyperref[lemma:pallesemi]{Lemma \ref{lemma:pallesemi}} we infer that $\mu_B$ is a seminorm on $X$.
+
+Assume that there exists $x \neq 0$ such that $p(x) = 0$. Since $\{0\}$ is closed, there exists a neighbourhood $U$ of $0$ such that $x \notin U$. By homogeneity $p(r \, x) = 0$, thus $r \, x \in B$ but it doesn't belong to $r \cdot U$ and this means that $B \not \subset r \cdot U$ (contradiction with the boundedness).
+
+It remains to prove that the topology induced by $p$, denoted by $\varsigma$, is equal to $\tau$. But $B_p$ is a neighbourhood of $0$ in $\tau$, thus $\varsigma$ is coarser than $\tau$. Similarly, given $U$ neighbourhood of $0$ in $\tau$, there exists $r > 0$ such that $B_p \subset r \cdot U$. Dividing by $r$, it turns out that
+\begin{equation*} \frac{B_p}{r} \subset U, \end{equation*}
+thus $\tau$ is coarser than $\varsigma$.
+ \end{proof}
+
+\begin{theorem} \label{theorem:bounded} Let $(X, \, \tau)$ be a locally convex topological vector space. Assume that $\tau$ is induced by a family of seminorms $\mathcal{P}$. Then
+\begin{equation*}\text{$C \subseteq X$ is bounded} \iff \text{$p \, \big|_C$ is bounded for all $p \in \mathcal{P}$.}. \end{equation*} \end{theorem}
+
+\begin{proof} Assume that $C \subseteq X$ is bounded. Then, for every $U$ neighbourhood of the origin, we can find a real number $r > 0$ such that $C \subset r \cdot U$. In particular, if $U = B_p$, we have
+\begin{equation*} C \subset r \cdot B_p \implies p(x) < r \quad \text{for all $x \in C$}. \end{equation*}
+Vice versa, assume that $p(C)$ is bounded for all $p \in \mathcal{P}$. Since the open unit balls $B_p$ form a subbasis of $\tau$, we have that
+\begin{equation*} U \supseteq \bigcap_{i = 1}^{k} r_i \cdot B_{p_i}\end{equation*}
+for all $U \in \mathcal{U}_0(X)$. By assumption, for all $i = 1, \, \dots, \, k$ we can find a constant $c_i$ such that $p_i(x) < c_i$ for all $x \in C$. Set
+\begin{equation*} r  := \max_{i = 1, \, \dots, \, k} \frac{c_i}{r_i}.\end{equation*}
+Then it is easy to show that $x \in c_i \cdot B_{p_i}$ and, consequently, that $C \subset r \cdot U$. \end{proof} 
+
+\begin{theorem} \label{theorem:lsl} Let $(X, \, \tau)$ be a topological vector space. Then $X$ is locally compact if and only if $X$ is a finite-dimensional space if and only if $X$ is linearly homeomorphic to $\mathbb{K}^n$. \end{theorem}
+
+\begin{proof}\begin{theorem} Let $(X, \, \tau)$ be a $\mathrm{T_0}$ topological vector space. Then $X$ is locally compact if and only if $X$ is a finite-dimensional space if and only if $X$ is linearly homeomorphic to $\mathbb{K}^n$. \end{theorem}
+
+\begin{proof} We first prove that a finite-dimensional $\mathrm{T_0}$ topological vector space is linearly homeomorphic to $\mathbb{K}^n$ with the usual topology (which is locally compact), and then we show that a locally compact space is finite-dimensional.
+
+\paragraph{Step 1.} Suppose that $X$ is a finite-dimensional $\mathrm{T_0}$ topological vector space, and let $\{e_1, \, \dots, \, e_n\}$ be a basis of $X$. There is linear isomorphism $\Phi : \mathbb{K}^n \longrightarrow X$, defined by setting
+\begin{equation*} \mathbb{K}^n \ni (\lambda_1, \, \dots, \, \lambda_n) \longmapsto \sum_{i = 1}^{n} \lambda_i e_i \in X. \end{equation*}
+We only need to prove that $\Phi$ is an open map to conclude that it is an homeomorphism since $\Phi$ is clearly continuous and bijective.
+
+Let $B := \overline{B_{\mathbb{K}^n}(0, \, 1)}$ be the closed unit ball, and let $S := \partial B$ be its boundary. Then $S$ is compact in $\mathbb{K}^n$ and it does not contain the origin; hence $\Phi(S)$ is compact in $X$, and it does not contain the origin of $X$. In particular $\Phi(S)$ is closed\footnote{Recall that a $\mathrm{T}_0$ topological vector space is automatically $Hausdorff$, and a compact set in a Hausdorff space is always closed.} in $X$, and thus there exists $V \in \mathcal{U}_0(X)$ open and balanced neighborhood of the origin such that
+\begin{equation*} V \cap \Phi(S) = \varnothing. \end{equation*}
+Let $x \in V \setminus \Phi(B)$. The map is surjective, which means that we can find $\lambda \in \mathbb{K}^n$ such that $x = \Phi(\lambda)$, with $\| \lambda \| > 1$. The rescaling $\lambda / \| \lambda \|$ belongs to $S$, and therefore we find a contradiction since
+\begin{equation*} \Phi \left( \frac{\lambda}{\| \lambda \|} \right) = \frac{x}{\| \lambda \|} \implies \Phi \left( \frac{\lambda}{\| \lambda \|} \right) \in \frac{1}{\| \lambda \|} \cdot V = V, \end{equation*}
+that is, $x$ belongs to both $\Phi(S)$ and $V$ at the same time. It follows that $V \subseteq \Phi(B)$, and this implies that $\Phi(B)$ is a neighborhood of the origin in $X$, that is, $\Phi$ is an open mapping.
+
+\paragraph{Step 2.} Conversely, assume that $X$ is locally compact, and let $V$ be a compact neighborhood of the origin of $X$. Clearly $1/2 \cdot V$ is also a neighborhood of the origin and, by compactness, there are finitely many points $x_i \in V$ such that
+\begin{equation*} V \subseteq \bigcup_{i = 1}^{m}\left( x_i + \frac{1}{2} \cdot V \right).\end{equation*}
+Let $Y$ be the linear span of the points $x_1, \, \dots, \, x_m$. Then
+\begin{equation*} V \subseteq Y + \frac{1}{2} \cdot V \implies \dots \implies V \subseteq Y + \frac{1}{2^n} \cdot V. \end{equation*}
+Notice that the local compactness of $X$ easily implies that the family $\left\{ 2^{-n} \cdot V \right\}_{n \in \N}$ is a local basis of the origin in $X$, and hence
+\begin{equation*} V \subseteq \bigcap_{n \in \N} \left( Y + \frac{1}{2^n} \cdot V \right) = \overline{Y} = Y, \end{equation*}
+since $Y$ is finite-dimensional, and thus closed. This concludes the proof since $V$ is absorbent and each rescaling is contained in $Y$, i.e.
+\begin{equation*} X = \bigcup_{t > 0} t \cdot V \subseteq Y \implies X = Y. \end{equation*}
+\end{proof} 
+\end{proof} 

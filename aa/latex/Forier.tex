@@ -1,0 +1,384 @@
+\chapter{The Fourier Transform} \thispagestyle{empty}
+
+In this chapter, we introduce the Fourier transform of summable functions and prove its central properties, including the invertibility on Schwartz distributions.
+
+\section{Definitions and Elementary Properties}
+
+Let $\varphi \in L^1(\R^n)$ be a summable function. The \textit{Fourier transform} of $\varphi$ is the function defined by\index{Fourier transform!function}
+\begin{equation} \label{def:fourier} \F \left( \varphi \right)(\xi) := \frac{1}{\left(2 \pi \right)^{n/2}} \int_{\R^n} \varphi(x) \mathrm{e}^{- \imath \langle x, \, \xi \rangle} \, \mathrm{d}x, \end{equation}
+where $\langle \cdot, \, \cdot \rangle$ denotes the standard Euclidean scalar product on $\R^n$.
+
+\caution{We will always denote the Fourier transform of a function $\varphi$ with the symbol $\F(\varphi)$. The reason is that the standard notation $\hat{\varphi}$ might be confused with the overturning symbol.}
+
+\begin{notation}We denote by $e_x$ the exponential function\index{exponential notation}
+\begin{equation*} e_x : \C \ni \xi \longmapsto \mathrm{e}^{\imath \langle x, \, \xi \rangle} \in \C,\end{equation*}
+and, for any $\lambda \neq 0$, we denote by $h_\lambda$ the scaling\index{scaling function}
+\begin{equation*} h_{\lambda} : L^1(\R^n) \ni \varphi \longmapsto \varphi_\lambda \in L^1(\R^n),\end{equation*}
+where
+\begin{equation*} \varphi_\lambda(x) = \varphi \left( \frac{x}{\lambda} \right). \end{equation*} \end{notation}
+
+\begin{proposition}\label{proofpssd}Let $\varphi, \, \psi \in L^1(\R^n)$ be summable functions. The Fourier transform operator satisfies the following properties: \mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item For all $x \in \R^n$ we have
+\begin{equation*}  \F( \tau_x (\varphi)) = e_{-x}  (\F(\varphi)). \end{equation*}
+\item For all $x \in \R^n$ we have
+\begin{equation*}  \F(e_x ( \varphi)) = \tau_x ( \F(\varphi) ). \end{equation*}
+\item The Fourier transform of the convolution\index{Fourier transform!convolution} equals a multiple of the product of the Fourier transforms, that is,
+\begin{equation*} \F( \varphi \ast \psi ) = \left(2 \pi \right)^{n/2} \left( \F(\varphi) \cdot \F(\psi) \right). \end{equation*}
+\item Let $\lambda > 0$. The Fourier transform equals the inverse scaling of the Fourier transform, that is,
+\begin{equation*} \F\left( h_\lambda (\varphi )\right) = \lambda^n h_{\frac{1}{\lambda}} ( \F(\varphi) ). \end{equation*}
+\item The Fourier transform of the overturning is the overturning of the Fourier transform, that is,
+\begin{equation*}\F( \check{\varphi} ) = (-1)^{n} \check{\F}(\varphi), \end{equation*}
+\end{enumerate}\end{proposition}
+
+\begin{proof} These properties are a straightforward consequence of the definitions. \mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item The right-hand side can easily be computed using \eqref{def:fourier}. We have
+\begin{equation*} \begin{aligned} e_{-x} ( \F(\varphi))(\xi) & = \frac{1}{\left(2 \pi \right)^{n/2}}  \int_{\R^n} \varphi(y)  \mathrm{e}^{- \imath \langle y + x, \, \xi \rangle} \, \mathrm{d}y \stackrel{(\ast)}{=}
+\\[1em] & = \frac{1}{\left(2 \pi \right)^{n/2}} \int_{\R^n} \varphi(z - x) \mathrm{e}^{- \imath \langle z, \, \xi \rangle} \, \mathrm{d}z = \F \left( \tau_x ( \varphi) \right)(\xi). \end{aligned} \end{equation*}
+The identity $(\ast)$ follows from the substitution $x + y \longmapsto z$.
+\item This property is extremely similar to the previous one. Indeed, it suffices to notice that
+\begin{equation*} \begin{aligned} \tau_x ( \F(\varphi) )(\xi) & = \frac{1}{\left(2 \pi \right)^{n/2}}  \int_{\R^n} \varphi(y) \mathrm{e}^{- \imath   \langle y, \, \xi - x \rangle} \, \mathrm{d}y =
+\\[1em] & = \frac{1}{\left(2 \pi \right)^{n/2}} \int_{\R^n} \varphi(y) \mathrm{e}^{\imath \, \langle y, \, x \rangle} \mathrm{e}^{- \imath \langle y, \, \xi\rangle} \, \mathrm{d}y = \F \left( e_x ( \varphi ) \right)(\xi). \end{aligned} \end{equation*}
+\item The left-hand side can be easily computed by using the definition of the convolution product (between functions). Indeed, it turns out that
+\begin{equation*} \begin{aligned} \F(\varphi \ast \psi)(\xi) & = \frac{1}{\left(2 \pi \right)^{n/2}} \int_{\R^n} \left(\varphi \ast \psi \right) (x) \mathrm{e}^{- \imath \langle x, \, \xi \rangle} \, \mathrm{d}x =
+\\[1em] & = \frac{1}{\left(2 \pi \right)^{n/2}} \int_{\R^n} \left[ \int_{\R^n} \left( \varphi(y) \psi(x - y)\right) \, \mathrm{d}y \right] \mathrm{e}^{-\imath \langle x, \, \xi \rangle} \, \mathrm{d}x \stackrel{(\ast)}{=}
+\\[1em] & = \frac{1}{\left(2 \pi \right)^{n/2}} \int_{\R^n} \left[ \int_{\R^n} \left( \psi(x - y) \mathrm{e}^{-\imath \langle x - y, \, \xi \rangle} \right) \, \mathrm{d}x \right] \varphi(y) \mathrm{e}^{- \imath \langle y, \, \xi \rangle} \, \mathrm{d}y =
+\\[1em] & = \F(\psi)(\xi) \cdot \int_{\R^n} \varphi(y) \mathrm{e}^{- \imath \langle y, \, \xi \rangle} \, \mathrm{d}y = \left(2 \pi \right)^{\frac{n}{2}} \F(\varphi) \cdot \F(\psi)(\xi). \end{aligned} \end{equation*}
+The identity $(\ast)$ follows from a simple application of the Fubini theorem.
+\item This property follows straightly from the definition \eqref{def:fourier}:
+\begin{equation*} \begin{aligned}  \F \left( h_\lambda ( \varphi ) \right)(\xi) & = \frac{1}{\left(2 \pi \right)^{n/2}} \int_{\R^n} \varphi \left( \frac{x}{\lambda} \right) \mathrm{e}^{- \imath \langle x, \, \xi \rangle} \, \mathrm{d}x =
+\\[1em] & = \frac{\lambda^n}{\left(2 \pi \right)^{n/2}} \int_{\R^n} \varphi(z) \mathrm{e}^{- \imath \langle \lambda \cdot z, \, \xi \rangle} \, \mathrm{d}z =
+\\[1em] & = \frac{\lambda^n}{\left(2 \pi \right)^{n/2}} \int_{\R^n} \varphi(z) \mathrm{e}^{- \imath \langle z, \, \lambda \cdot \xi \rangle} \, \mathrm{d}z = \lambda^n h_{\frac{1}{\lambda}} \left( \F(\varphi) \right) (\xi).  \end{aligned} \end{equation*}
+\item This property also follows straightly from the definition \eqref{def:fourier}:
+\begin{equation*} \begin{aligned}  \F \left(\check{\varphi} \right)(\xi) & = \frac{1}{\left(2 \pi \right)^{n/2}} \int_{\R^n} \check{\varphi} \left(x \right) \mathrm{e}^{- \imath \langle x, \, \xi \rangle} \, \mathrm{d}x =
+\\[1em] & = \frac{1}{\left(2 \pi \right)^{n/2}} \int_{\R^n} \varphi(-x) \mathrm{e}^{- \imath \langle x, \, \xi \rangle} \, \mathrm{d}x = 
+\\[1em] & =  (-1)^{n} \frac{1}{\left(2 \pi \right)^{n/2}} \int_{\R^n} \varphi(x) \mathrm{e}^{- \imath \langle x, \, - \xi \rangle} \, \mathrm{d}x = (-1)^{n} \check{\F}(\varphi)(\xi).  \end{aligned} \end{equation*}
+\end{enumerate}
+\end{proof}
+
+\section{The Fourier Transform in $\Sc$ and in $\Scp$}
+
+The goal of this section is to investigate the properties of the Fourier transform on a specific subset of $\mathcal{E}$, the \index{Schwartz function}Schwartz space $\Sc$, which consists of "rapidly decreasing" functions. Let $\varphi \in \mathcal{E}$ be a smooth function. Set
+\begin{equation*} q_{\alpha, \, \beta}(\varphi) := \sup_{x \in \R^n} \left|x^\alpha D^\beta \varphi(x)\right|, \end{equation*}
+where $\alpha, \, \beta \in \N^n$ are multi-indices. The collection of seminorms $\mathcal{P} := \left\{ q_{\alpha, \, \beta} \right\}_{\alpha, \, \beta \in \N^n}$ is well-defined on the Schwartz space
+\begin{equation*} \Sc := \left\{ \varphi \in \mathcal{E} \: \left| \: q_{\alpha, \, \beta}(\varphi) < + \infty, \, \, \forall \, \alpha, \, \beta \in \N^n \right. \right\}. \end{equation*}
+In particular, $\mathcal{P}$ induces on $\Sc$ a structure of topological vector space $\left(\Sc, \, \tau_\Sc \right)$, where $\tau$ is a locally convex topology - see \hyperref[theorem:convextopology]{Theorem \ref{theorem:convextopology}} -.
+
+\begin{lemma}The inclusions
+\begin{equation*} \left(\D, \, \tau_\D \right) \hookrightarrow \left(\Sc, \, \tau_\Sc \right) \hookrightarrow \left( L^1(\R^n), \, \|\cdot\|_{1} \right)\end{equation*}
+are continuous.\end{lemma}
+
+\begin{proof} We divide the proof into two steps.
+
+\paragraph{Step 1.} Let $\varphi$ be a smooth compactly supported function. Then
+\begin{equation*} q_{\alpha, \, \beta}(\varphi) = \sup_{x \in \mathrm{spt} \, \varphi} \left|x^\alpha D^\beta \varphi(x) \right| \leq C(\mathrm{spt} \, \varphi) \cdot \|\varphi\|_{|\beta|}\end{equation*}
+for all $\alpha, \, \beta \in \N^n$, which means that the inclusion $\D \hookrightarrow \Sc$ is continuous.
+
+\paragraph{Step 2.} Let $\varphi \in \Sc$ be any rapidly decreasing function. Recall that
+\begin{equation*} H(x) := \left(\frac{1}{1 + |x|^2} \right)^n \end{equation*}
+belongs to $L^1(\R^n)$. To obtain a bound for the $L^1$-norm of $\varphi$, we multiply and divide everything by $H(x)$, that is,
+\begin{equation*} \| \varphi \|_{L^1(\R^n)} = \int_{\R^n} \left| \varphi(x) \right| \, \mathrm{d}x = \int_{\R^n} \frac{(1 + |x|^2)^n \, |\varphi(x)|}{(1 + |x|^2)^n} \, \mathrm{d}x. \end{equation*}
+Now the "new" numerator is uniformly bounded and the "new" denominator is summable. More precisely, if we expand the binomial $n$th power (Newton formula), we find that
+\begin{equation*} \| \varphi \|_{L^1(\R^n)} \lesssim  \left\| \frac{1}{(1 + |x|^2)^n} \right\|_{L^1(\R^n)} \sum_{|\alpha| \leq 2 \, n} q_{\alpha, \, 0}(\varphi) < + \infty, \end{equation*}
+that is, the inclusion is continuous.\end{proof}
+
+%%metrizable
+\begin{theorem}The Schwartz space $\Sc$ is a Fréchet space (=metrizable and complete). \end{theorem}
+
+\begin{proof}The space $\Sc$ is linearly metrizable because the family of seminorms $\mathcal{P} := \{ q_{\alpha, \, \beta} \}_{\alpha, \, \beta \in \N^n}$ is countable - see \hyperref[linmetriz]{Theorem \ref{linmetriz}} -.
+
+Now let $\left(\varphi_k \right)_{k \in \N} \subset \Sc$ be a Cauchy sequence in the Schwartz space. Then, for all $\alpha, \, \beta \in \N^n$, the sequence
+\begin{equation*} \left( x^\alpha D^\beta \varphi_k \right)_{k \in \N} \subset C^\infty(\R^n) \subset C^0(\R^n)\end{equation*}
+is a Cauchy sequence in $C^0(\R^n)$. By completeness, it converges uniformly to a function $\psi_{\alpha, \, \beta} \in C^0(\R^n)$, that is,
+\begin{equation*} x^\alpha D^\beta \varphi_k \doublerightarrow \psi_{\alpha, \, \beta}. \end{equation*}
+To conclude the proof the reader should prove that for all $\alpha, \, \beta \in \N^n$, we have
+\begin{equation*} \psi_{\alpha, \, \beta} = x^\alpha D^\beta \, \psi_{0, \, 0} \quad \text{and} \quad \psi_{0, \, 0} = \lim_{k \to + \infty} \varphi_k. \end{equation*}
+\end{proof}
+
+\begin{proposition} \label{prop:contSc} The following operators from $\Sc$ to $\Sc$ are continuous:
+\begin{equation*} \varphi \longmapsto (\cdot)^\gamma \varphi, \quad \psi \longmapsto \varphi \cdot \psi \quad \text{and} \quad \varphi \longmapsto D^\delta \varphi. \end{equation*}\end{proposition}
+
+%%QUI
+\begin{proof} Let $\alpha, \, \beta \in \N^n$ be multi-indices. It follows from Leibniz formula that
+\begin{equation*} D^\beta  \left(x^\gamma \varphi \right) = \sum_{\delta \leq \beta} \binom{\beta}{\delta} D^\delta \left(x^\gamma\right) D^{\beta - \delta} \varphi. \end{equation*}
+therefore
+\begin{equation*} q_{\alpha, \, \beta} \left( x^\gamma \, \varphi \right) \leq C \cdot \sum_{\delta \leq \beta} \binom{\beta}{\delta} \, q_{\gamma + \alpha - \delta, \, \beta-\delta}(\varphi),\end{equation*}
+i.e., the operator $\varphi \mapsto x^\gamma \, \varphi$ is continuous. On the other hand, the continuity of the latter operator (derivative) is obvious since
+\begin{equation*} q_{\alpha, \, \beta} \left(D^\delta \, \varphi \right) = q_{\alpha, \, \beta +\delta}(\varphi), \end{equation*}
+therefore we only need to prove that the multiplication operator is continuous. As before, by Leibniz chain derivatives formula, it turns out that
+\begin{equation*} D^\beta  \left(\varphi \, \psi \right) = \sum_{\delta \leq \beta} \binom{\beta}{\delta} \, D^\delta \varphi \, D^{\beta - \delta} \, \psi, \end{equation*}
+and therefore
+\begin{equation*} q_{\alpha, \, \beta} \left( \varphi \, \psi \right) \leq \sum_{\delta \leq \beta} \binom{\beta}{\delta} \, q_{\alpha, \, \delta}(\varphi) \cdot q_{\alpha, \, \beta - \delta}(\psi).\end{equation*}
+\end{proof}
+
+\begin{theorem}Let $\varphi \in \Sc$ be a Schwartz function. Then the following two properties hold true: \mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item $\F \left( D^\alpha \, \varphi \right)(\xi) = (\imath)^{|\alpha|} \, \xi^\alpha \, \F(\varphi)(\xi)$, for any multi-index $\alpha \in \N^n$.
+\item $\F \left( x^\alpha \, \varphi \right)(\xi) = (\imath)^{|\alpha|} \, D^\alpha \, \F(\varphi)(\xi)$, for any multi-index $\alpha \in \N^n$.
+\end{enumerate}\end{theorem}
+
+\begin{proof} Clearly it suffices to prove that both identities hold true when $\alpha = j \in \{1, \, \dots, \, n\}$. Indeed, the thesis follows from a standard application of the induction principle. \mbox{}
+\begin{enumerate}[label = \textbf{(\alph*)}]
+\item We compute the left-hand side using the definition of the Fourier transform \eqref{def:fourier}:
+\begin{equation*} \begin{aligned} \F \left(D^j \, \varphi(x) \right)(\xi) & = \frac{1}{\left(2 \pi \right)^{n/2}} \, \int_{x \in \R^n} D^j \, \left( \varphi(x) \right) \, \mathrm{e}^{- \imath \, (x, \, \xi)} \, \mathrm{d}x \stackrel{(\ast)}{=} \\[1em] & = \int_{x \in \R^n} \varphi(x) \, D^j \left( \mathrm{e}^{- \imath \, (x, \, \xi)}\right) \, \mathrm{d}x  = \imath \, \xi_j \, \F(\varphi)(\xi), \end{aligned} \end{equation*}
+where the identity $(\ast)$ follows from a straightforward application of the integration by parts.
+
+\paragraph{N.B.} The latter equality is possible only because the border term vanishes (here we use that $\varphi$ is a Schwartz function). More precisely, we have that
+\begin{equation*} \int_{x \in \R^n} D^j \left( \varphi(x) \right) \, \mathrm{e}^{- \imath \, (x, \, \xi)} \, \mathrm{d}x  = \lim_{R \to + \infty} \int_{x \in B_R(0)} D^j \left( \varphi(x) \right) \, \mathrm{e}^{- \imath \, (x, \, \xi)} \, \mathrm{d}x, \end{equation*}
+thus, integrating by parts, we obtain
+\begin{equation*} \int_{x \in B_R(0)} D^j \left( \varphi(x) \right) \, \mathrm{e}^{- \imath \, (x, \, \xi)} \, \mathrm{d}x = \int_{\partial \, B_R(0)} D^j \left( \varphi(x) \right) \, \mathrm{e}^{- \imath \, (x, \, \xi)} \, \nu_j(x) \, \mathrm{d}\Sigma(x) + \dots. \end{equation*}
+The border term can be estimated by $c \, R^{N - 1} \, q_{\alpha, \, 0}(\varphi)$, and this goes to $0$ as $R$ goes to $+\infty$ because $\varphi \in \Sc$ decreases faster than any polynomial.
+\item We compute the left-hand side using the definition of the Fourier transform \eqref{def:fourier}:
+\begin{equation*} \begin{aligned} \F \left(x_j \, \varphi(x) \right)(\xi) & = \int_{\R^n} x_j \, \varphi(x) \, \mathrm{e}^{- \imath \, (x, \, \xi)} \, \mathrm{d}x = \\[1em] & = \imath \, \int_{\R^n} \varphi(x) \, \frac{\partial}{\partial \, \xi_j}  \mathrm{e}^{- \imath \, (x, \, \xi)} \, \mathrm{d}x = \\[1em] & = \imath \, \frac{\partial}{\partial \, \xi_j} \, \F(\varphi)(\xi), \end{aligned} \end{equation*}
+where the swap between the derivative and the integral is possible as a consequence of the dominate convergence theorem (since $\varphi \in \Sc$, for any $\alpha \in \N^n$ the product $x^\alpha \, \varphi$ is summable).
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}\label{sidskd} The inclusion $\F(\Sc) \subseteq \Sc$ is continuous. \end{theorem}
+
+\begin{proof} Let $\varphi \in \Sc$ be a Schwartz function. For any $\alpha, \, \beta \in \N^n$ we have that
+\begin{equation*} \begin{aligned} \left| \xi^\alpha \, D^\beta \, \F\left( \varphi(\xi) \right) \right| & = \left| \xi^\alpha \, \F(x^\beta \, \varphi)(\xi) \right| = \\[1em] & = \left| \F \left(D^\alpha \, x^\beta \, \varphi\right)(\xi) \right| \leq \\[1em] & \leq \left(2 \pi \right)^{-n/2} \, \left\| D^\alpha \left( x^\beta \, \varphi(x) \right) \right\|_{L^1(\R^n)} < + \infty, \end{aligned}\end{equation*}
+and this is enough to conclude that the inclusion is continuous.
+\end{proof}
+
+\begin{theorem} The inclusion
+\begin{equation*}\F \left( L^1(\R^n) \right) \hookrightarrow C_0(\R^n) \end{equation*}
+is continuous. \end{theorem}
+
+\begin{proof}It is a well-known fact that the inclusion
+\begin{equation*}\F \left( L^1(\R^n) \right) \hookrightarrow L^\infty(\R^n), \end{equation*}
+is continuous. Since $C_0$ is the closure of $\Sc$ with respect to the $L^\infty$-norm, it follows from \hyperref[sidskd]{Theorem \ref{sidskd}} that
+\begin{equation*}\F \left(L^1(\R^n) \right) = \F \left( \overline{\Sc}^{L^1} \right) \hookrightarrow \overline{\F(\Sc)}^{L^\infty} \hookrightarrow \overline{\Sc}^{L^\infty} = C_0\end{equation*}
+is a continuous inclusion, being the composition of continuous inclusions.
+\end{proof}
+
+\subsection{Inverse Fourier Transform from $\Sc \to \Sc$}
+
+In this subsection we want to prove that the Fourier transform $\F : \Sc \to \Sc$ is an invertible operator, and we can explicitly compute the inverse through the overturning operation.
+
+\paragraph{Gaussian Distribution.} The function
+\begin{equation} \label{G} G(x) = \mathrm{e}^{-\frac{|x|^2}{2}}, \end{equation}
+called \textit{Gaussian distribution}, is an element of the Schwartz space $\Sc$ and it is a fixed point for the Fourier transform operator, i.e.,
+\begin{equation*} \F \left(G \right) (\xi) = G(\xi) \qquad \forall \, \xi \in \R^n. \end{equation*}
+This fact is well-known, and it is usually proved in lower courses; Hence we shall give this for granted for the rest of the chapter.
+
+\begin{lemma} \label{adjoint} Let $\varphi, \, \psi \in L^1(\R^n)$ be summable functions. The Fourier transform operator is self-adjoint, that is, the following equality holds true:
+\begin{equation} \label{adjointeq} \int_{\R^n} \F( \varphi)(x) \, \psi (x) \, \mathrm{d}x = \int_{\R^n} \varphi(x) \, \F(\psi)(x) \, \mathrm{d}x. \end{equation} \end{lemma}
+
+\begin{proof} This result is a simple consequence of the Fubini theorem. Indeed, if we evaluate the left-hand side, then it turns out that
+\begin{equation*} \begin{aligned} \int_{\R^n} \F( \varphi)(x) \, \psi (x) \, \mathrm{d}x & = \frac{1}{\left(2 \pi \right)^{n/2}} \, \int_{\R^n} \int_{\R^n} \left( \varphi(t) \, \mathrm{e}^{- \imath \, (x, \, t)} \right) \, \mathrm{d}t \, \psi(x) \, \mathrm{d}x = \\[1em] & = \frac{1}{\left(2 \pi \right)^{n/2}} \, \int_{\R^n} \int_{\R^n} \left( \psi(x) \, \mathrm{e}^{- \imath \, (x, \, t)} \right) \, \mathrm{d}x \, \varphi(t) \, \mathrm{d}t = \\[1em] & =  \int_{\R^n} \varphi(x) \, \F(\psi)(x) \, \mathrm{d}x.\end{aligned}\end{equation*}
+\end{proof}
+
+\begin{theorem}[Inversion Theorem] Let $\varphi \in \Sc$ be a Schwartz function. Then for any $x \in \R^n$ it turns out that
+\begin{equation*} \F \circ \F (\varphi)(x) = \check{\varphi}(x). \end{equation*} \end{theorem}
+
+\begin{proof} Let $G(x)$ be the Gaussian distribution. For any $\lambda > 0$ we define $G_\lambda$ to be its $\lambda$-rescaling, that is,
+\begin{equation*}G_\lambda(x) := G \left( \frac{x}{\lambda} \right). \end{equation*}
+The Fourier transform of $G_\lambda$ can be explicitly computed (see \hyperref[proofpssd]{Proposition \ref{proofpssd}}) starting from the Fourier transform of $G$:
+\begin{equation*} \F \left( G_\lambda \right) (\xi) = \lambda^n \, \F(G)(\lambda \, \xi). \end{equation*}
+If we set $\psi = G_\lambda$, then the right-hand side of \eqref{adjointeq} becomes
+\begin{equation*} \begin{aligned} \int_{\R^n} \varphi(x) \, \F(G_\lambda)(x) \, \mathrm{d}x & = \lambda^n \, \int_{\R^n} \mathrm{e}^{-\frac{|\lambda \, x|^2}{2}} \, \varphi(x) \, \mathrm{d}x = \\[1em] &= \int_{\R^n} \varphi \left(\frac{s}{\lambda} \right) \, \mathrm{e}^{- \frac{s^2}{2}} \, \mathrm{d}s. \end{aligned} \end{equation*}
+Clearly $\varphi_\lambda(s) \to \varphi(0)$ pointwise (when $\lambda \to + \infty$), hence, by the Lebesgue dominated convergence theorem, it turns out that
+\begin{equation*} \int_{\R^n} \varphi(x) \, \F(G_\lambda)(x) \, \mathrm{d}x \xrightarrow{\lambda \to + \infty} \int_{\R^n} \mathrm{e}^{-\frac{s^2}{2}} \, \varphi(0) \, \mathrm{d}s = \left( 2 \pi \right)^{n/2} \, \varphi(0).\end{equation*}
+Analogously, we compute the left-hand side of \eqref{adjointeq} becomes
+\begin{equation*} \int_{\R^n} \F( \varphi)(x) \, G_\lambda (x) \, \mathrm{d}x = \int_{\R^n} \varphi(x) \, G_\lambda(x) \, \mathrm{e}^{- \imath \, (x, \, \xi)}. \end{equation*}
+Clearly $G_\lambda(x) \to G(0) = 1$ (when $\lambda \to + \infty$), hence, by the Lebesgue dominated convergence theorem, it turns out that
+\begin{equation*} \int_{\R^n} \F( \varphi)(x) \, G_\lambda (x) \, \mathrm{d}x \xrightarrow{\lambda \to + \infty} \left( 2 \pi \right)^{n/2} \, \int_{\R^n} \F\left(\varphi \right)(\xi) \, \mathrm{d}\xi = \left( 2 \pi \right)^{n/2} \, \F \left( \F(\varphi) \right)(0).\end{equation*}
+We infer that $\varphi(0) = \F^2(\varphi)(0)$, and this is enough to conclude since
+\begin{equation*} \F^2(\varphi)(x) = \tau_{-x} \left(\F^2 (\varphi) \right) (0) = \tau_x \, \varphi(0) = \varphi(-x) = \check{\varphi}(x). \end{equation*}
+\end{proof}
+
+\begin{corollary}The Fourier operator $\F : \Sc \to \Sc$ is invertible, and the inverse is defined by
+\begin{equation*} \F^{-1}(\varphi) = \F\left(\check{\varphi} \right). \end{equation*}
+In particular, the order of $\F$ is four (i.e. $\F^4 = \mathrm{I}_\Sc$).\end{corollary}
+
+The Fourier transform is naturally defined on the space of summable functions $L^1(\R^n)$, therefore it makes sense to ask if a similar result also holds in a more general setting.
+
+The answer, surprisingly, is that there is no difference. More precisely, the operator $\F$ can be inverted from $L^1(\R^n)$ to $L^1(\R^n)$, and the formula is the same (though, it holds only almost everywhere).
+
+\begin{theorem}[Inversion Theorem] Let $\varphi \in L^1(\R^n)$ be a summable function. If $\F(\varphi) \in L^1(\R^n)$, then for almost every $x \in \R^n$
+\begin{equation*} \F \circ \F (\varphi)(x) = \check{\varphi}(x). \end{equation*} \end{theorem}
+
+\begin{proof}Let $\psi \in \Sc$ be any Schwartz function. Then
+\begin{equation*} \begin{aligned} \int_{\R^n} \varphi(x) \, \psi(x) \, \mathrm{d}x & = \int_{\R^n} \varphi(x) \, \F^2\left(\check{\psi}\right) \, \mathrm{d}x = \\[1em] & = \int_{\R^n} \F^2(\varphi)(x) \, \check{\psi}(x) \, \mathrm{d}x = \\[1em] & = \int_{\R^n} \F^2\left( \check{\varphi}\right)(x) \, \psi(x) \, \mathrm{d}x, \end{aligned}\end{equation*}
+that is, the distribution associated $\Lambda_\varphi$ is equal to the distribution $\Lambda_{\F^2(\check{\varphi})}$.  This final identity concludes the proof, as a consequence of the so-called fundamental lemma of calculus of variations\footnote{\textbf{Lemma.} Let $f \in L_{\mathrm{loc}}^1(\R^n)$. If
+\begin{equation*} \int_{\R^n} f(x) \, \varphi(x) \, \mathrm{d}x = 0 \qquad \forall \, \varphi \in C_c^\infty(\R^n), \end{equation*}
+then $f(x) = 0$ for almost every $x \in \R^n$.}.
+
+Indeed, $\varphi \in L^1(\R^n)$ and $\F^2(\check{\varphi})$ may not be a summable function, but it surely belongs to $L_{\mathrm{loc}}^1(\R^n)$ hence the lemma can be applied.
+\end{proof}
+
+\begin{theorem} Let $\varphi, \, \psi \in \Sc$ be two Schwartz functions. Then the convolution $\varphi \ast \psi$ belongs to $\Sc$ and the Fourier transform of the product is, up to a constant, the convolution of the Fourier products, that is,
+\begin{equation*} \F \left( \varphi \cdot \psi \right) =\frac{1}{\left( 2 \pi \right)^{n/2}} \, \F(\varphi) \ast \F(\psi). \end{equation*} \end{theorem}
+
+\begin{proof} We have already proved (see \hyperref[proofpssd]{Proposition \ref{proofpssd}}) that
+\begin{equation*} \F \left( \varphi \ast \psi \right) =\left( 2 \pi \right)^{n/2} \, \F(\varphi) \cdot \F(\psi), \end{equation*}
+therefore we can also apply this formula to $\F(\varphi)$ and $\F(\psi)$, since the Fourier transform operator sends $\Sc$ to $\Sc$. It follows that
+\begin{equation*} \begin{aligned} \F \left( \F(\varphi) \ast \F(\psi) \right) & = \left( 2 \pi \right)^{n/2} \, \F^2(\varphi) \cdot \F^2(\psi) = \\[1em] & = \left( 2 \pi \right)^{n/2} \, \check{\varphi} \cdot \check{\psi}, \end{aligned} \end{equation*}
+and, if we apply the Fourier transform again, it turns out to be the sought identity:
+\begin{equation*} \F \left( \varphi \cdot \psi \right) = \frac{1}{\left(2 \pi \right)^{n/2}} \, \F(\varphi) \ast \F(\psi). \end{equation*}
+\end{proof}
+
+\subsection{Extension to $L^2(\R^n)$}
+
+The main goal of this brief subsection is to extend the notion of Fourier transform to $L^2(\R^n)$ function, in such a way that the it coincides with \eqref{def:fourier} whenever $\varphi \in L^2(\R^n)\cap L^1(\R^n)$.
+
+\begin{theorem}[Plancherel] \label{planchh} The Fourier transform operator $\F : \Sc \to \Sc$ can be uniquely extended to an isometry $\tilde{F} : L^2(\R^n) \to L^2(\R^n)$.\end{theorem}
+
+\begin{proof} We first show that $\F : \Sc \subset L^2(\R^n) \to L^2(\R^n)$ is an isometry. It follows easily from the following chain of equalities:
+\begin{equation*} \begin{aligned} \left< \varphi, \, \psi \right>_{L^2} & = \int_{\R^n} \varphi(x) \, \overline{\psi(x)} \, \mathrm{d}x = \int_{\R^n} \F^2\left(\check{\varphi} \right)(x) \, \overline{\psi(x)} \, \mathrm{d}x = \\[1em] & = \int_{\R^n} \F \left( \check{\varphi} \right)(x) \, \F\left(\overline{\psi} \right)(x) \, \mathrm{d}x = \int_{\R^n} \F \left( \check{\varphi} \right)(x) \, \overline{\F(\psi)(-x)} \, \mathrm{d}x = \\[1em] & = \int_{\R^n} \F(\varphi)(x) \, \overline{\F(\psi)(x)} \, \mathrm{d}x = \left< \F (\varphi), \, \F (\psi) \right>_{L^2}.\end{aligned} \end{equation*}
+The Schwartz functions space is clearly dense in $L^2$, therefore the isometry $\F : \Sc \to L^2(\R^n)$ can be continuously extended in a unique way to an operator $\tilde{\F} : L^2(\R^n) \to L^2(\R^n)$, which is also an isometry.\end{proof}
+
+\begin{theorem} The extension $\tilde{\F} : L^2(\R^n) \to L^2(\R^n)$ is well defined. More precisely, for any $\varphi \in L^1(\R^n) \cap L^2(\R^n)$ it turns out that
+\begin{equation*} \F(\varphi) = \tilde{\F}(\varphi). \end{equation*} \end{theorem}
+
+\begin{proof} Let $\rho_\epsilon$ be a mollifier and let us set $\varphi_\epsilon := \varphi \ast \rho_\epsilon$. Clearly $\varphi_\epsilon \in \Sc$ is a Schwartz function, and it converges both in $L^2(\R^n)$ and in $L^1(\R^n)$ to $\varphi$, as $\epsilon \to 0^+$. Moreover, for any $\epsilon > 0$
+\begin{equation*} \F(\varphi_\epsilon) = \tilde{\F}(\varphi_\epsilon), \end{equation*}
+therefore we conclude the proof by noticing that the first term converges in $L^\infty(\R^n)$ to $\F(\varphi)$, while the second term converges in $L^2(\R^n)$ to $\tilde{\F}(\varphi)$.\end{proof}
+
+\begin{remark}In the previous proof, to conclude that $\F(\varphi) = \tilde{\F}(\varphi)$, we implicitly used a nontrivial fact. Indeed, for any $1 \leq p \leq + \infty$, from the proof of the completeness of $L^p$, one also shows that it is always possible to extract a subsequence converging pointwise almost everywhere. \end{remark}
+
+\section{Tempered Distributions}
+
+The primary goal of this section is to give a formal definition of Fourier transform of a distribution, which is also compatible with the one introduced already. The obvious idea would be to set
+\begin{equation} \label{ftd} \F(f)(\psi) := f \left( \F(\psi) \right), \end{equation}
+but, unfortunately, this relation does not make any sense if $f \in \D^\prime$. To avoid this issue we restrict the Fourier transform operator to the dual of Schwartz functions $\Scp$, which is usually referred to as \textit{space of tempered distributions}.\index{tempered distribution}
+
+\begin{theorem}The inclusions $\D \hookrightarrow \Sc \hookrightarrow \mathcal{E}$ are continuous and dense.
+\end{theorem}
+
+\begin{proof} Let $\varphi \in \Sc$ be a Schwartz function, and let $\psi \in \D$ be a cut-off function, i.e., a function such that $\psi \, \big|_{B(0, \, 1)} \equiv 1$ and $\mathrm{spt}(\psi)$ is compact. Let us set
+\begin{equation*} \psi_r (x) := \psi \left( \frac{x}{r} \right), \end{equation*}
+so that $\psi_r$ is identically equal to $1$ on the ball of radius $r$. Clearly $\varphi \cdot \psi_r$ is a compactly supported function, and it is equal to $\varphi$ on the ball of radius $r > 0$. Now notice that
+\begin{equation*} \begin{aligned} \left| x^\alpha \, D^\beta \left(\varphi - \varphi \cdot \psi_r \right)(x) \right| & = \left| x^\alpha \, D^\beta \, \varphi(x) \, \left(1 - \psi_r \right)(x) \right| \leq
+\\[1em] & \leq \left| x^\alpha \, \sum_{\gamma \leq \beta} \binom{\beta}{\gamma} \, D^{\beta - \gamma} \, \varphi(x) \, D^\gamma \, (1 - \psi_r)(x)\right| \leq
+\\[1em] & \leq \sup_{|x| \geq r} \left| x^\alpha \, \sum_{\gamma \leq \beta} \binom{\beta}{\gamma} \, D^{\beta - \gamma} \, \varphi(x) \, D^\gamma \, (1 - \psi)(x)\right| \leq \\[1em] & \leq C_r \, \| \psi \|_{|\beta|}, \end{aligned} \end{equation*}
+and this last quantity goes to $0$ as $r \to + \infty$, i.e., $\Sc$ is dense in $\D$.
+
+Finally recall that by \hyperref[theorem:contid]{Theorem \ref{theorem:contid}} it follows that $\D \hookrightarrow \Sc$ is continuous if and only if $\D_K \hookrightarrow \Sc$ for any $K \subset \R^n$ compact, and this is obvious because $x^\alpha$ is bounded on any $K$ compact.
+
+The continuity can be proved in the same way, but it is much simpler, therefore we leave it to the reader. The density, on the other hand, is obvious since $\D \subseteq \mathcal{E}$ is dense.
+\end{proof}
+
+\begin{example}\label{ex:1323}We can now exhibit the first examples of tempered distribution, starting from the main examples in $\D^\prime$.\mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item Let $\mu$ be a measure defined on $\R^n$. If there exists $N \in \N$ such that
+\begin{equation}\label{cons232} \int_{\R^n} \frac{1}{\left(1 + |x|^2\right)^N} \, \mathrm{d}\mu(x) \leq C < + \infty, \end{equation}
+then $\Lambda_\mu \in \Scp$ is a tempered distribution.
+
+Indeed, for any $\varphi \in \Sc$ it turns out that
+\begin{equation*} \left| \Lambda_\mu(\varphi) \right| = \left| \int_{\R^n} \varphi(x) \, \mathrm{d}\mu(x) \right| \leq \int_{\R^n} \left|\varphi(x) \right| \, \left(1 + |x|^2 \right)^N \, \frac{1}{\left(1 + |x|^2 \right)^N} \, \mathrm{d}\mu(x) . \end{equation*}
+On the other hand, we can estimate the first term by the seminorms (using the binomial formula):
+\begin{equation*}\left|\varphi(x) \right| \, \left(1 + |x|^2 \right)^N = \sum_{i \leq N} \binom{N}{i} \, x^{2i} \, |\varphi(x)| \leq \sum_{i \leq N} \binom{N}{i} \, q_{2i, \, 0}(\varphi).  \end{equation*}
+The distribution $\Lambda_\mu$ is thus bounded since
+\begin{equation*} \left| \Lambda_\mu(\varphi) \right| \leq \sum_{i \leq N} \binom{N}{i} \, q_{2i, \, 0}(\varphi) \, \int_{\R^n} \frac{1}{\left(1 + |x|^2\right)^N} \, \mathrm{d}\mu(x) \leq C \cdot \sum_{i \leq N} \binom{N}{i} \, q_{2i, \, 0}(\varphi) < + \infty, \end{equation*}
+and it is thus continuous. The linearity is obvious by the definition, so we conclude that $\Lambda_\mu$ is a tempered distribution provided that $\mu$ satisfies the condition \eqref{cons232}.
+\item Let $f \in L^p(\R^n)$ for some $1 \leq p \leq + \infty$. Then $\Lambda_f \in \Scp$ is a tempered distribution.
+
+Indeed, for any $\varphi \in \Sc$ it turns out that
+\begin{equation*} \left| \Lambda_f(\varphi) \right| = \left| \int_{\R^n} \varphi(x) \, f(x) \, \mathrm{d}x \right| \leq \int_{\R^n} \left|\varphi(x) \right| \, \left| f(x) \right| \, \mathrm{d}x. \end{equation*}
+On the other hand, any Schwartz function belongs to $L^q(R^n)$ for $q \in [1, \, + \infty]$ since
+\begin{equation*} \| \varphi \|_{L^q(\R^n)}^q = \int_{\R^n} \left| \varphi(x) \right|^q \, \mathrm{d}x = \int_{\R^n} \left|\varphi(x) \right|^q \, \left(1 + |x|^2 \right)^{nq} \, \frac{1}{\left(1 + |x|^2 \right)^{nq}} \, \mathrm{d}x, \end{equation*}
+and, clearly, we can estimate the first term by the seminorms as we have already done before. If follows that $\Lambda_f$ is bounded, since we can apply the Holder inequality:
+\begin{equation*} \left| \Lambda_f(\varphi) \right| \leq \|f\|_{L^p(\R^n)} \cdot \|\varphi\|_{L^q(\R^n)} < + \infty, \end{equation*}
+thus $\Lambda_f$ is continuous with respect to the topology of $\Sc$, and thus we infer that $\Lambda_f \in \Scp$.
+\item Let $\varphi(x) = x^\alpha$ be a monomial. Then $\Lambda_\varphi \in \Scp$ is a distribution for any multi-index $\alpha \in \N^n$.
+\end{enumerate} \end{example}
+
+\begin{proposition}Let $f \in \Scp$ be a tempered distribution. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item For any multi-index $\alpha \in \N^n$, the product $x^\alpha \, f \in \Scp$.
+\item For any multi-index $\beta \in \N^n$, the derivative $D^\beta \, f \in \Scp$.
+\item For any Schwartz function $\psi \in \Scp$, the product $\psi \, f \in \Scp$.
+\end{enumerate} \end{proposition}
+
+\begin{proof} We prove only one of these properties since the same argument works fine with minor adjustments. Recall that (see \hyperref[prop:contSc]{Proposition \ref{prop:contSc}}) the application
+\begin{equation*} \Sc \ni \varphi \longmapsto x^\alpha \, \varphi \in \Sc \end{equation*}
+is continuous for any multi-index $\alpha$. The distribution $f$ is continuous on $\Sc$ by definition, hence the composition
+\begin{equation*} \Sc \ni \varphi \longmapsto x^\alpha \, \varphi \longmapsto f \left(x^\alpha \, \varphi \right) \in \C \end{equation*}
+is continuous; we conclude by noticing that
+\begin{equation*}f \left(x^\alpha \, \varphi \right) = x^\alpha \, f(\varphi), \qquad \forall \, \varphi \in \Sc. \end{equation*}
+\end{proof}
+
+\begin{proposition} Let $f \in L^1(\R^n)$ be a summable function. Then the Fourier transform of the distribution associated to $f$ is exactly equal to the distribution associated to the Fourier transform of $f$, that is,
+\begin{equation*} \F \left( \Lambda_f \right) = \Lambda_{\F(f)}. \end{equation*} \end{proposition}
+
+\begin{proof}Let $\varphi \in \Sc$ be a test function. The identity is a straightforward consequence of the definitions:
+\begin{equation*} \begin{aligned}\Lambda_{\F(f)}(\varphi) & = \int_{\R^n} \F(f)(\xi) \, \varphi(\xi) \, \mathrm{d}\xi = \\[1em] & = \int_{\R^n} \int_{\R^n} f(x) \, \mathrm{e}^{- \imath \, (x, \, \xi)} \, \mathrm{d}x \, \varphi(\xi) \, \mathrm{d}\xi = \\[1em] & = \int_{\R^n} \int_{\R^n} \varphi(\xi) \, \mathrm{e}^{- \imath \, (x, \, \xi)} \, \mathrm{d}\xi \, f(x) \, \mathrm{d}x = \\[1em] & = \int_{\R^n} \F(\varphi)(x) \, f(x) \, \mathrm{d}x = \Lambda_f \left( \F(\varphi) \right) = \F(\Lambda_f)(\varphi). \end{aligned}\end{equation*}
+\end{proof}
+
+The same property holds true for the extended Fourier transform $\tilde{\F} : L^2(\R^n) \to L^2(\R^n)$, and the proof is exactly the same.
+
+\begin{proposition} Let $f \in L^2(\R^n)$ be a square-summable function. Then
+\begin{equation*} \F \left( \Lambda_f \right) = \Lambda_{\tilde{F}(f)}. \end{equation*}  \end{proposition}
+
+\begin{example} Let $\delta_0$ be the Dirac delta concentrated at the origin. The Fourier transform of $\delta_0$ is, as expected, the distribution associated to the constant $1$:
+\begin{equation*} \F(\delta_0)(\varphi) = \delta_0 \left( \F(\varphi) \right) = \F (\varphi)(0) = \int_{\R^n} 1 \cdot \varphi(x) \, \mathrm{d}x = \Lambda_1 (\varphi). \end{equation*} \end{example}
+
+\begin{theorem}[Inversion Theorem] The Fourier transform $\F : \Scp \to \Scp$ is a linear, continuous and bijective operator such that
+\begin{equation*} \F^2(\varphi) = \check{\varphi}, \qquad \forall \, \varphi \in \Sc. \end{equation*}\end{theorem}
+
+\begin{proof}The identity easily follows from the equivalent one for the Fourier transform of Schwartz functions, that is,
+\begin{equation*} \F^2 \, f (\varphi) = f \left( \F^2(\varphi) \right) = f \left( \check{\varphi} \right) = \check{f}(\varphi), \qquad \forall \, \varphi \in \Sc. \end{equation*}
+The operator is linear and bijective, hence it is enough to prove that it is continuous at the point $0$. Recall that the topology $\tau^\prime$ is generated by the valuations $|\lambda_\varphi|$, where
+\begin{equation*} |\lambda_\varphi|(f) := \left| f(\varphi) \right|. \end{equation*}
+More precisely, each neighborhood $W$ of the origin contains a finite intersection of the rescaled balls associated to the seminorms, that is,
+\begin{equation*} W \supseteq \left\{ f \in \Scp \: \left| \: \text{$\left|f(\varphi_k) \right| \leq \epsilon_k$ for $k = 1, \, \dots, \, N$} \right. \right\} = \bigcap_{i = 1}^{N} B_{\epsilon_i}(\varphi_i). \end{equation*}
+If we set
+\begin{equation*} V := \left\{ f \in \Scp \: \left| \:  \text{$\left|f\left(\F(\varphi_k)\right) \right| \leq \epsilon_k$ for $k = 1, \, \dots, \, N$} \right. \right\}, \end{equation*}
+then $\F(V) \subseteq W$, i.e., the operator $\F$ is continuous at the origin.
+\end{proof}
+
+The Fourier transform, defined on the tempered distributions space, satisfies the same properties of the operator $\F : \Sc \to \Sc$. We do not give the proof since they follow easily from the definitions.
+
+\begin{proposition}Let $f \in \Scp$ be a tempered distribution. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item For any multi-index $\alpha \in \N^n$, it turns out that
+\begin{equation*} \begin{aligned} & \F \left(D^\alpha \, f \right)= \left( \imath \, \xi \right)^\alpha \, \F(f), \\[1em] & \F \left(x^\alpha \, f \right)= \left( \imath \, D \right)^\alpha \, \F(f).  \end{aligned}\end{equation*}
+\item For any $x \in \R^n$, it turns out that
+\begin{equation*} \begin{aligned} & \F \left(\tau_x \, f \right)= e_{-x} \, \F(f), \\[1em] & \F \left(e_x \, f \right)=\tau_x \, \F(f). \end{aligned}\end{equation*}
+\item The Fourier transform of the symmetric is the symmetric of the Fourier transform, that is,
+\begin{equation*}\F \left( \check{f} \right) = \check{\F}(f). \end{equation*}
+\end{enumerate} \end{proposition}
+
+\begin{definition}[Convolution] Let $f \in \Scp$ be a tempered distribution, and let $\varphi \in \Sc$ be a Schwartz function. The convolution at the point $x \in \R^n$ is defined by
+\begin{equation*} f \ast \varphi (x) := f \left( \tau_x \, \check{\varphi} \right). \end{equation*} \end{definition}
+
+This definition is coherent with the one we have already given in the case $f \in \D^\prime$ and $\varphi \in \D$. To conclude the chapter, we need to prove that the same properties holds true.
+
+The proofs are essentially the same, therefore we will not give any detail - except when it is necessary (or when there are stronger properties that are not totally trivial).
+
+\begin{theorem} Let $f \in \Scp$ be a tempered distribution, and let $\varphi \in \Sc$ be a Schwartz function. Then the convolution is a function which belongs to $\mathcal{E}$. \end{theorem}
+
+\begin{theorem} Let $f \in \Scp$ be a tempered distribution, and let $\varphi \in \Sc$ be a Schwartz function. For any multi-index $\alpha \in \N^n$, it turns out that
+\begin{equation*} D^\alpha \left( f \ast \varphi \right) = f \ast D^\alpha \, \varphi = D^\alpha \, f \ast \varphi. \end{equation*} \end{theorem}
+
+\begin{proof} The main idea is essentially the same, but we also need to use a Lemma asserting that for any $\varphi \in \Sc$ the incremental ratio converges in $\Sc$ to the directional derivative, that is,
+\begin{equation*} \frac{\varphi(x + h \, e_k) - \varphi(x)}{h} \xrightarrow{\Sc}_{h \to 0} \frac{\partial \, \varphi}{\partial \, x_k}(x). \end{equation*} \end{proof}
+
+\begin{theorem}Let $f \in \Scp$ be a tempered distribution, and let $\varphi \in \Sc$ be a Schwartz function. The distribution associated to $f \ast \varphi$ is a tempered distribution, i.e., $\Lambda_{f \ast \varphi} \in \Scp$. \end{theorem}
+
+\begin{proof} First, we observe that $f : \Sc \to \C$ is a linear and continuous functional. There exist $C_{\alpha, \, \beta}$ constants such that
+\begin{equation*} \left| f(\varphi) \right| \leq \sum_{(\alpha, \, \beta) \in \N^n} C_{\alpha, \, \beta} \cdot  q_{\alpha, \, \beta}(\varphi),\end{equation*}
+where $C_{\alpha, \, \beta} \neq 0$ for finitely many couples only. By Example \ref{ex:1323}, it suffices to prove that $f \ast \varphi$ is a function which grows less than a certain polynomial. The estimate above yields to
+\begin{equation*} \left| f \ast \varphi (x) \right| \leq \sum_{(\alpha, \, \beta) \in \N^n} C_{\alpha, \, \beta} \cdot  q_{\alpha, \, \beta}\left( \tau_x \, \check{\varphi} \right),\end{equation*}
+hence we conclude by noticing that the seminorm can be easily estimated:
+\begin{equation*} \begin{aligned}q_{\alpha, \, \beta}\left( \tau_x \, \check{\varphi} \right) & = \sup_{y \in \R^n} \left| y^\alpha \, D_y^\beta \, \left(\tau_x \, \check{\varphi}(y) \right) \right| = \\[1em] & = \sup_{y \in \R^n} \left| y^\alpha \, D_y^\beta \, \varphi(x - y) \right| = \\[1em] & = \sup_{z \in \R^n} \left| (z-x)^\alpha \, D_y^\beta \, \varphi(z) \right| < + \infty.\end{aligned} \end{equation*}
+\end{proof}
+
+\begin{theorem}Let $f \in \Scp$ be a tempered distribution, and let $\varphi, \, \psi \in \Sc$ be Schwartz functions. The convolution product is associative, that is,
+\begin{equation*} \left(f \ast \psi\right) \ast \varphi = f \ast \left(\psi \ast \varphi\right) = \left(f \ast \varphi \right) \ast \psi. \end{equation*}
+Moreover, the distribution associated to $f \ast  \varphi$ computed at $\psi$ is equal to $f(\psi \ast \check{\varphi})$, i.e.,
+\begin{equation*} \Lambda_{f \ast \varphi}(\psi) = f \left( \psi \ast \check{\varphi} \right).\end{equation*}\end{theorem}
+
+\begin{theorem}\label{th:convprod}Let $f \in \Scp$ be a tempered distribution, and let $\varphi \in \Sc$ be a Schwartz function. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item The Fourier transform of the convolution is, up to a constant, the product of the Fourier transforms:
+\begin{equation*}  \F \left(f \ast \varphi \right) = \left(2 \pi \right)^{n/2} \, \F(\varphi) \cdot \F(f).\end{equation*}
+\item The Fourier transform of the product is, up to a constant, the convolution of the Fourier transforms:
+\begin{equation*}  \F \left( \varphi \cdot f \right) = \left(2 \pi \right)^{-n/2} \, \F(f) \ast \F(\varphi).\end{equation*}
+\end{enumerate} \end{theorem}
+
+\begin{proof} We only prove the identity \textbf{(a)} since the second one follows easily by using $f \leadsto \F(f)$ and $\varphi \leadsto \F(\varphi)$. If $\psi \in \Sc$ is a Schwartz function, then
+\begin{equation*} \begin{aligned} \Lambda_{\F(f \ast \varphi)}\left( \check{\psi} \right) & = \Lambda_{f \ast \varphi} \left( \F \left(\check{\varphi} \right) \right) = \\[1em] & = \left(f \ast \varphi \right) \ast \F(\psi)(0) = \\[1em] & = \left(f \ast \varphi \ast \F(\psi) \right)(0) = \\[1em] & = \F(f) \left( \left(2 \pi \right)^{n/2} \, \F(\varphi) \, \check{\psi} \right) = \\[1em] & = \left(2 \pi \right)^{n/2} \, \F(\varphi) \cdot \F(f) \left( \check{\psi} \right). \end{aligned} \end{equation*} \end{proof} %CHECK

@@ -1,0 +1,464 @@
+\chapter{Regularity Theory of Elliptic Operators} \thispagestyle{empty}
+
+The goal of this chapter is to investigate elliptic operators $L$ and show that solutions of the equation $Lu = 0$ are necessarily smooth.
+
+\begin{definition}[Linear PDE] A \index{linear partial differential equation}\textit{linear partial differential equation} with constant coefficients is a functional equation of the form
+\begin{equation} \label{eq:edp} \sum_{|\alpha| \leq m} c_\alpha \left(- \imath D\right)^\alpha u = \varphi, \end{equation}
+where $c_\alpha \in \C$ are complex constants, while $u$ and $\varphi$ are (a priori) distributions. The function
+\begin{equation*} P(\xi) = \sum_{|\alpha| \leq m} c_\alpha \, \xi^\alpha \end{equation*}
+is known as the \textit{characteristic polynomial}\index{linear partial differential equation!characteristic polynomials} associated to the equation \eqref{eq:edp}. It turns out that
+\begin{equation} \label{eq:edp2} P \left( - \imath D \right) u = \varphi. \end{equation} \end{definition}
+
+There is a special class of solutions of PDEs, which is extremely useful whenever we are dealing with a problem of the form $Lu = f(u)$.
+
+\begin{definition}[Fundamental Solution] \index{fundamental solution} Let $P(- \imath D)$ be a partial differential operator with constant coefficients. A distribution $u_0$ is a \textit{fundamental solution} for $P$ if
+\begin{equation*} P \left( - \imath D \right) u_0 = \delta_0, \end{equation*}
+where $\delta_0$ denotes the Dirac distribution centred at the origin.
+\end{definition}
+
+\begin{remark}Suppose that $u_0$ is a fundamental solution for $P$. Then
+\begin{equation*} P \left( - \imath D \right) (u_0 \ast \varphi) = \left( P(- \imath D) u_0 \right) \ast \varphi = \delta_0 \ast \varphi = \varphi, \end{equation*}
+which means that, at least formally, a fundamental solution produces a nontrivial solution to the equation with right-hand side given by $\varphi$.\end{remark}
+
+\noindent We now apply the Fourier transform operator $\F$ to \eqref{eq:edp}. We obtain the identity
+\begin{equation} \label{eq:edp2} \sum_{|\alpha| \leq m} c_\alpha \left(- \imath  D\right)^\alpha  u = \varphi \implies P(t)  \F(u)(t) = \F(\varphi)(t). \end{equation}
+In particular, if $u_0$ is a fundamental solution of \eqref{eq:edp}, then it must satisfy
+\begin{equation*} P(t)  \F(u_0)(t) = 1 \quad \text{for all $t \in \R$}. \end{equation*}
+This approach suggests that a fundamental solution $u_0$ can never be a compactly supported distribution. In fact, if we had $u_0 \in \mathcal{E}^\prime$, then a straightforward application of the \hyperref[pwtheroem]{Paley-Wiener Theorem \ref{pwtheroem}} would imply that both $\F(u_0)$ and $P(t) \F(u_0)(t)$ are entire functions. Consequently,
+\begin{equation*} \text{$P(t)$ is not constant} \implies \exists \, t \: : \:  P(t) \F(u_0)(t) = 0, \end{equation*}
+which is in contradiction with the identity above.
+
+\section{Malgrange Theorem}
+
+In this section, we set the ground to state and prove the well-known Malgrange theorem, which asserts that the problem \eqref{eq:edp2} always admits a fundamental solution.
+
+\begin{lemma}\label{ml1:lemma} Let $P \in \C[z_1, \, \dots, \, z_n]$ be a nonzero polynomial of degree $d$. Then there exists a positive constant $C > 0$ such that the estimate
+\begin{equation} \label{ml1} |f(z)| \leq \frac{c}{r^d} \int_{\mathbb{T}^n} \left| P \cdot f \right| \left(z + r \mathrm{e}^{\imath \theta} \right) \, \mathrm{d}\theta \end{equation}
+holds for every entire function $f$, $z \in \C^n$ and $r > 0$. Here $\mathbb{T}^n$ denotes the $n$-torus $[0, \, 2 \pi]^n$. \end{lemma}
+
+\begin{proof} We first prove that the estimate \eqref{ml1} holds at the origin for a polynomial $Q(\xi)$ of a single complex variable. Next, we reduce the general case to it using a simple trick.
+
+\paragraph{Step 1.} Let $Q \in \C[\xi]$ be a polynomial of degree $d$, and let $F(\xi)$ be an entire function. We can factorise $Q$ over $\C$ and write it as
+\begin{equation*}Q(\xi) = a \, \prod_{j = 1}^{d} \left( \xi - \xi_j \right), \end{equation*}
+where $\xi_1, \, \dots, \, \xi_d \in \C$ are the (eventually repeated) roots of $Q$. We also consider the auxiliary polynomial defined by
+\begin{equation*}Q_0(\xi) := a \prod_{j = 1}^{d} \left( 1 - \bar{\xi}_j \xi \right). \end{equation*}
+We now notice that, if $\xi \in \C$ is a complex number of norm equal to one, then
+\begin{equation*}\begin{aligned} \left| \xi - \xi_j \right| & = \left|\overline{\xi - \xi_j} \right| =
+\\[1em] & = |\bar{\xi}|^{-1} \left| 1 - \frac{\bar{\xi}_j}{\bar{\xi}} \right| = 
+\\[1em] & =\left| 1 - \frac{\bar{\xi}_j \xi}{|\xi|} \right| = \left| 1 - \bar{\xi}_j \xi \right|, \end{aligned} \end{equation*}
+which means that
+\begin{equation*}|\xi| = 1 \implies \left|Q_0(\xi) \right| = \left| Q(\xi) \right|. \end{equation*}
+A straightforward application of the Cauchy\index{Cauchy formula} formula\footnote{Let $f : A \subset \C \longrightarrow \C$ be a holomorphic function defined on an open subset of $\C$. Let $\gamma$ be a simple closed curve contained in $A$. Let $S$ be the region enclosed in $\gamma$ (counterclockwise) and let $z$ be any point in the internal of $S$ which does not belong to the curve. Then
+\begin{equation*}f(z) = \frac{1}{2 \pi \imath} \oint_{\gamma} \frac{f(\xi)}{\xi - z} \, \mathrm{d}\xi. \end{equation*}} shows that
+\begin{equation} \label{l72:1} F \cdot Q_0(z) = \frac{1}{2\pi} \int_{0}^{2 \pi} F \cdot Q_0 \left(z + r \mathrm{e}^{\imath \theta} \right) \, \mathrm{d}\theta. \end{equation}
+It follows that
+\begin{equation*}\left| F \cdot Q_0(0) \right| \leq \frac{1}{2 \pi} \int_0^{2 \pi} \left|F \cdot Q_0 \right| \left( \mathrm{e}^{\imath \theta} \right) \, \mathrm{d}\theta = \frac{1}{2 \pi} \int_0^{2 \pi} \left|F \cdot Q \right| \left( \mathrm{e}^{\imath \theta} \right) \, \mathrm{d}\theta \end{equation*}
+using the fact that $|Q_0(\mathrm{e}^{\imath \theta})| = |Q(\mathrm{e}^{\imath \theta})|$ for all $\theta \in [0, \, 2 \pi]$. We finally infer that
+\begin{equation} \label{l72:2} \left|a \cdot F(0) \right| \leq \frac{1}{2 \pi} \int_0^{2 \pi} \left|F \cdot Q \right| \left( \mathrm{e}^{\imath \theta} \right) \, \mathrm{d}\theta, \end{equation}
+where $a$ is a constant whose exact value is given by the formula
+\begin{equation*}|a| = \lim_{|\xi| \to + \infty} \frac{\left|Q(\xi) \right|}{\left|\xi\right|^d}. \end{equation*}
+
+\paragraph{Step 2.} Fix $\theta \in \mathbb{T}^n$ and $z \in \C^n$. We consider the entire function
+\begin{equation*}F : \C \ni \xi \longmapsto f(z + r \mathrm{e}^{\imath \theta} \xi) \in \C,\end{equation*}
+and the $d$-polynomial
+\begin{equation*}Q : \C \ni \xi \longmapsto P(z + r \mathrm{e}^{\imath \theta} \xi) \in \C.\end{equation*}
+The corresponding constant $|a|$ is given by the following limit evaluation:
+\begin{equation*} \begin{aligned} |a| & = \lim_{|\xi| \to + \infty} \frac{\left|Q(\xi)\right|}{|\xi|^d} = \lim_{|\xi| \to + \infty} \frac{\left|P(z + r  \mathrm{e}^{\imath \theta} \xi)\right|}{|\xi|^d} =
+\\[1em] &= \lim_{|\xi| \to + \infty} \left[ \sum_{|\alpha|\leq d} |c_\alpha| \frac{\left| z + r \mathrm{e}^{\imath \theta} \xi \right|^{|\alpha|}}{|\xi|^d} \right] =
+\\[1em] & = \lim_{|\xi| \to + \infty} \left[ \sum_{|\alpha| = d} |c_\alpha|  \left| \frac{z}{\xi} + r  \mathrm{e}^{\imath \theta} \right| \right]  =
+\\[1em] & = P_d \left(r \mathrm{e}^{\imath \theta} \right),\end{aligned}  \end{equation*}
+where $P_d$ is the maximal-degree part of the polynomial $P$, that is,
+\begin{equation*} P_d(z) = \sum_{|\alpha| = d} c_\alpha z^\alpha. \end{equation*}
+The estimate \eqref{l72:2} immediately implies that
+\begin{equation} \label{l72:3} \left|P_d(r \mathrm{e}^{\imath \theta})\right| \left| f(z) \right| \leq \frac{1}{2 \pi} \int_0^{2 \pi} \left|P \cdot f\right| \left(z + r \mathrm{e}^{\imath \theta} \mathrm{e}^{\imath \tau} \right) \, \mathrm{d}\tau, \end{equation}
+and, by taking the average of the polynomial over the $n$-dimensional torus, it turns out that
+\begin{equation*} \left| f(z) \right|  \int_{\mathbb{T}^n} \left|P_d(r  \mathrm{e}^{\imath \theta})\right|  \, \mathrm{d}\theta \leq \frac{1}{2 \pi} \int_{\mathbb{T}^n} \int_0^{2 \pi} \left|P \cdot f\right| \left(z + r \mathrm{e}^{\imath \theta} \mathrm{e}^{\imath \tau} \right) \, \mathrm{d}\tau \, \mathrm{d}\theta. \end{equation*}
+The left-hand side, by homogeneity, satisfies the following equality
+\begin{equation*} \left| f(z) \right| \cdot \int_{\mathbb{T}^n} \left|P_d(r \mathrm{e}^{\imath \theta})\right|  \, \mathrm{d}\theta = r^d \cdot \left| f(z) \right| \int_{\mathbb{T}^n} \left|P_d(\mathrm{e}^{\imath \theta})\right|  \, \mathrm{d}\theta, \end{equation*}
+and hence it is enough to prove that
+\begin{equation*}  \int_{\mathbb{T}^n} \left|P_d(\mathrm{e}^{\imath \theta})\right|  \, \mathrm{d}\theta = c \neq 0 \end{equation*}
+to infer that the estimate \eqref{ml1} holds. But the integral cannot be equal to zero since the integrand is positive and the $P_d$ is assumed to be nonzero.
+
+\paragraph{Note.} The substitution $\tau + \theta \mapsto \sigma$ is enough to deal with the right-hand side since we obtain the following identity:
+\begin{equation*} \frac{1}{2 \pi} \int_{\mathbb{T}^n} \int_{\theta}^{2 \pi + \theta} \left|P \cdot f\right| \left(z + r \mathrm{e}^{\imath \sigma} \right) \, \mathrm{d}\sigma \, \mathrm{d}\theta =  \frac{1}{2 \pi} \int_{\mathbb{T}^n} \left|P \cdot f\right| \left(z + r  \mathrm{e}^{\imath \theta} \right) \,\mathrm{d}\theta. \end{equation*}
+\end{proof}
+
+\begin{theorem}[Solution Property] Let $\varphi \in \mathcal{E}^\prime$ be a compactly supported distribution. \mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item If there exists $u \in \mathcal{E}^\prime$ such that
+\begin{equation*} P(- \imath D) u = \varphi, \end{equation*}
+then there exists an entire function $f$ satisfying
+\begin{equation*} P(x) f(x) = \F(\varphi)(x). \end{equation*}
+\item If there exists an entire function $f$ such that
+\begin{equation*} P(x) f(x) = \F(\varphi)(x), \end{equation*}
+then the equation \eqref{eq:edp2} admits a solution $u \in \mathcal{E}^\prime$ whose support is contained in the convex hull generated by $\mathrm{spt}(\varphi)$, that is,
+\begin{equation*} \mathrm{spt}(u) \subset \mathrm{Conv} \left( \mathrm{spt}(\varphi) \right). \end{equation*}
+\end{enumerate} \end{theorem}
+
+\begin{proof}The assertion \textbf{(a)} has already been proved. Suppose that there exists an entire function $f$ satisfying
+\begin{equation*} P(x) f(x)  = \F(\varphi)(x) \end{equation*}
+for all $x$. Since $\varphi$ belongs to $\mathcal{E}^\prime$ it follows from the \hyperref[pw:gen1]{Paley-Wiener Theorem \ref{pw:gen1}} that $\F(\varphi)$ is an entire function satisfying the estimate
+\begin{equation*} \left| \F(\varphi)(z) \right| \leq c \left(1 + |z| \right)^d \cdot \mathrm{e}^{r  |\mathfrak{Im}(z)|}. \end{equation*}
+We now plug this into the inequality \eqref{ml1} given by \hyperref[ml1:lemma]{Lemma \ref{ml1:lemma}}. It turns out that
+\begin{equation*} \begin{aligned} \left|f(z) \right| & \leq \int_{\mathbb{T}^n} \left| \F(\varphi) \right| \left(z + \mathrm{e}^{\imath \theta} \right) \, \mathrm{d}\theta \leq
+\\[1em] & \leq c \int_{\mathbb{T}^n} \left(1 + \left| z + \mathrm{e}^{\imath \theta} \right| \right)^d  \mathrm{e}^{r \left| \mathfrak{Im}(z + \mathrm{e}^{\imath \theta}) \right|} \, \mathrm{d}\theta \leq
+\\[1em] & \leq \underbrace{c^\prime \,  \mathrm{vol}\left(\mathbb{T}^n \right)}_{= c^{\prime \prime}} \left(1 + |z| \right)^d \cdot \mathrm{e}^{r |\mathfrak{Im}(z)|}. \end{aligned} \end{equation*}
+The \hyperref[pw:gen1]{Paley-Wiener Theorem \ref{pw:gen1}} shows that $f$ is the Fourier transform of a function $u \in \mathcal{E}^\prime$ with support satisfying
+\begin{equation*} \mathrm{spt}(u) \subset \overline{B_r}. \end{equation*}
+Putting together all these facts we conclude that $u$ is the sought solution and
+\begin{equation*} \mathrm{spt}(u) \subset \overline{B_r} \quad \text{for all $B_r$ s.t. $\overline{B_r} \supset \mathrm{spt}(\varphi)$} \leadsto  \mathrm{spt}(u) \subset \mathrm{Conv} \left( \mathrm{spt}(\varphi) \right). \end{equation*}\end{proof}
+
+\begin{theorem}[Malgrange] Let $P \in \C[z_1, \, \dots, \, z_n]$ be a nonzero $d$-polynomial. Then there exists a distribution $u \in \mathcal{D}^\prime$ such that
+\begin{equation*} P(- \imath D) \, u = \delta_0. \end{equation*} \end{theorem}
+
+\begin{proof} We may equivalently show that
+\begin{equation} \label{eq:ml2} P(-\imath D) u(\varphi) = \delta_0(\varphi) = \varphi(0) \quad \text{for all $\varphi \in \D$}. \end{equation}
+
+\paragraph{Step 1.} We first observe that for every multi-index $\alpha \in \N^n$ we have
+\begin{equation*} D^\alpha u(\varphi) = (-1)^{|\alpha|} u \left(D^\alpha \varphi \right) = \check{u} \left(D^\alpha \check{\varphi} \right), \end{equation*}
+and hence \eqref{eq:ml2} holds if and only if
+\begin{equation*} \check{u} \left( P(-\imath D) \check{\varphi} \right) = \varphi(0) \quad \text{for all $\varphi \in \D$} \end{equation*}
+holds. Since $\varphi(0) = \check{\varphi}(0)$ the thesis \eqref{eq:ml2} is also equivalent to requiring that
+\begin{equation} \label{eq:ml3} \check{u} \left( P(-\imath D) \varphi \right) = \varphi(0) \quad \text{for all $\varphi \in \D$.}\end{equation}
+
+\paragraph{Step 2.} To show that \eqref{eq:ml3} is true, we will first prove the existence of a unique map $U : \mathfrak{Y} \longrightarrow \C$ with the property that the following diagram is commutative
+\begin{equation*} \begin{tikzcd} \D \ar[rr, "\mathcal{P}"] \ar[drr, swap, "\delta_0"]  && \mathfrak{Y} := \mathrm{Ran}(\mathcal{P}) \ar[d, dotted, "U"] \\ && \C \end{tikzcd} \end{equation*}
+where $\mathcal{P}$ denotes the map sending $\psi \in \D$ to $P(- \imath \, D) \, \psi \in Y$.
+
+\paragraph{Step 3.} The existence of the map $U$ follows from the fact that $\mathcal{P}$ is an injective operator. Let $\psi \in \D$ be an element in the kernel of $\mathcal{P}$, that is,
+\begin{equation*} P(- \imath  D) \psi = 0. \end{equation*}
+We apply the Fourier transform to both the left-hand side and the right-hand side and we obtain the identity
+\begin{equation*} P(\xi) \cdot \F(\psi)(\xi) = 0 \quad \text{for all $\xi \in \C^n$}. \end{equation*}
+The \hyperref[pw:gen1]{Paley-Wiener Theorem \ref{pw:gen1}} asserts that $\F(\psi)$ is an entire function, and thus the identity above implies that
+\begin{equation*}\F(\psi)(\xi) = 0 \quad \text{for all $\xi \in \left\{ P(\xi) \neq 0 \right\}$}. \end{equation*}
+The set of points where $P(\xi)$ is equal to zero has empty interior part; hence $\F(\psi)$ vanishes on a dense set and, by continuity, $\F(\psi)$ must be identically equal to zero, which means that $\mathcal{P}$ is injective.
+
+\paragraph{Step 4.} The existence of the map $U$ follows from the previous point so, if we can prove that $U$ is continuous, then the Hahn-Banach theorem would allow us to extend it to a linear continuous map satisfying
+\begin{equation*} \D \ni \varphi \longmapsto P(- \imath  D) u(\varphi) \longmapsto \varphi(0).\end{equation*}
+
+\paragraph{Step 5.} Let $(\psi_j)_{j \in \N} \subset Y$ be a sequence converging to zero with respect to the $\D$-topology. We can always find a sequence $(\varphi_j)_{j \in \N} \subset \D$ such that
+\begin{equation*} \psi_j = P(- \imath D) \varphi_j \quad  \text{and} \quad U(\psi_j) = \varphi_j(0). \end{equation*}
+If we apply the Fourier transform, we obtain
+\begin{equation*} P(\xi) \cdot \F(\varphi_j)(\xi) = \F(\psi_j)(\xi) \end{equation*}
+for all $j \in \N$ and, as a consequence of the \hyperref[pw:gen1]{Paley-Wiener Theorem \ref{pw:gen1}}, we infer that the function $\F(\varphi_j)$ is entire. It follows from \hyperref[ml1:lemma]{Lemma \ref{ml1:lemma}} that
+\begin{equation} \label{ml.4} |\varphi_j(0)| = \frac{1}{(2 \pi)^{n/2}} \int_{\R^n} \left| \F(\varphi_j(\xi)\right| \,  \mathrm{d}\xi \lesssim \int_{\R^n} \left[ \int_{\mathbb{T}^n} \left| P\cdot \F(\varphi_j) \right| (\xi + \mathrm{e}^{\imath \theta}) \, \mathrm{d}\theta \right] \, \mathrm{d}\xi, \end{equation}
+where
+\begin{equation*}\left| P \cdot \F(\varphi_j) \right| (\xi + \mathrm{e}^{\imath \theta}) = \F(\psi_j)(\xi + \mathrm{e}^{\imath \theta}). \end{equation*}
+Recall that, by definition of the exponential notation, we have
+\begin{equation*}\F(\psi_j)(\xi + \mathrm{e}^{\imath \theta}) = \F \left( \mathrm{exp}_{ \imath \theta} \psi_j \right). \end{equation*}
+Set $\psi_{\theta, \, j} := \mathrm{exp}_{ \imath \theta} \psi_j$. If we plug this into \eqref{ml.4}, we obtain the estimate
+\begin{equation}\label{ml:5} |\varphi_j(0)| \lesssim \int_{\R^n} \left[ \int_{\mathbb{T}^n} \left| \F(\psi_{\theta, \, j}\right)(\xi) \, \mathrm{d}\theta \right] \, \mathrm{d}\xi. \end{equation}
+We now apply the Schwartz-Hölder inequality and find that
+\begin{equation*} \begin{aligned} \| \F(\psi_{\theta, \, j}) \|_{L^1(\R^n)} & = \left\| \frac{1}{(1 + |x|^2)^n} (1 + |x|^2)^n \cdot \F(\psi_{j, \, \theta}) \right\|_{L^1(\R^n)} \leq
+\\[1em] & \leq \left\| \frac{1}{(1 + |x|^2)^n} \right\|_{L^2(\R^n)} \left\| (1 + |x|^2)^n \F(\psi_{j, \, \theta}) \right\|_{L^2(\R^n)} \lesssim
+\\[1em] & \lesssim C^\prime \left\|  \F\left( Q(- \imath D) \psi_{j, \, \theta} \right) \right\|_{L^2(\R^n)} \, {\color{red}=} \\[1em] & \,  {\color{red}=} \, \left\|  Q(- \imath D)  \psi_{j, \, \theta} \right\|_{L^2(\R^n)},\end{aligned} \end{equation*}
+where $Q(x) := (1 + |x|^2)^n$, while the {\color{red}red} identity follows from \hyperref[planchh]{Theorem \ref{planchh}}. It remains to prove that
+\begin{equation*}\left\|  Q(- \imath D) \psi_{j, \, \theta} \right\|_{L^2(\R^n)} \xrightarrow{j \to + \infty} 0\end{equation*}
+uniformly with respect to $\theta$. However, for all $\theta$, we have 
+\begin{equation*} \psi_{\theta, \, j} \xrightarrow{\D} 0, \end{equation*}
+which means that there exists a compact set $K$ such that the support of every such function is contained there and 
+\begin{equation*} D^\alpha \psi_{\theta, \, j} \xrightarrow{\text{uniformly in $K$}} 0 \end{equation*}
+for every multi-index $\alpha \in \N^n$. Since $\theta$ ranges in a compact set, it turns out that
+\begin{equation*}\left\|  Q(- \imath D) \, \psi_{j, \, \theta} \right\|_{L^2(\R^n)} \xrightarrow{j \to + \infty} 0\end{equation*}
+uniformly with respect to $\theta$, which is exactly what we needed to prove to conclude.
+\end{proof}
+
+\section{Introduction to Sobolev Spaces}
+
+We will now discuss some basic results concerning $(m, \, 2)$-Sobolev spaces, e.g. embedding-type theorems, which will be essential to prove the main result of the elliptic operator regularity theory.
+
+\begin{definition}[Sobolev Space] \index{Sobolev space}\index{Sobolev space!local} The $(m, \, p)$-Sobolev space on $\R^n$ is defined by setting
+\begin{equation*} W^{m, \, p}(\R^n) := \left\{ f \in \mathcal{D}^\prime(\R^n) \: \left| \: \text{$D^\alpha f \in L^p(\R^n)$ for every $|\alpha| \leq m$} \right. \right\}. \end{equation*} 
+Furthermore, if $\Omega \subseteq \R^n$ is an open subset of $\R^n$, the \textit{local} Sobolev space is defined by
+\begin{equation*} W_{\mathrm{loc}}^{m, \, p}(\R^n) := \left\{ f \in \mathcal{D}^\prime(\R^n) \: \left| \: \text{$D^\alpha f \in L_{\mathrm{loc}}^{p}(\Omega)$ for every $|\alpha| \leq m$} \right. \right\} \end{equation*} \end{definition}
+
+The primary goal of this paragraph is to prove an embedding-type theorem for Sobolev spaces with $p$ equal to $2$. \caution[c][darkgreen][Note]{The main idea is to use the fact that the Fourier transform is an isometry from $L^2$ to $L^2$.}
+
+\begin{theorem}[Sobolev] \index{Sobolev embedding theorem} \label{th:set} The inclusion
+\begin{equation*} W^{m, \, 2}(\R^n) \subseteq C^r(\R^n), \end{equation*}
+holds, provided that
+\begin{equation*} r < m - \frac{n}{2}. \end{equation*} \end{theorem}
+
+\begin{theorem}[Sobolev] \index{Sobolev embedding theorem!local version}  \label{th:slet} The inclusion
+\begin{equation*} W_{\mathrm{loc}}^{m, \, 2}(\Omega) \subseteq C^r(\Omega), \end{equation*}
+holds, provided that
+\begin{equation*} r < m - \frac{n}{2}. \end{equation*}\end{theorem}
+
+\begin{lemma}\label{lemma:set} Let $f \in L^1(\R^n)$ be a summable function, and assume that $x_j f \in L^1(\R^n)$ for all $j = 1, \, \dots, \, n$. Then
+\begin{equation*}\F(f) \in C^1(\R^n) \quad \text{and} \quad \partial_j \F(f) = D^j \F(f), \end{equation*}
+which means that the weak partial derivative coincides with the classical partial derivative.\end{lemma}
+
+\begin{proof} Recall that the Fourier transform of a summable function $g \in L^1(\R^n)$ is a continuous function vanishing at infinity, that is,
+\begin{equation*} g \in L^1(\R^n) \implies \F(g) \in C_0^0(\R^n). \end{equation*}
+In our case it turns out that
+\begin{equation*} \F(f) \in C_0^0(\R^n) \quad \text{and} \quad \F\left(x_j f \right) = D^j \F(f) \in C_0^0(\R^n). \end{equation*}
+The thesis will now follow if we are able to show that the incremental ratio
+\begin{equation*} \lim_{h \to 0} \frac{\F(f)(\xi + h e_j) - \F(f)(\xi)}{h} \end{equation*}
+coincides with the weak derivative $D^j \F(f)$ for all $j$. A straightforward computation shows that
+\begin{equation*}\begin{aligned} \lim_{h \to 0} \frac{\F(f)(\xi + h e_j) - \F(f)(\xi)}{h} & = \int_{\R^n} f(x) \mathrm{e}^{- \imath \langle x, \, \xi \rangle} \left( \frac{\mathrm{e}^{-\imath x_j h} - 1}{h} \right) \, \mathrm{d}x \stackrel{\ast}{=}
+\\[1em] & \stackrel{\ast}{=} - \imath \int_{\R^n} x_j f(x) \mathrm{e}^{-\imath \langle x, \, \xi \rangle} \, \mathrm{d}x = 
+\\[1em] & = - \imath \F \left(x_j f \right)(\xi) = D^j \F(f), \end{aligned} \end{equation*}
+where the equality $\ast$ follows from the Lebesgue dominated convergence theorem.
+\end{proof}
+
+\begin{proposition}\label{prop:set}Let $r \in \N$ be a positive integer. Then
+\begin{equation*} (1 + |x|)^r f(x) \in L^1(\R^n) \implies \F(f) \in C^r(\R^n). \end{equation*}
+\end{proposition}
+
+\begin{proof}We argue by induction. The base step has already been discussed above, so we only deal with the inductive step.
+
+\paragraph{Inductive Step.} Suppose that the thesis holds true for some integer $k$ such that $k - 1 < r$ with
+\begin{equation*}(1 + |x|)^k f(x) \in L^1(\R^n).\end{equation*}
+The inductive assumption tells us that
+\begin{equation*}D^\alpha \F(f) \in C^0(\R^n) \quad \text{for all $\alpha \in \N^n$ s.t. $|\alpha| \leq r - 1$},\end{equation*}
+and therefore it is enough to check the regularity of the derivatives
+\begin{equation*}D^j \left[ D^\alpha \F(f) \right] \quad \text{for $j = 1, \, \dots, \, n$.}\end{equation*}
+Now $D^j D^\alpha \F(f)$ is equal to $\F( x_j x^\alpha f)$ and
+\begin{equation*} \left| x^\alpha f \right| \leq (1 + |x|)^{|\alpha|} |f| \in L^1(\R^n) \quad \text{for all $|\alpha| \leq r$}. \end{equation*}
+We finally apply \hyperref[lemma:set]{Lemma \ref{lemma:set}} and infer that
+\begin{equation*}D^j \left[ D^\alpha \F(f) \right] \in C^0(\R^n) \quad \text{for $j = 1, \, \dots, \, n$.}\end{equation*}
+\end{proof}
+
+\begin{lemma}Let $m \in \R_{\geq 0}$. The estimate
+\begin{equation} \label{set:stima} \left(1 + |x|\right)^{2m} \leq 2^m (1 + n)^m \left(1 + |x_1|^{2m} + \dots + |x_n|^{2m} \right) \end{equation}
+holds for all $x \in \R^n$. \end{lemma}
+
+\begin{proof}Let $k \in \{1, \, \dots, \, n\}$ be an index realising the maximum absolute value, that is,
+\begin{equation*} |x_k|^2 = \max_{i = 1, \, \dots, \, n} |x_i|^2, \end{equation*}
+and notice that
+\begin{equation*} |x|^2 \leq n |x_k|^2. \end{equation*}
+It follows that
+\begin{equation*} \left( 1 + |x| \right)^2 \leq \left(1 + \sqrt{n} |x_k| \right)^2 \leq 2 \left(1 + n |x_k|^2 \right), \end{equation*}
+where the last inequality comes from the well-known estimate
+\begin{equation*} \frac{1}{2} (a + b)^2 \leq a^2 + b^2. \end{equation*}
+We now take the $m$th power of the inequality above and obtain the following chain that leads to the desired estimate:
+\begin{equation*}\begin{aligned} \left( 1 + |x| \right)^{2m} & \leq 2^m \left(1 + n |x_k|^2 \right)^m \leq
+\\[1em] & \leq 2^m \sum_{j=0}^{m} \binom{m}{j} n^j |x_i|^{2j} \leq
+\\[1em] & \leq 2^m \sum_{j=0}^m \binom{m}{j} n^j \left(1 + |x_k|^{2m} \right) =
+\\[1em] & = 2^m (1 + n)^m \left(1 + |x_k|^{2m}\right) \leq
+\\[1em] & \leq 2^m (1 + n)^m \left(1 + |x_1|^{2m} + \dots + |x_n|^{2m} \right). \end{aligned} \end{equation*}
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{th:set}] By assumption $D^\alpha f \in L^2(\R^n)$ for all $\alpha \in \N^n$ satisfying $|\alpha| \leq m$. Therefore
+\begin{equation*} \F \left(D^\alpha f \right) = \left( \imath x \right)^\alpha \F(f) \in L^2(\R^n) \end{equation*}
+since the Fourier transform maps $L^2$ into $L^2$ isometrically. The assumption on $r$ allows us to estimate the $L^1(\R^n)$-norm of $(1 + |x|^r) \F(f)$ as follows:
+\begin{equation*} \begin{aligned} \left\| (1 + |x|)^r \F(f) \right\|_{L^1(\R^n)} & =  \left\| \left( 1 + |x| \right)^{r - m} \left( 1 + |x| \right)^{m} \F(f) \right\|_{L^1(\R^n)} \leq
+\\[1em] & \leq \left\| \left( 1 + |x| \right)^{r - m}  \right\|_{L^2(\R^n)} \left\| \left( 1 + |x| \right)^{m} \F(f) \right\|_{L^2(\R^n)} \leq
+\\[1em]  & \lesssim \left\| \left( 1 + |x| \right)^{m} \F(f) \right\|_{L^2(\R^n)}. \end{aligned} \end{equation*}
+To conclude we need to estimate this $L^2$-norm, but it is worth noticing that
+\begin{equation*}\left\| \left( 1 + |x| \right)^{r - m} \right\|_{L^2(\R^n)} \leq C \end{equation*}
+provided that $2(r - m) < -n$, which is exactly our assumption. Using the algebraic result \eqref{set:stima}, it turns out that
+\begin{equation*} \begin{aligned} \left\| \left( 1 + |x| \right)^{m} \F(f) \right\|_{L^2(\R^n)} & = \int_{\R^n} \left(1 + |x| \right)^{2m} \left| \F(f) \right|^2(x) \, \mathrm{d}x \lesssim
+\\[1em] & \lesssim \int_{\R^n} \left(1 + |x_1|^{2m} + \dots + |x_n|^{2m} \right) \left| \F(f) \right\|^2(x) \, \mathrm{d}x \lesssim
+\\[1em] & \lesssim \left[ \|\F(f)\|_{L^2(\R^n)}^2 + \sum_{j = 1}^{n} \left\| x_j^m \F(f) \right\|_{L^2(\R^n)}^2 \right] \simeq
+\\[1em] & \simeq \left[ \|f\|_{L^2(\R^n)}^2 + \sum_{j = 1}^{n} \left\| D^{\alpha_j} f \right\|_{L^2(\R^n)}^2 \right], \end{aligned} \end{equation*}
+where $\alpha_j = m e_j$. In particular, the function $\left(1 + |x|\right)^r$ belongs to $L^1(\R^n)$, and hence the function $f$ is of class $C^r(\R^n)$ as a consequence of \hyperref[prop:set]{Proposition \ref{prop:set}}. \end{proof}
+
+\begin{proof}[Proof of Theorem \ref{th:slet}] Let $f \in W_{\mathrm{loc}}^{m, \, 2}(\Omega)$. Let $x \in \Omega$ be an arbitrary point, and let $U_x \ni x$ be an open neighborhood of $x$ such that
+\begin{equation*} \overline{U_x} \Subset \Omega. \end{equation*}
+Let $\psi$ be a cutoff function satisfying $\psi \, \big|_{U_x} \equiv 1$ and $\mathrm{spt}(\psi) \subset \Omega$. The function
+\begin{equation*} \tilde{f} := \psi \cdot f \end{equation*}
+belongs to $W^{m, \, 2}(\R^n)$ by construction. Indeed, the usual Leibniz rule implies that
+\begin{equation*}D^\alpha \left(\psi \cdot f \right) = \sum_{\gamma \leq \alpha} \binom{\alpha}{\gamma} D^\gamma \psi D^{\alpha - \gamma} f \in L^2(\R^n) \end{equation*}
+for all $|\alpha| \leq m$. The global \hyperref[th:set]{Sobolev Embedding Theorem \ref{th:set}} implies that $\tilde{f} \in C^r(\R^n)$, that is,
+\begin{equation*} f \in C^r \left(U_x \right), \end{equation*}
+and we conclude using the arbitrariness of $x \in \Omega$.
+\end{proof}
+
+\section{Fractional Sobolev Spaces}
+
+Let $s \in \R$. We denote by $L_{\mu_s}^2(\R^n)$ the weighted $L^2$-space with respect to the measure 
+\begin{equation*}\mathrm{d} \mu_s(x) := \left(1 + |x|^2 \right)^s \, \mathrm{d}x\end{equation*}
+that is, the space of square-integrable functions $f : \R^n \longrightarrow \C$ such that
+\begin{equation*} \int_{\R^n} \left| f(x) \right|^2\left(1 + |x|^2 \right)^s \, \mathrm{d}x < + \infty. \end{equation*}
+
+\begin{definition}\index{Sobolev space!fractional}The $s$-Sobolev space, denoted by $H^s(\R^n)$, is the space of all the tempered distributions $f \in \Scp$ such that
+\begin{equation*} \F(f) \in L_{\mu_s}^2(\R^n). \end{equation*}
+In other words, we define
+\begin{equation*} H^s(\R^n) := \left\{ f \in \Scp \: \left| \:  \int_{\R^n} \left| \F(f)(x) \right|^2\left(1 + |x|^2 \right)^s \, \mathrm{d}x < + \infty \right. \right\}. \end{equation*} \end{definition}
+
+\begin{exercise}Prove that
+\begin{equation} \label{eq:norm1} \|f\|_{H^s} := \left\| \F(f) \right\|_{L_{\mu_s}^2(\R^n)} \end{equation}
+is a well-defined norm on the space $H^s(\R^n)$. \end{exercise}
+
+\begin{definition}\index{Sobolev space!local fractional}The local space $H_{\mathrm{loc}}^s(\R^n)$ is defined by all tempered distributions $f$ satisfying the following property: for any $x \in \Omega$ we can find an open neighborhood $U_x \ni x$, with
+\begin{equation*} \overline{U_x} \Subset \Omega, \end{equation*}
+such that $f \, \big|_{U_x} = g \, \big|_{U_x}$ for some $g \in H^s(\R^n)$. \end{definition}
+
+
+\begin{theorem} For all $m \in \N$ the $m$-Sobolev space corresponds to the $W$-space, that is,
+\begin{equation*} W^{m, \, 2}(\R^n) = H^m(\R^n). \end{equation*} \end{theorem}
+
+\begin{proof}Let $f \in W^{m, \, 2}(\R^n)$ be any Sobolev function. Then
+\begin{equation*} \begin{aligned} \|f\|_{H^m}^2 & = \int_{\R^n} \left| \F(f) \right|^2(x) \left(1 + |x|^2 \right)^s \, \mathrm{d}x =
+\\[1em] & = \sum_{|\alpha| \leq m} c_\alpha \| D^\alpha f \|_{L^2(\R^n)}^2 < + \infty, \end{aligned} \end{equation*}
+and this implies that $f \in H^m(\R^n)$. In a similar fashion, if $f \in H^m(\R^n)$, then we can use the properties of the Fourier transform to infer that
+\begin{equation*} \begin{aligned} \|D^\alpha f\|_{L^2(\R^n)}^2 & = \left\| \F(D^\alpha f)\right\|_{L^2(\R^n)}^2 =
+\\[1em] & = \left\| x^\alpha \F(f) \right\|_{L^2(\R^n)}^2 < + \infty \end{aligned} \end{equation*}
+for any $|\alpha| \leq m$. Note that we used the obvious inequality
+\begin{equation*} |x^\alpha|^2 \leq |x|^{2 \, |\alpha|} \leq \left(1 + |x|^2 \right)^{|\alpha|} \end{equation*}\end{proof}
+
+\begin{remark} We now list a few properties of $s$-Sobolev spaces that are immediate from the definition and some well-known facts. \mbox{}
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item We have
+\begin{equation*} H^0(\R^n) = W^{0, \, 2}(\R^n) = L^2(\R^n). \end{equation*}
+\item The Fourier transform
+\begin{equation*} \F : H^s(\R^n) \to L_{\mu_s}^2(\R^n) \end{equation*}
+is an isometry. Consequently $H^s(\R^n)$ is a Hilbert space for every $s \in \R$.
+\item If $s \geq t$, then
+\begin{equation*} H^s(\R^n) \subseteq H^t(\R^n). \end{equation*}
+\end{enumerate} \end{remark}
+
+\begin{definition}[Order] \index{operator!order} Let $L$ be an operator defined on $H^\ast(\R^n) := \cup_{s \in \R} H^s(\R^n)$. The \textit{order} of $L$ is the minimal integer $k$, if there exists one, such that
+\begin{equation*} L \left( H^s(\R^n) \right) \subseteq H^{s - k}(\R^n) \quad \text{for all $s \in \R$}. \end{equation*} \end{definition}
+
+\begin{lemma}Let $\varphi \in \mathcal{E}^\prime$ be a distribution of order $N$. Then $\varphi \in H^s(\R^n)$ for all $s$ satisfying
+\begin{equation*}s < - N - \frac{n}{2}. \end{equation*} \end{lemma}
+
+\begin{proof}The Fourier transform of $\varphi$ satisfies the estimate
+\begin{equation*} \left| \F(\varphi) \right|(x) \lesssim \left(1 + |x|\right)^N \end{equation*}
+as a consequence of the \hyperref[pw:gen1]{Paley-Wiener Theorem \ref{pw:gen1}}. Therefore
+\begin{equation*} \| \varphi \|_{H^s(\R^n)}^2 = \left\| \F(\varphi) \right\|_{L_{\mu_s}^2(\R^n)} \lesssim \int_{\R^n} \left(1 + |x| \right)^{2N} \left(1 + |x|^2 \right)^{s} \, \mathrm{d}x, \end{equation*}
+and this integral is finite if and only if
+\begin{equation*} 2N + 2s + n - 1 < - 1, \end{equation*}
+which is exactly what we wanted to show.\end{proof}
+
+\begin{lemma}[Operators Order]\label{lemma:reg1}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let $t \in \R$. The operator $L_t : H^\ast(\R^n) \longrightarrow H^\ast(\R^n)$ defined by
+\begin{equation*} L_t(u) := \F \left( \left(1 + |x|^2\right)^{\frac{t}{2}} \F(u) \right)\end{equation*}
+has order $t$.
+\item Let $f \in L^\infty(\R^n)$. The operator $L_f : H^\ast(\R^n) \longrightarrow H^\ast(\R^n)$ defined by
+\begin{equation*} L_f(u) := \F \left( f \cdot \F(u) \right) \end{equation*}
+has order zero.
+\item The derivative operator $D^\alpha : H^\ast(\R^n) \longrightarrow H^\ast(\R^n)$ has order $|\alpha|$.
+\end{enumerate} \end{lemma}
+
+\begin{proof}\mbox{}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Let $s \in \R$. Then
+\begin{equation*} \begin{aligned} \left\| L_t(u) \right\|_{H^s(\R^n)}^2 & = \left\| \left(1 + |x|^2\right)^{\frac{t}{2}} \F(u) \right\|_{L_{\mu_s}^2(\R^n)}^2 =
+\\[1em] & = \int_{\R^n} \left| \F(u) \right|^2(x) \left(1 + |x|^2 \right)^t \left(1 + |x|^2 \right)^s \, \mathrm{d}x =
+\\[1em] & = \left\| \F(u) \right\|_{L_{\mu_{s + t}}^2(\R^n)}^2 =
+\\[1em] & = \| u \|_{H^{s+t}(\R^n)}^2. \end{aligned} \end{equation*}
+\item A straightforward computation proves that
+\begin{equation*} \begin{aligned} \left\| L_f(u) \right\|_{H^s(\R^n)}^2 & = \left\| f \cdot \F(u) \right\|_{L_{\mu_s}^2(\R^n)}^2 =
+\\[1em] & = \int_{\R^n} \left| f \cdot \F(u) \right|^2(x)  \left(1 + |x|^2 \right)^s \, \mathrm{d}x \leq
+\\[1em] & \leq \|f\|_{L^\infty(\R^n)}^2 \left\| \F(u) \right\|_{L_{\mu_{s}}^2(\R^n)}^2 =
+\\[1em] & = \|f\|_{L^\infty(\R^n)}^2 \| u \|_{H^{s}(\R^n)}^2. \end{aligned} \end{equation*}
+\item A straightforward computation proves that
+\begin{equation*} \begin{aligned} \left\| D^\alpha u \right\|_{H^s(\R^n)}^2 & = \left\|x ^\alpha \F(u) \right\|_{L_{\mu_s}^2(\R^n)}^2 =
+\\[1em] & = \int_{\R^n} \left| \F(u) \right|^2(x) |x|^{2 \alpha} \left(1 + |x|^2 \right)^s \, \mathrm{d}x \leq
+\\[1em] & \leq \int_{\R^n} \left| \F(u) \right|^2(x) \left(1 + |x|^2 \right)^{s+|\alpha|} \, \mathrm{d}x =
+\\[1em] & = \left\| \F(u) \right\|_{L_{\mu_{s + |\alpha|}}^2(\R^n)}^2 =
+\\[1em] & = \| u \|_{H^{s+|\alpha|}(\R^n)}^2. \end{aligned} \end{equation*}
+\end{enumerate} \end{proof}
+
+\begin{proposition}\label{prop:reggg} Let $f : \R^n \longrightarrow \C$ be a function satisfying
+\begin{equation*}  \left(1 + | \cdot |^2 \right)^{- \frac{N}{2}} f \in L^\infty(\R^n). \end{equation*}
+Then the operator defined by
+\begin{equation*} F_f(u) := \F \left( f \cdot \F(u) \right) \end{equation*}
+has order $N$. \end{proposition}
+
+\begin{proof}The main idea is to prove that $F$ is, up to overturning, the composition of the operators $L_g$ and $L_N$ introduced in \hyperref[lemma:reg1]{Lemma \ref{lemma:reg1}}. Let
+\begin{equation*} g := \left(1 + | \cdot |^2 \right)^{- \frac{N}{2}} f \in L^\infty(\R^n). \end{equation*}
+We claim that the identity
+\begin{equation*}F(u) = L_g \left( \check{L}_N(u) \right) \end{equation*}
+holds for all $u$. Indeed, we have that
+\begin{equation*}\begin{aligned} L_g \left( \check{L}_N(u) \right) & = \F \left(  \left(1 + |x|^2 \right)^{- \frac{N}{2}} f(x) \F \left(L_N(u) \right) \right) =
+\\[1em] & = \F \left( \left(1 + |x|^2 \right)^{- \frac{N}{2}} f(x) \F \left( \check{\F} \left( \left(1 + |x|^2 \right)^{\frac{N}{2}}  \F(u) \right)\right) \right) =
+\\[1em] & = \F \left(  \left(1 + |x|^2 \right)^{- \frac{N}{2}} f(x) \underbrace{\F \circ \check{\F}}_{= \mathrm{id}} \left( \left(1 + |x|^2 \right)^{\frac{N}{2}} \F(u)\right) \right) =
+\\[1em] & = \F \left( f \cdot \F(u) \right) = F(u), \end{aligned}\end{equation*}
+and this concludes the proof since the order of the composition is the sum of the orders.\end{proof}
+
+\begin{proposition} Let $u \in H^s(\R^n)$ be a Sobolev function and $\varphi \in \Sc$ a Schwartz function. Then the product is a Sobolev function, that is,
+\begin{equation*} \varphi u \in H^s(\R^n).\end{equation*}\end{proposition}
+
+\begin{proof}We may equivalently show that
+\begin{equation*} \| \varphi u \|_{H^s(\R^n)} < + \infty. \end{equation*}
+We know (\hyperref[th:convprod]{Theorem \ref{th:convprod}}) that the Fourier of the product is, up to a constant, the convolution of the Fourier transforms. Hence, we have the following chain of equalities:
+\begin{equation*} \begin{aligned} \| \varphi u \|_{H^s(\R^n)} & = \left\| \F(\varphi u) \right\|_{L_{\mu_s}^2(\R^n)}^2 \simeq
+\\[1em] & \simeq \left\| \F(\varphi) \ast \F(u) \right\|_{L_{\mu_s}^2(\R^n)}^2 =
+\\[1em] & = \int_{\R^n} \left| \int_{\R^n} \F(u)(x - y) \F(\varphi)(y) \, \mathrm{d}y\right| \mathrm{d}\mu_s(x). \end{aligned} \end{equation*}
+We now notice that a Schwartz function $\psi \in \Sc$ belongs to $H^t(\R^n)$ for all $t \in \R$. Indeed, we can always estimate the $H^t$-norm as follows:
+\begin{equation*} \left\| \psi \right\|_{H^t(\R^n)} = \int_{\R^n} \left| \F(\psi) \right|^2(x) (1 + |x|^2)^t \, \mathrm{d}x < + \infty \end{equation*}
+since the Fourier transform $\F$ maps $\Sc$ into $\Sc$. In particular, it turns out that
+\begin{equation*} \begin{aligned} \| \varphi u \|_{H^s(\R^n)} & \simeq \int_{\R^n} \left| \int_{\R^n} \F(u)(x - y) \F(\varphi)(y) \, \mathrm{d}y\right| \mathrm{d}\mu_s(x) =
+\\[1em] & = \int_{\R^n} \left| \int_{\R^n} \frac{\F(u)(x - y)}{(1 + |y|^2)^{t/2}} \F(\varphi)(y) (1 + |y|^2)^{\frac{t}{2}} \, \mathrm{d}y\right| \mathrm{d}\mu_s(x) \leq
+\\[1em] & \leq \int_{\R^n} \left[ \| \F(\varphi) \|_{L_{\mu_t}^2(\R^n)} \int_{\R^n} \frac{|\F(u)|^2(x - y)}{(1 + |y|^2)^{t}} \, \mathrm{d}y \right] \\mathrm{d}\mu_s(x) \leq
+\\[1em] & \leq \| \varphi \|_{H^t(\R^n)}^2 \int_{\R^n} \left[ \int_{\R^n} |\F(u)|^2(x) (1 + |x - y|^2)^s \, \mathrm{d}x \right] (1 + |y|^2)^{-t} \, \mathrm{d}y, \end{aligned} \end{equation*}
+where the last inequality follows from the change of variables $x - y \longmapsto x$ and the Fubini-Tonelli theorem. At this point, we need to state and use an useful algebraic inequality:
+
+\vspace{2.5mm}
+\noindent\fbox{ 
+\parbox{\textwidth}{ \begin{lemma}For every $x, \, y \in \R^n$ and every $s \in \R$ it turns out that
+\begin{equation} \label{alg:stima} \left(1 + |x + y|^2 \right)^s \leq 2^{|s|} \left(1 + |x|^2 \right)^s \left(1 + |y|^2 \right)^{|s|}. \end{equation} \end{lemma} 
+
+\begin{proof}It suffices to check the inequality \eqref{alg:stima} for $s = \pm 1$. This is a trivial exercise, and it is left to the reader to fill in the details. \end{proof} }}
+
+\vspace{2.5mm}
+\noindent If we apply \eqref{alg:stima} to the inequality above, we find that
+\begin{equation*} \begin{aligned} \| \varphi u \|_{H^s(\R^n)} & \lesssim \| \varphi \|_{H^t(\R^n)}^2 \int_{\R^n} \left[ \int_{\R^n} |\F(u)|^2(x) (1 + |x - y|^2)^s \, \mathrm{d}x \right] (1 + |y|^2)^{-t} \, \mathrm{d}y \lesssim
+\\[1em] & \lesssim \| \varphi \|_{H^t(\R^n)}^2 \|u\|_{H^s(\R^n)}^2  \int_{\R^n} \frac{(1 + |y|^2)^s}{(1 + |y|^2)^t} \, \mathrm{d}y, \end{aligned} \end{equation*}
+and the last term is finite since $t \in \R$ is arbitrarily big.\end{proof}
+
+\section{Elliptic Regularity Theorem}
+
+In this final section, we want to state and prove the regularity theorem for an elliptic operator. From now on, we denote by $\Omega$ an open subset of $\R^n$.
+
+\begin{theorem}[Regularity] \label{reg:themore}\index{elliptic operator!regularity theorem}Let $L$ be an elliptic operator of order $N$ and suppose that
+\begin{equation*}L(u) = \sum_{|\alpha| < N} g_\alpha (- \imath D)^{\alpha} u + \sum_{|\alpha| = N} c_\alpha (- \imath D)^{\alpha} u, \end{equation*}
+for some smooth functions $g_\alpha \in C^\infty(\Omega)$ and complex constants $c_\alpha \in \C$. Then
+\begin{equation*} L(u) \in H_{\mathrm{loc}}^s(\Omega) \implies u \in H_{\mathrm{loc}}^{s+N}(\Omega). \end{equation*}
+In particular, a function $u$ such that $L(u) = 0$ is necessarily smooth, that is, $u \in C^\infty(\Omega)$.\end{theorem}
+
+\begin{proof}Let $p(x)$ denote the polynomial associated to the maximum-order terms of the elliptic operator $L$, that is,
+\begin{equation*}p(x) := \sum_{|\alpha| = N} c_\alpha  x^\alpha. \end{equation*} 
+We also introduce the auxiliary function
+\begin{equation*}r(x) := \frac{1 + |x|^N}{|x|^N} p(x). \end{equation*}
+
+\paragraph{Step 1.} We now observe that the function
+\begin{equation*} r(x) \cdot (1 + |x|^2)^{- \frac{N}{2}} = \frac{(1 + |x|^N)}{(1 + |x|^2)^{N/2}} \frac{p(x)}{|x|^N} \end{equation*}
+belongs to $L^\infty(\Omega)$ since it is given by the product of two $L^\infty$ functions. In fact, the polynomial $p(x)$ is homogeneous of degree $N$ and $L$ is elliptic, which means that
+\begin{equation*} \min_{x \in S^n} |p(x)| > 0 \implies c_1 |x|^N < |p(x)| < c_2 |x|^N \end{equation*}
+for every $x \in \R^n \setminus \{0\}$. In a similar fashion, one can prove that the function
+\begin{equation*} \frac{1}{r(x)} \cdot (1 + |x|^2)^{\frac{N}{2}}\end{equation*}
+also belongs to $L^\infty(\Omega)$. It follows from \hyperref[prop:reggg]{Proposition \ref{prop:reggg}} that the operator
+\begin{equation*} R(w) := \check{\F} \left( r \cdot \F(w) \right) \end{equation*}
+has order equal to $N$, while the operator
+\begin{equation*} R^{-1}(w) := \check{\F} \left( \frac{1}{r} \cdot \F(w) \right) \end{equation*}
+has order equal to $-N$. Furthermore, we can check that $R^{-1}$ is the inverse of $R$:
+\begin{equation*} \begin{aligned} &R^{-1}\left(R(w) \right) = \check{\F} \left( \frac{1}{r} \cdot \F \circ \check{F} \left( r \cdot \F(w) \right) \right) = w, \\[1em] & R\left(R^{-1}(w) \right) = \check{\F} \left( r \cdot \F \circ \check{F} \left( \frac{1}{r} \cdot \F(w) \right) \right) = w. \end{aligned} \end{equation*}
+We now claim that the operator $P - R$ has order zero. Indeed, it suffices to notice that
+\begin{equation*} \begin{aligned} (P-R)\left(w \right) & = \check{\F} \left( p \cdot \F(w) \right) - \check{\F}\left(r \cdot \F(w) \right) = \\[1em] & = \check{\F} \left( (p - r) \cdot \F(w) \right) = \\[1em] & = \check{\F} \left( - \frac{1}{|x|^{N}} \, p \cdot \F(w) \right),\end{aligned} \end{equation*}
+and the latter is an operator of order zero as a consequence of \hyperref[lemma:reg1]{Lemma \ref{lemma:reg1}} since
+\begin{equation*}- \frac{1}{|x|^{N}} \cdot p(x) \in L^\infty(\Omega). \end{equation*}
+
+\paragraph{Step 2.} Fix $x \in \Omega$ and let $U_x \ni x$ be a neighbourhood of $x$. Let $\varphi_0 \in \mathcal{D}(\Omega)$ be a cutoff function such that $\varphi_0$ is identically one over $U_x$. Clearly, the function
+\begin{equation*} u_0 := \varphi_0 \cdot u : \R^n \to \C \end{equation*}
+belongs to $\mathcal{E}^\prime$, and therefore it belongs to $H^t(\R^n)$ for some $t$.
+
+\paragraph{Step 3.} The idea is to use a recursive process (long $k = s + N - t$) and, at each step, gain one order of regularity. Let $\varphi_1, \, \dots, \, \varphi_k$ be cutoff functions satisfying
+\begin{equation*} \varphi_j(x^\prime) = 1 \quad \text{for all $x^\prime \in U_x^{(j)}$} \quad \text{and} \quad \mathrm{spt} \, \varphi_j \subset U_x^{(j-1)}. \end{equation*}
+
+\paragraph{Step 4.} Suppose that $u_j := u \cdot \varphi_j$ belongs to $H^{t + j}(\Omega)$. By construction we have $u_{j+1} = \varphi_{j + 1} \cdot u_j$ since $\varphi_{j+1} \cdot \varphi_j = \varphi_{j+1}$. Let us consider the operator
+\begin{equation*} T[w] := L[ \varphi_{j+1} \cdot w ] - \varphi_{j+1} \cdot L[w]. \end{equation*}
+A straightforward computation proves that
+\begin{equation*}D^\alpha \left( \varphi_{j + 1} \cdot w \right) - \varphi_{j + 1} \cdot D^\alpha(w) = \sum_{\beta < \alpha} c_\beta \, D^\beta(w) \, D^{\alpha - \beta}(\varphi_{j+1}), \end{equation*}
+that is,
+\begin{equation*} T[w] = \sum_{|\alpha| < N} \widetilde{g}_\alpha \, D^\alpha w, \end{equation*}
+which means that the order of $T$ is at most $N - 1$. On the other hand,
+\begin{equation*}\begin{aligned} T[u_j] & = L[ \varphi_{j+1} \cdot u_j ] - \varphi_{j+1} \cdot L[u_j] =
+\\[1em] & = L \left[ u_{j+1} \right] - \varphi_{j+1} \cdot L[u], \end{aligned} \end{equation*}
+from which it follows that
+\begin{equation*} L\left[ u_{j+1} \right] = T[u_j] + \varphi_{j+1} \cdot L[u]. \end{equation*}
+Since $T[u_j] \in H^{t + k -(N - 1)}(\R^n)$ and $L[u] \in H^s(\R^n)$, it turns out that
+\begin{equation*} L\left[ u_{j+1} \right] \in H^{t + j - N + 1}(\R^n). \end{equation*}
+In a similar fashion, one can prove that
+\begin{equation*} S\left[ u_{j+1} \right] \in H^{t + j - N + 1}(\R^n) \qquad \text{and} \qquad (P - R)[u_{j+1}] \in H^{t + j}(\R^n) \subset H^{t + j - N + 1}(\R^n), \end{equation*}
+and hence
+\begin{equation*} R[u_{j+1}] = \left( L - S - (P - R) \right)[u_{j+1}] \in H^{t + j - N + 1}(\R^n). \end{equation*}
+In conclusion, we apply the inverse of $R$ (which is an operator of order $-N$, and we obtain
+\begin{equation*} u_{j+1} = R^{-1} \circ R[u_{j+1}] \in H^{t + j + 1}(\R^n), \end{equation*}
+which is exactly what we wanted to prove.
+\end{proof}
